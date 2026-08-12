@@ -1,5 +1,52 @@
 \begin{thebibliography}{10}
 
+\bibitem{Silva20671635}
+Breno Andrade.
+\newblock Exact archimedean entries for truncated {Weil} forms: Closed-form
+  implementation, a precision-stable library defect, and corrected deep
+  spectra, June 2026.
+\newblock Zenodo record 20671635.
+\newblock URL: \url{https://zenodo.org/records/20671635}, \href
+  {https://doi.org/10.5281/zenodo.20671635}
+  {\path{doi:10.5281/zenodo.20671635}}.
+
+\bibitem{Silva20710075}
+Breno Andrade.
+\newblock A {Loewner} divided-difference formula for the prime contribution in
+  the localized {Weil} quadratic form, and a parity sign law, June 2026.
+\newblock Zenodo record 20710075.
+\newblock URL: \url{https://zenodo.org/records/20710075}, \href
+  {https://doi.org/10.5281/zenodo.20710075}
+  {\path{doi:10.5281/zenodo.20710075}}.
+
+\bibitem{Silva20737111}
+Breno Andrade.
+\newblock A {Loewner}/operator-monotone framework for the even-simplicity
+  problem in the {CCM} spectral triple, June 2026.
+\newblock Zenodo record 20737111.
+\newblock URL: \url{https://zenodo.org/records/20737111}, \href
+  {https://doi.org/10.5281/zenodo.20737111}
+  {\path{doi:10.5281/zenodo.20737111}}.
+
+\bibitem{Silva20682834}
+Breno Andrade.
+\newblock The pole term is the only obstruction to {Perron} structure in the
+  localized {Weil} quadratic form: A rank-two splitting and a scalar criterion
+  for the bottom eigenvalue, June 2026.
+\newblock Zenodo record 20682834.
+\newblock URL: \url{https://zenodo.org/records/20682834}, \href
+  {https://doi.org/10.5281/zenodo.20682834}
+  {\path{doi:10.5281/zenodo.20682834}}.
+
+\bibitem{Andrews2026}
+Ronnie Andrews, Jr.
+\newblock A quantitative convergence law for the {Connes--Consani--Moscovici}
+  zeta spectral triple, July 2026.
+\newblock Zenodo record 21272569.
+\newblock URL: \url{https://zenodo.org/records/21272569}, \href
+  {https://doi.org/10.5281/zenodo.21272569}
+  {\path{doi:10.5281/zenodo.21272569}}.
+
 \bibitem{BatenkovYomdin2013}
 Dmitry Batenkov and Yosef Yomdin.
 \newblock On the accuracy of solving confluent {Prony} systems.
@@ -47,34 +94,6 @@ Ingrid Daubechies.
 \newblock \href {https://doi.org/10.1137/1.9781611970104}
   {\path{doi:10.1137/1.9781611970104}}.
 
-\bibitem{Silva20671635}
-Breno~Wilson de~Andrade~Silva.
-\newblock Exact archimedean entries for truncated {Weil} forms: Closed-form
-  implementation, a precision-stable library defect, and corrected deep
-  spectra, June 2026.
-\newblock Zenodo record 20671635.
-\newblock URL: \url{https://zenodo.org/records/20671635}, \href
-  {https://doi.org/10.5281/zenodo.20671635}
-  {\path{doi:10.5281/zenodo.20671635}}.
-
-\bibitem{Silva20710075}
-Breno~Wilson de~Andrade~Silva.
-\newblock A {Loewner} divided-difference formula for the prime contribution in
-  the localized {Weil} quadratic form, and a parity sign law, June 2026.
-\newblock Zenodo record 20710075.
-\newblock URL: \url{https://zenodo.org/records/20710075}, \href
-  {https://doi.org/10.5281/zenodo.20710075}
-  {\path{doi:10.5281/zenodo.20710075}}.
-
-\bibitem{Silva20737111}
-Breno~Wilson de~Andrade~Silva.
-\newblock A {Loewner}/operator-monotone framework for the even-simplicity
-  problem in the {CCM} spectral triple, June 2026.
-\newblock Zenodo record 20737111.
-\newblock URL: \url{https://zenodo.org/records/20737111}, \href
-  {https://doi.org/10.5281/zenodo.20737111}
-  {\path{doi:10.5281/zenodo.20737111}}.
-
 \bibitem{Prony1795}
 Gaspard~Riche de~Prony.
 \newblock Essai experimental et analytique sur les lois de la dilatabilite des
@@ -88,6 +107,12 @@ Walter Gautschi.
 \newblock {\em Numerische Mathematik}, 4:117--123, 1962.
 \newblock \href {https://doi.org/10.1007/BF01386302}
   {\path{doi:10.1007/BF01386302}}.
+
+\bibitem{GesztesySimon1997}
+Fritz Gesztesy and Barry Simon.
+\newblock M-functions and inverse spectral analysis for finite and
+  semi-infinite {Jacobi} matrices.
+\newblock {\em Journal d'Analyse Math\'ematique}, 73:267--297, 1997.
 
 \bibitem{Groskin2026FiniteDictionary}
 Akiva Groskin.
@@ -114,6 +139,19 @@ Henryk Iwaniec and Emmanuel Kowalski.
   Society Colloquium Publications}.
 \newblock American Mathematical Society, 2004.
 
+\bibitem{KacKrein1974string}
+I.~S. Kac and M.~G. Krein.
+\newblock On the spectral functions of the string.
+\newblock {\em American Mathematical Society Translations, Series 2},
+  103:19--102, 1974.
+
+\bibitem{KacKrein1974R}
+I.~S. Kac and M.~G. Krein.
+\newblock R-functions: Analytic functions mapping the upper half plane into
+  itself.
+\newblock {\em American Mathematical Society Translations, Series 2},
+  103:1--18, 1974.
+
 \bibitem{Liao2026}
 Jinhua Liao.
 \newblock Prime event languages: An information-theoretic investigation of
@@ -129,6 +167,15 @@ Kejun Liu.
 \newblock {\em arXiv:2605.17645}, 2026.
 \newblock URL: \url{https://arxiv.org/abs/2605.17645}, \href
   {https://arxiv.org/abs/2605.17645} {\path{arXiv:2605.17645}}.
+
+\bibitem{Makraini2026}
+Kerym Makraini.
+\newblock Spectral properties of the truncated {Weil} operator \& numerical
+  verification of {Weil} positivity, March 2026.
+\newblock Zenodo record 19355650.
+\newblock URL: \url{https://zenodo.org/records/19355650}, \href
+  {https://doi.org/10.5281/zenodo.19355650}
+  {\path{doi:10.5281/zenodo.19355650}}.
 
 \bibitem{MoranLedezma2023}
 {\'A}ngel~Alfredo Mor{\'a}n~Ledezma.

@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
-"""
-WIN 1 benchmark — h_plus precomputation / memoization.
+"""Historical-workload timer using the current checkout.
 
-Measures the speedup of the WIN 1 optimization on the CvS psi-cache phase,
-and verifies bit-identicality to the baseline lambda_min fingerprint.
+The frozen numbers below came from an April 2026 v0.1.0-era run. This script
+now imports the current ``_compute_psi_pair`` and may include later changes.
+Ratios printed against those constants are cross-run historical context, not a
+same-environment A/B benchmark for the current checkout.
 
-Mirrors the phase timings from _benchmarks/baseline_benchmark.py so the
-numbers are directly comparable. The baseline at c=13 N=50 dps=50 T=200
-was recorded in _benchmarks/baseline_results_before_win1_win2.txt:
+The historical baseline at c=13 N=50 dps=50 T=200 was recorded as:
 
     psi cache  : 122.112 s  (98.8%)
     TOTAL      : 123.607 s
     lambda_min : 4.8051148795216734485219293678933754790769597762326e-51
 
-This benchmark re-runs the same workload with the WIN 1 code path and
-reports the speedup + a >=50-digit lambda_min comparison.
+The script reports the current timing and printed-digit agreement with the
+frozen lambda fingerprint.
 
 Usage
 -----
@@ -35,13 +34,13 @@ _REPO = os.path.dirname(_HERE)
 if _REPO not in sys.path:
     sys.path.insert(0, _REPO)
 
-import mpmath as mp
+import mpmath as mp  # noqa: E402
 
-from connes_cvs import (
+from connes_cvs import (  # noqa: E402
     compute_ground_state,
     extract_zeros,
 )
-from connes_cvs.operator import (
+from connes_cvs.operator import (  # noqa: E402
     HAS_FLINT,
     _compute_psi_pair,
     prime_powers_up_to,
@@ -103,7 +102,7 @@ def bench(c: int, N: int, T: int, dps: int) -> dict:
 
     # Phase 4: findroot
     t0 = time.perf_counter()
-    zeros = extract_zeros(eigvec, L=float(L), n_zeros=1, dps=dps)
+    zeros = extract_zeros(eigvec, c=c, n_zeros=1, dps=dps)
     t_findroot = time.perf_counter() - t0
 
     return {
@@ -125,7 +124,7 @@ def main() -> None:
     T = 200 if N <= 60 else 400
 
     print("=" * 72)
-    print("Connes-van Suijlekom WIN 1 benchmark (h_plus memoization)")
+    print("Connes-van Suijlekom historical-workload timer (current checkout)")
     print("=" * 72)
     print(f"Python   : {platform.python_version()} ({sys.executable})")
     print(f"mpmath   : {mp.__version__}")
@@ -135,7 +134,8 @@ def main() -> None:
 
     result = bench(c=c, N=N, T=T, dps=dps)
 
-    pct = lambda x: 100.0 * x / result["t_total"]
+    def pct(value):
+        return 100.0 * value / result["t_total"]
     print("Timings (seconds, wall, time.perf_counter()):")
     print(f"  1. psi cache (prime+pole+arch)  : {result['t_cache']:9.3f}  ({pct(result['t_cache']):5.1f}%)")
     print(f"  2. matrix assembly + symmetrize : {result['t_assemble']:9.3f}  ({pct(result['t_assemble']):5.1f}%)")
@@ -150,26 +150,26 @@ def main() -> None:
         baseline_total = BASELINE_T_TOTAL_C13_N50_DPS50_T200
         speedup_cache = baseline_cache / result["t_cache"]
         speedup_total = baseline_total / result["t_total"]
-        print("Speedup vs baseline (baseline_results_before_win1_win2.txt):")
+        print("Ratio vs frozen April 2026 baseline (NOT a contemporary A/B):")
         print(f"  psi cache : {baseline_cache:8.3f}s -> {result['t_cache']:8.3f}s  ({speedup_cache:5.2f}x)")
         print(f"  total     : {baseline_total:8.3f}s -> {result['t_total']:8.3f}s  ({speedup_total:5.2f}x)")
         print("-" * 72)
 
-        # Bit-identicality check against the baseline lambda_min
+        # Printed-digit comparison against the frozen baseline lambda.
         baseline_lm = mp.mpf(BASELINE_LAMBDA_MIN_C13_N50_DPS50_T200)
         new_lm = result["lambda_min"]
         abs_diff = abs(new_lm - baseline_lm)
         rel_diff = abs_diff / abs(baseline_lm) if baseline_lm != 0 else abs_diff
-        print("Bit-identicality (lambda_min):")
+        print("Historical lambda comparison:")
         print(f"  baseline : {mp.nstr(baseline_lm, dps)}")
         print(f"  new      : {mp.nstr(new_lm, dps)}")
         print(f"  abs diff : {mp.nstr(abs_diff, 5)}")
         print(f"  rel diff : {mp.nstr(rel_diff, 5)}")
         tol = mp.mpf("1e-50")
         if rel_diff < tol:
-            print(f"  PASS: rel diff < 1e-50 (bit-identical at dps=50)")
+            print("  PASS: relative difference < 1e-50; all 50 displayed digits agree")
         else:
-            print(f"  FAIL: rel diff exceeds 1e-50")
+            print("  FAIL: rel diff exceeds 1e-50")
         print("-" * 72)
 
     lam = result["lambda_min"]

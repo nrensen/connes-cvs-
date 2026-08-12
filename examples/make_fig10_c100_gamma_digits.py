@@ -1,4 +1,4 @@
-"""Generate fig10_c100_gamma_digits.pdf — matching-digit recovery of γ_1..γ_10 at c=100.
+"""Generate fig10_c100_gamma_digits.pdf - matching-digit recovery of γ_1..γ_10 at c=100.
 
 Visualizes the three precision cells reported in Table~\\ref{tab:gamma-c100}
 of Paper 1 v3:
@@ -8,11 +8,10 @@ of Paper 1 v3:
     Cell C: N=250, dps=500  (deepest cell; paper's headline matching-digit count)
 
 For each γ_k (k=1..10), plots the floor of -log10(|detected - reference|) where
-the reference is mpmath.zetazero(k).imag computed at dps=400. Each cell's curve
-falls monotonically with k (as expected for a Galerkin-truncated spectrum); the
-gap between Cell A and Cell B isolates the precision-floor effect at fixed N,
-and the gap between Cell B and Cell C isolates the N-extension effect at fixed
-working precision dps=500.
+the reference is mpmath.zetazero(k).imag computed at dps=400. These are three
+distinct recorded extraction configurations. Their different ``N``, working
+precision, and root-finding tolerances are shown explicitly; the plot is a
+comparison of the artifacts, not a single-variable causal decomposition.
 
 Usage:
     python examples/make_fig10_c100_gamma_digits.py
@@ -87,7 +86,8 @@ CELLS = [
 
 def load_cell(meta: dict) -> tuple[list[int], list[int]]:
     path = os.path.join(DATA_DIR, meta["file"])
-    d = json.load(open(path))
+    with open(path, encoding="utf-8") as handle:
+        d = json.load(handle)
     ks, digits = [], []
     for entry in sorted(d["gamma"], key=lambda e: e["k"]):
         ks.append(entry["k"])
@@ -140,7 +140,7 @@ def make_figure(out_path: str) -> None:
     ax.set_xlabel(r"Riemann-zero index $k$")
     ax.set_ylabel(r"matching digits $= \lfloor -\log_{10}|\gamma_k - \gamma_k^{\rm exact}|\rfloor$")
     ax.set_title(
-        r"$\gamma_k$ recovery at $c=100$:  three precision cells"
+        r"$\gamma_k$ recovery at $c=100$: three recorded extraction cells"
     )
     # Legend below the plot, in a single horizontal row so it never
     # collides with the three data curves (which span ~115 to ~330 in y).

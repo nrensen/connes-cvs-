@@ -1,0 +1,36 @@
+{
+  "description": "Committed c=13 reference values for the connes-cvs regression gate. Sources are stated per cell. The slow tests in test_c13_regression.py recompute these cells and compare against the stored strings after checking sign and decimal exponent. Thresholds differ per cell: the A/B benchmark cell is a same-precision (dps=80) reference and must match in FULL (all 80 stored digits, no partial-digit floor); the extended T=400 validation cell is a dps=150 reference recomputed at dps=80 and is gated at >= 20 digits on lambda and >= 18 on the gamma_1 error; the published T=800 cell is recomputed at dps=150 and applies the runner's fatal >=22-digit lambda check plus a gamma_1-error comparison.",
+  "cells": {
+    "c13_reference_T800": {
+      "c": 13,
+      "N": 100,
+      "T": 800,
+      "dps": 150,
+      "lambda_min_even_mantissa": "2.86545361493028029516151514986747977533",
+      "lambda_min_even": "2.86545361493028029516151514986747977533e-59",
+      "gamma_1_abs_error": "2.0054614440503604741098249893e-55",
+      "source": "Published reference cell. The first 25 mantissa digits and the 29-digit gamma_1_abs_error are recorded in data/results_15pt_T800.json (c=13 row). The longer lambda run is recorded in benchmarks/AB_VERIFIED_2026-04-14.md under 'Gold-standard verification at the published reference workload'; this gate stores its first 39 mantissa digits.",
+      "note": "This is the headline c=13 Paper 1 T=800 cell. The pinned exact-reference CI leg recomputes it end to end. GalerkinCell._c13_regression attaches the comparison as c13_regression and raises RuntimeError if fewer than 22 significant digits match; the slow test also checks the first-zero error. The lambda failure is fatal rather than warning-only."
+    },
+    "c13_quick_T400": {
+      "c": 13,
+      "N": 100,
+      "T": 400,
+      "dps": 80,
+      "lambda_min_even": "2.076962658197831893134147e-59",
+      "gamma_1_abs_error": "1.4549524124360525386e-55",
+      "source": "The extended validation cell documented in examples/basic_compute.py --extended (c=13, N=100, T=400, dps=80). lambda reference (25 digits) from the Paper 1 T=400 validation run at dps=150 for the same (c, N, T); gamma_1_abs_error reference to 20 digits, the common prefix of two independent Paper 1 ancillary runs of this cell.",
+      "note": "Measured 2026-08-12: a dps=80 recompute matches the dps=150 lambda reference to exactly 22 digits (the dps=80 arithmetic floor) and the gamma_1 reference to all 20 stored digits (~23 vs the longer ancillary value). The slow gate asserts >= 20 on lambda and >= 18 on gamma_1 to leave platform margin below those measured matches."
+    },
+    "c13_ab_benchmark": {
+      "c": 13,
+      "N": 80,
+      "T": 400,
+      "dps": 80,
+      "lambda_min_even": "2.5282661401965756026025862533001704392434144948201908268289070778008968019858182e-59",
+      "lambda_min_even_nstr_digits": 80,
+      "source": "benchmarks/AB_VERIFIED_2026-04-14.md (results table, lambda_min row): the v0.1.0/v0.2.0 A/B cell, 80 printed digits, computed at dps=80 itself, where the baseline and WIN-1 code paths agreed on all 80. Same-precision recomputes are deterministic, so all 80 digits reproduce. The raw run logs behind that table are development artifacts and are not tracked in this repository.",
+      "note": "The strongest committed anchor, and the only cell gated on a full match: a fresh dps=80 run of this cell reproduced all 80 digits during v0.3.0 release preparation (2026-08-12). lambda_min_even_nstr_digits is the mp.nstr digit count that produced the stored string; the gate prints its recompute at the same count so the final digit rounds identically on both sides."
+    }
+  }
+}

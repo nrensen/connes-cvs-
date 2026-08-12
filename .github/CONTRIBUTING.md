@@ -1,6 +1,6 @@
 # Contributing to connes-cvs
 
-Thanks for your interest. This project implements a specific mathematical construction (the Connes–van Suijlekom Galerkin matrix) and prioritises **correctness and reproducibility** over feature surface. The bar for any change that touches the numerical core is high.
+Thanks for your interest. This project implements a specific mathematical construction (the Connes-van Suijlekom Galerkin matrix) and prioritises **correctness and reproducibility** over feature surface. The bar for any change that touches the numerical core is high.
 
 ## Development setup
 
@@ -9,33 +9,48 @@ git clone https://github.com/akivag613/connes-cvs-.git
 cd connes-cvs-
 python -m venv venv
 source venv/bin/activate
-pip install -e '.[all]'
+pip install -e '.[all,dev]'
 ```
 
-The `all` extra installs `python-flint` (11× speedup on digamma), `gmpy2` (GMP-backed mpmath core), `numpy`, `scipy`, and the test tooling.
+The `all` extra installs the arithmetic, science, plotting, and test
+dependencies. The smaller `dev` set contains pytest, pytest-timeout,
+pytest-cov, python-flint, and gmpy2. python-flint supplies a compiled
+arbitrary-precision digamma backend, but its speedup is workload-, version-,
+precision-, and hardware-dependent.
 
 ## Running tests
 
 ```bash
-# Fast test suite (< 15 seconds)
+# Fast test suite (well under a minute). pyproject.toml sets
+# addopts = -m 'not slow', so this deselects the regression gate.
 pytest
 
-# Full suite including slow regression tests (~1-2 minutes)
-pytest -m slow --timeout=600
+# Slow regression gate (run in addition to plain pytest, not instead of
+# it: the CLI -m overrides the addopts selection, so this command runs
+# the slow tests and nothing else). It computes real c=13 cells and
+# compares against tests/reference_values.json, with per-leg thresholds:
+# the A/B cell (c=13, N=80, T=400, dps=80) is a same-precision reference
+# and must match in full, all 80 stored digits; the extended cell (c=13,
+# N=100, T=400, dps=80) gates at >= 20 digits on lambda and >= 18 on the
+# gamma_1 error.
+pytest -m slow --timeout=1800
 
 # With coverage
 pytest --cov=connes_cvs --cov-report=term-missing
 ```
 
-The slow regression tests in `tests/test_matrix_microopt_v0_2_0.py` validate against a pickled reference run at the published workload `c=13 N=100 T=800 dps=150`; they must pass before any merge.
+The slow regression tests in `tests/test_c13_regression.py` compute c=13 cells end-to-end and enforce the reference contract against the committed values; they must pass before any merge. (`tests/test_matrix_microopt_v0_2_0.py` keeps one unmarked source-form check that always runs, plus slow legs that validate against a pickled psi-cache reference when that pickle is present locally and skip cleanly otherwise.)
 
-## The bit-identicality contract
+The numerical core mutates process-global mpmath/Flint precision contexts and caches. Do not run different-precision cells concurrently in Python threads; use the process-based runner/sweep. Resume only trusted local checkpoint files: their hashes detect corruption but are not authentication, and their locks only enforce a single writer.
+
+## Numerical regression contract
 
 Any change to `connes_cvs/operator.py`, `connes_cvs/sweep.py`, or `connes_cvs/kernels.py` that could affect `λ_min` must:
 
-1. Preserve `λ_min` to **≥ 18 leading decimal digits** against the pickled reference, enforced by `tests/test_matrix_microopt_v0_2_0.py::test_microopt_lambda_even_bit_identical`.
-2. Include a before/after benchmark run via `_benchmarks/win1_pool_benchmark.py` (production-style 12-way multiprocessing, same code path as `run_sweep`).
-3. Document the change in [CHANGELOG.md](CHANGELOG.md) under the next unreleased version, stating the speedup and the bit-identicality tolerance observed.
+1. Reproduce the committed c=13 references in `tests/reference_values.json`: **all 80 stored printed digits** on the same-precision A/B cell, and **>=20** lambda plus **>=18** gamma-error digits on the cross-precision extended validation cell.
+2. Preserve the exact small-cell equality checks in `tests/test_runner_identity.py` and the independent parity/full-assembly checks in `tests/test_operator_hardening.py`. Do not generalize those scopes into a blanket raw-value claim.
+3. Include a matched before/after benchmark for any speed claim: same checkout except for the proposed change, same workload, precision, backend, worker count, output phases, hardware, and timing boundary. `benchmarks/win1_pool_benchmark.py` is a current-path timer, not by itself a historical v0.1 baseline.
+4. Document the change in [CHANGELOG.md](../CHANGELOG.md) under the next unreleased version, with the exact measured scope and numerical tolerance.
 
 Performance optimizations that produce a mathematically different output (e.g. changing the quadrature rule, reordering summation steps that accumulate differently) must be behind a default-off flag, not replace the v0.1+ reference path.
 
@@ -50,7 +65,7 @@ Performance optimizations that produce a mathematically different output (e.g. c
 
 - **Title:** imperative mood, ≤ 70 chars.
 - **Body:** explain the **why**, reference measurements or test results, cite file paths where non-obvious.
-- Keep commits focused — one logical change per commit.
+- Keep commits focused: one logical change per commit.
 
 ## Opening a pull request
 
@@ -61,10 +76,10 @@ Performance optimizations that produce a mathematically different output (e.g. c
 
 ## Reporting a numerical discrepancy
 
-If you see `λ_min` or `|γ₁ err|` diverging from the [data/results_15pt_T800.json](data/results_15pt_T800.json) reference beyond the ~1.3× envelope (reflecting differences in `N`, precision, integration cutoff `T`, and normalization conventions — all three published computations use the same trigonometric basis), please open an issue with:
+If a like-for-like cell differs from the [published reference data](../data/results_15pt_T800.json), please open an issue with:
 
 - exact `(c, N, T, dps)` used,
-- platform (macOS/Linux, Python version, mpmath version, python-flint version/presence),
+- platform (Windows/macOS/Linux, Python version, mpmath version, python-flint version/presence),
 - output you got vs. expected.
 
 Numerical reproducibility across platforms is something this package takes seriously; such reports are high priority.

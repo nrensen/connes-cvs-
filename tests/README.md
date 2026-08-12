@@ -1,31 +1,35 @@
-# `tests/` — Regression test suite for the `connes-cvs` package
+# `tests/` - Regression test suite for the `connes-cvs` package
 
 ## What's here
 
-Bit-identity and micro-optimization regression tests for the public `connes-cvs` PyPI package.
-
 | File | Purpose |
 |---|---|
-| `test_c13_regression.py` | Canonical bit-identity regression at `c = 13`, `N = 100`, `T = 800`, `dps = 150`. Verifies that the package reproduces the paper's `lambda_even` reference value `2.86545361493028029516151514986747977533...` to ≥ 22 matching digits. `test_package_imports` uses `importlib.metadata.version("connes-cvs")` as the version-identity check (no manual per-release update needed). |
-| `test_matrix_microopt_v0_2_0.py` | Verifies that v0.2.0's `_h_plus_cached` memoization + fused real kernel produces bit-identical output to v0.1.0 at `c = 13`, `N = 80`, `T = 400`, `dps = 80` across a 500-digit mantissa. |
+| `reference_values.json` | The committed c = 13 reference values the gate compares against: the published T = 800 reference cell (39-digit lambda mantissa from the exact-workload run recorded in `benchmarks/AB_VERIFIED_2026-04-14.md`, whose first 25 digits also appear in `data/results_15pt_T800.json`), the T = 400 extended validation cell of `examples/basic_compute.py --extended` (25-digit lambda, 20-digit gamma_1 error), and the 80-digit A/B benchmark cell. Sources are documented per cell inside the file. |
+| `test_c13_regression.py` | Public-API and reference gate. Fast tests cover input validation, the float64-`L` warning and `c=` path, the finite-matrix Arb helper, the deliberate absence of unsupported precision-recommender APIs, canonical digit comparison, and karl-keysingularity's credited Windows artifact. Slow tests recompute the A/B cell (all 80 stored printed digits required), extended validation cell (>=20 lambda digits, >=18 gamma-error digits), and published T=800 cell (fatal >=22-digit lambda gate plus gamma-error comparison). |
+| `test_operator_hardening.py` | Direct checks of the fast prime-power enumerator, stable kernel, positive/negative index parity, and upper-triangle assembly against the legacy full assembly. These are independent of the runner-vs-classic comparison that shares the optimized operator. |
+| `test_runner_identity.py` | Exact small-cell scope: c=13, N=8, T=60, dps=30 through the runner and classic path must agree in every raw mpmath matrix entry, selected eigenvalue and eigenvector component; a second cell compares pooled and serial runner output. This does not assert identity at untested workloads. |
+| `test_validation.py` | Adversarial tests for the outward Arb finite-matrix residual bound, exact dyadic serialization, shape/symmetry checks, canonical hashes and extreme exponents. |
+| `test_matrix_microopt_v0_2_0.py` | Historical v0.2.0 regression. Its unmarked source-form check runs on a clean checkout. Pickle-dependent slow legs use a local research reference that is not distributed and skip when absent; they are not the release's portable numerical gate. |
 
 ## Running
 
 ```bash
-pip install -e .
-pytest tests/ -v
+pip install -e '.[dev]'
+
+# Fast suite (well under a minute). The `addopts = -m 'not slow'` in
+# pyproject.toml deselects the slow gate here.
+pytest -v
+
+# Slow exact-reference gate ONLY. Reproduce the recorded arithmetic stack;
+# newer dependency versions are compatibility targets, not bit-identity
+# substitutes for this provenance-labelled reference.
+pip install 'mpmath==1.4.1' 'python-flint==0.8.0' 'gmpy2==2.3.0' pytest-timeout
+pytest -v -s -m slow --timeout=1800  # -s keeps the per-point heartbeat visible
 ```
-
-Expected: both tests pass. Wall-clock < 5 min total on a 12-core modern machine.
-
-## Cross-references (public)
-
-- Package source: [`../connes_cvs/`](../connes_cvs/)
-- Paper reference data the c=13 test compares against: [`../data/results_15pt_T800.json`](../data/results_15pt_T800.json)
-- CI configuration: [`../.github/workflows/tests.yml`](../.github/workflows/tests.yml)
 
 ## Discipline
 
-- Every PyPI release MUST pass these tests before upload.
-- A failure at `c = 13` is a **blocking release issue** — do not publish.
-- Bit-identity is the gate: if mpmath internals change (e.g., `mpmath 1.4.x → 1.5.x`) and the `c = 13` `lambda_even` mantissa shifts, investigate; do not silently accept drift.
+- Every PyPI release MUST pass `pytest` and `pytest -m slow` before upload.
+- A failure of the c = 13 gate is a **blocking release issue** - do not publish.
+- Reproduction of the committed decimal contract is the gate: if dependency internals change and the c=13 digits shift, investigate rather than silently accepting drift. The same-precision A/B test requires all 80 stored printed digits; raw-tuple identity is asserted only in the explicitly documented small-cell tests.
+- The committed references in `reference_values.json` are frozen history. Extending them (more digits, new cells) is fine; changing recorded digits requires a documented erratum.

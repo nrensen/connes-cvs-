@@ -1,39 +1,35 @@
-# `benchmarks/` — Per-optimization speed benchmarks
+# `benchmarks/` - Historical records and current-path timers
 
-**Purpose.** Empirical measurements of the v0.2.0 math-core optimizations (`_h_plus_cached` memoization + `_re_S_and_dS_fused` real kernel) versus v0.1.0, plus the profile and probe scripts used during development.
+This directory separates two different kinds of evidence:
 
-## A/B benchmark summaries (v0.1.0 vs v0.2.0)
+1. the frozen April 2026 v0.1.0-to-v0.2.0 A/B summary; and
+2. scripts that execute the **current checkout** for profiling or comparison with frozen historical numbers.
 
-| File | Content |
+Do not treat a current run divided by a historical time as a same-environment A/B result.
+
+## Distributed record
+
+| File | Scope |
 |---|---|
-| `AB_VERIFIED_2026-04-14.md` | Authoritative A/B summary. v0.2.0 delivers 2.06× on the psi-cache phase and 1.83×–1.69× end-to-end at production scale. Bit-identical to v0.1.0 at `c = 13`, `N = 80`, `T = 400`, `dps = 80` across a 500-digit mantissa. |
-| `AB_baseline_no_win1.txt` | Raw wall-clock numbers for v0.1.0 (baseline). *(Local-only; gitignored.)* |
-| `AB_with_win1.txt` | Raw wall-clock numbers for v0.2.0. *(Local-only; gitignored.)* |
-| `AB_published_reference_check.txt` | Cross-check against the canonical paper data. *(Local-only; gitignored.)* |
-| `HOTSPOTS.md` | Per-function CPU profile analysis that motivated the v0.2.0 optimization. *(Local-only; gitignored.)* |
-| `WIN1_SUMMARY.md` | Narrative summary of the v0.2.0 optimization design. *(Local-only; gitignored.)* |
+| `AB_VERIFIED_2026-04-14.md` | Historical same-environment A/B summary at c=13, N=80, T=400, dps=80, 12 workers. It records 2.06x on the psi-cache phase, 1.83x end-to-end, and agreement in all 80 printed lambda digits. Raw console logs are not distributed, so the summary is the surviving evidence. |
+| `baseline_benchmark.py` | Single-process phase timer for the current checkout using the historical full-index assembly shape. Despite its filename, it cannot reconstruct the pre-optimization v0.1.0 source. |
+| `win1_benchmark.py` | Runs the current checkout at the historical small workload and prints a clearly labelled comparison with frozen April 2026 numbers. It is archaeological context, not a clean contemporary A/B. |
+| `win1_pool_benchmark.py` | Times one current public `run_sweep` cell with a configurable process count. It does not claim comparability with a v0.1.0 single-process run. |
 
-## Runnable benchmark scripts
-
-| Script | Purpose |
-|---|---|
-| `baseline_benchmark.py` | Re-run the v0.1.0 baseline timing on your hardware. |
-| `win1_benchmark.py` | Re-run the v0.2.0 timing on your hardware. |
-| `win1_pool_benchmark.py` | v0.2.0 with multi-process Pool parallelism. Used in the README quoted timings. |
-
-Example:
+Example current-path timing:
 
 ```bash
-python benchmarks/win1_pool_benchmark.py 13 80 400 80
+python benchmarks/win1_pool_benchmark.py 13 80 400 80 8
 ```
 
-## Cross-references (public)
+## Interpreting the historical terminology
 
-- Package source: [`../connes_cvs/`](../connes_cvs/)
-- Tests (bit-identity gate): [`../tests/`](../tests/)
-- Top-level performance section: [`../README.md`](../README.md)
+The April summary described two decimal strings as identical when they agree in all 80 printed digits. This repository reserves raw identity language for direct `_mpf_` tuple comparisons. The historical table has therefore been relabelled as an 80-printed-digit agreement; no underlying value or timing was changed.
 
-## Discipline
+Performance claims require a matched before/after harness with identical code scope, workload, precision, backend, worker count, hardware and timing boundary. The distributed evidence does not support a universal python-flint multiplier, so none is claimed.
 
-- These benchmarks are historical (Apr 2026) and document the v0.1.0 → v0.2.0 transition. The A/B summary at `AB_VERIFIED_2026-04-14.md` is the authoritative numerical record.
-- Probe scripts (`_probe_*.py`, `_compare_psi_full.py`, `run_profile.py`) are gitignored development artifacts; they remain in the local working tree for archaeological reference.
+## Cross-references
+
+- [Package source](../connes_cvs/)
+- [Regression and identity tests](../tests/)
+- [Top-level performance section](../README.md#performance)

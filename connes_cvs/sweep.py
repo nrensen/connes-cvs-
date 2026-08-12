@@ -1,255 +1,187 @@
-"""
-Multi-cutoff sweep runner with multiprocessing parallelism.
+"""Validated multi-cutoff orchestration for CvS Galerkin cells.
 
-Runs :func:`connes_cvs.operator.build_galerkin_matrix` and
-:func:`connes_cvs.operator.compute_ground_state` across a range of
-cutoff values, distributing the expensive psi-cache computation across
-CPU cores.
+The sweep API delegates every cutoff to :mod:`connes_cvs.runner`, so serial
+and multiprocessing runs share one arithmetic path, spawn-safe process setup,
+lossless mpf transport, per-point heartbeat, and optional atomic checkpoints.
 
-The parallelism strategy mirrors the production scripts: each worker
-computes a single (psi, psi') pair for one basis index, and the matrix
-assembly + eigensolver run in the main process after the cache is built.
+Multiprocessing entry points must be protected on spawn platforms::
 
-References
-----------
-- Connes & van Suijlekom, arXiv:2511.23257
-- Connes, Consani & Moscovici, arXiv:2511.22755
+    from connes_cvs.sweep import run_sweep
+
+    if __name__ == "__main__":
+        results = run_sweep([7, 8, 9], N=60, T=400, dps=80, workers=4)
+        for cutoff, row in sorted(results.items()):
+            print(cutoff, row["lambda_min"])
+
+The numerical core mutates the process-global mpmath and Flint precision
+contexts. Run independent cells in processes, not concurrent Python threads.
 """
 
 from __future__ import annotations
 
-import multiprocessing as mp_pool
+import os
 import time
-from typing import Any
+from multiprocessing import cpu_count
+from numbers import Integral
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import mpmath as mp
 
-from connes_cvs.operator import (
-    HAS_FLINT,
-    prime_powers_up_to,
-    psi_prime,
-    psi_prime_deriv,
-    psi_pole,
-    psi_pole_deriv,
-    psi_arch,
-    psi_arch_deriv,
-    compute_ground_state,
-    extract_zeros,
-    _hplus_cache_clear,
-)
-
-if HAS_FLINT:
-    from flint import ctx as flint_ctx
+from connes_cvs.operator import extract_zeros
+from connes_cvs.runner import CellConfig, GalerkinCell
 
 
-# ============================================================
-# Worker initializer and task function for multiprocessing
-# ============================================================
-
-# Module-level state for worker processes (populated by init_worker)
-_worker_state: dict[str, Any] = {}
-
-
-def _init_worker(cutoff: int, dps: int, T: int) -> None:
-    """
-    Initializer for each worker process in the multiprocessing pool.
-
-    Sets mpmath precision, flint precision, and precomputes shared data
-    (L, prime_data) that every worker needs.
-    """
-    mp.mp.dps = dps
-    if HAS_FLINT:
-        flint_ctx.prec = int(dps * 3.5)
-
-    L = mp.log(cutoff)
-    prime_data, _ = prime_powers_up_to(cutoff)
-
-    _worker_state["dps"] = dps
-    _worker_state["T"] = T
-    _worker_state["L"] = L
-    _worker_state["prime_data"] = prime_data
+def _require_int(name: str, value: int, minimum: int) -> int:
+    if isinstance(value, bool) or not isinstance(value, Integral):
+        raise TypeError(f"{name} must be an integer, got {type(value).__name__}")
+    value_int = int(value)
+    if value_int < minimum:
+        raise ValueError(f"{name} must be >= {minimum}, got {value_int}")
+    return value_int
 
 
-def _compute_psi_pair_worker(n_idx: int) -> tuple[int, str, str]:
-    """
-    Worker function: compute psi(n_idx) and psi'(n_idx).
-
-    Returns string representations to safely pass between processes
-    (mpmath objects are not pickle-safe at high precision).
-    """
-    L = _worker_state["L"]
-    T = _worker_state["T"]
-    dps = _worker_state["dps"]
-    prime_data = _worker_state["prime_data"]
-
-    # WIN 1: share h_plus evaluations between psi_arch and psi_arch_deriv
-    # via a per-x memoization cache keyed on abs(tau). Bit-identical.
-    _hplus_cache_clear()
-    x = mp.mpf(n_idx)
-    psi = psi_prime(x, L, prime_data) + psi_pole(x, L) + psi_arch(x, L, T, dps)
-    psi_d = psi_prime_deriv(x, L, prime_data) + psi_pole_deriv(x, L) + psi_arch_deriv(x, L, T, dps)
-    _hplus_cache_clear()
-    return (n_idx, mp.nstr(psi, dps + 5), mp.nstr(psi_d, dps + 5))
+def _validated_cutoffs(cutoffs: Sequence[int]) -> List[int]:
+    if isinstance(cutoffs, (str, bytes)) or not isinstance(cutoffs, Sequence):
+        raise TypeError("cutoffs must be a nonempty sequence of integers")
+    values = [_require_int(f"cutoffs[{i}]", value, 2) for i, value in enumerate(cutoffs)]
+    if not values:
+        raise ValueError("cutoffs must not be empty")
+    if len(set(values)) != len(values):
+        raise ValueError("cutoffs must not contain duplicates")
+    return values
 
 
-def _run_single_cutoff(
-    c: int,
-    N: int,
-    T: int,
-    dps: int,
-    n_workers: int,
-) -> dict[str, Any]:
-    """
-    Run the full pipeline for a single cutoff value using multiprocessing.
+def _optional_directory(
+    name: str, value: Optional[Union[str, os.PathLike]]
+) -> Optional[Path]:
+    if value is None:
+        return None
+    try:
+        path = Path(value).expanduser().resolve()
+    except TypeError as exc:
+        raise TypeError(f"{name} must be path-like or None") from exc
+    path.mkdir(parents=True, exist_ok=True)
+    if not path.is_dir():
+        raise ValueError(f"{name} is not a directory: {path}")
+    return path
 
-    1. Parallel psi-cache computation (workers compute individual psi pairs).
-    2. Matrix assembly in main process.
-    3. Even-sector diagonalization.
-    4. Zero extraction.
-
-    Returns a result dict with eigenvalue, errors, timing, etc.
-    """
-    mp.mp.dps = dps
-    if HAS_FLINT:
-        flint_ctx.prec = int(dps * 3.5)
-
-    t_start = time.time()
-    L = mp.log(c)
-
-    # Step 1: parallel psi-cache
-    n_indices = list(range(-N, N + 1))
-    t0 = time.time()
-    with mp_pool.Pool(n_workers, initializer=_init_worker, initargs=(c, dps, T)) as pool:
-        cache_results = pool.map(_compute_psi_pair_worker, n_indices)
-    t_cache = time.time() - t0
-
-    psi_vals = {}
-    psi_deriv_vals = {}
-    for (n_idx, psi_str, psi_d_str) in cache_results:
-        psi_vals[n_idx] = mp.mpf(psi_str)
-        psi_deriv_vals[n_idx] = mp.mpf(psi_d_str)
-
-    # Step 2: assemble the Galerkin matrix
-    t_mat_start = time.time()
-    DIM = 2 * N + 1
-    Q = mp.matrix(DIM, DIM)
-    for i in range(DIM):
-        m_idx = i - N
-        for j in range(DIM):
-            n_idx = j - N
-            if m_idx == n_idx:
-                Q[i, j] = psi_deriv_vals[n_idx]
-            else:
-                # Note: mpmath handles mpf / int correctly; avoid redundant
-                # mp.mpf(int) conversion in the inner loop (micro-opt, bit-identical).
-                Q[i, j] = (psi_vals[m_idx] - psi_vals[n_idx]) / (m_idx - n_idx)
-    # Symmetrize
-    for i in range(DIM):
-        for j in range(i + 1, DIM):
-            avg = (Q[i, j] + Q[j, i]) / 2
-            Q[i, j] = avg
-            Q[j, i] = avg
-    t_mat = time.time() - t_mat_start
-
-    # Step 3: even-sector diagonalization
-    t_diag_start = time.time()
-    lambda_min, v_full = compute_ground_state(Q)
-    t_diag = time.time() - t_diag_start
-
-    # Step 4: zero extraction
-    t_zeros_start = time.time()
-    zeros_results = extract_zeros(v_full, float(L), n_zeros=10, dps=dps)
-    t_zeros = time.time() - t_zeros_start
-
-    t_total = time.time() - t_start
-
-    return {
-        "cutoff": c,
-        "L": L,
-        "N": N,
-        "T": T,
-        "dps": dps,
-        "lambda_min": lambda_min,
-        "eigvec": v_full,
-        "zeros": zeros_results,
-        "gamma1_error": (
-            zeros_results[0]["error"]
-            if zeros_results and zeros_results[0]["error"] is not None
-            else None
-        ),
-        "wall_time": t_total,
-        "timing": {
-            "cache_sec": t_cache,
-            "matrix_sec": t_mat,
-            "diag_sec": t_diag,
-            "zeros_sec": t_zeros,
-            "total_sec": t_total,
-        },
-    }
-
-
-# ============================================================
-# Public API
-# ============================================================
 
 def run_sweep(
-    cutoffs: list[int],
+    cutoffs: Sequence[int],
     N: int = 100,
     T: int = 800,
     dps: int = 150,
-    workers: int | None = None,
-) -> dict[int, dict[str, Any]]:
+    workers: Optional[int] = None,
+    flint_bits: Optional[int] = None,
+    n_zeros: int = 10,
+    zero_tol: Optional[Union[mp.mpf, str]] = None,
+    strict_zeros: bool = False,
+    checkpoint_dir: Optional[Union[str, os.PathLike]] = None,
+    artifact_dir: Optional[Union[str, os.PathLike]] = None,
+    overwrite_artifacts: bool = False,
+) -> Dict[int, Dict[str, Any]]:
+    """Run validated, resumable Galerkin cells for several integer cutoffs.
+
+    Cutoffs are processed sequentially; each cell may use up to ``workers``
+    spawn processes for its independent basis-index quadratures. The returned
+    mapping retains the v0.2 public fields while adding each runner artifact.
+
+    ``checkpoint_dir`` stores one integrity-checked psi cache per cutoff.
+    ``artifact_dir`` stores one atomic JSON runner artifact per cutoff. Those
+    files are single-writer local inputs/outputs; a live lock prevents two
+    processes from sharing the same target accidentally.
     """
-    Run a multi-cutoff sweep of the CvS operator.
-
-    For each cutoff c in ``cutoffs``, builds the Galerkin matrix Q(c),
-    computes the ground-state eigenvalue, extracts the first 10 zeta
-    zeros from the eigenvector, and records diagnostics.
-
-    Each cutoff is processed sequentially (the parallelism is WITHIN
-    each cutoff — the expensive psi-cache computation is distributed
-    across ``workers`` CPU cores via multiprocessing.Pool).
-
-    Parameters
-    ----------
-    cutoffs : list of int
-        Cutoff values to sweep. Each must be >= 2.
-    N : int, optional
-        Basis half-size. Default: 100.
-    T : int, optional
-        Archimedean truncation parameter. Default: 800.
-    dps : int, optional
-        Decimal digits of precision. Default: 150.
-    workers : int or None, optional
-        Number of parallel processes for the psi-cache computation.
-        If None, uses ``multiprocessing.cpu_count()``.
-
-    Returns
-    -------
-    results : dict
-        Mapping from cutoff c to a dict containing:
-
-        - ``'lambda_min'`` (mpmath.mpf): Ground-state eigenvalue.
-        - ``'gamma1_error'`` (mpmath.mpf or None): |gamma_1 - detected_zero|.
-        - ``'eigvec'`` (mpmath.matrix): Ground-state eigenvector.
-        - ``'zeros'`` (list of dict): Full zero extraction results.
-        - ``'wall_time'`` (float): Computation time in seconds.
-        - ``'timing'`` (dict): Breakdown of time per phase.
-
-    Examples
-    --------
-    >>> results = run_sweep([7, 8, 9], N=60, T=400, dps=80, workers=4)
-    >>> for c, r in sorted(results.items()):
-    ...     print(f"c={c:2d}  lambda_min={r['lambda_min']:.4e}")
-    """
+    values = _validated_cutoffs(cutoffs)
+    N = _require_int("N", N, 1)
+    T = _require_int("T", T, 1)
+    dps = _require_int("dps", dps, 15)
+    if flint_bits is not None:
+        flint_bits = _require_int(
+            "flint_bits", flint_bits, (3322 * dps + 999) // 1000
+        )
+    n_zeros = _require_int("n_zeros", n_zeros, 1)
     if workers is None:
-        workers = mp_pool.cpu_count()
+        workers = min(cpu_count(), 8)
+    workers = _require_int("workers", workers, 1)
+    if not isinstance(strict_zeros, bool):
+        raise TypeError("strict_zeros must be a bool")
+    if not isinstance(overwrite_artifacts, bool):
+        raise TypeError("overwrite_artifacts must be a bool")
+    checkpoint_root = _optional_directory("checkpoint_dir", checkpoint_dir)
+    artifact_root = _optional_directory("artifact_dir", artifact_dir)
 
-    mp.mp.dps = dps
-
-    results = {}
-    for c in cutoffs:
-        result = _run_single_cutoff(c, N, T, dps, workers)
-        results[c] = result
+    results: Dict[int, Dict[str, Any]] = {}
+    for cutoff in values:
+        checkpoint_path = (
+            checkpoint_root / f"c{cutoff}_N{N}_T{T}_dps{dps}.checkpoint.json"
+            if checkpoint_root is not None
+            else None
+        )
+        artifact_path = (
+            artifact_root / f"c{cutoff}_N{N}_T{T}_dps{dps}.json"
+            if artifact_root is not None
+            else None
+        )
+        cell = GalerkinCell(
+            CellConfig(
+                c=cutoff,
+                N=N,
+                T=T,
+                dps=dps,
+                tag="run_sweep",
+                flint_bits=flint_bits,
+            ),
+            workers=workers,
+            ground_state="minimum",
+            checkpoint_path=checkpoint_path,
+            artifact_path=artifact_path,
+            overwrite_artifact=overwrite_artifacts,
+        )
+        artifact = cell.run()
+        if cell.eigvec_full is None or cell.lambda_even is None:
+            raise RuntimeError("runner completed without an eigenpair")
+        zero_started = time.perf_counter()
+        zeros = extract_zeros(
+            cell.eigvec_full,
+            c=cutoff,
+            n_zeros=n_zeros,
+            dps=dps,
+            tol=zero_tol,
+            strict=strict_zeros,
+        )
+        zero_seconds = time.perf_counter() - zero_started
+        timing = dict(artifact["timings_seconds"])
+        timing["zeros_s"] = zero_seconds
+        timing["total_with_zeros_s"] = timing["total_s"] + zero_seconds
+        # Preserve the v0.2 public timing schema for downstream consumers while
+        # retaining the more explicit v0.3 names from the runner artifact.
+        timing["cache_sec"] = timing["psi_cache_s"]
+        timing["matrix_sec"] = timing["matrix_assembly_s"]
+        timing["diag_sec"] = timing["diagonalize_s"]
+        timing["zeros_sec"] = timing["zeros_s"]
+        timing["total_sec"] = timing["total_with_zeros_s"]
+        results[cutoff] = {
+            "cutoff": cutoff,
+            "L": mp.log(cutoff),
+            "N": N,
+            "T": T,
+            "dps": dps,
+            "lambda_min": cell.lambda_even,
+            "eigvec": cell.eigvec_full,
+            "zeros": zeros,
+            "gamma1_error": (
+                zeros[0]["error"]
+                if zeros and zeros[0].get("converged") is True
+                else None
+            ),
+            "wall_time": timing["total_with_zeros_s"],
+            "timing_scope": (
+                "runner compute pipeline plus zero extraction; excludes runner "
+                "artifact hashing, JSON serialization, and disk-write overhead"
+            ),
+            "timing": timing,
+            "runner_artifact": artifact,
+        }
 
     return results

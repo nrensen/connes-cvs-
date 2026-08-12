@@ -49,7 +49,7 @@ in the finite \cvs\ path}
 
 \author{Akiva Groskin}
 
-\date{Draft, July 2026}
+\date{July 2026}
 
 \begin{document}
 
@@ -58,34 +58,42 @@ in the finite \cvs\ path}
 \begin{abstract}
 Fix a Galerkin level $N$ in the finite \cvs\ truncation of the Weil
 quadratic form (with no archimedean cutoff), and let $u=\log c$ be the prime
-cutoff, which is retained and varied. Differentiating the
-finite matrix path $u\mapsto Q_N(u)$ across a prime-power threshold $u=\log q$
-returns the von Mangoldt weight exactly, in every matrix entry: the
-first-derivative jump is
+cutoff, which is retained and varied. The object of this paper is the singular
+part of $D_u^2Q_N$ along the finite matrix path $u\mapsto Q_N(u)$: a negative
+semidefinite rank-one \emph{matrix-valued von Mangoldt measure}, a finite,
+cutoff-free realization of the prime side of the Weil--Guinand explicit
+formula on the operator path itself. Its defining computation is the
+first-derivative jump at a prime-power threshold $u=\log q$, which returns the
+von Mangoldt weight exactly, in every matrix entry:
 \[
         Q_N'(\log q+0)-Q_N'(\log q-0)
         =-\frac{2\Lam(q)}{\sqrt q\,\log q}\,\one_N\one_N^t .
 \]
-Equivalently, the singular part of $D_u^2Q_N$ is a negative semidefinite
-rank-one \emph{matrix-valued von Mangoldt measure}, a finite realization of the
-prime side of the Weil--Guinand explicit formula (with no archimedean cutoff) on
-the operator path itself; the identity relating this prime side to the zeros is
-classical and is not proven here. We prove that this event is
-\emph{arithmetically rigid}:
+This identity is an elementary structural derivative of the path's defining
+prime sum: the jump is one differentiation of the entering prime atom, and
+that is precisely what makes the readout exact rather than asymptotic; the
+identity relating the prime side to the zeros is classical and is not proven
+here. The contribution is the isolation and naming of the finite matrix-valued
+measure and the exact finite geometry established around it. First, the event
+is \emph{arithmetically rigid}:
 the entire singular jet at an edge is a universal matrix scaled by the single
 scalar $\Lam(q)$, so it carries exactly the von Mangoldt weight and nothing
-more. The event geometry is otherwise a piece of finite harmonic analysis: the
+more. Second, the event geometry is a sharp piece of finite harmonic analysis: the
 source-to-jet map is a lossless finite dictionary on the squared-integer nodes
 $\{0,1^2,\dots,N^2\}$, with an explicit confluent-Vandermonde determinant, a
 sharp $2N{+}1$ window, and a universal recurrence $S\prod_{k=1}^N(S-k^2)^2$; a
-sharp finite \emph{prime-edge uncertainty principle} bounds the order at which a
+sharp finite vanishing-moment bound (a \emph{prime-edge uncertainty principle}
+in the band-limited sense) bounds the order at which a
 band-limited normal can be blind to an entering prime, with the centered
 finite-difference stencil the unique extremizer; and each prime event is a
 rank-one negative-semidefinite deflation of the spectral velocity, interlacing
-the velocity spectrum. Every statement is finite and exact; the event algebra
-holds verbatim for any $L$-function of the Selberg class (the arithmetic entering
-only through the source weights), while the sign-definite consequences require a
-positive weight and so hold for $\zeta$. The results are structural; the paper
+the velocity spectrum. The statements are finite-dimensional and proved under
+explicitly stated hypotheses; the event algebra transfers to any $L$-function of
+the Selberg class once a finite path with the same event structure is prescribed
+(the arithmetic entering only through the source weights), while the
+sign-definite consequences require a positive weight and so hold for $\zeta$
+(the spectral-barrier statement remaining conditional on its
+positive-definiteness hypothesis). The results are structural; the paper
 proves no positivity, no Riemann Hypothesis, no prime-counting, next-prime, or
 factoring statement.
 \end{abstract}
@@ -97,6 +105,29 @@ Secondary 11M06, 15A15, 47A75, 42C40.
 \noindent\textit{Key words and phrases.} Riemann zeta function, Weil explicit
 formula, von Mangoldt function, Connes--van Suijlekom operator, truncated Weil
 form, confluent Vandermonde, vanishing moments.
+
+\medskip
+\noindent\textit{Note on this version.} This version corrects version 1 of the
+Zenodo deposit: the coincidence-averaging corollary now carries its
+uncorrelatedness hypothesis explicitly (with the covariance discussion in
+Remark~\ref{rem:covariance}); the directional-residual and singular-ratio
+diagnostics are no longer called equivalent; the coincidence-resolvent pole
+statement is stated by spectral projection, allowing removable points; the
+reciprocal Weyl identity is stated meromorphically with its pointwise domain
+made exact; and the Krein-string boundary-mass reading is downgraded from a
+theorem to an explicitly labeled analogy. Scope language is also recalibrated
+relative to version 1: the abstract's exactness sentence is removed, the
+Selberg-class transfer is conditioned on an actually constructed finite path,
+the spectral-barrier statement is demoted to a conditional remark stating its
+positive-definiteness hypothesis, one proof argument in the resolution-scale
+corollary is repaired (a domination argument replaces a first-positive-root
+phrase), the verification table marks the variance reduction as an IID-model
+statement, the vanishing-moment result is presented under a calibrated name
+(with the uncertainty-principle reading kept as a gloss), the related-work
+discussion is extended (Makraini, Andrade, Andrews), and point-of-use
+attributions are added. The central rank-one prime-power
+jump, the distributional matrix-valued measure, the dictionary,
+vanishing-moment, and deflation results are unchanged in statement.
 
 \section{Introduction}
 
@@ -119,11 +150,18 @@ the matrix value itself, but it is exactly visible in the first derivative, and
         \bigl(Q_N'(\log q+0)-Q_N'(\log q-0)\bigr)_{mn}
         \qquad\text{for every }m,n.
 \]
+This identity is elementary and holds by construction: the prime sum is a
+defining summand of $Q_N$, and the jump is one chain-rule differentiation of
+the entering atom (Section~\ref{sec:measure}). The exactness is the point, and
+the contribution of the paper is what is isolated around it: the finite
+matrix-valued measure itself, its rigidity, the exact squared-node dictionary,
+and the sharp vanishing-moment ceiling with its unique extremizer.
 Summing these jumps against a test function reproduces $\sum_{q}\Lam(q)\phi(\log
 q)$, the prime side of the Weil--Guinand explicit formula
 \cite{Weil1952,IwaniecKowalski2004}; the archimedean and pole terms
 (Paper~2) carry the complementary side, and the eigenvalues of $Q_N$
-approximate the zeros (Paper~1). In this sense the finite path renders the
+approximate the zeros (Paper~1; a quantitative convergence law for the first
+zero in the CCM setting is given by Andrews \cite{Andrews2026}). In this sense the finite path renders the
 \emph{prime side} of the explicit formula exactly and without an archimedean
 cutoff, with the primes appearing as the singular part of a second derivative;
 the archimedean and pole side is closed-form (Paper~2) and the zeros enter only
@@ -136,35 +174,48 @@ The rest of the arithmetic story is a rigidity theorem: beyond the scalar
 $\Lam(q)$, the local event contains no further information about $q$, and the
 universal singular jet has an explicit closed form (Section
 \ref{sec:rigidity}). The redundancy of the rank-one measure has a concrete
-payoff: averaging its $(2N+1)^2$ entries reads $\Lam(q)$ with variance reduced by
-the same factor. What remains is finite algebra of independent interest. The
+payoff: under mean-zero, equal-variance, pairwise uncorrelated entrywise
+errors, averaging its $(2N+1)^2$
+entries reads $\Lam(q)$ with variance reduced by
+the same factor (Corollary~\ref{cor:matched}; the covariance hypothesis is
+essential, Remark~\ref{rem:covariance}). What remains is the finite algebra of
+the event geometry, recorded as a reference catalog. The
 finite source-to-jet map is a lossless dictionary whose nodes are the squares
-$0,1^{2},\dots,N^{2}$ (Section~\ref{sec:dictionary}); a sharp uncertainty
-principle governs how blind a band-limited probe can be to an entering prime,
+$0,1^{2},\dots,N^{2}$ (Section~\ref{sec:dictionary}); a sharp vanishing-moment
+ceiling governs how blind a band-limited probe can be to an entering prime,
 with a unique extremizer (Section~\ref{sec:uncertainty}); and the rank-one
 event deflates the spectral velocity, interlaces its spectrum, and is generated
 by a single coincidence resolvent (Section~\ref{sec:deflation}). The event
-algebra is universal across the Selberg class, with a residue-class readout of
-$\Lam(q)$ across the Dirichlet family; the sign-definite parts require a positive
+algebra transfers across the Selberg class conditionally on the corresponding
+finite paths, with a residue-class readout of
+$\Lam(q)$ across the Dirichlet family under the same hypothesis; the
+sign-definite parts require a positive
 weight (Section~\ref{sec:scope}).
 
 Here an edge is treated only after a nonsmooth point of the path has been
 localized; nothing below predicts future prime powers from sampled data, and
 nothing below is a positivity statement. To our knowledge the finite \cvs\
 matrix-valued von Mangoldt measure and its rigidity, together with the
-squared-node event dictionary and the finite prime-edge uncertainty principle,
+squared-node event dictionary and the finite prime-edge vanishing-moment
+ceiling,
 have not previously been isolated. The trace-formula setting is due to Connes
 \cite{Connes1999,Connes2026}; the finite Galerkin framework to \cvs\ and \ccm;
 Suzuki develops a continuous screw-function framework
 \cite{Suzuki2026}; Śliwiński studies the adjacent $D_{\log}^{(\lambda,N)}$
-spectral-error regime \cite{Sliwinski2026}; Silva records related Loewner,
-exact-entry, and operator-monotone framings
-\cite{Silva20710075,Silva20737111,Silva20671635}; and Liao uses prime-event
+spectral-error regime \cite{Sliwinski2026}; Makraini records unconditional
+spectral bounds, a Krein-space symmetry, and a norm-convergence obstruction
+for the truncated Weil operator compressed to a prolate Sonin space, reducing
+positivity in that framework to an asymptotic kernel-invisibility property
+\cite{Makraini2026}, a line concerning positivity and convergence in the
+cutoff rather than the derivative structure of a fixed-$N$ path; Andrade records related Loewner,
+exact-entry, operator-monotone, and rank-one pole-resolvent framings
+\cite{Silva20710075,Silva20737111,Silva20671635,Silva20682834}; and Liao uses prime-event
 language for statistical event sequences \cite{Liao2026}. The classical Prony
 and confluent-Vandermonde algebra
 \cite{Prony1795,Gautschi1962,BatenkovYomdin2013}, the explicit formula
 \cite{Weil1952,IwaniecKowalski2004}, and the vanishing-moment (sum-rule)
-inequality \cite{Daubechies1992} are used as tools; the novelty is their exact
+inequality \cite{Daubechies1992} are used as tools; what is new, to our
+knowledge, is their exact
 realization on the finite \cvs\ path.
 
 \section{The finite path}\label{sec:path}
@@ -185,6 +236,10 @@ $I_N$,
  \end{cases}
 \]
 in the normalization of the finite dictionary \cite{Groskin2026FiniteDictionary}.
+A symbol-level Loewner divided-difference representation of the prime
+contribution in the localized Weil form was recorded earlier by Andrade
+\cite{Silva20710075}; what is used here is the derivative jump of the path
+across the threshold, not the representation itself.
 Its off-diagonal entries are divided differences of $m\mapsto\sin(2\pi m\omega)$;
 this is why a source entering at $\omega=0$ is invisible in the matrix value but
 exact in the first derivative (Lemma~\ref{lem:edge}).
@@ -195,14 +250,23 @@ function $g$ on real nodes $X=\{x_m\}$, with entries
 $(g(x_m)-g(x_n))/(x_m-x_n)$ off the diagonal and $g'(x_m)$ on it. Then
 $A_N(\omega)=\mathrm{DD}_X[g_\omega]$ with $X=\{-N,\dots,N\}$ and
 $g_\omega(x)=\sin(2\pi x\omega)/\pi$: the diagonal $2\omega\cos(2\pi m\omega)$ is
-exactly the confluent limit $g_\omega'(m)$. The whole event package below uses
-only this structure. Indeed, for any real-analytic background, amplitude
+exactly the confluent limit $g_\omega'(m)$. This is the divided-difference
+representation of the finite quadratic form established in
+\cite[Props.~4.1--4.2]{ConnesvanSuijlekom2025}; here it is specialized to a
+single prime source and differentiated in the prime cutoff along the path. The
+whole event package below uses
+only this structure. Indeed, for any real-analytic background $R(u)$, amplitude
 $s(u)$, and reduced position $\omega(u)$ with $\omega(u_0)=0$,
-$\omega'(u_0)\ne0$, and $\tfrac{d}{d\omega}g_\omega|_0$ affine on the nodes with
-nonzero slope $\lambda$, the path $R(u)-s(u)\mathrm{DD}_X[g_{\omega(u)}]$ has the
+$\omega'(u_0)\ne0$, such that $g_0$ is constant on the node span (so
+$\mathrm{DD}_X[g_0]=0$) and $\tfrac{d}{d\omega}g_\omega|_0$ is affine on the nodes with
+nonzero slope $\lambda$, the path
+$u\mapsto R(u)-s(u)\,\mathrm{DD}_X[g_{\omega(u)}]\,\mathbf 1[u\ge u_0]$, with the
+source term present only for $u\ge u_0$ (the entering-source mechanism of
+Theorem~\ref{thm:jump}), has the
 universal rank-one first-derivative jump $-s(u_0)\omega'(u_0)\lambda\,
 \one_N\one_N^t$ and the ensuing rigidity, independent of the node geometry. The
-finite \cvs\ path is the case $g_\omega=\sin(2\pi x\omega)/\pi$ ($\lambda=2$),
+finite \cvs\ path is the case $g_\omega=\sin(2\pi x\omega)/\pi$ ($g_0=0$,
+$\lambda=2$),
 $s=\Lam(q)/\sqrt q$, $\omega=1-\log q/u$.
 \end{remark}
 
@@ -215,7 +279,8 @@ $c=e^u$:
 \]
 Here $Q_{\mathrm{arch}}$ and $Q_{\mathrm{pole}}$ are the closed-form finite
 archimedean and pole matrices of the finite dictionary, given explicitly in
-Paper~2 \cite[the finite archimedean and pole blocks]{Groskin2026FiniteDictionary}:
+Paper~2 \cite[Lemma~2.1 and the displayed pole and archimedean
+sources]{Groskin2026FiniteDictionary}:
 $Q_{\mathrm{pole}}$ is the divided-difference matrix of the pole source
 $\psi_0$, and $Q_{\mathrm{arch}}$ that of the archimedean density, both in the
 same $A_N$-normalization as the prime blocks. We call the path
@@ -224,7 +289,7 @@ prime cutoff $e^u$ is varied. This is the standard finite \cvs/\ccm\ assembly
 with the prime cutoff exposed as a variable, not an ad hoc signal. From Paper~2
 we use only the following regularity of the non-prime blocks.
 
-\begin{lemma}[Background regularity]\label{lem:background}
+\begin{lemma}[Background regularity, imported from Paper~2]\label{lem:background}
 The archimedean and pole blocks $Q_{\mathrm{arch}}(u)$ and $Q_{\mathrm{pole}}(u)$
 are real analytic on $(0,\infty)$. Consequently the only points at which
 $u\mapsto Q_N(u)$ can fail to be real analytic are the prime-power thresholds
@@ -232,6 +297,9 @@ $u=\log q$.
 \end{lemma}
 
 \begin{proof}
+This lemma is imported: the blocks are defined, entrywise and in closed form,
+in \cite[Lemma~2.1]{Groskin2026FiniteDictionary}, and the analyticity below
+only restates the regularity of those closed forms.
 Entrywise, the pole block is a rational-hyperbolic expression whose denominators
 $u^2+16\pi^2n^2$ are strictly positive for $u>0$, and the archimedean block is
 built from digamma and trigamma values at $\tfrac14+\tfrac{i\pi n}{u}$, whose
@@ -300,6 +368,16 @@ All other terms are analytic at $u_0$ and cancel. The recovery formula follows
 because every entry of $\one_N\one_N^t$ equals $1$.
 \end{proof}
 
+\noindent Theorem~\ref{thm:jump} is an elementary structural derivative of the
+path's defining prime sum: the prime block is a defining summand of $Q_N(u)$,
+and the jump is one chain-rule differentiation of the entering atom
+(Lemma~\ref{lem:edge}). This is a feature, not an accident: it is what makes
+the readout exact rather than asymptotic. The contribution of the paper is not
+the differentiation but the isolation of the resulting measure
+(Corollary~\ref{cor:measure}) and the exact finite geometry around it
+(Sections~\ref{sec:rigidity}--\ref{sec:deflation}); see the scope discussion in
+Section~\ref{sec:scope}.
+
 \begin{corollary}[Matrix-valued von Mangoldt measure]\label{cor:measure}
 In the sense of distributions on $(0,\infty)$,
 \[
@@ -365,41 +443,82 @@ $+\tfrac{4\Lam(q)}{\sqrt q\,u_0^2}\one_N\one_N^t$.
 \end{proof}
 
 Because the jump lies entirely in the known rank-one direction $\one_N\one_N^t$,
-the $(2N+1)^2$ entries are $(2N+1)^2$ independent measurements of the same scalar,
-and averaging them is optimal.
+every entry of the jump matrix carries the same scalar, so the $(2N+1)^2$
+entries can be pooled. Since all entries of the model jump \emph{coincide} in
+the universal direction, we call the resulting all-ones compressions
+\emph{coincidence} objects: the coincidence average below, and the coincidence
+resolvent and coincidence-Weyl function of Section~\ref{sec:deflation}. How
+much pooling helps is decided by the correlation
+structure of the measurement errors, which must therefore be part of the
+hypothesis.
 
 \begin{corollary}[Coincidence-averaged weight readout]\label{cor:matched}
 Suppose the first-derivative jump is measured or estimated as
 $\widehat{J}=-a_q\,\one_N\one_N^t+E$, $a_q=2\Lam(q)/(\sqrt q\,\log q)$, with
-entrywise errors $E_{mn}$ of mean zero and common variance $\sigma^2$. The
-minimum-variance linear unbiased estimator of $a_q$ is the coincidence average
+entrywise errors $E_{mn}$ of mean zero and common variance $\sigma^2$ that are
+\emph{pairwise uncorrelated}. Among linear unbiased estimators of $a_q$, the
+minimum-variance one (Gauss--Markov) is the coincidence average
 \[
         \widehat a_q=-\frac{1}{(2N+1)^2}\sum_{m,n}\widehat{J}_{mn},
         \qquad \operatorname{Var}(\widehat a_q)=\frac{\sigma^2}{(2N+1)^2},
 \]
 a variance smaller by the factor $(2N+1)^2$ than the single-entry readout of
 Theorem~\ref{thm:jump}. The residual $\widehat{J}+\widehat a_q\one_N\one_N^t$ is
-orthogonal to $\one_N\one_N^t$, and its size, equivalently the ratio
-$\sigma_2/\sigma_1$ of the two leading singular values of $\widehat{J}$, certifies
-the rank-one model.
+orthogonal to $\one_N\one_N^t$, and its Frobenius size measures the distance of
+$\widehat{J}$ to the one-dimensional model span of $\one_N\one_N^t$.
 \end{corollary}
 
 \begin{proof}
 For the unit-Frobenius direction $u=\one_N\one_N^t/\|\one_N\one_N^t\|_F$, the
 amplitude functional $\langle u,\cdot\rangle_F$ is the Gauss--Markov estimator of
 the coefficient of $u$; with $\|\one_N\one_N^t\|_F^2=(2N+1)^2$ this is the stated
-average, and for uncorrelated entries
+average, and for pairwise uncorrelated entries
 $\operatorname{Var}=\sigma^2\|\one_N\one_N^t\|_F^2/(\|\one_N\one_N^t\|_F^2)^2
 =\sigma^2/(2N+1)^2$, against $\sigma^2$ for one entry. The orthogonal split
 $\widehat{J}=-\widehat a_q\one_N\one_N^t+R$, $R\perp\one_N\one_N^t$, gives the
-certificate.
+residual statement.
 \end{proof}
+
+\noindent Corollary~\ref{cor:matched} is a design upper bound on the pooling
+gain under an idealized error model, approximated for instance when the
+entrywise estimates are formed from disjoint sample sets;
+Remark~\ref{rem:covariance} records the realistic correlated regimes.
+
+\begin{remark}[Covariance hypotheses and diagnostics]\label{rem:covariance}
+(i) The uncorrelatedness hypothesis cannot be dropped: if all entries carry one
+common error variable, $E_{mn}\equiv Z$ with $\operatorname{Var}(Z)=\sigma^2$,
+then every mean/variance hypothesis holds while
+$\operatorname{Var}(\widehat a_q)=\sigma^2$, with no reduction. For a general
+\emph{nonsingular} (positive definite) error covariance $\Sigma$ the
+minimum-variance linear unbiased readout is the
+generalized least-squares estimator with weights $\Sigma^{-1}$, and its variance
+is governed by $\Sigma$, not by the entry count; for singular $\Sigma$, as in
+the common-error example just given, the best linear unbiased estimator exists
+but is not given by this formula. (ii) If the measurement is
+symmetric, $E_{mn}=E_{nm}$, the entries cannot all be uncorrelated; under the
+natural model (the entries with $m\le n$, diagonal included, pairwise
+uncorrelated, each of variance
+$\sigma^2$) the coincidence average has variance $\sigma^2(2d-1)/d^{3}$ with
+$d=2N+1$, a reduction of order $d^{2}/2$ rather than $d^{2}$: indeed
+$\operatorname{Var}\bigl(\sum_{m,n}E_{mn}\bigr)
+=d\,\sigma^2+4\binom d2\sigma^2=d(2d-1)\sigma^2$, since each of the $\binom d2$
+off-diagonal values appears twice in the sum, and dividing by $d^4$ gives the
+formula. (iii) The
+directional residual and the singular-value ratio $\sigma_2/\sigma_1$ of
+$\widehat J$ are \emph{different} diagnostics: the residual measures distance to
+the fixed model direction $\one_N\one_N^t$, while $\sigma_2/\sigma_1$ measures
+the relative (spectral-norm)
+distance to the set of all rank-one matrices. A rank-one matrix in a different
+direction has $\sigma_2/\sigma_1=0$ but a large directional residual, so
+$\sigma_2/\sigma_1$ is only a necessary check; the model at the fixed direction
+is certified by the directional residual.
+\end{remark}
 
 \noindent A one-sided difference estimate of the jump additionally carries the
 systematic bias of Proposition~\ref{prop:second}; a centered difference removes it
 to leading order.
 
-\section{Arithmetic rigidity}\label{sec:rigidity}
+\section{What the local event determines: arithmetic rigidity}\label{sec:rigidity}
 
 The first jump recovers $\Lam(q)$. It is natural to ask whether the higher-order
 local structure of the event carries any further arithmetic. It does not.
@@ -413,7 +532,10 @@ of the path is
 where $B_{r,N}(u_0)$ is a universal matrix depending only on $r$, $N$, and the
 edge location $u_0$, and not otherwise on $q$. Consequently, modulo the known
 edge location, the entire singular event content is the single scalar $\Lam(q)$:
-the map from the family of singular jets to $\Lam(q)$ is a bijection, and no
+at a fixed edge $u_0$ the assignment
+$\Lam\mapsto(\Lam/\sqrt q)\,(B_{r,N}(u_0))_{r\ge1}$ is a linear injection, so
+the singular jet family determines and is determined by the single scalar
+$\Lam(q)$, and no
 finer arithmetic invariant of $q$ is present in the local event.
 \end{theorem}
 
@@ -479,6 +601,8 @@ and $r=2$ recovers the first- and second-derivative jumps.
 
 We record the finite algebra of the event geometry: how a general finite source
 measure is encoded in the matrix, and how the edge jets invert that encoding.
+Sections~\ref{sec:dictionary} and~\ref{sec:uncertainty} are a reference catalog
+of this finite harmonic analysis, recorded for the event geometry itself.
 The statements are exact facts about the fixed matrix $A_N$; by
 Theorem~\ref{thm:rigidity} they specialize at a prime event to the recovery of a
 fixed profile, not to further arithmetic.
@@ -502,7 +626,9 @@ For a finite signed measure $\mu$ on $[0,1]$ put $B_\mu=\int A_N\dd\mu$ and
 Then $\mu\mapsto B_\mu$ factors exactly through the $2N+1$ coordinates
 $(M_0,S_k,C_k)$, recovered from the entries
 $(B_\mu)_{00}=2M_0$, $(B_\mu)_{k0}=S_k/(\pi k)$, $(B_\mu)_{kk}=2C_{|k|}$; the
-quotient has dimension exactly $2N+1$.
+quotient has dimension exactly $2N+1$. This is the source-to-matrix
+bijection of \cite[Prop.~4.2]{ConnesvanSuijlekom2025}, specialized to the
+single-source family used here.
 \end{lemma}
 
 \begin{proof}
@@ -615,7 +741,7 @@ $2N{+}1=9$; one jet short leaves the sharp one-dimensional blind line.}
 \label{fig:reconstruction}
 \end{figure}
 
-\section{A finite prime-edge uncertainty principle}\label{sec:uncertainty}
+\section{A finite vanishing-moment ceiling at the prime edge}\label{sec:uncertainty}
 
 How blind can a band-limited probe be to an entering prime? For a real even
 vector $x=(x_m)_{m\in I_N}$, let $T_x(t)=\sum_m x_m e^{2\pi imt}$, let
@@ -624,9 +750,12 @@ $e(x)=\min\{j\ge0:M_j(x)\ne0\}$ be its first nonvanishing (even) moment. The
 Rayleigh response of $x$ to the entering atom, $x^tA_N(\omega)x=K_x(\omega)$ with
 $K_x(\omega)=2\int_0^\omega T_x(t)T_x(\omega-t)\dd t$, has vanishing order
 $2e(x)+1$ in $\omega$, hence, via Lemma~\ref{lem:transport}, in the cutoff
-variable $\tau$; we call $2e(x)+1$ the \emph{visibility order} of $x$.
+variable $\tau$; we call $2e(x)+1$ the \emph{visibility order} of $x$. The
+bound below is a vanishing-moment (sum-rule) ceiling; the phrase
+\emph{prime-edge uncertainty principle} is kept only as a gloss for its
+band-limited reading.
 
-\begin{theorem}[Finite prime-edge uncertainty ceiling]\label{thm:uncertainty}
+\begin{theorem}[Finite vanishing-moment ceiling at the prime edge]\label{thm:uncertainty}
 For every nonzero real even $x$ on $I_N$ the visibility order satisfies
 $2e(x)+1\le 4N+1$. Equality holds if and only if, up to a nonzero scalar, $x$ is
 the centered finite-difference stencil
@@ -656,14 +785,14 @@ prime-edge visibility ceiling of the finite \cvs\ path.
 \end{proof}
 
 Figure~\ref{fig:uncertainty} shows the extremal stencil and the visibility
-ceiling. The principle is sharp and the extremizer unique: a level-$N$
+ceiling. The ceiling is sharp and the extremizer unique: a level-$N$
 band-limited probe cannot be blind to an entering prime beyond order $4N+1$, and
 exactly one probe (the $2N$-th central difference) attains that bound.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_uncertainty.pdf}
-\caption{The finite prime-edge uncertainty ceiling at $N=4$. Left: the unique
+\caption{The finite vanishing-moment ceiling at the prime edge, shown at $N=4$. Left: the unique
 maximally blind normal, the centered finite-difference stencil
 $x_m=(-1)^{N-m}\binom{2N}{N+m}$. Right: the visibility order $2e(x)+1$ of a
 family of even normals climbs by $4$ with each additional vanishing moment and
@@ -698,8 +827,9 @@ By Theorem~\ref{thm:uncertainty},
 $K_x(\omega)=\tfrac{2(2\pi)^{2e}M_e^2}{(2e+1)!}\omega^{2e+1}(1+O(\omega^2))$ with a
 positive leading coefficient. The remainder is an analytic multiple of
 $\omega^{2e+3}$, so it is dominated by the leading term on a nonempty window
-$0<\omega\le\omega_*(x)$ (any $\omega_*$ below the first positive root of the
-remainder, whose scale is set by the ratio of successive even moments of $x$);
+$0<\omega\le\omega_*(x)$ (such a window exists because the remainder is
+$O(\omega^{2e+3})$ with the leading term of exact order $\omega^{2e+1}$; the
+window scale is set by the ratio of successive even moments of $x$);
 there the leading term controls sign, monotonicity, and, as $\varepsilon\to0$,
 the first-passage scale. Inverting $K_x(\tau)=\varepsilon$ with
 $\omega=\tau/\log q+O(\tau^2)$ gives $\tau_\varepsilon$. The window $\omega_*(x)$
@@ -729,8 +859,14 @@ $a_q=2\Lam(q)/(\sqrt q\,\log q)>0$. Define the \emph{coincidence resolvent}
         =\sum_{j=1}^d\frac{|\langle\phi_j,\one_N\rangle|^2}{\lambda_j-z},
         \qquad z\notin\operatorname{spec}(Q_0),
 \]
-a rational function with a simple pole of residue $-|\langle\phi_j,\one_N\rangle|^2$
-at each eigenvalue $\lambda_j$ of $Q_0$. Then, at $u_0$, for $z\notin
+a rational function whose poles lie among the eigenvalues of $Q_0$: grouping the
+sum by spectral projections $P_\lambda$,
+$G_N(z)=\sum_{\lambda\in\operatorname{spec}(Q_0)}\|P_\lambda\one_N\|^2/(\lambda-z)$
+has a simple pole with residue $-\|P_\lambda\one_N\|^2$ at exactly those
+eigenvalues $\lambda$ with $P_\lambda\one_N\ne0$; an eigenvalue whose eigenspace
+is orthogonal to $\one_N$ contributes no pole (the corresponding point is
+removable), and a repeated eigenvalue contributes one grouped residue, not one
+pole per basis eigenvector. Then, at $u_0$, for $z\notin
 \operatorname{spec}(Q_0)$ (only the derivative jump enters, not the branch of
 $\log\det$),
 \[
@@ -741,9 +877,11 @@ $\log\det$),
 \]
 In particular $\Delta\frac{d}{du}\operatorname{tr}Q_N(u_0)=-a_q\,d$, so the scalar
 trace path $\operatorname{tr}Q_N$ has singular curvature
-$(D_u^2\operatorname{tr}Q_N)_{\rm sing}=-d\sum_q a_q\delta_{\log q}$: its second
-derivative is exactly $-(2N+1)$ times the prime side of the explicit formula, a
-scalar reading of Corollary~\ref{cor:measure}.
+$(D_u^2\operatorname{tr}Q_N)_{\rm sing}=-d\sum_q a_q\delta_{\log q}$: its
+singular second
+derivative is exactly $-(2N+1)$ times the scalar von Mangoldt measure
+$\mu_{mn}$ of Corollary~\ref{cor:measure}, hence carries the prime side of the
+explicit formula under the same conversion.
 \end{theorem}
 
 \begin{proof}
@@ -758,7 +896,8 @@ $-p\,a_q\,\one_N^tQ_0^{\,p-1}\one_N$; for $p=1$ this is $-a_q\|\one_N\|^2=-a_qd$
 \end{proof}
 
 The residues of $G_N$ are $-|\langle\phi_j,\one_N\rangle|^2$; their magnitudes are
-the couplings to the universal direction, and scaled by $-a_q$ they are exactly
+the couplings to the universal direction, and these magnitudes, scaled by
+$-a_q$, are exactly
 the eigenvalue-velocity jumps of Corollary~\ref{cor:deflation}.
 
 \begin{remark}[The coincidence spectral measure]
@@ -790,8 +929,14 @@ Immediate from $\Delta Q_N'(u_0)=-a_q\one_N\one_N^t$ and, for the velocities,
 first-order perturbation $\Delta\lambda_j'=\langle\phi_j,\Delta Q_N'\phi_j\rangle$.
 \end{proof}
 
-\begin{theorem}[Elementary spectral barriers in a positive cell]\label{thm:barriers}
-Suppose $Q_0=Q_N(u_0)$ is positive definite. Let $e_r(Q)$ be the $r$th elementary
+\begin{remark}[Elementary spectral barriers in a positive cell; conditional]\label{thm:barriers}
+Suppose $Q_0=Q_N(u_0)$ is positive definite. (This is a hypothesis, not a
+verified property of the actual \cvs\ path at the program's canonical
+parameters, where the assembled form has near-zero eigenvalues
+\cite{Groskin2026Paper1}; whether any
+actual prime-power event sits in a positive cell is not established here, and
+the statement is conditional on it, which is why it is recorded as a remark
+rather than a theorem.) Let $e_r(Q)$ be the $r$th elementary
 symmetric function of the eigenvalues of $Q$. Then for every $1\le r\le d$,
 \[
         \Delta\frac{d}{du}e_r(Q_N(u))\Big|_{u=u_0}
@@ -799,10 +944,10 @@ symmetric function of the eigenvalues of $Q$. Then for every $1\le r\le d$,
         T_{r-1}(Q_0)=\sum_{j=0}^{r-1}(-1)^je_{r-1-j}(Q_0)Q_0^j .
 \]
 In particular the determinant barrier ($r=d$) and its logarithm strictly
-decelerate at every prime event.
-\end{theorem}
+decelerate at every prime event in such a cell.
+\end{remark}
 
-\begin{proof}
+\begin{proof}[Proof of the barrier inequalities]
 For a principal $r$-set $S$, the matrix determinant lemma gives
 $\det(Q_{0,S}-ta_q\one_S\one_S^t)=\det Q_{0,S}-ta_q\,\one_S^t\adj(Q_{0,S})\one_S$;
 $Q_{0,S}$ is positive definite so $\adj(Q_{0,S})$ is positive definite and each
@@ -813,10 +958,16 @@ $T_{r-1}(Q_0)$ is diagonal with positive entries, so the quadratic form on
 $\one_N$ is positive.
 \end{proof}
 
-\subsection*{The prime event as a Krein-string boundary mass}
+\subsection*{The prime event as a rank-one Weyl-function increment}
 
-The rank-one velocity deflation has a clean reading in the classical language of
-Krein strings and de Branges canonical systems. Let $V_\pm=Q_N'(u_0\pm0)$ be the
+The rank-one velocity deflation has a clean resolvent reading. A related
+scalar-resolvent reduction appears in Andrade's analysis of the pole term of
+the continuum localized form \cite{Silva20682834}, where a
+rank-one-per-parity splitting reduces a bottom-eigenvalue question to a scalar
+resolvent criterion with a Krein analysis; the object here is different, namely
+the prime-event velocity jump of the fixed-$N$ path rather than the pole term.
+Let
+$V_\pm=Q_N'(u_0\pm0)$ be the
 right and left spectral velocities at $u_0=\log q$, so $V_+=V_--a_q\one_N\one_N^t$
 by Theorem~\ref{thm:jump}, and define the \emph{coincidence-Weyl function} of the
 velocity in the universal direction,
@@ -824,70 +975,109 @@ velocity in the universal direction,
         W_\pm(z)=\bigl\langle\one_N,(V_\pm-z)^{-1}\one_N\bigr\rangle,
         \qquad z\notin\operatorname{spec}(V_\pm).
 \]
-$W_\pm$ is a rational Nevanlinna function, the
-Weyl--Titchmarsh coefficient of the finite Krein string obtained by
-tridiagonalizing $V_\pm$ from $\one_N$ (a genuine finite string when $\one_N$ is
-cyclic; the identity below needs no such assumption).
+$W_\pm$ is a rational Nevanlinna function; when $\one_N$ is cyclic for $V_\pm$
+it is $(2N+1)$ times the Weyl function of the finite Jacobi matrix obtained by
+tridiagonalizing
+$V_\pm$ from the normalized vector $\one_N/\sqrt{2N+1}$ (the identities below
+need no such assumption).
 
-\begin{theorem}[Prime event as a boundary-mass increment]\label{thm:krein}
-At every $z$ off the spectra of $V_\pm$,
+\begin{theorem}[Prime event as a rank-one Weyl increment]\label{thm:krein}
+For every $z$ off the spectra of $V_\pm$, $1-a_qW_-(z)\ne0$ and
+\[
+        W_+(z)=\frac{W_-(z)}{1-a_qW_-(z)},
+        \qquad a_q=\frac{2\Lam(q)}{\sqrt q\,\log q}>0 .
+\]
+Equivalently, as an identity of meromorphic functions,
 \[
         \frac{1}{W_+(z)}=\frac{1}{W_-(z)}-a_q,
-        \qquad a_q=\frac{2\Lam(q)}{\sqrt q\,\log q}>0,
 \]
-a jump \emph{independent of $z$}. Equivalently $V_+$ is the Schur complement, with
+valid pointwise exactly where $W_+(z)W_-(z)\ne0$; the constant decrement is
+\emph{independent of $z$}. (The pointwise restriction is not vacuous: a
+nonconstant real rational Nevanlinna function has real zeros interlacing its
+poles, so $W_\pm$ generically vanish at points off both spectra whenever
+$\one_N$ has
+nonzero projection onto at least two eigenspaces, the exceptional case being an
+interlacing zero that coincides with an eigenvalue whose eigenspace is
+orthogonal to $\one_N$, and at such points off the spectra both
+reciprocals are undefined.) Equivalently $V_+$ is the Schur complement, with
 respect to the scalar block, of the bordered matrix
 $\left(\begin{smallmatrix}a_q^{-1}&\one_N^t\\ \one_N&V_-\end{smallmatrix}\right)$,
 i.e.\ a single symmetric elimination step with pivot $a_q^{-1}=\sqrt q\,\log q/
-(2\Lam(q))$. In the Krein correspondence this appends one boundary point mass
-$a_q$ to the coincidence string. Consequently the von Mangoldt weight is that
-boundary mass,
+(2\Lam(q))$. Consequently the von Mangoldt weight is read off from the
+reciprocal increment,
 \[
         \Lam(q)=\frac{\sqrt q\,\log q}{2}\Bigl(\tfrac{1}{W_-(z)}-\tfrac{1}{W_+(z)}\Bigr)
-        \qquad\text{for every }z.
+        \qquad\text{wherever }W_+(z)W_-(z)\ne0 .
 \]
 \end{theorem}
 
 \begin{proof}
-Apply the Sherman--Morrison identity to $V_+=V_--a_q\one_N\one_N^t$: with
-$M=V_--z$, $W_+=\one_N^t(M-a_q\one_N\one_N^t)^{-1}\one_N=W_-/(1-a_qW_-)$, hence
-$1/W_+=1/W_--a_q$. The Schur statement is the identity
-$V_--\one_N\,a_q\,\one_N^t=V_+$ for the displayed border; adding a constant to
-$-1/W$ is the boundary point-mass move in Krein's string--to--continued-fraction
-correspondence.
+For $z$ off both spectra,
+$\det(V_+-z)=\det(V_--z)\,(1-a_qW_-(z))$ by the matrix determinant lemma, so
+$1-a_qW_-(z)\ne0$ there. The Sherman--Morrison identity applied to
+$V_+=V_--a_q\one_N\one_N^t$ with
+$M=V_--z$ gives
+$W_+=\one_N^t(M-a_q\one_N\one_N^t)^{-1}\one_N=W_-/(1-a_qW_-)$. Dividing by
+$W_+W_-$ where both are nonzero yields the reciprocal form, which then extends
+to the stated meromorphic identity. The Schur statement is the identity
+$V_--\one_N\,a_q\,\one_N^t=V_+$ for the displayed border. The zero/pole
+interlacing for a real rational Nevanlinna function is classical
+\cite{KacKrein1974R}
+($W_-'>0$ between consecutive real poles).
 \end{proof}
 
-\begin{remark}
-This places the finite \cvs\ prime event in the same de Branges--Krein
+\begin{remark}[Krein-string analogy, not established here]
+The constant decrement of $1/W$ is \emph{formally} the boundary point-mass move
+in Krein's string--to--continued-fraction correspondence
+\cite{KacKrein1974string}, and it is tempting to
+read $a_q$ as a per-event boundary mass in the same de Branges--Krein
 canonical-system setting as Suzuki's continuous screw-function pencil
-\cite{Suzuki2026}: the prime data his continuous screw function carries appears
-here, under the reduced parametrization ($\omega_q'(u_0)=1/\log q$), as the finite
-per-event boundary mass $a_q=2\Lam(q)/(\sqrt q\,\log q)$. Only the \emph{per-event} boundary
-increment equals $a_q$; the interior masses of the string encode the accumulated
-spectral history of $V_-$, not the individual primes, and nothing here bears on
-positivity of the finite form or on the zeros.
+\cite{Suzuki2026}, with the reduced parametrization ($\omega_q'(u_0)=1/\log q$)
+matching the prime data his continuous screw function carries. Making that
+reading literal, however, requires Stieltjes-class hypotheses (a positive
+string with spectral measure supported on a half-line
+\cite{KacKrein1974string}) that the indefinite
+velocities $V_\pm$ are not proved to satisfy here; a general rational Nevanlinna
+function is the Weyl function of a finite Jacobi matrix or canonical system
+\cite{GesztesySimon1997,KacKrein1974R},
+which is a strictly larger class than the Krein strings. We therefore record
+the string reading as an analogy, not a theorem. In any case only the
+\emph{per-event} reciprocal increment equals $a_q$; the interior structure of
+$V_-$ encodes its accumulated spectral history, not the individual primes, and
+nothing here bears on positivity of the finite form or on the zeros.
 \end{remark}
 
 \section{Universality, the explicit formula, and scope}\label{sec:scope}
 
 \paragraph{Universality across the Selberg class.}
-The prime block is determined only by the source amplitudes and the
+The transfer below is conditional on the construction of the corresponding
+finite path: it applies to any finite path assembled with the same prime-block
+template as the \cvs\ path, with the $\zeta$ source weights replaced by those of
+$L(s,\pi)$; such a path is exhibited here only for $\zeta$. For Dirichlet
+twists the prime block is written down entrywise below, but no full twisted
+path (in particular no twisted archimedean or pole block) is constructed, and
+the construction for a general Selberg-class $L$-function
+is not carried out in this paper. Granting the path, the prime block is
+determined only by the source amplitudes and the
 test-function-at-$\log q$ pairing: the single-source matrix $A_N(1-\log q/u)$ is
 the same divided-difference matrix regardless of the $L$-function, since the
 gamma factor enters only the archimedean block $Q_{\mathrm{arch}}$, not the prime
-term. For an $L$-function $L(s,\pi)$ with prime side $\sum_q c_\pi(q)q^{-1/2}$
+term. For an $L$-function $L(s,\pi)$ with prime side
+$\sum_q c_\pi(q)q^{-1/2}\phi(\log q)$
 (Dirichlet $c_\chi(q)=\Lam(q)\chi(q)$, or automorphic $c_\pi(q)=\Lam(q)a_\pi(q)$),
-the finite path has first-derivative jump
+such a finite path has first-derivative jump
 $-\,2c_\pi(q)(\log q)^{-1}q^{-1/2}\one_N\one_N^t$, and the whole event
 \emph{algebra} transfers verbatim: the rank-one direction $\one_N\one_N^t$, the
 source-to-jet dictionary on the squared nodes $\{0,1^2,\dots,N^2\}$, and the
-uncertainty ceiling depend only on $A_N$ and hold for arbitrary (in particular
+vanishing-moment ceiling depend only on $A_N$ and hold for arbitrary (in particular
 complex) weights. The \emph{sign-definite} consequences are different: negative
 semidefiniteness of the event measure (Corollary~\ref{cor:measure}), the velocity
 interlacing and deceleration (Corollary~\ref{cor:deflation}), and the strict
-barrier decrease (Theorem~\ref{thm:barriers}) all use $a_q>0$, hence a
+barrier decrease (Remark~\ref{thm:barriers}) all use $a_q>0$, hence a
 \emph{positive} weight $c_\pi(q)>0$. This holds at every prime power for $\zeta$
-(where $c(q)=\Lam(q)>0$), so those results transfer verbatim there. For a real
+(where $c(q)=\Lam(q)>0$), so those results transfer verbatim there, the barrier
+statement remaining conditional on its positive-definiteness hypothesis
+(Remark~\ref{thm:barriers}). For a real
 primitive character the atom is Hermitian, but $c(q)=\Lam(q)\chi(q)$ is negative
 wherever $\chi(q)=-1$ (for instance $\chi_4(3)=-1$), and there the three
 sign-definite statements reverse; they hold only at prime powers with
@@ -897,10 +1087,14 @@ a finite rendering of the prime side of the twisted explicit formula
 \cite{IwaniecKowalski2004}.
 
 \begin{corollary}[Residue-class readout across the Dirichlet family]\label{cor:dirichlet}
-Fix a prime-power edge $u_0=\log q$ with $(q,m)=1$, and for each Dirichlet
-character $\chi\bmod m$ let $J^{(\chi)}=j^{(\chi)}\one_N\one_N^t$ be the
-first-derivative jump of the finite path built from $L(s,\chi)$, so
-$j^{(\chi)}=-2\Lam(q)\chi(q)(\log q)^{-1}q^{-1/2}$. Then for every residue $a$ with
+Fix a prime-power edge $u_0=\log q$ with $(q,m)=1$. Assume, for each Dirichlet
+character $\chi\bmod m$, a finite path with the same prime-block template,
+carrying the twisted weights $c_\chi(q')=\Lam(q')\chi(q')$, whose non-prime
+blocks are real analytic at $u_0$; such paths are granted, not constructed,
+here. Then the first-derivative jump of the $\chi$-path is
+$J^{(\chi)}=j^{(\chi)}\one_N\one_N^t$ with
+$j^{(\chi)}=-2\Lam(q)\chi(q)(\log q)^{-1}q^{-1/2}$ (by the argument of
+Theorem~\ref{thm:jump}), and for every residue $a$ with
 $(a,m)=1$,
 \[
  -\frac{\sqrt q\,\log q}{2}\cdot\frac{1}{\phi(m)}
@@ -913,7 +1107,10 @@ progression at a known edge, and is not a prediction of $q$.
 \end{corollary}
 
 \begin{proof}
-Substitute $j^{(\chi)}$ and apply the character orthogonality
+The jump formula follows exactly as in Theorem~\ref{thm:jump}: the analytic
+non-prime blocks cancel in the right-minus-left derivative, and the entering
+atom carries the twisted weight. Then
+substitute $j^{(\chi)}$ and apply the character orthogonality
 $\frac{1}{\phi(m)}\sum_{\chi\bmod m}\overline{\chi(a)}\chi(q)
 =\mathbf 1[q\equiv a\ (\mathrm{mod}\ m)]$, valid for $(q,m)=1$.
 \end{proof}
@@ -927,7 +1124,9 @@ prime sum is a defining summand of $Q_N$), and we prove nothing here about the
 zero side: the identity relating the prime side to the zeros is the classical
 explicit formula, supplied externally by the archimedean and pole blocks of
 Paper~2 \cite{Groskin2026FiniteDictionary} and the eigenvalue-to-zero
-approximation of Paper~1 \cite{Groskin2026Paper1}. The object is thus
+approximation of Paper~1 \cite{Groskin2026Paper1} (with a quantitative
+convergence law for the first zero in the CCM setting in
+\cite{Andrews2026}). The object is thus
 complementary to Suzuki's continuous screw-function picture \cite{Suzuki2026},
 to the CCM spectral triple \cite{ConnesConsaniMoscovici2025}, and to Liu's
 determinant encoding of local Euler factors \cite{Liu2026}, each a differently
@@ -937,35 +1136,56 @@ mechanized realization of the same arithmetic.
 The claims are finite and structural. The paper proves no positivity of the
 finite form, no Riemann Hypothesis, no prime-counting or next-prime bound, and
 no factoring statement; by Theorem~\ref{thm:rigidity} the local event carries
-exactly $\Lam(q)$, and the reconstruction, uncertainty, and deflation results are
+exactly $\Lam(q)$, and the reconstruction, vanishing-moment, and deflation results are
 finite harmonic analysis of the fixed path, not arithmetic prediction. The event
 jets are right-minus-left jumps taken after the common analytic background has
 cancelled.
 
 \paragraph{Verification.}
-The proofs are algebraic; the companion scripts are reproducibility guards for
+The proofs are algebraic; the companion scripts are separate reproducibility
+checks for
 signs, indexing, determinant factors, and finite-field behavior, not proof
-substitutes. The workspace records, over exact integer or modular arithmetic:
-\[
-\begin{array}{ll}
-\text{rank-one jump / first-jump end-to-end} & q\in\{3,4,5,7,8,9,25\},\ N\le6,\\
-\text{event-jet rank and determinant} & N\le200\ \text{over four prime fields},\\
-\text{recurrence} & N\le1000\ \text{over four prime fields},\\
-\text{event dictionary (window, blind line)} & N\le200,\\
-\text{uncertainty ceiling (unique extremizer)} & N\le10,\\
-\text{spectral-barrier deceleration} & 50\ \text{positive definite integer cases},\\
-\text{universal jet }B_{r,N}\text{ closed form} & \text{exact symbolic, orders }r\le5,\\
-\text{coincidence-averaged readout} & (2N+1)^2\ \text{variance reduction},\\
-\text{Dirichlet residue-class readout} & \text{cyclic moduli }m\le13.
-\end{array}
-\]
+substitutes. The ancillary verification package records (scripts and JSON
+artifacts listed in its manifest, each script writing the JSON artifact of the
+same stem, e.g.\ \texttt{rank\_one\_jump\_audit.json}), over exact integer or
+modular arithmetic:
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lll}
+rank-one jump, end-to-end & $q\in\{3,4,5,7,8,9,25\}$, $N\le6$
+ & \texttt{check\_rank\_one\_jump}\\
+event-jet and transport rank & $N\le200$, four prime fields
+ & \texttt{check\_event\_jet\_largeN}\\
+event-jet and transport determinants & $N\le200$, four prime fields
+ & \texttt{check\_event\_jet\_determinant}\\
+recurrence & $N\le1000$, four prime fields
+ & \texttt{check\_event\_jet\_recurrence}\\
+event dictionary (window, blind line) & $N\le200$
+ & \texttt{check\_event\_prony\_reconstruction}\\
+source quotient and transport & $N\le200$
+ & \texttt{check\_source\_quotient\_and\_transport}\\
+vanishing-moment ceiling (extremizer) & $N\le10$
+ & \texttt{check\_uncertainty\_ceiling}\\
+spectral-barrier deceleration & 50 positive definite cases
+ & \texttt{check\_spectral\_barrier\_jump}\\
+universal jet $B_{r,N}$ closed form & exact symbolic, orders $r\le5$
+ & \texttt{check\_universal\_jet}\\
+coincidence-averaged readout & $(2N+1)^2$ variance (IID model)
+ & \texttt{check\_coincidence\_readout}\\
+Dirichlet residue-class readout & cyclic moduli $m\le13$
+ & \texttt{check\_dirichlet\_readout}
+\end{tabular}
+\end{center}
 As a floating-point check on the actual assembled operator at the program's
 canonical scale, at $N=200$ (dimension $401$) every prime power $q\le100$ was
 confirmed to have a rank-one first-derivative jump equal to
 $-2\Lam(q)/(\sqrt q\,\log q)\one_N\one_N^t$: over all $35$ events the second
 singular value of the jump is at most $4\times10^{-7}$ of the first, the jump
 matches $-a_q\one_N\one_N^t$ to relative error $10^{-6}$, and $\Lam(q)$ is
-recovered from a single entry to $5\times10^{-8}$. The archimedean and pole
+recovered from a single entry to $5\times10^{-8}$; these four figures are
+produced by \texttt{check\_canonical\_scale.py} and recorded in its artifact
+\texttt{canonical\_scale\_audit.json} in the ancillary archive. The archimedean and pole
 blocks (Lemma~\ref{lem:background}) are analytic and cancel in the jump, so the
 prime part carries the entire singular event.
 
@@ -975,7 +1195,7 @@ under the author's direction; the author takes sole responsibility for all
 mathematics, computations, and text.
 
 \paragraph{Data and code availability.}
-The verification package (the reproducibility guard scripts, their exact JSON
+The verification package (the separate reproducibility check scripts, their exact JSON
 artifacts, and the figure generator) accompanies this paper as ancillary files;
 a checksummed archive is deposited on Zenodo, concept DOI
 \href{https://doi.org/10.5281/zenodo.21242028}{10.5281/zenodo.21242028} (which

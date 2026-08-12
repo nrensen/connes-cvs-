@@ -1,0 +1,37 @@
+{
+  "guard": "check_negative_controls",
+  "status": "PASS",
+  "failures": [],
+  "results": {
+    "NC1_correlated_errors_kill_variance_reduction": {
+      "pass": true,
+      "detail": "var(correlated)=1.0032 (expected ~1, v1 formula predicts 0.0400); var(IID)=0.04012 and var(mixed non-identical)=0.03985 (both expected ~0.0400)"
+    },
+    "NC2_rank_one_wrong_direction_separates_diagnostics": {
+      "pass": true,
+      "detail": "sigma2/sigma1 = 0 exactly, residual^2 to all-ones model = 15/16 (large): diagnostics are not equivalent"
+    },
+    "NC3_orthogonal_eigenspace_gives_removable_point": {
+      "pass": true,
+      "detail": "G(z) from exact matrix solves equals 2/(2-z) although 5 is in spec(Q0); G bounded near 5 (removable): v1's 'simple pole at each eigenvalue' fails, corrected P_lambda 1 != 0 condition holds"
+    },
+    "NC4_repeated_eigenvalue_groups_residue": {
+      "pass": true,
+      "detail": "3 is a double eigenvalue (rank(Q0-3I)=1); grouped residue from the matrix resolvent = -2 (exactly -||P_lam 1||^2 = -2), one pole, not one per eigenvector"
+    },
+    "NC5_weyl_zero_off_both_spectra": {
+      "pass": true,
+      "detail": "W_-(0)=0 with 0 certified off both spectra (det(V_- )=-1, det(V_+)=-1); W_+(0)=0 by independent exact inversion of V_+, matching the Sherman-Morrison prediction; reciprocal form undefined there and exact at z=1/2 (independent W_+(1/2) matches too): v1's 'every z off the spectra' domain fails, corrected domain holds"
+    },
+    "NC6_indefinite_velocity_not_stieltjes": {
+      "pass": true,
+      "detail": "V_- has an eigenvalue at -1 < 0 and W_- has a pole there, so W_- is not a Stieltjes function; the rank-one algebra alone does not yield a Krein string (positivity hypotheses are genuinely additional)"
+    },
+    "NC7_symmetric_noise_breaks_full_reduction": {
+      "pass": true,
+      "detail": "exact w^t Sigma w in Fractions: the full d^2 reduction fails under symmetry-correlated noise while sigma^2(2d-1)/d^3 holds exactly (order d^2/2 reduction); d=3: Var=5/27 == (2d-1)/d^3=5/27, > 1/d^2=1/9; d=5: Var=9/125 == (2d-1)/d^3=9/125, > 1/d^2=1/25; d=7: Var=13/343 == (2d-1)/d^3=13/343, > 1/d^2=1/49; d=9: Var=17/729 == (2d-1)/d^3=17/729, > 1/d^2=1/81"
+    }
+  },
+  "python": "3.12.11",
+  "note": "Negative controls for version 2: each v1 defect fails on its counterexample and each corrected statement holds. Seven controls (NC1-NC7). Resolvent quantities are computed from the matrices by exact Fraction solves; W_+ in NC5 is computed independently of the Sherman-Morrison formula under test. Exact Fraction arithmetic except the seeded Monte Carlo in NC1."
+}

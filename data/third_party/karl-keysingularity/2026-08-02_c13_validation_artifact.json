@@ -1,0 +1,34 @@
+{
+  "schema": "rh-rig.groskin-c13-validation.v1",
+  "started_utc": "2026-08-02T05:58:17.803382+00:00",
+  "host": "RYZEN",
+  "python": "3.11.9",
+  "connes_cvs_version": "0.2.2",
+  "parameters": {
+    "c": 13,
+    "N": 100,
+    "T": 400,
+    "dps": 80
+  },
+  "precision_correction": "extract_zeros uses mpmath.log(c), not the README's float64 math.log(c)",
+  "lambda_min": "2.0769626581978318931340299465234524335463335311139756566875773464779095131794357e-59",
+  "gamma1_detected": "14.134725141734693790457251983562470270784257115699243175831062701393568683669761",
+  "gamma1_error": "1.4549524124360525386050417554569294022709559831554739448798498746974950452524321e-55",
+  "reference": {
+    "lambda_min": "2.077e-59",
+    "gamma1_error": "1.455e-55",
+    "acceptance_band": "within +/-30% of each reference value"
+  },
+  "ratios_to_reference": {
+    "lambda_min": 0.9999820212796495,
+    "gamma1_error": 0.9999672937704829
+  },
+  "passes_published_band": true,
+  "timing_seconds": {
+    "assembly": 360.96515280002495,
+    "eigensolve": 11.858265699993353,
+    "zero_extraction": 0.08337100001517683,
+    "total": 372.9067895000335
+  },
+  "claim_level": "independently-validated-published-code-reproduction"
+}

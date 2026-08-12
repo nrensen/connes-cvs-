@@ -5,14 +5,15 @@ Loads the published N-sweep data from ``data/c100/`` and recomputes:
   - successive first differences and consecutive ratios
     (the geometric-convergence consistency test from Paper §6.4)
   - Aitken-Δ² applied to two overlapping triples:
-        (100, 150, 200)  — original three-point Aitken
-        (150, 200, 250)  — deeper anchor with N=250 datum
+        (100, 150, 200)  - original three-point Aitken
+        (150, 200, 250)  - deeper anchor with N=250 datum
   - Connes 2026 §6.4 heuristic continuum prediction at c=100
   - the gap of each Aitken anchor to the Connes prediction
 
-Runs in under a second on any machine. No mpmath required (the input JSONs
-already carry full-precision decimal strings; this script only inspects
-their exponents and uses Python's float for the Aitken arithmetic).
+Runs in under a second on ordinary hardware. No mpmath is required: the input
+JSONs carry decimal strings, and this script needs only their base-10 logarithms.
+Python float precision is sufficient for the two-decimal Aitken summary; this
+script does not claim to regenerate the underlying eigenvalues.
 
 Usage:
     python examples/c100_aitken_check.py
@@ -59,7 +60,7 @@ DATA = os.path.join(os.path.dirname(HERE), "data", "c100")
 
 
 def log10_from_decimal_string(s: str) -> float:
-    """Compute the base-10 log of a full-precision decimal string of an mpmath float.
+    """Compute the base-10 log of a recorded decimal string.
 
     The Aitken arithmetic only needs the exponent; we use Python's ``float`` for
     the mantissa correction since 16-digit precision is more than sufficient.
@@ -90,7 +91,7 @@ def connes_2026_section_6_4_at(c: int) -> float:
     """Evaluate the Connes 2026 §6.4 heuristic prediction at integer cutoff c.
 
     Asymptotic (Connes 2026, displayed equation immediately before footnote 19;
-    LaTeX in the arXiv HTML source reads ``\\sqrt{2}\\pi^{5}`` — the radical
+    LaTeX in the arXiv HTML source reads ``\\sqrt{2}\\pi^{5}`` - the radical
     covers only the 2, then is multiplied by pi^5):
         1 - chi_2(lambda) ~  (2^14 / 3) * sqrt(2) * pi^5 * exp(-4*pi*e^L + 9*L/2)
     where L = 2*log(lambda) = log(c) at lambda = sqrt(c).

@@ -1,0 +1,58 @@
+{
+  "c": 100,
+  "N": 150,
+  "gamma": [
+    {
+      "k": 1,
+      "error": "3.21598326961437e-129",
+      "log10_error": -128.49268621923113
+    },
+    {
+      "k": 2,
+      "error": "2.54370146492705e-123",
+      "log10_error": -122.5945338599036
+    },
+    {
+      "k": 3,
+      "error": "1.99841325884546e-127",
+      "log10_error": -126.69931469755265
+    },
+    {
+      "k": 4,
+      "error": "5.97334350502599e-118",
+      "log10_error": -117.22378250985568
+    },
+    {
+      "k": 5,
+      "error": "2.31785815516105e-129",
+      "log10_error": -128.63491314486757
+    },
+    {
+      "k": 6,
+      "error": "4.02020312227404e-120",
+      "log10_error": -119.39575200346921
+    },
+    {
+      "k": 7,
+      "error": "4.53895416049318e-119",
+      "log10_error": -118.34304420323322
+    },
+    {
+      "k": 8,
+      "error": "8.36108665349781e-129",
+      "log10_error": -128.07773727555747
+    },
+    {
+      "k": 9,
+      "error": "1.17094064958738e-112",
+      "log10_error": -111.9314651170625
+    },
+    {
+      "k": 10,
+      "error": "1.17936908524305e-127",
+      "log10_error": -126.92835026055374
+    }
+  ],
+  "retightened_tol": "1e-100",
+  "verification_protocol": "Finite-root retest for the c=100, N=150, T=800, dps=500, flint_bits=2000 smallest-positive even-sector cell. Each matching-digit plot value is floor(-log10(error)); this file stores the error and log10_error directly. Full regeneration uses GalerkinCell(..., ground_state='smallest_positive') followed by extract_zeros(cell.eigvec_full, c=100, n_zeros=10, dps=500, tol='1e-100')."
+}

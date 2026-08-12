@@ -1,0 +1,133 @@
+"""Fast structural tests for the fail-closed release manifest."""
+
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+
+import pytest
+
+
+ROOT = Path(__file__).resolve().parent.parent
+MANIFEST_PATH = ROOT / ".github" / "release-files.json"
+VERIFIER_PATH = ROOT / "tools" / "verify_release.py"
+
+
+def _verifier_module():
+    spec = importlib.util.spec_from_file_location("release_verifier", VERIFIER_PATH)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _manifest():
+    return json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _relative_files(directory: str):
+    root = ROOT / directory
+    return {
+        path.relative_to(ROOT).as_posix()
+        for path in root.iterdir()
+        if path.is_file() and path.name != ".DS_Store"
+    }
+
+
+def test_release_manifest_is_canonical_and_self_consistent():
+    module = _verifier_module()
+    manifest = module._load_manifest(MANIFEST_PATH)
+    assert manifest["distribution"] == "connes-cvs"
+    assert manifest["version"] == "0.3.0"
+    assert ".github/release-files.json" in manifest["sdist_files"]
+    assert "tools/verify_release.py" in manifest["sdist_files"]
+    assert len(manifest["sdist_files"]) == len(set(manifest["sdist_files"]))
+    assert len(manifest["wheel_files"]) == len(set(manifest["wheel_files"]))
+
+
+def test_every_package_test_example_and_public_data_file_is_allowlisted():
+    sdist = set(_manifest()["sdist_files"])
+    for directory in (
+        "connes_cvs",
+        "data/c100",
+        "data/third_party/karl-keysingularity",
+    ):
+        assert _relative_files(directory) <= sdist, directory
+    for directory in (
+        "papers/2_guinand_weil_dictionary_tail_order",
+        "papers/3_matrix_von_mangoldt_measure",
+    ):
+        assert not any(name.startswith(directory + "/") for name in sdist)
+
+    expected_tests = _relative_files("tests") - {
+        "tests/test_paper2_public_artifacts.py"
+    }
+    expected_examples = {
+        name
+        for name in _relative_files("examples")
+        if "paper2" not in Path(name).name
+    }
+    assert expected_tests <= sdist
+    assert expected_examples <= sdist
+
+    required = {
+        "data/c100/c100_N150_gamma_extraction_retight.json",
+        "data/third_party/karl-keysingularity/2026-08-02_c13_validation_artifact.json",
+        "examples/make_fig9_c100_aitken.py",
+        "examples/make_fig10_c100_gamma_digits.py",
+        "tests/test_paper2_public_artifacts.py",
+        "tests/test_validation.py",
+    }
+    assert required - {"tests/test_paper2_public_artifacts.py"} <= sdist
+    assert "tests/test_paper2_public_artifacts.py" not in sdist
+    assert not any(name.startswith("data/paper2/") for name in sdist)
+    assert not any("paper2" in Path(name).name for name in sdist if name.startswith("examples/"))
+
+
+def test_wheel_manifest_is_exactly_the_public_package_plus_metadata():
+    manifest = _manifest()
+    wheel = set(manifest["wheel_files"])
+    package_files = _relative_files("connes_cvs")
+    assert {name for name in wheel if name.startswith("connes_cvs/")} == (
+        package_files
+    )
+    assert len(wheel - package_files) == 4
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "../escape",
+        "/absolute",
+        "a/../../escape",
+        "a\\windows-path",
+        "a/./noncanonical",
+        "nul\x00byte",
+        "control\nname",
+    ],
+)
+def test_release_verifier_rejects_unsafe_archive_paths(name):
+    module = _verifier_module()
+    with pytest.raises(module.ReleaseVerificationError):
+        module._validate_member_name(name)
+
+
+def test_release_verifier_rejects_casefold_collisions():
+    module = _verifier_module()
+    with pytest.raises(module.ReleaseVerificationError, match="collision"):
+        module._validate_name_collection(["Data/x", "data/x"], [])
+
+
+def test_release_verifier_rejects_an_exact_manifest_extra():
+    module = _verifier_module()
+    with pytest.raises(module.ReleaseVerificationError, match="extra"):
+        module._check_exact(["expected", "unexpected"], ["expected"], "test")
+
+
+def test_dependency_floors_remain_python39_compatible():
+    text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert 'requires-python = ">=3.9"' in text
+    assert '"mpmath>=1.3.0"' in text
+    assert text.count('"python-flint>=0.5.0"') == 3
+    assert "python-flint>=0.8.0" not in text

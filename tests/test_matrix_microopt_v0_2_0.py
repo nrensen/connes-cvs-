@@ -3,7 +3,7 @@ Bit-identicality regression test for the v0.2.0 matrix-assembly micro-optimizati
 
 The optimization drops the redundant ``mp.mpf(int)`` conversion in the Q-matrix
 off-diagonal assembly loop in both ``connes_cvs.operator.build_galerkin_matrix``
-and ``connes_cvs.sweep._run_single_cutoff``.  mpmath already handles ``mpf / int``
+and ``connes_cvs.runner.GalerkinCell``.  mpmath already handles ``mpf / int``
 arithmetic at full precision, so the change should be bit-identical; this test
 verifies that claim against the published Paper reference value
 ``2.86545361493028029516151514986747977533...e-59`` at c=13, N=100, T=800, dps=150
@@ -17,12 +17,10 @@ the Galerkin matrix::
     Q[i, j] = (psi_vals[m_idx] - psi_vals[n_idx]) / (m_idx - n_idx)   # new
     Q[i, j] = (psi_vals[m_idx] - psi_vals[n_idx]) / mp.mpf(m_idx - n_idx)  # old
 
-The rest of the pipeline --- psi cache computation (the ~3-minute phase),
-matrix symmetrization, even-sector projection, and eigendecomposition --- is
-unchanged.  A re-run of ``build_galerkin_matrix`` end-to-end would spend >95%
-of its time recomputing the psi cache, which is *independent* of the
-optimization being tested; a 600s budget is not enough for the serial
-(single-process) ``build_galerkin_matrix`` path at these parameters.
+The historical cache-backed checks below isolate this original v0.2 change.
+Version 0.3 additionally mirrors the exact psi index parity and fills one
+matrix triangle; dedicated raw-mpf tests in ``test_operator_hardening.py``
+cover those newer arithmetic paths independently.
 
 Instead, we load the pickled psi cache (produced by the pre-optimization code),
 re-assemble the Galerkin matrix with the new code, run ``compute_ground_state``,
@@ -33,12 +31,18 @@ default) that does call ``build_galerkin_matrix`` fully for users who want to
 run the complete pipeline.
 
 The comparison is performed on the first ``MATCH_DIGITS = 18`` significant
-digits of ``mp.nstr`` representations (leading-digit agreement), which is far
-stricter than any downstream consumer requires and catches even a single
-ULP-level drift.
+digits of ``mp.nstr`` representations (leading-digit agreement). It enforces
+that explicit prefix and relative-error contract; it is not a raw-ULP test.
+
+That reference pickle is a research-environment artifact and is not
+distributed with this repository, so every pickle-backed test here skips on a
+clean checkout.  The one check that needs no data, ``test_microopt_source_form``
+(both assembly sites still carry the optimized ``/ (m_idx - n_idx)`` form), is
+therefore kept unmarked and pickle-free so that it does run there.
 
 Run with::
 
+    venv/bin/pytest tests/test_matrix_microopt_v0_2_0.py               # source-form check
     venv/bin/pytest tests/test_matrix_microopt_v0_2_0.py -m slow --timeout=600 -v
 """
 
@@ -209,20 +213,55 @@ def test_microopt_lambda_even_bit_identical(_optional_deps):
     _assert_lambda_match(lambda_even_ref, lambda_even_new)
 
 
+def test_microopt_source_form():
+    """The optimized assembly form is present in both code paths.
+
+    Pure source inspection: no reference pickle, no optional dependency,
+    no marker, so it runs on a clean checkout under plain ``pytest``.
+    That is the point of keeping it separate: the pickle-backed legs
+    below skip wherever the research pickle is absent, which is
+    everywhere outside the research environment, and a structural check
+    parked inside one of them would never run.
+    """
+    import inspect
+
+    from connes_cvs import operator as op_mod
+    from connes_cvs import runner as runner_mod
+
+    src = inspect.getsource(op_mod.build_galerkin_matrix)
+    assert "mp.mpf(m_idx - n_idx)" not in src, (
+        "operator.build_galerkin_matrix still contains the redundant "
+        "mp.mpf(int) conversion."
+    )
+    assert "/ (m_idx - n_idx)" in src, (
+        "operator.build_galerkin_matrix is missing the expected "
+        "`/ (m_idx - n_idx)` pattern."
+    )
+
+    runner_src = inspect.getsource(runner_mod.GalerkinCell.run_phase_matrix_assembly)
+    assert "mp.mpf(m_index - n_index)" not in runner_src, (
+        "runner.GalerkinCell still contains the redundant "
+        "mp.mpf(int) conversion."
+    )
+    assert "/ (m_index - n_index)" in runner_src, (
+        "runner.GalerkinCell is missing the expected "
+        "`/ (m_index - n_index)` pattern."
+    )
+
+
 @pytest.mark.slow
 @pytest.mark.timeout(600)
 def test_microopt_matches_operator_assembly(_optional_deps):
-    """The in-package ``build_galerkin_matrix`` assembly block must agree
-    with the standalone ``_assemble_Q_from_cache`` helper (both using the
-    new code path), verifying there is no stray ``mp.mpf(int)`` left in
-    ``connes_cvs.operator``.
+    """The assembled entries agree with a direct application of the new
+    formula to the pickled psi cache.
 
-    This is a fast structural check (no eigendecomposition of the full
-    matrix is needed --- we compare a handful of entries directly).
+    The source-form half of this test now lives in
+    ``test_microopt_source_form`` above, which needs no pickle and runs
+    on a clean checkout.  What remains here is the data-backed half: it
+    loads the research psi cache and compares assembled entries, so it
+    skips when that pickle is absent.
     """
     import mpmath as mp
-
-    from connes_cvs import operator as op_mod
 
     if not PICKLE_PATH.exists():
         pytest.skip(f"Reference pickle not found at {PICKLE_PATH}")
@@ -237,33 +276,6 @@ def test_microopt_matches_operator_assembly(_optional_deps):
     psi_deriv_vals = {
         int(k): mp.mpf(v) for k, v in ref["psi_deriv_vals"].items()
     }
-
-    # Verify the source of operator.py contains the optimized form and
-    # no stray `mp.mpf(m_idx - n_idx)` call remains.
-    import inspect
-
-    src = inspect.getsource(op_mod.build_galerkin_matrix)
-    assert "mp.mpf(m_idx - n_idx)" not in src, (
-        "operator.build_galerkin_matrix still contains the redundant "
-        "mp.mpf(int) conversion."
-    )
-    assert "/ (m_idx - n_idx)" in src, (
-        "operator.build_galerkin_matrix is missing the expected "
-        "`/ (m_idx - n_idx)` pattern."
-    )
-
-    # Also check sweep.py.
-    from connes_cvs import sweep as sweep_mod
-
-    sweep_src = inspect.getsource(sweep_mod._run_single_cutoff)
-    assert "mp.mpf(m_idx - n_idx)" not in sweep_src, (
-        "sweep._run_single_cutoff still contains the redundant "
-        "mp.mpf(int) conversion."
-    )
-    assert "/ (m_idx - n_idx)" in sweep_src, (
-        "sweep._run_single_cutoff is missing the expected "
-        "`/ (m_idx - n_idx)` pattern."
-    )
 
     # Spot-check a few assembled entries agree between the helper and
     # a manual computation using the new formula.

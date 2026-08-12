@@ -36,8 +36,8 @@
     "beta": 10.741422800866712
   },
   "interpretation": {
-    "exponential_supports_lambda_infinity_zero": true,
-    "alpha_positive_supports_lambda_infinity_zero": true,
-    "overall": "the data at c=100 N\u2208{100,150,200} is consistent with \u03bb_\u221e(c=100) = 0 in the continuum limit, with \u03bb_N decreasing exponentially (or stretched-exponentially) in N. This would be consistent with RH via Weil positivity criterion on the continuum CvS operator."
+    "exponential_model_limit_is_zero": true,
+    "stretched_exponential_model_limit_is_zero": true,
+    "overall": "The three finite-N points decrease rapidly and admit the recorded exponential, stretched-exponential, and Aitken summaries. Three points do not determine the N-to-infinity limit or distinguish those models, and this finite numerical fit is not evidence for a proof of RH. The four-point follow-up is recomputed by examples/c100_aitken_check.py."
   }
 }

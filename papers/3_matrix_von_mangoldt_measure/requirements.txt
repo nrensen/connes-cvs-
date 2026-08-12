@@ -1,9 +1,11 @@
 # Reproducibility requirements for "A matrix-valued von Mangoldt measure in the
 # finite Connes-van Suijlekom path".
 #
-# Ten of the thirteen verification guards (check_*.py) use ONLY the Python 3
+# Of the fourteen version 2 guards (check_*.py), nine use only the Python 3
 # standard library (fractions, math, json); any Python 3.8+ interpreter suffices
-# for those. Three guards need third-party packages:
+# for those. Five guards need third-party packages:
+#   check_canonical_scale.py      -> numpy
+#   check_elevations.py           -> numpy
 #   check_universal_jet.py        -> sympy
 #   check_dirichlet_readout.py    -> sympy, numpy
 #   check_coincidence_readout.py  -> numpy

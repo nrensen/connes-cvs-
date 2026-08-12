@@ -1,4 +1,4 @@
-"""Generate fig9_c100_aitken.pdf — the headline c=100 Aitken figure for Paper 1 v3.
+"""Generate fig9_c100_aitken.pdf - the headline c=100 Aitken figure for Paper 1 v3.
 
 Reads the public N-sweep JSONs at ``data/c100/`` and produces a two-panel
 vector PDF that summarizes:
@@ -85,10 +85,11 @@ def connes_2026_section_6_4(c: int) -> float:
 
 
 def load_x() -> dict[int, float]:
-    runs = {
-        N: json.load(open(os.path.join(DATA, f"results_c100_N{N}_T800_dps500_v020.json")))
-        for N in N_LIST
-    }
+    runs = {}
+    for N in N_LIST:
+        path = os.path.join(DATA, f"results_c100_N{N}_T800_dps500_v020.json")
+        with open(path, encoding="utf-8") as handle:
+            runs[N] = json.load(handle)
     return {N: log10_from_decimal_string(r["lambda_even"]) for N, r in runs.items()}
 
 

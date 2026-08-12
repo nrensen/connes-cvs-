@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Baseline benchmark for the Connes-van Suijlekom package.
+"""Current-checkout single-process phase timer.
 
 Times each phase of the pipeline separately using time.perf_counter():
 
@@ -10,12 +9,11 @@ Times each phase of the pipeline separately using time.perf_counter():
   3. Eigensolver (compute_ground_state / eigsy on even sector).
   4. Zero extraction via findroot (extract_zeros, first zero only for speed).
 
-Baseline for measuring WIN 1 / WIN 2 optimizations against.
-
-This script DOES NOT modify connes_cvs/ source files. It re-implements
-the matrix-assembly loop here using the exact same logic as
-build_galerkin_matrix so we can time the psi cache and the assembly loop
-separately. The result must be bit-identical to the public API.
+The filename is historical. This script imports ``_compute_psi_pair`` from the
+current checkout and therefore cannot recreate a v0.1.0 baseline. It evaluates
+all indices from -N through N and uses the historical full assembly shape so
+the phases remain visible. Use it for local profiling, not as a clean
+before/after performance claim or a current-public-API identity check.
 
 Usage
 -----
@@ -26,7 +24,6 @@ Defaults: c=13, N=50, dps=50.
 
 from __future__ import annotations
 
-import math
 import platform
 import sys
 import time
@@ -34,7 +31,6 @@ import time
 import mpmath as mp
 
 from connes_cvs import (
-    build_galerkin_matrix,
     compute_ground_state,
     extract_zeros,
 )
@@ -98,7 +94,7 @@ def bench(c: int, N: int, T: int, dps: int) -> dict:
 
     # ---- Phase 4: findroot zero extraction (first zero only for speed) ----
     t0 = time.perf_counter()
-    zeros = extract_zeros(eigvec, L=float(L), n_zeros=1, dps=dps)
+    zeros = extract_zeros(eigvec, c=c, n_zeros=1, dps=dps)
     t_findroot = time.perf_counter() - t0
 
     return {
@@ -124,7 +120,7 @@ def main() -> None:
     T = 200 if N <= 60 else 400
 
     print("=" * 72)
-    print("Connes-van Suijlekom baseline benchmark")
+    print("Connes-van Suijlekom current-checkout phase timer")
     print("=" * 72)
     print(f"Python   : {platform.python_version()} ({sys.executable})")
     print(f"mpmath   : {mp.__version__}")
@@ -138,7 +134,8 @@ def main() -> None:
 
     result = bench(c=c, N=N, T=T, dps=dps)
 
-    pct = lambda x: 100.0 * x / result["t_total"]
+    def pct(value):
+        return 100.0 * value / result["t_total"]
     print("Timings (seconds, wall, time.perf_counter()):")
     print(f"  1. psi cache (prime+pole+arch)  : {result['t_cache']:9.3f}  ({pct(result['t_cache']):5.1f}%)")
     print(f"  2. matrix assembly + symmetrize : {result['t_assemble']:9.3f}  ({pct(result['t_assemble']):5.1f}%)")
@@ -151,7 +148,7 @@ def main() -> None:
     lam = result["lambda_min"]
     print("Correctness fingerprint:")
     print(f"  lambda_min = {mp.nstr(lam, min(dps, 60))}")
-    print(f"  lambda_min (full repr):")
+    print("  lambda_min (full repr):")
     print(f"    {mp.nstr(lam, dps)}")
 
     z0 = result["zeros"][0]
@@ -163,7 +160,7 @@ def main() -> None:
         print(f"  gamma_1 detected = {mp.nstr(gd, 25)}")
         print(f"  |gamma_1 error|  = {mp.nstr(err, 6)}")
     else:
-        print(f"  gamma_1 detected = None (findroot failed)")
+        print("  gamma_1 detected = None (findroot failed)")
     print("=" * 72)
 
 
