@@ -102,7 +102,7 @@ pip install -e '.[all]'
 
 ### Requirements
 
-- Python ≥ 3.9
+- Python ≥ 3.10
 - [mpmath](https://mpmath.org/) ≥ 1.3 (arbitrary-precision arithmetic)
 
 ### Optional dependencies

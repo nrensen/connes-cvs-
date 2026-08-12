@@ -225,7 +225,7 @@ def _verify_metadata(raw: bytes, manifest: Mapping[str, object], label: str) -> 
         raise ReleaseVerificationError(f"{label} has wrong project name")
     if metadata["Version"] != manifest["version"]:
         raise ReleaseVerificationError(f"{label} has wrong version")
-    if metadata["Requires-Python"] != ">=3.9":
+    if metadata["Requires-Python"] != ">=3.10":
         raise ReleaseVerificationError(f"{label} has wrong Python floor")
     requirements = metadata.get_all("Requires-Dist", [])
     if "mpmath>=1.3.0" not in requirements:

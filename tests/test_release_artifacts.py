@@ -125,9 +125,18 @@ def test_release_verifier_rejects_an_exact_manifest_extra():
         module._check_exact(["expected", "unexpected"], ["expected"], "test")
 
 
-def test_dependency_floors_remain_python39_compatible():
+def test_dependency_floors_remain_pinned():
+    """
+    Guard the declared floors against silent drift.
+
+    The Python floor is 3.10, not 3.9: the pinned build backend
+    (``hatchling==1.32.0``, which keeps the release archives byte-reproducible)
+    itself requires 3.10 or newer, so a source build on 3.9 cannot succeed.
+    Python 3.9 reached end of life in October 2025; installations that need it
+    should pin ``connes-cvs==0.2.2``.
+    """
     text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'requires-python = ">=3.9"' in text
+    assert 'requires-python = ">=3.10"' in text
     assert '"mpmath>=1.3.0"' in text
     assert text.count('"python-flint>=0.5.0"') == 3
     assert "python-flint>=0.8.0" not in text

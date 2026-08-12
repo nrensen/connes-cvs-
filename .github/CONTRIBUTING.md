@@ -56,7 +56,7 @@ Performance optimizations that produce a mathematically different output (e.g. c
 
 ## Style
 
-- Python ≥ 3.9 syntax. `from __future__ import annotations` is used throughout; use PEP 585 built-in generics (`list[...]`, `dict[...]`, `tuple[...]`) rather than `typing.List`, etc.
+- Python ≥ 3.10 syntax. `from __future__ import annotations` is used throughout; use PEP 585 built-in generics (`list[...]`, `dict[...]`, `tuple[...]`) rather than `typing.List`, etc.
 - Line length: 100 characters (soft).
 - Docstrings: NumPy style with `Parameters`, `Returns`, and optional `Notes` sections for public API.
 - Private helpers are underscore-prefixed.

@@ -1,0 +1,17 @@
+# Line-ending policy.
+#
+# Several files in this repository have their exact bytes attested by a
+# checksum: the third-party reproduction artifact under data/third_party/ is
+# SHA-256 pinned by the test suite, and each papers/*/SHA256SUMS attests the
+# manuscript sources and reproducibility scripts beside it. Git's default
+# behaviour on Windows is to translate LF to CRLF on checkout, which changes
+# those bytes and breaks every one of those checks.
+#
+# Every tracked file is stored with LF, so this file is a no-op for content and
+# exists purely to keep checkouts byte-identical across platforms.
+
+* text=auto eol=lf
+
+# Byte-exact records: perform no translation at all.
+data/third_party/** -text
+papers/**/SHA256SUMS -text
