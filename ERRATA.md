@@ -1,6 +1,8 @@
 # Errata
 
-Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. The 2026-06-26 correction is incorporated into the current published version (arXiv:2605.20224v2, Zenodo Version 3.3); the 2026-08-12 corrections below are recorded here first and will be folded into the next version of the paper. Entries are newest first. No entry changes a quantitative result.
+Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. Entries are newest first. No entry changes a quantitative result.
+
+**Status of each correction in the manuscript.** The 2026-06-26 correction is incorporated in the manuscript text of the current published version (arXiv:2605.20224v2, Zenodo Version 3.4, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402)). The two 2026-08-12 corrections are *not yet* in the manuscript text: Zenodo Version 3.4 carries this errata file alongside a PDF that is byte-identical to Version 3.3, so the published PDF still prints "168 digits" at the $c=67$ comparison and still presents the Section 8.2 Paley-Wiener mechanism as live. Read those two passages against the entries below until the next manuscript revision folds them in.
 
 ## 2026-08-12 - the Section 8.2 Paley-Wiener mechanism is withdrawn, and Table 14 is measured at T = 400
 
@@ -16,7 +18,7 @@ Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/
 
 Across a fourfold increase in T the exponent moves by 0.206, where proportionality would require roughly a fourfold increase. The Paley-Wiener reading of Section 8.2 is therefore **withdrawn**, and the constant A = 0.432 has no meaning as derived.
 
-The empirical scaling s(c) ~ 55 log c - 128 is a fit to the measured exponents, not a consequence of the withdrawn mechanism, and is unaffected; so are the measured values in Table 14, once correctly labelled T = 400. The three-cutoff test was first carried out by M. Osman ([github.com/Osman209/prime-number-studies](https://github.com/Osman209/prime-number-studies), issue #2) and has since been reproduced independently here.
+The empirical scaling s(c) ~ 55 log c - 128 is a fit to the measured exponents, not a consequence of the withdrawn mechanism, and is unaffected; so are the measured values in Table 14, once correctly labelled T = 400. The three-cutoff test was first carried out by M. Osman ([github.com/Osman209/prime-number-studies](https://github.com/Osman209/prime-number-studies)), who reported it in [issue #2 of this repository](https://github.com/akivag613/connes-cvs-/issues/2), and it has since been reproduced independently here.
 
 ## 2026-08-12 - matching-digit count at c = 67
 

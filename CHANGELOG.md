@@ -5,6 +5,10 @@ All notable changes to `connes-cvs` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [paper 1 - Zenodo Version 3.4] - 2026-08-13
+
+Errata deposit for [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), published on Zenodo as **Version 3.4**, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402); the concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) now resolves to it. The deposit carries the two 2026-08-12 entries added to [ERRATA.md](ERRATA.md): the Section 8.2 Paley-Wiener mechanism is withdrawn (its own Section 11 test shows the Sobolev exponent is insensitive to `T`: 46.140, 46.031, 45.934 at `T` = 400, 800, 1600 for `c=23` on `N` in {40, 60, 80} at `dps=150`), so `A = 0.432` has no meaning as derived and Table 14 is measured at `T = 400`, not `T = 800`; and the `c=67` matching-digit count is 167, not 168, under the paper's own definition. The three-cutoff test was first carried out by M. Osman and reported in [issue #2](https://github.com/akivag613/connes-cvs-/issues/2); it has been reproduced independently here. **Neither correction changes a quantitative result, and the Version 3.4 manuscript PDF is byte-identical to Version 3.3** - the corrections live in the errata file until the next manuscript revision. No changes to the `connes-cvs` package or to any numerical data.
+
 ## [0.3.0] - 2026-08-12
 
 Release combining the `extract_zeros` correctness fix with a validated, resumable production runner. Its numerical contract is deliberately scoped:

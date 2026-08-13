@@ -34,7 +34,7 @@ this folder holds the paper; the code and data live at the repository root:
 | Runnable examples (incl. the Aitken-Δ² check) | [`../../examples/`](../../examples/) |
 | Regression tests against the committed `c = 13` references | [`../../tests/`](../../tests/) |
 | Performance A/B benchmarks | [`../../benchmarks/`](../../benchmarks/) |
-| Erratum (finite-cutoff sign correction) | [`../../ERRATA.md`](../../ERRATA.md) |
+| Errata (three entries; see below) | [`../../ERRATA.md`](../../ERRATA.md) |
 
 The [repository root README](../../README.md) documents the headline result, installation,
 quick start, the `c = 100` verification, and how it works.
@@ -46,8 +46,11 @@ quadratic form at high precision. It computes the smallest-positive eigenvalue a
 15-cutoff sweep and at `c = 100`, extracts the first ten Riemann zeros to hundreds of matching
 digits, and gives an independent out-of-sample numerical test of the Connes 2026 §6.4 continuum
 asymptotic. It reports empirical measurements only; it makes no claim regarding the Riemann
-Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for a finite-cutoff sign correction (no
-quantitative result changed).
+Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the three recorded corrections, none of
+which changes a quantitative result: the 2026-06-26 finite-cutoff sign correction, which is in the
+published manuscript text; and two dated 2026-08-12, which are not yet in it - the Section 8.2
+Paley-Wiener mechanism is withdrawn (Table 14 is measured at `T = 400`, not `T = 800`), and the
+`c = 67` matching-digit count is 167 rather than 168 under the paper's own definition.
 
 ## License
 
