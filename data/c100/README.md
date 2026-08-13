@@ -84,5 +84,5 @@ At $c=100$, $T=800$, the raw finite-$T$ matrix has negative-sign eigenvalues tha
 
 - Top-level headline + Aitken match: [`../../README.md`](../../README.md)
 - Verification script: [`../../examples/c100_aitken_check.py`](../../examples/c100_aitken_check.py)
-- 15-cutoff Paper 1 data: [`../results_15pt_T800.json`](../results_15pt_T800.json)
+- 15-cutoff sweep data: [`../results_15pt_T800.json`](../results_15pt_T800.json)
 - Package source: [`../../connes_cvs/`](../../connes_cvs/)

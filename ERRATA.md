@@ -17,9 +17,9 @@ These ranges are differences of the per-gamma_k counts, and those counts are unc
 
 ## 2026-08-12 - the Section 8.2 Paley-Wiener mechanism is withdrawn, and Table 14 is measured at T = 400
 
-**Cutoff provenance.** The caption of Table 14 (`tab:sobolev-scaling`, the Sobolev regularity exponent s(c)) did not state the archimedean integration cutoff. Its rows are measured at **T = 400**, inherited from the per-cutoff N-convergence ladders, not at the T = 800 used for the 15-cutoff sweep. Section 8.2 nevertheless derives A = 55 * 2*pi / 800 = 0.432 as though the slope were a T = 800 measurement. That substitution was incorrect; the caption now states T = 400.
+**Cutoff provenance.** The caption of Table 14 (`tab:sobolev-scaling`, the Sobolev regularity exponent s(c)) did not state the archimedean integration cutoff. Its rows are measured at **T = 400**, inherited from the per-cutoff N-convergence ladders, not at the T = 800 used for the 15-cutoff sweep. Section 8.2 had nevertheless derived A = 55 * 2*pi / 800 = 0.432 as though the slope were a T = 800 measurement. That substitution was incorrect; the caption now states T = 400.
 
-**Mechanism withdrawn.** Section 8.2 proposes s = sigma_eff * T / (2*pi), which predicts s proportional to T at fixed c, and Section 11 preregisters exactly that test. The test has now been run at c = 23 on the N in {40, 60, 80} grid at dps = 150:
+**Mechanism withdrawn.** Section 8.2 proposed s = sigma_eff * T / (2*pi), which predicts s proportional to T at fixed c, and Section 11 preregistered exactly that test. The test has now been run at c = 23 on the N in {40, 60, 80} grid at dps = 150:
 
 | T | s |
 |---:|---|

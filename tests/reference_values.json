@@ -10,7 +10,7 @@
       "lambda_min_even": "2.86545361493028029516151514986747977533e-59",
       "gamma_1_abs_error": "2.0054614440503604741098249893e-55",
       "source": "Published reference cell. The first 25 mantissa digits and the 29-digit gamma_1_abs_error are recorded in data/results_15pt_T800.json (c=13 row). The longer lambda run is recorded in benchmarks/AB_VERIFIED_2026-04-14.md under 'Gold-standard verification at the published reference workload'; this gate stores its first 39 mantissa digits.",
-      "note": "This is the headline c=13 Paper 1 T=800 cell. The pinned exact-reference CI leg recomputes it end to end. GalerkinCell._c13_regression attaches the comparison as c13_regression and raises RuntimeError if fewer than 22 significant digits match; the slow test also checks the first-zero error. The lambda failure is fatal rather than warning-only."
+      "note": "This is the headline c=13 T=800 cell of the accompanying paper. The pinned exact-reference CI leg recomputes it end to end. GalerkinCell._c13_regression attaches the comparison as c13_regression and raises RuntimeError if fewer than 22 significant digits match; the slow test also checks the first-zero error. The lambda failure is fatal rather than warning-only."
     },
     "c13_quick_T400": {
       "c": 13,
@@ -19,7 +19,7 @@
       "dps": 80,
       "lambda_min_even": "2.076962658197831893134147e-59",
       "gamma_1_abs_error": "1.4549524124360525386e-55",
-      "source": "The extended validation cell documented in examples/basic_compute.py --extended (c=13, N=100, T=400, dps=80). lambda reference (25 digits) from the Paper 1 T=400 validation run at dps=150 for the same (c, N, T); gamma_1_abs_error reference to 20 digits, the common prefix of two independent Paper 1 ancillary runs of this cell.",
+      "source": "The extended validation cell documented in examples/basic_compute.py --extended (c=13, N=100, T=400, dps=80). lambda reference (25 digits) from the paper's T=400 validation run at dps=150 for the same (c, N, T); gamma_1_abs_error reference to 20 digits, the common prefix of two independent ancillary runs of this cell.",
       "note": "Measured 2026-08-12: a dps=80 recompute matches the dps=150 lambda reference to exactly 22 digits (the dps=80 arithmetic floor) and the gamma_1 reference to all 20 stored digits (~23 vs the longer ancillary value). The slow gate asserts >= 20 on lambda and >= 18 on gamma_1 to leave platform margin below those measured matches."
     },
     "c13_ab_benchmark": {

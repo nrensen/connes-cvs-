@@ -148,6 +148,15 @@ Peter~J. Forrester.
   \href {https://doi.org/10.1142/S2010326319300018}
   {\path{doi:10.1142/S2010326319300018}}.
 
+\bibitem{Groskin2026Zeros}
+Akiva Groskin.
+\newblock High-precision approximation of {Riemann} zeros via the truncated
+  {Weil} form.
+\newblock {\em arXiv:2605.20224}, 2026.
+\newblock \href {https://arxiv.org/abs/2605.20224} {\path{arXiv:2605.20224}},
+  \href {https://doi.org/10.5281/zenodo.19546514}
+  {\path{doi:10.5281/zenodo.19546514}}.
+
 \bibitem{Guinand1948}
 A.~P. Guinand.
 \newblock A summation formula in the theory of prime numbers.

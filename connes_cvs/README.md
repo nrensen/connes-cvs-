@@ -54,7 +54,7 @@ Build, upload, tag and push operations are owner-run only after review. Preparin
 - [Committed reference values](https://github.com/akivag613/connes-cvs-/blob/main/tests/reference_values.json)
 - [Runnable smoke and extended example](https://github.com/akivag613/connes-cvs-/blob/main/examples/basic_compute.py)
 - [Historical benchmarks](https://github.com/akivag613/connes-cvs-/tree/main/benchmarks)
-- [Paper 1 reference data](https://github.com/akivag613/connes-cvs-/blob/main/data/results_15pt_T800.json)
+- [Riemann-zeros paper reference data](https://github.com/akivag613/connes-cvs-/blob/main/data/results_15pt_T800.json)
 - [Changelog](https://github.com/akivag613/connes-cvs-/blob/main/CHANGELOG.md)
 
 ## Numerical contract

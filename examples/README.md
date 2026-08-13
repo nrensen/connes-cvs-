@@ -6,7 +6,7 @@
 |---|---|
 | `basic_compute.py` | Defaults to the seconds-level `c=13, N=8, T=60, dps=30` API smoke cell and one seeded finite-test root. `--extended` runs the `N=100, T=400, dps=80` validation cell through the process-based runner, with progress and the default eight-worker cap, then locates three roots. Heavy work is protected by `main()`, so importing the module is safe. |
 | `c100_aitken_check.py` | Loads the published `c = 100` N-sweep data from [`../data/c100/`](../data/c100/) and reproduces the Aitken extrapolation check in under a second. |
-| `make_fig9_c100_aitken.py`, `make_fig10_c100_gamma_digits.py` | Generators for the two `c = 100` figures of the Paper 1 reproducibility package (Aitken extrapolation; canonical `floor(-log10(error))` counts for `gamma_1..gamma_10`). They require Matplotlib in addition to the package dependencies. Papers 2 and 3 keep their own figure generators inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers). |
+| `make_fig9_c100_aitken.py`, `make_fig10_c100_gamma_digits.py` | Generators for the two `c = 100` figures of the accompanying paper's reproducibility package (Aitken extrapolation; canonical `floor(-log10(error))` counts for `gamma_1..gamma_10`). They require Matplotlib in addition to the package dependencies. Papers 2 and 3 keep their own figure generators inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers). |
 
 ## Running
 

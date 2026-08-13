@@ -1,4 +1,5 @@
-"""Generate fig9_c100_aitken.pdf - the headline c=100 Aitken figure for Paper 1 v3.
+"""Generate fig9_c100_aitken.pdf - the headline c=100 Aitken figure for the
+Riemann-zeros paper (arXiv:2605.20224), revised manuscript.
 
 Reads the public N-sweep JSONs at ``data/c100/`` and produces a two-panel
 vector PDF that summarizes:

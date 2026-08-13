@@ -4,11 +4,11 @@
 
 | Path | Content |
 |---|---|
-| `results_15pt_T800.json` | The 15-cutoff Paper 1 summary: `lambda_even` and `gamma_1_abs_error` for each `c` in `{13, 14, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67}` at `N = 100`, `T = 800`, `dps = 150` or `200`. |
+| `results_15pt_T800.json` | The 15-cutoff summary from the accompanying paper: `lambda_even` and `gamma_1_abs_error` for each `c` in `{13, 14, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67}` at `N = 100`, `T = 800`, `dps = 150` or `200`. |
 | `c100/` | The `c = 100` verification dataset: N-sweep results, gamma-extraction tables, and the Richardson/Aitken extrapolation inputs used by `examples/c100_aitken_check.py`. See `c100/README.md`. |
 | `third_party/` | Contributed third-party reproduction artifacts, preserved verbatim and credited to their authors. Each subdirectory carries its own `README.md` recording provenance, the maintainer comparison against `tests/reference_values.json`, and the artifact's SHA-256, which the test suite pins. Currently: `karl-keysingularity/` (a `connes-cvs` 0.2.2 run of the `c=13, N=100, T=400, dps=80` cell under native Windows). |
 
-**Purpose.** The public-facing numerical record of Paper 1 and of the `c = 100` verification. Linked from [`../README.md`](../README.md) and cross-validated by the examples and tests. Papers 2 and 3 carry their own reproducibility artifacts inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers), not here.
+**Purpose.** The public-facing numerical record of the accompanying paper and of the `c = 100` verification. Linked from [`../README.md`](../README.md) and cross-validated by the examples and tests. Papers 2 and 3 carry their own reproducibility artifacts inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers), not here.
 
 ## Schema of `results_15pt_T800.json`
 
@@ -60,4 +60,4 @@ if __name__ == "__main__":
 ## Discipline
 
 - This directory is **public** (git-tracked). Never include in-progress or revision-pending findings here.
-- The `results_15pt_T800.json` file is byte-for-byte unchanged across the published Paper 1 versions that carry it (concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514), currently resolving to Version 3.4, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402)). If a correction is ever needed, deposit a new Zenodo version and update this file in lockstep.
+- The `results_15pt_T800.json` file is byte-for-byte unchanged across the published versions of the paper that carry it (concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514), currently resolving to Version 3.6, version DOI [10.5281/zenodo.21918387](https://doi.org/10.5281/zenodo.21918387)). If a correction is ever needed, deposit a new Zenodo version and update this file in lockstep.

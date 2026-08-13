@@ -1,4 +1,4 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Paper 1](../1_high_precision_riemann_zeros/) · [Paper 2](../2_guinand_weil_dictionary_tail_order/) · **Paper 3**
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · **von Mangoldt measure**
 
 # A matrix-valued von Mangoldt measure in the finite Connes-van Suijlekom path (version 2, corrected)
 
@@ -6,10 +6,13 @@ Akiva Groskin, 2026. Manuscript and full reproducibility package, version 2.
 
 Archived on Zenodo, concept DOI
 [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028), which resolves
-to the current version 2 (published 2026-07-27), version DOI
-[10.5281/zenodo.21612746](https://doi.org/10.5281/zenodo.21612746). Cite the
-version DOI for theorem-sensitive use. Companion to Paper 1
-([arXiv:2605.20224](https://arxiv.org/abs/2605.20224)) and Paper 2
+to the current version 2.1 (published 2026-08-13), version DOI
+[10.5281/zenodo.21911012](https://doi.org/10.5281/zenodo.21911012). The manuscript
+in version 2.1 is the corrected version 2 of 2026-07-27
+([10.5281/zenodo.21612746](https://doi.org/10.5281/zenodo.21612746)) unchanged;
+version 2.1 revises documentation in the reproducibility archive only. Cite the
+version DOI for theorem-sensitive use. Companion to the Riemann-zeros paper
+([arXiv:2605.20224](https://arxiv.org/abs/2605.20224)) and the Guinand-Weil dictionary
 ([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)).
 
 Fix a Galerkin level `N` in the finite Connes-van Suijlekom truncation of the Weil

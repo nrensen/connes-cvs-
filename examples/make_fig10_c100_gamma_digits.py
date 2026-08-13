@@ -1,7 +1,7 @@
 """Generate fig10_c100_gamma_digits.pdf - matching-digit recovery of γ_1..γ_10 at c=100.
 
 Visualizes the three precision cells reported in Table~\\ref{tab:gamma-c100}
-of Paper 1 v3:
+of the Riemann-zeros paper (arXiv:2605.20224), revised manuscript:
 
     Cell A: N=150, dps=500  (tight findroot tolerance retest)
     Cell B: N=150, dps=1000 (precision-doubling retest)

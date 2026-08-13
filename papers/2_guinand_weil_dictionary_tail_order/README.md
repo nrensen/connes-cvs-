@@ -1,10 +1,10 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Paper 1](../1_high_precision_riemann_zeros/) · **Paper 2** · [Paper 3](../3_matrix_von_mangoldt_measure/)
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · **Guinand-Weil dictionary** · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/)
 
 <div align="center">
 
 # A finite Guinand-Weil dictionary and archimedean tail order<br>for the truncated Weil quadratic form
 
-**Paper 2 - _the structure_ · Akiva Groskin, 2026**
+**The finite Guinand-Weil dictionary - _the structure_ · Akiva Groskin, 2026**
 
 [![arXiv](https://img.shields.io/badge/arXiv-2607.02828-b31b1b.svg)](https://arxiv.org/abs/2607.02828)
 [![Zenodo DOI](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.21124802-1682D4.svg?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.21124802)
@@ -17,7 +17,7 @@
 > **archimedean tail-order theorem** with a two-sided certification rule. No claim regarding the
 > Riemann Hypothesis.
 
-Part of the [`connes-cvs` series](../../README.md#papers): [**Paper 1** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Paper 2 - the structure** · [**Paper 3** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
+Part of the [`connes-cvs` series](../../README.md#papers): [**Riemann zeros** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Guinand-Weil dictionary - the structure** · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
 
 ## What this paper proves
 
