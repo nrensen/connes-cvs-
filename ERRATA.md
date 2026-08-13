@@ -2,11 +2,11 @@
 
 Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. Entries are newest first. No entry changes a measured value.
 
-**Status of each correction in the manuscript.** The 2026-06-26 correction is incorporated in the manuscript text of the currently published version (arXiv:2605.20224v2, Zenodo Version 3.4, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402)). The three later corrections are *not yet* in the published manuscript text: Version 3.4 carries this errata file alongside a PDF byte-identical to Version 3.3, so that PDF still presents the Section 8.2 Paley-Wiener mechanism as live, still prints "168 digits" at the $c=67$ comparison, and still prints the two Section 6.5 summary ranges as 95-115 and 179-201. Read those passages against the entries below. A revised manuscript incorporating all four corrections has been prepared and submitted; this note will be updated when it is public.
+**Status of each correction in the manuscript.** All four corrections are incorporated in the text of the revised manuscript, which is deposited on Zenodo under concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) and has been submitted to arXiv. The 2026-06-26 correction was folded in earlier, at Zenodo Version 3.3. The two 2026-08-12 corrections were first recorded in this file at Version 3.4, whose PDF was byte-identical to Version 3.3; the 2026-08-13 correction was found later, in a pre-submission audit of the revised manuscript. The currently announced arXiv version, v2, predates all three of the later corrections: readers using it should read the passages named below against these entries.
 
 ## 2026-08-13 - two summary digit-increment ranges in Section 6.5
 
-Section 6.5 summarises how the matching-digit counts at c = 100 respond to increasing the working precision and the Galerkin level. Both summary ranges are misstated. Recomputing the per-gamma_k counts from the deposited extraction files gives:
+Section 6.5 summarises how the matching-digit counts at c = 100 respond to increasing the working precision and the Galerkin level. Both summary ranges were misstated. Recomputing the per-gamma_k counts from the deposited extraction files gives:
 
 | change | correct | printed |
 |---|---|---|
@@ -17,7 +17,7 @@ These ranges are differences of the per-gamma_k counts, and those counts are unc
 
 ## 2026-08-12 - the Section 8.2 Paley-Wiener mechanism is withdrawn, and Table 14 is measured at T = 400
 
-**Cutoff provenance.** The caption of Table 14 (`tab:sobolev-scaling`, the Sobolev regularity exponent s(c)) does not state the archimedean integration cutoff. Its rows are measured at **T = 400**, inherited from the per-cutoff N-convergence ladders, not at the T = 800 used for the 15-cutoff sweep. Section 8.2 nevertheless derives A = 55 * 2*pi / 800 = 0.432 as though the slope were a T = 800 measurement. That substitution is incorrect, and the caption should state T = 400.
+**Cutoff provenance.** The caption of Table 14 (`tab:sobolev-scaling`, the Sobolev regularity exponent s(c)) did not state the archimedean integration cutoff. Its rows are measured at **T = 400**, inherited from the per-cutoff N-convergence ladders, not at the T = 800 used for the 15-cutoff sweep. Section 8.2 nevertheless derives A = 55 * 2*pi / 800 = 0.432 as though the slope were a T = 800 measurement. That substitution was incorrect; the caption now states T = 400.
 
 **Mechanism withdrawn.** Section 8.2 proposes s = sigma_eff * T / (2*pi), which predicts s proportional to T at fixed c, and Section 11 preregisters exactly that test. The test has now been run at c = 23 on the N in {40, 60, 80} grid at dps = 150:
 
@@ -33,7 +33,7 @@ The empirical scaling s(c) ~ 55 log c - 128 is a fit to the measured exponents, 
 
 ## 2026-08-12 - matching-digit count at c = 67
 
-Section 6 defines the matching-digit count as the floor of -log10 of the absolute error. Applied to the c = 67, N = 100, dps = 200 datum, whose error is 1.478e-168, that definition gives **167** matching digits; the text prints 168, which labels the error by its decade instead. The measured error value is unchanged and is reported correctly throughout, and every other matching-digit count in the paper follows the stated definition exactly: 307 to 329 at c = 100, N = 250, dps = 500, and 219 to 242 at N = 150, dps = 1000. Only the c = 67 corroborative comparison figure is affected; no quantitative result changes.
+Section 6 defines the matching-digit count as the floor of -log10 of the absolute error. Applied to the c = 67, N = 100, dps = 200 datum, whose error is 1.478e-168, that definition gives **167** matching digits; the text printed 168, which labels the error by its decade instead. The measured error value is unchanged and is reported correctly throughout, and every other matching-digit count in the paper follows the stated definition exactly: 307 to 329 at c = 100, N = 250, dps = 500, and 219 to 242 at N = 150, dps = 1000. Only the c = 67 corroborative comparison figure is affected; no quantitative result changes.
 
 ## 2026-06-26 - negative-sign eigenvalue blocks are a finite-cutoff artifact
 
