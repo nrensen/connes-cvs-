@@ -13,7 +13,15 @@ in version 2.1 is the corrected version 2 of 2026-07-27
 version 2.1 revises documentation in the reproducibility archive only. Cite the
 version DOI for theorem-sensitive use. Companion to the Riemann-zeros paper
 ([arXiv:2605.20224](https://arxiv.org/abs/2605.20224)) and the Guinand-Weil dictionary
-([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)).
+([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)). This paper is not on arXiv.
+
+**Corrections.** Version 2 corrected version 1 substantively, and **version 1 remains publicly
+citable** at [10.5281/zenodo.21242029](https://doi.org/10.5281/zenodo.21242029). Anyone holding
+that v1 DOI should read [What version 2 corrects](#what-version-2-corrects-relative-to-the-version-1-deposit)
+below before relying on it; the same list ships in the README of the deposited reproducibility
+archive. The guard script `scripts/check_negative_controls.py` verifies that each corrected
+version-1 statement fails on its counterexample and each version-2 statement holds. The PDF
+here is the corrected version 2 manuscript.
 
 Fix a Galerkin level `N` in the finite Connes-van Suijlekom truncation of the Weil
 quadratic form (no archimedean cutoff), and vary the prime cutoff `u = log c`.

@@ -34,7 +34,7 @@ this folder holds the paper; the code and data live at the repository root:
 | Runnable examples (incl. the Aitken-Δ² check) | [`../../examples/`](../../examples/) |
 | Regression tests against the committed `c = 13` references | [`../../tests/`](../../tests/) |
 | Performance A/B benchmarks | [`../../benchmarks/`](../../benchmarks/) |
-| Errata (three entries; see below) | [`../../ERRATA.md`](../../ERRATA.md) |
+| Errata (four entries; see below) | [`../../ERRATA.md`](../../ERRATA.md) |
 
 The [repository root README](../../README.md) documents the headline result, installation,
 quick start, the `c = 100` verification, and how it works.
@@ -47,11 +47,17 @@ quadratic form at high precision. It computes the smallest-positive eigenvalue a
 digits, and gives an independent out-of-sample numerical test of the Connes 2026 §6.4 continuum
 asymptotic. It reports empirical measurements only; it makes no claim regarding the Riemann
 Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the four recorded corrections, none of
-which changes a measured value: the 2026-06-26 finite-cutoff sign correction, which is in the
-published manuscript text; and three later ones, which are not yet in it - the Section 8.2
-Paley-Wiener mechanism is withdrawn (Table 14 is measured at `T = 400`, not `T = 800`), the
-`c = 67` matching-digit count is 167 rather than 168 under the paper's own definition, and two
-summary digit-increment ranges in Section 6.5 are 93-117 and 181-203.
+which changes a measured value: the 2026-06-26 finite-cutoff sign correction; the withdrawal of
+the Section 8.2 Paley-Wiener mechanism (Table 14 is measured at `T = 400`, not `T = 800`); the
+`c = 67` matching-digit count, 167 rather than 168 under the paper's own definition; and two
+summary digit-increment ranges in Section 6.5, 93-117 and 181-203.
+
+All four are incorporated in the revised manuscript text deposited on Zenodo as **Version 3.6**
+([10.5281/zenodo.21918387](https://doi.org/10.5281/zenodo.21918387)). **The PDF in this folder is
+the currently announced arXiv v2**, which carries the 2026-06-26 correction but predates the three
+later ones; its replacement has been submitted to arXiv and is awaiting announcement. Read the
+arXiv v2 PDF against `ERRATA.md`, or use the Zenodo Version 3.6 manuscript, which needs no errata
+overlay.
 
 ## License
 

@@ -19,6 +19,15 @@
 
 Part of the [`connes-cvs` series](../../README.md#papers): [**Riemann zeros** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Guinand-Weil dictionary - the structure** · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
 
+**Corrections.** This paper has no errata: **no mathematical statement has been corrected
+since publication.** The PDF here is the current Zenodo **v1.2**
+([10.5281/zenodo.21918605](https://doi.org/10.5281/zenodo.21918605)), which relative to v1.1
+adds a citation identifying the earlier finite-cutoff computation that motivates the
+tail-order theorem and corrects the companion-package repository path. The full change
+history is in the repository [CHANGELOG](../../CHANGELOG.md) and in the Zenodo record. The
+matching arXiv replacement has been submitted and is awaiting announcement, so
+[arXiv:2607.02828](https://arxiv.org/abs/2607.02828) still shows v1.
+
 ## What this paper proves
 
 For a real even finite Connes-van Suijlekom / Connes-Consani-Moscovici Galerkin coefficient
