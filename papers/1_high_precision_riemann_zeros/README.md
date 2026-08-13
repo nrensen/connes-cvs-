@@ -46,11 +46,12 @@ quadratic form at high precision. It computes the smallest-positive eigenvalue a
 15-cutoff sweep and at `c = 100`, extracts the first ten Riemann zeros to hundreds of matching
 digits, and gives an independent out-of-sample numerical test of the Connes 2026 §6.4 continuum
 asymptotic. It reports empirical measurements only; it makes no claim regarding the Riemann
-Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the three recorded corrections, none of
-which changes a quantitative result: the 2026-06-26 finite-cutoff sign correction, which is in the
-published manuscript text; and two dated 2026-08-12, which are not yet in it - the Section 8.2
-Paley-Wiener mechanism is withdrawn (Table 14 is measured at `T = 400`, not `T = 800`), and the
-`c = 67` matching-digit count is 167 rather than 168 under the paper's own definition.
+Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the four recorded corrections, none of
+which changes a measured value: the 2026-06-26 finite-cutoff sign correction, which is in the
+published manuscript text; and three later ones, which are not yet in it - the Section 8.2
+Paley-Wiener mechanism is withdrawn (Table 14 is measured at `T = 400`, not `T = 800`), the
+`c = 67` matching-digit count is 167 rather than 168 under the paper's own definition, and two
+summary digit-increment ranges in Section 6.5 are 93-117 and 181-203.
 
 ## License
 

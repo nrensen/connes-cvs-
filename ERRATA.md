@@ -1,8 +1,19 @@
 # Errata
 
-Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. Entries are newest first. No entry changes a quantitative result.
+Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. Entries are newest first. No entry changes a measured value.
 
-**Status of each correction in the manuscript.** The 2026-06-26 correction is incorporated in the manuscript text of the current published version (arXiv:2605.20224v2, Zenodo Version 3.4, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402)). The two 2026-08-12 corrections are *not yet* in the manuscript text: Zenodo Version 3.4 carries this errata file alongside a PDF that is byte-identical to Version 3.3, so the published PDF still prints "168 digits" at the $c=67$ comparison and still presents the Section 8.2 Paley-Wiener mechanism as live. Read those two passages against the entries below until the next manuscript revision folds them in.
+**Status of each correction in the manuscript.** The 2026-06-26 correction is incorporated in the manuscript text of the currently published version (arXiv:2605.20224v2, Zenodo Version 3.4, version DOI [10.5281/zenodo.21910402](https://doi.org/10.5281/zenodo.21910402)). The three later corrections are *not yet* in the published manuscript text: Version 3.4 carries this errata file alongside a PDF byte-identical to Version 3.3, so that PDF still presents the Section 8.2 Paley-Wiener mechanism as live, still prints "168 digits" at the $c=67$ comparison, and still prints the two Section 6.5 summary ranges as 95-115 and 179-201. Read those passages against the entries below. A revised manuscript incorporating all four corrections has been prepared and submitted; this note will be updated when it is public.
+
+## 2026-08-13 - two summary digit-increment ranges in Section 6.5
+
+Section 6.5 summarises how the matching-digit counts at c = 100 respond to increasing the working precision and the Galerkin level. Both summary ranges are misstated. Recomputing the per-gamma_k counts from the deposited extraction files gives:
+
+| change | correct | printed |
+|---|---|---|
+| dps 500 -> 1000 at N = 150 | 93-117 | 95-115 |
+| N 150 -> 250 at dps = 500 | 181-203 | 179-201 |
+
+These ranges are differences of the per-gamma_k counts, and those counts are unchanged and reported correctly throughout, including the 219-242 and 307-329 ranges quoted in the same paragraph, the latter also in the abstract. No measured value changes. Found in a pre-submission audit of the version 3 manuscript, where the ranges are corrected.
 
 ## 2026-08-12 - the Section 8.2 Paley-Wiener mechanism is withdrawn, and Table 14 is measured at T = 400
 
