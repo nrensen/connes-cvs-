@@ -60,4 +60,4 @@ if __name__ == "__main__":
 ## Discipline
 
 - This directory is **public** (git-tracked). Never include in-progress or revision-pending findings here.
-- The `results_15pt_T800.json` file is byte-for-byte unchanged across the published versions of the paper that carry it (concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514), currently resolving to Version 3.6, version DOI [10.5281/zenodo.21918387](https://doi.org/10.5281/zenodo.21918387)). If a correction is ever needed, deposit a new Zenodo version and update this file in lockstep.
+- The `results_15pt_T800.json` file is byte-for-byte unchanged across every published version of the paper that carries it (concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514), which always resolves to the current version). If a correction is ever needed, deposit a new Zenodo version and update this file in lockstep.

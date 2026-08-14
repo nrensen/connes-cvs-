@@ -21,3 +21,6 @@ venv/
 # ---- OS / editor ----
 .DS_Store
 .vscode/
+
+# ---- PyPI release staging (built artifacts, never committed) ----
+release-dist/

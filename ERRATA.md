@@ -2,7 +2,21 @@
 
 Corrections to the accompanying paper, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224), *High-Precision Approximation of Riemann Zeros via the Truncated Weil Form*. This note records them for transparency. Entries are newest first. No entry changes a measured value.
 
-**Status of each correction in the manuscript.** All four corrections are incorporated in the text of the revised manuscript, which is deposited on Zenodo under concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) and has been submitted to arXiv. The 2026-06-26 correction was folded in earlier, at Zenodo Version 3.3. The two 2026-08-12 corrections were first recorded in this file at Version 3.4, whose PDF was byte-identical to Version 3.3; the 2026-08-13 correction was found later, in a pre-submission audit of the revised manuscript. The currently announced arXiv version, v2, predates all three of the later corrections: readers using it should read the passages named below against these entries.
+**Status of each correction in the manuscript.** Every correction recorded here is incorporated in the text of the current manuscript, which is deposited on Zenodo under the concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514). That DOI always resolves to the current version. Readers working from an earlier version, on either Zenodo or arXiv, should read the passages named below against these entries.
+
+## 2026-08-14 - the c = 100 negative block does not vanish at any finite cutoff we tested
+
+The 2026-06-26 entry below stated that the c = 100 negative-sign block is "absent at T = 1200", and the manuscript stated that raising the cutoff to T = 1200 removes it. Both are wrong, and both are corrected.
+
+Every c = 100, T = 1200 cell computed for this work still contains negative-sign eigenvalues: eight at N = 20 (dps 80), three at N = 100 (dps 150), two at N = 100 (dps 500), three at N = 150 (dps 500), and four at N = 200 (dps 500). At the N = 150, dps = 500 cell the paper actually reports, the five negatives at T = 800, at log₁₀|e| in {−40.66, −59.75, −96.75, −165.15, −223.69}, are replaced at T = 1200 by three at entirely different magnitudes, {−71.73, −101.66, −176.21}. What the underlying observation actually showed is therefore that the negative set *rearranges* with the cutoff rather than surviving it. In compressing that into an errata line, "those negatives vanish" became "the negatives are absent". Two further cautions apply to any such ladder. The count is not monotone in T at fixed working precision, since past some cutoff the arithmetic no longer resolves the deep spectrum at all; and the count at a fixed cell depends on the working precision, because eigenvalues at the precision floor are not meaningful. The counts above are raw counts at the stated precision.
+
+**The conclusion is unchanged**, because it rests on the second clause, which is unaffected: a cutoff-free evaluation of the archimedean entries, certified by a rigorous Arb interval LDLᵀ factorization, leaves the even sector with no negative eigenvalues at N = 100, 150 and 200. The block is a finite-cutoff artifact. What was wrong is only the specific claim that T = 1200 is a large enough cutoff to remove it.
+
+For completeness: because the omitted archimedean tail is a positive-definite increment (a result of the companion Guinand-Weil paper) and the cutoff-free block is certified positive definite, the block must be absent for all sufficiently large finite T. The paper's more general statements that the negatives are absent at larger T are therefore correct as written. What this entry corrects is the one place a specific finite cutoff was named. How large T must be was not determined here, and it is evidently far above the cutoffs tested.
+
+No measured value changes. The L(s, χ₃) half of the 2026-06-26 entry is unaffected and was re-verified against its own cutoff sweep.
+
+Raised by M. Osman in [issue #4](https://github.com/akivag613/connes-cvs-/issues/4).
 
 ## 2026-08-13 - two summary digit-increment ranges in Section 6.5
 
@@ -44,7 +58,7 @@ The paper reported small blocks of negative-sign even-sector eigenvalues in two 
 
 Both are artifacts of the finite archimedean integration cutoff T, not features of the operator. The negatives are stable under increasing working precision but not under increasing T:
 
-- c=100 (T=800): absent at T=1200, and a cutoff-free evaluation of the archimedean entries leaves the even sector with no negative eigenvalues.
+- c=100 (T=800): the negative set rearranges with the cutoff rather than persisting, and a cutoff-free evaluation of the archimedean entries leaves the even sector with no negative eigenvalues. (The original wording of this line, "absent at T=1200", was wrong; see the 2026-08-14 entry above.)
 - χ₃ (T=400): re-running the exact original computation with only T varied, the c=23 negative (−6.46×10⁻²³) becomes positive by T=800, and the c=29 negative (−5.82×10⁻¹⁷) by T=1200; both even sectors are then non-negative.
 
 dps-stability was mistaken for correctness; the correct diagnostic of a deep-spectrum value is agreement between two values of T. The "structural character dependence" reading of the χ₃ case, and the suggestion that the c=100 and χ₃ blocks arise from different mechanisms, are withdrawn: both are the same archimedean-truncation artifact.

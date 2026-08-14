@@ -497,7 +497,7 @@ def build_galerkin_matrix(
 
     Constructs the (2N+1) x (2N+1) matrix whose entries are inner products
     of the Weil functional against the trigonometric basis
-    {e_k(t) = exp(2*pi*i*k*t / (2*log(c)))} for k in [-N, N].
+    {e_k(t) = exp(2*pi*i*k*t / L)}, L = log(c), for k in [-N, N].
 
     The matrix decomposes into three pieces:
 

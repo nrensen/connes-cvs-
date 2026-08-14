@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "connes-cvs"
-version = "0.3.0"
+version = "0.3.1"
 description = "Open-source arbitrary-precision construction and validation of the Connes-van Suijlekom Galerkin matrix."
 readme = "README.md"
 license = "MIT"

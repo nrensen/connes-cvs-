@@ -11,8 +11,8 @@ Weil quadratic form* are in
 Public records:
 
 - [arXiv:2607.02828](https://arxiv.org/abs/2607.02828)
-- [Zenodo concept DOI 10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802)
-- [Zenodo version 1.2 DOI 10.5281/zenodo.21918605](https://doi.org/10.5281/zenodo.21918605)
+- [Zenodo concept DOI 10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802),
+  which always resolves to the current version
 
 No manuscript, source, data, or executable code is duplicated here; the linked
 paper folder is the canonical repository location.

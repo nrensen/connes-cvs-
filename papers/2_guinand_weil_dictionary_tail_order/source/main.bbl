@@ -71,18 +71,19 @@ Alain Connes and Caterina Consani.
 \bibitem{ConnesConsaniMoscovici2025}
 Alain Connes, Caterina Consani, and Henri Moscovici.
 \newblock Zeta spectral triples.
-\newblock {\em arXiv:2511.22755}, 2025.
+\newblock In {\em Applications of Noncommutative Geometry to Gauge Theories,
+  Field Theories, and Quantum Space-Time}, EMS Series of Lectures in
+  Mathematics, pages 39--76. EMS Press, 2026.
 \newblock \href {https://arxiv.org/abs/2511.22755} {\path{arXiv:2511.22755}},
-  \href {https://doi.org/10.48550/arXiv.2511.22755}
-  {\path{doi:10.48550/arXiv.2511.22755}}.
+  \href {https://doi.org/10.4171/elm/37/3} {\path{doi:10.4171/elm/37/3}}.
 
 \bibitem{ConnesvanSuijlekom2025}
 Alain Connes and Walter~D. van Suijlekom.
 \newblock Quadratic forms, real zeros and echoes of the spectral action.
-\newblock {\em arXiv:2511.23257}, 2025.
+\newblock {\em Communications in Mathematical Physics}, 406(12):312, 2025.
 \newblock \href {https://arxiv.org/abs/2511.23257} {\path{arXiv:2511.23257}},
-  \href {https://doi.org/10.48550/arXiv.2511.23257}
-  {\path{doi:10.48550/arXiv.2511.23257}}.
+  \href {https://doi.org/10.1007/s00220-025-05493-1}
+  {\path{doi:10.1007/s00220-025-05493-1}}.
 
 \bibitem{Silva20671635}
 Breno~Wilson {de Andrade Silva}.

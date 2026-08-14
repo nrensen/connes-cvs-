@@ -22,10 +22,10 @@ Part of the [`connes-cvs` series](../../README.md#papers): **Riemann zeros - the
 
 ## About this folder
 
-`high_precision_approximation_of_riemann_zeros.pdf` is the current published manuscript: Zenodo
-**Version 3.6** ([10.5281/zenodo.21918387](https://doi.org/10.5281/zenodo.21918387)), 46 pages,
-carrying all four recorded corrections in its text. It is byte-identical to the manuscript in that
-deposit. The arXiv replacement is submitted and awaiting announcement, so arXiv still serves v2.
+`high_precision_approximation_of_riemann_zeros.pdf` is the current published manuscript, 46 pages,
+carrying every recorded correction in its text. It is byte-identical to the manuscript in the
+Zenodo deposit that the concept DOI
+[10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) resolves to.
 Unlike the two companion notes - self-contained theorem notes whose code lives beside them - **this paper's
 reproducibility package is the `connes-cvs` package itself**, which is the whole repository. So
 this folder holds the paper; the code and data live at the repository root:
@@ -49,19 +49,18 @@ quadratic form at high precision. It computes the smallest-positive eigenvalue a
 15-cutoff sweep and at `c = 100`, extracts the first ten Riemann zeros to hundreds of matching
 digits, and gives an independent out-of-sample numerical test of the Connes 2026 §6.4 continuum
 asymptotic. It reports empirical measurements only; it makes no claim regarding the Riemann
-Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the four recorded corrections, none of
+Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the recorded corrections, none of
 which changes a measured value: the 2026-06-26 finite-cutoff sign correction; the withdrawal of
 the Section 8.2 Paley-Wiener mechanism (Table 14 is measured at `T = 400`, not `T = 800`); the
-`c = 67` matching-digit count, 167 rather than 168 under the paper's own definition; and two
-summary digit-increment ranges in Section 6.5, 93-117 and 181-203.
+`c = 67` matching-digit count, 167 rather than 168 under the paper's own definition; two
+summary digit-increment ranges in Section 6.5, 93-117 and 181-203; and the correction that the
+`c = 100` negative block does not vanish at any finite cutoff tested, though a cutoff-free
+evaluation still leaves the even sector non-negative.
 
-**All four are already incorporated in the text of the PDF in this folder**, which is Zenodo
-**Version 3.6** ([10.5281/zenodo.21918387](https://doi.org/10.5281/zenodo.21918387)), so it needs
-no errata overlay. `ERRATA.md` is retained as the record of what changed and when, and because it
-still applies to the arXiv copy: [arXiv:2605.20224](https://arxiv.org/abs/2605.20224) currently
-shows v2, which carries the 2026-06-26 correction but predates the three later ones. Its
-replacement has been submitted and is awaiting announcement. Anyone reading the arXiv v2 PDF today
-should read it against `ERRATA.md`.
+**All of them are already incorporated in the text of the PDF in this folder**, so it needs no
+errata overlay. `ERRATA.md` is retained as the record of what changed and when, and because it
+still applies to anyone reading an earlier version of the manuscript, on either Zenodo or
+[arXiv](https://arxiv.org/abs/2605.20224).
 
 ## License
 

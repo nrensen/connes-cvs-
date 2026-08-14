@@ -134,8 +134,11 @@ from the archived checksum.
 - `zero_side_values.json`: the original M<=64 zero-side confirmation.
 - `c100_N200_arb_ldlt_prec9000.log` (+ `_provenance.json`): the cutoff-free
   Arb interval LDL certificate, n_pos=401, n_neg=0; generator
-  `arb_ldlt_certify.py` ships in-package with a self-test that validates the
-  Arb entry balls against an independent mpmath recomputation.
+  `arb_ldlt_certify.py` ships in-package with a self-test that checks the Arb
+  entries against an independent mpmath recomputation of the same closed forms,
+  agreeing to a relative tolerance of 1e-60. That is an agreement test, not a
+  strict ball-containment test: the mpmath mirror truncates its geometric sums
+  near 1e-70, so containment is not the assertion being made.
 - `fig_dictionary.pdf`, `fig_tailorder.pdf`: manuscript figures; generator
   `make_figures.py`.
 

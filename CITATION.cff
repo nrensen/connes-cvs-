@@ -6,8 +6,9 @@ abstract: "Open-source arbitrary-precision construction and validation of the Co
 authors:
   - family-names: Groskin
     given-names: Akiva
-version: 0.3.0
-date-released: 2026-08-12
+    orcid: "https://orcid.org/0009-0002-2709-4855"
+version: 0.3.1
+date-released: 2026-08-14
 license: MIT
 repository-code: "https://github.com/akivag613/connes-cvs-"
 url: "https://github.com/akivag613/connes-cvs-"
@@ -17,6 +18,7 @@ preferred-citation:
   authors:
     - family-names: Groskin
       given-names: Akiva
+      orcid: "https://orcid.org/0009-0002-2709-4855"
   year: 2026
   url: "https://arxiv.org/abs/2605.20224"
   identifiers:

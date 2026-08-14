@@ -1,7 +1,7 @@
 {
   "schema": "connes-cvs.release-files.v1",
   "distribution": "connes-cvs",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "limits": {
     "maximum_file_bytes": 26214400,
     "maximum_total_bytes": 104857600
@@ -63,10 +63,10 @@
     "tools/verify_release.py"
   ],
   "wheel_files": [
-    "connes_cvs-0.3.0.dist-info/METADATA",
-    "connes_cvs-0.3.0.dist-info/RECORD",
-    "connes_cvs-0.3.0.dist-info/WHEEL",
-    "connes_cvs-0.3.0.dist-info/licenses/LICENSE",
+    "connes_cvs-0.3.1.dist-info/METADATA",
+    "connes_cvs-0.3.1.dist-info/RECORD",
+    "connes_cvs-0.3.1.dist-info/WHEEL",
+    "connes_cvs-0.3.1.dist-info/licenses/LICENSE",
     "connes_cvs/README.md",
     "connes_cvs/__init__.py",
     "connes_cvs/kernels.py",

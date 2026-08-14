@@ -54,7 +54,7 @@ The five `results_c100_*_v020.json` files share a common shape:
 
 The production result files were produced on a 12-worker Apple M-series workstation using the v0.2.0 mathematical core with a local cell runner. Each result JSON records `flint_prec=4*dps`; this differs from the package's historical default and must be supplied explicitly for an exact reproduction attempt.
 
-The `version` field in those files reads `v0.2.3-local`. That is the internal label of the local cell runner used to produce them, **not** a PyPI release: no `0.2.3` was ever published. The released versions are `0.2.0`, `0.2.1` (yanked), `0.2.2` and `0.3.0`, and the `engine` field records the mathematical core actually used, `v020`.
+The `version` field in those files reads `v0.2.3-local`. That is the internal label of the local cell runner used to produce them, **not** a PyPI release: no `0.2.3` was ever published. The released versions are listed in [`../../CHANGELOG.md`](../../CHANGELOG.md), and the `engine` field records the mathematical core actually used, `v020`.
 
 Recorded wall times are:
 

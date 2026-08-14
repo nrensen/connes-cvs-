@@ -27,7 +27,7 @@ Version 0.3.0:
   scoped Arb residual bound for an exact supplied finite symmetric matrix.
 """
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 from connes_cvs.operator import build_galerkin_matrix, compute_ground_state, extract_zeros
 from connes_cvs.validation import arb_eigenpair_residual_bound

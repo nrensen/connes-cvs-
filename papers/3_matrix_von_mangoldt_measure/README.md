@@ -5,13 +5,12 @@
 Akiva Groskin, 2026. Manuscript and full reproducibility package, version 2.
 
 Archived on Zenodo, concept DOI
-[10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028), which resolves
-to the current version 2.1 (published 2026-08-13), version DOI
-[10.5281/zenodo.21911012](https://doi.org/10.5281/zenodo.21911012). The manuscript
-in version 2.1 is the corrected version 2 of 2026-07-27
-([10.5281/zenodo.21612746](https://doi.org/10.5281/zenodo.21612746)) unchanged;
-version 2.1 revises documentation in the reproducibility archive only. Cite the
-version DOI for theorem-sensitive use. Companion to the Riemann-zeros paper
+[10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028), which always
+resolves to the current version. The manuscript is the corrected version 2 of
+2026-07-27; later versions have revised documentation in the reproducibility
+archive only, leaving the manuscript unchanged. For theorem-sensitive use, cite
+the version DOI of the specific version you consulted, which each Zenodo record
+displays. Companion to the Riemann-zeros paper
 ([arXiv:2605.20224](https://arxiv.org/abs/2605.20224)) and the Guinand-Weil dictionary
 ([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)). This paper is not on arXiv.
 
@@ -22,6 +21,14 @@ below before relying on it; the same list ships in the README of the deposited r
 archive. The guard script `scripts/check_negative_controls.py` verifies that each corrected
 version-1 statement fails on its counterexample and each version-2 statement holds. The PDF
 here is the corrected version 2 manuscript.
+
+On 2026-08-14 two references were updated to the journal versions in which they have since
+appeared: Connes and van Suijlekom to *Communications in Mathematical Physics* **406** (2025),
+article 312, and Connes, Consani and Moscovici to a chapter in *Applications of Noncommutative
+Geometry to Gauge Theories, Field Theories, and Quantum Space-Time*, EMS Series of Lectures in
+Mathematics, EMS Press (2026), pages 39-76. That is the only reason the PDF differs from the one
+deposited before that date; the text is otherwise the corrected version 2 of 2026-07-27, and
+**no theorem, proof, or numerical result changes.**
 
 Fix a Galerkin level `N` in the finite Connes-van Suijlekom truncation of the Weil
 quadratic form (no archimedean cutoff), and vary the prime cutoff `u = log c`.

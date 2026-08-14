@@ -15,8 +15,11 @@ Archimedean entries use closed forms built from digamma/trigamma values at
   S(n)  = (1/2) Im psi(1/4 + i pi n/L)          - w  * G_S
   CC(n) = -(1/2)(Re psi(1/4 + i pi n/L)-psi(1/4)) + G_CC
   XC(n) = (1/4) Re psi'(1/4 + i pi n/L)          - L G_XC1 - G_XC2
-Self-test: the Arb entry balls are checked to contain an independent mpmath
-recomputation of the same closed forms.
+Self-test: the Arb entries are checked to agree with an independent mpmath
+recomputation of the same closed forms to a relative tolerance of 1e-60.  This
+is an agreement test, not a strict ball-containment test: the mpmath mirror
+truncates its geometric sums near 1e-70, so containment is not the assertion
+being made.
 
 Usage:
   python3 arb_ldlt_certify.py --selftest --c 13 --N 8 --prec 300
@@ -200,7 +203,9 @@ def certified_inertia(A, DIM, heartbeat=50):
 
 
 def selftest(c=13, N=8, prec=300):
-    """Arb entry balls must contain an independent mpmath recomputation."""
+    """Arb entries must agree with an independent mpmath recomputation to a
+    relative tolerance of 1e-60.  This is an agreement test, not strict ball
+    containment; see the module docstring."""
     print("[%s] SELF-TEST c=%d N=%d prec=%d ..." % (ts(), c, N, prec), flush=True)
     S, CC, XC, L = arb_closed_forms(N, c, prec)
     mp.mp.dps = 80

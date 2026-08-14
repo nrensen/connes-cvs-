@@ -20,15 +20,15 @@ Riemann Hypothesis.
 | :--- | :--- | :--- | :--- |
 | **1** | **High-Precision Approximation of Riemann Zeros via the Truncated Weil Form** - the numerics: builds and diagonalizes the CvS Galerkin matrix at high precision and extracts Riemann zeros to hundreds of matching digits. | [`1_high_precision_riemann_zeros/`](1_high_precision_riemann_zeros/) - the code is the [`connes-cvs`](../README.md) package | [arXiv:2605.20224](https://arxiv.org/abs/2605.20224)<br>[10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) |
 | **2** | **A finite Guinand-Weil dictionary and archimedean tail order for the truncated Weil quadratic form** - the structure: an exact finite zero-source dictionary + a finite-cutoff archimedean tail-order theorem with a two-sided certification rule. | [`2_guinand_weil_dictionary_tail_order/`](2_guinand_weil_dictionary_tail_order/) | [arXiv:2607.02828](https://arxiv.org/abs/2607.02828)<br>[10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) |
-| **3** | **A matrix-valued von Mangoldt measure in the finite Connes–van Suijlekom path** - the arithmetic: realizes the prime side of the explicit formula as an exact matrix-valued von Mangoldt measure, with arithmetic rigidity, a finite source-to-jet dictionary, and a sharp finite vanishing-moment ceiling at the prime edge (an uncertainty-principle interpretation in the band-limited sense). | [`3_matrix_von_mangoldt_measure/`](3_matrix_von_mangoldt_measure/) | Zenodo [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028)<br>(resolves to v2.1, published 2026-08-13,<br>version DOI [10.5281/zenodo.21911012](https://doi.org/10.5281/zenodo.21911012);<br>manuscript unchanged from the corrected v2) |
+| **3** | **A matrix-valued von Mangoldt measure in the finite Connes–van Suijlekom path** - the arithmetic: realizes the prime side of the explicit formula as an exact matrix-valued von Mangoldt measure, with arithmetic rigidity, a finite source-to-jet dictionary, and a sharp finite vanishing-moment ceiling at the prime edge (an uncertainty-principle interpretation in the band-limited sense). | [`3_matrix_von_mangoldt_measure/`](3_matrix_von_mangoldt_measure/) | Zenodo [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028)<br>(concept DOI; resolves to the<br>current version) |
 
 ## Which manuscript each folder holds
 
 **Every folder holds the current Zenodo deposit's manuscript, byte-identical to it.** That is the
-rule for all three papers, without exception. Where an arXiv replacement has been submitted but not
-yet announced, the folder is therefore ahead of arXiv until arXiv catches up, and each paper's
-README says so. When a new version is deposited, refresh the PDF here in the same pass, so this
-rule keeps holding.
+rule for all three papers, without exception. Each paper's Zenodo concept DOI is therefore the
+reference for what that paper currently says; an arXiv version may briefly lag a new deposit while
+arXiv processes a replacement. When a new version is deposited, refresh the PDF here in the same
+pass, so this rule keeps holding.
 
 ## Layout
 

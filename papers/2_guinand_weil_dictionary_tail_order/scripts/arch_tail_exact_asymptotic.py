@@ -9,7 +9,7 @@ half by two integrations by parts with an explicit remainder bound) against
 
 Also verifies the derivative envelope h_+'(t) <= 1/t + 13/(10 t^2) of
 Lemma 3.1 on a t-ladder, and solves B_asym(T) = 1e-59 at (c,N) = (100,200)
-for the "T of order 10^58" statement.
+for the "T of order 10^62" statement (the solved value is ~7.98e62).
 
 Writes arch_tail_exact_vs_asymptotic.json.  Requires mpmath only.
 """
@@ -76,9 +76,15 @@ def main():
 
     # derivative envelope margin ladder (Lemma 3.1)
     def hplus_d(t):
-        u = mp.mpf(t)/2
-        return (mp.mpf(t)/2)*mp.nsum(
-            lambda k: (k + mp.mpf(1)/4)/(((k + mp.mpf(1)/4)**2 + u**2)**2), [0, mp.inf])
+        # h_+(t) = Re psi(1/4 + i t/2) - log pi, hence
+        #   h_+'(t) = -(1/2) Im psi'(1/4 + i t/2),
+        # evaluated here directly from the trigamma function.  The equivalent
+        # series (t/2) * sum_k (k+1/4)/(((k+1/4)^2 + (t/2)^2)^2) is the same
+        # quantity, but its summand rises to a peak near k ~ t/(2 sqrt 3)
+        # before decaying, which defeats mp.nsum's acceleration and silently
+        # returned a value low by a factor of ~4.19 at t = 1000.
+        # Reported by B. W. de Andrade Silva, 2026-07-04.
+        return -mp.im(mp.polygamma(1, mp.mpf(1)/4 + mp.mpc(0, mp.mpf(t))/2))/2
     env_rows = []
     env_ok = True
     for t in (1, 2, 3, 5, 7, 10, 20, 50, 100, 1000):

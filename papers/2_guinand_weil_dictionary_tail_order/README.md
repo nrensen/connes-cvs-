@@ -20,13 +20,25 @@
 Part of the [`connes-cvs` series](../../README.md#papers): [**Riemann zeros** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Guinand-Weil dictionary - the structure** · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
 
 **Corrections.** This paper has no errata: **no mathematical statement has been corrected
-since publication.** The PDF here is the current Zenodo **v1.2**
-([10.5281/zenodo.21918605](https://doi.org/10.5281/zenodo.21918605)), which relative to v1.1
-adds a citation identifying the earlier finite-cutoff computation that motivates the
-tail-order theorem and corrects the companion-package repository path. The full change
-history is in the repository [CHANGELOG](../../CHANGELOG.md) and in the Zenodo record. The
-matching arXiv replacement has been submitted and is awaiting announcement, so
-[arXiv:2607.02828](https://arxiv.org/abs/2607.02828) still shows v1.
+since publication.** The PDF here is byte-identical to the manuscript in the Zenodo deposit
+that the concept DOI above resolves to. One published ancillary value was corrected on
+2026-08-14: the derivative envelope ladder in
+`artifacts/arch_tail_exact_vs_asymptotic.json` reported `h_+'(t)` at `t = 50`, `100` and
+`1000` from a series evaluation that `mp.nsum` had accelerated incorrectly at `dps = 25`, most
+visibly at `t = 1000`, where the published `0.0002384087979` should read `0.001000000083`.
+The formula in the script was correct and is now evaluated directly from the trigamma
+function; Lemma 3.1's envelope holds at every `t` under the corrected values, and
+`B_exact`, `B_asym` and the certification-floor solve are unchanged. **No statement in the
+manuscript quotes these values, so this correction does not change the manuscript.** The defect
+was identified by B. W. A. Silva.
+
+Separately, and also on 2026-08-14, two references were updated to the journal versions in which
+they have since appeared: Connes and van Suijlekom to *Communications in Mathematical Physics*
+**406** (2025), article 312, and Connes, Consani and Moscovici to a chapter in *Applications of
+Noncommutative Geometry to Gauge Theories, Field Theories, and Quantum Space-Time*, EMS Series of
+Lectures in Mathematics, EMS Press (2026), pages 39-76. That is the only reason the PDF differs
+from the one deposited before that date; **no mathematical statement changes.** The full change
+history is in the repository [CHANGELOG](../../CHANGELOG.md) and in the Zenodo record.
 
 ## What this paper proves
 
