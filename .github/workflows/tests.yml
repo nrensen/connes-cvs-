@@ -200,10 +200,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for artifact in \
-            release-dist/connes_cvs-0.3.0-py3-none-any.whl \
-            release-dist/connes_cvs-0.3.0.tar.gz
+          # The version is read from pyproject.toml rather than hardcoded, so a
+          # release bump cannot leave this gate pointing at artifacts that no
+          # longer exist. The glob is asserted to match exactly one file of each
+          # kind, so a stale archive in release-dist/ cannot be silently tested.
+          expected_version=$(python -c "import tomllib, pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          shopt -s nullglob
+          wheels=(release-dist/*.whl)
+          sdists=(release-dist/*.tar.gz)
+          test "${#wheels[@]}" -eq 1
+          test "${#sdists[@]}" -eq 1
+          for artifact in "${wheels[0]}" "${sdists[0]}"
           do
+            case "$(basename "$artifact")" in
+              connes_cvs-"$expected_version"[.-]*) ;;
+              *) echo "artifact $artifact does not match version $expected_version" >&2; exit 1 ;;
+            esac
             kind=$(basename "$artifact" | tr '.-' '__')
             env_dir="$RUNNER_TEMP/install-$kind"
             python -m venv "$env_dir"
@@ -212,7 +224,7 @@ jobs:
             "$env_dir/bin/python" -m pip check
             (
               cd "$RUNNER_TEMP"
-              PYTHONPATH='' "$env_dir/bin/python" -c \
-                "import connes_cvs; from importlib.metadata import version; from connes_cvs import arb_eigenpair_residual_bound; from connes_cvs.runner import CellConfig; assert version('connes-cvs') == connes_cvs.__version__ == '0.3.0'; assert callable(arb_eigenpair_residual_bound); assert CellConfig(c=2, N=1, T=1, dps=15).c == 2"
+              PYTHONPATH='' EXPECTED_VERSION="$expected_version" "$env_dir/bin/python" -c \
+                "import os, connes_cvs; from importlib.metadata import version; from connes_cvs import arb_eigenpair_residual_bound; from connes_cvs.runner import CellConfig; expected = os.environ['EXPECTED_VERSION']; assert version('connes-cvs') == connes_cvs.__version__ == expected, (version('connes-cvs'), connes_cvs.__version__, expected); assert callable(arb_eigenpair_residual_bound); assert CellConfig(c=2, N=1, T=1, dps=15).c == 2"
             )
           done
