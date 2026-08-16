@@ -25,10 +25,8 @@ venv/
 # ---- PyPI release staging (built artifacts, never committed) ----
 release-dist/
 
-# ---- Belt-and-braces: private joint-work names must never enter this repo ----
-# (the material lives only in the local-only research repo, which has no remote;
-#  these patterns are a second fence, not the mechanism)
-*joint_silva*
-*silva_groskin*
-interior_rebuild/
-mu13_finite_section/
+# ---- Working material that must never enter this repository ----
+*_private_rc*
+*_HELD_*
+*_in_prep*
+proof_objects/
