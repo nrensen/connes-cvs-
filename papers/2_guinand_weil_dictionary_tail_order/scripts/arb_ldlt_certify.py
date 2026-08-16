@@ -29,6 +29,7 @@ Requires python-flint (Arb) and mpmath.
 import argparse
 import datetime
 import json
+import os
 import sys
 import time
 
@@ -173,11 +174,14 @@ def build_arb_tau(c, N, prec):
 
 
 def certified_inertia(A, DIM, heartbeat=50):
-    """Interval LDL^T.  Returns (n_pos, n_neg, undetermined_pivot_or_None)."""
+    """Interval LDL^T.  Returns (n_pos, n_neg, undetermined_pivot_or_None,
+    pivot_transcript): the transcript lists every pivot as
+    "index sign mid rad" and is what the provenance JSON digests."""
     d = [None] * DIM
     Lf = [[arb(0)] * DIM for _ in range(DIM)]
     n_pos = 0
     n_neg = 0
+    transcript = []
     t0 = time.time()
     for i in range(DIM):
         s = A[i, i]
@@ -186,10 +190,15 @@ def certified_inertia(A, DIM, heartbeat=50):
         d[i] = s
         if s > 0:
             n_pos += 1
+            sign = "+"
         elif s < 0:
             n_neg += 1
+            sign = "-"
         else:
-            return n_pos, n_neg, i
+            return n_pos, n_neg, i, transcript
+        transcript.append("%d %s %s %s" % (i, sign,
+                          s.mid().str(40, radius=False),
+                          s.rad().str(10, radius=False)))
         for j in range(i + 1, DIM):
             t = A[j, i]
             for k in range(i):
@@ -199,7 +208,7 @@ def certified_inertia(A, DIM, heartbeat=50):
             el = time.time() - t0
             print("  [ldlt] pivot %d/%d  elapsed=%.0fs  eta=%.0fs"
                   % (i + 1, DIM, el, el / (i + 1) * (DIM - i - 1)), flush=True)
-    return n_pos, n_neg, None
+    return n_pos, n_neg, None, transcript
 
 
 def selftest(c=13, N=8, prec=300):
@@ -258,7 +267,10 @@ def main():
     p.add_argument("--json-out", type=str, default="")
     args = p.parse_args()
 
-    if args.selftest and not selftest():
+    # A JSON certificate always carries a self-test result, so run it
+    # unconditionally when a certificate is requested.
+    ran_selftest = args.selftest or bool(args.json_out)
+    if ran_selftest and not selftest():
         sys.exit(1)
 
     print("[%s] ARB LDL^T CERTIFY  c=%d N=%d prec=%d bits (~%.0f digits)"
@@ -269,7 +281,7 @@ def main():
     print("[%s] cutoff-free block built, dimension %d (%.1fs); interval LDL^T ..."
           % (ts(), DIM, t_build), flush=True)
     t1 = time.time()
-    n_pos, n_neg, undet = certified_inertia(A, DIM)
+    n_pos, n_neg, undet, pivot_transcript = certified_inertia(A, DIM)
     t_ldlt = time.time() - t1
     if undet is None:
         print("[%s] RESULT: n_pos=%d n_neg=%d  (%.1fs)" % (ts(), n_pos, n_neg, t_ldlt), flush=True)
@@ -279,12 +291,37 @@ def main():
         print("[%s] UNDETERMINED at pivot %d (ball straddles 0): raise --prec" % (ts(), undet), flush=True)
 
     if args.json_out:
+        # Full provenance (requested by B. Silva, 3 July 2026): script hash,
+        # package commit, dependency versions, self-test result, pivot digest.
+        import hashlib, platform, subprocess
+        script_sha = hashlib.sha256(open(__file__, "rb").read()).hexdigest()
+        try:
+            commit = subprocess.run(["git", "rev-parse", "HEAD"],
+                                    capture_output=True, text=True,
+                                    cwd=os.path.dirname(os.path.abspath(__file__))
+                                    ).stdout.strip() or None
+        except Exception:
+            commit = None
+        import flint as _flint
+        selftest_result = "PASS" if ran_selftest else None
+        pivot_digest = hashlib.sha256(
+            "\n".join(pivot_transcript).encode()).hexdigest()
+        with open(args.json_out.replace(".json", "_pivots.txt"), "w") as f:
+            f.write("\n".join(pivot_transcript) + "\n")
         out = dict(script="arb_ldlt_certify.py", c=args.c, N=args.N, dimension=DIM,
                    prec_bits=args.prec, n_pos=n_pos, n_neg=n_neg,
                    undetermined_pivot=undet,
                    certified_positive_definite=bool(undet is None and n_neg == 0),
                    build_seconds=round(t_build, 1), ldlt_seconds=round(t_ldlt, 1),
-                   date=datetime.datetime.now().isoformat(timespec="seconds"))
+                   date=datetime.datetime.now().isoformat(timespec="seconds"),
+                   script_sha256=script_sha,
+                   package_commit=commit,
+                   python_version=platform.python_version(),
+                   mpmath_version=mp.__version__,
+                   python_flint_version=_flint.__version__,
+                   platform=platform.platform(),
+                   selftest=selftest_result,
+                   pivot_transcript_sha256=pivot_digest)
         with open(args.json_out, "w") as f:
             json.dump(out, f, indent=2)
         print("wrote %s" % args.json_out, flush=True)

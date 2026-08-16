@@ -13,7 +13,10 @@ Route 3: the zero side 2 * sum_{n<=M} g_v(gamma_n) over the first M nontrivial
 
 Configs: (c=29, N=6, generic vector), (c=29, N=6, pole-neutral vector),
          (c=13, N=4, the regression vector of the worked example).
-Routes 1 and 2 must agree to the tail remainder bound; route 3 must converge to
+Routes 1 and 2 must agree to the tail remainder bound.  Route 3 is
+convergence evidence only: it is a partial sum over computed zeros, not a
+rigorous enclosure of the omitted zero sum, and no error bound is claimed
+for it (B. Silva, 3 July 2026).  Route 3 must converge to
 the same value; the pole-neutral config must show a vanishing pole term.
 
 This script also generates, as route 1 of the c=13 configuration, the reference

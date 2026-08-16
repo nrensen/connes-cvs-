@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Exact spectral tail B_T versus the closed asymptotic of Corollary 3.3(iii).
+"""Numerically evaluated spectral tail B_T versus the closed asymptotic of
+Corollary 3.3(iii).
+
+This is a numerical evaluation with an explicit remainder bound, NOT an
+interval-exact enclosure (B. Silva, 3 July 2026): the smooth half is direct
+quadrature at working precision and only the cosine half carries the proved
+integration-by-parts remainder recorded as remainder_bound in the JSON.
 
 Computes, at the configurations quoted in the manuscript,
-  B_exact = (1/pi^2) int_T^inf h_+(r) sin^2(Lr/2)/rho (||p_r||^2 + ||q_r||^2) dr
+  B_quadrature = (1/pi^2) int_T^inf h_+(r) sin^2(Lr/2)/rho (||p_r||^2 + ||q_r||^2) dr
 (with sin^2 split as 1/2 - cos(Lr)/2: smooth half by direct quadrature, cosine
 half by two integrations by parts with an explicit remainder bound) against
   B_asym  = (2N+1) rho (log(T/(2 pi)) + 1) / (pi^2 T).
@@ -44,7 +50,7 @@ def envelope_tail(env, L, T0):
     return smooth - (b1 + b2 + rem)/2, rem_bound/2
 
 
-def B_exact(c, N, T):
+def B_quadrature(c, N, T):
     L = mp.log(c)
     rho = 2*mp.pi/L
 
@@ -66,12 +72,12 @@ def main():
     for (c, N, T) in [(13, 4, 40), (13, 4, 160), (13, 40, 160),
                       (100, 100, 800), (100, 200, 800), (100, 200, 1600),
                       (100, 200, 6400)]:
-        be, rem = B_exact(c, N, T)
+        be, rem = B_quadrature(c, N, T)
         ba = B_asym(c, N, T)
         rows.append(dict(c=c, N=N, T=T,
-                         B_exact=mp.nstr(be, 12), remainder_bound=mp.nstr(rem, 4),
+                         B_quadrature=mp.nstr(be, 12), remainder_bound=mp.nstr(rem, 4),
                          B_asym=mp.nstr(ba, 12), ratio=mp.nstr(be/ba, 8)))
-        print("c=%3d N=%3d T=%5d  B_exact=%-14s B_asym=%-14s ratio=%s" %
+        print("c=%3d N=%3d T=%5d  B_quadrature=%-14s B_asym=%-14s ratio=%s" %
               (c, N, T, mp.nstr(be, 8), mp.nstr(ba, 8), mp.nstr(be/ba, 6)), flush=True)
 
     # derivative envelope margin ladder (Lemma 3.1)

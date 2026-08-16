@@ -8,7 +8,15 @@
   "n_neg": 0,
   "undetermined_pivot": null,
   "certified_positive_definite": true,
-  "build_seconds": 715.1,
-  "ldlt_seconds": 88.4,
-  "date": "2026-07-02T06:29:27"
+  "build_seconds": 898.6,
+  "ldlt_seconds": 120.6,
+  "date": "2026-08-16T12:36:06",
+  "script_sha256": "b7fee730a83baedc860ca456547d2799ec10894a79edecc6d5612931b41509e3",
+  "package_commit": "8ce0fc791ed9c9ca6f4ba512322720b4be80421b",
+  "python_version": "3.12.11",
+  "mpmath_version": "1.4.1",
+  "python_flint_version": "0.8.0",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "selftest": "PASS",
+  "pivot_transcript_sha256": "be95d588997df5a49bf991d23a149cee4ca00da7dbaddc2073d8a0364444c392"
 }

@@ -28,7 +28,7 @@ that the concept DOI above resolves to. One published ancillary value was correc
 visibly at `t = 1000`, where the published `0.0002384087979` should read `0.001000000083`.
 The formula in the script was correct and is now evaluated directly from the trigamma
 function; Lemma 3.1's envelope holds at every `t` under the corrected values, and
-`B_exact`, `B_asym` and the certification-floor solve are unchanged. **No statement in the
+`B_quadrature` (renamed from `B_exact` on 2026-08-16 because it is a numerical evaluation with a remainder bound, not an interval-exact value), `B_asym` and the certification-floor solve are unchanged. **No statement in the
 manuscript quotes these values, so this correction does not change the manuscript.** The defect
 was identified by B. W. A. Silva.
 
