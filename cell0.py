@@ -345,24 +345,24 @@ print("F'(gamma1) row    =",
 # Constraint geometry
 # ============================================================
 
-C = mp.matrix(3, N + 1)
+C2 = mp.matrix(3, N + 1)
 
 for k in range(N + 1):
-    C[0, k] = a[k]
-    C[1, k] = b[k]
-    C[2, k] = p[k]
+    C2[0, k] = a[k]
+    C2[1, k] = b[k]
+    C2[2, k] = p[k]
 
-G = C * C.T
+G2 = C2 * C2.T
 
 print("C C^T =")
 for i in range(3):
     print([
-        mp.nstr(G[i, j], 30)
+        mp.nstr(G2[i, j], 30)
         for j in range(3)
     ])
 
 print("\ndeterminant(C C^T) =")
-print(mp.nstr(mp.det(G), 40))
+print(mp.nstr(mp.det(G2), 40))
 
 print("\nconstraint-row cosine similarities:")
 
@@ -371,9 +371,9 @@ for i, j, name in [
     (0, 2, "a,p"),
     (1, 2, "b,p"),
 ]:
-    dot = sum(C[i,k] * C[j,k] for k in range(N + 1))
-    ni = mp.sqrt(sum(C[i,k]**2 for k in range(N + 1)))
-    nj = mp.sqrt(sum(C[j,k]**2 for k in range(N + 1)))
+    dot = sum(C2[i,k] * C2[j,k] for k in range(N + 1))
+    ni = mp.sqrt(sum(C2[i,k]**2 for k in range(N + 1)))
+    nj = mp.sqrt(sum(C2[j,k]**2 for k in range(N + 1)))
 
     print(
         name, "=",
@@ -386,32 +386,32 @@ for i, j, name in [
 
 d_vec = mp.matrix(d)
 
-Cd = C * d_vec
+C2d = C2 * d_vec
 
-# Solve (C C^T) y = C d
-y = mp.lu_solve(G, Cd)
+# Solve (C2 C2^T) y = C2 d
+y = mp.lu_solve(G2, C2d)
 
-# Orthogonal projection of d onto ker(C)
-d_perp = d_vec - C.T * y
+# Orthogonal projection of d onto ker(C2)
+d_perp2 = d_vec - C2.T * y
 
-Dmax = mp.sqrt(mp.fdot(d_perp, d_perp))
+Dmax = mp.sqrt(mp.fdot(d_perp2, d_perp2))
 
 # Maximising unit vector
-v_star = d_perp / Dmax
+v_star = d_perp2 / Dmax
 
 print("D_max =")
 print(mp.nstr(Dmax, 60))
 
 print("\n||d_perp|| =")
-print(mp.nstr(mp.sqrt(mp.fdot(d_perp, d_perp)), 60))
+print(mp.nstr(mp.sqrt(mp.fdot(d_perp2, d_perp2)), 60))
 
 print("\n||v_star|| =")
 print(mp.nstr(mp.sqrt(mp.fdot(v_star, v_star)), 60))
 
 print("\nConstraint residuals:")
-print("F(gamma1) =", mp.nstr((C * v_star)[0], 50))
-print("F(gamma2) =", mp.nstr((C * v_star)[1], 50))
-print("P(v)      =", mp.nstr((C * v_star)[2], 50))
+print("F(gamma1) =", mp.nstr((C2 * v_star)[0], 50))
+print("F(gamma2) =", mp.nstr((C2 * v_star)[1], 50))
+print("P(v)      =", mp.nstr((C2 * v_star)[2], 50))
 
 print("\nDerivative:")
 print("d . v_star =",
@@ -424,10 +424,6 @@ def F_from_canonical_vector(v, tau):
         total += v[k] * F_from_canonical_basis(k, tau)
 
     return total
-
-print("v_star coefficients:")
-for k in range(N + 1):
-    print(k, mp.nstr(v_star[k], 30))
 
 print("\nF around gamma1:")
 for delta in ["-0.1", "-0.01", "0", "0.01", "0.1"]:
@@ -444,6 +440,80 @@ for delta in ["-0.1", "-0.01", "0", "0.01", "0.1"]:
         delta,
         mp.nstr(F_from_canonical_vector(v_star, x), 40)
     )
+
+C1 = mp.matrix(2, N + 1)
+
+for k in range(N + 1):
+    C1[0, k] = a[k]
+    C1[1, k] = b[k]
+
+G1 = C1 * C1.T
+
+print("C C^T =")
+for i in range(2):
+    print([
+        mp.nstr(G1[i, j], 30)
+        for j in range(2)
+    ])
+
+print("\ndeterminant(C C^T) =")
+print(mp.nstr(mp.det(G1), 40))
+
+print("\nconstraint-row cosine similarities:")
+
+# ============================================================
+# Projection of d onto the constraint nullspace
+# ============================================================
+
+d_vec = mp.matrix(d)
+
+C1d = C1 * d_vec
+
+# Solve (C C^T) y = C d
+y = mp.lu_solve(G1, C1d)
+
+# Orthogonal projection of d onto ker(C)
+d_perp1 = d_vec - C1.T * y
+
+Dmax = mp.sqrt(mp.fdot(d_perp1, d_perp1))
+
+# Maximising unit vector
+v_star = d_perp1 / Dmax
+
+print("D_max =")
+print(mp.nstr(Dmax, 60))
+
+# ============================================================
+# D_0: pole-neutral only
+# ============================================================
+
+C0 = mp.matrix(1, N + 1)
+
+for k in range(N + 1):
+    C0[0, k] = p[k]
+
+G0 = C0 * C0.T
+
+d_vec = mp.matrix(d)
+
+Cd0 = C0 * d_vec
+
+y0 = mp.lu_solve(G0, Cd0)
+
+d_perp0 = d_vec - C0.T * y0
+
+D0 = mp.sqrt(mp.fdot(d_perp0, d_perp0))
+
+v0_star = d_perp0 / D0
+
+print("D_0 =")
+print(mp.nstr(D0, 60))
+
+print("\nconstraint residual:")
+print(mp.nstr(mp.fdot(mp.matrix(p), v0_star), 50))
+
+print("\nnorm:")
+print(mp.nstr(mp.sqrt(mp.fdot(v0_star, v0_star)), 50))
 
 def constrained_D(m):
     """
@@ -486,6 +556,14 @@ def constrained_D(m):
     D = mp.sqrt(mp.fdot(d_perp, d_perp))
 
     return D, C, G, d_perp
+
+D3, C3, G3, dperp3 = constrained_D(3)
+
+print("D_3 =")
+print(mp.nstr(D3, 60))
+
+print("\ndet(C3 C3^T) =")
+print(mp.nstr(mp.det(G3), 50))
 
 for m in range(4):
     Dm, Cm, Gm, dpm = constrained_D(m)
@@ -538,9 +616,9 @@ y3 = mp.lu_solve(G2, C2 * c3)
 c3_perp = c3 - C2.T * y3
 
 c3_perp_norm = mp.sqrt(mp.fdot(c3_perp, c3_perp))
-d2_norm = mp.sqrt(mp.fdot(dperp2, dperp2))
+d2_norm = mp.sqrt(mp.fdot(d_perp2, d_perp2))
 
-dot = mp.fdot(c3_perp, dperp2)
+dot = mp.fdot(c3_perp, d_perp2)
 
 cos_theta = dot / (c3_perp_norm * d2_norm)
 
@@ -558,5 +636,4 @@ print(mp.nstr(cos_theta, 60))
 
 print("\n|cos(theta)|^2 =")
 print(mp.nstr(cos_theta**2, 60))
-
 
