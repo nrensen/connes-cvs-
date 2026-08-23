@@ -30,3 +30,4 @@ release-dist/
 *_HELD_*
 *_in_prep*
 proof_objects/
+.cell_cache/

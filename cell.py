@@ -15,6 +15,7 @@ from connes_cvs import (
 
 import hashlib
 import json
+import time
 from pathlib import Path
 
 # ============================================================
@@ -23,325 +24,146 @@ from pathlib import Path
 
 DEFAULT_DPS = 80
 
+
 # ============================================================
-# GROUND-STATE CACHE
+# GENERIC JSON RESULT CACHE
 # ============================================================
 #
-# Persistent cache for expensive ground-state calculations.
+# Persistent, content-addressed cache for expensive calculations.
 #
-# The cache is deliberately self-describing and content-addressed.
-# The hash incorporates all parameters which define the calculation,
-# together with explicit schema/operator versions.
+# The cache is deliberately generic.  It knows only:
 #
-# Cached numerical values are stored as decimal strings so that JSON
-# serialization does not introduce binary floating-point rounding.
+#   namespace
+#   parameters
+#   results
 #
-# No existing mathematical calculation is changed by this machinery.
+# Mathematical validation belongs to the wrapper for the particular
+# calculation being cached.
+#
+# Parameters and results must be JSON-compatible.
+#
+# The cache key is SHA-256 over a canonical JSON representation of
+# the namespace and parameters.
 # ============================================================
 
-GROUND_STATE_CACHE_VERSION = 1
+CACHE_SCHEMA_VERSION = 2
 
-# Increment this whenever the mathematical/operator construction
-# changes in a way which can invalidate previously computed states.
-GROUND_STATE_OPERATOR_VERSION = "cell.py-v1"
-
-GROUND_STATE_CACHE_DIR = Path(__file__).resolve().parent / "ground_state_cache"
+CELL_CACHE_DIR = (
+    Path(__file__).resolve().parent / ".cell_cache"
+)
 
 
-def _ground_state_parameter_record(
-    c,
-    N,
-    T,
-    dps,
-    flint_bits=None,
-):
+def _cache_canonical_json(obj):
     """
-    Return the canonical parameter record defining a ground-state
-    calculation.
+    Return the canonical JSON representation used for hashing.
 
-    c is represented as a decimal string rather than a binary float.
+    Sorting keys and using fixed separators makes the representation
+    independent of dictionary insertion order.
     """
-    if isinstance(c, float):
-        raise TypeError(
-            "Ground-state cache parameter c must not be a Python float; "
-            "pass an integer, decimal string, or mp.mpf."
-        )
-
-    c_mp = mp.mpf(c)
-
-    return {
-        "cache_version": GROUND_STATE_CACHE_VERSION,
-        "operator_version": GROUND_STATE_OPERATOR_VERSION,
-        "c": mp.nstr(c_mp, max(50, int(dps) + 10)),
-        "N": int(N),
-        "T": int(T),
-        "dps": int(dps),
-        "flint_bits": (
-            int(flint_bits)
-            if flint_bits is not None
-            else int(int(dps) * 3.5)
-        ),
-    }
-
-
-def ground_state_cache_key(
-    c,
-    N,
-    T,
-    dps,
-    flint_bits=None,
-):
-    """
-    Return the SHA-256 cache key for a ground-state calculation.
-
-    The returned tuple is:
-
-        (hex_digest, parameter_record)
-    """
-    record = _ground_state_parameter_record(
-        c=c,
-        N=N,
-        T=T,
-        dps=dps,
-        flint_bits=flint_bits,
-    )
-
-    payload = json.dumps(
-        record,
+    return json.dumps(
+        obj,
         sort_keys=True,
         separators=(",", ":"),
-    ).encode("utf-8")
+        ensure_ascii=False,
+    )
 
-    digest = hashlib.sha256(payload).hexdigest()
+
+def cache_key(namespace, parameters):
+    """
+    Return:
+
+        (sha256_hex_digest, canonical_parameter_record)
+
+    for a cache entry.
+
+    `parameters` must be JSON-compatible.
+    """
+    record = {
+        "schema_version": CACHE_SCHEMA_VERSION,
+        "namespace": str(namespace),
+        "parameters": parameters,
+    }
+
+    canonical = _cache_canonical_json(record)
+
+    digest = hashlib.sha256(
+        canonical.encode("utf-8")
+    ).hexdigest()
 
     return digest, record
 
 
-def _ground_state_cache_path(digest):
+def _cache_namespace_dir(namespace):
     """
-    Return the cache filename corresponding to a cache digest.
+    Return the cache directory for a namespace.
     """
-    return GROUND_STATE_CACHE_DIR / f"{digest}.json"
-
-
-def _matrix_residual(Q, lambda_min, v_full):
-    """
-    Euclidean residual ||Q v - lambda v||.
-    """
-    residual = Q * v_full - lambda_min * v_full
-
-    return mp.sqrt(
-        mp.fdot(residual, residual)
-    )
-
-
-def _validate_ground_state(
-    Q,
-    lambda_min,
-    v_full,
-    N,
-    *,
-    label="ground state",
-):
-    """
-    Validate a ground state against its operator.
-
-    Returns a diagnostic dictionary. Raises ValueError if the state
-    is structurally invalid or numerically inconsistent.
-
-    The tolerances are deliberately tied to the active arithmetic
-    precision rather than being fixed decimal thresholds.
-    """
-    DIM = 2 * N + 1
-
-    if not hasattr(v_full, "rows") or not hasattr(v_full, "cols"):
-        raise ValueError(
-            f"{label}: eigenvector is not an mpmath matrix"
-        )
-
-    if v_full.rows != DIM or v_full.cols != 1:
-        raise ValueError(
-            f"{label}: expected {DIM}x1 eigenvector, got "
-            f"{v_full.rows}x{v_full.cols}"
-        )
-
-    if not mp.isfinite(lambda_min):
-        raise ValueError(
-            f"{label}: eigenvalue is not finite"
-        )
-
-    for i in range(DIM):
-        if mp.im(v_full[i, 0]) != 0:
-            raise ValueError(
-                f"{label}: eigenvector has non-real entry at {i}"
-            )
-        if not mp.isfinite(v_full[i, 0]):
-            raise ValueError(
-                f"{label}: eigenvector has non-finite entry at {i}"
-            )
-
-    norm_full = mp.sqrt(
-        mp.fdot(v_full, v_full)
-    )
-
-    if norm_full == 0:
-        raise ValueError(
-            f"{label}: eigenvector has zero norm"
-        )
-
-    norm_error = abs(norm_full - 1)
-
-    # Reconstruct canonical coordinates and then return to full space.
-    v_canonical = full_to_canonical(v_full, N)
-    v_roundtrip = canonical_to_full(v_canonical, N)
-
-    roundtrip_error = mp.sqrt(
-        mp.fdot(
-            v_roundtrip - v_full,
-            v_roundtrip - v_full,
-        )
-    )
-
-    residual = _matrix_residual(
-        Q,
-        lambda_min,
-        v_full,
-    )
-
-    # These are deliberately generous relative to mp.eps. The purpose
-    # is to reject corrupted/stale cache entries, not to establish a
-    # new eigenvalue theorem.
-    tol = mp.sqrt(mp.eps)
-
-    if norm_error > tol:
-        raise ValueError(
-            f"{label}: norm validation failed: "
-            f"{mp.nstr(norm_error, 8)} > {mp.nstr(tol, 8)}"
-        )
-
-    if roundtrip_error > tol:
-        raise ValueError(
-            f"{label}: canonical/full round-trip failed: "
-            f"{mp.nstr(roundtrip_error, 8)} > {mp.nstr(tol, 8)}"
-        )
-
-    if residual > tol:
-        raise ValueError(
-            f"{label}: eigenvector residual failed: "
-            f"{mp.nstr(residual, 8)} > {mp.nstr(tol, 8)}"
-        )
-
-    return {
-        "norm_full": norm_full,
-        "norm_error": norm_error,
-        "roundtrip_error": roundtrip_error,
-        "residual_norm": residual,
-        "validation_tolerance": tol,
-    }
-
-
-def save_ground_state(
-    c,
-    N,
-    T,
-    dps,
-    lambda_min,
-    v_full,
-    *,
-    Q=None,
-    flint_bits=None,
-):
-    """
-    Validate and persist a ground state.
-
-    If Q is supplied, validation includes the eigenvector residual
-    against that exact operator. If Q is omitted, structural
-    validation is still performed, but the operator residual cannot
-    be checked.
-    """
-    digest, record = ground_state_cache_key(
-        c=c,
-        N=N,
-        T=T,
-        dps=dps,
-        flint_bits=flint_bits,
-    )
-
-    if Q is not None:
-        validation = _validate_ground_state(
-            Q,
-            lambda_min,
-            v_full,
-            N,
-            label="new ground state",
-        )
-    else:
-        DIM = 2 * N + 1
-
-        if v_full.rows != DIM or v_full.cols != 1:
-            raise ValueError(
-                "new ground state: incorrect eigenvector dimensions"
-            )
-
-        norm_full = mp.sqrt(mp.fdot(v_full, v_full))
-
-        validation = {
-            "norm_full": norm_full,
-            "norm_error": abs(norm_full - 1),
-            "roundtrip_error": mp.mpf("nan"),
-            "residual_norm": mp.mpf("nan"),
-            "validation_tolerance": mp.sqrt(mp.eps),
-        }
-
-    payload = {
-        "cache_key": digest,
-        "parameters": record,
-        "lambda_min": mp.nstr(lambda_min, int(dps) + 10),
-        "v_full": [
-            mp.nstr(v_full[i, 0], int(dps) + 10)
-            for i in range(v_full.rows)
-        ],
-        "validation": {
-            "norm_full": mp.nstr(
-                validation["norm_full"],
-                int(dps) + 10,
-            ),
-            "norm_error": mp.nstr(
-                validation["norm_error"],
-                int(dps) + 10,
-            ),
-            "roundtrip_error": mp.nstr(
-                validation["roundtrip_error"],
-                int(dps) + 10,
-            ),
-            "residual_norm": mp.nstr(
-                validation["residual_norm"],
-                int(dps) + 10,
-            ),
-            "validation_tolerance": mp.nstr(
-                validation["validation_tolerance"],
-                int(dps) + 10,
-            ),
-        },
-    }
-
-    GROUND_STATE_CACHE_DIR.mkdir(
+    path = CELL_CACHE_DIR / str(namespace)
+    path.mkdir(
         parents=True,
         exist_ok=True,
     )
+    return path
 
-    path = _ground_state_cache_path(digest)
 
-    # Atomic write: write a temporary file in the same directory,
-    # then replace the final path.
+def _cache_path(namespace, digest):
+    """
+    Return the path for a cache entry.
+    """
+    return (
+        _cache_namespace_dir(namespace)
+        / f"{digest}.json"
+    )
+
+
+def cache_save(
+    namespace,
+    parameters,
+    results,
+    *,
+    timing=None,
+):
+    """
+    Save a JSON-compatible result under its content-derived key.
+
+    Returns:
+
+        (digest, path)
+    """
+    digest, identity = cache_key(
+        namespace,
+        parameters,
+    )
+
+    path = _cache_path(
+        namespace,
+        digest,
+    )
+
+    payload = {
+        "cache_schema_version": CACHE_SCHEMA_VERSION,
+        "cache_key": digest,
+        "namespace": str(namespace),
+        "parameters": parameters,
+        "results": results,
+    }
+
+    if timing is not None:
+        payload["timing"] = timing
+
+    # Atomic write.  The temporary file is in the same directory so
+    # os/filesystem rename semantics remain atomic.
     temporary = path.with_suffix(".tmp")
 
-    with temporary.open("w", encoding="utf-8") as f:
+    with temporary.open(
+        "w",
+        encoding="utf-8",
+    ) as f:
         json.dump(
             payload,
             f,
             indent=2,
             sort_keys=True,
+            ensure_ascii=False,
         )
         f.write("\n")
 
@@ -350,106 +172,493 @@ def save_ground_state(
     return digest, path
 
 
-def load_ground_state(
-    c,
-    N,
-    T,
-    dps,
-    *,
-    Q=None,
-    flint_bits=None,
+def cache_load(
+    namespace,
+    parameters,
 ):
     """
-    Load and validate a cached ground state.
+    Load a cache entry.
 
     Returns:
 
-        (lambda_min, v_full, validation, path)
+        (results, metadata)
 
-    Raises FileNotFoundError if the cache entry does not exist.
+    Raises FileNotFoundError if the entry does not exist.
 
-    Raises ValueError if the cache entry exists but does not exactly
-    correspond to the requested calculation or fails validation.
+    Raises ValueError if the entry exists but its identity is
+    inconsistent with the requested namespace/parameters.
     """
-    digest, record = ground_state_cache_key(
-        c=c,
-        N=N,
-        T=T,
-        dps=dps,
-        flint_bits=flint_bits,
+    digest, identity = cache_key(
+        namespace,
+        parameters,
     )
 
-    path = _ground_state_cache_path(digest)
+    path = _cache_path(
+        namespace,
+        digest,
+    )
 
     if not path.exists():
         raise FileNotFoundError(path)
 
-    try:
-        with path.open("r", encoding="utf-8") as f:
-            payload = json.load(f)
-    except Exception as exc:
+    with path.open(
+        "r",
+        encoding="utf-8",
+    ) as f:
+        payload = json.load(f)
+
+    # Validate the cache record itself rather than trusting the
+    # filename.
+    if payload.get("cache_schema_version") != CACHE_SCHEMA_VERSION:
         raise ValueError(
-            f"Could not read ground-state cache {path}: {exc}"
-        ) from exc
+            "cache schema version mismatch"
+        )
 
     if payload.get("cache_key") != digest:
         raise ValueError(
-            "Ground-state cache key mismatch"
+            "cache key mismatch"
         )
 
-    stored_parameters = payload.get("parameters")
-
-    if stored_parameters != record:
+    if payload.get("namespace") != str(namespace):
         raise ValueError(
-            "Ground-state cache parameters do not match request"
+            "cache namespace mismatch"
         )
 
-    try:
-        lambda_min = mp.mpf(
-            payload["lambda_min"]
-        )
-
-        stored_vector = payload["v_full"]
-
-        if len(stored_vector) != 2 * N + 1:
-            raise ValueError(
-                "cached eigenvector has incorrect dimension"
-            )
-
-        v_full = mp.matrix(
-            [
-                mp.mpf(value)
-                for value in stored_vector
-            ]
-        )
-
-        v_full = mp.matrix(
-            2 * N + 1,
-            1,
-        )
-
-        for i, value in enumerate(stored_vector):
-            v_full[i, 0] = mp.mpf(value)
-
-    except Exception as exc:
+    if payload.get("parameters") != parameters:
         raise ValueError(
-            f"Invalid numerical data in ground-state cache {path}: {exc}"
-        ) from exc
+            "cache parameters do not match request"
+        )
 
-    validation = _validate_ground_state(
-        Q,
-        lambda_min,
-        v_full,
-        N,
-        label="cached ground state",
-    ) if Q is not None else None
+    if "results" not in payload:
+        raise ValueError(
+            "cache entry contains no results"
+        )
 
     return (
-        lambda_min,
-        v_full,
-        validation,
-        path,
+        payload["results"],
+        {
+            "cache_hit": True,
+            "cache_key": digest,
+            "cache_path": path,
+            "cache_record": identity,
+            "stored_timing": payload.get("timing"),
+        },
     )
+
+
+def cache_get_or_compute(
+    namespace,
+    parameters,
+    compute_fn,
+    *,
+    verbose=True,
+):
+    """
+    Generic cached calculation.
+
+    `compute_fn` must return a JSON-compatible result fragment.
+
+    Returns:
+
+        (results, metadata)
+
+    The metadata contains timing information for both cache hits and
+    misses.
+    """
+    digest, identity = cache_key(
+        namespace,
+        parameters,
+    )
+
+    lookup_start = time.perf_counter()
+
+    try:
+        results, metadata = cache_load(
+            namespace,
+            parameters,
+        )
+
+        lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        metadata = dict(metadata)
+
+        metadata["lookup_seconds"] = (
+            lookup_elapsed
+        )
+        metadata["total_seconds"] = (
+            lookup_elapsed
+        )
+
+        if verbose:
+            print()
+            print(
+                f"CACHE HIT [{namespace}]"
+            )
+            print(
+                f"  key            = {digest}"
+            )
+            print(
+                f"  lookup         = "
+                f"{lookup_elapsed:.6f} s"
+            )
+            print(
+                f"  total          = "
+                f"{lookup_elapsed:.6f} s"
+            )
+
+        return results, metadata
+
+    except FileNotFoundError:
+        lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        if verbose:
+            print()
+            print(
+                f"CACHE MISS [{namespace}]"
+            )
+            print(
+                f"  key            = {digest}"
+            )
+
+    except ValueError as exc:
+        lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        if verbose:
+            print()
+            print(
+                f"CACHE INVALID [{namespace}]"
+            )
+            print(
+                f"  key            = {digest}"
+            )
+            print(
+                f"  reason         = {exc}"
+            )
+            print(
+                "  recalculating"
+            )
+
+    compute_start = time.perf_counter()
+
+    results = compute_fn()
+
+    compute_elapsed = (
+        time.perf_counter()
+        - compute_start
+    )
+
+    save_start = time.perf_counter()
+
+    save_timing = {
+        "compute_seconds": compute_elapsed,
+    }
+
+    digest, path = cache_save(
+        namespace,
+        parameters,
+        results,
+        timing=save_timing,
+    )
+
+    save_elapsed = (
+        time.perf_counter()
+        - save_start
+    )
+
+    total_elapsed = (
+        lookup_elapsed
+        + compute_elapsed
+        + save_elapsed
+    )
+
+    metadata = {
+        "cache_hit": False,
+        "cache_key": digest,
+        "cache_path": path,
+        "cache_record": identity,
+        "lookup_seconds": lookup_elapsed,
+        "compute_seconds": compute_elapsed,
+        "save_seconds": save_elapsed,
+        "total_seconds": total_elapsed,
+        "stored_timing": save_timing,
+    }
+
+    if verbose:
+        print()
+        print(
+            f"CACHE COMPUTED [{namespace}]"
+        )
+        print(
+            f"  key            = {digest}"
+        )
+        print(
+            f"  lookup         = "
+            f"{lookup_elapsed:.6f} s"
+        )
+        print(
+            f"  computation     = "
+            f"{compute_elapsed:.6f} s"
+        )
+        print(
+            f"  save            = "
+            f"{save_elapsed:.6f} s"
+        )
+        print(
+            f"  total           = "
+            f"{total_elapsed:.6f} s"
+        )
+
+    return results, metadata
+
+
+# ============================================================
+# GROUND-STATE CACHE WRAPPER
+# ============================================================
+
+GROUND_STATE_OPERATOR_VERSION = (
+    "cell.py-ground-state-v1"
+)
+
+
+def _ground_state_parameters(
+    c,
+    N,
+    T,
+    dps,
+    flint_bits=None,
+):
+    """
+    Construct the complete identity of a ground-state calculation.
+    """
+    if isinstance(c, float):
+        raise TypeError(
+            "Ground-state c must not be a Python float; "
+            "use an integer, decimal string, or mp.mpf."
+        )
+
+    c_mp = mp.mpf(c)
+
+    if flint_bits is None:
+        flint_bits = int(
+            int(dps) * 3.5
+        )
+
+    return {
+        "operator_version": (
+            GROUND_STATE_OPERATOR_VERSION
+        ),
+        "c": mp.nstr(
+            c_mp,
+            max(50, int(dps) + 10),
+        ),
+        "N": int(N),
+        "T": int(T),
+        "dps": int(dps),
+        "flint_bits": int(flint_bits),
+    }
+
+
+def _ground_state_encode(
+    lambda_min,
+    v_full,
+    dps,
+):
+    """
+    Convert arbitrary-precision numerical results into a
+    JSON-compatible fragment.
+    """
+    digits = int(dps) + 10
+
+    return {
+        "lambda_min": mp.nstr(
+            lambda_min,
+            digits,
+        ),
+        "v_full": [
+            mp.nstr(
+                v_full[i, 0],
+                digits,
+            )
+            for i in range(v_full.rows)
+        ],
+    }
+
+
+def _ground_state_decode(
+    results,
+    N,
+):
+    """
+    Reconstruct mpmath numerical objects from cached JSON.
+    """
+    lambda_min = mp.mpf(
+        results["lambda_min"]
+    )
+
+    values = results["v_full"]
+
+    expected = 2 * N + 1
+
+    if len(values) != expected:
+        raise ValueError(
+            "cached ground-state vector has "
+            f"length {len(values)}, expected {expected}"
+        )
+
+    v_full = mp.matrix(
+        expected,
+        1,
+    )
+
+    for i, value in enumerate(values):
+        v_full[i, 0] = mp.mpf(value)
+
+    return lambda_min, v_full
+
+
+def _validate_ground_state_structure(
+    lambda_min,
+    v_full,
+    N,
+):
+    """
+    Cheap validation which requires no Galerkin matrix.
+
+    This is suitable for the fast cache-hit path.
+    """
+    expected = 2 * N + 1
+
+    if v_full.rows != expected:
+        raise ValueError(
+            "ground-state vector has incorrect row count"
+        )
+
+    if v_full.cols != 1:
+        raise ValueError(
+            "ground-state vector must be a column vector"
+        )
+
+    if not mp.isfinite(lambda_min):
+        raise ValueError(
+            "ground-state eigenvalue is not finite"
+        )
+
+    for i in range(expected):
+        value = v_full[i, 0]
+
+        if not mp.isfinite(value):
+            raise ValueError(
+                f"ground-state vector entry {i} "
+                "is not finite"
+            )
+
+        if mp.im(value) != 0:
+            raise ValueError(
+                f"ground-state vector entry {i} "
+                "is not real"
+            )
+
+    norm = mp.sqrt(
+        mp.fdot(v_full, v_full)
+    )
+
+    norm_error = abs(norm - 1)
+
+    tolerance = mp.sqrt(
+        mp.eps
+    )
+
+    if norm_error > tolerance:
+        raise ValueError(
+            "ground-state norm validation failed: "
+            f"{mp.nstr(norm_error, 10)} > "
+            f"{mp.nstr(tolerance, 10)}"
+        )
+
+    return {
+        "norm": norm,
+        "norm_error": norm_error,
+        "tolerance": tolerance,
+    }
+
+
+def _validate_ground_state_full(
+    Q,
+    lambda_min,
+    v_full,
+    N,
+):
+    """
+    Full mathematical validation against the requested operator.
+    """
+    structural = (
+        _validate_ground_state_structure(
+            lambda_min,
+            v_full,
+            N,
+        )
+    )
+
+    residual = Q * v_full - (
+        lambda_min * v_full
+    )
+
+    residual_norm = mp.sqrt(
+        mp.fdot(
+            residual,
+            residual,
+        )
+    )
+
+    tolerance = structural["tolerance"]
+
+    if residual_norm > tolerance:
+        raise ValueError(
+            "ground-state eigenvector residual "
+            "validation failed: "
+            f"{mp.nstr(residual_norm, 10)} > "
+            f"{mp.nstr(tolerance, 10)}"
+        )
+
+    v_canonical = full_to_canonical(
+        v_full,
+        N,
+    )
+
+    v_roundtrip = canonical_to_full(
+        v_canonical,
+        N,
+    )
+
+    roundtrip_error = mp.sqrt(
+        mp.fdot(
+            v_roundtrip - v_full,
+            v_roundtrip - v_full,
+        )
+    )
+
+    if roundtrip_error > tolerance:
+        raise ValueError(
+            "ground-state canonical/full "
+            "round-trip validation failed: "
+            f"{mp.nstr(roundtrip_error, 10)} > "
+            f"{mp.nstr(tolerance, 10)}"
+        )
+
+    return {
+        **structural,
+        "residual_norm": residual_norm,
+        "roundtrip_error": roundtrip_error,
+    }
 
 
 def get_ground_state(
@@ -459,25 +668,43 @@ def get_ground_state(
     dps,
     *,
     cache=True,
-    validate=True,
+    validation="fast",
     flint_bits=None,
     verbose=True,
 ):
     """
-    Obtain the ground state, using the persistent cache when enabled.
+    Obtain the CvS ground state.
 
-    Returns:
+    Parameters
+    ----------
+    validation : {"fast", "full", "none"}
+        fast:
+            Validate cached results structurally without rebuilding Q.
 
-        (lambda_min, v_full, metadata)
+        full:
+            Rebuild Q and validate
+            ||Qv - lambda v|| as well as the canonical/full
+            coordinate transformation.
 
-    The metadata dictionary records whether the result came from the
-    cache and contains validation diagnostics.
+        none:
+            Only validate the cache identity and JSON structure.
 
-    Existing mathematical routines are used unchanged:
-        build_galerkin_matrix()
-        compute_ground_state()
+    Returns
+    -------
+    lambda_min, v_full, metadata
     """
-    digest, record = ground_state_cache_key(
+    mp.mp.dps = int(dps)
+
+    if validation not in (
+        "fast",
+        "full",
+        "none",
+    ):
+        raise ValueError(
+            "validation must be 'fast', 'full', or 'none'"
+        )
+
+    parameters = _ground_state_parameters(
         c=c,
         N=N,
         T=T,
@@ -485,60 +712,197 @@ def get_ground_state(
         flint_bits=flint_bits,
     )
 
+    namespace = "ground_state"
+
+    # --------------------------------------------------------
+    # FAST CACHE PATH
+    #
+    # Crucially, no Galerkin matrix is constructed here.
+    # --------------------------------------------------------
+
     if cache:
+
         try:
-            # Build Q first. This is intentionally conservative:
-            # validation of a cache entry is against the exact operator
-            # requested by this call.
-            mp.mp.dps = int(dps)
-
-            Q = build_galerkin_matrix(
-                c=c,
-                N=N,
-                T=T,
-                dps=dps,
-                flint_bits=flint_bits,
+            results, cache_meta = cache_load(
+                namespace,
+                parameters,
             )
 
-            lambda_min, v_full, validation, path = load_ground_state(
-                c=c,
-                N=N,
-                T=T,
-                dps=dps,
-                Q=Q if validate else None,
-                flint_bits=flint_bits,
+            lookup_start = time.perf_counter()
+
+            results, cache_meta = cache_load(
+            	namespace,
+            	parameters,
             )
+
+            lookup_elapsed = (
+            	time.perf_counter()
+            	- lookup_start
+            )
+
+            decode_start = time.perf_counter()
+
+            lambda_min, v_full = (
+            	_ground_state_decode(
+            		results,
+            		N,
+            	)
+            )
+
+            decode_elapsed = (
+            	time.perf_counter()
+            	- decode_start
+            )
+
+            validation_start = time.perf_counter()
+
+            structural = (
+            	None
+            	if validation == "none"
+            	else _validate_ground_state_structure(
+            		lambda_min,
+            		v_full,
+            		N,
+            	)
+            )
+
+            validation_elapsed = (
+            	time.perf_counter()
+            	- validation_start
+            )
+
+            cache_meta = dict(cache_meta)
+
+            cache_meta["lookup_seconds"] = lookup_elapsed
+            cache_meta["decode_seconds"] = decode_elapsed
+            cache_meta["validation_seconds"] = validation_elapsed
+
+            cache_meta["total_seconds"] = (
+            	lookup_elapsed
+            	+ decode_elapsed
+            	+ validation_elapsed
+            )
+
+            cache_meta["validation_mode"] = validation
+            cache_meta["structural_validation"] = structural
+
+            if validation == "full":
+
+                Q_start = time.perf_counter()
+
+                Q = build_galerkin_matrix(
+                    c=c,
+                    N=N,
+                    T=T,
+                    dps=dps,
+                    flint_bits=flint_bits,
+                )
+
+                Q_elapsed = (
+                    time.perf_counter()
+                    - Q_start
+                )
+
+                full_validation = (
+                    _validate_ground_state_full(
+                        Q,
+                        lambda_min,
+                        v_full,
+                        N,
+                    )
+                )
+
+                validation_elapsed = (
+                    time.perf_counter()
+                    - load_start
+                )
+
+                cache_meta[
+                    "operator_build_seconds"
+                ] = Q_elapsed
+
+                cache_meta[
+                    "validation_seconds"
+                ] = validation_elapsed
+
+                cache_meta[
+                    "total_seconds"
+                ] = (
+                    cache_meta["lookup_seconds"]
+                    + validation_elapsed
+                )
+
+                cache_meta[
+                    "full_validation"
+                ] = full_validation
 
             if verbose:
-                print("GROUND STATE CACHE: HIT")
-                print(f"  key = {digest}")
-                print(f"  path = {path}")
+                print()
+                print(
+                    "GROUND STATE CACHE: HIT"
+                )
+                print(
+                    f"  key        = "
+                    f"{cache_meta['cache_key']}"
+                )
+
+                print(
+                    f"  decode     = "
+                    f"{cache_meta['decode_seconds']:.6f} s"
+                )
+
+                print(
+                    f"  validation = "
+                    f"{cache_meta['validation_seconds']:.6f} s"
+                )
+
+                print(
+                    f"  total      = "
+                    f"{cache_meta['total_seconds']:.6f} s"
+                )
+
+                if validation == "full":
+                    print(
+                        f"  Q build    = "
+                        f"{cache_meta['operator_build_seconds']:.6f} s"
+                    )
+
+                print(
+                    f"  total      = "
+                    f"{cache_meta['total_seconds']:.6f} s"
+                )
 
             return (
                 lambda_min,
                 v_full,
-                {
-                    "cache_hit": True,
-                    "cache_key": digest,
-                    "cache_path": path,
-                    "parameters": record,
-                    "validation": validation,
-                },
+                cache_meta,
             )
 
         except FileNotFoundError:
             if verbose:
-                print("GROUND STATE CACHE: MISS")
-                print(f"  key = {digest}")
+                print()
+                print(
+                    "GROUND STATE CACHE: MISS"
+                )
 
         except ValueError as exc:
             if verbose:
-                print("GROUND STATE CACHE: INVALID")
-                print(f"  reason = {exc}")
-                print("  recalculating ground state")
+                print()
+                print(
+                    "GROUND STATE CACHE: INVALID"
+                )
+                print(
+                    f"  reason = {exc}"
+                )
+                print(
+                    "  recalculating"
+                )
 
-    # Cache miss, cache disabled, or invalid cache.
-    mp.mp.dps = int(dps)
+    # --------------------------------------------------------
+    # COLD CALCULATION
+    # --------------------------------------------------------
+
+    compute_start = time.perf_counter()
 
     Q = build_galerkin_matrix(
         c=c,
@@ -548,50 +912,130 @@ def get_ground_state(
         flint_bits=flint_bits,
     )
 
-    lambda_min, v_full = compute_ground_state(Q)
+    Q_build_elapsed = (
+        time.perf_counter()
+        - compute_start
+    )
 
-    validation = (
-        _validate_ground_state(
-            Q,
+    eig_start = time.perf_counter()
+
+    lambda_min, v_full = (
+        compute_ground_state(Q)
+    )
+
+    eig_elapsed = (
+        time.perf_counter()
+        - eig_start
+    )
+
+    validation_start = time.perf_counter()
+
+    structural = (
+        _validate_ground_state_structure(
             lambda_min,
             v_full,
             N,
-            label="fresh ground state",
         )
-        if validate
-        else None
     )
 
-    cache_path = None
+    full_validation = None
 
-    if cache:
-        _, cache_path = save_ground_state(
-            c=c,
-            N=N,
-            T=T,
-            dps=dps,
-            lambda_min=lambda_min,
-            v_full=v_full,
-            Q=Q if validate else None,
-            flint_bits=flint_bits,
+    if validation == "full":
+        full_validation = (
+            _validate_ground_state_full(
+                Q,
+                lambda_min,
+                v_full,
+                N,
+            )
         )
 
-        if verbose:
-            print("GROUND STATE CACHE: SAVED")
-            print(f"  key = {digest}")
-            print(f"  path = {cache_path}")
+    validation_elapsed = (
+        time.perf_counter()
+        - validation_start
+    )
+
+    results = _ground_state_encode(
+        lambda_min,
+        v_full,
+        dps,
+    )
+
+    save_start = time.perf_counter()
+
+    digest, path = cache_save(
+        namespace,
+        parameters,
+        results,
+        timing={
+            "Q_build_seconds": Q_build_elapsed,
+            "eigensolve_seconds": eig_elapsed,
+            "validation_seconds": validation_elapsed,
+        },
+    )
+
+    save_elapsed = (
+        time.perf_counter()
+        - save_start
+    )
+
+    total_elapsed = (
+        Q_build_elapsed
+        + eig_elapsed
+        + validation_elapsed
+        + save_elapsed
+    )
+
+    metadata = {
+        "cache_hit": False,
+        "cache_key": digest,
+        "cache_path": path,
+        "parameters": parameters,
+        "validation_mode": validation,
+        "Q_build_seconds": Q_build_elapsed,
+        "eigensolve_seconds": eig_elapsed,
+        "validation_seconds": validation_elapsed,
+        "save_seconds": save_elapsed,
+        "total_seconds": total_elapsed,
+        "structural_validation": structural,
+        "full_validation": full_validation,
+    }
+
+    if verbose:
+        print()
+        print(
+            "GROUND STATE CACHE: COMPUTED"
+        )
+        print(
+            f"  key        = {digest}"
+        )
+        print(
+            f"  Q build    = "
+            f"{Q_build_elapsed:.6f} s"
+        )
+        print(
+            f"  eigensolve = "
+            f"{eig_elapsed:.6f} s"
+        )
+        print(
+            f"  validation = "
+            f"{validation_elapsed:.6f} s"
+        )
+        print(
+            f"  save       = "
+            f"{save_elapsed:.6f} s"
+        )
+        print(
+            f"  total      = "
+            f"{total_elapsed:.6f} s"
+        )
 
     return (
         lambda_min,
         v_full,
-        {
-            "cache_hit": False,
-            "cache_key": digest,
-            "cache_path": cache_path,
-            "parameters": record,
-            "validation": validation,
-        },
+        metadata,
     )
+
 
 # ============================================================
 # BASIC GEOMETRIC / FOURIER PARAMETERS

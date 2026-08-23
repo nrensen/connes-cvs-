@@ -1,4 +1,10 @@
 #!/bin/ksh
-python3 -u "$1.py" > "$1.out" 2>&1 &
-echo "NOTE: Job has been backgrounded and tailed. You can kill the tail safely.\n\n"
+
+# Launch in subshell without 'exec'
+(
+  trap '' INT HUP QUIT
+  python3 -u "$1.py" > "$1.out" 2>&1 < /dev/null
+) &
+
+print "NOTE: Job has been backgrounded and tailed. You can kill the tail safely.\n\n"
 tail -f "$1.out"
