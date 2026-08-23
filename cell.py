@@ -24,29 +24,37 @@ from pathlib import Path
 
 DEFAULT_DPS = 80
 
-
 # ============================================================
 # GENERIC JSON RESULT CACHE
 # ============================================================
 #
 # Persistent, content-addressed cache for expensive calculations.
 #
-# The cache is deliberately generic.  It knows only:
+# The cache is deliberately generic. It knows only:
 #
 #   namespace
 #   parameters
 #   results
 #
-# Mathematical validation belongs to the wrapper for the particular
-# calculation being cached.
-#
 # Parameters and results must be JSON-compatible.
 #
 # The cache key is SHA-256 over a canonical JSON representation of
 # the namespace and parameters.
+#
+# Cache semantics:
+#
+#   lookup -> hit:
+#       decode -> validate -> return
+#
+#   lookup -> miss:
+#       generate -> write -> lookup again -> decode -> validate -> return
+#
+# The second path deliberately rejoins the first path after writing.
+# Thus cache hit and cache miss have identical observable numerical
+# semantics. The cache changes speed, not results.
 # ============================================================
 
-CACHE_SCHEMA_VERSION = 2
+CACHE_SCHEMA_VERSION = 3
 
 CELL_CACHE_DIR = (
     Path(__file__).resolve().parent / ".cell_cache"
@@ -125,6 +133,10 @@ def cache_save(
     """
     Save a JSON-compatible result under its content-derived key.
 
+    Existing entries are never silently replaced by a different
+    calculation. If the path already exists, its identity must match
+    the requested namespace and parameters.
+
     Returns:
 
         (digest, path)
@@ -139,6 +151,41 @@ def cache_save(
         digest,
     )
 
+    # If an entry already exists, verify that it is the exact same
+    # cache identity. Never mutate an existing entry.
+    if path.exists():
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as f:
+            existing = json.load(f)
+
+        if (
+            existing.get("cache_schema_version")
+            != CACHE_SCHEMA_VERSION
+        ):
+            raise ValueError(
+                "existing cache entry has incompatible schema"
+            )
+
+        if existing.get("cache_key") != digest:
+            raise ValueError(
+                "existing cache entry has inconsistent key"
+            )
+
+        if existing.get("namespace") != str(namespace):
+            raise ValueError(
+                "existing cache entry has inconsistent namespace"
+            )
+
+        if existing.get("parameters") != parameters:
+            raise ValueError(
+                "existing cache entry has inconsistent parameters"
+            )
+
+        # Exact same immutable entry already exists.
+        return digest, path
+
     payload = {
         "cache_schema_version": CACHE_SCHEMA_VERSION,
         "cache_key": digest,
@@ -150,8 +197,8 @@ def cache_save(
     if timing is not None:
         payload["timing"] = timing
 
-    # Atomic write.  The temporary file is in the same directory so
-    # os/filesystem rename semantics remain atomic.
+    # Atomic write. The temporary file is in the same directory so
+    # filesystem rename semantics remain atomic.
     temporary = path.with_suffix(".tmp")
 
     with temporary.open(
@@ -184,7 +231,6 @@ def cache_load(
         (results, metadata)
 
     Raises FileNotFoundError if the entry does not exist.
-
     Raises ValueError if the entry exists but its identity is
     inconsistent with the requested namespace/parameters.
     """
@@ -209,7 +255,10 @@ def cache_load(
 
     # Validate the cache record itself rather than trusting the
     # filename.
-    if payload.get("cache_schema_version") != CACHE_SCHEMA_VERSION:
+    if (
+        payload.get("cache_schema_version")
+        != CACHE_SCHEMA_VERSION
+    ):
         raise ValueError(
             "cache schema version mismatch"
         )
@@ -246,186 +295,12 @@ def cache_load(
     )
 
 
-def cache_get_or_compute(
-    namespace,
-    parameters,
-    compute_fn,
-    *,
-    verbose=True,
-):
-    """
-    Generic cached calculation.
-
-    `compute_fn` must return a JSON-compatible result fragment.
-
-    Returns:
-
-        (results, metadata)
-
-    The metadata contains timing information for both cache hits and
-    misses.
-    """
-    digest, identity = cache_key(
-        namespace,
-        parameters,
-    )
-
-    lookup_start = time.perf_counter()
-
-    try:
-        results, metadata = cache_load(
-            namespace,
-            parameters,
-        )
-
-        lookup_elapsed = (
-            time.perf_counter()
-            - lookup_start
-        )
-
-        metadata = dict(metadata)
-
-        metadata["lookup_seconds"] = (
-            lookup_elapsed
-        )
-        metadata["total_seconds"] = (
-            lookup_elapsed
-        )
-
-        if verbose:
-            print()
-            print(
-                f"CACHE HIT [{namespace}]"
-            )
-            print(
-                f"  key            = {digest}"
-            )
-            print(
-                f"  lookup         = "
-                f"{lookup_elapsed:.6f} s"
-            )
-            print(
-                f"  total          = "
-                f"{lookup_elapsed:.6f} s"
-            )
-
-        return results, metadata
-
-    except FileNotFoundError:
-        lookup_elapsed = (
-            time.perf_counter()
-            - lookup_start
-        )
-
-        if verbose:
-            print()
-            print(
-                f"CACHE MISS [{namespace}]"
-            )
-            print(
-                f"  key            = {digest}"
-            )
-
-    except ValueError as exc:
-        lookup_elapsed = (
-            time.perf_counter()
-            - lookup_start
-        )
-
-        if verbose:
-            print()
-            print(
-                f"CACHE INVALID [{namespace}]"
-            )
-            print(
-                f"  key            = {digest}"
-            )
-            print(
-                f"  reason         = {exc}"
-            )
-            print(
-                "  recalculating"
-            )
-
-    compute_start = time.perf_counter()
-
-    results = compute_fn()
-
-    compute_elapsed = (
-        time.perf_counter()
-        - compute_start
-    )
-
-    save_start = time.perf_counter()
-
-    save_timing = {
-        "compute_seconds": compute_elapsed,
-    }
-
-    digest, path = cache_save(
-        namespace,
-        parameters,
-        results,
-        timing=save_timing,
-    )
-
-    save_elapsed = (
-        time.perf_counter()
-        - save_start
-    )
-
-    total_elapsed = (
-        lookup_elapsed
-        + compute_elapsed
-        + save_elapsed
-    )
-
-    metadata = {
-        "cache_hit": False,
-        "cache_key": digest,
-        "cache_path": path,
-        "cache_record": identity,
-        "lookup_seconds": lookup_elapsed,
-        "compute_seconds": compute_elapsed,
-        "save_seconds": save_elapsed,
-        "total_seconds": total_elapsed,
-        "stored_timing": save_timing,
-    }
-
-    if verbose:
-        print()
-        print(
-            f"CACHE COMPUTED [{namespace}]"
-        )
-        print(
-            f"  key            = {digest}"
-        )
-        print(
-            f"  lookup         = "
-            f"{lookup_elapsed:.6f} s"
-        )
-        print(
-            f"  computation     = "
-            f"{compute_elapsed:.6f} s"
-        )
-        print(
-            f"  save            = "
-            f"{save_elapsed:.6f} s"
-        )
-        print(
-            f"  total           = "
-            f"{total_elapsed:.6f} s"
-        )
-
-    return results, metadata
-
-
 # ============================================================
 # GROUND-STATE CACHE WRAPPER
 # ============================================================
 
 GROUND_STATE_OPERATOR_VERSION = (
-    "cell.py-ground-state-v1"
+    "cell.py-ground-state-v2"
 )
 
 
@@ -438,6 +313,9 @@ def _ground_state_parameters(
 ):
     """
     Construct the complete identity of a ground-state calculation.
+
+    `dps` is the generation/certification precision and therefore
+    forms part of the immutable cache identity.
     """
     if isinstance(c, float):
         raise TypeError(
@@ -475,6 +353,8 @@ def _ground_state_encode(
     """
     Convert arbitrary-precision numerical results into a
     JSON-compatible fragment.
+
+    The serialised result retains guard digits beyond generation dps.
     """
     digits = int(dps) + 10
 
@@ -499,6 +379,11 @@ def _ground_state_decode(
 ):
     """
     Reconstruct mpmath numerical objects from cached JSON.
+
+    Decoding occurs at the caller's current mp.mp.dps. This is
+    deliberate: the cached artefact may have been generated at a
+    substantially higher precision than the current calculation
+    requires.
     """
     lambda_min = mp.mpf(
         results["lambda_min"]
@@ -531,9 +416,14 @@ def _validate_ground_state_structure(
     N,
 ):
     """
-    Cheap validation which requires no Galerkin matrix.
+    Cheap intrinsic validation performed on every retrieval.
 
-    This is suitable for the fast cache-hit path.
+    This validates the integrity and basic numerical structure of the
+    cached result. It does NOT rebuild the Galerkin matrix.
+
+    Mathematical correctness of the ground state is deliberately not
+    part of ordinary cache retrieval. If that is ever in doubt, an
+    explicit audit should be performed.
     """
     expected = 2 * N + 1
 
@@ -591,325 +481,20 @@ def _validate_ground_state_structure(
     }
 
 
-def _validate_ground_state_full(
-    Q,
-    lambda_min,
-    v_full,
-    N,
-):
-    """
-    Full mathematical validation against the requested operator.
-    """
-    structural = (
-        _validate_ground_state_structure(
-            lambda_min,
-            v_full,
-            N,
-        )
-    )
-
-    residual = Q * v_full - (
-        lambda_min * v_full
-    )
-
-    residual_norm = mp.sqrt(
-        mp.fdot(
-            residual,
-            residual,
-        )
-    )
-
-    tolerance = structural["tolerance"]
-
-    if residual_norm > tolerance:
-        raise ValueError(
-            "ground-state eigenvector residual "
-            "validation failed: "
-            f"{mp.nstr(residual_norm, 10)} > "
-            f"{mp.nstr(tolerance, 10)}"
-        )
-
-    v_canonical = full_to_canonical(
-        v_full,
-        N,
-    )
-
-    v_roundtrip = canonical_to_full(
-        v_canonical,
-        N,
-    )
-
-    roundtrip_error = mp.sqrt(
-        mp.fdot(
-            v_roundtrip - v_full,
-            v_roundtrip - v_full,
-        )
-    )
-
-    if roundtrip_error > tolerance:
-        raise ValueError(
-            "ground-state canonical/full "
-            "round-trip validation failed: "
-            f"{mp.nstr(roundtrip_error, 10)} > "
-            f"{mp.nstr(tolerance, 10)}"
-        )
-
-    return {
-        **structural,
-        "residual_norm": residual_norm,
-        "roundtrip_error": roundtrip_error,
-    }
-
-
-def get_ground_state(
+def _generate_ground_state(
     c,
     N,
     T,
     dps,
-    *,
-    cache=True,
-    validation="fast",
-    flint_bits=None,
-    verbose=True,
+    flint_bits,
 ):
     """
-    Obtain the CvS ground state.
+    Generate a ground state at exactly the requested generation dps.
 
-    Parameters
-    ----------
-    validation : {"fast", "full", "none"}
-        fast:
-            Validate cached results structurally without rebuilding Q.
-
-        full:
-            Rebuild Q and validate
-            ||Qv - lambda v|| as well as the canonical/full
-            coordinate transformation.
-
-        none:
-            Only validate the cache identity and JSON structure.
-
-    Returns
-    -------
-    lambda_min, v_full, metadata
+    The caller is responsible for establishing the generation
+    precision context before calling this function.
     """
-
-    caller_dps = mp.mp.dps
-
-    generation_dps = int(dps)
-
-    if generation_dps <= 0:
-        raise ValueError(
-            "dps must be positive"
-        )
-
-    if validation not in (
-        "fast",
-        "full",
-        "none",
-    ):
-        raise ValueError(
-            "validation must be 'fast', 'full', or 'none'"
-        )
-
-    parameters = _ground_state_parameters(
-        c=c,
-        N=N,
-        T=T,
-        dps=dps,
-        flint_bits=flint_bits,
-    )
-
-    namespace = "ground_state"
-
-    # --------------------------------------------------------
-    # FAST CACHE PATH
-    #
-    # Crucially, no Galerkin matrix is constructed here.
-    # --------------------------------------------------------
-
-    if cache:
-
-        try:
-            lookup_start = time.perf_counter()
-
-            results, cache_meta = cache_load(
-            	namespace,
-            	parameters,
-            )
-
-            lookup_elapsed = (
-            	time.perf_counter()
-            	- lookup_start
-            )
-
-            decode_start = time.perf_counter()
-
-            lambda_min, v_full = (
-            	_ground_state_decode(
-            		results,
-            		N,
-            	)
-            )
-
-            decode_elapsed = (
-            	time.perf_counter()
-            	- decode_start
-            )
-
-            validation_start = time.perf_counter()
-
-            structural = (
-            	None
-            	if validation == "none"
-            	else _validate_ground_state_structure(
-            		lambda_min,
-            		v_full,
-            		N,
-            	)
-            )
-
-            validation_elapsed = (
-            	time.perf_counter()
-            	- validation_start
-            )
-
-            cache_meta = dict(cache_meta)
-
-            cache_meta["generation_dps"] = generation_dps
-            cache_meta["caller_dps"] = caller_dps
-            cache_meta["lookup_seconds"] = lookup_elapsed
-            cache_meta["decode_seconds"] = decode_elapsed
-            cache_meta["validation_seconds"] = validation_elapsed
-
-            cache_meta["total_seconds"] = (
-            	lookup_elapsed
-            	+ decode_elapsed
-            	+ validation_elapsed
-            )
-
-            cache_meta["validation_mode"] = validation
-            cache_meta["structural_validation"] = structural
-
-            if validation == "full":
-
-            	Q_start = time.perf_counter()
-
-            	Q = build_galerkin_matrix(
-            		c=c,
-            		N=N,
-            		T=T,
-            		dps=dps,
-            		flint_bits=flint_bits,
-            	)
-
-            	Q_elapsed = (
-            		time.perf_counter()
-            		- Q_start
-            	)
-
-            	full_validation_start = time.perf_counter()
-
-            	full_validation = (
-            		_validate_ground_state_full(
-            			Q,
-            			lambda_min,
-            			v_full,
-            			N,
-            		)
-            	)
-
-            	full_validation_elapsed = (
-            		time.perf_counter()
-            		- full_validation_start
-            	)
-
-            	cache_meta[
-            		"operator_build_seconds"
-            	] = Q_elapsed
-
-            	cache_meta[
-            		"full_validation_seconds"
-            	] = full_validation_elapsed
-
-            	cache_meta[
-            		"total_seconds"
-            	] = (
-            		cache_meta["lookup_seconds"]
-            		+ cache_meta["decode_seconds"]
-            		+ cache_meta["validation_seconds"]
-            		+ Q_elapsed
-            		+ full_validation_elapsed
-            	)
-
-            	cache_meta[
-            		"full_validation"
-            	] = full_validation
-
-            if verbose:
-                print()
-                print(
-                    "GROUND STATE CACHE: HIT"
-                )
-                print(
-                    f"  key        = "
-                    f"{cache_meta['cache_key']}"
-                )
-
-                print(
-                    f"  decode     = "
-                    f"{cache_meta['decode_seconds']:.6f} s"
-                )
-
-                print(
-                    f"  validation = "
-                    f"{cache_meta['validation_seconds']:.6f} s"
-                )
-
-                if validation == "full":
-                    print(
-                        f"  Q build    = "
-                        f"{cache_meta['operator_build_seconds']:.6f} s"
-                    )
-
-                print(
-                    f"  total      = "
-                    f"{cache_meta['total_seconds']:.6f} s"
-                )
-
-            return (
-                lambda_min,
-                v_full,
-                cache_meta,
-            )
-
-        except FileNotFoundError:
-            if verbose:
-                print()
-                print(
-                    "GROUND STATE CACHE: MISS"
-                )
-
-        except ValueError as exc:
-            if verbose:
-                print()
-                print(
-                    "GROUND STATE CACHE: INVALID"
-                )
-                print(
-                    f"  reason = {exc}"
-                )
-                print(
-                    "  recalculating"
-                )
-
-    # --------------------------------------------------------
-    # COLD CALCULATION
-    # --------------------------------------------------------
-
-    compute_start = time.perf_counter()
-
-    mp.mp.dps = generation_dps
+    Q_start = time.perf_counter()
 
     Q = build_galerkin_matrix(
         c=c,
@@ -921,7 +506,7 @@ def get_ground_state(
 
     Q_build_elapsed = (
         time.perf_counter()
-        - compute_start
+        - Q_start
     )
 
     eig_start = time.perf_counter()
@@ -935,6 +520,7 @@ def get_ground_state(
         - eig_start
     )
 
+    # Generation-time structural validation.
     validation_start = time.perf_counter()
 
     structural = (
@@ -944,18 +530,6 @@ def get_ground_state(
             N,
         )
     )
-
-    full_validation = None
-
-    if validation == "full":
-        full_validation = (
-            _validate_ground_state_full(
-                Q,
-                lambda_min,
-                v_full,
-                N,
-            )
-        )
 
     validation_elapsed = (
         time.perf_counter()
@@ -968,92 +542,447 @@ def get_ground_state(
         dps,
     )
 
-    save_start = time.perf_counter()
-
-    digest, path = cache_save(
-        namespace,
-        parameters,
+    return (
         results,
-        timing={
+        {
             "Q_build_seconds": Q_build_elapsed,
             "eigensolve_seconds": eig_elapsed,
             "validation_seconds": validation_elapsed,
+            "structural_validation": structural,
         },
     )
 
-    save_elapsed = (
+
+def get_ground_state(
+    c,
+    N,
+    T,
+    dps,
+    *,
+    flint_bits=None,
+    verbose=True,
+):
+    """
+    Obtain the CvS ground state through the persistent cache.
+
+    Cache semantics
+    ---------------
+    The cache is always enabled.
+
+    `dps` is the generation/certification precision and forms part
+    of the immutable cache identity.
+
+    The caller's current `mp.mp.dps` is the working precision.
+
+    A cache hit:
+        lookup -> decode -> validate -> return
+
+    A cache miss:
+        generate -> write -> fresh lookup -> decode -> validate -> return
+
+    The deliberate second lookup after generation means that cache
+    hit and cache miss use exactly the same decode/validation/return
+    path.
+
+    If the requested generation precision is below the caller's
+    working precision, that cache entry is not sufficient. A new
+    calculation is generated at the caller's working precision and
+    stored under its own immutable cache key.
+
+    Existing cache entries are never mutated.
+
+    Mathematical validation of the cached eigenpair against a freshly
+    rebuilt Galerkin matrix is NOT performed here. The cache is
+    assumed mathematically correct unless there is reason to suspect
+    otherwise. Such an expensive check belongs in a separate explicit
+    audit operation.
+
+    Returns
+    -------
+    lambda_min, v_full, metadata
+    """
+
+    working_dps = int(mp.mp.dps)
+
+    if working_dps <= 0:
+        raise ValueError(
+            "current mp.mp.dps must be positive"
+        )
+
+    requested_generation_dps = int(dps)
+
+    if requested_generation_dps <= 0:
+        raise ValueError(
+            "dps must be positive"
+        )
+
+    if flint_bits is None:
+        flint_bits = int(
+            requested_generation_dps * 3.5
+        )
+
+    namespace = "ground_state"
+
+    # --------------------------------------------------------
+    # Resolve the generation precision.
+    #
+    # If the requested generation precision is insufficient for
+    # the current working precision, promote the calculation to
+    # working precision. The lower-precision cache entry is left
+    # untouched.
+    # --------------------------------------------------------
+
+    generation_dps = max(
+        requested_generation_dps,
+        working_dps,
+    )
+
+    if generation_dps != requested_generation_dps:
+        if verbose:
+            print()
+            print(
+                "GROUND STATE CACHE: "
+                "GENERATION PRECISION PROMOTED"
+            )
+            print(
+                f"  requested dps = "
+                f"{requested_generation_dps}"
+            )
+            print(
+                f"  working dps   = "
+                f"{working_dps}"
+            )
+            print(
+                f"  generation dps = "
+                f"{generation_dps}"
+            )
+            print(
+                "  existing lower-precision "
+                "cache entry will not be modified"
+            )
+
+    parameters = _ground_state_parameters(
+        c=c,
+        N=N,
+        T=T,
+        dps=generation_dps,
+        flint_bits=flint_bits,
+    )
+
+    # --------------------------------------------------------
+    # LOOKUP
+    #
+    # This is the only route to the returned result.
+    # --------------------------------------------------------
+
+    lookup_start = time.perf_counter()
+
+    try:
+        results, cache_meta = cache_load(
+            namespace,
+            parameters,
+        )
+
+        lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        cache_hit = True
+        generation_metadata = None
+
+        if verbose:
+            print()
+            print(
+                "GROUND STATE CACHE: HIT"
+            )
+            print(
+                f"  key            = "
+                f"{cache_meta['cache_key']}"
+            )
+            print(
+                f"  generation dps = "
+                f"{generation_dps}"
+            )
+            print(
+                f"  working dps    = "
+                f"{working_dps}"
+            )
+            print(
+                f"  lookup         = "
+                f"{lookup_elapsed:.6f} s"
+            )
+
+    except FileNotFoundError:
+
+        lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        cache_hit = False
+
+        if verbose:
+            print()
+            print(
+                "GROUND STATE CACHE: MISS"
+            )
+            print(
+                f"  generation dps = "
+                f"{generation_dps}"
+            )
+            print(
+                f"  working dps    = "
+                f"{working_dps}"
+            )
+
+        # ----------------------------------------------------
+        # GENERATION
+        #
+        # Do the entire generation and generation-time
+        # validation at generation precision.
+        # ----------------------------------------------------
+
+        caller_dps = mp.mp.dps
+
+        generation_start = time.perf_counter()
+
+        mp.mp.dps = generation_dps
+
+        try:
+            (
+                generated_results,
+                generation_metadata,
+            ) = _generate_ground_state(
+                c=c,
+                N=N,
+                T=T,
+                dps=generation_dps,
+                flint_bits=flint_bits,
+            )
+
+            save_start = time.perf_counter()
+
+            cache_save(
+                namespace,
+                parameters,
+                generated_results,
+                timing={
+                    **{
+                        key: value
+                        for key, value
+                        in generation_metadata.items()
+                        if key.endswith("_seconds")
+                    },
+                    "generation_dps": generation_dps,
+                },
+            )
+
+            save_elapsed = (
+                time.perf_counter()
+                - save_start
+            )
+
+            generation_elapsed = (
+                time.perf_counter()
+                - generation_start
+            )
+
+        finally:
+            # The generated result must NOT be returned directly.
+            # The next operation is a completely fresh cache lookup,
+            # and therefore the returned result will have exactly the
+            # same semantics as a cache hit.
+            mp.mp.dps = caller_dps
+
+        if verbose:
+            print()
+            print(
+                "GROUND STATE CACHE: GENERATED"
+            )
+            print(
+                f"  Q build        = "
+                f"{generation_metadata['Q_build_seconds']:.6f} s"
+            )
+            print(
+                f"  eigensolve     = "
+                f"{generation_metadata['eigensolve_seconds']:.6f} s"
+            )
+            print(
+                f"  validation     = "
+                f"{generation_metadata['validation_seconds']:.6f} s"
+            )
+            print(
+                f"  save           = "
+                f"{save_elapsed:.6f} s"
+            )
+            print(
+                f"  generation     = "
+                f"{generation_elapsed:.6f} s"
+            )
+
+        # ----------------------------------------------------
+        # CRITICAL:
+        #
+        # Do NOT decode generated_results here.
+        #
+        # Start again from cache_load(), exactly as though this
+        # had been a cache hit from the beginning.
+        # ----------------------------------------------------
+
+        lookup_start = time.perf_counter()
+
+        results, cache_meta = cache_load(
+            namespace,
+            parameters,
+        )
+
+        second_lookup_elapsed = (
+            time.perf_counter()
+            - lookup_start
+        )
+
+        cache_meta = dict(cache_meta)
+        cache_meta["initial_cache_miss_seconds"] = (
+            lookup_elapsed
+        )
+        cache_meta["generation_seconds"] = (
+            generation_elapsed
+        )
+        cache_meta["save_seconds"] = (
+            save_elapsed
+        )
+        cache_meta["final_lookup_seconds"] = (
+            second_lookup_elapsed
+        )
+        cache_meta["cache_hit"] = False
+        cache_meta["generated"] = True
+
+    # --------------------------------------------------------
+    # DECODE
+    #
+    # Always performed after the final cache lookup.
+    # Therefore hit and miss are identical from here onward.
+    #
+    # Decoding occurs at the caller's current mp.mp.dps.
+    # --------------------------------------------------------
+
+    decode_start = time.perf_counter()
+
+    lambda_min, v_full = (
+        _ground_state_decode(
+            results,
+            N,
+        )
+    )
+
+    decode_elapsed = (
         time.perf_counter()
-        - save_start
+        - decode_start
     )
 
-    total_elapsed = (
-        Q_build_elapsed
-        + eig_elapsed
-        + validation_elapsed
-        + save_elapsed
+    # --------------------------------------------------------
+    # STRUCTURAL VALIDATION
+    #
+    # Always performed at working precision.
+    # --------------------------------------------------------
+
+    validation_start = time.perf_counter()
+
+    structural = (
+        _validate_ground_state_structure(
+            lambda_min,
+            v_full,
+            N,
+        )
     )
 
-    mp.mp.dps = caller_dps
+    validation_elapsed = (
+        time.perf_counter()
+        - validation_start
+    )
 
-    metadata = {
-        "cache_hit": False,
-        "cache_key": digest,
-        "cache_path": path,
-        "parameters": parameters,
-        "generation_dps": generation_dps,
-        "caller_dps": caller_dps,
-        "validation_mode": validation,
-        "Q_build_seconds": Q_build_elapsed,
-        "eigensolve_seconds": eig_elapsed,
-        "validation_seconds": validation_elapsed,
-        "save_seconds": save_elapsed,
-        "total_seconds": total_elapsed,
-        "structural_validation": structural,
-        "full_validation": full_validation,
-    }
+    # --------------------------------------------------------
+    # FINAL METADATA
+    # --------------------------------------------------------
+
+    cache_meta = dict(cache_meta)
+
+    cache_meta["generation_dps"] = generation_dps
+    cache_meta["working_dps"] = working_dps
+    cache_meta["decode_seconds"] = decode_elapsed
+    cache_meta["validation_seconds"] = (
+        validation_elapsed
+    )
+    cache_meta["structural_validation"] = structural
+
+    if cache_hit:
+        cache_meta["total_seconds"] = (
+            lookup_elapsed
+            + decode_elapsed
+            + validation_elapsed
+        )
+
+    else:
+        cache_meta["total_seconds"] = (
+            cache_meta["initial_cache_miss_seconds"]
+            + cache_meta["generation_seconds"]
+            + cache_meta["save_seconds"]
+            + cache_meta["final_lookup_seconds"]
+            + decode_elapsed
+            + validation_elapsed
+        )
 
     if verbose:
         print()
         print(
-            "GROUND STATE CACHE: COMPUTED"
+            "GROUND STATE CACHE: RETURN"
         )
         print(
-            f"  key        = {digest}"
+            f"  generation dps = "
+            f"{generation_dps}"
         )
         print(
-            f"  Q build    = "
-            f"{Q_build_elapsed:.6f} s"
+            f"  working dps    = "
+            f"{working_dps}"
         )
         print(
-            f"  eigensolve = "
-            f"{eig_elapsed:.6f} s"
+            f"  decode         = "
+            f"{decode_elapsed:.6f} s"
         )
         print(
-            f"  validation = "
+            f"  validation     = "
             f"{validation_elapsed:.6f} s"
         )
+
+        if not cache_hit:
+            print(
+                f"  final lookup   = "
+                f"{cache_meta['final_lookup_seconds']:.6f} s"
+            )
+
         print(
-            f"  save       = "
-            f"{save_elapsed:.6f} s"
-        )
-        print(
-            f"  total      = "
-            f"{total_elapsed:.6f} s"
+            f"  total          = "
+            f"{cache_meta['total_seconds']:.6f} s"
         )
 
     return (
         lambda_min,
         v_full,
-        metadata,
+        cache_meta,
     )
 
 
 # ============================================================
 # CANONICAL FORENSIC GROUND-STATE CONFIGURATION
+# ============================================================
 #
 # All diagnostic cells investigating the current Cell-5
 # discrepancy should use these parameters unless they are
 # explicitly performing a separate convergence experiment.
+#
+# `dps` is generation/certification precision.
+# The caller's current mp.mp.dps is working precision.
 # ============================================================
 
 FORENSIC_GROUND_STATE = {

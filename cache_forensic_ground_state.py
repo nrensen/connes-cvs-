@@ -17,8 +17,6 @@ print()
 
 lambda_min, u_star, meta = get_ground_state(
     **FORENSIC_GROUND_STATE,
-    cache=True,
-    validation="full",
     verbose=True,
 )
 

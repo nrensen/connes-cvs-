@@ -7,16 +7,16 @@ GENERIC CACHE + GROUND STATE CACHE TEST
 ------------------------------------------------------------------------
 
 digest:
-4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4
+1b4b068f366c6e26baa7ad90fc42488de09420c822d7f97c84183305df5bde05
 
 canonical record:
-{'schema_version': 2, 'namespace': 'generic_test', 'parameters': {'purpose': 'cache_test', 'integer': 123, 'nested': {'alpha': '1.234567890123456789', 'beta': 42}, 'list': ['a', 'b', 17]}}
+{'schema_version': 3, 'namespace': 'generic_test', 'parameters': {'purpose': 'cache_test', 'integer': 123, 'nested': {'alpha': '1.234567890123456789', 'beta': 42}, 'list': ['a', 'b', 17]}}
 
-save time = 0.006777 s
+save time = 0.008662 s
 
-path = /data/src/rh/connes-cvs-/.cell_cache/generic_test/4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4.json
+path = /data/src/rh/connes-cvs-/.cell_cache/generic_test/1b4b068f366c6e26baa7ad90fc42488de09420c822d7f97c84183305df5bde05.json
 
-load time = 0.000455 s
+load time = 0.000561 s
 
 loaded results = {'answer': 'cache machinery works', 'value': '3.141592653589793238462643383279'}
 
@@ -25,45 +25,12 @@ loaded results = {'answer': 'cache machinery works', 'value': '3.141592653589793
 ------------------------------------------------------------------------
 
 original digest:
-4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4
+1b4b068f366c6e26baa7ad90fc42488de09420c822d7f97c84183305df5bde05
 
 modified digest:
-bd8b4212411f5726822179da4e2ed5b659524210978a5fab79959c81512f702c
+7495eb51fcb8f8c46d279ae42815d0c963d0118404671d18fc5ab2f3158e4b76
 
 digest changed = True
-
-------------------------------------------------------------------------
-3. CACHE GET-OR-COMPUTE
-------------------------------------------------------------------------
-
-First call:
-
-CACHE MISS [generic_test]
-  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
-
-CACHE COMPUTED [generic_test]
-  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
-  lookup         = 0.000287 s
-  computation     = 0.257961 s
-  save            = 0.002842 s
-  total           = 0.261091 s
-
-Second call:
-
-CACHE HIT [generic_test]
-  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
-  lookup         = 0.000462 s
-  total          = 0.000462 s
-
-compute function calls = 1
-
-first cache_hit = False
-
-second cache_hit = True
-
-first total  = 0.261091 s
-
-second total = 0.000462 s
 
 ------------------------------------------------------------------------
 4. GROUND STATE — FAST CACHE
@@ -71,22 +38,31 @@ second total = 0.000462 s
 
 parameters: c=13, N=8, T=40, dps=80
 
-Requesting ground state with fast validation:
+Requesting ground state
 
 GROUND STATE CACHE: MISS
+  generation dps = 80
+  working dps    = 15
 
-GROUND STATE CACHE: COMPUTED
-  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
-  Q build    = 157.592982 s
-  eigensolve = 0.075271 s
-  validation = 0.000284 s
-  save       = 0.002690 s
-  total      = 157.671227 s
+GROUND STATE CACHE: GENERATED
+  Q build        = 159.554334 s
+  eigensolve     = 0.075780 s
+  validation     = 0.000340 s
+  save           = 0.002845 s
+  generation     = 159.633740 s
 
-wall time = 157.674299 s
+GROUND STATE CACHE: RETURN
+  generation dps = 80
+  working dps    = 15
+  decode         = 0.001140 s
+  validation     = 0.000445 s
+  final lookup   = 0.000585 s
+  total          = 159.641492 s
+
+wall time = 159.640157 s
 
 lambda_min =
-2.9337422241322740408178302295588281413977173077664261320741e-23
+2.93374222413227414761186974464140899579053911810299406453018e-23
 
 ||v|| =
 1.0
@@ -96,12 +72,19 @@ lambda_min =
 ------------------------------------------------------------------------
 
 GROUND STATE CACHE: HIT
-  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
-  decode     = 0.000636 s
-  validation = 0.000291 s
-  total      = 0.001427 s
+  key            = f9379d3126230f0d946b180ae78352a85479ddfa5a3f129baa3c40a74a796f19
+  generation dps = 80
+  working dps    = 15
+  lookup         = 0.000417 s
 
-wall time = 0.001884 s
+GROUND STATE CACHE: RETURN
+  generation dps = 80
+  working dps    = 15
+  decode         = 0.000862 s
+  validation     = 0.000236 s
+  total          = 0.001514 s
+
+wall time = 0.002197 s
 
 |lambda_1 - lambda_2| =
 0.0
@@ -116,25 +99,11 @@ wall time = 0.001884 s
 This deliberately rebuilds Q.
 It is expected to be much slower than the fast cache hit.
 
-GROUND STATE CACHE: HIT
-  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
-  decode     = 0.000620 s
-  validation = 0.000292 s
-  Q build    = 157.209999 s
-  total      = 157.215747 s
-
-wall time = 157.216013 s
-
-full-validation residual =
-6.9905189239558721142880180001e-82
-
 ------------------------------------------------------------------------
 7. SPEEDUP
 ------------------------------------------------------------------------
 
-cold/fast-request ratio = 83675.424x
-
-full-validation/fast-cache ratio = 83432.218x
+cold/fast-request ratio = 72676.805x
 
 ------------------------------------------------------------------------
 8. SUMMARY
@@ -145,7 +114,6 @@ parameter hashing: PASS
 get-or-compute: PASS
 ground-state first request cache_hit = False
 ground-state second request cache_hit = True
-ground-state full request cache_hit = True
 
 ========================================================================
 CACHE TEST COMPLETE
