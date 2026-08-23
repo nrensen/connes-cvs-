@@ -723,11 +723,6 @@ def get_ground_state(
     if cache:
 
         try:
-            results, cache_meta = cache_load(
-                namespace,
-                parameters,
-            )
-
             lookup_start = time.perf_counter()
 
             results, cache_meta = cache_load(
@@ -788,53 +783,58 @@ def get_ground_state(
 
             if validation == "full":
 
-                Q_start = time.perf_counter()
+            	Q_start = time.perf_counter()
 
-                Q = build_galerkin_matrix(
-                    c=c,
-                    N=N,
-                    T=T,
-                    dps=dps,
-                    flint_bits=flint_bits,
-                )
+            	Q = build_galerkin_matrix(
+            		c=c,
+            		N=N,
+            		T=T,
+            		dps=dps,
+            		flint_bits=flint_bits,
+            	)
 
-                Q_elapsed = (
-                    time.perf_counter()
-                    - Q_start
-                )
+            	Q_elapsed = (
+            		time.perf_counter()
+            		- Q_start
+            	)
 
-                full_validation = (
-                    _validate_ground_state_full(
-                        Q,
-                        lambda_min,
-                        v_full,
-                        N,
-                    )
-                )
+            	full_validation_start = time.perf_counter()
 
-                validation_elapsed = (
-                    time.perf_counter()
-                    - load_start
-                )
+            	full_validation = (
+            		_validate_ground_state_full(
+            			Q,
+            			lambda_min,
+            			v_full,
+            			N,
+            		)
+            	)
 
-                cache_meta[
-                    "operator_build_seconds"
-                ] = Q_elapsed
+            	full_validation_elapsed = (
+            		time.perf_counter()
+            		- full_validation_start
+            	)
 
-                cache_meta[
-                    "validation_seconds"
-                ] = validation_elapsed
+            	cache_meta[
+            		"operator_build_seconds"
+            	] = Q_elapsed
 
-                cache_meta[
-                    "total_seconds"
-                ] = (
-                    cache_meta["lookup_seconds"]
-                    + validation_elapsed
-                )
+            	cache_meta[
+            		"full_validation_seconds"
+            	] = full_validation_elapsed
 
-                cache_meta[
-                    "full_validation"
-                ] = full_validation
+            	cache_meta[
+            		"total_seconds"
+            	] = (
+            		cache_meta["lookup_seconds"]
+            		+ cache_meta["decode_seconds"]
+            		+ cache_meta["validation_seconds"]
+            		+ Q_elapsed
+            		+ full_validation_elapsed
+            	)
+
+            	cache_meta[
+            		"full_validation"
+            	] = full_validation
 
             if verbose:
                 print()
@@ -854,11 +854,6 @@ def get_ground_state(
                 print(
                     f"  validation = "
                     f"{cache_meta['validation_seconds']:.6f} s"
-                )
-
-                print(
-                    f"  total      = "
-                    f"{cache_meta['total_seconds']:.6f} s"
                 )
 
                 if validation == "full":
