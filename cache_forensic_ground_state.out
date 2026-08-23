@@ -10,14 +10,23 @@ Parameters:
 
 
 GROUND STATE CACHE: MISS
+  generation dps = 150
+  working dps    = 150
 
-GROUND STATE CACHE: COMPUTED
-  key        = 7b7a88bda4d9b3136833d1648ae356ddd6c532d960dc8230c26e6a7b42d26ee5
-  Q build    = 1015.842719 s
-  eigensolve = 0.097264 s
-  validation = 0.005746 s
-  save       = 0.003283 s
-  total      = 1015.949011 s
+GROUND STATE CACHE: GENERATED
+  Q build        = 1023.005863 s
+  eigensolve     = 0.097269 s
+  validation     = 0.000355 s
+  save           = 0.002984 s
+  generation     = 1023.106988 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 150
+  decode         = 0.000795 s
+  validation     = 0.000350 s
+  final lookup   = 0.000420 s
+  total          = 1023.111863 s
 
 ======================================================================
 CACHE OPERATION COMPLETE
@@ -26,4 +35,4 @@ CACHE OPERATION COMPLETE
 lambda_min = 6.7109352501259621034709589486121248522785394950591e-23
 
 Cache statistics:
-{'cache_hit': False, 'cache_key': '7b7a88bda4d9b3136833d1648ae356ddd6c532d960dc8230c26e6a7b42d26ee5', 'cache_path': PosixPath('/data/src/rh/connes-cvs-/.cell_cache/ground_state/7b7a88bda4d9b3136833d1648ae356ddd6c532d960dc8230c26e6a7b42d26ee5.json'), 'parameters': {'operator_version': 'cell.py-ground-state-v1', 'c': '13.0', 'N': 8, 'T': 400, 'dps': 150, 'flint_bits': 525}, 'validation_mode': 'full', 'Q_build_seconds': 1015.8427186384797, 'eigensolve_seconds': 0.0972638837993145, 'validation_seconds': 0.005745556205511093, 'save_seconds': 0.0032827407121658325, 'total_seconds': 1015.9490108191967, 'structural_validation': {'norm': mpf('1.0'), 'norm_error': mpf('0.0'), 'tolerance': mpf('3.90828374321747824275262710627575305686700883141246039977744992265697434538810410691312013599376318163299928037532699195723128671615700262892055985280703e-76')}, 'full_validation': {'norm': mpf('1.0'), 'norm_error': mpf('0.0'), 'tolerance': mpf('3.90828374321747824275262710627575305686700883141246039977744992265697434538810410691312013599376318163299928037532699195723128671615700262892055985280703e-76'), 'residual_norm': mpf('3.2822975225519563066674426368321816603447583681498489369981202209678293866744803680003352870023863475748844459120532398492600592439295530969316116959562e-152'), 'roundtrip_error': mpf('1.35010392693869454964028958694291239284388107895811222527009576495775287519161477961946716207947262699523514755640387453148966310996649443172380841677318e-152')}}
+{'cache_hit': False, 'cache_key': '7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a', 'cache_path': PosixPath('/data/src/rh/connes-cvs-/.cell_cache/ground_state/7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a.json'), 'cache_record': {'schema_version': 3, 'namespace': 'ground_state', 'parameters': {'operator_version': 'cell.py-ground-state-v2', 'c': '13.0', 'N': 8, 'T': 400, 'dps': 150, 'flint_bits': 525}}, 'stored_timing': {'Q_build_seconds': 1023.0058628320694, 'eigensolve_seconds': 0.09726922772824764, 'generation_dps': 150, 'validation_seconds': 0.0003546886146068573}, 'initial_cache_miss_seconds': 0.00032649561762809753, 'generation_seconds': 1023.1069875676185, 'save_seconds': 0.002983683720231056, 'final_lookup_seconds': 0.00042019039392471313, 'generated': True, 'generation_dps': 150, 'working_dps': 150, 'decode_seconds': 0.0007949117571115494, 'validation_seconds': 0.00034977681934833527, 'structural_validation': {'norm': mpf('1.0'), 'norm_error': mpf('0.0'), 'tolerance': mpf('3.90828374321747824275262710627575305686700883141246039977744992265697434538810410691312013599376318163299928037532699195723128671615700262892055985280703e-76')}, 'total_seconds': 1023.1118626259267}
