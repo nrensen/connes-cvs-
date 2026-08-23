@@ -693,7 +693,15 @@ def get_ground_state(
     -------
     lambda_min, v_full, metadata
     """
-    mp.mp.dps = int(dps)
+
+    caller_dps = mp.mp.dps
+
+    generation_dps = int(dps)
+
+    if generation_dps <= 0:
+        raise ValueError(
+            "dps must be positive"
+        )
 
     if validation not in (
         "fast",
@@ -768,6 +776,8 @@ def get_ground_state(
 
             cache_meta = dict(cache_meta)
 
+            cache_meta["generation_dps"] = generation_dps
+            cache_meta["caller_dps"] = caller_dps
             cache_meta["lookup_seconds"] = lookup_elapsed
             cache_meta["decode_seconds"] = decode_elapsed
             cache_meta["validation_seconds"] = validation_elapsed
@@ -899,6 +909,8 @@ def get_ground_state(
 
     compute_start = time.perf_counter()
 
+    mp.mp.dps = generation_dps
+
     Q = build_galerkin_matrix(
         c=c,
         N=N,
@@ -981,11 +993,15 @@ def get_ground_state(
         + save_elapsed
     )
 
+    mp.mp.dps = caller_dps
+
     metadata = {
         "cache_hit": False,
         "cache_key": digest,
         "cache_path": path,
         "parameters": parameters,
+        "generation_dps" = generation_dps
+        "caller_dps" = caller_dps
         "validation_mode": validation,
         "Q_build_seconds": Q_build_elapsed,
         "eigensolve_seconds": eig_elapsed,
