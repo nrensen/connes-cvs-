@@ -1,0 +1,152 @@
+========================================================================
+GENERIC CACHE + GROUND STATE CACHE TEST
+========================================================================
+
+------------------------------------------------------------------------
+1. GENERIC JSON CACHE
+------------------------------------------------------------------------
+
+digest:
+4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4
+
+canonical record:
+{'schema_version': 2, 'namespace': 'generic_test', 'parameters': {'purpose': 'cache_test', 'integer': 123, 'nested': {'alpha': '1.234567890123456789', 'beta': 42}, 'list': ['a', 'b', 17]}}
+
+save time = 0.006777 s
+
+path = /data/src/rh/connes-cvs-/.cell_cache/generic_test/4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4.json
+
+load time = 0.000455 s
+
+loaded results = {'answer': 'cache machinery works', 'value': '3.141592653589793238462643383279'}
+
+------------------------------------------------------------------------
+2. PARAMETER IDENTITY
+------------------------------------------------------------------------
+
+original digest:
+4cf932c7435fb386f143efce9c76605dd03622e22bc6c7c592c136097c7c96f4
+
+modified digest:
+bd8b4212411f5726822179da4e2ed5b659524210978a5fab79959c81512f702c
+
+digest changed = True
+
+------------------------------------------------------------------------
+3. CACHE GET-OR-COMPUTE
+------------------------------------------------------------------------
+
+First call:
+
+CACHE MISS [generic_test]
+  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
+
+CACHE COMPUTED [generic_test]
+  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
+  lookup         = 0.000287 s
+  computation     = 0.257961 s
+  save            = 0.002842 s
+  total           = 0.261091 s
+
+Second call:
+
+CACHE HIT [generic_test]
+  key            = 9db08d18b29b0f39738d601690b55fd92a983f23cca813dc88a04cd96fdd1676
+  lookup         = 0.000462 s
+  total          = 0.000462 s
+
+compute function calls = 1
+
+first cache_hit = False
+
+second cache_hit = True
+
+first total  = 0.261091 s
+
+second total = 0.000462 s
+
+------------------------------------------------------------------------
+4. GROUND STATE — FAST CACHE
+------------------------------------------------------------------------
+
+parameters: c=13, N=8, T=40, dps=80
+
+Requesting ground state with fast validation:
+
+GROUND STATE CACHE: MISS
+
+GROUND STATE CACHE: COMPUTED
+  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
+  Q build    = 157.592982 s
+  eigensolve = 0.075271 s
+  validation = 0.000284 s
+  save       = 0.002690 s
+  total      = 157.671227 s
+
+wall time = 157.674299 s
+
+lambda_min =
+2.9337422241322740408178302295588281413977173077664261320741e-23
+
+||v|| =
+1.0
+
+------------------------------------------------------------------------
+5. GROUND STATE — SECOND FAST REQUEST
+------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
+  decode     = 0.000636 s
+  validation = 0.000291 s
+  total      = 0.001427 s
+
+wall time = 0.001884 s
+
+|lambda_1 - lambda_2| =
+0.0
+
+||v_1 - v_2|| =
+0.0
+
+------------------------------------------------------------------------
+6. GROUND STATE — FULL VALIDATION
+------------------------------------------------------------------------
+
+This deliberately rebuilds Q.
+It is expected to be much slower than the fast cache hit.
+
+GROUND STATE CACHE: HIT
+  key        = 3b5309a0027bd4058b93a22df27d6d0f982c5bbb412b13004408729cf6c41171
+  decode     = 0.000620 s
+  validation = 0.000292 s
+  Q build    = 157.209999 s
+  total      = 157.215747 s
+
+wall time = 157.216013 s
+
+full-validation residual =
+6.9905189239558721142880180001e-82
+
+------------------------------------------------------------------------
+7. SPEEDUP
+------------------------------------------------------------------------
+
+cold/fast-request ratio = 83675.424x
+
+full-validation/fast-cache ratio = 83432.218x
+
+------------------------------------------------------------------------
+8. SUMMARY
+------------------------------------------------------------------------
+
+generic cache: PASS
+parameter hashing: PASS
+get-or-compute: PASS
+ground-state first request cache_hit = False
+ground-state second request cache_hit = True
+ground-state full request cache_hit = True
+
+========================================================================
+CACHE TEST COMPLETE
+========================================================================
