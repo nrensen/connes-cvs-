@@ -1000,8 +1000,8 @@ def get_ground_state(
         "cache_key": digest,
         "cache_path": path,
         "parameters": parameters,
-        "generation_dps" = generation_dps
-        "caller_dps" = caller_dps
+        "generation_dps": generation_dps,
+        "caller_dps": caller_dps,
         "validation_mode": validation,
         "Q_build_seconds": Q_build_elapsed,
         "eigensolve_seconds": eig_elapsed,
