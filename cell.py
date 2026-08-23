@@ -1033,6 +1033,22 @@ def get_ground_state(
 
 
 # ============================================================
+# CANONICAL FORENSIC GROUND-STATE CONFIGURATION
+#
+# All diagnostic cells investigating the current Cell-5
+# discrepancy should use these parameters unless they are
+# explicitly performing a separate convergence experiment.
+# ============================================================
+
+FORENSIC_GROUND_STATE = {
+    "c": 13,
+    "N": 8,
+    "T": 400,
+    "dps": 150,
+}
+
+
+# ============================================================
 # BASIC GEOMETRIC / FOURIER PARAMETERS
 # ============================================================
 
