@@ -1,0 +1,189 @@
+
+========================================================================
+CELL 18 — G_COMPLEX MATHEMATICAL EQUIVALENCE AUDIT
+========================================================================
+
+Historical Cell 5:
+  /data/src/rh/connes-cvs-/cell5.py
+
+Current G_complex:
+  /data/src/rh/connes-cvs-/cell.py
+
+------------------------------------------------------------------------
+1. HISTORICAL CELL-5 GLOBAL PARAMETERS
+------------------------------------------------------------------------
+
+Historical N = 8
+Historical L = mpf('2.5649493574615367360534874415653186048052679447602071164190455106634646673244101782')
+
+These values are extracted from the actual top-level Cell-5 assignments.
+
+------------------------------------------------------------------------
+2. CURRENT G_complex
+------------------------------------------------------------------------
+def G_complex(v, z, L):
+    """
+    Complex analytic response G_v(z).
+    """
+
+    return sum(
+        v[k]
+        * G_complex_basis(k, z, L)
+        for k in range(len(v))
+    )
+
+
+------------------------------------------------------------------------
+HISTORICAL CELL-5 G_complex
+------------------------------------------------------------------------
+def G_complex(v, z):
+    total = mp.mpc(0)
+
+    for k in range(N + 1):
+        total += (
+            v[k]
+            * G_complex_from_canonical_basis(k, z)
+        )
+
+    return total
+
+
+------------------------------------------------------------------------
+3. POINTWISE MATHEMATICAL COMPARISON
+------------------------------------------------------------------------
+
+Both implementations are evaluated using:
+  N = 8
+  L = 2.5649493574615367360534874415653186048052679447602071164190455106634646673244102
+
+Number of comparisons: 42
+Maximum absolute difference: 0.0
+Maximum relative difference: 0.0
+
+Representative comparisons:
+
+  vector=basis_0      r=     0.0
+    historical = (1.60154592736566151091081982471 + 0.0j)
+    current    = (1.60154592736566151091081982471 + 0.0j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=     0.1
+    historical = (1.5971593217805333011419302194 - 2.73640656954298009023988490824e-81j)
+    current    = (1.5971593217805333011419302194 - 2.73640656954298009023988490824e-81j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=    0.25
+    historical = (1.57424777232049532705603942982 + 3.90143585968369482733699999166e-83j)
+    current    = (1.57424777232049532705603942982 + 3.90143585968369482733699999166e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=     0.5
+    historical = (1.49402508760638593509645888415 + 1.8850448849549536111017977171e-82j)
+    current    = (1.49402508760638593509645888415 + 1.8850448849549536111017977171e-82j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=     1.0
+    historical = (1.1972462828004226830898132681 + 3.45515479474922170759779650458e-82j)
+    current    = (1.1972462828004226830898132681 + 3.45515479474922170759779650458e-82j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=     2.0
+    historical = (0.340429261450913984589327883104 - 1.53726169493845385741921534993e-82j)
+    current    = (0.340429261450913984589327883104 - 1.53726169493845385741921534993e-82j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_0      r=     5.0
+    historical = (0.032176170602684996949052412932 - 3.28654305605711923143259329646e-83j)
+    current    = (0.032176170602684996949052412932 - 3.28654305605711923143259329646e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_1      r=     0.0
+    historical = (0.0 + 0.0j)
+    current    = (0.0 + 0.0j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_1      r=     0.1
+    historical = (-0.00377038270224534437982972709354 + 1.95536076276994195694158237947e-83j)
+    current    = (-0.00377038270224534437982972709354 + 1.95536076276994195694158237947e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_1      r=    0.25
+    historical = (-0.0234321990276817743333178267919 - 7.84330429492691034005352258679e-83j)
+    current    = (-0.0234321990276817743333178267919 - 7.84330429492691034005352258679e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_1      r=     0.5
+    historical = (-0.0918527033049673695026901886476 + 6.68686021187469507396468292814e-83j)
+    current    = (-0.0918527033049673695026901886476 + 6.68686021187469507396468292814e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+  vector=basis_1      r=     1.0
+    historical = (-0.338584767174945188954698258703 - 1.84829936956512245712199307886e-83j)
+    current    = (-0.338584767174945188954698258703 - 1.84829936956512245712199307886e-83j)
+    difference = (0.0 + 0.0j)
+    rel error  = 0.0
+
+------------------------------------------------------------------------
+4. MULTIPLICATIVE-FACTOR TEST
+------------------------------------------------------------------------
+
+Reference old/new ratio: (1.0 + 0.0j)
+Maximum ratio deviation: 0.0
+
+RESULT: a constant multiplicative factor appears to explain the difference.
+
+------------------------------------------------------------------------
+5. ADDITIVE-OFFSET TEST
+------------------------------------------------------------------------
+
+Reference old-new difference: (0.0 + 0.0j)
+Maximum deviation from constant difference: 0.0
+
+RESULT: a constant additive term appears to explain the difference.
+
+------------------------------------------------------------------------
+6. CONJUGATION TEST
+------------------------------------------------------------------------
+
+Maximum |old - conjugate(new)|: 6.5818363098887986598354825845
+
+RESULT: conjugation does not explain the difference.
+
+------------------------------------------------------------------------
+7. r-DEPENDENCE OF DIFFERENCE
+------------------------------------------------------------------------
+
+Complex test vector:
+  r=     0.0 diff=(0.0 + 0.0j)
+  r=     0.1 diff=(0.0 + 0.0j)
+  r=    0.25 diff=(0.0 + 0.0j)
+  r=     0.5 diff=(0.0 + 0.0j)
+  r=     1.0 diff=(0.0 + 0.0j)
+  r=     2.0 diff=(0.0 + 0.0j)
+  r=     5.0 diff=(0.0 + 0.0j)
+
+========================================================================
+8. FORENSIC VERDICT
+========================================================================
+
+The historical and current implementations are exactly equal for every tested input.
+
+The comparison used the actual historical Cell-5 values of N and L.
+
+No conclusion is drawn here about which implementation is mathematically correct.
+If a difference is established, the next step is to derive the mathematical expression represented by each implementation.
+
+========================================================================
+CELL 18 COMPLETE
+========================================================================
