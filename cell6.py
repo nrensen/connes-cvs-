@@ -47,7 +47,7 @@ from cell import (
     canonical_to_full,
     canonical_norm,
     prime_power_terms,
-    G_complex,
+    sum_v_G,
 )
 
 
@@ -373,7 +373,7 @@ pole_form = mp.fdot(
 )
 
 pole_explicit = mp.re(
-    2 * G_complex(
+    2 * sum_v_G(
         v_star,
         1j / 2,
         L,
@@ -729,7 +729,7 @@ def explicit_arch_form_cell6(T_local):
     integrand = lambda r: (
         h_plus_cell6(r)
         * mp.re(
-            G_complex(
+            sum_v_G(
                 v_star,
                 r,
                 L,

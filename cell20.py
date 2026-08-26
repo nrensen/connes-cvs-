@@ -514,15 +514,15 @@ print(
 #
 #     <u,Q_pole u> = Re(2 G_complex(v,i/2))
 #
-# Here G_complex is called through the current cell.py
+# G_complex is replaced by sum_v_G from the current cell.py
 # interface, which takes L explicitly.
 # ============================================================
 
-from cell import G_complex
+from cell import sum_v_G
 
 
 pole_explicit = mp.re(
-    2 * G_complex(
+    2 * sum_v_G(
         v_star,
         1j / 2,
         L,
@@ -541,7 +541,7 @@ print(
 )
 
 print()
-print("2 Re G_complex(v_star, i/2) =")
+print("2 Re sum_v_G(v_star, i/2) =")
 print(
     nstr(pole_explicit)
 )
@@ -942,7 +942,7 @@ historical_linear = (
         lambda r:
             h_plus_cell20(r)
             * mp.re(
-                G_complex(
+                sum_v_G(
                     v_star,
                     r,
                     L,

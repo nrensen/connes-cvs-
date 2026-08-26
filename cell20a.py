@@ -9,7 +9,7 @@
 #
 # and
 #
-#     2 Re G_complex(v, i/2).
+#     2 Re sum_v_G(v, i/2).
 #
 # This cell investigates that discrepancy only.
 #
@@ -37,7 +37,7 @@ import mpmath as mp
 
 from cell import (
     FORENSIC_GROUND_STATE,
-    G_complex,
+    sum_v_G,
     canonical_to_full,
     get_ground_state,
     normalise_ground_state,
@@ -187,18 +187,18 @@ print(nstr(P_v))
 # 3. G(i/2)
 # ============================================================
 #
-# G_complex is also linear in v.
+# sum_v_G is also linear in v.
 #
 # Compare it directly against P(v).
 # ============================================================
 
 print()
 print("-" * 72)
-print("3. G_complex(v, i/2)")
+print("3. sum_v_G(v, i/2)")
 print("-" * 72)
 
 G_pole = mp.re(
-    2 * G_complex(
+    2 * sum_v_G(
         v_star,
         1j / 2,
         L,
@@ -206,7 +206,7 @@ G_pole = mp.re(
 )
 
 print()
-print("2 Re G_complex(v_star, i/2) =")
+print("2 Re sum_v_G(v_star, i/2) =")
 print(nstr(G_pole))
 
 
@@ -287,7 +287,7 @@ for k in range(N + 1):
     )
 
     G_k = mp.re(
-        2 * G_complex(
+        2 * sum_v_G(
             e,
             1j / 2,
             L,
@@ -486,7 +486,7 @@ constraint_P = mp.fdot(
 )
 
 constraint_G = mp.re(
-    2 * G_complex(
+    2 * sum_v_G(
         v_constraint,
         1j / 2,
         L,

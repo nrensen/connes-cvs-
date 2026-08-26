@@ -19,16 +19,30 @@ Historical L = mpf('2.5649493574615367360534874415653186048052679447602071164190
 These values are extracted from the actual top-level Cell-5 assignments.
 
 ------------------------------------------------------------------------
-2. CURRENT G_complex
+2. CURRENT sum_v_G
 ------------------------------------------------------------------------
-def G_complex(v, z, L):
+def sum_v_G(v, z, L):
     """
-    Complex analytic response G_v(z).
+    Coefficient-weighted sum of the complex G basis responses:
+
+        G_v(z) = sum_k v_k G_k(z).
+
+    This is the construction of G_v from the canonical basis
+    responses G_k using the entries of v as coefficients.
+
+    IMPORTANT:
+        G_v(z) is a coefficient-weighted basis sum. It is therefore
+        linear in v, but this function is not itself the quadratic
+        functional represented by a Galerkin matrix quadratic form
+        such as v* Q v.
+
+        Quadratic quantities involving v must be constructed by the
+        appropriate quadratic machinery.
     """
 
     return sum(
         v[k]
-        * G_complex_basis(k, z, L)
+        * G_basis_complex(k, z, L)
         for k in range(len(v))
     )
 

@@ -3,7 +3,7 @@
 #
 # Purpose:
 #   Determine whether the historical Cell-5 G_complex and the
-#   current cell.py G_complex are mathematically equivalent,
+#   current cell.py sum_v_G are mathematically equivalent,
 #   despite their source implementations differing.
 #
 # Historical Cell 5:
@@ -14,7 +14,7 @@
 #
 # Current cell.py:
 #
-#       G_complex(v, r, L)
+#       sum_v_G(v, r, L)
 #
 # This audit reconstructs the historical N and L environment
 # from Cell 5 rather than guessing those values.
@@ -28,7 +28,7 @@ import inspect
 
 import mpmath as mp
 
-from cell import G_complex
+from cell import sum_v_G
 
 
 # ============================================================
@@ -181,7 +181,7 @@ print(f"  {CELL5_PATH}")
 print()
 print("Current G_complex:")
 print(
-    f"  {Path(inspect.getfile(G_complex)).resolve()}"
+    f"  {Path(inspect.getfile(sum_v_G)).resolve()}"
 )
 
 cell5_source = CELL5_PATH.read_text(
@@ -322,11 +322,11 @@ def historical_G(v, r):
 
 print()
 print("-" * 72)
-print("2. CURRENT G_complex")
+print("2. CURRENT sum_v_G")
 print("-" * 72)
 
 print(
-    inspect.getsource(G_complex)
+    inspect.getsource(sum_v_G)
 )
 
 print()
@@ -465,7 +465,7 @@ for vector_name, vector in test_vectors:
             r,
         )
 
-        new = G_complex(
+        new = sum_v_G(
             vector,
             r,
             L_historical,

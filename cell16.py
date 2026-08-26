@@ -25,10 +25,10 @@ from cell import (
     compute_L,
     canonical_pairs,
     F_basis,
-    F_vector,
+    sum_v_F,
     Fprime_basis,
-    G_complex_basis,
-    G_complex,
+    G_basis_complex,
+    sum_v_G,
     canonical_to_full,
     full_to_canonical,
 )
@@ -284,11 +284,11 @@ for k in BASIS_K:
         else:
             Fp = Fprime_basis(k, r, L)
 
-        G0 = G_complex_basis(k, r, L)
+        G0 = G_basis_complex(k, r, L)
 
         Gp = mp.diff(
             lambda rr:
-                G_complex_basis(k, rr, L),
+                G_basis_complex(k, rr, L),
             r,
         )
 
@@ -335,13 +335,13 @@ print()
 
 for r in TEST_R:
 
-    Fv = F_vector(
+    Fv = sum_v_F(
         v_star,
         r,
         L,
     )
 
-    Gv = G_complex(
+    Gv = sum_v_G(
         v_star,
         r,
         L,
@@ -391,7 +391,7 @@ for x in TEST_X:
         S0 = S_arch(r, x)
 
         Gv = mp.re(
-            G_complex(
+            sum_v_G(
                 v_star,
                 r,
                 L,
@@ -516,7 +516,7 @@ def diagnostic_integrand(r, x):
     S0 = S_arch(r, x)
 
     Gv = mp.re(
-        G_complex(
+        sum_v_G(
             v_star,
             r,
             L,
