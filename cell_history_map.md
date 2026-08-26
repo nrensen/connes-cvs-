@@ -177,8 +177,9 @@ It:
 ### What went wrong
 
 The historical explicit Archimedean calculation used the quantity
-$\frac1\pi\int_0^T h_+(r)\,\operatorname{Re}G_v(r)\,dr\,$ where
-$G_v(r)=\sum_k v_kG_k(r)$.
+$\frac1\pi\int_0^T h_+(r) \, \mathop{\mathrm{Re}}G_v(r) \, dr \,$ where
+
+$$G_v(r)=\sum_k v_kG_k(r)$$.
 
 That quantity is a coefficient-weighted **linear** construction, not the quadratic Weil functional represented by the Galerkin matrix.
 
@@ -225,8 +226,10 @@ These files are part of the investigation's history and should not be confused w
 ## Intended purpose
 
 Cell 6 was created to independently reconstruct the Archimedean matrix from
-$\psi_{R,T}(x)=\frac{1}{2\pi^2}\int_{-T}^{T}h_+(r)S(r,x,L)\,dr\,$ then form
-the divided-difference matrix and compare:
+
+$$\psi_{R,T}(x)=\frac{1}{2\pi^2}\int_{-T}^{T}h_+(r)S(r,x,L) \, dr \,$$
+
+then form the divided-difference matrix and compare:
 
 1. source-derived Archimedean matrix;
 2. repository Archimedean matrix;
@@ -301,7 +304,9 @@ It checked the Archimedean `h_+` convention against the logarithmic derivative o
 ### Intended purpose
 
 Cell 8 independently evaluates
-$S(r,x,L)=\int_0^L\sin(2\pi x(1-y/L))\cos(ry)\,dy$
+
+$$S(r,x,L)=\int_0^L\sin(2\pi x(1-y/L))\cos(ry) \, dy$$
+
 in two ways:
 
 1. direct quadrature;
@@ -373,8 +378,8 @@ The discrepancy was a **centering/sign convention issue**, not a numerical quadr
 
 Cell 11 determines exactly which Fourier transform is implemented by `extract_zeros()`.
 
-It distinguishes $F_+(\tau)=\int f(t)e^{+i\tau t}\,dt$
-from $F_-(\tau)=\int f(t)e^{-i\tau t}\,dt$
+It distinguishes $F_+(\tau)=\int f(t)e^{+i\tau t} \, dt$
+from $F_-(\tau)=\int f(t)e^{-i\tau t} \, dt$
 
 and their centred versions.
 
@@ -529,7 +534,7 @@ Cell 17 is the crucial transition to the correct quadratic construction.
 It establishes the relationship between:
 
 1. the Archimedean quadratic form obtained from the source/divided differences;
-2. the quadratic Volterra kernel $K_v(\omega)=2\int_0^\omega T_v(t)T_v(\omega-t)\,dt$;
+2. the quadratic Volterra kernel $K_v(\omega)=2\int_0^\omega T_v(t)T_v(\omega-t) \, dt$;
 3. the direct Archimedean integral constructed from `K_v`.
 
 The key identity under test is $D_v(\omega)=\pi K_v(\omega)$.
@@ -599,9 +604,9 @@ This is worth preserving in the history because it may still be useful before Ce
 Cell 20 is the major current corrected calculation.
 
 Its stated mathematical correction is to replace the historical Cell-5 expression
-$\frac1\pi\int_0^T h_+(r)\operatorname{Re}G_v(r)\,dr$
+$\frac1\pi\int_0^T h_+(r)\mathop{\mathrm{{Re}}G_v(r) \, dr$
 with the required quadratic functional
-$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry)\,dy\,dr$.
+$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry) \, dy \, dr$.
 
 It uses the closed finite-Fourier representation of `K` developed in Cell 17.
 
@@ -627,7 +632,7 @@ The historical Cell 5 remains unchanged.
 
 Cell 20a investigates an apparent discrepancy between
 $\langle u,Q_{\rm pole}u\rangle$ and
-$2\operatorname{Re}\sum_vG(v,i/2)$.
+$2\mathop{\mathrm{Re}}\sum_vG(v,i/2)$.
 
 It deliberately performs:
 
@@ -638,7 +643,7 @@ Instead it tests the more basic distinction between $P(v)$
 as a pole **linear functional**, and $\langle u,Q_{\rm pole}u\rangle$
 as a pole **quadratic form**.
 
-It also tests whether $2\operatorname{Re}\sum_vG(v,i/2)$
+It also tests whether $2\mathop{\mathrm{Re}}\sum_vG(v,i/2)$
 is proportional to the pole functional.
 
 ### What it established
