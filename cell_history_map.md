@@ -584,19 +584,44 @@ Cell 18 deliberately retains the historical local function name `G_complex` when
 
 ---
 
-# Cell 19 — currently absent
+# Cell 19 — linear-vs-quadratic homogeneity audit
 
-There is **no `cell19.py` in the repository snapshot**.
+### Intended purpose
 
-Earlier planning had discussed a possible Cell 19 as a dedicated linear-vs-quadratic homogeneity audit. That would have been useful for making the distinction between `sum_v_G` and a quadratic form numerically explicit.
+Cell 19 is a deliberately extensive numerical audit of the distinction between
+coefficient-weighted linear constructions and genuinely quadratic forms.
 
-However, it has not been committed as a numbered cell in the current repository.
+In particular, it is intended to make the different scaling laws explicit:
+
+$$G(av,r)=aG(v,r)$$
+
+whereas
+
+$$
+(av)^*Q(av)=|a|^2v^*Qv.
+$$
+
+The purpose is not merely to demonstrate a general mathematical fact, but to
+provide a numerical regression/forensic test against the specific objects used
+in the Connes–CvS implementation.
+
+### Execution status
+
+Cell 19 is implemented and has been launched, but is computationally very
+large. Its expected runtime is measured in days.
+
+Consequently, its final output is not yet available and its conclusions should
+not be treated as established until execution completes.
+
+### Historical significance
+
+Cell 19 grew directly out of the `G_complex` investigations. It is intended to
+provide an explicit numerical guard against the class of category error that
+occurred in Cell 5 and subsequently resurfaced during the Cell 20 investigation.
 
 ### Status
 
-**Planned concept, not currently implemented.**
-
-This is worth preserving in the history because it may still be useful before Cell 21.
+**Running — results pending.**
 
 ---
 
