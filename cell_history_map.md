@@ -701,13 +701,7 @@ Cell 21 has not yet been committed.
 Its intended role is to move from the historical discrepancy investigations to a clean, independent treatment of the **Archimedean quadratic dictionary**.
 
 The principal path should use:
-$T_v,
-\qquad
-K_v,
-\qquad
-\widehat g_v,
-\qquad
-v^*Q_{\rm arch}v$,
+$T_v\to K_v\to\widehat g_v\to v^*Q_{\rm arch}v$,
 
 rather than `sum_v_G` as a surrogate quadratic object.
 
