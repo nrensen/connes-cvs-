@@ -177,7 +177,10 @@ It:
 ### What went wrong
 
 The historical explicit Archimedean calculation used the quantity
-$\frac1\pi\int_0^T h_+(r) \thinspace \mathop{\mathrm{Re}}G_v(r) \thinspace dr \thinspace$ where
+
+$$\frac1\pi\int_0^T h_+(r) \thinspace \mathop{\mathrm{Re}}G_v(r) \thinspace dr \thinspace$$
+
+where
 
 $$G_v(r)=\sum_k v_kG_k(r)$$.
 
@@ -784,7 +787,7 @@ The subsequent migration commit `9aa29074b05a457c012dba7ec33cf2f5ee04f38c` mecha
 
 The purpose of this refactor is therefore historical as well as practical:
 
-Make the mathematical category of an object more visible without changing what the historical calculations actually do.
+> **Make the mathematical category of an object more visible without changing what the historical calculations actually do.**
 
 In particular, `sum_v_G` makes explicit that the operation is the coefficient-weighted sum
 $sum_k v_kG_k$, which is precisely the distinction that was obscured by the old name `G_complex`.
