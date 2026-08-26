@@ -335,11 +335,12 @@ It provided an independent check of the Archimedean source kernel and its relati
 Cell 9 explicitly tests what a coefficient vector in the trigonometric Galerkin basis represents.
 
 The intended chain is:
-$v
+
+$$v
 \to f_v(t)
 \to F_v(\tau)
 \to \text{translated test function}
-\to \text{Weil quadratic form}$.
+\to \text{Weil quadratic form}$$.
 
 It deliberately uses arbitrary test vectors rather than relying solely on the ground state.
 
@@ -404,11 +405,13 @@ It pinned down the precise transform/sign/centering convention used by the extra
 ### Intended purpose
 
 Cell 12 closes the loop between:
-$v
+
+$$v
 \to f_v
 \to H_v
 \to \text{Weil quadratic form}
-$
+$$
+
 and $v^TQv$.
 
 It explicitly builds on the conclusions of Cells 9–11.
@@ -488,7 +491,7 @@ The central question is whether the historical discrepancy was caused by feeding
 
 ### What it established
 
-It isolated the canonical/full coordinate issue that had contributed to the historical discrepancy.
+It isolated a canonical/full coordinate error that was also present in the historical Cell-5 investigation.
 
 Importantly, this did **not** erase the separate Archimedean `G` category error from Cell 5. The two issues must remain conceptually distinct.
 
@@ -552,7 +555,7 @@ That was exactly the correct conceptual separation.
 
 ### What it established
 
-It supplied the genuinely quadratic route needed to replace the misleading historical `G`-based construction.
+It supplied the genuinely quadratic construction that avoids the historical `G`-based category error and provides the route for the subsequent Archimedean dictionary audit.
 
 ### Status
 
@@ -625,7 +628,7 @@ occurred in Cell 5 and subsequently resurfaced during the Cell 20 investigation.
 
 ---
 
-# Cell 20 — corrected Cell-5 Archimedean audit
+# Cell 20 — corrected Archimedean quadratic audit
 
 ### Intended purpose
 
@@ -663,7 +666,7 @@ The historical Cell 5 remains unchanged.
 
 Cell 20a investigates an apparent discrepancy between
 $\langle u,Q_{\rm pole}u\rangle$ and
-$2\mathop{\mathrm{Re}}\sum_vG(v,i/2)$.
+$2\mathop{\mathrm{Re}}G_v(i/2)$ where $G_v$ is implemented by `sum_v_G`.
 
 It deliberately performs:
 
@@ -815,7 +818,7 @@ The purpose of this refactor is therefore historical as well as practical:
 > **Make the mathematical category of an object more visible without changing what the historical calculations actually do.**
 
 In particular, `sum_v_G` makes explicit that the operation is the coefficient-weighted sum
-$sum_k v_kG_k$, which is precisely the distinction that was obscured by the old name `G_complex`.
+$\sum_k v_kG_k$, which is precisely the distinction that was obscured by the old name `G_complex`.
 
 # Research-state summary
 
