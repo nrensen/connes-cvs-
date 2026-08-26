@@ -177,7 +177,7 @@ It:
 ### What went wrong
 
 The historical explicit Archimedean calculation used the quantity
-$\frac1\pi\int_0^T h_+(r) \, \mathop{\mathrm{Re}}G_v(r) \, dr \,$ where
+$\frac1\pi\int_0^T h_+(r) \thinspace \mathop{\mathrm{Re}}G_v(r) \thinspace dr \thinspace$ where
 
 $$G_v(r)=\sum_k v_kG_k(r)$$.
 
@@ -227,7 +227,7 @@ These files are part of the investigation's history and should not be confused w
 
 Cell 6 was created to independently reconstruct the Archimedean matrix from
 
-$$\psi_{R,T}(x)=\frac{1}{2\pi^2}\int_{-T}^{T}h_+(r)S(r,x,L) \, dr \,$$
+$$\psi_{R,T}(x)=\frac{1}{2\pi^2}\int_{-T}^{T}h_+(r)S(r,x,L) \thinspace dr$$
 
 then form the divided-difference matrix and compare:
 
@@ -281,11 +281,12 @@ They should be read together with Cells 6 and 7–8 rather than as independent f
 ### Intended purpose
 
 Cell 7 explicitly states its goal as deriving and numerically verifying
-$\text{completed-zeta Archimedean factor}
+
+$$\text{completed-zeta Archimedean factor}
 \to h_+(\tau)
 \to \text{basis Fourier response}
 \to S_x(\tau)
-\to \psi_{\rm arch}(x)$.
+\to \psi_{\rm arch}(x)$$.
 
 It deliberately avoids constructing a large Galerkin matrix.
 
@@ -305,7 +306,7 @@ It checked the Archimedean `h_+` convention against the logarithmic derivative o
 
 Cell 8 independently evaluates
 
-$$S(r,x,L)=\int_0^L\sin(2\pi x(1-y/L))\cos(ry) \, dy$$
+$$S(r,x,L)=\int_0^L\sin(2\pi x(1-y/L))\cos(ry) \thinspace dy$$
 
 in two ways:
 
@@ -378,8 +379,8 @@ The discrepancy was a **centering/sign convention issue**, not a numerical quadr
 
 Cell 11 determines exactly which Fourier transform is implemented by `extract_zeros()`.
 
-It distinguishes $F_+(\tau)=\int f(t)e^{+i\tau t} \, dt$
-from $F_-(\tau)=\int f(t)e^{-i\tau t} \, dt$
+It distinguishes $F_+(\tau)=\int f(t)e^{+i\tau t} \thinspace dt$
+from $F_-(\tau)=\int f(t)e^{-i\tau t} \thinspace dt$
 
 and their centred versions.
 
@@ -499,8 +500,7 @@ Importantly, this did **not** erase the separate Archimedean `G` category error 
 ### Intended purpose
 
 Cell 16 localises the remaining Archimedean discrepancy progressively through:
-$
-S
+$S
 \to dS
 \to \text{divided differences}
 \to \text{basis kernel}
@@ -534,7 +534,7 @@ Cell 17 is the crucial transition to the correct quadratic construction.
 It establishes the relationship between:
 
 1. the Archimedean quadratic form obtained from the source/divided differences;
-2. the quadratic Volterra kernel $K_v(\omega)=2\int_0^\omega T_v(t)T_v(\omega-t) \, dt$;
+2. the quadratic Volterra kernel $K_v(\omega)=2\int_0^\omega T_v(t)T_v(\omega-t) \thinspace dt$;
 3. the direct Archimedean integral constructed from `K_v`.
 
 The key identity under test is $D_v(\omega)=\pi K_v(\omega)$.
@@ -604,9 +604,12 @@ This is worth preserving in the history because it may still be useful before Ce
 Cell 20 is the major current corrected calculation.
 
 Its stated mathematical correction is to replace the historical Cell-5 expression
-$\frac1\pi\int_0^T h_+(r)\mathop{\mathrm{{Re}}G_v(r) \, dr$
+
+$$\frac1\pi\int_0^T h_+(r)\mathop{\mathrm{Re}}G_v(r) \thinspace dr$$
+
 with the required quadratic functional
-$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry) \, dy \, dr$.
+
+$$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry) \thinspace dy \thinspace dr$$.
 
 It uses the closed finite-Fourier representation of `K` developed in Cell 17.
 
@@ -760,7 +763,7 @@ This was the deeper semantic error exposed through Cell 5 and revisited in Cell 
 
 Cell 17 established the appropriate genuinely quadratic $K_v$ route.
 
-These are *different errors* and should remain separately documented.
+These are **different errors** and should remain separately documented.
 
 ## `cell.py` refactor — historical significance
 
