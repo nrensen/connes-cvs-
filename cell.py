@@ -1248,9 +1248,14 @@ def F_basis(k, tau, L):
     )
 
 
-def F_vector(v, tau, L):
+def sum_v_F(v, tau, L):
     """
-    F_v(tau) for a canonical vector v.
+    Coefficient-weighted sum of the canonical F basis responses:
+
+        F_v(tau) = sum_k v_k F_k(tau).
+
+    This is the construction of F_v from the canonical basis
+    responses F_k using the entries of v as coefficients.
     """
 
     return sum(
@@ -1305,9 +1310,14 @@ def Fprime_basis(k, tau, L):
     )
 
 
-def Fprime_vector(v, tau, L):
+def sum_v_Fprime(v, tau, L):
     """
-    F'_v(tau) for a canonical vector v.
+    Coefficient-weighted sum of the canonical F' basis responses:
+
+        F'_v(tau) = sum_k v_k F'_k(tau).
+
+    This is the construction of F'_v from the canonical basis
+    responses F'_k using the entries of v as coefficients.
     """
 
     return sum(
@@ -1318,10 +1328,10 @@ def Fprime_vector(v, tau, L):
 
 
 # ============================================================
-# COMPLEX G BASIS RESPONSE
+# G BASIS RESPONSE
 # ============================================================
 
-def G_complex_basis(k, z, L):
+def G_basis_complex(k, z, L):
     """
     Complex analytic response G_k(z).
     """
@@ -1365,14 +1375,28 @@ def G_complex_basis(k, z, L):
     )
 
 
-def G_complex(v, z, L):
+def sum_v_G(v, z, L):
     """
-    Complex analytic response G_v(z).
+    Coefficient-weighted sum of the complex G basis responses:
+
+        G_v(z) = sum_k v_k G_k(z).
+
+    This is the construction of G_v from the canonical basis
+    responses G_k using the entries of v as coefficients.
+
+    IMPORTANT:
+        G_v(z) is a coefficient-weighted basis sum. It is therefore
+        linear in v, but this function is not itself the quadratic
+        functional represented by a Galerkin matrix quadratic form
+        such as v* Q v.
+
+        Quadratic quantities involving v must be constructed by the
+        appropriate quadratic machinery.
     """
 
     return sum(
         v[k]
-        * G_complex_basis(k, z, L)
+        * G_basis_complex(k, z, L)
         for k in range(len(v))
     )
 
@@ -1400,7 +1424,9 @@ def pole_basis(k, L):
 
 def pole_row(N, L):
     """
-    Canonical pole functional row.
+    Canonical coordinate row representing the pole functional P:
+
+        [P(e_0), ..., P(e_N)].
     """
 
     return mp.matrix([
@@ -1415,7 +1441,11 @@ def pole_row(N, L):
 
 def T_canonical(v, t):
     """
-    Trigonometric polynomial corresponding to canonical vector v.
+    Trigonometric polynomial T_v(t) corresponding to canonical
+    coefficient vector v.
+
+    The dependence of T_v on v is through the canonical coefficient
+    combination defining the trigonometric polynomial.
     """
 
     N = len(v) - 1
@@ -1452,6 +1482,9 @@ def K_canonical(v, omega):
             T_v(t) T_v(omega-t) dt
 
     for 0 <= omega <= 1.
+
+    K_v is constructed from the product of two copies of T_v and
+    is therefore quadratic in the coefficient vector v.
     """
 
     omega = mp.mpf(omega)
@@ -1481,9 +1514,13 @@ def K_canonical(v, omega):
 
 def ghat(v, xi, L):
     """
-    ghat(xi) = pi K(1 - |xi| / Delta)
+    Fourier weight ghat_v(xi):
+
+        ghat_v(xi) = pi K_v(1 - |xi| / Delta)
 
     for |xi| <= Delta.
+
+    Since K_v is quadratic in v, ghat_v is also quadratic in v.
     """
 
     xi = mp.mpf(xi)
