@@ -177,17 +177,8 @@ It:
 ### What went wrong
 
 The historical explicit Archimedean calculation used the quantity
-
-\[
-\frac1\pi\int_0^T h_+(r)\,
-       \operatorname{Re}G_v(r)\,dr,
-\]
-
-where
-
-\[
-G_v(r)=\sum_k v_kG_k(r).
-\]
+$\frac1\pi\int_0^T h_+(r)\,\operatorname{Re}G_v(r)\,dr\,$ where
+$G_v(r)=\sum_k v_kG_k(r)$.
 
 That quantity is a coefficient-weighted **linear** construction, not the quadratic Weil functional represented by the Galerkin matrix.
 
@@ -234,16 +225,8 @@ These files are part of the investigation's history and should not be confused w
 ## Intended purpose
 
 Cell 6 was created to independently reconstruct the Archimedean matrix from
-
-\[
-\psi_{R,T}(x)
-=
-\frac{1}{2\pi^2}
-\int_{-T}^{T}
-h_+(r)S(r,x,L)\,dr,
-\]
-
-then form the divided-difference matrix and compare:
+$\psi_{R,T}(x)=\frac{1}{2\pi^2}\int_{-T}^{T}h_+(r)S(r,x,L)\,dr\,$ then form
+the divided-difference matrix and compare:
 
 1. source-derived Archimedean matrix;
 2. repository Archimedean matrix;
@@ -295,14 +278,11 @@ They should be read together with Cells 6 and 7–8 rather than as independent f
 ### Intended purpose
 
 Cell 7 explicitly states its goal as deriving and numerically verifying
-
-\[
-\text{completed-zeta Archimedean factor}
+$\text{completed-zeta Archimedean factor}
 \to h_+(\tau)
 \to \text{basis Fourier response}
 \to S_x(\tau)
-\to \psi_{\rm arch}(x).
-\]
+\to \psi_{\rm arch}(x)$.
 
 It deliberately avoids constructing a large Galerkin matrix.
 
@@ -321,14 +301,7 @@ It checked the Archimedean `h_+` convention against the logarithmic derivative o
 ### Intended purpose
 
 Cell 8 independently evaluates
-
-\[
-S(r,x,L)
-=
-\int_0^L
-\sin(2\pi x(1-y/L))\cos(ry)\,dy
-\]
-
+$S(r,x,L)=\int_0^L\sin(2\pi x(1-y/L))\cos(ry)\,dy$
 in two ways:
 
 1. direct quadrature;
@@ -353,14 +326,11 @@ It provided an independent check of the Archimedean source kernel and its relati
 Cell 9 explicitly tests what a coefficient vector in the trigonometric Galerkin basis represents.
 
 The intended chain is:
-
-\[
-v
+$v
 \to f_v(t)
 \to F_v(\tau)
 \to \text{translated test function}
-\to \text{Weil quadratic form}.
-\]
+\to \text{Weil quadratic form}$.
 
 It deliberately uses arbitrary test vectors rather than relying solely on the ground state.
 
@@ -403,17 +373,8 @@ The discrepancy was a **centering/sign convention issue**, not a numerical quadr
 
 Cell 11 determines exactly which Fourier transform is implemented by `extract_zeros()`.
 
-It distinguishes
-
-\[
-F_+(\tau)=\int f(t)e^{+i\tau t}\,dt
-\]
-
-from
-
-\[
-F_-(\tau)=\int f(t)e^{-i\tau t}\,dt
-\]
+It distinguishes $F_+(\tau)=\int f(t)e^{+i\tau t}\,dt$
+from $F_-(\tau)=\int f(t)e^{-i\tau t}\,dt$
 
 and their centred versions.
 
@@ -434,19 +395,12 @@ It pinned down the precise transform/sign/centering convention used by the extra
 ### Intended purpose
 
 Cell 12 closes the loop between:
-
-\[
-v
+$v
 \to f_v
 \to H_v
 \to \text{Weil quadratic form}
-\]
-
-and
-
-\[
-v^TQv.
-\]
+$
+and $v^TQv$.
 
 It explicitly builds on the conclusions of Cells 9–11.
 
@@ -540,15 +494,13 @@ Importantly, this did **not** erase the separate Archimedean `G` category error 
 ### Intended purpose
 
 Cell 16 localises the remaining Archimedean discrepancy progressively through:
-
-\[
+$
 S
 \to dS
 \to \text{divided differences}
 \to \text{basis kernel}
 \to \text{quadratic-form integrand}
-\to r\text{-integration}.
-\]
+\to r\text{-integration}$.
 
 It is explicitly diagnostic rather than production code.
 
@@ -577,22 +529,10 @@ Cell 17 is the crucial transition to the correct quadratic construction.
 It establishes the relationship between:
 
 1. the Archimedean quadratic form obtained from the source/divided differences;
-2. the quadratic Volterra kernel
-
-\[
-K_v(\omega)
-=
-2\int_0^\omega
-T_v(t)T_v(\omega-t)\,dt;
-\]
-
+2. the quadratic Volterra kernel $K_v(\omega)=2\int_0^\omega T_v(t)T_v(\omega-t)\,dt$;
 3. the direct Archimedean integral constructed from `K_v`.
 
-The key identity under test is
-
-\[
-D_v(\omega)=\pi K_v(\omega).
-\]
+The key identity under test is $D_v(\omega)=\pi K_v(\omega)$.
 
 ### Particularly important design decision
 
@@ -659,19 +599,9 @@ This is worth preserving in the history because it may still be useful before Ce
 Cell 20 is the major current corrected calculation.
 
 Its stated mathematical correction is to replace the historical Cell-5 expression
-
-\[
-\frac1\pi\int_0^T h_+(r)\operatorname{Re}G_v(r)\,dr
-\]
-
+$\frac1\pi\int_0^T h_+(r)\operatorname{Re}G_v(r)\,dr$
 with the required quadratic functional
-
-\[
-\frac1\pi
-\int_0^T h_+(r)
-\int_0^L
-K_v(1-y/L)\cos(ry)\,dy\,dr.
-\]
+$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry)\,dy\,dr$.
 
 It uses the closed finite-Fourier representation of `K` developed in Cell 17.
 
@@ -696,42 +626,19 @@ The historical Cell 5 remains unchanged.
 ### Intended purpose
 
 Cell 20a investigates an apparent discrepancy between
-
-\[
-\langle u,Q_{\rm pole}u\rangle
-\]
-
-and
-
-\[
-2\operatorname{Re}\sum_vG(v,i/2).
-\]
+$\langle u,Q_{\rm pole}u\rangle$ and
+$2\operatorname{Re}\sum_vG(v,i/2)$.
 
 It deliberately performs:
 
 - no Archimedean integration;
 - no new Galerkin matrix construction.
 
-Instead it tests the more basic distinction between
-
-\[
-P(v)
-\]
-
-as a pole **linear functional**, and
-
-\[
-\langle u,Q_{\rm pole}u\rangle
-\]
-
+Instead it tests the more basic distinction between $P(v)$
+as a pole **linear functional**, and $\langle u,Q_{\rm pole}u\rangle$
 as a pole **quadratic form**.
 
-It also tests whether
-
-\[
-2\operatorname{Re}\sum_vG(v,i/2)
-\]
-
+It also tests whether $2\operatorname{Re}\sum_vG(v,i/2)$
 is proportional to the pole functional.
 
 ### What it established
@@ -755,16 +662,13 @@ Cell 21 has not yet been committed.
 Its intended role is to move from the historical discrepancy investigations to a clean, independent treatment of the **Archimedean quadratic dictionary**.
 
 The principal path should use:
-
-\[
-T_v,
+$T_v,
 \qquad
 K_v,
 \qquad
 \widehat g_v,
 \qquad
-v^*Q_{\rm arch}v,
-\]
+v^*Q_{\rm arch}v$,
 
 rather than `sum_v_G` as a surrogate quadratic object.
 
@@ -837,47 +741,19 @@ It is important that the repository history does not collapse these into one iss
 
 1. Canonical/full coordinate error
 
-At various stages the full
-
-\[
-(2N+1)
-\]
-
-representation and canonical
-
-\[
-(N+1)
-\]
-
-representation were confused.
+At various stages the full $(2N+1)$ representation and canonical
+$(N+1)$ representation were confused.
 
 This was investigated and resolved by Cells 13–15.
 
-2. Linear 
+2. Linear  $G_v$ versus quadratic Weil functional
 
-\[
-G_v
-\]
-
-versus quadratic Weil functional
-
-The historical Archimedean calculation treated
-
-\[
-G_v(r)=\sum_k v_kG_k(r)
-\]
-
+The historical Archimedean calculation treated $G_v(r)=\sum_k v_kG_k(r)$
 as though it represented the quadratic Archimedean functional.
 
 This was the deeper semantic error exposed through Cell 5 and revisited in Cell 6.
 
-Cell 17 established the appropriate genuinely quadratic 
-
-\[
-K_v
-\]
-
- route.
+Cell 17 established the appropriate genuinely quadratic $K_v$ route.
 
 These are *different errors* and should remain separately documented.
 
@@ -903,12 +779,7 @@ The purpose of this refactor is therefore historical as well as practical:
 Make the mathematical category of an object more visible without changing what the historical calculations actually do.
 
 In particular, `sum_v_G` makes explicit that the operation is the coefficient-weighted sum
-
-\[
-\sum_k v_kG_k
-\]
-
-, which is precisely the distinction that was obscured by the old name `G_complex`.
+$sum_k v_kG_k$, which is precisely the distinction that was obscured by the old name `G_complex`.
 
 # Research-state summary
 
