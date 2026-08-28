@@ -47,7 +47,7 @@ from cell import (
 # PARAMETERS
 # ============================================================
 
-WORKING_DPS = 80
+WORKING_DPS = 20
 T = 60
 
 mp.mp.dps = WORKING_DPS
@@ -57,7 +57,7 @@ N = FORENSIC_GROUND_STATE["N"]
 
 L = compute_L(c)
 
-DISPLAY_DIGITS = 80
+DISPLAY_DIGITS = 120
 
 
 def nstr(x):
