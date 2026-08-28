@@ -6,7 +6,7 @@ Parameters:
   c              = 13
   N              = 8
   T              = 60
-  working_dps    = 60
+  working_dps    = 80
 
 Forensic ground state:
   c              = 13
@@ -15,7 +15,7 @@ Forensic ground state:
   generation_dps = 150
 
 L =
-2.564949357461536736053487441565318604805267944760207116419045500564993136878685
+2.5649493574615367360534874415653186048052679447602071164190455106634646673244102
 
 ------------------------------------------------------------------------------
 1. FORENSIC GROUND STATE
@@ -24,23 +24,23 @@ L =
 GROUND STATE CACHE: HIT
   key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
   generation dps = 150
-  working dps    = 60
-  lookup         = 0.000806 s
+  working dps    = 80
+  lookup         = 0.000619 s
 
 GROUND STATE CACHE: RETURN
   generation dps = 150
-  working dps    = 60
-  decode         = 0.001525 s
-  validation     = 0.000578 s
-  total          = 0.002909 s
+  working dps    = 80
+  decode         = 0.001024 s
+  validation     = 0.000392 s
+  total          = 0.002035 s
 
 lambda_forensic =
-0.000000000000000000000067109352501259621034709589486121248522785394950591468237461315418146691321172165
+0.000000000000000000000067109352501259621034709589486121248522785394950591468237461316839232916537869526
 
 ||u_star|| =
 1.0
 
-ground-state retrieval elapsed = 0.003896 s
+ground-state retrieval elapsed = 0.002311 s
 
 ------------------------------------------------------------------------------
 2. CANONICAL / FULL REPRESENTATIONS
@@ -63,20 +63,20 @@ Computing:
 No numerical y-integration is performed.
 
 Analytic Archimedean =
--1.6590330874909356691129886258921455565271140176152095515115701164615139534840752
+-1.6590330874909356691129886258921455565271140176152095515115701580412723893977269
 
-analytic Archimedean elapsed = 18.125779 s
+analytic Archimedean elapsed = 23.602864 s
 
 ==============================================================================
 CELL 23 COMPLETE
 ==============================================================================
 
 Result:
-  analytic Archimedean = -1.6590330874909356691129886258921455565271140176152095515115701164615139534840752
+  analytic Archimedean = -1.6590330874909356691129886258921455565271140176152095515115701580412723893977269
 
 Timing:
-  ground state         = 0.003896 s
-  analytic Archimedean = 18.125779 s
+  ground state         = 0.002311 s
+  analytic Archimedean = 23.602864 s
 
 ==============================================================================
 CELL 23 COMPLETE
