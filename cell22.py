@@ -47,7 +47,7 @@ from cell import (
 # PARAMETERS
 # ============================================================
 
-WORKING_DPS = 100
+WORKING_DPS = 120
 T = 60
 
 mp.mp.dps = WORKING_DPS
