@@ -6,7 +6,7 @@ Parameters:
   c              = 13
   N              = 8
   T              = 60
-  working_dps    = 20
+  working_dps    = 40
 
 Forensic ground state:
   c              = 13
@@ -15,7 +15,7 @@ Forensic ground state:
   generation_dps = 150
 
 L =
-2.56494935746153673605354545058
+2.56494935746153673605348744157
 
 ------------------------------------------------------------------------------
 1. FORENSIC GROUND STATE
@@ -24,26 +24,26 @@ L =
 GROUND STATE CACHE: HIT
   key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
   generation dps = 150
-  working dps    = 20
-  lookup         = 0.000621 s
+  working dps    = 40
+  lookup         = 0.000602 s
 
 GROUND STATE CACHE: RETURN
   generation dps = 150
-  working dps    = 20
-  decode         = 0.000953 s
-  validation     = 0.000330 s
-  total          = 0.001904 s
+  working dps    = 40
+  decode         = 0.001002 s
+  validation     = 0.000369 s
+  total          = 0.001972 s
 
 lambda_forensic =
-6.71093525012596210347209809428e-23
+6.71093525012596210347095894861e-23
 
 ||u_star|| =
 1.0
 
-ground-state retrieval elapsed = 0.002198 s
+ground-state retrieval elapsed = 0.002240 s
 
 Canonical/full consistency:
-  ||u - u_star|| = 5.98942740891943000561783446322e-22
+  ||u - u_star|| = 2.02929694021708492165371221512e-42
 
 ------------------------------------------------------------------------------
 2. ANALYTIC ARCHIMEDEAN REDUCTION
@@ -56,9 +56,9 @@ Computing:
 No numerical y-integration is performed.
 
 Analytic Archimedean =
--1.65903308749090429482263080955
+-1.65903308749093566911298833914
 
-analytic Archimedean elapsed = 22.902654 s
+analytic Archimedean elapsed = 58.248391 s
 
 ------------------------------------------------------------------------------
 3. COMPARISON WITH CELL 21
@@ -68,13 +68,13 @@ Cell 21 direct K-fourier =
 -1.65903308749093566911612062081
 
 Cell 22 analytic reduction =
--1.65903308749090429482263080955
+-1.65903308749093566911298833914
 
 difference =
-3.13742934898112585395679730027e-14
+3.1322816658110052379780852364e-21
 
 relative difference =
-1.89111921434072518716835172197e-14
+1.88801639305950180049013942752e-21
 
 ==============================================================================
 CELL 22 COMPLETE
@@ -82,13 +82,13 @@ CELL 22 COMPLETE
 
 Results:
   Cell 21 direct K-fourier = -1.65903308749093566911612062081
-  Cell 22 analytic         = -1.65903308749090429482263080955
-  difference               = 3.13742934898112585395679730027e-14
-  relative difference      = 1.89111921434072518716835172197e-14
+  Cell 22 analytic         = -1.65903308749093566911298833914
+  difference               = 3.1322816658110052379780852364e-21
+  relative difference      = 1.88801639305950180049013942752e-21
 
 Timing:
-  ground state             = 0.002198 s
-  analytic Archimedean     = 22.902654 s
+  ground state             = 0.002240 s
+  analytic Archimedean     = 58.248391 s
 
 ==============================================================================
 CELL 22 COMPLETE
