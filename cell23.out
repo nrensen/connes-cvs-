@@ -6,7 +6,7 @@ Parameters:
   c              = 13
   N              = 8
   T              = 60
-  working_dps    = 60
+  working_dps    = 80
 
 Forensic ground state:
   c              = 13
@@ -24,15 +24,15 @@ L =
 GROUND STATE CACHE: HIT
   key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
   generation dps = 150
-  working dps    = 60
-  lookup         = 0.000672 s
+  working dps    = 80
+  lookup         = 0.000658 s
 
 GROUND STATE CACHE: RETURN
   generation dps = 150
-  working dps    = 60
-  decode         = 0.001042 s
-  validation     = 0.000338 s
-  total          = 0.002052 s
+  working dps    = 80
+  decode         = 0.000903 s
+  validation     = 0.000325 s
+  total          = 0.001886 s
 
 lambda_forensic =
 6.7109352501259621034709589486121249e-23
@@ -40,7 +40,7 @@ lambda_forensic =
 ||u_star|| =
 1.0
 
-ground-state retrieval elapsed = 0.002361 s
+ground-state retrieval elapsed = 0.002158 s
 
 ------------------------------------------------------------------------------
 2. CANONICAL / FULL REPRESENTATIONS
@@ -65,7 +65,7 @@ No numerical y-integration is performed.
 Analytic Archimedean =
 -1.6590330874909356691129886258921456
 
-analytic Archimedean elapsed = 17.946318 s
+analytic Archimedean elapsed = 23.426964 s
 
 ==============================================================================
 CELL 23 COMPLETE
@@ -75,8 +75,8 @@ Result:
   analytic Archimedean = -1.6590330874909356691129886258921456
 
 Timing:
-  ground state         = 0.002361 s
-  analytic Archimedean = 17.946318 s
+  ground state         = 0.002158 s
+  analytic Archimedean = 23.426964 s
 
 ==============================================================================
 CELL 23 COMPLETE
