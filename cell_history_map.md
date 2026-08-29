@@ -692,40 +692,425 @@ The updated version uses `sum_v_G` and explicitly labels its linear character.
 
 ---
 
-# Cell 21 — planned next substantive cell
+# Cell 21 — modern Cell-5 reimplementation
 
 ## Intended purpose
 
-Cell 21 has not yet been committed.
+Cell 21 was the planned clean reimplementation of what historical Cell 5 was intended to calculate, using the modern `cell.py` machinery and explicitly avoiding the historical `G_complex` / `sum_v_G` category error.
 
-Its intended role is to move from the historical discrepancy investigations to a clean, independent treatment of the **Archimedean quadratic dictionary**.
+The principal calculation is the genuinely quadratic Archimedean functional
 
-The principal path should use:
-$T_v\to K_v\to\widehat g_v\to v^*Q_{\rm arch}v$,
+$$
+A_{\rm arch}
+=
+\frac{1}{\pi}
+\int_0^T h_+(r)
+\int_0^L
+K_v(1-y/L)\cos(ry)\,dy\,dr,
+$$
 
-rather than `sum_v_G` as a surrogate quadratic object.
+where $K_v$ is the quadratic Volterra kernel established in Cell 17.
 
-The intended question is essentially:
+The principal path therefore uses
 
-> Does the independently constructed quadratic Archimedean functional agree with the Archimedean quadratic form represented by the Galerkin matrix?
+$$
+v
+\to
+K_v
+\to
+\text{Fourier representation}
+\to
+A_{\rm arch},
+$$
 
-Cell 17 and Cell 20 provide the immediate groundwork.
+rather than treating
 
-### Design constraint
+$$
+\sum_k v_k G_k(r)
+$$
 
-Cell 21 should be deliberately resistant to the historical Cell-5/Cell-6 category error.
+as a surrogate for the quadratic Weil functional.
 
-In particular, `sum_v_G` may appear as a separately labelled diagnostic if useful, but it should **not be part of the principal quadratic calculation**.
+The historical Cell-5 expression involving `sum_v_G` is retained in Cell 21 only as a separately labelled forensic comparison.
 
-### Status
+## What it established
 
-**Planned / open.**
+Cell 21 successfully reproduced the corrected Archimedean quadratic calculation and compared it with the Archimedean quadratic form obtained from the Galerkin matrix.
+
+At 20 dps the direct nested numerical calculation produced a small discrepancy relative to the subsequently derived analytic reduction. The Archimedean calculation was therefore repeated at 40 dps.
+
+At 40 dps the independently evaluated nested numerical integral converged to the same value as the analytic reduction to essentially the full available precision:
+
+$$
+A_{\rm arch}
+=
+-1.659033087490935669112988625892145556527\ldots
+$$
+
+The 20-dps result differed from the high-precision value by approximately
+
+$$
+3.13\times10^{-21},
+$$
+
+whereas the 40-dps result agreed to approximately its full working precision.
+
+This established that the earlier discrepancy was a numerical-precision / nested-quadrature issue rather than a mathematical discrepancy in the quadratic construction.
+
+## Computational significance
+
+The result also exposed the enormous computational cost of evaluating the corrected expression directly.
+
+At 20 dps the Archimedean calculation took approximately 10,874 s (about 3.0 hours).
+
+At 40 dps it took approximately 44,081 s (about 12.2 hours).
+
+The calculation is therefore suitable as an independent validation method, but not as the preferred production implementation.
+
+## Status
+
+**Established — major validation result.**
+
+Cell 21 is now the independent brute-force control against which the analytic Cell-22/23 implementations can be checked.
 
 ---
 
-# Major historical arc
+# Cell 22 — analytic Archimedean reduction
 
-The overall development can be summarised as:
+## Intended purpose
+
+Cell 22 was created after Cell 21 exposed the prohibitive cost of the nested numerical integration.
+
+The objective was to preserve the same mathematics while analytically evaluating the inner $y$-integral.
+
+The Archimedean calculation was reduced from
+
+$$
+\frac{1}{\pi}
+\int_0^T
+h_+(r)
+\int_0^L
+K_v(1-y/L)\cos(ry)\,dy\,dr
+$$
+
+to
+
+$$
+\frac{1}{\pi}
+\int_0^T
+h_+(r)J_v(r)\,dr,
+$$
+
+where $J_v(r)$ is evaluated by a finite analytic Fourier sum.
+
+There is therefore only one remaining numerical quadrature: the outer $r$-integral.
+
+## What it established
+
+Cell 22 agreed with the independent Cell-21 result and converged systematically as working precision was increased.
+
+Using the Cell-23 120-dps result as the reference, the approximate absolute discrepancies were:
+
+| dps |            discrepancy |
+| --: | ---------------------: |
+|  20 | $3.14\times10^{-14}$ |
+|  40 | $2.87\times10^{-25}$ |
+|  60 | $3.95\times10^{-39}$ |
+|  80 | $9.62\times10^{-59}$ |
+| 100 | $1.80\times10^{-79}$ |
+| 120 |       $\sim10^{-91}$ |
+
+The relatively poor 20-dps result therefore proved to be a precision/conditioning issue. Increasing precision caused the result to converge rapidly to the same value obtained independently by Cell 21 and Cell 23.
+
+## Computational significance
+
+Cell 22 reduced the approximately three-hour Cell-21 calculation at 20 dps to approximately 23 seconds.
+
+At 40 dps it required approximately 58 seconds.
+
+This demonstrated that the expensive nested numerical integration was unnecessary once the inner integral was analytically reduced.
+
+## Status
+
+**Established — validated analytic reduction.**
+
+Cell 22 is retained as the first-generation analytic implementation and as an independent computational route to the Cell-23 result.
+
+---
+
+# Cell 23 — optimised analytic Archimedean calculation
+
+## Intended purpose
+
+Cell 23 takes the analytic reduction established in Cell 22 and improves its numerical and computational efficiency without changing the mathematics.
+
+The principal optimisations are:
+
+* exploit the symmetry between the $(m,n)$ and $(n,m)$ terms;
+* evaluate each Fourier-mode $S_m(r)$ only once for a given $r$;
+* use analytically stable forms for expressions such as $1-\cos(x)$;
+* express the kernel integral using a sinc-based representation with the removable $k=0$ limit handled explicitly.
+
+The resulting calculation still evaluates
+
+$$
+A_{\rm arch}
+=
+\frac{1}{\pi}
+\int_0^T h_+(r)J_v(r)\,dr,
+$$
+
+but does substantially less repeated arithmetic than Cell 22.
+
+## What it established
+
+Cell 23 converges extremely rapidly with working precision.
+
+Using the 120-dps Cell-23 result as the reference, the approximate discrepancies are:
+
+| dps |            discrepancy |
+| --: | ---------------------: |
+|  20 | $1.44\times10^{-21}$ |
+|  40 | $2.15\times10^{-41}$ |
+|  60 | $4.16\times10^{-62}$ |
+|  80 | $2.01\times10^{-82}$ |
+| 120 |              reference |
+
+The 60-, 80-, 100- and 120-dps calculations demonstrate very strong stability of the resulting value.
+
+The limiting value is
+
+$$
+A_{\rm arch}
+=
+-1.6590330874909356691129886258921455565271140176152095515115701580412723893977269298\ldots
+$$
+
+The agreement with Cell 21 at 40 dps is particularly important because Cell 21 obtains the result through the original nested numerical integration rather than through the analytic reduction.
+
+Cell 22 independently converges to the same value, although more slowly with respect to working precision.
+
+Thus Cell 23 is supported by two independent computational routes:
+
+$$
+\text{Cell 21}
+\longrightarrow
+A_{\rm arch},
+$$
+
+and
+
+$$
+\text{Cell 22}
+\longrightarrow
+A_{\rm arch},
+$$
+
+with both converging to the Cell-23 result.
+
+## Computational significance
+
+The analytic optimisation is dramatic.
+
+At 40 dps, Cell 23 requires only a few seconds compared with approximately 12 hours for Cell 21.
+
+At 120 dps, Cell 23 still completes in roughly a minute.
+
+The brute-force nested integral is therefore no longer an appropriate production method for this calculation. It is best regarded as an independent validation method.
+
+## Status
+
+**Established — current preferred Archimedean computational implementation.**
+
+Cell 23 is now the natural basis for future high-precision Archimedean calculations.
+
+---
+
+# Cells 19 and 5_corrected — implications of the analytic reduction
+
+## Cell 19
+
+Cell 19 was designed as an extensive numerical audit of the distinction between coefficient-weighted linear constructions and genuinely quadratic forms.
+
+Its mathematical purpose remains legitimate, but its implementation performs very expensive nested numerical integrations.
+
+At the current recorded run, Cell 19 at 50 dps had already consumed approximately
+
+$$
+6325\ {\rm minutes}
+\approx105.4\ {\rm hours},
+$$
+
+with no useful final result yet available.
+
+This is now understood to be a computationally obsolete route for the quadratic Archimedean calculations.
+
+The completion of Cell 21, together with the successful Cell 22/23 reductions, means that the mathematical question motivating Cell 19 has already been addressed through substantially cheaper and independently validated machinery.
+
+The running calculation may be retained temporarily as a historical experiment, but it should not be regarded as a prerequisite for the current research programme.
+
+### Status
+
+**Running / computationally superseded.**
+
+---
+
+## `cell5_corrected.py`
+
+`cell5_corrected.py` is another historical branch that evaluates the corrected Archimedean quantity using expensive nested numerical integrations, including repeated calculations at different values of $T$.
+
+At the current recorded run, the 80-dps calculation had consumed approximately
+
+$$
+8551\ {\rm minutes}
+\approx142.5\ {\rm hours}.
+$$
+
+It had completed the $T=20$ calculation and was still working toward the next $T$ value.
+
+The successful Cell-21 result has now provided an independent brute-force validation of the corrected quadratic construction, while Cells 22 and 23 have demonstrated that the same mathematical quantity can be evaluated vastly more efficiently.
+
+Consequently, there is no longer a mathematical need to complete the entire historical `cell5_corrected.py` sequence merely to establish the correctness of the quadratic Archimedean construction.
+
+The historical file should remain untouched. Any decision to terminate its current long-running calculation is a computational-resource decision, not a change to the historical record.
+
+### Status
+
+**Historical experimental branch / computationally superseded.**
+
+---
+
+# Current research state after Cells 21–23
+
+The Archimedean investigation has now passed an important transition.
+
+The historical sequence
+
+$$
+\text{Cell 5}
+\to
+\text{discrepancy}
+\to
+\text{Cells 6–20}
+$$
+
+has established why the original calculation failed and has produced the correct quadratic construction.
+
+Cell 21 then provided an independent brute-force implementation of that construction.
+
+Cells 22 and 23 subsequently transformed the calculation from an impractical nested numerical integral into an efficient analytic computation.
+
+The current picture is therefore:
+
+$$
+\boxed{
+\begin{array}{c}
+\text{Cell 21}\\
+\text{independent nested numerical validation}
+\end{array}
+}
+$$
+
+$$
+\Downarrow
+$$
+
+$$
+\boxed{
+\begin{array}{c}
+\text{Cell 22}\\
+\text{analytic reduction}
+\end{array}
+}
+$$
+
+$$
+\Downarrow
+$$
+
+$$
+\boxed{
+\begin{array}{c}
+\text{Cell 23}\\
+\text{optimised analytic implementation}
+\end{array}
+}
+$$
+
+The three routes converge to the same Archimedean value.
+
+This substantially increases confidence in the quadratic Archimedean dictionary and removes the need to use the expensive nested integral as the normal computational route.
+
+---
+
+# Future directions
+
+The purpose of this section is deliberately forward-looking. As the investigation progresses, these directions will themselves become part of the historical record.
+
+## 1. Adopt Cell 23 as the production Archimedean implementation
+
+Future calculations requiring the Archimedean quadratic functional should preferentially use the Cell-23 analytic machinery.
+
+The nested Cell-21 calculation should be reserved for occasional independent validation.
+
+The historical Cell-5 and Cell-19 implementations should remain available for forensic purposes but should not be used as normal computational infrastructure.
+
+## 2. Add CPU timing to future calculations
+
+The previous cells generally recorded wall-clock time. This is useful for knowing how long a calculation took on the machine, but it does not distinguish computation from waiting for CPU availability.
+
+Future substantial cells should preferably record both:
+
+* wall-clock time;
+* process CPU time.
+
+This will allow computational cost to be compared meaningfully when multiple long-running experiments share the same machine.
+
+Historical cells should not be rewritten merely to add this information.
+
+## 3. Revisit finite-$T$ behaviour using the efficient implementation
+
+The analytical Cell-23 route makes it practical to investigate the dependence on $T$ at substantially higher precision and with many more samples than was practical using the nested integral.
+
+This should allow the finite-$T$ convergence of the Archimedean contribution to be studied without spending days on each calculation.
+
+## 4. Consolidate the validated Archimedean dictionary
+
+The work of Cells 17, 20, 21, 22 and 23 should eventually be distilled into a clean statement of the finite-dimensional Archimedean dictionary:
+
+$$
+v
+\to
+T_v
+\to
+K_v
+\to
+\widehat g_v
+\to
+Q_{\rm arch}.
+$$
+
+The goal is not merely a fast numerical routine, but a transparent mathematical chain in which the semantic type of every object is clear.
+
+## 5. Resume the broader Connes–CvS investigation
+
+The project should now be able to move beyond the historical Cell-5 discrepancy.
+
+The central computational infrastructure is considerably better understood:
+
+* the finite Fourier dictionary has been audited;
+* canonical/full coordinates are understood;
+* the prime contribution has been independently checked;
+* the Archimedean source has been independently checked;
+* the genuinely quadratic $K_v$ construction has been established;
+* the historical `G_complex` / `sum_v_G` distinction is understood;
+* the Archimedean quadratic calculation now has an efficient, independently validated implementation.
+
+The next work should therefore focus on what mathematical consequences can be extracted from the validated finite-dimensional construction, rather than continuing to reproduce the historical numerical calculations.
+
+---
+
+# Updated major historical arc
 
 ```text
 Cells 0–4
@@ -758,6 +1143,10 @@ Cell 17
 Cell 18
     Historical G_complex equivalence confirmed
     ↓
+Cell 19
+    Extensive linear-vs-quadratic numerical audit
+    [running; computationally superseded]
+    ↓
 Cell 20
     Corrected Archimedean quadratic audit
     ↓
@@ -765,56 +1154,21 @@ Cell 20a
     Pole linear-vs-quadratic forensic audit
     ↓
 Cell 21
-    Correct Archimedean quadratic dictionary
-    [planned]
-```
-## The two distinct historical errors
-
-It is important that the repository history does not collapse these into one issue.
-
-1. Canonical/full coordinate error
-
-At various stages the full $(2N+1)$ representation and canonical
-$(N+1)$ representation were confused.
-
-This was investigated and resolved by Cells 13–15.
-
-2. Linear  $G_v$ versus quadratic Weil functional
-
-The historical Archimedean calculation treated $G_v(r)=\sum_k v_kG_k(r)$
-as though it represented the quadratic Archimedean functional.
-
-This was the deeper semantic error exposed through Cell 5 and revisited in Cell 6.
-
-Cell 17 established the appropriate genuinely quadratic $K_v$ route.
-
-These are **different errors** and should remain separately documented.
-
-## `cell.py` refactor — historical significance
-
-The `cell.py` refactor at commit `8b317297bb1361d37d64cdc747c656ee50918add` was not a mathematical correction.
-
-It changed the vocabulary:
-
-```text
-F_vector          → sum_v_F
-Fprime_vector     → sum_v_Fprime
-G_complex_basis   → G_basis_complex
-G_complex         → sum_v_G
+    Clean modern Cell-5 reimplementation
+    Independent brute-force validation
+    ↓
+Cell 22
+    Analytic elimination of inner y-integral
+    ↓
+Cell 23
+    Optimised analytic Archimedean implementation
+    ↓
+Current direction
+    Efficient high-precision Archimedean calculations
+    + broader Connes–CvS mathematical investigation
 ```
 
-The pre/post regression test confirmed that the numerical fingerprint was unchanged.
-
-The subsequent migration commit `9aa29074b05a457c012dba7ec33cf2f5ee04f38c` mechanically updated the few cells that import these objects.
-
-The purpose of this refactor is therefore historical as well as practical:
-
-> **Make the mathematical category of an object more visible without changing what the historical calculations actually do.**
-
-In particular, `sum_v_G` makes explicit that the operation is the coefficient-weighted sum
-$\sum_k v_kG_k$, which is precisely the distinction that was obscured by the old name `G_complex`.
-
-# Research-state summary
+## Current status summary
 
 At the current stage:
 
@@ -822,9 +1176,13 @@ At the current stage:
 * The canonical/full coordinate distinction is understood.
 * The prime-side dictionary has been independently audited.
 * The Archimedean source itself has been independently audited.
-* The genuinely quadratic `K_v` construction has been established and tested.
+* The genuinely quadratic $K_v$ construction has been established and tested.
 * The historical `G_complex` construction has been confirmed mathematically equivalent to the current `sum_v_G`.
-* The historical Cell-5 and Cell-6 misuse of that linear construction remains preserved as historical record.
-* Cell 20 provides the current corrected Archimedean calculation.
-* Cell 20a separately investigates the pole linear/quadratic distinction.
-* Cell 21 remains the natural next substantive synthesis of the Archimedean quadratic dictionary.
+* The historical Cell-5/Cell-6 misuse of that linear construction remains preserved as historical record.
+* Cell 21 has independently validated the corrected quadratic Archimedean calculation through expensive nested numerical integration.
+* Cell 22 has analytically eliminated the inner numerical integral.
+* Cell 23 has optimised that analytic calculation and demonstrated stable high-precision convergence.
+* The three computational routes converge to the same Archimedean value.
+* The expensive nested-integral implementations are now best regarded as validation/forensic calculations rather than production machinery.
+* The investigation is ready to move beyond the Cell-5 discrepancy and back toward the broader mathematical objectives of the project.
+
