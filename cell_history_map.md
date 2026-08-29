@@ -182,7 +182,7 @@ $$\frac1\pi\int_0^T h_+(r) \thinspace \mathop{\mathrm{Re}}G_v(r) \thinspace dr \
 
 where
 
-$$G_v(r)=\sum_k v_kG_k(r)$$.
+$$G_v(r)=\sum_k v_kG_k(r).$$
 
 That quantity is a coefficient-weighted **linear** construction, not the quadratic Weil functional represented by the Galerkin matrix.
 
@@ -645,7 +645,7 @@ $$\frac1\pi\int_0^T h_+(r)\mathop{\mathrm{Re}}G_v(r) \thinspace dr$$
 
 with the required quadratic functional
 
-$$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry) \thinspace dy \thinspace dr$$.
+$$\frac1\pi\int_0^T h_+(r)\int_0^L K_v(1-y/L)\cos(ry) \thinspace dy \thinspace dr.$$
 
 It uses the closed finite-Fourier representation of `K` developed in Cell 17.
 
@@ -791,7 +791,7 @@ to
 $$
 \frac{1}{\pi}
 \int_0^T
-h_+(r)J_v(r)\thinspace dr,
+h_+(r)J_v(r)\thinspace dr
 $$
 
 where $J_v(r)$ is evaluated by a finite analytic Fourier sum.
@@ -850,7 +850,7 @@ $$
 A_{\rm arch}
 =
 \frac{1}{\pi}
-\int_0^T h_+(r)J_v(r)\thinspace dr,
+\int_0^T h_+(r)J_v(r)\thinspace dr
 $$
 
 but does substantially less repeated arithmetic than Cell 22.
@@ -885,11 +885,11 @@ Cell 22 independently converges to the same value, although more slowly with res
 
 Thus Cell 23 is supported by two independent computational routes:
 
-$$\text{Cell 21}\longrightarrow A_{\rm arch},$$
+$$\text{Cell 21}\longrightarrow A_{\rm arch}$$
 
 and
 
-$$\text{Cell 22}\longrightarrowA_{\rm arch},$$
+$$\text{Cell 22}\longrightarrowA_{\rm arch}$$
 
 with both converging to the Cell-23 result.
 
