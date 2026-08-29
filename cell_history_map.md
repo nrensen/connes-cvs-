@@ -861,13 +861,13 @@ Cell 23 converges extremely rapidly with working precision.
 
 Using the 120-dps Cell-23 result as the reference, the approximate discrepancies are:
 
-| dps |            discrepancy |
-| --: | ---------------------: |
-|  20 | $1.44\times10^{-21}$ |
-|  40 | $2.15\times10^{-41}$ |
-|  60 | $4.16\times10^{-62}$ |
-|  80 | $2.01\times10^{-82}$ |
-| 120 |              reference |
+| dps | discrepancy |
+| --: | ----------: |
+| 20 | $1.44\times10^{-21}$ |
+| 40 | $2.15\times10^{-41}$ |
+| 60 | $4.16\times10^{-62}$ |
+| 80 | $2.01\times10^{-82}$ |
+| 120 | reference |
 
 The 60-, 80-, 100- and 120-dps calculations demonstrate very strong stability of the resulting value.
 
