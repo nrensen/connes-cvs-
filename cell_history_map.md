@@ -846,12 +846,7 @@ The principal optimisations are:
 
 The resulting calculation still evaluates
 
-$$
-A_{\rm arch}
-=
-\frac{1}{\pi}
-\int_0^T h_+(r)J_v(r)\thinspace dr
-$$
+$$A_{\rm arch}=\frac{1}{\pi}\int_0^T h_+(r)J_v(r)\thinspace dr$$
 
 but does substantially less repeated arithmetic than Cell 22.
 
@@ -873,11 +868,7 @@ The 60-, 80-, 100- and 120-dps calculations demonstrate very strong stability of
 
 The limiting value is
 
-$$
-A_{\rm arch}
-=
--1.6590330874909356691129886258921455565271140176152095515115701580412723893977269298\ldots
-$$
+$$A_{\rm arch}=-1.6590330874909356691129886258921455565271140176152095515115701580412723893977269298\ldots$$
 
 The agreement with Cell 21 at 40 dps is particularly important because Cell 21 obtains the result through the original nested numerical integration rather than through the analytic reduction.
 
