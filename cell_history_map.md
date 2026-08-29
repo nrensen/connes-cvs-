@@ -705,7 +705,7 @@ A_{\rm arch}=\frac{1}{\pi}
 \int_0^T h_+(r)
 \int_0^L
 K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr
-$$,
+,$$
 
 where $K_v$ is the quadratic Volterra kernel established in Cell 17.
 
@@ -719,7 +719,7 @@ K_v
 \text{Fourier representation}
 \to
 A_{\rm arch}
-$$,
+,$$
 
 rather than treating
 
@@ -788,8 +788,8 @@ to
 $$
 \frac{1}{\pi}
 \int_0^T
-h_+(r)J_v(r)\thinspace dr
-$$,
+h_+(r)J_v(r)\thinspace dr,
+$$
 
 where $J_v(r)$ is evaluated by a finite analytic Fourier sum.
 
@@ -847,8 +847,8 @@ $$
 A_{\rm arch}
 =
 \frac{1}{\pi}
-\int_0^T h_+(r)J_v(r)\thinspace dr
-$$,
+\int_0^T h_+(r)J_v(r)\thinspace dr,
+$$
 
 but does substantially less repeated arithmetic than Cell 22.
 
