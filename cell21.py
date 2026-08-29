@@ -35,7 +35,7 @@ from cell import (
 # PARAMETERS
 # ============================================================
 
-WORKING_DPS = 20
+WORKING_DPS = 40
 
 # Cell-21 calculation cutoff.
 T = 60
@@ -47,7 +47,7 @@ N = FORENSIC_GROUND_STATE["N"]
 
 L = compute_L(c)
 
-DISPLAY_DIGITS = 30
+DISPLAY_DIGITS = 40
 
 
 def nstr(x):
