@@ -701,9 +701,7 @@ Cell 21 was the planned clean reimplementation of what historical Cell 5 was int
 The principal calculation is the genuinely quadratic Archimedean functional
 
 $$
-A_{\rm arch}
-=
-\frac{1}{\pi}
+A_{\rm arch}=\frac{1}{\pi}
 \int_0^T h_+(r)
 \int_0^L
 K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr
