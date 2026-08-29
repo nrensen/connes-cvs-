@@ -1,7 +1,7 @@
 # Connes–CvS exploratory cell history
 
 **Repository:** `nrensen/connes-cvs-`  
-**Historical snapshot audited:** commit `9aa29074b05a457c012dba7ec33cf2f5ee04f38c`  
+**Historical snapshot audited:** commit `2275abc0bacbc804a4197ef5c5e65d03aa82312f`  
 **Purpose of this document:** preserve a compact map of what each exploratory `cell<n>.py` was intended to investigate, what it established, and where discrepancies or historical errors were encountered.
 
 This document is a **research-history map**, not a claim that every historical cell is mathematically correct. In particular, known errors are intentionally recorded rather than silently corrected.
