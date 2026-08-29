@@ -285,11 +285,13 @@ They should be read together with Cells 6 and 7–8 rather than as independent f
 
 Cell 7 explicitly states its goal as deriving and numerically verifying
 
-$$\text{completed-zeta Archimedean factor}
+$$
+\text{completed-zeta Archimedean factor}
 \to h_+(\tau)
 \to \text{basis Fourier response}
 \to S_x(\tau)
-\to \psi_{\rm arch}(x)$$.
+\to \psi_{\rm arch}(x).
+$$
 
 It deliberately avoids constructing a large Galerkin matrix.
 
@@ -336,11 +338,13 @@ Cell 9 explicitly tests what a coefficient vector in the trigonometric Galerkin 
 
 The intended chain is:
 
-$$v
+$$
+v
 \to f_v(t)
 \to F_v(\tau)
 \to \text{translated test function}
-\to \text{Weil quadratic form}$$.
+\to \text{Weil quadratic form}.
+$$
 
 It deliberately uses arbitrary test vectors rather than relying solely on the ground state.
 
@@ -406,7 +410,8 @@ It pinned down the precise transform/sign/centering convention used by the extra
 
 Cell 12 closes the loop between:
 
-$$v
+$$
+v
 \to f_v
 \to H_v
 \to \text{Weil quadratic form}
@@ -704,8 +709,8 @@ $$
 A_{\rm arch}=\frac{1}{\pi}
 \int_0^T h_+(r)
 \int_0^L
-K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr
-,$$
+K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr,
+$$
 
 where $K_v$ is the quadratic Volterra kernel established in Cell 17.
 
@@ -718,8 +723,8 @@ K_v
 \to
 \text{Fourier representation}
 \to
-A_{\rm arch}
-,$$
+A_{\rm arch},
+$$
 
 rather than treating
 
@@ -737,9 +742,7 @@ At 20 dps the direct nested numerical calculation produced a small discrepancy r
 
 At 40 dps the independently evaluated nested numerical integral converged to the same value as the analytic reduction to essentially the full available precision:
 
-$$A_{\rm arch}
-=
--1.659033087490935669112988625892145556527\ldots$$
+$$A_{\rm arch}=-1.659033087490935669112988625892145556527\ldots$$
 
 The 20-dps result differed from the high-precision value by approximately $3.13\times10^{-21}$,
 
@@ -882,11 +885,11 @@ Cell 22 independently converges to the same value, although more slowly with res
 
 Thus Cell 23 is supported by two independent computational routes:
 
-$$\text{Cell 21}\longrightarrow A_{\rm arch}$$,
+$$\text{Cell 21}\longrightarrow A_{\rm arch},$$
 
 and
 
-$$\text{Cell 22}\longrightarrowA_{\rm arch}$$,
+$$\text{Cell 22}\longrightarrowA_{\rm arch},$$
 
 with both converging to the Cell-23 result.
 
@@ -918,7 +921,7 @@ Its mathematical purpose remains legitimate, but its implementation performs ver
 
 At the current recorded run, Cell 19 at 50 dps had already consumed approximately
 
-$$6325\ {\rm minutes}\approx105.4\ {\rm hours}$$,
+$$6325\ {\rm minutes}\approx105.4\ {\rm hours},$$
 
 with no useful final result yet available.
 
@@ -940,8 +943,7 @@ The running calculation may be retained temporarily as a historical experiment, 
 
 At the current recorded run, the 80-dps calculation had consumed approximately
 
-$$8551\ {\rm minutes}
-\approx142.5\ {\rm hours}$$.
+$$8551\ {\rm minutes}\approx142.5\ {\rm hours}.$$
 
 It had completed the $T=20$ calculation and was still working toward the next $T$ value.
 
@@ -963,11 +965,13 @@ The Archimedean investigation has now passed an important transition.
 
 The historical sequence
 
-$$\text{Cell 5}
+$$
+\text{Cell 5}
 \to
 \text{discrepancy}
 \to
-\text{Cells 6–20}$$
+\text{Cells 6–20}
+$$
 
 has established why the original calculation failed and has produced the correct quadratic construction.
 
@@ -977,30 +981,36 @@ Cells 22 and 23 subsequently transformed the calculation from an impractical nes
 
 The current picture is therefore:
 
-$$\boxed{
+$$
+\boxed{
 \begin{array}{c}
 \text{Cell 21}\\
 \text{independent nested numerical validation}
 \end{array}
-}$$
+}
+$$
 
 $$\Downarrow$$
 
-$$\boxed{
+$$
+\boxed{
 \begin{array}{c}
 \text{Cell 22}\\
 \text{analytic reduction}
 \end{array}
-}$$
+}
+$$
 
 $$\Downarrow$$
 
-$$\boxed{
+$$
+\boxed{
 \begin{array}{c}
 \text{Cell 23}\\
 \text{optimised analytic implementation}
 \end{array}
-}$$
+}
+$$
 
 The three routes converge to the same Archimedean value.
 
@@ -1043,7 +1053,8 @@ This should allow the finite-$T$ convergence of the Archimedean contribution to 
 
 The work of Cells 17, 20, 21, 22 and 23 should eventually be distilled into a clean statement of the finite-dimensional Archimedean dictionary:
 
-$$v
+$$
+v
 \to
 T_v
 \to
@@ -1051,7 +1062,8 @@ K_v
 \to
 \widehat g_v
 \to
-Q_{\rm arch}$$.
+Q_{\rm arch}.
+$$
 
 The goal is not merely a fast numerical routine, but a transparent mathematical chain in which the semantic type of every object is clear.
 
