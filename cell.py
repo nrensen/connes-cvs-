@@ -1509,6 +1509,372 @@ def K_canonical(v, omega):
 
 
 # ============================================================
+# ANALYTIC FOURIER REPRESENTATION OF K_v
+# ============================================================
+#
+# The Archimedean calculation can be reduced analytically to
+# a single r-integral by expressing the Fourier transform of
+# the quadratic K_v kernel as a finite sum over the Fourier
+# modes.
+#
+# For canonical coefficient vector v, let
+#
+#     u_{-N}, ..., u_0, ..., u_N
+#
+# be the corresponding full symmetric coefficients.
+#
+# The following functions implement the analytic ingredients
+# of that finite Fourier representation.
+#
+# These expressions are algebraically equivalent to the
+# numerical inner integration used in Cells 21/22.
+#
+# No mathematical change is intended by this implementation.
+# ============================================================
+
+
+def sinc(z):
+    """
+    Stable sinc function:
+
+        sinc(z) = sin(z) / z
+
+    with the removable value
+
+        sinc(0) = 1.
+    """
+
+    z = mp.mpf(z)
+
+    if z == 0:
+        return mp.mpf(1)
+
+    return mp.sin(z) / z
+
+
+def one_minus_cos(x):
+    """
+    Stable evaluation of
+
+        1 - cos(x)
+
+    using
+
+        1 - cos(x) = 2 sin^2(x/2).
+    """
+
+    x = mp.mpf(x)
+
+    return (
+        2
+        * mp.sin(x / 2) ** 2
+    )
+
+
+def S_mode(m, r, L):
+    """
+    Fourier-mode sine/cosine integral:
+
+        S_m(r)
+          = integral_0^L
+                sin(a_m y) cos(r y)
+            dy
+
+    where
+
+        a_m = 2*pi*m/L.
+
+    For m = 0 the value is exactly zero.
+
+    The removable limit when a_m +/- r -> 0 is also handled
+    explicitly.
+    """
+
+    m = int(m)
+    r = mp.mpf(r)
+    L = mp.mpf(L)
+
+    a_m = (
+        2
+        * mp.pi
+        * m
+        / L
+    )
+
+    if m == 0:
+        return mp.mpf(0)
+
+    k_plus = a_m + r
+    k_minus = a_m - r
+
+    plus = (
+        one_minus_cos(
+            k_plus * L
+        )
+        / k_plus
+        if k_plus != 0
+        else mp.mpf(0)
+    )
+
+    minus = (
+        one_minus_cos(
+            k_minus * L
+        )
+        / k_minus
+        if k_minus != 0
+        else mp.mpf(0)
+    )
+
+    return (
+        plus + minus
+    ) / 2
+
+
+def W_triangular(k, L):
+    """
+    Fourier transform of the triangular window:
+
+        W(k)
+          = integral_0^L
+                (1 - y/L) cos(k y)
+            dy
+
+    with the stable representation
+
+        W(k)
+          = L/2 * sinc(k L/2)^2.
+
+    In particular,
+
+        W(0) = L/2.
+    """
+
+    k = mp.mpf(k)
+    L = mp.mpf(L)
+
+    return (
+        L
+        / 2
+        * sinc(
+            k * L / 2
+        ) ** 2
+    )
+
+
+def C_mode(m, r, L):
+    """
+    Fourier-mode triangular-window integral:
+
+        C_m(r)
+          = integral_0^L
+                (1 - y/L)
+                cos(a_m y)
+                cos(r y)
+            dy
+
+    where
+
+        a_m = 2*pi*m/L.
+
+    Using the product-to-sum identity,
+
+        C_m(r)
+          = 1/2 [
+                W_triangular(a_m-r, L)
+                + W_triangular(a_m+r, L)
+            ].
+    """
+
+    m = int(m)
+    r = mp.mpf(r)
+    L = mp.mpf(L)
+
+    a_m = (
+        2
+        * mp.pi
+        * m
+        / L
+    )
+
+    return (
+        W_triangular(
+            a_m - r,
+            L,
+        )
+        + W_triangular(
+            a_m + r,
+            L,
+        )
+    ) / 2
+
+
+def K_fourier(v, r, L):
+    """
+    Analytic Fourier-side representation of the quadratic K_v
+    kernel.
+
+    Parameters
+    ----------
+    v:
+        Canonical real-even coefficient vector
+
+            v = (v_0, ..., v_N).
+
+    r:
+        Real spectral variable.
+
+    L:
+        Logarithmic interval length, L = log(c).
+
+    Returns
+    -------
+    mp.mpf
+        The value of the Fourier representation J_v(r) of the
+        quadratic K_v kernel entering the explicit Archimedean
+        calculation.
+
+    Construction
+    ------------
+    The canonical vector is first converted to the full symmetric
+    Fourier coefficient vector u:
+
+        u_0     = v_0
+        u_{+k}  = u_{-k} = v_k / sqrt(2).
+
+    The result is then evaluated as
+
+        J_v(r)
+          = sum_m 2 u_m^2 C_m(r)
+
+            + 2 sum_{m<n}
+                u_m u_n / pi
+                * [S_n(r) - S_m(r)] / (m-n).
+
+    The (m,n) and (n,m) terms are identical, so only m < n
+    is evaluated. Each S_m(r) is also evaluated only once.
+
+    IMPORTANT
+    ---------
+    K_fourier is a quadratic construction in the coefficient
+    vector v. It represents the Fourier-side form of the
+    quadratic K_v kernel.
+
+    It must not be confused with coefficient-weighted
+    constructions such as sum_v_F or sum_v_G.
+    """
+
+    r = mp.mpf(r)
+    L = mp.mpf(L)
+
+    N = len(v) - 1
+
+    # Convert the canonical coefficients to the full symmetric
+    # Fourier coefficients used by the finite Fourier sum.
+    u = canonical_to_full(
+        v,
+        N,
+    )
+
+    modes = list(
+        range(-N, N + 1)
+    )
+
+    # S_m(r) is common to many terms, so evaluate it once.
+    S = {
+        m: S_mode(
+            m,
+            r,
+            L,
+        )
+        for m in modes
+    }
+
+    total = mp.mpf(0)
+
+    # --------------------------------------------------------
+    # Diagonal terms
+    # --------------------------------------------------------
+
+    for m in modes:
+
+        um = u[m + N]
+
+        total += (
+            2
+            * um
+            * um
+            * C_mode(
+                m,
+                r,
+                L,
+            )
+        )
+
+    # --------------------------------------------------------
+    # Off-diagonal terms
+    #
+    # The (m,n) and (n,m) contributions are identical, so only
+    # m < n is required.
+    # --------------------------------------------------------
+
+    for i, m in enumerate(modes):
+
+        um = u[i]
+
+        for j in range(i + 1, len(modes)):
+
+            n = modes[j]
+            un = u[j]
+
+            total += (
+                2
+                * um
+                * un
+                / mp.pi
+                * (
+                    S[n]
+                    - S[m]
+                )
+                / mp.mpf(m - n)
+            )
+
+    return total
+
+
+# ============================================================
+# ARCHIMEDEAN SOURCE
+# ============================================================
+
+def h_plus(r):
+    """
+    Archimedean source function:
+
+        h_+(r)
+          = Re psi(1/4 + i r/2) - log(pi).
+
+    This is the source appearing in the explicit Archimedean
+    functional
+
+        A_arch(T)
+          = 1/pi * integral_0^T
+                h_+(r) K_fourier(v,r,L)
+            dr.
+    """
+
+    r = mp.mpf(r)
+
+    return (
+        mp.re(
+            mp.digamma(
+                mp.mpf("0.25")
+                + 1j * r / 2
+            )
+        )
+        - mp.log(mp.pi)
+    )
+
+
+# ============================================================
 # FOURIER WEIGHT
 # ============================================================
 
