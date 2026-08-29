@@ -700,24 +700,28 @@ Cell 21 was the planned clean reimplementation of what historical Cell 5 was int
 
 The principal calculation is the genuinely quadratic Archimedean functional
 
-$$A_{\rm arch}
+$$
+A_{\rm arch}
 =
 \frac{1}{\pi}
 \int_0^T h_+(r)
 \int_0^L
-K_v(1-y/L)\cos(ry)\,dy\,dr$$,
+K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr
+$$,
 
 where $K_v$ is the quadratic Volterra kernel established in Cell 17.
 
 The principal path therefore uses
 
-$$v
+$$
+v
 \to
 K_v
 \to
 \text{Fourier representation}
 \to
-A_{\rm arch}$$,
+A_{\rm arch}
+$$,
 
 rather than treating
 
@@ -739,9 +743,7 @@ $$A_{\rm arch}
 =
 -1.659033087490935669112988625892145556527\ldots$$
 
-The 20-dps result differed from the high-precision value by approximately
-
-$$3.13\times10^{-21}$$,
+The 20-dps result differed from the high-precision value by approximately $3.13\times10^{-21}$,
 
 whereas the 40-dps result agreed to approximately its full working precision.
 
@@ -775,17 +777,21 @@ The objective was to preserve the same mathematics while analytically evaluating
 
 The Archimedean calculation was reduced from
 
-$$\frac{1}{\pi}
+$$
+\frac{1}{\pi}
 \int_0^T
 h_+(r)
 \int_0^L
-K_v(1-y/L)\cos(ry)\,dy\,dr$$
+K_v(1-y/L)\cos(ry)\thinspace dy\thinspace dr
+$$
 
 to
 
-$$\frac{1}{\pi}
+$$
+\frac{1}{\pi}
 \int_0^T
-h_+(r)J_v(r)\,dr,$$
+h_+(r)J_v(r)\thinspace dr
+$$,
 
 where $J_v(r)$ is evaluated by a finite analytic Fourier sum.
 
@@ -839,10 +845,12 @@ The principal optimisations are:
 
 The resulting calculation still evaluates
 
-$$A_{\rm arch}
+$$
+A_{\rm arch}
 =
 \frac{1}{\pi}
-\int_0^T h_+(r)J_v(r)\,dr$$,
+\int_0^T h_+(r)J_v(r)\thinspace dr
+$$,
 
 but does substantially less repeated arithmetic than Cell 22.
 
@@ -864,9 +872,11 @@ The 60-, 80-, 100- and 120-dps calculations demonstrate very strong stability of
 
 The limiting value is
 
-$$A_{\rm arch}
+$$
+A_{\rm arch}
 =
--1.6590330874909356691129886258921455565271140176152095515115701580412723893977269298\ldots$$
+-1.6590330874909356691129886258921455565271140176152095515115701580412723893977269298\ldots
+$$
 
 The agreement with Cell 21 at 40 dps is particularly important because Cell 21 obtains the result through the original nested numerical integration rather than through the analytic reduction.
 
@@ -874,15 +884,11 @@ Cell 22 independently converges to the same value, although more slowly with res
 
 Thus Cell 23 is supported by two independent computational routes:
 
-$$\text{Cell 21}
-\longrightarrow
-A_{\rm arch}$$,
+$$\text{Cell 21}\longrightarrow A_{\rm arch}$$,
 
 and
 
-$$\text{Cell 22}
-\longrightarrow
-A_{\rm arch}$$,
+$$\text{Cell 22}\longrightarrowA_{\rm arch}$$,
 
 with both converging to the Cell-23 result.
 
@@ -914,8 +920,7 @@ Its mathematical purpose remains legitimate, but its implementation performs ver
 
 At the current recorded run, Cell 19 at 50 dps had already consumed approximately
 
-$$6325\ {\rm minutes}
-\approx105.4\ {\rm hours}$$,
+$$6325\ {\rm minutes}\approx105.4\ {\rm hours}$$,
 
 with no useful final result yet available.
 
