@@ -246,7 +246,7 @@ def archimedean_to_T(T):
         mp.quad(
             lambda r:
                 h_plus(r)
-                * K_fourier(v_star, r, L),
+                * K_fourier(u, r, L),
             [0, T],
         )
         / mp.pi

@@ -1708,17 +1708,17 @@ def C_mode(m, r, L):
     ) / 2
 
 
-def K_fourier(v, r, L):
+def K_fourier(u, r, L):
     """
     Analytic Fourier-side representation of the quadratic K_v
     kernel.
 
     Parameters
     ----------
-    v:
-        Canonical real-even coefficient vector
+    u:
+        Full symmetric Fourier coefficient vector
 
-            v = (v_0, ..., v_N).
+            u = (u_{-N}, u_{-N+1}, ..., u_N).
 
     r:
         Real spectral variable.
@@ -1735,13 +1735,7 @@ def K_fourier(v, r, L):
 
     Construction
     ------------
-    The canonical vector is first converted to the full symmetric
-    Fourier coefficient vector u:
-
-        u_0     = v_0
-        u_{+k}  = u_{-k} = v_k / sqrt(2).
-
-    The result is then evaluated as
+    The is evaluated as
 
         J_v(r)
           = sum_m 2 u_m^2 C_m(r)
@@ -1766,14 +1760,7 @@ def K_fourier(v, r, L):
     r = mp.mpf(r)
     L = mp.mpf(L)
 
-    N = len(v) - 1
-
-    # Convert the canonical coefficients to the full symmetric
-    # Fourier coefficients used by the finite Fourier sum.
-    u = canonical_to_full(
-        v,
-        N,
-    )
+    N = int((len(u) - 1)/ 2)
 
     modes = list(
         range(-N, N + 1)
@@ -1857,7 +1844,7 @@ def h_plus(r):
 
         A_arch(T)
           = 1/pi * integral_0^T
-                h_+(r) K_fourier(v,r,L)
+                h_+(r) K_fourier(u,r,L)
             dr.
     """
 
