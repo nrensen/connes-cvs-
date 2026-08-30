@@ -1017,7 +1017,7 @@ $$
 K_v(\omega)
 =
 2\int_0^\omega
-T_v(t)\thinpace T_v(\omega-t)\thinspace dt,
+T_v(t)\thinspace T_v(\omega-t)\thinspace dt,
 \qquad 0\leq\omega\leq1
 $$
 
@@ -1036,7 +1036,7 @@ For the derivation, temporarily introduce the corresponding full symmetric coeff
 $$
 u_0=v_0,
 \qquad
-u_{+m}=u_{-m}=\frac{v_m}{\sqrt2},
+u_{+m}=u_{-m}=\frac{v_m}{\sqrt{2}},
 \qquad
 1\leq m\leq N.
 $$
