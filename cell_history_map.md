@@ -1017,8 +1017,8 @@ $$
 K_v(\omega)
 =
 2\int_0^\omega
-T_v(t)\,T_v(\omega-t)\,dt,
-\qquad 0\leq\omega\leq1,
+T_v(t)\thinpace T_v(\omega-t)\thinspace dt,
+\qquad 0\leq\omega\leq1
 $$
 
 without performing the inner convolution integral numerically.
@@ -1065,8 +1065,9 @@ J_v(r)
 =
 \int_0^L
 K_v\left(1-\frac{y}{L}\right)
-\cos(ry)\,dy.
+\cos(ry)\thinspacedy
 $$
+.
 
 The substitution
 
@@ -1081,8 +1082,9 @@ e^{2\pi i m\omega}
 =
 e^{2\pi i m(1-y/L)}
 =
-e^{-ia_m y}.
+e^{-ia_m y}
 $$
+.
 
 ### 2. Expand the convolution
 
