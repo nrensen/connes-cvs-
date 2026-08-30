@@ -347,7 +347,7 @@ def _ground_state_parameters(
 
 def _ground_state_encode(
     lambda_min,
-    v_full,
+    v_canonical,
     dps,
 ):
     """
@@ -363,12 +363,12 @@ def _ground_state_encode(
             lambda_min,
             digits,
         ),
-        "v_full": [
+        "v_canonical": [
             mp.nstr(
-                v_full[i, 0],
+                v_canonical[i, 0],
                 digits,
             )
-            for i in range(v_full.rows)
+            for i in range(v_canonical.rows)
         ],
     }
 
@@ -389,9 +389,9 @@ def _ground_state_decode(
         results["lambda_min"]
     )
 
-    values = results["v_full"]
+    values = results["v_canonical"]
 
-    expected = 2 * N + 1
+    expected = N + 1
 
     if len(values) != expected:
         raise ValueError(
@@ -399,20 +399,20 @@ def _ground_state_decode(
             f"length {len(values)}, expected {expected}"
         )
 
-    v_full = mp.matrix(
+    v_canonical = mp.matrix(
         expected,
         1,
     )
 
     for i, value in enumerate(values):
-        v_full[i, 0] = mp.mpf(value)
+        v_canonical[i, 0] = mp.mpf(value)
 
-    return lambda_min, v_full
+    return lambda_min, v_canonical
 
 
 def _validate_ground_state_structure(
     lambda_min,
-    v_full,
+    v_canonical,
     N,
 ):
     """
@@ -425,14 +425,14 @@ def _validate_ground_state_structure(
     part of ordinary cache retrieval. If that is ever in doubt, an
     explicit audit should be performed.
     """
-    expected = 2 * N + 1
+    expected = N + 1
 
-    if v_full.rows != expected:
+    if v_canonical.rows != expected:
         raise ValueError(
             "ground-state vector has incorrect row count"
         )
 
-    if v_full.cols != 1:
+    if v_canonical.cols != 1:
         raise ValueError(
             "ground-state vector must be a column vector"
         )
@@ -443,7 +443,7 @@ def _validate_ground_state_structure(
         )
 
     for i in range(expected):
-        value = v_full[i, 0]
+        value = v_canonical[i, 0]
 
         if not mp.isfinite(value):
             raise ValueError(
@@ -458,7 +458,7 @@ def _validate_ground_state_structure(
             )
 
     norm = mp.sqrt(
-        mp.fdot(v_full, v_full)
+        mp.fdot(v_canonical, v_canonical)
     )
 
     norm_error = abs(norm - 1)
@@ -511,9 +511,11 @@ def _generate_ground_state(
 
     eig_start = time.perf_counter()
 
-    lambda_min, v_full = (
+    lambda_min, u_full = (
         compute_ground_state(Q)
     )
+
+    v_canonical = full_to_canonical(u_full)
 
     eig_elapsed = (
         time.perf_counter()
@@ -526,7 +528,7 @@ def _generate_ground_state(
     structural = (
         _validate_ground_state_structure(
             lambda_min,
-            v_full,
+            v_canonical,
             N,
         )
     )
@@ -538,7 +540,7 @@ def _generate_ground_state(
 
     results = _ground_state_encode(
         lambda_min,
-        v_full,
+        v_canonical,
         dps,
     )
 
@@ -599,7 +601,7 @@ def get_ground_state(
 
     Returns
     -------
-    lambda_min, v_full, metadata
+    lambda_min, v_canonical, metadata
     """
 
     working_dps = int(mp.mp.dps)
@@ -869,7 +871,7 @@ def get_ground_state(
 
     decode_start = time.perf_counter()
 
-    lambda_min, v_full = (
+    lambda_min, v_canonical = (
         _ground_state_decode(
             results,
             N,
@@ -892,7 +894,7 @@ def get_ground_state(
     structural = (
         _validate_ground_state_structure(
             lambda_min,
-            v_full,
+            v_canonical,
             N,
         )
     )
@@ -968,7 +970,7 @@ def get_ground_state(
 
     return (
         lambda_min,
-        v_full,
+        v_canonical,
         cache_meta,
     )
 
@@ -1070,7 +1072,7 @@ def prime_power_terms(c):
 # CANONICAL <-> FULL SYMMETRIC COORDINATES
 # ============================================================
 
-def canonical_to_full(v, N):
+def canonical_to_full(v):
     """
     Convert canonical real-even coordinates
 
@@ -1086,6 +1088,7 @@ def canonical_to_full(v, N):
         u_{+k} = u_{-k} = v_k / sqrt(2).
     """
 
+    N = len(v) - 1
     u = mp.matrix(2 * N + 1, 1)
 
     for m in range(-N, N + 1):
@@ -1102,12 +1105,13 @@ def canonical_to_full(v, N):
     return u
 
 
-def full_to_canonical(u, N):
+def full_to_canonical(u):
     """
     Convert a symmetric full-space vector to canonical
     real-even coordinates.
     """
 
+    N = int((len(u) - 1) / 2)
     v = mp.matrix(N + 1, 1)
 
     v[0] = u[N]
@@ -1708,17 +1712,17 @@ def C_mode(m, r, L):
     ) / 2
 
 
-def K_fourier(u, r, L):
+def K_fourier(v, r, L):
     """
     Analytic Fourier-side representation of the quadratic K_v
     kernel.
 
     Parameters
     ----------
-    u:
-        Full symmetric Fourier coefficient vector
+    v:
+        Canonical real-even coefficient vector
 
-            u = (u_{-N}, u_{-N+1}, ..., u_N).
+            v = (v_0, ..., v_N).
 
     r:
         Real spectral variable.
@@ -1729,42 +1733,70 @@ def K_fourier(u, r, L):
     Returns
     -------
     mp.mpf
-        The value of the Fourier representation J_v(r) of the
+        The value J_v(r) of the Fourier-side representation of the
         quadratic K_v kernel entering the explicit Archimedean
         calculation.
 
     Construction
     ------------
-    The is evaluated as
+    The expression is evaluated directly in the canonical vector v,
+    exploiting the even symmetry of the underlying full symmetric
+    representation of the Fourier-side kernel.
 
         J_v(r)
-          = sum_m 2 u_m^2 C_m(r)
+          = sum_m 2 v_m^2 C_m(r)
 
             + 2 sum_{m<n}
-                u_m u_n / pi
+                v_m v_n / pi
                 * [S_n(r) - S_m(r)] / (m-n).
 
-    The (m,n) and (n,m) terms are identical, so only m < n
-    is evaluated. Each S_m(r) is also evaluated only once.
+    Here the diagonal factor 2 comes from the ±m pair in the full
+    symmetric representation. For m != n, the ordered (m,n) and
+    (n,m) contributions are equal, so their combined contribution is
+    represented by the single factor 2 multiplying the m<n sum.
+    Restricting the sum to m<n does not introduce an additional
+    factor: the displayed factor 2 already accounts for the two
+    ordered off-diagonal terms.
+
+    Each S_m(r) is evaluated only once and reused in the pairwise
+    differences.
 
     IMPORTANT
     ---------
-    K_fourier is a quadratic construction in the coefficient
-    vector v. It represents the Fourier-side form of the
-    quadratic K_v kernel.
+    K_fourier is a quadratic construction in the canonical coefficient
+    vector v. It represents the Fourier-side form of the quadratic
+    K_v kernel.
 
-    It must not be confused with coefficient-weighted
-    constructions such as sum_v_F or sum_v_G.
+    It must not be confused with coefficient-weighted constructions
+    such as sum_v_F or sum_v_G.
     """
 
     r = mp.mpf(r)
     L = mp.mpf(L)
+    N = len(v) - 1
 
-    N = int((len(u) - 1)/ 2)
+    # --------------------------------------------------------
+    # Diagonal terms
+    # --------------------------------------------------------
 
-    modes = list(
-        range(-N, N + 1)
-    )
+    diag = mp.mpf(0)
+
+    for m in range(0, N+1):
+        diag += (
+            v[m]
+            * v[m]
+            * C_mode(
+                m,
+                r,
+                L,
+            )
+        )
+
+    total = 2 * diag
+
+    # --------------------------------------------------------
+    # Off-diagonal terms
+    # --------------------------------------------------------
 
     # S_m(r) is common to many terms, so evaluate it once.
     S = {
@@ -1773,57 +1805,24 @@ def K_fourier(u, r, L):
             r,
             L,
         )
-        for m in modes
+        for m in range(1, N+1)
     }
 
-    total = mp.mpf(0)
+    off_diag = mp.mpf(0)
+    for m in range(1, N+1):
+        off_diag += v[m] * v[m] * S[m] / m
+    total -= off_diag / mp.pi
 
-    # --------------------------------------------------------
-    # Diagonal terms
-    # --------------------------------------------------------
+    off_zero = mp.mpf(0)
+    for m in range(1, N+1):
+        off_zero += v[m] * S[m] / m
+    total -= 2 * mp.sqrt(2) * v[0] * off_zero / mp.pi
 
-    for m in modes:
-
-        um = u[m + N]
-
-        total += (
-            2
-            * um
-            * um
-            * C_mode(
-                m,
-                r,
-                L,
-            )
-        )
-
-    # --------------------------------------------------------
-    # Off-diagonal terms
-    #
-    # The (m,n) and (n,m) contributions are identical, so only
-    # m < n is required.
-    # --------------------------------------------------------
-
-    for i, m in enumerate(modes):
-
-        um = u[i]
-
-        for j in range(i + 1, len(modes)):
-
-            n = modes[j]
-            un = u[j]
-
-            total += (
-                2
-                * um
-                * un
-                / mp.pi
-                * (
-                    S[n]
-                    - S[m]
-                )
-                / mp.mpf(m - n)
-            )
+    off = mp.mpf(0)
+    for m in range(1, N):
+        for n in range(m+1, N+1):
+            off += v[m] * v[n] * ((m * S[m] - n * S[n]) / (n * n - m * m))
+    total += 4 * off / mp.pi
 
     return total
 
@@ -1858,6 +1857,21 @@ def h_plus(r):
             )
         )
         - mp.log(mp.pi)
+    )
+
+
+# ============================================================
+# ARCHIMEDEAN SOURCE
+# ============================================================
+def archimedean_integral(T, v, L):
+    return (
+        mp.quad(
+            lambda r:
+                h_plus(r)
+                * K_fourier(v, r, L),
+            [0, T],
+        )
+        / mp.pi
     )
 
 

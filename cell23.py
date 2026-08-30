@@ -32,11 +32,10 @@ import mpmath as mp
 from cell import (
     FORENSIC_GROUND_STATE,
     get_ground_state,
+    compute_L,
+    archimedean_integral,
     canonical_to_full,
     full_to_canonical,
-    compute_L,
-    K_fourier,
-    h_plus,
 )
 
 
@@ -103,14 +102,17 @@ print("-" * 78)
 
 ground_start = time.perf_counter()
 
-lambda_forensic, u_star, ground_meta = get_ground_state(
+lambda_forensic, v_star, ground_meta = get_ground_state(
     **FORENSIC_GROUND_STATE,
     verbose=True,
 )
 
 ground_elapsed = elapsed(ground_start)
 
-u_star = mp.matrix(u_star)
+v_star = mp.matrix(v_star)
+u_star = canonical_to_full(v_star)
+v = full_to_canonical(u_star)
+u = canonical_to_full(v)
 
 print()
 print("lambda_forensic =")
@@ -144,16 +146,6 @@ print()
 print("-" * 78)
 print("2. CANONICAL / FULL REPRESENTATIONS")
 print("-" * 78)
-
-v_star = full_to_canonical(
-    u_star,
-    N,
-)
-
-u = canonical_to_full(
-    v_star,
-    N,
-)
 
 print()
 print("||v_star|| =")
@@ -214,15 +206,7 @@ print(
 
 arch_start = time.perf_counter()
 
-explicit_arch = (
-    mp.quad(
-        lambda r:
-            h_plus(r)
-            * K_fourier(u, r, L),
-        [0, T],
-    )
-    / mp.pi
-)
+explicit_arch = archimedean_integral(T, v_star, L)
 
 arch_elapsed = elapsed(
     arch_start
