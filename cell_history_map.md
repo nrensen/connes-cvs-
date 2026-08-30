@@ -1065,7 +1065,7 @@ J_v(r)
 =
 \int_0^L
 K_v\left(1-\frac{y}{L}\right)
-\cos(ry)\thinspacedy
+\cos(ry)\thinspace dy
 $$
 .
 
@@ -1098,14 +1098,14 @@ K_v(\omega)
 u_m u_n
 e^{2\pi i n\omega}
 \int_0^\omega
-e^{2\pi i(m-n)t}\,dt.
+e^{2\pi i(m-n)t}\thinspace dt.
 $$
 
 For $m=n$,
 
 $$
 2e^{2\pi i m\omega}
-\int_0^\omega 1\,dt
+\int_0^\omega 1\thinspace dt
 =
 2\omega e^{2\pi i m\omega}.
 $$
@@ -1115,7 +1115,7 @@ For $m\ne n$,
 $$
 2e^{2\pi i n\omega}
 \int_0^\omega
-e^{2\pi i(m-n)t}\,dt
+e^{2\pi i(m-n)t}\thinspace dt
 =
 \frac{1}{\pi i(m-n)}
 \left(
@@ -1131,7 +1131,7 @@ $$
 K_v(\omega)
 =
 2\sum_{m=-N}^{N}
-u_m^2\,
+u_m^2\thinspace
 \omega e^{2\pi i m\omega}
 +
 \sum_{\substack{m,n=-N\\m\ne n}}^{N}
@@ -1164,7 +1164,7 @@ Taking the real part after multiplication by $\cos(ry)$ gives
 $$
 \int_0^L
 \left(1-\frac{y}{L}\right)
-\cos(a_m y)\cos(ry)\,dy.
+\cos(a_m y)\cos(ry)\thinspace dy.
 $$
 
 Define
@@ -1174,7 +1174,7 @@ C_m(r)
 =
 \int_0^L
 \left(1-\frac{y}{L}\right)
-\cos(a_m y)\cos(ry)\,dy.
+\cos(a_m y)\cos(ry)\thinspace dy.
 $$
 
 Hence the complete diagonal contribution is
@@ -1227,7 +1227,7 @@ $$
 S_m(r)
 =
 \int_0^L
-\sin(a_m y)\cos(ry)\,dy.
+\sin(a_m y)\cos(ry)\thinspace dy.
 $$
 
 Since
@@ -1315,7 +1315,7 @@ $$
 \boxed{
 J_{0}(r)
 =
--\frac{2\sqrt2\,v_0}{\pi}
+-\frac{2\sqrt2\thinspace v_0}{\pi}
 \sum_{m=1}^{N}
 \frac{v_m S_m(r)}{m}.
 }
@@ -1444,7 +1444,7 @@ J_v(r)
 v_m^2 C_m(r)
 \\
 &-
-\frac{2\sqrt2\,v_0}{\pi}
+\frac{2\sqrt2\thinspace v_0}{\pi}
 \sum_{m=1}^{N}
 \frac{v_mS_m(r)}{m}
 \\
@@ -1487,7 +1487,7 @@ The implementation corresponds term-by-term to the derivation:
 * `off_zero` evaluates
 
   $$
-  -\frac{2\sqrt2\,v_0}{\pi}
+  -\frac{2\sqrt2\thinspace v_0}{\pi}
   \sum_{m=1}^{N}\frac{v_mS_m(r)}{m};
   $$
 
