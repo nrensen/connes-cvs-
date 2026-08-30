@@ -1712,6 +1712,7 @@ def C_mode(m, r, L):
     ) / 2
 
 
+```python
 def K_fourier(v, r, L):
     """
     Analytic Fourier-side representation of the quadratic K_v
@@ -1739,27 +1740,59 @@ def K_fourier(v, r, L):
 
     Construction
     ------------
-    The expression is evaluated directly in the canonical vector v,
-    exploiting the even symmetry of the underlying full symmetric
-    representation of the Fourier-side kernel.
+    Starting from
+
+        K_v(omega)
+            = 2 * integral_0^omega
+                T_v(t) T_v(omega - t) dt,
+
+    the convolution is evaluated analytically in Fourier modes and
+    then transformed to the r-variable. The resulting expression is
+    evaluated directly in canonical coordinates:
 
         J_v(r)
-          = sum_m 2 v_m^2 C_m(r)
+          = 2 sum_{m=0}^N v_m^2 C_m(r)
 
-            + 2 sum_{m<n}
-                v_m v_n / pi
-                * [S_n(r) - S_m(r)] / (m-n).
+            - (2 sqrt(2) v_0 / pi)
+                sum_{m=1}^N v_m S_m(r) / m
 
-    Here the diagonal factor 2 comes from the ±m pair in the full
-    symmetric representation. For m != n, the ordered (m,n) and
-    (n,m) contributions are equal, so their combined contribution is
-    represented by the single factor 2 multiplying the m<n sum.
-    Restricting the sum to m<n does not introduce an additional
-    factor: the displayed factor 2 already accounts for the two
-    ordered off-diagonal terms.
+            - (1 / pi)
+                sum_{m=1}^N v_m^2 S_m(r) / m
 
-    Each S_m(r) is evaluated only once and reused in the pairwise
-    differences.
+            + (4 / pi)
+                sum_{1 <= m < n <= N}
+                    v_m v_n
+                    * [m S_m(r) - n S_n(r)]
+                    / (n^2 - m^2).
+
+    Here
+
+        C_m(r)
+          = integral_0^L
+                (1 - y/L)
+                cos(a_m y) cos(r y) dy,
+
+        S_m(r)
+          = integral_0^L
+                sin(a_m y) cos(r y) dy,
+
+        a_m = 2 pi m / L.
+
+    The formula exploits the real-even symmetry of the underlying
+    full Fourier coefficients. The zero-mode, opposite-sign, and
+    positive-mode pair contributions are combined analytically.
+
+    For m < n, the triangular sum represents both signs of the
+    Fourier modes after symmetry reduction. The factor 4/pi is the
+    complete multiplicity factor for the resulting canonical
+    positive-mode pair contribution; no additional factor is applied
+    merely because the sum is restricted to m < n.
+
+    Each S_m(r) is evaluated once and reused throughout the
+    triangular sum.
+
+    The detailed derivation from the convolution integral is recorded
+    in cell_history_map.md.
 
     IMPORTANT
     ---------
