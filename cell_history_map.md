@@ -1007,6 +1007,501 @@ The three routes converge to the same Archimedean value.
 
 This substantially increases confidence in the quadratic Archimedean dictionary and removes the need to use the expensive nested integral as the normal computational route.
 
+# Efficient calculation of the Archimedean integral
+
+## Derivation of the analytic Fourier representation `K_fourier`
+
+The purpose of `K_fourier` is to evaluate the Fourier-side representation of the quadratic kernel
+
+$$
+K_v(\omega)
+=
+2\int_0^\omega
+T_v(t)\,T_v(\omega-t)\,dt,
+\qquad 0\leq\omega\leq1,
+$$
+
+without performing the inner convolution integral numerically.
+
+The derivation below starts from this convolution definition and reduces it analytically to a finite sum in the canonical coefficient vector
+
+$$
+v=(v_0,\ldots,v_N).
+$$
+
+### 1. Full symmetric Fourier representation
+
+For the derivation, temporarily introduce the corresponding full symmetric coefficients $u_m$:
+
+$$
+u_0=v_0,
+\qquad
+u_{+m}=u_{-m}=\frac{v_m}{\sqrt2},
+\qquad
+1\leq m\leq N.
+$$
+
+Thus
+
+$$
+T_v(t)
+=
+\sum_{m=-N}^{N}
+u_m e^{2\pi i m t}.
+$$
+
+The vector $u$ is used only as an intermediate mathematical representation in this derivation. The computational interface of `cell.py` is canonical $v$.
+
+Define
+
+$$
+a_m=\frac{2\pi m}{L}.
+$$
+
+The Fourier-side quantity evaluated by `K_fourier` is
+
+$$
+J_v(r)
+=
+\int_0^L
+K_v\left(1-\frac{y}{L}\right)
+\cos(ry)\,dy.
+$$
+
+The substitution
+
+$$
+\omega=1-\frac{y}{L}
+$$
+
+is useful because the integer Fourier modes satisfy
+
+$$
+e^{2\pi i m\omega}
+=
+e^{2\pi i m(1-y/L)}
+=
+e^{-ia_m y}.
+$$
+
+### 2. Expand the convolution
+
+Substitute the Fourier expansion of $T_v$ into the convolution:
+
+$$
+K_v(\omega)
+=
+2
+\sum_{m,n=-N}^{N}
+u_m u_n
+e^{2\pi i n\omega}
+\int_0^\omega
+e^{2\pi i(m-n)t}\,dt.
+$$
+
+For $m=n$,
+
+$$
+2e^{2\pi i m\omega}
+\int_0^\omega 1\,dt
+=
+2\omega e^{2\pi i m\omega}.
+$$
+
+For $m\ne n$,
+
+$$
+2e^{2\pi i n\omega}
+\int_0^\omega
+e^{2\pi i(m-n)t}\,dt
+=
+\frac{1}{\pi i(m-n)}
+\left(
+e^{2\pi i m\omega}
+-
+e^{2\pi i n\omega}
+\right).
+$$
+
+Therefore
+
+$$
+K_v(\omega)
+=
+2\sum_{m=-N}^{N}
+u_m^2\,
+\omega e^{2\pi i m\omega}
++
+\sum_{\substack{m,n=-N\\m\ne n}}^{N}
+\frac{u_m u_n}{\pi i(m-n)}
+\left(
+e^{2\pi i m\omega}
+-
+e^{2\pi i n\omega}
+\right).
+$$
+
+### 3. Fourier transform of the diagonal terms
+
+Set
+
+$$
+\omega=1-\frac{y}{L}.
+$$
+
+For the diagonal terms,
+
+$$
+\omega e^{2\pi i m\omega}
+=
+\left(1-\frac{y}{L}\right)e^{-ia_m y}.
+$$
+
+Taking the real part after multiplication by $\cos(ry)$ gives
+
+$$
+\int_0^L
+\left(1-\frac{y}{L}\right)
+\cos(a_m y)\cos(ry)\,dy.
+$$
+
+Define
+
+$$
+C_m(r)
+=
+\int_0^L
+\left(1-\frac{y}{L}\right)
+\cos(a_m y)\cos(ry)\,dy.
+$$
+
+Hence the complete diagonal contribution is
+
+$$
+J_{\mathrm{diag}}(r)
+=
+2\sum_{m=-N}^{N}
+u_m^2 C_m(r).
+$$
+
+Using the canonical symmetry,
+
+$$
+u_0=v_0,
+\qquad
+u_{\pm m}^2=\frac{v_m^2}{2},
+$$
+
+and $C_{-m}=C_m$, this becomes
+
+$$
+\boxed{
+J_{\mathrm{diag}}(r)
+=
+2\sum_{m=0}^{N}
+v_m^2 C_m(r).
+}
+$$
+
+This is the `diag` term in `K_fourier`.
+
+### 4. Fourier transform of an off-diagonal ordered pair
+
+For $m\ne n$, after setting
+
+$$
+\omega=1-\frac{y}{L},
+$$
+
+the exponential difference becomes
+
+$$
+e^{-ia_m y}-e^{-ia_n y}.
+$$
+
+Define
+
+$$
+S_m(r)
+=
+\int_0^L
+\sin(a_m y)\cos(ry)\,dy.
+$$
+
+Since
+
+$$
+e^{-ia_m y}
+=
+\cos(a_m y)-i\sin(a_m y),
+$$
+
+the real part of the Fourier transform of the off-diagonal term is
+
+$$
+\frac{u_m u_n}{\pi}
+\frac{S_n(r)-S_m(r)}
+{m-n}.
+$$
+
+Thus the full off-diagonal contribution is
+
+$$
+J_{\mathrm{off}}(r)
+=
+\sum_{\substack{m,n=-N\\m\ne n}}^N
+\frac{u_m u_n}{\pi}
+\frac{S_n(r)-S_m(r)}
+{m-n}.
+$$
+
+The summand is symmetric under interchange of $m$ and $n$:
+
+$$
+u_m u_n
+\frac{S_n-S_m}{m-n}
+=
+u_n u_m
+\frac{S_m-S_n}{n-m}.
+$$
+
+Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
+
+$$
+\boxed{
+J_{\mathrm{off}}(r)
+=
+\frac{2}{\pi}
+\sum_{m<n}
+u_m u_n
+\frac{S_n(r)-S_m(r)}
+{m-n}.
+}
+$$
+
+This is the important multiplicity point: restricting the ordered sum to $m<n$ introduces exactly the displayed factor of $2$. There is no additional factor of $2$ merely because the sum is now triangular.
+
+### 5. Reduce the off-diagonal sum to canonical coordinates
+
+We now substitute
+
+$$
+u_0=v_0,
+\qquad
+u_{\pm m}=\frac{v_m}{\sqrt2}.
+$$
+
+The off-diagonal terms naturally split into four classes.
+
+#### 5.1 Terms involving the zero mode
+
+For each $m>0$, the pairs $(0,m)$ and $(-m,0)$ give equal contributions.
+
+Since $S_0=0$,
+
+$$
+J_{0,m}+J_{-m,0}
+=
+-\frac{2\sqrt2}{\pi}
+v_0v_m
+\frac{S_m(r)}{m}.
+$$
+
+Summing over $m$ gives
+
+$$
+\boxed{
+J_{0}(r)
+=
+-\frac{2\sqrt2\,v_0}{\pi}
+\sum_{m=1}^{N}
+\frac{v_m S_m(r)}{m}.
+}
+$$
+
+This is the `off_zero` term in `K_fourier`.
+
+#### 5.2 The opposite-sign pair $(m,-m)$
+
+For each $m>0$, the pair $(-m,m)$ gives
+
+$$
+\frac{2}{\pi}
+\frac{v_m^2}{2}
+\frac{S_m-S_{-m}}{-2m}.
+$$
+
+Because
+
+$$
+S_{-m}=-S_m,
+$$
+
+this reduces to
+
+$$
+-\frac{v_m^2}{\pi}
+\frac{S_m(r)}{m}.
+$$
+
+Therefore
+
+$$
+\boxed{
+J_{\pm m}(r)
+=
+-\frac{1}{\pi}
+\sum_{m=1}^{N}
+\frac{v_m^2 S_m(r)}{m}.
+}
+$$
+
+This is the `off_diag` term in `K_fourier`.
+
+#### 5.3 Same-sign positive and negative pairs
+
+For $1\le m<n\le N$, the positive pair $(m,n)$ contributes
+
+$$
+\frac{v_m v_n}{\pi}
+\frac{S_n-S_m}{m-n}.
+$$
+
+The negative pair $(-n,-m)$ contributes the same amount.
+
+Together,
+
+$$
+\frac{2v_m v_n}{\pi}
+\frac{S_n-S_m}{m-n}.
+$$
+
+#### 5.4 Mixed-sign pairs
+
+The two mixed-sign pairs $(-n,m)$ and $(-m,n)$ together contribute
+
+$$
+-\frac{2v_m v_n}{\pi}
+\frac{S_m+S_n}{m+n}.
+$$
+
+Combining the same-sign and mixed-sign contributions gives
+
+$$
+\frac{2v_m v_n}{\pi}
+\left[
+\frac{S_n-S_m}{m-n}
+-
+\frac{S_m+S_n}{m+n}
+\right].
+$$
+
+The bracket simplifies algebraically:
+
+$$
+\begin{aligned}
+\frac{S_n-S_m}{m-n}
+-
+\frac{S_m+S_n}{m+n}
+&=
+\frac{(S_n-S_m)(m+n)-(S_m+S_n)(m-n)}
+{(m-n)(m+n)}
+\\[4pt]
+&=
+\frac{2(mS_m-nS_n)}
+{n^2-m^2}.
+\end{aligned}
+$$
+
+Hence the complete positive-mode pair contribution is
+
+$$
+\boxed{
+J_{m,n}(r)
+=
+\frac{4v_m v_n}{\pi}
+\frac{mS_m(r)-nS_n(r)}
+{n^2-m^2},
+\qquad
+1\le m<n\le N.
+}
+$$
+
+This is the $O(N^2)$ triangular term evaluated by `K_fourier`.
+
+### 6. Final canonical formula
+
+Combining the diagonal, zero-mode, opposite-sign, and positive-mode pair contributions gives
+
+$$
+\boxed{
+\begin{aligned}
+J_v(r)
+={}&
+2\sum_{m=0}^{N}
+v_m^2 C_m(r)
+\\
+&-
+\frac{2\sqrt2\,v_0}{\pi}
+\sum_{m=1}^{N}
+\frac{v_mS_m(r)}{m}
+\\
+&-
+\frac{1}{\pi}
+\sum_{m=1}^{N}
+\frac{v_m^2S_m(r)}{m}
+\\
+&+
+\frac{4}{\pi}
+\sum_{1\le m<n\le N}
+v_m v_n
+\frac{mS_m(r)-nS_n(r)}
+{n^2-m^2}.
+\end{aligned}
+}
+$$
+
+This is exactly the decomposition implemented by `K_fourier`.
+
+The calculation therefore performs no approximation to the quadratic kernel. It is an algebraic reduction of the original convolution integral to a finite Fourier sum. The numerical gain comes from evaluating the Fourier transform analytically and computing each $S_m(r)$ only once for a given $(r,L)$.
+
+### 7. Relationship to the computational implementation
+
+The implementation corresponds term-by-term to the derivation:
+
+* `diag` evaluates
+
+  $$
+  2\sum_{m=0}^{N}v_m^2C_m(r);
+  $$
+
+* `off_diag` evaluates
+
+  $$
+  -\frac{1}{\pi}
+  \sum_{m=1}^{N}\frac{v_m^2S_m(r)}{m};
+  $$
+
+* `off_zero` evaluates
+
+  $$
+  -\frac{2\sqrt2\,v_0}{\pi}
+  \sum_{m=1}^{N}\frac{v_mS_m(r)}{m};
+  $$
+
+* the triangular loop evaluates
+
+  $$
+  \frac{4}{\pi}
+  \sum_{1\le m<n\le N}
+  v_m v_n
+  \frac{mS_m(r)-nS_n(r)}
+  {n^2-m^2}.
+  $$
+
+Thus `K_fourier` is mathematically equivalent to the original convolution construction `K_canonical`, while avoiding the numerical inner integration over the convolution variable.
+
+
 ---
 
 # Future directions
