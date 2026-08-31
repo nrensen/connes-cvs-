@@ -1175,7 +1175,7 @@ $$
 Thus the full off-diagonal contribution is
 
 $$
-J_{\mathrm{off}}(r) = \sum_{\substack{m,n=-N \\ m\ne n}}^N
+J_{\mathrm{off}}(r) = \sum_{\substack{m,n=-N\\ m\ne n}}^N
 \frac{u_m u_n}{\pi} \frac{S_n(r)-S_m(r)}{m-n}.
 $$
 
