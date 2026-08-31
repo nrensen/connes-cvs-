@@ -973,23 +973,17 @@ Cells 22 and 23 subsequently transformed the calculation from an impractical nes
 The current picture is therefore:
 
 $$
-\boxed{
 \begin{array}{c}
-\text{Cell 21}\\
-\text{independent nested numerical validation}
+\boxed{\text{Cell 21}\\ \text{independent nested numerical validation}}
 \end{array}
-}
 $$
 
 $$\Downarrow$$
 
 $$
-\boxed{
 \begin{array}{c}
-\text{Cell 22}\\
-\text{analytic reduction}
+\boxed{\text{Cell 22}\\ \text{analytic reduction} \Downarrow}
 \end{array}
-}
 $$
 
 $$\Downarrow$$
@@ -1088,8 +1082,8 @@ $$
 For $m\ne n$,
 
 $$
-2e^{2\pi i n\omega} \int_0^\omega e^{2\pi i(m-n)t}\thinspace dt
-= \frac{1}{\pi i(m-n)} \left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
+2e^{2\pi i n\omega} \int_0^\omega e^{2\pi i(m-n)t}\thinspace dt =
+\frac{1}{\pi i(m-n)} \left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
 $$
 
 Therefore
@@ -1197,7 +1191,8 @@ Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
 
 $$
 \boxed{
-J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}.
+J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}
+.
 }
 $$
 
@@ -1256,9 +1251,7 @@ $$
 Therefore
 
 $$
-\boxed{
-J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.
-}
+\boxed{J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.}
 $$
 
 This is the `off_diag` term in `K_fourier`.
@@ -1307,10 +1300,7 @@ $$
 Hence the complete positive-mode pair contribution is
 
 $$
-\boxed{
-J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},
-\qquad 1\le m<n\le N.
-}
+\boxed{J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},\qquad 1\le m<n\le N.}
 $$
 
 This is the $O(N^2)$ triangular term evaluated by `K_fourier`.
