@@ -1089,8 +1089,9 @@ $$
 Therefore
 
 $$
-K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2 \, \omega e^{2\pi i m\omega}
-+ \sum_{\substack{m,n=-N \\ m \ne n}}^{N} \frac{u_m u_n}{\pi i(m-n)} \left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
+K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2\thinspace\omega e^{2\pi i m\omega}
++ \sum_{\substack{m,n=-N \\ m \ne n}}^{N} \frac{u_m u_n}{\pi i(m-n)}
+\left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
 $$
 
 ### 3. Fourier transform of the diagonal terms
