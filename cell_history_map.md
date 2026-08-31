@@ -1013,7 +1013,10 @@ This substantially increases confidence in the quadratic Archimedean dictionary 
 
 The purpose of `K_fourier` is to evaluate the Fourier-side representation of the quadratic kernel
 
-$$K_v(\omega) = 2\int_0^\omega T_v(t)\thinspace T_v(\omega-t)\thinspace dt, \qquad 0\leq\omega\leq1$$
+$$
+K_v(\omega) = 2\int_0^\omega T_v(t)\thinspace T_v(\omega-t)\thinspace dt,
+\qquad 0\leq\omega\leq1
+$$
 
 without performing the inner convolution integral numerically.
 
