@@ -1188,7 +1188,7 @@ $$
 Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
 
 $$
-J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}.
+J_{\mathrm{off}}(r)=\frac{2}{\pi}\sum_{m < n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}.
 $$
 
 This is the important multiplicity point: restricting the ordered sum to $m<n$ introduces exactly the displayed factor of $2$. There is no additional factor of $2$ merely because the sum is now triangular.
@@ -1305,11 +1305,10 @@ Combining the diagonal, zero-mode, opposite-sign, and positive-mode pair contrib
 
 $$
 \begin{aligned}
-J_v(r) ={}&
-2\sum_{m=0}^{N} v_m^2 C_m(r)\\
-&- \frac{2\sqrt2\thinspace v_0}{\pi} \sum_{m=1}^{N} \frac{v_mS_m(r)}{m}\\
-&- \frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2S_m(r)}{m} \\
-&+ \frac{4}{\pi} \sum_{1\le m<n\le N} v_m v_n \frac{mS_m(r)-nS_n(r)} {n^2-m^2}.
+J_v(r) ={}& 2\sum_{m=0}^{N} v_m^2 C_m(r) \\
+&- \frac{2\sqrt{2}\, v_0}{\pi} \sum_{m=1}^{N} \frac{v_m S_m(r)}{m} \\
+&- \frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m} \\
+&+ \frac{4}{\pi} \sum_{1 \le m < n \le N} v_m v_n \frac{m S_m(r) - n S_n(r)}{n^2 - m^2}.
 \end{aligned}
 $$
 
