@@ -1284,7 +1284,7 @@ The bracket simplifies algebraically:
 $$
 \begin{aligned}
 \frac{S_n-S_m}{m-n} - \frac{S_m+S_n}{m+n}
-&= \frac{(S_n-S_m)(m+n)-(S_m+S_n)(m-n)} {(m-n)(m+n)}
+&= \frac{(S_n-S_m)(m+n)-(S_m+S_n)(m-n)} {(m-n)(m+n)} \\
 &= \frac{2(mS_m-nS_n)} {n^2-m^2}.
 \end{aligned}
 $$
