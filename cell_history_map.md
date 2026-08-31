@@ -880,7 +880,7 @@ $$\text{Cell 21}\longrightarrow A_{\rm arch}$$
 
 and
 
-$$\text{Cell 22}\longrightarrowA_{\rm arch}$$
+$$\text{Cell 22}\longrightarrow A_{\rm arch}$$
 
 with both converging to the Cell-23 result.
 
@@ -972,29 +972,29 @@ Cells 22 and 23 subsequently transformed the calculation from an impractical nes
 
 The current picture is therefore:
 
-$$
+> $$
 \begin{array}{c}
-\boxed{\text{Cell 21}\\ \text{independent nested numerical validation}}
+\text{Cell 21}\\
+\text{independent nested numerical validation}
 \end{array}
 $$
 
 $$\Downarrow$$
 
-$$
+> $$
 \begin{array}{c}
-\boxed{\text{Cell 22}\\ \text{analytic reduction} \Downarrow}
+\text{Cell 22}\\
+\text{analytic reduction} \Downarrow
 \end{array}
 $$
 
 $$\Downarrow$$
 
-$$
-\boxed{
+> $$
 \begin{array}{c}
 \text{Cell 23}\\
 \text{optimised analytic implementation}
 \end{array}
-}
 $$
 
 The three routes converge to the same Archimedean value.
@@ -1134,10 +1134,8 @@ $$
 
 and $C_{-m}=C_m$, this becomes
 
-$$
-\boxed{
+> $$
 J_{\mathrm{diag}}(r) = 2\sum_{m=0}^{N} v_m^2 C_m(r).
-}
 $$
 
 This is the `diag` term in `K_fourier`.
@@ -1189,11 +1187,9 @@ $$
 
 Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
 
-$$
-\boxed{
+> $$
 J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}
 .
-}
 $$
 
 This is the important multiplicity point: restricting the ordered sum to $m<n$ introduces exactly the displayed factor of $2$. There is no additional factor of $2$ merely because the sum is now triangular.
@@ -1220,10 +1216,8 @@ $$
 
 Summing over $m$ gives
 
-$$
-\boxed{
+> $$
 J_{0}(r) = -\frac{2\sqrt2\thinspace v_0}{\pi}\sum_{m=1}^{N}\frac{v_m S_m(r)}{m}.
-}
 $$
 
 This is the `off_zero` term in `K_fourier`.
@@ -1250,8 +1244,8 @@ $$
 
 Therefore
 
-$$
-\boxed{J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.}
+> $$
+J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.
 $$
 
 This is the `off_diag` term in `K_fourier`.
@@ -1299,8 +1293,9 @@ $$
 
 Hence the complete positive-mode pair contribution is
 
-$$
-\boxed{J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},\qquad 1\le m<n\le N.}
+> $$
+J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},
+\qquad 1\le m<n\le N.
 $$
 
 This is the $O(N^2)$ triangular term evaluated by `K_fourier`.
@@ -1310,7 +1305,6 @@ This is the $O(N^2)$ triangular term evaluated by `K_fourier`.
 Combining the diagonal, zero-mode, opposite-sign, and positive-mode pair contributions gives
 
 $$
-\boxed{
 \begin{aligned}
 J_v(r) ={}&
 2\sum_{m=0}^{N} v_m^2 C_m(r)
@@ -1321,7 +1315,6 @@ J_v(r) ={}&
 \sum_{1\le m<n\le N} v_m v_n
 \frac{mS_m(r)-nS_n(r)} {n^2-m^2}.
 \end{aligned}
-}
 $$
 
 This is exactly the decomposition implemented by `K_fourier`.
@@ -1334,33 +1327,19 @@ The implementation corresponds term-by-term to the derivation:
 
 * `diag` evaluates
 
-  $$
-  2\sum_{m=0}^{N}v_m^2C_m(r);
-  $$
+  $$2\sum_{m=0}^{N}v_m^2C_m(r);$$
 
 * `off_diag` evaluates
 
-  $$
-  -\frac{1}{\pi}
-  \sum_{m=1}^{N}\frac{v_m^2S_m(r)}{m};
-  $$
+  $$-\frac{1}{\pi}\sum_{m=1}^{N}\frac{v_m^2S_m(r)}{m};$$
 
 * `off_zero` evaluates
 
-  $$
-  -\frac{2\sqrt2\thinspace v_0}{\pi}
-  \sum_{m=1}^{N}\frac{v_mS_m(r)}{m};
-  $$
+  $$-\frac{2\sqrt2\thinspace v_0}{\pi}\sum_{m=1}^{N}\frac{v_mS_m(r)}{m};$$
 
 * the triangular loop evaluates
 
-  $$
-  \frac{4}{\pi}
-  \sum_{1\le m<n\le N}
-  v_m v_n
-  \frac{mS_m(r)-nS_n(r)}
-  {n^2-m^2}.
-  $$
+  $$\frac{4}{\pi}\sum_{1\le m<n\le N}v_m v_n\frac{mS_m(r)-nS_n(r)}{n^2-m^2}.$$
 
 Thus `K_fourier` is mathematically equivalent to the original convolution construction `K_canonical`, while avoiding the numerical inner integration over the convolution variable.
 
