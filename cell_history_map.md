@@ -972,7 +972,7 @@ Cells 22 and 23 subsequently transformed the calculation from an impractical nes
 
 The current picture is therefore:
 
-> $$
+$$
 \begin{array}{c}
 \text{Cell 21}\\
 \text{independent nested numerical validation}
@@ -981,7 +981,7 @@ $$
 
 $$\Downarrow$$
 
-> $$
+$$
 \begin{array}{c}
 \text{Cell 22}\\
 \text{analytic reduction} \Downarrow
@@ -990,7 +990,7 @@ $$
 
 $$\Downarrow$$
 
-> $$
+$$
 \begin{array}{c}
 \text{Cell 23}\\
 \text{optimised analytic implementation}
@@ -1091,16 +1091,6 @@ Therefore
 $$
 K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2\thinspace\omega e^{2\pi i m\omega} +
 \sum_{m,n=-N}^{N} \frac{u_m u_n}{\pi i(m-n)}
-$$
-
-$$
-K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2\thinspace\omega e^{2\pi i m\omega} +
-\sum_{m,n=-N}^{N} \frac{u_m u_n}{\pi i(m-n)}
-\left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
-$$
-
-K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2\thinspace\omega e^{2\pi i m\omega}
-+ \sum_{\substack{m,n=-N \\ m \ne n}}^{N} \frac{u_m u_n}{\pi i(m-n)}
 \left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
 $$
 
@@ -1144,7 +1134,7 @@ $$
 
 and $C_{-m}=C_m$, this becomes
 
-> $$
+$$
 J_{\mathrm{diag}}(r) = 2\sum_{m=0}^{N} v_m^2 C_m(r).
 $$
 
@@ -1197,9 +1187,8 @@ $$
 
 Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
 
-> $$
-J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}
-.
+$$
+J_{\mathrm{off}}(r) = \frac{2}{\pi}\sum_{m<n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}.
 $$
 
 This is the important multiplicity point: restricting the ordered sum to $m<n$ introduces exactly the displayed factor of $2$. There is no additional factor of $2$ merely because the sum is now triangular.
@@ -1226,7 +1215,7 @@ $$
 
 Summing over $m$ gives
 
-> $$
+$$
 J_{0}(r) = -\frac{2\sqrt2\thinspace v_0}{\pi}\sum_{m=1}^{N}\frac{v_m S_m(r)}{m}.
 $$
 
@@ -1254,7 +1243,7 @@ $$
 
 Therefore
 
-> $$
+$$
 J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.
 $$
 
@@ -1303,7 +1292,7 @@ $$
 
 Hence the complete positive-mode pair contribution is
 
-> $$
+$$
 J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},
 \qquad 1\le m<n\le N.
 $$
@@ -1317,13 +1306,10 @@ Combining the diagonal, zero-mode, opposite-sign, and positive-mode pair contrib
 $$
 \begin{aligned}
 J_v(r) ={}&
-2\sum_{m=0}^{N} v_m^2 C_m(r)
-\\ &- \frac{2\sqrt2\thinspace v_0}{\pi} \sum_{m=1}^{N} \frac{v_mS_m(r)}{m}
-\\ &- \frac{1}{\pi} \sum_{m=1}^{N}
-\frac{v_m^2S_m(r)}{m} \\
-&+ \frac{4}{\pi}
-\sum_{1\le m<n\le N} v_m v_n
-\frac{mS_m(r)-nS_n(r)} {n^2-m^2}.
+2\sum_{m=0}^{N} v_m^2 C_m(r)\\
+&- \frac{2\sqrt2\thinspace v_0}{\pi} \sum_{m=1}^{N} \frac{v_mS_m(r)}{m}\\
+&- \frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2S_m(r)}{m} \\
+&+ \frac{4}{\pi} \sum_{1\le m<n\le N} v_m v_n \frac{mS_m(r)-nS_n(r)} {n^2-m^2}.
 \end{aligned}
 $$
 
