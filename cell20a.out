@@ -18,14 +18,14 @@ GROUND STATE CACHE: HIT
   key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
   generation dps = 150
   working dps    = 80
-  lookup         = 0.000660 s
+  lookup         = 0.000845 s
 
 GROUND STATE CACHE: RETURN
   generation dps = 150
   working dps    = 80
-  decode         = 0.000944 s
-  validation     = 0.000357 s
-  total          = 0.001961 s
+  decode         = 0.000886 s
+  validation     = 0.000342 s
+  total          = 0.002074 s
 
 lambda_min =
 6.71093525012596210347095894861212485227853949505914682374613e-23
@@ -34,7 +34,7 @@ lambda_min =
 1.0
 
 ground-state retrieval elapsed =
-0.002274 s
+0.002554 s
 
 ------------------------------------------------------------------------
 2. POLE LINEAR FUNCTIONAL

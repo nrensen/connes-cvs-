@@ -170,9 +170,9 @@ print("-" * 70)
 print("2. FULL / CANONICAL REPRESENTATION")
 print("-" * 70)
 
-v_star = full_to_canonical(u_star, N)
+v_star = full_to_canonical(u_star)
 
-u_roundtrip = canonical_to_full(v_star, N)
+u_roundtrip = canonical_to_full(v_star)
 
 print()
 print("canonical dimension =", len(v_star))
@@ -440,12 +440,12 @@ print("-" * 70)
 
 correct_conversion_error = max_vector_error(
     u_star,
-    canonical_to_full(v_star, N),
+    canonical_to_full(v_star),
 )
 
 wrong_conversion_error = max_vector_error(
     u_star,
-    canonical_to_full(v_wrong, N),
+    canonical_to_full(v_wrong),
 )
 
 print()

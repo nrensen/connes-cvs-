@@ -40,7 +40,6 @@ from cell import (
     sum_v_G,
     canonical_to_full,
     get_ground_state,
-    normalise_ground_state,
     pole_basis,
     pole_row,
 )
@@ -99,7 +98,7 @@ print("-" * 72)
 
 ground_start = time.perf_counter()
 
-lam_min, eigvec, cache_meta = get_ground_state(
+lam_min, v_star, cache_meta = get_ground_state(
     c=FORENSIC_GROUND_STATE["c"],
     N=FORENSIC_GROUND_STATE["N"],
     T=FORENSIC_GROUND_STATE["T"],
@@ -112,16 +111,8 @@ ground_elapsed = (
     - ground_start
 )
 
-v_star = normalise_ground_state(
-    eigvec,
-    N,
-)
-
-v_star = mp.matrix(v_star)
-
 u_star = canonical_to_full(
     v_star,
-    N,
 )
 
 print()

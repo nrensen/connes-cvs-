@@ -84,6 +84,10 @@ Q = build_galerkin_matrix(
     dps=mp.mp.dps,
 )
 
+# HISTORICAL CATEGORY ERROR:
+# compute_ground_state() returns the full vector u_star. The historical
+# code incorrectly treated its first N+1 components as the canonical
+# vector v.
 lambda_min, v_star = compute_ground_state(Q)
 
 target_norm = mp.fdot(v_star, v_star)
@@ -118,7 +122,12 @@ print()
 # ============================================================
 
 def full_coefficients(v):
-    u = canonical_to_full(v, N)
+    # v is actually the full vector u, not the canonical vector v.
+    # The historical code incorrectly treated its first N+1 components
+    # as the canonical vector v. We preserve that behaviour here for
+    # reproducibility.
+    v = [v[i] for i in range(0, N+1)]
+    u = canonical_to_full(v)
 
     return {
         k: mp.mpf(u[k + N])

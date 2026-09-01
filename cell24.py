@@ -42,8 +42,7 @@ from cell import (
     canonical_to_full,
     full_to_canonical,
     compute_L,
-    K_fourier,
-    h_plus,
+    archimedean_integral,
 )
 
 # ============================================================
@@ -137,7 +136,7 @@ print("-" * 78)
 ground_wall_start = time.perf_counter()
 ground_cpu_start = time.process_time()
 
-lambda_forensic, u_star, ground_meta = get_ground_state(
+lambda_forensic, v_star, ground_meta = get_ground_state(
     **FORENSIC_GROUND_STATE,
     verbose=True,
 )
@@ -150,7 +149,7 @@ ground_cpu_elapsed = (
     - ground_cpu_start
 )
 
-u_star = mp.matrix(u_star)
+u_star = canonical_to_full(v_star)
 
 print()
 print("lambda_forensic =")
@@ -189,14 +188,9 @@ print("-" * 78)
 print("2. CANONICAL / FULL REPRESENTATIONS")
 print("-" * 78)
 
-v_star = full_to_canonical(
-    u_star,
-    N,
-)
-
+v = full_to_canonical(u_star)
 u = canonical_to_full(
-    v_star,
-    N,
+    v,
 )
 
 print()
@@ -224,33 +218,6 @@ print(
         )
     )
 )
-
-
-# ============================================================
-# 8. FINITE-T ARCHIMEDEAN FUNCTIONAL
-# ============================================================
-
-def archimedean_to_T(T):
-    """
-    Compute
-
-        A_arch(T)
-          = 1/pi * int_0^T h_+(r) J_v(r) dr
-
-    using the Cell-23 analytic reduction.
-    """
-
-    T = mp.mpf(T)
-
-    return (
-        mp.quad(
-            lambda r:
-                h_plus(r)
-                * K_fourier(u, r, L),
-            [0, T],
-        )
-        / mp.pi
-    )
 
 
 # ============================================================
@@ -297,7 +264,7 @@ for T in T_VALUES:
     wall_start = time.perf_counter()
     cpu_start = time.process_time()
 
-    value = archimedean_to_T(T)
+    value = archimedean_integral(T, v_star, L)
 
     wall_elapsed = (
         time.perf_counter()

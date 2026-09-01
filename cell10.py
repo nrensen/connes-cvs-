@@ -89,7 +89,7 @@ def phi(k, t):
 # ============================================================
 
 def full_coefficients(v):
-    u = canonical_to_full(v, N)
+    u = canonical_to_full(v)
 
     return {
         k: mp.mpf(u[k + N])

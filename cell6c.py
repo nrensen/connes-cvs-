@@ -36,9 +36,8 @@ from cell import (
     DEFAULT_DPS,
     compute_L,
     canonical_to_full,
-    normalise_ground_state,
-    canonical_norm,
-    G_complex,
+    full_to_canonical,
+    sum_v_F,
 )
 
 from connes_cvs import (
@@ -94,14 +93,10 @@ Q = build_galerkin_matrix(
 
 lam_min, eigvec = compute_ground_state(Q)
 
-v_star = normalise_ground_state(
-    eigvec,
-    N,
-)
+v_star = full_to_canonical(eigvec)
 
 u_star = canonical_to_full(
     v_star,
-    N,
 )
 
 print("\n" + "-" * 70)
@@ -113,7 +108,7 @@ print(mp.nstr(lam_min, 50))
 
 print("\n||v_star|| =")
 print(mp.nstr(
-    canonical_norm(v_star),
+    mp.sqrt(mp.fdot(v_star, v_star)),
     50
 ))
 
@@ -254,7 +249,7 @@ def source_quadratic_integrand_cell6c(r):
 def weil_response_cell6c(r):
 
     return mp.re(
-        G_complex(
+        sum_v_F(
             v_star,
             r,
             L,
@@ -504,7 +499,6 @@ def basis_vector_full_cell6c(k):
 
     return canonical_to_full(
         v,
-        N,
     )
 
 
@@ -551,7 +545,7 @@ def G_basis_response_cell6c(
     v[k] = mp.mpf(1)
 
     return mp.re(
-        G_complex(
+        sum_v_F(
             v,
             r,
             L,

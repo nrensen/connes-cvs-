@@ -43,9 +43,8 @@ from cell import (
     compute_delta,
     build_galerkin_matrix,
     compute_ground_state,
-    normalise_ground_state,
+    full_to_canonical,
     canonical_to_full,
-    canonical_norm,
     prime_power_terms,
     sum_v_G,
 )
@@ -95,14 +94,10 @@ Q = build_galerkin_matrix(
 
 lam_min, eigvec = compute_ground_state(Q)
 
-v_star = normalise_ground_state(
-    eigvec,
-    N,
-)
+v_star = full_to_canonical(eigvec)
 
 u_star = canonical_to_full(
     v_star,
-    N,
 )
 
 print("\n" + "-" * 60)
@@ -120,7 +115,7 @@ print(u_star.rows)
 
 print("\n||v_star|| =")
 print(mp.nstr(
-    canonical_norm(v_star),
+    mp.sqrt(mp.fdot(v_star, v_star)),
     50
 ))
 

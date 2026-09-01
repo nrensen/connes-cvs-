@@ -87,7 +87,7 @@ norm_u = mp.sqrt(
 
 u_star = u_star / norm_u
 
-v_star = full_to_canonical(u_star, N)
+v_star = full_to_canonical(u_star)
 
 print("lambda_min =")
 print(mp.nstr(lambda_min, 60))

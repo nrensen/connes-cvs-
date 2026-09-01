@@ -1126,52 +1126,6 @@ def full_to_canonical(u):
     return v
 
 
-def canonical_norm(v):
-    """
-    Euclidean norm in canonical coordinates.
-    """
-
-    return mp.sqrt(
-        mp.fdot(v, v)
-    )
-
-
-# ============================================================
-# GROUND-STATE NORMALISATION
-# ============================================================
-
-def normalise_ground_state(eigvec, N):
-    """
-    Convert a repository ground-state eigenvector into the
-    canonical real-even normalisation used by the cells.
-    """
-
-    coefficients = [
-        mp.mpf(eigvec[i, 0])
-        for i in range(eigvec.rows)
-    ]
-
-    norm = mp.sqrt(
-        sum(x * x for x in coefficients)
-    )
-
-    coefficients = [
-        x / norm
-        for x in coefficients
-    ]
-
-    v = [coefficients[N]]
-
-    for k in range(1, N + 1):
-
-        v.append(
-            mp.sqrt(2)
-            * coefficients[N + k]
-        )
-
-    return v
-
-
 # ============================================================
 # CANONICAL BASIS PAIRS
 # ============================================================
@@ -1712,7 +1666,6 @@ def C_mode(m, r, L):
     ) / 2
 
 
-```python
 def K_fourier(v, r, L):
     """
     Analytic Fourier-side representation of the quadratic K_v

@@ -24,7 +24,7 @@
 
 import mpmath as mp
 
-from cell import G_complex
+from cell import sum_v_F
 
 
 # ============================================================
@@ -149,7 +149,7 @@ def A_linear(v):
         return (
             h_plus_cell5(r)
             * mp.re(
-                G_complex(
+                sum_v_F(
                     v,
                     r,
                     L

@@ -174,7 +174,7 @@ def f_direct(v, t):
 # ============================================================
 
 def full_coefficients(v):
-    u = canonical_to_full(v, N)
+    u = canonical_to_full(v)
 
     return {
         m: mp.mpf(u[m + N])
@@ -367,7 +367,7 @@ print()
 # ============================================================
 
 def Q_quadratic(v):
-    u = canonical_to_full(v, N)
+    u = canonical_to_full(v)
     return mp.fdot(u, Q * u)
 
 

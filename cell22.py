@@ -106,14 +106,14 @@ print("-" * 78)
 
 ground_start = time.perf_counter()
 
-lambda_forensic, u_star, ground_meta = get_ground_state(
+lambda_forensic, v_star, ground_meta = get_ground_state(
     **FORENSIC_GROUND_STATE,
     verbose=True,
 )
 
 ground_elapsed = elapsed(ground_start)
 
-u_star = mp.matrix(u_star)
+u_star = canonical_to_full(v_star)
 
 print()
 print("lambda_forensic =")
@@ -145,12 +145,10 @@ print(
 
 v_star = full_to_canonical(
     u_star,
-    N,
 )
 
 u = canonical_to_full(
     v_star,
-    N,
 )
 
 print()

@@ -176,7 +176,7 @@ print("-" * 70)
 print("2. CORRECT FULL -> CANONICAL CONVERSION")
 print("-" * 70)
 
-v_star = full_to_canonical(full_star, N)
+v_star = full_to_canonical(full_star)
 
 print()
 print("canonical dimension =", len(v_star))
@@ -205,7 +205,7 @@ print("-" * 70)
 print("3. CANONICAL -> FULL ROUND TRIP")
 print("-" * 70)
 
-full_roundtrip = canonical_to_full(v_star, N)
+full_roundtrip = canonical_to_full(v_star)
 
 roundtrip_error = max_abs_vector_error(
     full_star,

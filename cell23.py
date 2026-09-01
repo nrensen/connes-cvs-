@@ -109,7 +109,6 @@ lambda_forensic, v_star, ground_meta = get_ground_state(
 
 ground_elapsed = elapsed(ground_start)
 
-v_star = mp.matrix(v_star)
 u_star = canonical_to_full(v_star)
 v = full_to_canonical(u_star)
 u = canonical_to_full(v)
