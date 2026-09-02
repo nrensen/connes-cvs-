@@ -142,3 +142,136 @@ Interval [5,242,880, 10,485,760]
   subdivisions=  1  D(T)=6.787107270566731305367740454862985e-27  time=   33.62s
   subdivisions=  4  D(T)=6.6278765475866754291196341817082616e-27  time=  133.86s
   subdivisions= 16  D(T)=6.7574696549877428285367963580820114e-27  time=  532.60s
+  subdivisions= 64  D(T)=6.7242866807156999886152942064976259e-27  time= 2147.42s
+
+Interval [20,971,520, 41,943,040]
+  subdivisions=  1  D(T)=1.8578432154656347166515256581967718e-27  time=   33.04s
+  subdivisions=  4  D(T)=1.8477270069582499567358144313248717e-27  time=  132.97s
+  subdivisions= 16  D(T)=1.8516849960152730186162538775013676e-27  time=  533.28s
+  subdivisions= 64  D(T)=1.8449290360592491976692243474600789e-27  time= 2137.05s
+
+
+WORKING PRECISION = 120 dps
+------------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
+  generation dps = 150
+  working dps    = 120
+  lookup         = 0.000440 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 120
+  decode         = 0.000441 s
+  validation     = 0.000218 s
+  total          = 0.001099 s
+Interval [1,310,720, 2,621,440]
+  subdivisions=  1  D(T)=2.3425515466783979389555446628957873e-26  time=   47.20s
+  subdivisions=  4  D(T)=2.4426494484918165906670903185943758e-26  time=  189.56s
+  subdivisions= 16  D(T)=2.4157885332189336932314817016599659e-26  time=  754.23s
+  subdivisions= 64  D(T)=2.4207733754181820117775812382386176e-26  time= 3701.22s
+
+Interval [5,242,880, 10,485,760]
+  subdivisions=  1  D(T)=6.787107270566731305367740454862985e-27  time=   90.28s
+  subdivisions=  4  D(T)=6.6278765475866754291196341817082616e-27  time=  320.20s
+  subdivisions= 16  D(T)=6.7574696549877428285367963580820114e-27  time= 1122.24s
+  subdivisions= 64  D(T)=6.7242866807156999886152942064976259e-27  time= 5500.67s
+
+Interval [20,971,520, 41,943,040]
+  subdivisions=  1  D(T)=1.8578432154656347166515256581967718e-27  time=   99.23s
+  subdivisions=  4  D(T)=1.8477270069582499567358144313248717e-27  time=  402.59s
+  subdivisions= 16  D(T)=1.8516849960152730186162538775013676e-27  time= 1486.29s
+  subdivisions= 64  D(T)=1.8449290360592491976692243474600789e-27  time= 5729.68s
+
+
+==============================================================================
+4. SUBDIVISION CONVERGENCE
+==============================================================================
+
+WORKING PRECISION = 80 dps
+------------------------------------------------------------------------------
+T = 1,310,720
+    1 ->  64: rel diff = 0.0323127433299
+    4 ->  64: rel diff = 0.00903681166349
+   16 ->  64: rel diff = 0.00205919407817
+   64 ->  64: rel diff = 0.0
+
+T = 5,242,880
+    1 ->  64: rel diff = 0.00934234259095
+    4 ->  64: rel diff = 0.0143376000618
+   16 ->  64: rel diff = 0.00493479469982
+   64 ->  64: rel diff = 0.0
+
+T = 20,971,520
+    1 ->  64: rel diff = 0.00699982446695
+    4 ->  64: rel diff = 0.00151657372415
+   16 ->  64: rel diff = 0.00366190776121
+   64 ->  64: rel diff = 0.0
+
+
+WORKING PRECISION = 120 dps
+------------------------------------------------------------------------------
+T = 1,310,720
+    1 ->  64: rel diff = 0.0323127433299
+    4 ->  64: rel diff = 0.00903681166349
+   16 ->  64: rel diff = 0.00205919407817
+   64 ->  64: rel diff = 0.0
+
+T = 5,242,880
+    1 ->  64: rel diff = 0.00934234259095
+    4 ->  64: rel diff = 0.0143376000618
+   16 ->  64: rel diff = 0.00493479469982
+   64 ->  64: rel diff = 0.0
+
+T = 20,971,520
+    1 ->  64: rel diff = 0.00699982446695
+    4 ->  64: rel diff = 0.00151657372415
+   16 ->  64: rel diff = 0.00366190776121
+   64 ->  64: rel diff = 0.0
+
+
+==============================================================================
+5. 80/120-dps REFINED CROSS-CHECK
+==============================================================================
+
+T = 1,310,720
+  80 dps / 64 subdivisions  = 2.4207733754181820117775812382386176e-26
+ 120 dps / 64 subdivisions  = 2.4207733754181820117775812382386176e-26
+  relative difference       = 1.36034541402178e-59
+
+T = 5,242,880
+  80 dps / 64 subdivisions  = 6.7242866807156999886152942064976259e-27
+ 120 dps / 64 subdivisions  = 6.7242866807156999886152942064976259e-27
+  relative difference       = 3.27661409877674e-58
+
+T = 20,971,520
+  80 dps / 64 subdivisions  = 1.8449290360592491976692243474600789e-27
+ 120 dps / 64 subdivisions  = 1.8449290360592491976692243474600789e-27
+  relative difference       = 6.06410920960637e-57
+
+==============================================================================
+6. INTERPRETATION GUIDE
+==============================================================================
+
+The purpose of this cell is purely numerical validation.
+
+The strongest evidence that the Cell 30 tail values are trustworthy
+would be:
+
+  1. 80, 100 and 120 dps give essentially the same D(T);
+  2. increasing subdivision gives essentially the same D(T);
+  3. the 80-dps and 120-dps refined calculations agree.
+
+If increasing dps changes D(T) materially while subdivision does not,
+that points toward precision loss.
+
+If subdivision changes D(T) materially while dps does not,
+that points toward unresolved oscillatory structure.
+
+If both precision and subdivision changes become negligible, then
+the Cell 30 large-T drift is much less likely to be a straightforward
+quadrature artefact.
+
+No asymptotic conclusion is drawn by this cell.
+
