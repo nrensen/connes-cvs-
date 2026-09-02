@@ -1829,7 +1829,7 @@ def h_plus(r):
 
         A_arch(T)
           = 1/pi * integral_0^T
-                h_+(r) K_fourier(u,r,L)
+                h_+(r) K_fourier(v,r,L)
             dr.
     """
 
