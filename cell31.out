@@ -1,0 +1,144 @@
+==============================================================================
+CELL 31 — LARGE-T QUADRATURE FORENSIC
+==============================================================================
+
+c                         = 13
+N                         = 8
+T_ground                 = 400
+ground-state generation  = 150 dps
+precision sweep           = [80, 100, 120]
+subdivisions              = [1, 4, 16, 64]
+
+The ground state is retrieved separately inside each working-precision context.
+All retrievals refer to the same immutable forensic cache entry.
+
+==============================================================================
+1. PRECISION SWEEP — UNSUBDIVIDED mp.quad
+==============================================================================
+
+WORKING PRECISION = 80 dps
+------------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
+  generation dps = 150
+  working dps    = 80
+  lookup         = 0.000648 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 80
+  decode         = 0.000713 s
+  validation     = 0.000234 s
+  total          = 0.001595 s
+ground-state working dps = 80
+ground-state generation dps = 150
+lambda_min = 6.710935250125962103470959e-23
+||v_star|| = 1.0
+L = log(c) = 2.56494935746153673605348744157
+
+T=1,310,720  D(T)=2.3425515466783979389555446628957873e-26  time=   33.82s
+T=5,242,880  D(T)=6.787107270566731305367740454862985e-27  time=   33.69s
+T=20,971,520  D(T)=1.8578432154656347166515256581967718e-27  time=   33.10s
+
+WORKING PRECISION = 100 dps
+------------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
+  generation dps = 150
+  working dps    = 100
+  lookup         = 0.000513 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 100
+  decode         = 0.000566 s
+  validation     = 0.000210 s
+  total          = 0.001288 s
+ground-state working dps = 100
+ground-state generation dps = 150
+lambda_min = 6.710935250125962103470959e-23
+||v_star|| = 1.0
+L = log(c) = 2.56494935746153673605348744157
+
+T=1,310,720  D(T)=2.3425515466783979389555446628957873e-26  time=   40.78s
+T=5,242,880  D(T)=6.787107270566731305367740454862985e-27  time=   39.74s
+T=20,971,520  D(T)=1.8578432154656347166515256581967718e-27  time=   39.05s
+
+WORKING PRECISION = 120 dps
+------------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
+  generation dps = 150
+  working dps    = 120
+  lookup         = 0.000538 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 120
+  decode         = 0.000815 s
+  validation     = 0.000379 s
+  total          = 0.001732 s
+ground-state working dps = 120
+ground-state generation dps = 150
+lambda_min = 6.710935250125962103470959e-23
+||v_star|| = 1.0
+L = log(c) = 2.56494935746153673605348744157
+
+T=1,310,720  D(T)=2.3425515466783979389555446628957873e-26  time=   47.63s
+T=5,242,880  D(T)=6.787107270566731305367740454862985e-27  time=   46.64s
+T=20,971,520  D(T)=1.8578432154656347166515256581967718e-27  time=   45.97s
+
+==============================================================================
+2. PRECISION DIFFERENCES
+==============================================================================
+
+T = 1,310,720
+------------------------------------------------------------------------------
+ 80 dps: abs diff = 8.16100848807e-83   rel diff = 3.48381170081e-57
+100 dps: abs diff = 2.2233807929e-103   rel diff = 9.49127798725e-78
+120 dps: abs diff = 0.0   rel diff = 0.0
+
+T = 5,242,880
+------------------------------------------------------------------------------
+ 80 dps: abs diff = 2.78329368138e-82   rel diff = 4.10085412006e-56
+100 dps: abs diff = 1.28720162568e-102   rel diff = 1.89653938617e-76
+120 dps: abs diff = 0.0   rel diff = 0.0
+
+T = 20,971,520
+------------------------------------------------------------------------------
+ 80 dps: abs diff = 2.9734563342e-82   rel diff = 1.60048830248e-55
+100 dps: abs diff = 3.00328158115e-102   rel diff = 1.61654199674e-75
+120 dps: abs diff = 0.0   rel diff = 0.0
+
+==============================================================================
+3. SUBDIVISION SWEEP
+==============================================================================
+
+WORKING PRECISION = 80 dps
+------------------------------------------------------------------------------
+
+GROUND STATE CACHE: HIT
+  key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
+  generation dps = 150
+  working dps    = 80
+  lookup         = 0.000531 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 150
+  working dps    = 80
+  decode         = 0.000779 s
+  validation     = 0.000310 s
+  total          = 0.001621 s
+Interval [1,310,720, 2,621,440]
+  subdivisions=  1  D(T)=2.3425515466783979389555446628957873e-26  time=   33.32s
+  subdivisions=  4  D(T)=2.4426494484918165906670903185943758e-26  time=  133.85s
+  subdivisions= 16  D(T)=2.4157885332189336932314817016599659e-26  time=  538.86s
+  subdivisions= 64  D(T)=2.4207733754181820117775812382386176e-26  time= 2152.78s
+
+Interval [5,242,880, 10,485,760]
+  subdivisions=  1  D(T)=6.787107270566731305367740454862985e-27  time=   33.62s
+  subdivisions=  4  D(T)=6.6278765475866754291196341817082616e-27  time=  133.86s
+  subdivisions= 16  D(T)=6.7574696549877428285367963580820114e-27  time=  532.60s
