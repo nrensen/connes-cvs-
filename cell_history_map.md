@@ -954,28 +954,26 @@ The historical file should remain untouched. Any decision to terminate its curre
 
 ### Intended purpose
 
-Cell 24 begins the post-validation investigation of finite-\(T\) behaviour using the now-validated analytic Archimedean implementation.
+Cell 24 begins the post-validation investigation of finite-$T$ behaviour using the now-validated analytic Archimedean implementation.
 
 The forensic ground state is held fixed:
 
-* \(c=13\)
-* \(N=8\)
-* Galerkin \(T=400\)
-* generation precision \(150\) dps.
+* $c=13$
+* $N=8$
+* Galerkin $T=400$
+* generation precision 150 dps.
 
-Only the upper limit of the Archimedean \(r\)-integral is varied:
+Only the upper limit of the Archimedean $r$-integral is varied:
 
 $$
-A_{\rm arch}(T)
-=
-\frac1\pi\int_0^T h_+(r)J_v(r)\,dr.
+A_{\rm arch}(T) = \frac1\pi\int_0^T h_+(r)J_v(r)\thinspace dr.
 $$
 
-No Galerkin matrix is rebuilt and no numerical \(y\)-integration is performed.
+No Galerkin matrix is rebuilt and no numerical $y$-integration is performed.
 
 ### What it established
 
-It provided a systematic finite-\(T\) convergence map using the efficient analytic representation and confirmed that the fixed forensic state could be reused while extending the Archimedean cutoff.
+It provided a systematic finite-$T$ convergence map using the efficient analytic representation and confirmed that the fixed forensic state could be reused while extending the Archimedean cutoff.
 
 ### Status
 
@@ -987,7 +985,7 @@ It provided a systematic finite-\(T\) convergence map using the efficient analyt
 
 ### Intended purpose
 
-Cell 25 uses the analytic `K_fourier` reduction to reproduce key finite-\(T\) values from the historical `cell5_corrected` calculation and then extends the cutoff substantially beyond the historical \(T=200\) range.
+Cell 25 uses the analytic `K_fourier` reduction to reproduce key finite-$T$ values from the historical `cell5_corrected` calculation and then extends the cutoff substantially beyond the historical $T=200$ range.
 
 The ground state remains fixed at
 
@@ -995,17 +993,17 @@ $$
 c=13,\qquad N=8,\qquad T_{\rm ground}=60,
 $$
 
-with generation precision \(80\) dps.
+with generation precision 80 dps.
 
 ### What it established
 
-The analytic calculation reproduced the historical finite-\(T\) Archimedean values while making much larger cutoff experiments computationally practical.
+The analytic calculation reproduced the historical finite-$T$ Archimedean values while making much larger cutoff experiments computationally practical.
 
 This established an important continuity between the historical source-level calculation and the modern analytic implementation.
 
 ### Status
 
-**Established — historical cross-check and extended finite-\(T\) investigation.**
+**Established — historical cross-check and extended finite-$T$ investigation.**
 
 ---
 
@@ -1013,7 +1011,7 @@ This established an important continuity between the historical source-level cal
 
 ### Intended purpose
 
-Cell 26 extends the finite-\(T\) investigation to \(T=10,000\) for the fixed forensic ground state
+Cell 26 extends the finite-$T$ investigation to $T=10,000$ for the fixed forensic ground state
 
 $$
 c=13,\qquad N=8,\qquad T_{\rm ground}=400,
@@ -1025,11 +1023,11 @@ $$
 I(r)=h_+(r)K_{\rm fourier}(v_\star,r,L).
 $$
 
-No ground-state regeneration occurs as \(T\) changes.
+No ground-state regeneration occurs as $T$ changes.
 
 ### What it found
 
-The finite-\(T\) Archimedean contribution continued to exhibit a small but persistent large-\(T\) contribution, motivating a direct investigation of the pointwise tail rather than immediately assuming a particular asymptotic law.
+The finite-$T$ Archimedean contribution continued to exhibit a small but persistent large-$T$ contribution, motivating a direct investigation of the pointwise tail rather than immediately assuming a particular asymptotic law.
 
 ### Historical significance
 
@@ -1045,7 +1043,7 @@ Cell 26 is the point at which the investigation changed from ordinary finite-cut
 
 ### Intended purpose
 
-Cell 27 examines the large-\(r\) pointwise structure of
+Cell 27 examines the large-$r$ pointwise structure of
 
 $$
 J(r)=K_{\rm fourier}(v_\star,r,L)
@@ -1077,9 +1075,9 @@ in order to distinguish ordinary decay from oscillatory structure.
 
 ### What it contributed
 
-It established that the large-\(r\) integrand is strongly oscillatory and that ordinary pointwise ratios are not a reliable way to infer its asymptotic decay.
+It established that the large-$r$ integrand is strongly oscillatory and that ordinary pointwise ratios are not a reliable way to infer its asymptotic decay.
 
-The phase-locked samples showed that the oscillation is strongly tied to the phase \(rL\).
+The phase-locked samples showed that the oscillation is strongly tied to the phase $rL$.
 
 ### Status
 
@@ -1094,7 +1092,7 @@ The phase-locked samples showed that the oscillation is strongly tied to the pha
 Cell 28 abandons pointwise extrapolation and integrates the actual analytic integrand over successive finite intervals:
 
 $$
-A(a,b)=\int_a^b h_+(r)K_{\rm fourier}(v_\star,r,L)\,dr.
+A(a,b)=\int_a^b h_+(r)K_{\rm fourier}(v_\star,r,L)\thinspace dr.
 $$
 
 No asymptotic power law is assumed.
@@ -1118,7 +1116,7 @@ It also supplied interval-level data suitable for subsequent logarithmic/dyadic 
 Cell 29 introduces the dyadic interval quantity
 
 $$
-D(T)=\int_T^{2T}I(r)\,dr
+D(T)=\int_T^{2T}I(r)\thinspace dr
 $$
 
 and examines the empirical ratio
@@ -1129,11 +1127,11 @@ $$
 
 without assuming a value for the power-law exponent.
 
-It also tracks the cumulative tail and diagnostic quantities such as \(T^pD(T)\).
+It also tracks the cumulative tail and diagnostic quantities such as $T^pD(T)$.
 
 ### What it contributed
 
-The dyadic contributions remained positive and decreased with \(T\). The effective scaling appeared broadly compatible with a decay somewhat slower than \(1/T\) over the explored range.
+The dyadic contributions remained positive and decreased with $T$. The effective scaling appeared broadly compatible with a decay somewhat slower than $1/T$ over the explored range.
 
 However, the data did not establish a particular asymptotic law.
 
@@ -1147,7 +1145,7 @@ However, the data did not establish a particular asymptotic law.
 
 ### Intended purpose
 
-Cell 30 extends the dyadic analysis from \(T\leq20,480\) to
+Cell 30 extends the dyadic analysis from $T\leq20,480$ to
 
 $$
 T=20,971,520
@@ -1165,11 +1163,11 @@ $$
 C_T=TD(T)
 $$
 
-and an empirical local exponent \(p_{\rm eff}\), together with several extrapolation diagnostics.
+and an empirical local exponent $p_{\rm eff}$, together with several extrapolation diagnostics.
 
 ### What it appeared to show
 
-The computed \(D(T)\) values remained positive over the extended range and continued to decrease approximately on the scale of \(1/T\), while \(C_T\) continued to drift upward rather than reaching an obvious plateau.
+The computed $D(T)$ values remained positive over the extended range and continued to decrease approximately on the scale of $1/T$, while $C_T$ continued to drift upward rather than reaching an obvious plateau.
 
 This suggested that a logarithmic correction such as
 
@@ -1185,7 +1183,7 @@ The Cell-30 integrals were evaluated using unsubdivided `mp.quad` over extremely
 
 Consequently, the numerical values and asymptotic interpretation of Cell 30 are **not established**.
 
-Cell 30 should therefore be preserved as an important historical hypothesis-generating experiment, not as evidence for a \(1/T\) or \((\log T)/T\) asymptotic law.
+Cell 30 should therefore be preserved as an important historical hypothesis-generating experiment, not as evidence for a $1/T$ or $(\log T)/T$ asymptotic law.
 
 ### Status
 
@@ -1197,7 +1195,7 @@ Cell 30 should therefore be preserved as an important historical hypothesis-gene
 
 ### Intended purpose
 
-Cell 31 was created to determine whether the large-\(T\) results of Cell 30 were actually resolving the highly oscillatory integrand.
+Cell 31 was created to determine whether the large-$T$ results of Cell 30 were actually resolving the highly oscillatory integrand.
 
 It independently varies:
 
@@ -1220,11 +1218,11 @@ The result is a critical methodological warning:
 
 ### Consequence for the preceding tail analysis
 
-The numerical values of \(D(T)\), \(C_T\), and \(p_{\rm eff}\) reported by Cell 30 cannot presently be treated as quantitatively converged.
+The numerical values of $D(T)$, $C_T$, and $p_{\rm eff}$ reported by Cell 30 cannot presently be treated as quantitatively converged.
 
-In particular, the apparent \(1/T\) behaviour, upward drift of \(TD(T)\), and possible logarithmic correction remain unresolved.
+In particular, the apparent $1/T$ behaviour, upward drift of $TD(T)$, and possible logarithmic correction remain unresolved.
 
-The next step should therefore be to understand the analytic frequency structure of \(K_{\rm fourier}\) and construct a quadrature method adapted to that structure, rather than simply increasing precision or blindly increasing the number of interval subdivisions.
+The next step should therefore be to understand the analytic frequency structure of $K_{\rm fourier}$ and construct a quadrature method adapted to that structure, rather than simply increasing precision or blindly increasing the number of interval subdivisions.
 
 ### Status
 
@@ -1240,7 +1238,7 @@ Cell 31 supersedes the quantitative conclusions of Cell 30 while preserving Cell
 
 Cell 32 responds directly to the quadrature problem exposed by Cell 31.
 
-Rather than attempting further large-\(T\) integration, it analytically reduces the exact finite-\(N\) `K_fourier` expression using
+Rather than attempting further large-$T$ integration, it analytically reduces the exact finite-$N$ `K_fourier` expression using
 
 $$
 a_m=\frac{2\pi m}{L},
@@ -1252,45 +1250,32 @@ This reveals the common oscillatory structure of the Fourier modes.
 
 ### What it established
 
-For the finite-\(N\) kernel,
+For the finite-$N$ kernel,
 
 $$
-K_{\rm fourier}(v,r,L)
-=
-(1-\cos rL)R_v(r),
+K_{\rm fourier}(v,r,L) = (1-\cos rL)R_v(r),
 $$
 
-where \(R_v(r)\) is a purely rational function of \(r\).
+where $R_v(r)$ is a purely rational function of $r$.
 
 The factorisation was independently checked numerically against the existing `K_fourier` implementation at high precision.
 
-The large-\(r\) behaviour was then found to be
+The large-$r$ behaviour was then found to be
 
 $$
-R_v(r)
-=
-\frac{A(v)}{r^2}
-+
-O(r^{-4}),
+R_v(r) = \frac{A(v)}{r^2} + O(r^{-4}),
 $$
 
 with
 
 $$
-A(v)
-=
-\frac{2}{L}
-\left(
-v_0+\sqrt2\sum_{m=1}^{N}v_m
-\right)^2.
+A(v) = \frac{2}{L} \left( v_0+\sqrt2\sum_{m=1}^{N}v_m \right)^2.
 $$
 
 Equivalently, writing
 
 $$
-T_v(0)
-=
-v_0+\sqrt2\sum_{m=1}^{N}v_m,
+T_v(0) = v_0+\sqrt2\sum_{m=1}^{N}v_m,
 $$
 
 the leading coefficient is
@@ -1299,13 +1284,13 @@ $$
 A(v)=\frac{2T_v(0)^2}{L}.
 $$
 
-For the \(c=13,N=8\) forensic ground state, \(T_v(0)\) is extraordinarily small, so the nominal \(r^{-2}\) tail is strongly suppressed.
+For the $c=13,N=8$ forensic ground state, $T_v(0)$ is extraordinarily small, so the nominal $r^{-2}$ tail is strongly suppressed.
 
-Cell 32 also numerically probes the next \(r^{-4}\) coefficient, providing a target for subsequent exact symbolic derivation.
+Cell 32 also numerically probes the next $r^{-4}$ coefficient, providing a target for subsequent exact symbolic derivation.
 
 ### Mathematical significance
 
-This is the first point in the tail investigation at which the large-\(r\) structure is explained analytically rather than inferred from numerical integration.
+This is the first point in the tail investigation at which the large-$r$ structure is explained analytically rather than inferred from numerical integration.
 
 It also changes the numerical problem fundamentally: the tail is no longer an opaque highly oscillatory function. Its dominant oscillatory factor and leading rational decay are explicitly known.
 
@@ -1367,28 +1352,16 @@ $$
 
 The important current distinction is between **mathematical structure** and **numerical evaluation**.
 
-The analytical structure of the finite-\(N\) kernel is now strongly constrained:
+The analytical structure of the finite-$N$ kernel is now strongly constrained:
 
 $$
-K_{\rm fourier}(v,r,L)
-=
-(1-\cos rL)
-\left[
-\frac{A(v)}{r^2}
-+
-O(r^{-4})
-\right],
+K_{\rm fourier}(v,r,L) = (1-\cos rL) \left[ \frac{A(v)}{r^2} + O(r^{-4}) \right],
 $$
 
 with
 
 $$
-A(v)
-=
-\frac{2}{L}
-\left(
-v_0+\sqrt2\sum_{m=1}^Nv_m
-\right)^2.
+A(v) = \frac{2}{L} \left( v_0+\sqrt2\sum_{m=1}^Nv_m \right)^2.
 $$
 
 The remaining numerical tail problem should therefore be attacked using this structure rather than by brute-force integration over enormous oscillatory intervals.
@@ -1399,29 +1372,23 @@ The remaining numerical tail problem should therefore be attacked using this str
 
 ## 1. Study the leading tail coefficient across N
 
-For the ground state \(v_N\), evaluate
+For the ground state $v_N$, evaluate
 
 $$
-T_{v_N}(0)
-=
-v_{N,0}
-+
-\sqrt2\sum_{m=1}^{N}v_{N,m}
+T_{v_N}(0) = v_{N,0} + \sqrt2\sum_{m=1}^{N}v_{N,m}
 $$
 
 and
 
 $$
-A_N
-=
-\frac{2T_{v_N}(0)^2}{L}.
+A_N = \frac{2T_{v_N}(0)^2}{L}.
 $$
 
-The immediate question is whether the extraordinary suppression observed at \(N=8\) is accidental or systematic as \(N\) increases.
+The immediate question is whether the extraordinary suppression observed at $N=8$ is accidental or systematic as $N$ increases.
 
 This is the purpose of Cell 33.
 
-## 2. Derive the \(r^{-4}\) coefficient analytically
+## 2. Derive the $r^{-4}$ coefficient analytically
 
 Cell 32 provides numerical evidence for a stable next coefficient.
 
@@ -1432,23 +1399,22 @@ The next step is to derive that coefficient directly from the finite rational ex
 Once the coefficients and remainder structure are understood, derive an explicit bound on
 
 $$
-\int_T^\infty
-h_+(r)K_{\rm fourier}(v,r,L)\,dr.
+\int_T^\infty h_+(r)K_{\rm fourier}(v,r,L)\thinspace dr.
 $$
 
-The goal is to replace empirical finite-\(T\) convergence by a controlled error budget.
+The goal is to replace empirical finite-$T$ convergence by a controlled error budget.
 
 ## 4. Develop phase-aware quadrature only after the analytic structure is understood
 
 The Cell-31 result shows that simply increasing precision does not resolve the large-interval quadrature problem.
 
-The exact \(1-\cos(rL)\) structure should therefore be exploited in any future numerical integration scheme.
+The exact $1-\cos(rL)$ structure should therefore be exploited in any future numerical integration scheme.
 
 ## 5. Keep the N and T limits conceptually separate
 
-The current forensic calculations hold \(N\) fixed while \(T\to\infty\).
+The current forensic calculations hold $N$ fixed while $T\to\infty$.
 
-Cell 33 begins the complementary investigation of how the tail coefficients themselves behave as \(N\to\infty\).
+Cell 33 begins the complementary investigation of how the tail coefficients themselves behave as $N\to\infty$.
 
 The ultimate finite-to-infinite problem therefore involves at least the two distinct limits
 
@@ -1515,7 +1481,7 @@ Cell 31
     ↓
 Cell 32
     Exact common oscillatory factor
-    + analytical r^-2 tail
+    + analytical $r^{-2}$ tail
     + suppressed leading coefficient
     ↓
 Cell 33
@@ -1531,21 +1497,21 @@ At the current stage:
 * The canonical/full coordinate distinction is understood.
 * The prime-side dictionary has been independently audited.
 * The Archimedean source has been independently audited.
-* The genuinely quadratic \(K_v\) construction has been established.
+* The genuinely quadratic $K_v$ construction has been established.
 * The historical linear `G_complex` / current `sum_v_G` distinction is understood and preserved.
 * Cell 21 provides an independent brute-force validation of the corrected Archimedean quadratic calculation.
 * Cells 22–23 establish an efficient analytic implementation.
-* Cells 24–26 establish the long-range finite-\(T\) investigation.
-* Cell 27 identifies strong \(rL\)-dependent oscillatory structure.
+* Cells 24–26 establish the long-range finite-$T$ investigation.
+* Cell 27 identifies strong $rL$-dependent oscillatory structure.
 * Cells 28–30 investigate the integrated tail without and then with an empirical scaling hypothesis.
 * Cell 31 establishes that the extreme-range `mp.quad` results are not converged with respect to interval resolution, despite excellent working-precision stability.
-* Cell 32 analytically identifies the exact common factor \(1-\cos(rL)\) and the leading \(r^{-2}\) coefficient.
-* The extraordinary smallness of \(T_{v_\star}(0)\) for the \(N=8\) forensic ground state has emerged as a new structural question.
-* Cell 33 now begins the investigation of whether this suppression is systematic in \(N\).
+* Cell 32 analytically identifies the exact common factor $1-\cos(rL)$ and the leading $r^{-2}$ coefficient.
+* The extraordinary smallness of $T_{v_\star}(0)$ for the $N=8$ forensic ground state has emerged as a new structural question.
+* Cell 33 now begins the investigation of whether this suppression is systematic in $N$.
 
 The central research question has consequently shifted again:
 
-> **What is the finite-\(N\) Archimedean tail analytically, and how does its coefficient structure behave as \(N\to\infty\)?**
+> **What is the finite-$N$ Archimedean tail analytically, and how does its coefficient structure behave as $N\to\infty$?**
 
 That question should be answered before returning to very large numerical tail integrations.
 
