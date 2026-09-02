@@ -1481,7 +1481,7 @@ Cell 31
     ↓
 Cell 32
     Exact common oscillatory factor
-    + analytical $r^{-2}$ tail
+    + analytical r^-2 tail
     + suppressed leading coefficient
     ↓
 Cell 33
