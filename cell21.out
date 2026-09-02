@@ -25,14 +25,14 @@ GROUND STATE CACHE: HIT
   key            = 7f77f99cab98fbfd41bfc923f4e7a5c8daa05b4944fd7232e65374127943dd3a
   generation dps = 150
   working dps    = 40
-  lookup         = 0.000717 s
+  lookup         = 0.001701 s
 
 GROUND STATE CACHE: RETURN
   generation dps = 150
   working dps    = 40
-  decode         = 0.001021 s
-  validation     = 0.000345 s
-  total          = 0.002084 s
+  decode         = 0.000819 s
+  validation     = 0.000448 s
+  total          = 0.002968 s
 
 Forensic ground-state result:
   lambda =
@@ -41,7 +41,7 @@ Forensic ground-state result:
   ||u_star|| =
 1.0
 
-ground-state retrieval elapsed = 0.002511 s
+ground-state retrieval elapsed = 0.003410 s
 
 ------------------------------------------------------------------------
 2. CANONICAL GROUND-STATE VECTOR
@@ -54,16 +54,16 @@ ground-state retrieval elapsed = 0.002511 s
 3. CELL-21 GALERKIN MATRIX
 ------------------------------------------------------------------------
 
-Q(T=60) construction elapsed = 47.501951 s
+Q(T=60) construction elapsed = 48.635023 s
 
 ------------------------------------------------------------------------
 4. TOTAL QUADRATIC FORM
 ------------------------------------------------------------------------
 
 total =
-5.163584733099529874752221534327677515076e-23
+5.163584733099529874752221534327717077251e-23
 
-total quadratic-form elapsed = 0.002076 s
+total quadratic-form elapsed = 0.001841 s
 
 ------------------------------------------------------------------------
 5. PRIME MATRIX
@@ -72,7 +72,7 @@ total quadratic-form elapsed = 0.002076 s
 prime =
 -0.1549161798920014924128116322536594828988
 
-prime elapsed = 0.079189 s
+prime elapsed = 0.078515 s
 
 ------------------------------------------------------------------------
 6. POLE MATRIX
@@ -81,7 +81,7 @@ prime elapsed = 0.079189 s
 pole =
 1.813949267382937161525851893993136034725
 
-pole elapsed = 1.452472 s
+pole elapsed = 1.467305 s
 
 ------------------------------------------------------------------------
 7. ARCHIMEDEAN MATRIX FORM
@@ -99,7 +99,7 @@ Computing corrected quadratic K-Fourier Archimedean functional...
 K-fourier =
 -1.659033087490935669112988625892145556527
 
-explicit Archimedean elapsed = 44081.406940 s
+explicit Archimedean elapsed = 47766.628910 s
 
 ------------------------------------------------------------------------
 9. AGREEMENT
@@ -131,7 +131,7 @@ CELL 21 COMPLETE
 ========================================================================
 
 Quadratic forms:
-  total          = 5.163584733099529874752221534327677515076e-23
+  total          = 5.163584733099529874752221534327717077251e-23
   prime          = -0.1549161798920014924128116322536594828988
   pole           = 1.813949267382937161525851893993136034725
   arch           = -1.659033087490935669112988625892145556527
@@ -150,13 +150,13 @@ Historical Cell-5 expression:
   [WRONG; retained for forensic comparison]
 
 Timing:
-  ground state   = 0.002511 s
-  Q(T=60)       = 47.501951 s
-  total form     = 0.002076 s
-  prime          = 0.079189 s
-  pole           = 1.452472 s
-  Archimedean    = 44081.406940 s
-  linear         = 3.880976 s
+  ground state   = 0.003410 s
+  Q(T=60)       = 48.635023 s
+  total form     = 0.001841 s
+  prime          = 0.078515 s
+  pole           = 1.467305 s
+  Archimedean    = 47766.628910 s
+  linear         = 4.689340 s
 
 ========================================================================
 CELL 21 COMPLETE

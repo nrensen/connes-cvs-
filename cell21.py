@@ -104,14 +104,14 @@ print("-" * 72)
 
 ground_start = time.perf_counter()
 
-lambda_forensic, u_star, ground_meta = get_ground_state(
+lambda_forensic, v_star, ground_meta = get_ground_state(
     **FORENSIC_GROUND_STATE,
     verbose=True,
 )
 
 ground_elapsed = elapsed(ground_start)
 
-u_star = mp.matrix(u_star)
+u_star = canonical_to_full(v_star)
 
 print()
 print("Forensic ground-state result:")
@@ -149,7 +149,6 @@ print("-" * 72)
 
 v_star = full_to_canonical(
     u_star,
-    N,
 )
 
 print()
@@ -563,7 +562,6 @@ def K_fourier(v, omega):
 
     u = canonical_to_full(
         v,
-        N,
     )
 
     total = mp.mpc("0")
