@@ -954,7 +954,7 @@ The historical file should remain untouched. Any decision to terminate its curre
 
 ### Intended purpose
 
-Cell 24 begins the post-validation investigation of finite-$T$ behaviour using the now-validated analytic Archimedean implementation.
+Cell 24 begins the post-validation investigation of $\text{finite-}T$ behaviour using the now-validated analytic Archimedean implementation.
 
 The forensic ground state is held fixed:
 
@@ -973,7 +973,7 @@ No Galerkin matrix is rebuilt and no numerical $y$-integration is performed.
 
 ### What it established
 
-It provided a systematic finite-$T$ convergence map using the efficient analytic representation and confirmed that the fixed forensic state could be reused while extending the Archimedean cutoff.
+It provided a systematic $\text{finite-}T$ convergence map using the efficient analytic representation and confirmed that the fixed forensic state could be reused while extending the Archimedean cutoff.
 
 ### Status
 
@@ -985,7 +985,7 @@ It provided a systematic finite-$T$ convergence map using the efficient analytic
 
 ### Intended purpose
 
-Cell 25 uses the analytic `K_fourier` reduction to reproduce key finite-$T$ values from the historical `cell5_corrected` calculation and then extends the cutoff substantially beyond the historical $T=200$ range.
+Cell 25 uses the analytic `K_fourier` reduction to reproduce key $\text{finite-}T$ values from the historical `cell5_corrected` calculation and then extends the cutoff substantially beyond the historical $T=200$ range.
 
 The ground state remains fixed at
 
@@ -997,13 +997,13 @@ with generation precision 80 dps.
 
 ### What it established
 
-The analytic calculation reproduced the historical finite-$T$ Archimedean values while making much larger cutoff experiments computationally practical.
+The analytic calculation reproduced the historical $\text{finite-}T$ Archimedean values while making much larger cutoff experiments computationally practical.
 
 This established an important continuity between the historical source-level calculation and the modern analytic implementation.
 
 ### Status
 
-**Established — historical cross-check and extended finite-$T$ investigation.**
+**Established — historical cross-check and extended $\text{finite-}T$ investigation.**
 
 ---
 
@@ -1011,7 +1011,7 @@ This established an important continuity between the historical source-level cal
 
 ### Intended purpose
 
-Cell 26 extends the finite-$T$ investigation to $T=10,000$ for the fixed forensic ground state
+Cell 26 extends the $\text{finite-}T$ investigation to $T=10,000$ for the fixed forensic ground state
 
 $$
 c=13,\qquad N=8,\qquad T_{\rm ground}=400,
@@ -1027,7 +1027,7 @@ No ground-state regeneration occurs as $T$ changes.
 
 ### What it found
 
-The finite-$T$ Archimedean contribution continued to exhibit a small but persistent large-$T$ contribution, motivating a direct investigation of the pointwise tail rather than immediately assuming a particular asymptotic law.
+The $\text{finite-}T$ Archimedean contribution continued to exhibit a small but persistent $\text{large-}T$ contribution, motivating a direct investigation of the pointwise tail rather than immediately assuming a particular asymptotic law.
 
 ### Historical significance
 
@@ -1043,7 +1043,7 @@ Cell 26 is the point at which the investigation changed from ordinary finite-cut
 
 ### Intended purpose
 
-Cell 27 examines the large-$r$ pointwise structure of
+Cell 27 examines the $\text{large-}r$ pointwise structure of
 
 $$
 J(r)=K_{\rm fourier}(v_\star,r,L)
@@ -1075,7 +1075,7 @@ in order to distinguish ordinary decay from oscillatory structure.
 
 ### What it contributed
 
-It established that the large-$r$ integrand is strongly oscillatory and that ordinary pointwise ratios are not a reliable way to infer its asymptotic decay.
+It established that the $\text{large-}r$ integrand is strongly oscillatory and that ordinary pointwise ratios are not a reliable way to infer its asymptotic decay.
 
 The phase-locked samples showed that the oscillation is strongly tied to the phase $rL$.
 
@@ -1195,7 +1195,7 @@ Cell 30 should therefore be preserved as an important historical hypothesis-gene
 
 ### Intended purpose
 
-Cell 31 was created to determine whether the large-$T$ results of Cell 30 were actually resolving the highly oscillatory integrand.
+Cell 31 was created to determine whether the $\text{large-}T$ results of Cell 30 were actually resolving the highly oscillatory integrand.
 
 It independently varies:
 
@@ -1238,7 +1238,7 @@ Cell 31 supersedes the quantitative conclusions of Cell 30 while preserving Cell
 
 Cell 32 responds directly to the quadrature problem exposed by Cell 31.
 
-Rather than attempting further large-$T$ integration, it analytically reduces the exact finite-$N$ `K_fourier` expression using
+Rather than attempting further $\text{large-}T$ integration, it analytically reduces the exact $\text{finite-}N$ `K_fourier` expression using
 
 $$
 a_m=\frac{2\pi m}{L},
@@ -1250,7 +1250,7 @@ This reveals the common oscillatory structure of the Fourier modes.
 
 ### What it established
 
-For the finite-$N$ kernel,
+For the $\text{finite-}N$ kernel,
 
 $$
 K_{\rm fourier}(v,r,L) = (1-\cos rL)R_v(r),
@@ -1260,7 +1260,7 @@ where $R_v(r)$ is a purely rational function of $r$.
 
 The factorisation was independently checked numerically against the existing `K_fourier` implementation at high precision.
 
-The large-$r$ behaviour was then found to be
+The $\text{large-}r$ behaviour was then found to be
 
 $$
 R_v(r) = \frac{A(v)}{r^2} + O(r^{-4}),
@@ -1290,7 +1290,7 @@ Cell 32 also numerically probes the next $r^{-4}$ coefficient, providing a targe
 
 ### Mathematical significance
 
-This is the first point in the tail investigation at which the large-$r$ structure is explained analytically rather than inferred from numerical integration.
+This is the first point in the tail investigation at which the $\text{large-}r$ structure is explained analytically rather than inferred from numerical integration.
 
 It also changes the numerical problem fundamentally: the tail is no longer an opaque highly oscillatory function. Its dominant oscillatory factor and leading rational decay are explicitly known.
 
@@ -1352,7 +1352,7 @@ $$
 
 The important current distinction is between **mathematical structure** and **numerical evaluation**.
 
-The analytical structure of the finite-$N$ kernel is now strongly constrained:
+The analytical structure of the $\text{finite-}N$ kernel is now strongly constrained:
 
 $$
 K_{\rm fourier}(v,r,L) = (1-\cos rL) \left[ \frac{A(v)}{r^2} + O(r^{-4}) \right],
@@ -1402,7 +1402,7 @@ $$
 \int_T^\infty h_+(r)K_{\rm fourier}(v,r,L)\thinspace dr.
 $$
 
-The goal is to replace empirical finite-$T$ convergence by a controlled error budget.
+The goal is to replace empirical $\text{finite-}T$ convergence by a controlled error budget.
 
 ## 4. Develop phase-aware quadrature only after the analytic structure is understood
 
@@ -1501,7 +1501,7 @@ At the current stage:
 * The historical linear `G_complex` / current `sum_v_G` distinction is understood and preserved.
 * Cell 21 provides an independent brute-force validation of the corrected Archimedean quadratic calculation.
 * Cells 22–23 establish an efficient analytic implementation.
-* Cells 24–26 establish the long-range finite-$T$ investigation.
+* Cells 24–26 establish the long-range $\text{finite-}T$ investigation.
 * Cell 27 identifies strong $rL$-dependent oscillatory structure.
 * Cells 28–30 investigate the integrated tail without and then with an empirical scaling hypothesis.
 * Cell 31 establishes that the extreme-range `mp.quad` results are not converged with respect to interval resolution, despite excellent working-precision stability.
@@ -1511,7 +1511,7 @@ At the current stage:
 
 The central research question has consequently shifted again:
 
-> **What is the finite-$N$ Archimedean tail analytically, and how does its coefficient structure behave as $N\to\infty$?**
+> **What is the $\text{finite-}N$ Archimedean tail analytically, and how does its coefficient structure behave as $N\to\infty$?**
 
 That question should be answered before returning to very large numerical tail integrations.
 
