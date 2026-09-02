@@ -1,7 +1,7 @@
 # Connes–CvS exploratory cell history
 
 **Repository:** `nrensen/connes-cvs-`  
-**Historical snapshot audited:** commit `2275abc0bacbc804a4197ef5c5e65d03aa82312f`  
+**Historical snapshot audited:** commit `150fa5fe3788018d7582d67d488d3c95a314a155`  
 **Purpose of this document:** preserve a compact map of what each exploratory `cell<n>.py` was intended to investigate, what it established, and where discrepancies or historical errors were encountered.
 
 This document is a **research-history map**, not a claim that every historical cell is mathematically correct. In particular, known errors are intentionally recorded rather than silently corrected.
@@ -950,460 +950,519 @@ The historical file should remain untouched. Any decision to terminate its curre
 
 ---
 
-# Current research state after Cells 21–23
+# Cell 24 — finite-T Archimedean convergence map
 
-The Archimedean investigation has now passed an important transition.
+### Intended purpose
 
-The historical sequence
+Cell 24 begins the post-validation investigation of finite-\(T\) behaviour using the now-validated analytic Archimedean implementation.
 
-$$
-\text{Cell 5}
-\to
-\text{discrepancy}
-\to
-\text{Cells 6–20}
-$$
-
-has established why the original calculation failed and has produced the correct quadratic construction.
-
-Cell 21 then provided an independent brute-force implementation of that construction.
-
-Cells 22 and 23 subsequently transformed the calculation from an impractical nested numerical integral into an efficient analytic computation.
-
-The current picture is therefore:
-
-$$
-\begin{array}{c}
-\text{Cell 21}\\
-\text{independent nested numerical validation}
-\end{array}
-$$
-
-$$\Downarrow$$
-
-$$
-\begin{array}{c}
-\text{Cell 22}\\
-\text{analytic reduction} \Downarrow
-\end{array}
-$$
-
-$$\Downarrow$$
-
-$$
-\begin{array}{c}
-\text{Cell 23}\\
-\text{optimised analytic implementation}
-\end{array}
-$$
-
-The three routes converge to the same Archimedean value.
-
-This substantially increases confidence in the quadratic Archimedean dictionary and removes the need to use the expensive nested integral as the normal computational route.
-
-# Efficient calculation of the Archimedean integral
-
-## Derivation of the analytic Fourier representation `K_fourier`
-
-The purpose of `K_fourier` is to evaluate the Fourier-side representation of the quadratic kernel
-
-$$
-K_v(\omega) = 2\int_0^\omega T_v(t)\thinspace T_v(\omega-t)\thinspace dt,
-\qquad 0\leq\omega\leq1
-$$
-
-without performing the inner convolution integral numerically.
-
-The derivation below starts from this convolution definition and reduces it analytically to a finite sum in the canonical coefficient vector
-
-$$
-v=(v_0,\ldots,v_N).
-$$
-
-### 1. Full symmetric Fourier representation
-
-For the derivation, temporarily introduce the corresponding full symmetric coefficients $u_m$:
-
-$$
-u_0=v_0,
-\qquad
-u_{+m}=u_{-m}=\frac{v_m}{\sqrt{2}},
-\qquad
-1\leq m\leq N.
-$$
-
-Thus
-
-$$
-T_v(t) = \sum_{m=-N}^{N} u_m e^{2\pi i m t}.
-$$
-
-The vector $u$ is used only as an intermediate mathematical representation in this derivation. The computational interface of `cell.py` is canonical $v$.
-
-Define
-
-$$
-a_m=\frac{2\pi m}{L}.
-$$
-
-The Fourier-side quantity evaluated by `K_fourier` is
-
-$$
-J_v(r) = \int_0^L K_v\left(1-\frac{y}{L}\right) \cos(ry)\thinspace dy.
-$$
-
-The substitution
-
-$$
-\omega=1-\frac{y}{L}
-$$
-
-is useful because the integer Fourier modes satisfy
-
-$$
-e^{2\pi i m\omega} = e^{2\pi i m(1-y/L)} = e^{-ia_m y}.
-$$
-
-### 2. Expand the convolution
-
-Substitute the Fourier expansion of $T_v$ into the convolution:
-
-$$
-K_v(\omega) = 2 \sum_{m,n=-N}^{N} u_m u_n e^{2\pi i n\omega}
-\int_0^\omega e^{2\pi i(m-n)t}\thinspace dt.
-$$
-
-For $m=n$,
-
-$$
-2e^{2\pi i m\omega} \int_0^\omega 1\thinspace dt = 2\omega e^{2\pi i m\omega}.
-$$
-
-For $m\ne n$,
-
-$$
-2e^{2\pi i n\omega} \int_0^\omega e^{2\pi i(m-n)t}\thinspace dt =
-\frac{1}{\pi i(m-n)} \left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
-$$
-
-Therefore
-
-$$
-K_v(\omega) = 2\sum_{m=-N}^{N} u_m^2\thinspace\omega e^{2\pi i m\omega} +
-\sum_{m,n=-N}^{N} \frac{u_m u_n}{\pi i(m-n)}
-\left( e^{2\pi i m\omega} - e^{2\pi i n\omega} \right).
-$$
-
-### 3. Fourier transform of the diagonal terms
-
-Set
-
-$$
-\omega=1-\frac{y}{L}.
-$$
-
-For the diagonal terms,
-
-$$
-\omega e^{2\pi i m\omega} = \left(1-\frac{y}{L}\right)e^{-ia_m y}.
-$$
-
-Taking the real part after multiplication by $\cos(ry)$ gives
-
-$$
-\int_0^L \left(1-\frac{y}{L}\right) \cos(a_m y)\cos(ry)\thinspace dy.
-$$
-
-Define
-
-$$
-C_m(r) = \int_0^L \left(1-\frac{y}{L}\right) \cos(a_m y)\cos(ry)\thinspace dy.
-$$
-
-Hence the complete diagonal contribution is
-
-$$
-J_{\mathrm{diag}}(r) = 2\sum_{m=-N}^{N} u_m^2 C_m(r).
-$$
-
-Using the canonical symmetry,
-
-$$
-u_0=v_0, \qquad u_{\pm m}^2=\frac{v_m^2}{2},
-$$
-
-and $C_{-m}=C_m$, this becomes
-
-$$
-J_{\mathrm{diag}}(r) = 2\sum_{m=0}^{N} v_m^2 C_m(r).
-$$
-
-This is the `diag` term in `K_fourier`.
-
-### 4. Fourier transform of an off-diagonal ordered pair
+The forensic ground state is held fixed:
 
-For $m\ne n$, after setting
+* \(c=13\)
+* \(N=8\)
+* Galerkin \(T=400\)
+* generation precision \(150\) dps.
 
-$$
-\omega=1-\frac{y}{L},
-$$
-
-the exponential difference becomes
-
-$$
-e^{-ia_m y}-e^{-ia_n y}.
-$$
-
-Define
-
-$$
-S_m(r) = \int_0^L \sin(a_m y)\cos(ry)\thinspace dy.
-$$
-
-Since
-
-$$
-e^{-ia_m y} = \cos(a_m y)-i\sin(a_m y),
-$$
-
-the real part of the Fourier transform of the off-diagonal term is
-
-$$
-\frac{u_m u_n}{\pi} \frac{S_n(r)-S_m(r)}{m-n}.
-$$
-
-Thus the full off-diagonal contribution is
-
-$$
-J_{\mathrm{off}}(r) = \sum_{\substack{m,n=-N \\\\ m\ne n}}^N
-\frac{u_m u_n}{\pi} \frac{S_n(r)-S_m(r)}{m-n}.
-$$
-
-The summand is symmetric under interchange of $m$ and $n$:
-
-$$
-u_m u_n \frac{S_n-S_m}{m-n} = u_n u_m \frac{S_m-S_n}{n-m}.
-$$
-
-Therefore the two ordered terms $(m,n)$ and $(n,m)$ are identical, and
-
-$$
-J_{\mathrm{off}}(r)=\frac{2}{\pi}\sum_{m < n} u_m u_n\frac{S_n(r)-S_m(r)}{m-n}.
-$$
-
-This is the important multiplicity point: restricting the ordered sum to $m<n$ introduces exactly the displayed factor of $2$. There is no additional factor of $2$ merely because the sum is now triangular.
-
-### 5. Reduce the off-diagonal sum to canonical coordinates
-
-We now substitute
-
-$$
-u_0=v_0, \qquad u_{\pm m}=\frac{v_m}{\sqrt2}.
-$$
-
-The off-diagonal terms naturally split into four classes.
-
-#### 5.1 Terms involving the zero mode
-
-For each $m>0$, the pairs $(0,m)$ and $(-m,0)$ give equal contributions.
-
-Since $S_0=0$,
-
-$$
-J_{0,m}+J_{-m,0} = -\frac{2\sqrt2}{\pi} v_0v_m \frac{S_m(r)}{m}.
-$$
-
-Summing over $m$ gives
-
-$$
-J_{0}(r) = -\frac{2\sqrt2\thinspace v_0}{\pi}\sum_{m=1}^{N}\frac{v_m S_m(r)}{m}.
-$$
-
-This is the `off_zero` term in `K_fourier`.
-
-#### 5.2 The opposite-sign pair $(m,-m)$
-
-For each $m>0$, the pair $(-m,m)$ gives
-
-$$
-\frac{2}{\pi} \frac{v_m^2}{2} \frac{S_m-S_{-m}}{-2m}.
-$$
-
-Because
-
-$$
-S_{-m}=-S_m,
-$$
-
-this reduces to
-
-$$
--\frac{v_m^2}{\pi} \frac{S_m(r)}{m}.
-$$
-
-Therefore
-
-$$
-J_{\pm m}(r) = -\frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m}.
-$$
-
-This is the `off_diag` term in `K_fourier`.
-
-#### 5.3 Same-sign positive and negative pairs
-
-For $1\le m<n\le N$, the positive pair $(m,n)$ contributes
-
-$$
-\frac{v_m v_n}{\pi} \frac{S_n-S_m}{m-n}.
-$$
-
-The negative pair $(-n,-m)$ contributes the same amount.
-
-Together,
-
-$$
-\frac{2v_m v_n}{\pi} \frac{S_n-S_m}{m-n}.
-$$
-
-#### 5.4 Mixed-sign pairs
-
-The two mixed-sign pairs $(-n,m)$ and $(-m,n)$ together contribute
+Only the upper limit of the Archimedean \(r\)-integral is varied:
 
 $$
--\frac{2v_m v_n}{\pi} \frac{S_m+S_n}{m+n}.
+A_{\rm arch}(T)
+=
+\frac1\pi\int_0^T h_+(r)J_v(r)\,dr.
 $$
-
-Combining the same-sign and mixed-sign contributions gives
-
-$$
-\frac{2v_m v_n}{\pi} \left[ \frac{S_n-S_m}{m-n} - \frac{S_m+S_n}{m+n} \right].
-$$
-
-The bracket simplifies algebraically:
-
-$$
-\begin{aligned}
-\frac{S_n-S_m}{m-n} - \frac{S_m+S_n}{m+n}
-&= \frac{(S_n-S_m)(m+n)-(S_m+S_n)(m-n)} {(m-n)(m+n)} \\
-&= \frac{2(mS_m-nS_n)} {n^2-m^2}.
-\end{aligned}
-$$
-
-Hence the complete positive-mode pair contribution is
-
-$$
-J_{m,n}(r) = \frac{4v_m v_n}{\pi} \frac{mS_m(r)-nS_n(r)} {n^2-m^2},
-\qquad 1\le m<n\le N.
-$$
-
-This is the $O(N^2)$ triangular term evaluated by `K_fourier`.
-
-### 6. Final canonical formula
-
-Combining the diagonal, zero-mode, opposite-sign, and positive-mode pair contributions gives
-
-$$
-\begin{aligned}
-J_v(r) ={}& 2\sum_{m=0}^{N} v_m^2 C_m(r) \\
-&- \frac{2\sqrt{2}\, v_0}{\pi} \sum_{m=1}^{N} \frac{v_m S_m(r)}{m} \\
-&- \frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_m(r)}{m} \\
-&+ \frac{4}{\pi} \sum_{1 \le m < n \le N} v_m v_n \frac{m S_m(r) - n S_n(r)}{n^2 - m^2}.
-\end{aligned}
-$$
-
-This is exactly the decomposition implemented by `K_fourier`.
-
-The calculation therefore performs no approximation to the quadratic kernel. It is an algebraic reduction of the original convolution integral to a finite Fourier sum. The numerical gain comes from evaluating the Fourier transform analytically and computing each $S_m(r)$ only once for a given $(r,L)$.
-
-### 7. Relationship to the computational implementation
-
-The implementation corresponds term-by-term to the derivation:
-
-* `diag` evaluates
-
-  $$2\sum_{m=0}^{N}v_m^2C_m(r);$$
-
-* `off_diag` evaluates
-
-  $$-\frac{1}{\pi}\sum_{m=1}^{N}\frac{v_m^2S_m(r)}{m};$$
-
-* `off_zero` evaluates
 
-  $$-\frac{2\sqrt2\thinspace v_0}{\pi}\sum_{m=1}^{N}\frac{v_mS_m(r)}{m};$$
+No Galerkin matrix is rebuilt and no numerical \(y\)-integration is performed.
 
-* the triangular loop evaluates
+### What it established
 
-  $$\frac{4}{\pi}\sum_{1\le m<n\le N}v_m v_n\frac{mS_m(r)-nS_n(r)}{n^2-m^2}.$$
+It provided a systematic finite-\(T\) convergence map using the efficient analytic representation and confirmed that the fixed forensic state could be reused while extending the Archimedean cutoff.
 
-Thus `K_fourier` is mathematically equivalent to the original convolution construction `K_canonical`, while avoiding the numerical inner integration over the convolution variable.
+### Status
 
+**Established / transition to long-range tail investigation.**
 
 ---
 
-# Future directions
+# Cell 25 — finite-T Archimedean convergence and historical cross-check
 
-The purpose of this section is deliberately forward-looking. As the investigation progresses, these directions will themselves become part of the historical record.
+### Intended purpose
 
-## 1. Adopt Cell 23 as the production Archimedean implementation
+Cell 25 uses the analytic `K_fourier` reduction to reproduce key finite-\(T\) values from the historical `cell5_corrected` calculation and then extends the cutoff substantially beyond the historical \(T=200\) range.
 
-Future calculations requiring the Archimedean quadratic functional should preferentially use the Cell-23 analytic machinery.
-
-The nested Cell-21 calculation should be reserved for occasional independent validation.
-
-The historical Cell-5 and Cell-19 implementations should remain available for forensic purposes but should not be used as normal computational infrastructure.
-
-## 2. Add CPU timing to future calculations
-
-The previous cells generally recorded wall-clock time. This is useful for knowing how long a calculation took on the machine, but it does not distinguish computation from waiting for CPU availability.
-
-Future substantial cells should preferably record both:
-
-* wall-clock time;
-* process CPU time.
-
-This will allow computational cost to be compared meaningfully when multiple long-running experiments share the same machine.
-
-Historical cells should not be rewritten merely to add this information.
-
-## 3. Revisit finite-$T$ behaviour using the efficient implementation
-
-The analytical Cell-23 route makes it practical to investigate the dependence on $T$ at substantially higher precision and with many more samples than was practical using the nested integral.
-
-This should allow the finite-$T$ convergence of the Archimedean contribution to be studied without spending days on each calculation.
-
-## 4. Consolidate the validated Archimedean dictionary
-
-The work of Cells 17, 20, 21, 22 and 23 should eventually be distilled into a clean statement of the finite-dimensional Archimedean dictionary:
+The ground state remains fixed at
 
 $$
-v
-\to
-T_v
-\to
-K_v
-\to
-\widehat g_v
-\to
-Q_{\rm arch}.
+c=13,\qquad N=8,\qquad T_{\rm ground}=60,
 $$
 
-The goal is not merely a fast numerical routine, but a transparent mathematical chain in which the semantic type of every object is clear.
+with generation precision \(80\) dps.
 
-## 5. Resume the broader Connes–CvS investigation
+### What it established
 
-The project should now be able to move beyond the historical Cell-5 discrepancy.
+The analytic calculation reproduced the historical finite-\(T\) Archimedean values while making much larger cutoff experiments computationally practical.
 
-The central computational infrastructure is considerably better understood:
+This established an important continuity between the historical source-level calculation and the modern analytic implementation.
 
-* the finite Fourier dictionary has been audited;
-* canonical/full coordinates are understood;
-* the prime contribution has been independently checked;
-* the Archimedean source has been independently checked;
-* the genuinely quadratic $K_v$ construction has been established;
-* the historical `G_complex` / `sum_v_G` distinction is understood;
-* the Archimedean quadratic calculation now has an efficient, independently validated implementation.
+### Status
 
-The next work should therefore focus on what mathematical consequences can be extracted from the validated finite-dimensional construction, rather than continuing to reproduce the historical numerical calculations.
+**Established — historical cross-check and extended finite-\(T\) investigation.**
+
+---
+
+# Cell 26 — long-range forensic Archimedean tail
+
+### Intended purpose
+
+Cell 26 extends the finite-\(T\) investigation to \(T=10,000\) for the fixed forensic ground state
+
+$$
+c=13,\qquad N=8,\qquad T_{\rm ground}=400,
+$$
+
+using the analytic Archimedean integrand
+
+$$
+I(r)=h_+(r)K_{\rm fourier}(v_\star,r,L).
+$$
+
+No ground-state regeneration occurs as \(T\) changes.
+
+### What it found
+
+The finite-\(T\) Archimedean contribution continued to exhibit a small but persistent large-\(T\) contribution, motivating a direct investigation of the pointwise tail rather than immediately assuming a particular asymptotic law.
+
+### Historical significance
+
+Cell 26 is the point at which the investigation changed from ordinary finite-cutoff validation to an explicit study of the asymptotic Archimedean tail.
+
+### Status
+
+**Diagnostic / precursor to Cells 27–32.**
+
+---
+
+# Cell 27 — Archimedean tail anatomy
+
+### Intended purpose
+
+Cell 27 examines the large-\(r\) pointwise structure of
+
+$$
+J(r)=K_{\rm fourier}(v_\star,r,L)
+$$
+
+and
+
+$$
+I(r)=h_+(r)J(r)
+$$
+
+for the fixed forensic ground state.
+
+It deliberately performs no long-range integration and makes no asymptotic assumption.
+
+It also introduces phase-locked samples satisfying
+
+$$
+rL=k\pi
+$$
+
+and
+
+$$
+rL=(k+\tfrac12)\pi
+$$
+
+in order to distinguish ordinary decay from oscillatory structure.
+
+### What it contributed
+
+It established that the large-\(r\) integrand is strongly oscillatory and that ordinary pointwise ratios are not a reliable way to infer its asymptotic decay.
+
+The phase-locked samples showed that the oscillation is strongly tied to the phase \(rL\).
+
+### Status
+
+**Diagnostic / structural precursor to the integrated-tail investigation.**
+
+---
+
+# Cell 28 — direct integrated Archimedean tail
+
+### Intended purpose
+
+Cell 28 abandons pointwise extrapolation and integrates the actual analytic integrand over successive finite intervals:
+
+$$
+A(a,b)=\int_a^b h_+(r)K_{\rm fourier}(v_\star,r,L)\,dr.
+$$
+
+No asymptotic power law is assumed.
+
+### What it contributed
+
+It showed that the successive signed interval contributions remained positive over the investigated range and provided the first direct evidence that the tail was not simply disappearing through obvious local cancellation.
+
+It also supplied interval-level data suitable for subsequent logarithmic/dyadic analysis.
+
+### Status
+
+**Diagnostic / precursor to Cells 29–30.**
+
+---
+
+# Cell 29 — log-scale integrated-tail scaling
+
+### Intended purpose
+
+Cell 29 introduces the dyadic interval quantity
+
+$$
+D(T)=\int_T^{2T}I(r)\,dr
+$$
+
+and examines the empirical ratio
+
+$$
+\frac{D(2T)}{D(T)}
+$$
+
+without assuming a value for the power-law exponent.
+
+It also tracks the cumulative tail and diagnostic quantities such as \(T^pD(T)\).
+
+### What it contributed
+
+The dyadic contributions remained positive and decreased with \(T\). The effective scaling appeared broadly compatible with a decay somewhat slower than \(1/T\) over the explored range.
+
+However, the data did not establish a particular asymptotic law.
+
+### Status
+
+**Diagnostic / exploratory asymptotic analysis.**
+
+---
+
+# Cell 30 — forensic asymptotic tail test
+
+### Intended purpose
+
+Cell 30 extends the dyadic analysis from \(T\leq20,480\) to
+
+$$
+T=20,971,520
+$$
+
+and tests the empirical hypothesis
+
+$$
+D(T)\sim\frac{C}{T}.
+$$
+
+It reports
+
+$$
+C_T=TD(T)
+$$
+
+and an empirical local exponent \(p_{\rm eff}\), together with several extrapolation diagnostics.
+
+### What it appeared to show
+
+The computed \(D(T)\) values remained positive over the extended range and continued to decrease approximately on the scale of \(1/T\), while \(C_T\) continued to drift upward rather than reaching an obvious plateau.
+
+This suggested that a logarithmic correction such as
+
+$$
+D(T)\sim\frac{\log T}{T}
+$$
+
+might be compatible with the observed trend.
+
+### Critical qualification
+
+The Cell-30 integrals were evaluated using unsubdivided `mp.quad` over extremely large oscillatory intervals. Cell 31 subsequently demonstrated that changing interval subdivision changes these values by percent-level amounts even when working precision is increased substantially.
+
+Consequently, the numerical values and asymptotic interpretation of Cell 30 are **not established**.
+
+Cell 30 should therefore be preserved as an important historical hypothesis-generating experiment, not as evidence for a \(1/T\) or \((\log T)/T\) asymptotic law.
+
+### Status
+
+**Diagnostic / superseded as a quantitative tail estimate by Cell 31.**
+
+---
+
+# Cell 31 — large-T quadrature forensic
+
+### Intended purpose
+
+Cell 31 was created to determine whether the large-\(T\) results of Cell 30 were actually resolving the highly oscillatory integrand.
+
+It independently varies:
+
+1. working precision;
+2. interval subdivision.
+
+The mathematical integrand and fixed forensic ground state are unchanged.
+
+### What it established
+
+The precision sweep showed essentially identical results at 80, 100 and 120 dps for the large test intervals. Increasing numerical precision therefore did **not** resolve the discrepancy.
+
+In contrast, subdividing the same intervals changed the computed integrals by percent-level amounts.
+
+This establishes that the principal numerical problem in Cell 30 was **quadrature resolution of the oscillatory interval**, rather than insufficient arithmetic precision.
+
+The result is a critical methodological warning:
+
+> Agreement across working precision is not sufficient evidence of convergence when an oscillatory integral is being evaluated over an enormous interval.
+
+### Consequence for the preceding tail analysis
+
+The numerical values of \(D(T)\), \(C_T\), and \(p_{\rm eff}\) reported by Cell 30 cannot presently be treated as quantitatively converged.
+
+In particular, the apparent \(1/T\) behaviour, upward drift of \(TD(T)\), and possible logarithmic correction remain unresolved.
+
+The next step should therefore be to understand the analytic frequency structure of \(K_{\rm fourier}\) and construct a quadrature method adapted to that structure, rather than simply increasing precision or blindly increasing the number of interval subdivisions.
+
+### Status
+
+**Established — critical numerical-methodology result.**
+
+Cell 31 supersedes the quantitative conclusions of Cell 30 while preserving Cell 30's role as a hypothesis-generating experiment.
+
+---
+
+# Cell 32 — exact analytical structure of the Archimedean tail
+
+### Intended purpose
+
+Cell 32 responds directly to the quadrature problem exposed by Cell 31.
+
+Rather than attempting further large-\(T\) integration, it analytically reduces the exact finite-\(N\) `K_fourier` expression using
+
+$$
+a_m=\frac{2\pi m}{L},
+\qquad
+a_mL=2\pi m.
+$$
+
+This reveals the common oscillatory structure of the Fourier modes.
+
+### What it established
+
+For the finite-\(N\) kernel,
+
+$$
+K_{\rm fourier}(v,r,L)
+=
+(1-\cos rL)R_v(r),
+$$
+
+where \(R_v(r)\) is a purely rational function of \(r\).
+
+The factorisation was independently checked numerically against the existing `K_fourier` implementation at high precision.
+
+The large-\(r\) behaviour was then found to be
+
+$$
+R_v(r)
+=
+\frac{A(v)}{r^2}
++
+O(r^{-4}),
+$$
+
+with
+
+$$
+A(v)
+=
+\frac{2}{L}
+\left(
+v_0+\sqrt2\sum_{m=1}^{N}v_m
+\right)^2.
+$$
+
+Equivalently, writing
+
+$$
+T_v(0)
+=
+v_0+\sqrt2\sum_{m=1}^{N}v_m,
+$$
+
+the leading coefficient is
+
+$$
+A(v)=\frac{2T_v(0)^2}{L}.
+$$
+
+For the \(c=13,N=8\) forensic ground state, \(T_v(0)\) is extraordinarily small, so the nominal \(r^{-2}\) tail is strongly suppressed.
+
+Cell 32 also numerically probes the next \(r^{-4}\) coefficient, providing a target for subsequent exact symbolic derivation.
+
+### Mathematical significance
+
+This is the first point in the tail investigation at which the large-\(r\) structure is explained analytically rather than inferred from numerical integration.
+
+It also changes the numerical problem fundamentally: the tail is no longer an opaque highly oscillatory function. Its dominant oscillatory factor and leading rational decay are explicitly known.
+
+### Status
+
+**Major established analytical result / foundation for subsequent tail bounds and N-dependence analysis.**
+
+---
+
+# Current research state after Cells 24–32
+
+The investigation has now moved beyond merely validating the finite Archimedean dictionary.
+
+The current sequence is:
+
+$$
+\text{validated analytic Archimedean functional}
+$$
+
+$$
+\downarrow
+$$
+
+$$
+\text{finite-}T\text{ convergence}
+$$
+
+$$
+\downarrow
+$$
+
+$$
+\text{large-}r\text{ tail anatomy}
+$$
+
+$$
+\downarrow
+$$
+
+$$
+\text{integrated dyadic tail}
+$$
+
+$$
+\downarrow
+$$
+
+$$
+\text{quadrature failure identified}
+$$
+
+$$
+\downarrow
+$$
+
+$$
+\text{exact analytical tail structure}.
+$$
+
+The important current distinction is between **mathematical structure** and **numerical evaluation**.
+
+The analytical structure of the finite-\(N\) kernel is now strongly constrained:
+
+$$
+K_{\rm fourier}(v,r,L)
+=
+(1-\cos rL)
+\left[
+\frac{A(v)}{r^2}
++
+O(r^{-4})
+\right],
+$$
+
+with
+
+$$
+A(v)
+=
+\frac{2}{L}
+\left(
+v_0+\sqrt2\sum_{m=1}^Nv_m
+\right)^2.
+$$
+
+The remaining numerical tail problem should therefore be attacked using this structure rather than by brute-force integration over enormous oscillatory intervals.
+
+---
+
+# Current priorities
+
+## 1. Study the leading tail coefficient across N
+
+For the ground state \(v_N\), evaluate
+
+$$
+T_{v_N}(0)
+=
+v_{N,0}
++
+\sqrt2\sum_{m=1}^{N}v_{N,m}
+$$
+
+and
+
+$$
+A_N
+=
+\frac{2T_{v_N}(0)^2}{L}.
+$$
+
+The immediate question is whether the extraordinary suppression observed at \(N=8\) is accidental or systematic as \(N\) increases.
+
+This is the purpose of Cell 33.
+
+## 2. Derive the \(r^{-4}\) coefficient analytically
+
+Cell 32 provides numerical evidence for a stable next coefficient.
+
+The next step is to derive that coefficient directly from the finite rational expression, rather than treating its numerical estimate as the result.
+
+## 3. Construct a rigorous tail bound
+
+Once the coefficients and remainder structure are understood, derive an explicit bound on
+
+$$
+\int_T^\infty
+h_+(r)K_{\rm fourier}(v,r,L)\,dr.
+$$
+
+The goal is to replace empirical finite-\(T\) convergence by a controlled error budget.
+
+## 4. Develop phase-aware quadrature only after the analytic structure is understood
+
+The Cell-31 result shows that simply increasing precision does not resolve the large-interval quadrature problem.
+
+The exact \(1-\cos(rL)\) structure should therefore be exploited in any future numerical integration scheme.
+
+## 5. Keep the N and T limits conceptually separate
+
+The current forensic calculations hold \(N\) fixed while \(T\to\infty\).
+
+Cell 33 begins the complementary investigation of how the tail coefficients themselves behave as \(N\to\infty\).
+
+The ultimate finite-to-infinite problem therefore involves at least the two distinct limits
+
+$$
+T\to\infty
+$$
+
+and
+
+$$
+N\to\infty,
+$$
+
+which should not be interchanged without justification.
 
 ---
 
@@ -1416,70 +1475,77 @@ Cells 0–4
 Cell 5
     Archimedean discrepancy discovered
     ↓
-Cells 5_corrected*
-    Attempts to repair / understand discrepancy
-    ↓
-Cell 6
-    Independent Archimedean source/matrix audit
-    ↓
-Cells 7–8
-    Archimedean source dictionary
-    ↓
-Cells 9–12
-    Fourier / centering / Weil dictionary
-    ↓
-Cells 13–15
-    Parseval and canonical/full-coordinate discrepancy
-    ↓
-Cell 16
-    Localise remaining Archimedean discrepancy
-    ↓
-Cell 17
-    Correct quadratic K_v construction established
-    ↓
-Cell 18
-    Historical G_complex equivalence confirmed
-    ↓
-Cell 19
-    Extensive linear-vs-quadratic numerical audit
-    [running; computationally superseded]
-    ↓
-Cell 20
-    Corrected Archimedean quadratic audit
-    ↓
-Cell 20a
-    Pole linear-vs-quadratic forensic audit
+Cells 6–20
+    Source, coordinate, category and quadratic-form forensics
     ↓
 Cell 21
-    Clean modern Cell-5 reimplementation
-    Independent brute-force validation
+    Independent brute-force quadratic validation
     ↓
 Cell 22
-    Analytic elimination of inner y-integral
+    Analytic elimination of inner integral
     ↓
 Cell 23
     Optimised analytic Archimedean implementation
     ↓
-Current direction
-    Efficient high-precision Archimedean calculations
-    + broader Connes–CvS mathematical investigation
+Cell 24
+    Finite-T convergence map
+    ↓
+Cell 25
+    Historical finite-T cross-check + extension
+    ↓
+Cell 26
+    Long-range forensic tail
+    ↓
+Cell 27
+    Pointwise tail anatomy / phase structure
+    ↓
+Cell 28
+    Direct signed interval integration
+    ↓
+Cell 29
+    Dyadic integrated-tail scaling
+    ↓
+Cell 30
+    Extreme-range asymptotic hypothesis test
+    [quantitative interpretation later invalidated]
+    ↓
+Cell 31
+    Quadrature forensic
+    [precision exonerated; interval resolution identified]
+    ↓
+Cell 32
+    Exact common oscillatory factor
+    + analytical r^-2 tail
+    + suppressed leading coefficient
+    ↓
+Cell 33
+    N-dependence of tail coefficients
+    [current]
 ```
 
-## Current status summary
+# Current status summary
 
 At the current stage:
 
 * The finite Fourier/zero-side dictionary is substantially audited.
 * The canonical/full coordinate distinction is understood.
 * The prime-side dictionary has been independently audited.
-* The Archimedean source itself has been independently audited.
-* The genuinely quadratic $K_v$ construction has been established and tested.
-* The historical `G_complex` construction has been confirmed mathematically equivalent to the current `sum_v_G`.
-* The historical Cell-5/Cell-6 misuse of that linear construction remains preserved as historical record.
-* Cell 21 has independently validated the corrected quadratic Archimedean calculation through expensive nested numerical integration.
-* Cell 22 has analytically eliminated the inner numerical integral.
-* Cell 23 has optimised that analytic calculation and demonstrated stable high-precision convergence.
-* The three computational routes converge to the same Archimedean value.
-* The expensive nested-integral implementations are now best regarded as validation/forensic calculations rather than production machinery.
-* The investigation is ready to move beyond the Cell-5 discrepancy and back toward the broader mathematical objectives of the project.
+* The Archimedean source has been independently audited.
+* The genuinely quadratic \(K_v\) construction has been established.
+* The historical linear `G_complex` / current `sum_v_G` distinction is understood and preserved.
+* Cell 21 provides an independent brute-force validation of the corrected Archimedean quadratic calculation.
+* Cells 22–23 establish an efficient analytic implementation.
+* Cells 24–26 establish the long-range finite-\(T\) investigation.
+* Cell 27 identifies strong \(rL\)-dependent oscillatory structure.
+* Cells 28–30 investigate the integrated tail without and then with an empirical scaling hypothesis.
+* Cell 31 establishes that the extreme-range `mp.quad` results are not converged with respect to interval resolution, despite excellent working-precision stability.
+* Cell 32 analytically identifies the exact common factor \(1-\cos(rL)\) and the leading \(r^{-2}\) coefficient.
+* The extraordinary smallness of \(T_{v_\star}(0)\) for the \(N=8\) forensic ground state has emerged as a new structural question.
+* Cell 33 now begins the investigation of whether this suppression is systematic in \(N\).
+
+The central research question has consequently shifted again:
+
+> **What is the finite-\(N\) Archimedean tail analytically, and how does its coefficient structure behave as \(N\to\infty\)?**
+
+That question should be answered before returning to very large numerical tail integrations.
 
