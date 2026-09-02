@@ -39,8 +39,6 @@ import mpmath as mp
 from cell import (
     FORENSIC_GROUND_STATE,
     get_ground_state,
-    canonical_to_full,
-    full_to_canonical,
     compute_L,
     archimedean_integral,
 )
@@ -125,12 +123,12 @@ print(nstr(L))
 
 
 # ============================================================
-# 1. FORENSIC GROUND STATE
+# 1. GROUND STATE
 # ============================================================
 
 print()
 print("-" * 78)
-print("1. FORENSIC GROUND STATE")
+print("1. GROUND STATE")
 print("-" * 78)
 
 ground_wall_start = time.perf_counter()
@@ -149,24 +147,9 @@ ground_cpu_elapsed = (
     - ground_cpu_start
 )
 
-u_star = canonical_to_full(v_star)
-
 print()
 print("lambda_forensic =")
 print(nstr(lambda_forensic))
-
-print()
-print("||u_star|| =")
-print(
-    nstr(
-        mp.sqrt(
-            mp.fdot(
-                u_star,
-                u_star,
-            )
-        )
-    )
-)
 
 print()
 print(
@@ -176,21 +159,6 @@ print(
 print(
     f"ground-state retrieval CPU  = "
     f"{ground_cpu_elapsed:.6f} s"
-)
-
-
-# ============================================================
-# 2. CANONICAL / FULL REPRESENTATIONS
-# ============================================================
-
-print()
-print("-" * 78)
-print("2. CANONICAL / FULL REPRESENTATIONS")
-print("-" * 78)
-
-v = full_to_canonical(u_star)
-u = canonical_to_full(
-    v,
 )
 
 print()
@@ -205,20 +173,6 @@ print(
         )
     )
 )
-
-print()
-print("||u - u_star|| =")
-print(
-    nstr(
-        mp.sqrt(
-            mp.fdot(
-                u - u_star,
-                u - u_star,
-            )
-        )
-    )
-)
-
 
 # ============================================================
 # 9. FINITE-T SCAN
