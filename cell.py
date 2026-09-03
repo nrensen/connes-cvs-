@@ -994,6 +994,13 @@ FORENSIC_GROUND_STATE = {
     "dps": 150,
 }
 
+SURVEY_GROUND_STATE = {
+    "c": 13,
+    "N": 8,
+    "T": 400,
+    "dps": 50,
+}
+
 
 # ============================================================
 # BASIC GEOMETRIC / FOURIER PARAMETERS
