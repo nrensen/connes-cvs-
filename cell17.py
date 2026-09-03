@@ -117,7 +117,6 @@ def full_coefficients(v):
     """
     return canonical_to_full(
         v,
-        len(v) - 1,
     )
 
 
@@ -154,7 +153,7 @@ L = compute_L(c)
 
 ground_start = time.perf_counter()
 
-lambda_min, u_star, ground_meta = get_ground_state(
+lambda_min, v_star, ground_meta = get_ground_state(
     c=c,
     N=N,
     T=T,
@@ -164,12 +163,7 @@ lambda_min, u_star, ground_meta = get_ground_state(
 
 ground_elapsed = elapsed(ground_start)
 
-u_star = mp.matrix(u_star)
-
-v_star = full_to_canonical(
-    u_star,
-    N,
-)
+u_star = canonical_to_full(v_star)
 
 print()
 print("Ground-state result:")
@@ -199,7 +193,6 @@ print()
 
 u_from_v = canonical_to_full(
     v_star,
-    N,
 )
 
 roundtrip_error = mp.sqrt(
@@ -688,7 +681,7 @@ print()
 # 10. HISTORICAL CELL-5 LINEAR FUNCTIONAL
 # ============================================================
 
-from cell import G_complex
+from cell import sum_v_F
 
 print("-" * 78)
 print("8. HISTORICAL CELL-5 LINEAR QUANTITY (CONTRAST ONLY)")
@@ -705,7 +698,7 @@ A_linear = (
                 mp.mp.dps,
             )
             * mp.re(
-                G_complex(
+                sum_v_F(
                     v_star,
                     r,
                     L,

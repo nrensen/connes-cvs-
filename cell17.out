@@ -14,28 +14,31 @@ Parameters:
 ------------------------------------------------------------------------------
 
 
-GROUND STATE CACHE: MISS
+GROUND STATE CACHE: HIT
+  key            = 5cb62a328a120d93984871eac88a8524fbb1159c78743bf1b40a08018d476108
+  generation dps = 60
+  working dps    = 60
+  lookup         = 0.006467 s
 
-GROUND STATE CACHE: COMPUTED
-  key        = 87df660a1ea8e0ddc5511fb0abd1df0669272afdbca8cfeb659a886997ed28d0
-  Q build    = 78.695279 s
-  eigensolve = 0.066171 s
-  validation = 0.000288 s
-  save       = 0.002867 s
-  total      = 78.764604 s
+GROUND STATE CACHE: RETURN
+  generation dps = 60
+  working dps    = 60
+  decode         = 0.000660 s
+  validation     = 0.000432 s
+  total          = 0.007559 s
 
 Ground-state result:
   lambda_min = 2.933742224132274040817830229558828141346e-23
   ||u_star|| = 1.0
   ||v_star|| = 1.0
-  elapsed    = 78.765854 s
+  elapsed    = 0.007966 s
 
 ------------------------------------------------------------------------------
 2. COORDINATE CONSISTENCY
 ------------------------------------------------------------------------------
 
 canonical -> full -> canonical consistency:
-  ||u(v_star) - u_star|| = 5.669703550952449726704241252685071289521e-62
+  ||u(v_star) - u_star|| = 0.0
 
 ------------------------------------------------------------------------------
 3. ALGEBRAIC IDENTITY: D_v(omega) = pi K_v(omega)
@@ -86,25 +89,25 @@ omega = 0.125
   K numerical = (0.000000000001401347710356885146684946620935898381325 + 0.0j)
   K closed    = 0.000000000001401347710356885146684946620935898381325
   abs error   = 2.386641629338709734184214379897781367485e-62
-  elapsed     = 0.986431 s
+  elapsed     = 1.008113 s
 
 omega = 0.25
   K numerical = (0.00000002890576113629129807759578076937959101705 + 0.0j)
   K closed    = 0.00000002890576113629129807759578076937959101705
   abs error   = 1.779995175527246227257913074789235148602e-62
-  elapsed     = 1.038889 s
+  elapsed     = 1.024689 s
 
 omega = 0.5
   K numerical = (0.001911431137098161675820216140456737147906 + 0.0j)
   K closed    = 0.001911431137098161675820216140456737147906
   abs error   = 2.430865342914508479353150021007861031481e-62
-  elapsed     = 1.952547 s
+  elapsed     = 1.972205 s
 
 omega = 0.75
   K numerical = (0.3964995038505931735421332035797751101863 + 0.0j)
   K closed    = 0.3964995038505931735421332035797751101863
   abs error   = 2.333630729197928140179024020167546590221e-61
-  elapsed     = 1.955854 s
+  elapsed     = 2.055672 s
 
 Maximum numerical/closed K error = 2.333630729197928140179024020167546590221e-61
 
@@ -112,7 +115,7 @@ Maximum numerical/closed K error = 2.333630729197928140179024020167546590221e-61
 5. ARCHIMEDEAN DIVIDED-DIFFERENCE FORM
 ------------------------------------------------------------------------------
 
-psi_arch construction elapsed = 76.672738 s
+psi_arch construction elapsed = 77.337042 s
 
 A_arch via psi_arch divided differences =
 -1.660742085026845910743511010488925676719
@@ -130,7 +133,7 @@ This is the intentionally expensive part of cell17.
 A_arch via direct K integral =
 -1.660742085026845910743511010488925676719
 
-direct K integral elapsed = 110733.641002 s
+direct K integral elapsed = 129766.105115 s
 
 ------------------------------------------------------------------------------
 7. THREE-WAY COMPARISON
@@ -143,10 +146,10 @@ A_K       =
 -1.660742085026845910743511010488925676719
 
 |A_divdiff - A_K| =
-1.555753819465285426786016013445031060148e-61
+0.0
 
 relative difference =
-9.367823176710408060139692761147190752271e-62
+0.0
 
 ------------------------------------------------------------------------------
 8. HISTORICAL CELL-5 LINEAR QUANTITY (CONTRAST ONLY)
@@ -155,7 +158,7 @@ relative difference =
 A_linear =
 -1.878725186240259893057615751264588677049
 
-linear integral elapsed = 9.837269 s
+linear integral elapsed = 15.924085 s
 
 This value is deliberately NOT treated as a candidate
 for the quadratic Archimedean functional.
@@ -171,8 +174,8 @@ Numerical convolution:
   max |K_numeric - K_closed| = 2.333630729197928140179024020167546590221e-61
 
 Archimedean quadratic form:
-  |A_divdiff - A_K| = 1.555753819465285426786016013445031060148e-61
-  relative difference = 9.367823176710408060139692761147190752271e-62
+  |A_divdiff - A_K| = 0.0
+  relative difference = 0.0
 
 Historical linear quantity:
   A_linear = -1.878725186240259893057615751264588677049
