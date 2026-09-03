@@ -174,6 +174,9 @@ for N in N_VALUES:
 
     T0 = v[0]
 
+    for m in range(1, N + 1):
+        T0 += mp.sqrt(2) * v[m]
+
     TL = v[0]
 
     for m in range(1, N + 1):
