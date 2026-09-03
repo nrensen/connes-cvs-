@@ -902,7 +902,7 @@ Cell 23 is now the natural basis for future high-precision Archimedean calculati
 
 ---
 
-# Cells 19 and 5_corrected — implications of the analytic reduction
+# Cells 19 and 5_corrected — retrospective implications of the analytic reduction
 
 ## Cell 19
 
