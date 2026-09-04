@@ -289,7 +289,7 @@ High-precision numerical diagonalizations of the Galerkin operator $Q_{c, N}$ we
 
 The computed ground states exhibit strong $\ell^2$ concentration and rapidly decreasing successive increments:
 - The step difference $\|v_N - v_{N-1}\|_{\ell^2}$ decreases monotonically from $0.198$ down to $0.00199$ at $N = 24$. However, monotone decrease of successive differences does not imply that their sum is finite, and thus does not mathematically establish that $(v_N)$ is a Cauchy sequence in $\ell^2$.
-- What the numerical data rigorously establish is strong mode concentration: at $N = 24$, over $99.98\%$ of the total $\ell^2$ mass is concentrated in the first five Fourier modes ($m \le 4$).
+- What the numerical data directly show is strong mode concentration: at $N = 24$, over $99.98\%$ of the total $\ell^2$ mass is concentrated in the first five Fourier modes ($m \le 4$).
 
 ### 5.2 Observed Geometric Boundary Suppression and Conjecture 5.1
 
@@ -428,7 +428,7 @@ $$\text{Actual Suppression} = \log\left(\frac{T(L/2)}{T(0)}\right) = \log\left(\
 
 $$\frac{\text{Actual Suppression}}{\mathcal{S}_{\mathrm{WKB}}} = \frac{46.853901}{44.363852} = 1.05613.$$
 
-The numerically constructed effective potential yields a WKB action whose exponential scale matches the observed boundary suppression within **$5.6\%$** over 20 decimal orders of magnitude. The agreement is consistent with a WKB interpretation of the observed boundary suppression, but does not by itself establish that quantum tunneling is the underlying mathematical mechanism.
+The numerically constructed effective potential yields a WKB action whose exponential scale matches the observed boundary suppression within **$5.6\%$** for a boundary suppression corresponding to approximately 20 decimal orders of magnitude. The agreement is consistent with a WKB interpretation of the observed boundary suppression, but does not by itself establish that quantum tunneling is the underlying mathematical mechanism.
 
 ### Proposition 6.5 (Legendre Expansion via Bauer–Bessel Transform)
 *In normalized coordinates $x = \frac{2t}{L} - 1 \in [-1, 1]$, the finite-$N$ normalized even wave $\psi_N(x) = T_{v_N}\left(\frac{x+1}{2} L\right)$ admits an exact Legendre expansion in $L^2([-1, 1])$ (converging uniformly on $[-1, 1]$ since $\psi_N$ is smooth):*
@@ -449,7 +449,7 @@ Numerical evaluation of the Legendre expansion coefficients via the Bauer–Bess
    $$\sum_{k=0}^{10} \frac{2}{4k + 1} [c_{2k}^{(24)}]^2 = 1.99999968 \approx 2.00000000.$$
 
    Over **$93.7\%$** of the wave's total energy is concentrated in the lowest four even multipoles: $P_0$ ($29.9\%$), $P_2$ ($31.4\%$), $P_4$ ($21.2\%$), and $P_6$ ($11.1\%$).
-2. **Observed Alternating Phases:** Through all resolved multipoles ($k \le 10$), the computed coefficients exhibit a strict alternating-sign pattern:
+2. **Observed Alternating Phases:** Throughout the resolved multipoles ($k \le 10$), the computed coefficients exhibit an alternating-sign pattern:
 
    $$c_{2k}^{(N)} = (-1)^k |c_{2k}^{(N)}|.$$
 
@@ -505,7 +505,7 @@ $$\lim_{\omega \to 0} K_\infty(\omega) = 0, \qquad \lim_{\omega \to 1} K_\infty(
 
 with no jump discontinuities of any finite order at $\omega = 1$. This would eliminate the boundary jump that historically produced the oscillatory factor $1 - \cos(rL)$ and the $A_0/r^2$ tail in the finite-rank Galerkin models.
 
-### Proposition 6.7 (Tri-Partite Decomposition and Observed Continuum Equilibrium)
+### Proposition 6.7 (Tri-Partite Decomposition and Continuous-Quadrature Balance)
 *Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically by definition:*
 
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
@@ -575,7 +575,7 @@ What is significant is the **independent numerical quadrature of the continuous 
    *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ decreases monotonically toward unity across the tested cutoffs ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across approximately 47 decimal orders of magnitude at $c = 17$, the WKB action agrees with the observed logarithmic boundary suppression to within $5.3\%$. The classical inflection turning point appears to stabilise near $t_{\mathrm{turn}} / L \approx 0.41$ across the tested cutoffs.*
 
 3. **Prime Energy Share Across Cutoffs:**
-   *For every cutoff $c$, algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$ holds. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ is monotonically increasing over the tested cutoffs:*
+   *For every cutoff $c$, the matrix decomposition satisfies the algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ is monotonically increasing over the tested cutoffs:*
    - $c = 5$: $2.79\%$ prime / $97.21\%$ arch,
    - $c = 7$: $3.42\%$ prime / $96.58\%$ arch,
    - $c = 11$: $4.47\%$ prime / $95.53\%$ arch,
@@ -605,16 +605,16 @@ The findings of this paper resolve the finite-$N$ algebraic reduction of the Arc
 4. **Observed Tri-Partite Zero-Energy Balance (Observation):**
    On finite Galerkin subspaces, the matrix quadratic form decomposes into pole, prime, and Archimedean terms. When the Archimedean contribution is evaluated independently via continuous-variable quadrature, the independently computed $\mathcal{O}(1)$ terms cancel to a residual of order $10^{-43}$ at $N = 24$:
 
-   $$\mathcal{Q}_{\mathrm{pole}}^{(24)} + \mathcal{Q}_{\mathrm{prime}}^{(24)} + \mathcal{Q}_{\mathrm{arch}}^{(24)} \approx 1.29 \times 10^{-43} \approx \lambda_{\min}(24),$$
+   $$\mathcal{Q}_{\mathrm{pole}}^{(24)} + \mathcal{Q}_{\mathrm{prime}}^{(24)} + \mathcal{Q}_{\mathrm{arch}}^{(24)} = 1.29 \times 10^{-43},$$
 
-   where the positive geometric dilation energy from the zeta pole ($+1.55165$) is counterbalanced by the combined dispersive negative contributions of the prime powers ($-0.07185$) and Archimedean places ($-1.47980$).
+   which is of the same $10^{-43}$ scale as the matrix eigenvalue $2.53 \times 10^{-43}$, with the residual discrepancy discussed above. The positive geometric dilation energy from the zeta pole ($+1.55165$) is counterbalanced by the combined dispersive negative contributions of the prime powers ($-0.07185$) and Archimedean places ($-1.47980$).
 
 ### Reconnection with the Riemann Hypothesis (Weil Positivity)
 
 In André Weil's 1952 explicit formula framework and Alain Connes' noncommutative geometry formulation:
 - The Riemann Hypothesis is mathematically equivalent to the **positivity of the Weil quadratic form** $\Delta_{\mathrm{Weil}}(f, f) \ge 0$ on the space of test functions on the idele class group $\mathbb{A}_{\mathbb{Q}} / \mathbb{Q}^\times$.
 - In the Connes–van Suijlekom truncation, the quadratic form is regularized on a finite scaling interval $[0, L] = [0, \log c]$ with cutoff $N$. For every finite $N$ and cutoff $c$, the ground-state eigenvalue is strictly positive: $\lambda_{\min}(N) > 0$.
-- As $N$ increases, numerical evidence shows that $\lambda_{\min}(N) \sim \kappa_c \cdot c^{-N} \longrightarrow 0^+$, with the minimum eigenvalue of the Galerkin matrix approaching zero strictly from above.
+- As $N$ increases, numerical evidence shows that $\lambda_{\min}(N)$ decreases rapidly toward zero and is empirically proportional to the boundary leakage energy $A_0(N)$ (approaching zero strictly from above).
 - **The Defensible Mathematical Core:** The finite-$N$ Archimedean contribution has an exact positive-square representation, and numerical evidence indicates that the smallest Galerkin eigenvalue is driven toward zero by increasingly strong suppression of a boundary leakage term.
 - **The Analytical Roadmap toward Continuous Weil Positivity:** Bridging these finite-dimensional results to a formal proof of Weil positivity requires addressing three major analytical steps:
   1. *Operator Convergence and Spectral Pollution:* Proving an operator convergence theorem (such as strong resolvent convergence) connecting the sequence of finite-rank Galerkin operators $Q_{c, N}$ to a continuous self-adjoint operator $Q_c$ on $L^2([0, L])$. Positivity of finite Galerkin projections $\lambda_{\min}(N) > 0$ does not by itself rule out spectral pollution or negative spectrum in the infinite-dimensional limit.
@@ -630,7 +630,7 @@ To ensure complete computational transparency and reproducibility, the entire ma
 > **Software Repository:** <https://github.com/akivag613/connes-cvs->  
 > **Mirror Repository:** <https://github.com/nrensen/connes-cvs->
 
-All numerical routines were executed in Python using the `mpmath` arbitrary-precision arithmetic library at working precisions between 50 and 60 decimal digits. The paper's empirical observations, asymptotic fits, and spectral decompositions are reproduced by standalone computational scripts (`cell*.py`), whose complete numerical output transcripts are preserved in matching log files (`cell*.out`). 
+The numerical calculations reported in this manuscript were performed using Python and the `mpmath` arbitrary-precision arithmetic library, with working precisions stated in the corresponding scripts and verification logs. The paper's empirical observations, asymptotic fits, and spectral decompositions are reproduced by standalone computational scripts (`cell*.py`), whose complete numerical output transcripts are preserved in matching log files (`cell*.out`). 
 
 **Table 4: Mapping of Manuscript Results to Computational Scripts and Output Logs**
 
