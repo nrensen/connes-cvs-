@@ -51,7 +51,7 @@ Bulk (m <= N/2) vs. Edge (m > N/2) contributions to the Fourier sums:
 Dirichlet kinetic energy ||T'_v||, curvature ||T''_v||, and Cauchy-Schwarz trace bounds:
     |D_1| <= sqrt(2) * kappa * ||T'_v||_2 * sqrt(sum_{m=1}^N m^2)
 
-   N   ||T_v||_{L^2}    ||T_v'||_{H^1}   ||T_v''||_{H^2}      CS Bound Ratio
+   N   ||T_v||_{L^2}    ||T_v'||_{L^2}   ||T_v''||_{L^2}      CS Bound Ratio
 --------------------------------------------------------------------------
    8             1.0           2.77807           13.1781          2.44717e-8
   12             1.0           2.99621           15.2875         2.41934e-11
