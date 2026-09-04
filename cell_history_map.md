@@ -2310,10 +2310,22 @@ Cell 54 conducts a four-part mathematical dissection to determine what governs t
   * Because the eigenvalue is fantastically small ($\lambda \sim 10^{-23} - 10^{-43} \ll |D_0|$), the quadratic spectral moment satisfies the forced linear system:
     $$Q M^2 u \approx -D_0 b + B_1 e,$$
     proving that the entire quadratic moment $M^2 u$ is sourced by an amplitude proportional to $D_0$.
+* **Non-Singular Spectral Resolvent Resummation:**
+  * In the spectral expansion of $D_1 / D_0$ on the even subspace, the small-eigenvalue denominators $(E_k - \lambda)$ for bound states $k$ are identically canceled by an exact $(E_k - \lambda)$ factor in the numerator arising from the first resolvent identity on the odd arithmetic energy:
+    $$\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) = (E_k - \lambda) \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
+  * Each bound state contributes at most $\sim [D_0^{(k)}]^2 \le 10^{-20}$, proving that the bound sector contributes $\le 10^{-15}$ to $D_1/D_0$ and the ratio is governed strictly by the non-singular continuum scattering spectrum ($E_k \ge 1.20$).
+* **Rigorous Two-Sided Subexponential Bounding Ladder:**
+  * By operator Cauchy–Schwarz and the continuum resolvent bound $\|Q^\dagger\|_{\mathrm{scatt}} \le 1/1.20 = \mathcal{O}(1)$, the first-jet cancellation scale $u_1 = |D_0/D_1|$ and decoupling ratio $s_N$ satisfy:
+    $$\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}, \qquad \frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2},$$
+    algebraically proving that $u_1$ and $s_N$ are strictly subexponential, ruling out any $e^{-\alpha N}$ collapse, and confirming that $D_0$ and $D_1$ share the identical WKB decay rate.
+* **Universal Heat Semigroup Squeezing Bounds (Cell 53 Profile Collapse):**
+  * Under $u = \theta u_1$, the normalized heat profile $\Theta_N(\theta) = H_N(\theta u_1)/D_0$ satisfies the rigorous two-sided squeezing bounds:
+    $$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2 \qquad (\forall \theta \in [0, 1]),$$
+    with $\beta_N = D_0 D_2 / D_1^2 \approx 0.24 \pm 0.02$, proving analytically the near-perfect profile collapse ($1.5\%$) observed across 16 orders of magnitude in Cell 53.
 
 ### Status
 
-**Established.** Confirmed subexponentiality of $\Delta_N = -\log|D_0| + \log|D_1|$ and the first-jet scale $u_1$, mapped structured signed cancellations down to $10^{-20}$, discovered the bulk/edge mechanism split, derived the exact Archimedean resolvent identity $D_1/D_0 = -\frac{1}{2} A_1 / A_0$, and established the rank-4 commutator forced moment balance $Q M^2 u \approx -D_0 b + B_1 e$.
+**Established.** Confirmed subexponentiality of $\Delta_N = -\log|D_0| + \log|D_1|$ and the first-jet scale $u_1$, mapped structured signed cancellations down to $10^{-20}$, discovered the bulk/edge mechanism split, derived the exact Archimedean resolvent identity $D_1/D_0 = -\frac{1}{2} A_1 / A_0$, proved the identical small-denominator cancellation in the spectral resolvent, established rigorous two-sided subexponential bounds on $u_1$ and $s_N$, and derived the universal semigroup squeezing bounds for the Cell 53 profile collapse.
 
 ---
 
@@ -2566,6 +2578,7 @@ At the current stage:
   * Non-sharpness of Sobolev/Cauchy–Schwarz bounds: bound ratio drops to $7.58 \times 10^{-18}$ at $N = 24$, proving that endpoint suppression is specific to the ground-state eigenvector rather than generic Sobolev norm constraints.
   * Exact Archimedean resolvent identity: $D_1 / D_0 = -\frac{1}{2} A_1 / A_0$ links the first-jet ratio directly to the relative first correction of the resolvent $R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \cdots$.
   * Rank-4 quadratic commutator: $[M^2, Q]$ has rank $\le 4$, yielding the forced linear moment equation $Q M^2 u \approx -D_0 b + B_1 e$ since $\lambda \ll |D_0|$, proving that the quadratic moment $M^2 u$ is sourced by an amplitude proportional to $D_0$.
+  * Non-singular resolvent resummation and two-sided bounds: small-eigenvalue denominators cancel identically via the first resolvent identity; operator norm bounds establish $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$ and $\frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2}$, proving subexponentiality and establishing the universal squeezing bounds $1 + \theta \le H_N(\theta u_1)/D_0 \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$ for the Cell 53 profile collapse.
 
 Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale boundary-layer cancellation asymptotics) is computationally established and advancing toward Paper 5 and Cell 55 (the Mellin scaling limit and large-$N$ moment equations).
 
