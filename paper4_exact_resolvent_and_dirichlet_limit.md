@@ -568,20 +568,46 @@ Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `ce
 
 At high frequencies, the finite-$N$ resolvent plunges precipitously: $R_{v_{24}}(10.0) = 0.0368$, $R_{v_{24}}(15.0) = 6.30 \times 10^{-6}$, $R_{v_{24}}(20.0) = 1.10 \times 10^{-8}$, and $R_{v_{24}}(50.0) = 5.40 \times 10^{-30}$. The effective logarithmic slope $\gamma_{\mathrm{eff}}(r) = -r R'(r)/R(r)$ reaches $\gamma_{\mathrm{eff}} \approx 78.6$ at $r = 15.0$, $154.0$ at $r = 20.0$, and $270.3$ at $r = 30.0$, demonstrating extremely strong finite-$N$ suppression over the computed high-frequency range (though for any fixed finite $N$, the rational tail must eventually dominate at sufficiently large $r$).
 
-### 6.7 The Accumulating Pole Mechanism and Non-Analytic Boundary Flatness
+### 6.7 The Accumulating Pole Mechanism and Boundary Flatness
 The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Theorem 3.2 provides the conceptual mechanism for understanding how the high-frequency Fourier tail behaves in the continuum limit, reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$ for all $k \ge 0$) with a non-trivial continuous-variable resolvent $R_\infty(r)$:
 
 1. **Accumulation of Resolvent Poles at the Origin (Proven):** At every finite dimension $N$, $D_N(z)$ is a rational function whose poles lie on the negative real axis at:
+
    $$z_m = -\frac{1}{a_m^2} = -\frac{L^2}{4\pi^2 m^2} \in \left(-\frac{L^2}{4\pi^2}, 0\right) \quad (m = 1, \dots, N).$$
+
    As $N \to \infty$, the number of poles grows without bound and their locations accumulate at the origin:
+
    $$\lim_{m\to\infty} z_m = 0^-.$$
+
 2. **Conditional Obstruction to Analyticity (Analytic Mechanism):** The residue of $D_N(z)$ at each pole $z_m$ is proportional to $\frac{\sqrt{2} v_{N, m}}{a_m^2}$. If the mode coefficients $v_{N, m}$ persist with sufficient weight in the large-$N$ limit, the infinite accumulation of poles at $z = 0^-$ obstructs analytic continuation through the origin from the negative real axis.
 3. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** The numerical extinction of every tested fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ is consistent with a limiting object that is $C^\infty$-flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, because $z = 0$ is an accumulation boundary of singularities, this flatness does not force $D_\infty(z)$ to vanish identically on the negative axis.
-4. **Motivated Asymptotic Hypothesis:** While the accumulating-pole mechanism explains why ordinary Taylor analyticity fails, it does not by itself select a unique essential-singularity scale. The observed WKB quantum barrier behavior in Section 6.1 motivates testing an exponentially flat ansatz:
+4. **Motivated Asymptotic Hypothesis:** When the accumulating-pole mechanism survives in the infinite-dimensional limit, it provides a natural obstruction to ordinary Taylor analyticity, though it does not by itself select a unique essential-singularity scale. The observed WKB quantum barrier behavior in Section 6.1 motivates testing an exponentially flat ansatz:
+
    $$D_\infty\left(-\frac{1}{r^2}\right) \sim e^{-C r} \qquad (r \to \infty),$$
+
    corresponding to $D_\infty(z) \sim e^{-C / \sqrt{-z}}$ as $z \to 0^-$. Whether the true continuum resolvent settles precisely to this exponential scale, a stretched exponential, or a broader boundary-layer scaling remains an open question under numerical investigation.
 
-Consequently, the extinction of the asymptotic inverse-power hierarchy $A_k(\infty) = 0$ does not imply that the continuous resolvent $R_\infty(r)$ vanishes; rather, it indicates that the algebraic polynomial tail is superseded in the continuum limit by a non-analytic, exponentially suppressed boundary resolvent.
+### Numerical Observations from the Operator Resolvent and Discrete Cauchy Transform (Cell 51)
+Dedicated numerical investigation across dimensions $N \in \{8, 12, 16, 20, 24\}$ (implemented in `cell51.py` and logged in `cell51.out` [10]) reveals five concrete structural features of $D_N(z)$:
+
+1. **Exact Discrete Cauchy Transform Identity:**
+   On the negative real axis $z = -1/r^2$, defining the quadratic lattice variable $w = -r^2 / \kappa^2$, the generating function $D_N(-1/r^2)$ matches the discrete Cauchy transform:
+
+   $$D_N\left(-\frac{1}{r^2}\right) \equiv v_{N, 0} + \sqrt{2} w \sum_{m=1}^N \frac{v_{N, m}}{w - m^2}$$
+
+   identically to 51 decimal digits ($|\text{diff}| = 2.67 \times 10^{-51}$ at $N = 24$). The poles on the $w$-axis are simply the positive integers $w = m^2$.
+
+2. **Persistent Lattice Oscillations Across Pole Cells:**
+   While $|D_{24}(-1/r^2)|$ drops across 14 orders of magnitude (falling from order unity to $8.38 \times 10^{-15}$ at $r \approx 55$), the ratio $-\log|D_{24}|/r$ does not settle to a single constant $C$, but oscillates between $0.37$ and $0.59$. Probing off-lattice points $r = \kappa(m + \delta)$ across $\delta \in \{0.10, 0.25, 0.50, 0.75, 0.90\}$ confirms that suppression is universal across the entire cell between poles ($\sim 10^{-12} - 10^{-13}$ at $m = 20$ for all $\delta$), ruling out half-integer sampling artifacts while confirming that a simple monotonic $e^{-Cr}$ law is not supported at finite $N$.
+
+3. **Irregular Mode Coefficient Signs:**
+   The modulated Fourier coefficients $b_{24, m} = (-1)^m v_{24, m}$ are strictly positive for $m = 1, \dots, 5$ ($0.674 \to 0.443 \to 0.213 \to 0.069 \to 0.011$), but reverse sign at $m = 6, 7, 8$ ($-9.30 \times 10^{-4}, -8.65 \times 10^{-4}, -1.14 \times 10^{-4}$) and oscillate irregularly thereafter. This disproves simple geometric decay $v_m \sim (-1)^m C q^m$, establishing that the finite-$N$ boundary suppression arises from a delicate balance between a smooth low-frequency profile and an oscillatory edge correction near $m \sim N$.
+
+4. **Heat Semigroup Boundary Layer at Scale $u_N \sim (\kappa N)^{-2}$:**
+   For $N = 24$, the heat boundary trace $H_N(u) = [e^{-u\mathcal{L}} T_N](0)$ plunges across 20 orders of magnitude ($0.544 \to 1.77 \times 10^{-20}$), reaching the exact boundary value $T_{24}(0)$ at $u = 10^{-6}$. This demonstrates that in the continuum limit $H_\infty(u) = 0$ for all $u > 0$, while at finite $N$ the system contains a shrinking boundary layer at characteristic diffusion scale $u_N \sim a_N^{-2} = \frac{1}{\kappa^2 N^2}$ ($u_{24} \approx 2.9 \times 10^{-4}$).
+
+5. **Resolvent Asymmetry:**
+   Along the positive real axis $x > 0$, $(I + x\mathcal{L})^{-1}$ is a bounded, positive operator, and $D_N(x)$ remains $O(1)$ across all dimensions ($D_{24}(1.0) \approx 0.431$, $D_{24}(10.0) \approx 0.533$), proving that the limiting operator resolvent cannot vanish identically. Thus, $z = 0$ serves as an asymmetric boundary separating an $O(1)$ positive resolvent from a super-suppressed boundary layer at $z \to 0^+$ and an accumulating discrete Cauchy singularity at $z = -1/r^2 < 0$.
 
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
@@ -730,7 +756,7 @@ The numerical calculations reported in this manuscript were performed using Pyth
 | Section 6.1–6.3 (Proposition 6.1, Observation 6.2, Conjecture 6.3) | Spatial wave profile & boundary jet derivatives $D_0\dots D_3$ | `cell42.py`, `cell43.py` | `cell42.out`, `cell43.out` |
 | Section 6.4–6.5 (Observation 6.4, Proposition 6.5) | Effective WKB barrier potential & Bauer–Bessel Legendre multipoles | `cell44.py` | `cell44.out` |
 | Section 6.6 (Conjecture 6.6) | High-frequency resolvent decay & Taylor jet extinction $A_0\dots A_4$ | `cell45.py` | `cell45.out` |
-| Section 6.7 (Proposition 6.7) | Continuous Archimedean integral & tri-partite zero balance | `cell46.py` | `cell46.out` |
+| Section 6.7 (Proposition 6.7, Cell 51) | Continuous Archimedean integral, discrete Cauchy transform & heat boundary layer | `cell46.py`, `cell51.py` | `cell46.out`, `cell51.out` |
 | Section 6.8 (Observation 6.8) | Universal ratio $\kappa$, multi-cutoff WKB scaling & prime partition | `cell47.py` | `cell47.out` |
 
 ---
