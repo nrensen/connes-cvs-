@@ -33,6 +33,7 @@ In this paper, we establish the exact algebraic solution to the finite-$N$ Archi
 6. **Exact Commutator Algebra, First-Jet Resolvent Identity, and Mellin Scaling Limit (Theorem & Asymptotic Analysis):** We prove algebraically that the first-jet cancellation ratio is identically the relative first correction of the Archimedean resolvent:
    $$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = \frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}.$$
    By computing the rank-$2k$ commutator $[M^k, Q]$ of the coordinate operator $M = \operatorname{diag}(n)$ with the Galerkin matrix $Q$, we establish the exact odd-sector resolvent identity $B_1 = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle$, yielding a closed-form formula for $D_1/D_0$ that factors out all exponential barrier suppression. Via the first resolvent identity, the small bound-state denominators $(E_k - \lambda)$ cancel identically in the spectral expansion, proving that $D_1/D_0$ is governed exclusively by the non-singular scattering continuum and establishing the rigorous two-sided bounds $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$ and $\frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2}$. This algebraically proves that $u_1$ and $s_N$ are subexponential, ruling out any $e^{-\alpha N}$ collapse. Furthermore, we establish the universal semigroup squeezing bounds $1 + \theta \le H_N(\theta u_1)/D_0 \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$, explaining the cross-$N$ profile collapse discovered in Cell 53. In the continuum limit, the divided-difference kernel $\frac{\log(m/n)}{m-n}$ is shown to be isometrically isomorphic to a Wiener–Hopf convolution operator on $\mathbb{R}_+$ with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$, whose symbol factors into squared Euler Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting leading double pole at $k = -i/2$ rigorously generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge cancellation mechanism asymmetry.
+7. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorem & Corollary):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via contour integration in the complex frequency plane. By isolating the origin boundary residue at $z=0$ (governed by $v_0^2$ rather than $D_0^2$), integrating the discrete lattice pole contributions at $z = \pm a_m$, and combining them with the imaginary pole at $z = iq$, we eliminate the need for numerical quadrature in the Archimedean sector. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ as an unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ absolute convergence.
 
 ---
 
@@ -842,6 +843,115 @@ The factor $(E_k - \lambda)$ cancels identically with the denominator in the spe
 
 ---
 
+### Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition of $\mathcal{Q}_{\mathrm{arch}}(v)$
+
+Evaluating the integrated Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$ against the digamma weight $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ has historically required numerical quadrature with interval-truncation cutoffs. The rational resolvent factorization $K_{\mathrm{Fourier}}(r) = (1 - \cos(rL)) R_v(r)$ established in Theorem 4.1 permits an exact closed-form evaluation of its Cauchy transform and an unconditionally convergent algebraic pole decomposition.
+
+#### Theorem 6.16 (Exact Archimedean Cauchy Transform Identity)
+*Let $c > 1$, $L = \log c$, $N \ge 1$, and $a_m = \frac{2\pi m}{L}$. For any canonical coefficient vector $v \in \mathbb{R}^{N+1}$ and any pole parameter $q > 0$, the Cauchy transform of the Fourier Archimedean kernel evaluates in exact closed algebraic form:*
+
+$$J(q) \equiv \frac{1}{\pi} \int_0^\infty \frac{2 q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{2 v_0^2}{q} + \sum_{m=1}^N \frac{2 q v_m^2}{q^2 + a_m^2} - \frac{2(1 - e^{-q L})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+
+*Proof.* By Theorem 4.1 and Corollary 4.2, the kernel decomposes on the real line as:
+
+$$K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r) = H(r) \left( 2 - e^{i r L} - e^{-i r L} \right),$$
+
+where $H(z) = \frac{1}{2} R_v(z) = \frac{1}{L z^2} \left[ D\left(-\frac{1}{z^2}\right) \right]^2$ with $D(w) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$. Decompose the kernel into two components:
+
+$$f_1(z) = H(z)(1 - e^{i z L}), \qquad f_2(z) = H(z)(1 - e^{-i z L}),$$
+
+satisfying $f_1(r) + f_2(r) = K_{\mathrm{Fourier}}(v, r, L)$ for $r \in \mathbb{R}$. Since $K_{\mathrm{Fourier}}$ is even on $\mathbb{R}$, we extend the integral over $(-\infty, \infty)$:
+
+$$J(q) = \frac{q}{\pi} \int_{-\infty}^\infty \frac{K_{\mathrm{Fourier}}(v, r, L)}{r^2 + q^2} \, dr = \frac{q}{\pi} \lim_{\epsilon \to 0^+} \left[ \int_{C_\epsilon^+} \frac{f_1(z)}{z^2 + q^2} \, dz + \int_{C_\epsilon^+} \frac{f_2(z)}{z^2 + q^2} \, dz \right],$$
+
+where $C_\epsilon^+$ is the real axis indented into the upper half-plane $\mathbb{C}^+$ by semicircles of radius $\epsilon$ around the real singularities $z = 0$ and $z = \pm a_m$ ($m = 1, \dots, N$).
+
+1. **Upper Half-Plane Contour ($\mathbb{C}^+$) for $f_1(z)$:**
+   For $\operatorname{Im}(z) > 0$, $|e^{i z L}| = e^{-L \operatorname{Im}(z)} < 1$, so $f_1(z) = \mathcal{O}(|z|^{-2})$ as $|z| \to \infty$. Closing $C_\epsilon^+$ with a large semicircle in $\mathbb{C}^+$ encloses the isolated pole at $z = i q$. Because the indentations pass above $z = 0$ and $z = \pm a_m$, all real singularities lie outside the upper contour. By Cauchy's residue theorem:
+
+   $$\int_{C_\epsilon^+} \frac{f_1(z)}{z^2 + q^2} \, dz = 2\pi i \operatorname{Res}_{z = i q} \left[ \frac{f_1(z)}{z^2 + q^2} \right] = 2\pi i \frac{f_1(i q)}{2 i q} = \frac{\pi}{q} H(i q) (1 - e^{-q L}).$$
+
+   Evaluating $H(i q)$ at the imaginary point:
+
+   $$H(i q) = \frac{1}{L (i q)^2} \left[ D\left(-\frac{1}{(i q)^2}\right) \right]^2 = -\frac{1}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+
+2. **Lower Half-Plane Contour ($\mathbb{C}^-$) for $f_2(z)$:**
+   For $\operatorname{Im}(z) < 0$, $|e^{-i z L}| = e^{L \operatorname{Im}(z)} < 1$, so $f_2(z) = \mathcal{O}(|z|^{-2})$ as $|z| \to \infty$. Closing $C_\epsilon^+$ with a large semicircle in the lower half-plane $\mathbb{C}^-$ (traversed clockwise) encloses:
+   - the imaginary pole at $z = -i q$;
+   - the origin $z = 0$;
+   - the discrete lattice nodes $z = \pm a_m$ ($m = 1, \dots, N$).
+
+   By the residue theorem for clockwise orientation:
+
+   $$\int_{C_\epsilon^+} \frac{f_2(z)}{z^2 + q^2} \, dz = -2\pi i \left[ \operatorname{Res}_{z = -i q} + \operatorname{Res}_{z = 0} + \sum_{m=1}^N \left( \operatorname{Res}_{z = a_m} + \operatorname{Res}_{z = -a_m} \right) \right] \left( \frac{f_2(z)}{z^2 + q^2} \right).$$
+
+   At $z = -i q$:
+
+   $$-2\pi i \operatorname{Res}_{z = -i q} \left[ \frac{f_2(z)}{z^2 + q^2} \right] = -2\pi i \frac{f_2(-i q)}{-2 i q} = \frac{\pi}{q} H(-i q) (1 - e^{-q L}) = \frac{\pi}{q} H(i q) (1 - e^{-q L}).$$
+
+   Summing the imaginary pole contributions from $f_1$ and $f_2$ and multiplying by the prefactor $\frac{q}{\pi}$ gives:
+
+   $$\frac{q}{\pi} \left[ \frac{\pi}{q} H(i q) (1 - e^{-q L}) + \frac{\pi}{q} H(i q) (1 - e^{-q L}) \right] = 2 H(i q) (1 - e^{-q L}) = -\frac{2(1 - e^{-q L})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+
+3. **Real Pole at the Origin ($z = 0$):**
+   As $z \to 0$ in the complex plane, the argument of $D(-1/z^2)$ tends to $-\infty$, where $\lim_{w\to\infty} D(w) = v_0$. Thus $H(z) = \frac{v_0^2}{L z^2} + \mathcal{O}(1)$. Expanding $1 - e^{-i z L} = i z L + \frac{1}{2} z^2 L^2 + \mathcal{O}(z^3)$, the product has a simple pole:
+
+   $$f_2(z) = \frac{v_0^2}{L z^2} (i z L) + \mathcal{O}(1) = \frac{i v_0^2}{z} + \mathcal{O}(1) \implies \operatorname{Res}_{z = 0} f_2(z) = i v_0^2.$$
+
+   Evaluating the pole in the integrand $\frac{f_2(z)}{z^2 + q^2}$ at $z = 0$ and applying the residue theorem:
+
+   $$-2\pi i \operatorname{Res}_{z = 0} \left[ \frac{f_2(z)}{z^2 + q^2} \right] = -2\pi i \left( \frac{i v_0^2}{q^2} \right) = \frac{2\pi v_0^2}{q^2}.$$
+
+   Multiplying by the overall factor $\frac{q}{\pi}$ yields the exact contribution:
+
+   $$\frac{q}{\pi} \left( \frac{2\pi v_0^2}{q^2} \right) = \frac{2 v_0^2}{q}.$$
+
+4. **Real Poles at the Discrete Lattice Nodes ($z = \pm a_m$):**
+   At $z = \pm a_m + \delta$, the double pole of $H(z)$ is regularized by the simple zero of $1 - e^{-i z L} = 1 - e^{\mp 2\pi i m} e^{-i \delta L} = i \delta L + \mathcal{O}(\delta^2)$. Computing the residue:
+
+   $$f_2(\pm a_m + \delta) = \left( \frac{v_m^2}{2 L \delta^2} \right) (i \delta L) + \mathcal{O}(1) = \frac{i v_m^2}{2 \delta} + \mathcal{O}(1) \implies \operatorname{Res}_{z = \pm a_m} f_2(z) = \frac{i}{2} v_m^2.$$
+
+   Evaluating in the integrand $\frac{f_2(z)}{z^2 + q^2}$ at $z = \pm a_m$, where $z^2 + q^2 = a_m^2 + q^2$:
+
+   $$-2\pi i \left( \operatorname{Res}_{z = a_m} + \operatorname{Res}_{z = -a_m} \right) \left[ \frac{f_2(z)}{z^2 + q^2} \right] = -2\pi i \left( \frac{i v_m^2 / 2 + i v_m^2 / 2}{q^2 + a_m^2} \right) = \frac{2\pi v_m^2}{q^2 + a_m^2}.$$
+
+   Multiplying by the overall factor $\frac{q}{\pi}$ yields:
+
+   $$\frac{q}{\pi} \left( \frac{2\pi v_m^2}{q^2 + a_m^2} \right) = \frac{2 q v_m^2}{q^2 + a_m^2}.$$
+
+Summing the origin term, the lattice mode sum over $m = 1, \dots, N$, and the imaginary pole term establishes the identity. $\blacksquare$
+
+*Remark 6.16.1 (Asymptotic Limits and Parseval Recovery).*
+Theorem 6.16 satisfies both fundamental asymptotic limits unconditionally:
+1. **Large-$q$ Limit ($q \to \infty$):**
+
+   $$\lim_{q\to\infty} q J(q) = 2 v_0^2 + 2 \sum_{m=1}^N v_m^2 - 0 = 2 \|v\|_2^2,$$
+
+   which identically matches Parseval's identity $\frac{1}{\pi}\int_0^\infty K_{\mathrm{Fourier}}(v, r, L) dr = \|v\|_2^2$ (Theorems 4.1 & 4.3).
+2. **Small-$q$ Limit ($q \to 0$):**
+   As $q \to 0$, expanding the difference $\frac{2 v_0^2}{q} - \frac{2(1 - e^{-qL})}{L q^2} v_0^2 = 2 v_0^2 [\frac{1}{q} - (\frac{1}{q} - \frac{L}{2} + \mathcal{O}(q))] = L v_0^2$, which identically matches the central kernel evaluation $K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2$ (Theorem 4.3).
+
+---
+
+#### Corollary 6.17 (Exact Closed-Form Pole Decomposition of $\mathcal{Q}_{\mathrm{arch}}(v)$)
+*Using the Weierstrass partial fraction expansion for the Digamma function:*
+
+$$h_+(r) = \operatorname{Re}\psi\left(\frac{1}{4} + \frac{ir}{2}\right) - \log \pi = C_{\mathrm{arch}} + \sum_{n=0}^\infty \left[ \frac{1}{n+1} - \frac{2 q_n}{q_n^2 + r^2} \right], \qquad q_n = 2n + \frac{1}{2},$$
+
+*where $C_{\mathrm{arch}} = -\gamma - \log \pi \approx -1.7219455$, the continuous Archimedean quadratic form decomposes into an exact, unconditionally convergent algebraic series without numerical quadrature:*
+
+$$\mathcal{Q}_{\mathrm{arch}}(v) \equiv C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right],$$
+
+*where each term $J(q_n)$ is evaluated in closed algebraic form via Theorem 6.16.*
+
+*Proof.* Integrating the partial fraction expansion of $h_+(r)$ term-by-term against $K_{\mathrm{Fourier}}(v, r, L)$ on $[0, \infty)$ is justified by Fubini's theorem since $K_{\mathrm{Fourier}}(r) = \mathcal{O}(r^{-2})$ at infinity and smooth on $[0, \infty)$. Using $\frac{1}{\pi}\int_0^\infty K_{\mathrm{Fourier}}(r) dr = \|v\|_2^2$ and the definition of $J(q_n)$, the result follows. Because $J(q_n) = \frac{2\|v\|_2^2}{q_n} + \mathcal{O}(q_n^{-2}) = \frac{\|v\|_2^2}{n + 1/4} + \mathcal{O}(n^{-2})$, the summand satisfies:
+
+$$\frac{\|v\|_2^2}{n+1} - J(q_n) = \|v\|_2^2 \left( \frac{1}{n+1} - \frac{1}{n + 1/4} \right) + \mathcal{O}(n^{-2}) = -\frac{3 \|v\|_2^2}{4 n^2} + \mathcal{O}(n^{-3}),$$
+
+which converges absolutely as $\sim n^{-2}$. $\blacksquare$
+
+---
+
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
 
@@ -941,7 +1051,7 @@ The findings of this paper resolve the finite-$N$ algebraic reduction of the Arc
 1. **Exact Resolvent Formula and Pointwise Kernel Positivity (Theorem):**
    The finite-$N$ Archimedean Fourier kernel is an exact non-asymptotic square on the real axis:
    $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R}.$$
-   This establishes algebraically, independently of numerical quadrature, that the Fourier-side Archimedean kernel is pointwise non-negative for every real coefficient vector. It does not by itself imply positivity of the integrated Archimedean quadratic form, since the Archimedean density $h_+(r)$ is not everywhere non-negative.
+   This establishes algebraically, independently of numerical quadrature, that the Fourier-side Archimedean kernel is pointwise non-negative for every real coefficient vector. While pointwise non-negativity does not by itself guarantee positivity of the integrated form against the indefinite digamma weight $h_+(r)$, contour integration in the complex plane evaluates the continuous Archimedean Cauchy transform $J(q)$ in closed algebraic form (Theorem 6.16). This yields an exact, unconditionally convergent pole series for $\mathcal{Q}_{\mathrm{arch}}(v)$ with $\mathcal{O}(n^{-2})$ convergence (Corollary 6.17), eliminating the need for numerical quadrature in the continuous Archimedean sector.
 
 2. **The Galerkin Cutoff as a Confinement Barrier (Observation & Conjecture):**
    The finite-rank spectral gap $\lambda_{\min}(N) > 0$ is an artifact of band limitation. The finite rank $N$ prevents the trigonometric polynomial from satisfying the Dirichlet boundary condition $T(0) = 0$ identically. The boundary energy leaks out as $A_0(N) = \frac{2}{L} [T_{v_N}(0)]^2$, driving the observed numerical eigenvalue gap:
@@ -989,7 +1099,7 @@ The numerical calculations reported in this manuscript were performed using Pyth
 | Section 6.1–6.3 (Proposition 6.1, Observation 6.2, Conjecture 6.3) | Spatial wave profile & boundary jet derivatives $D_0\dots D_3$ | `cell42.py`, `cell43.py` | `cell42.out`, `cell43.out` |
 | Section 6.4–6.5 (Observation 6.4, Proposition 6.5) | Effective WKB barrier potential & Bauer–Bessel Legendre multipoles | `cell44.py` | `cell44.out` |
 | Section 6.6 (Conjecture 6.6) | High-frequency resolvent decay & Taylor jet extinction $A_0\dots A_4$ | `cell45.py` | `cell45.out` |
-| Section 6.7 (Theorems 6.10–6.15, Proposition 6.14, Cells 51–54) | Exact commutator algebra, odd resolvent identity, two-sided cancellation bounds, Wiener–Hopf Mellin factorization & jet anatomy | `cell46.py`, `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell46.out`, `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
+| Section 6.7 (Theorems 6.10–6.16, Corollary 6.17, Proposition 6.14, Cells 51–54) | Exact commutator algebra, odd resolvent identity, two-sided cancellation bounds, Wiener–Hopf Mellin factorization, exact Archimedean Cauchy transform & closed-form pole decomposition | `cell46.py`, `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell46.out`, `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
 | Section 6.8 (Observation 6.8) | Universal ratio $\kappa$, multi-cutoff WKB scaling & prime partition | `cell47.py` | `cell47.out` |
 
 ---

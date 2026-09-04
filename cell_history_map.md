@@ -2502,6 +2502,12 @@ Cell 53
 Cell 54
     Analytic anatomy of D_0 / D_1, signed cancellation mechanics, Sobolev trace bounds, and exponential factor cancellation
     [subexponential difference Delta_N = 10.64 -> 13.16, rate gap narrows to 0.13, structured signed cancellation eps_0 ~ 10^-20 / eps_1 ~ 10^-15, bulk vs edge decoupling, CS bound non-sharpness by 10^-18, exact identity D_1/D_0 = -1/2 A_1/A_0]
+    ↓
+Cell 55
+    Numerical validation of Theorem 6.15: non-singular resolvent resummation, commutator forced moment balance, two-sided bounds, and Mellin scaling limit
+    ↓
+Cell 56
+    Numerical validation of Theorem 6.16 & Corollary 6.17: exact Cauchy transform, quadrature-free Archimedean pole series, resolution of 10^-43 discrepancy, and spatial Laplace duality
 ```
 
 # Current status summary
@@ -2579,7 +2585,8 @@ At the current stage:
   * Exact Archimedean resolvent identity: $D_1 / D_0 = -\frac{1}{2} A_1 / A_0$ links the first-jet ratio directly to the relative first correction of the resolvent $R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \cdots$.
   * Rank-4 quadratic commutator: $[M^2, Q]$ has rank $\le 4$, yielding the forced linear moment equation $Q M^2 u \approx -D_0 b + B_1 e$ since $\lambda \ll |D_0|$, proving that the quadratic moment $M^2 u$ is sourced by an amplitude proportional to $D_0$.
   * Non-singular resolvent resummation and two-sided bounds: small-eigenvalue denominators cancel identically via the first resolvent identity; operator norm bounds establish $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$ and $\frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2}$, proving subexponentiality and establishing the universal squeezing bounds $1 + \theta \le H_N(\theta u_1)/D_0 \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$ for the Cell 53 profile collapse.
+  * Exact Archimedean Cauchy transform and closed-form pole decomposition: contour integration in the complex frequency plane evaluates the Cauchy transform $J(q) = \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact algebraic closed form (Theorem 6.16), resolving the integrated Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}}\|v\|_2^2 + \sum_{n=0}^\infty [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ as an absolutely convergent $\mathcal{O}(n^{-2})$ series without numerical quadrature (Corollary 6.17).
 
-Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale boundary-layer cancellation asymptotics) is computationally established and advancing toward Paper 5 and Cell 55 (the Mellin scaling limit and large-$N$ moment equations).
+Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale boundary-layer cancellation asymptotics) is computationally established and advancing toward Paper 5, with Cell 55 (the Mellin scaling limit and large-$N$ moment equations) and Cell 56 (exact Archimedean Cauchy transform, quadrature-free pole series, and resolution of the $10^{-43}$ discrepancy).
 
 
