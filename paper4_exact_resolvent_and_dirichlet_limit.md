@@ -60,7 +60,7 @@ is the smooth Archimedean density.
 In finite implementations, numerical quadrature must truncate the $r$-integral at some cutoff $T$. This truncation introduced significant empirical and analytical difficulties:
 1. **Numerical Quadrature Failure:** At large $T$, oscillatory quadrature routines (such as unsubdivided Gauss–Legendre or double-exponential rules) suffer severe cancellation errors and false convergence.
 2. **Heuristic Asymptotics:** Early computational efforts in the literature and exploratory calculations attempted to expand $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ as an asymptotic inverse-power series $\sum_{k \ge 0} A_k / r^{2k+2}$. However, the coefficients $A_k$ appeared as highly non-trivial combinatorial sums of spectral moments, and bounding the remainder $\varepsilon_N(r)$ remained an open obstacle.
-3. **Question of Positivity:** It remained unproven whether $K_{\mathrm{Fourier}}(v, r, L)$ was unconditionally positive for all real $r$ and all vectors $v$, or whether sign-oscillations could induce negative eigenvalues at large $T$.
+3. **Question of Positivity:** The positivity of $K_{\mathrm{Fourier}}(v, r, L)$ was not made explicit in the finite-$N$ formulation used in exploratory calculations, leaving open whether sign-oscillations could induce negative eigenvalues at large $T$.
 
 This paper establishes the exact closed-form algebraic solution to this problem, proves global finite-$N$ non-negativity of the Fourier-side Archimedean kernel independently of numerical quadrature, and formulates the precise conjectures governing the infinite-dimensional limit $N \to \infty$.
 
@@ -74,21 +74,27 @@ The canonical vector $v$ maps to full symmetric Fourier coefficients $u = (u_{-N
 
 $$u_0 = v_0, \qquad u_{+m} = u_{-m} = \frac{v_m}{\sqrt{2}} \quad (m = 1, \dots, N).$$
 
-### 2.1 The Trigonometric Wave and the Sine-Chord Kernel
+### 2.1 The Trigonometric Wave and the Spatial Volterra Kernel
 
-The vector $v$ generates an even trigonometric polynomial on $[0, L]$:
+The vector $v$ generates an even trigonometric polynomial on the physical interval $[0, L]$:
 
-$$T_v(t) = v_0 + \sqrt{2} \sum_{m=1}^{N} v_m \cos\left(\frac{2\pi m t}{L}\right).$$
+$$T_v(t) = v_0 + \sqrt{2} \sum_{m=1}^{N} v_m \cos\left(\frac{2\pi m t}{L}\right) \qquad (0 \le t \le L),$$
 
-The quadratic spatial kernel entering the Archimedean explicit formula is the Volterra sine-chord auto-convolution on the normalized variable $\omega \in [0, 1]$:
+which in normalized coordinates $s = t/L \in [0, 1]$ is represented by:
 
-$$K_v(\omega) = 2 \int_0^\omega T_v(t) T_v(\omega - t) \, dt.$$
+$$\tau_v(s) := T_v(L s) = v_0 + \sqrt{2} \sum_{m=1}^{N} v_m \cos(2\pi m s) \qquad (0 \le s \le 1).$$
+
+The quadratic spatial kernel entering the Archimedean explicit formula is the normalized Volterra auto-convolution for $\omega \in [0, 1]$:
+
+$$K_v(\omega) = 2 \int_0^\omega \tau_v(s) \tau_v(\omega - s) \, ds = \frac{2}{L} \int_0^{L\omega} T_v(t) T_v(L\omega - t) \, dt \qquad (0 \le \omega \le 1).$$
+
+In physical coordinates $x = L\omega \in [0, L]$, the convolution evaluates to $K_v^{\mathrm{phys}}(x) = 2 \int_0^x T_v(t) T_v(x - t) \, dt = L K_v(x/L)$.
 
 ### 2.2 The Fourier-Side Representation
 
-Transforming $K_v(\omega)$ to the spectral variable $r \in \mathbb{R}$ against $\cos(r L \omega)$ produces the Fourier-side kernel $K_{\mathrm{Fourier}}(v, r, L)$. 
+Transforming $K_v(\omega)$ to the spectral variable $r \in \mathbb{R}$ against $\cos(r L \omega)$ on $[0, 1]$ produces the Fourier-side kernel $K_{\mathrm{Fourier}}(v, r, L)$. 
 
-By direct integration of the Volterra convolution against $\cos(r L \omega)$, the boundary terms at $\omega = 1$ factor out cleanly (implemented and verified in the companion calculation script `cell32.py` and output log `cell32.out` [10]), isolating the common oscillatory factor $1 - \cos(rL)$:
+By direct integration of the Volterra convolution against $\cos(r L \omega)$, the boundary terms at the endpoint $\omega = 1$ ($x = L$) factor out cleanly (implemented and verified in the companion calculation script `cell32.py` and output log `cell32.out` [10]), isolating the common oscillatory factor $1 - \cos(rL)$:
 
 $$K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r),$$
 
@@ -118,11 +124,11 @@ Using the analytic expression for the reduced kernel $R_v(r)$ derived from the A
 
 $$R_v(r) \equiv \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^{N} \frac{r v_m}{r^2 - a_m^2} \right]^2.$$
 
-*Furthermore, defining the boundary-resolvent generating function:*
+*Furthermore, defining the boundary-resolvent rational function:*
 
 $$D(z) := v_0 + \sqrt{2} \sum_{m=1}^{N} \frac{v_m}{1 + a_m^2 z},$$
 
-*and the coefficient generating function:*
+*and the coefficient-generating rational function:*
 
 $$A(z) := \frac{2}{L} D(-z)^2 = \frac{2}{L} \left[ v_0 + \sqrt{2} \sum_{m=1}^{N} \frac{v_m}{1 - a_m^2 z} \right]^2,$$
 
@@ -234,11 +240,11 @@ At the apparent poles $r = \pm a_m$, we have $a_m L / 2 = \pi m$. Taylor expansi
 
 $$\sin(rL/2) = \sin(\pi m + (r - a_m)L/2) = (-1)^m \sin((r - a_m)L/2) = (-1)^m \frac{L}{2}(r - a_m) + O((r - a_m)^3).$$
 
-Because the denominator contains $r^2 - a_m^2 = (r - a_m)(r + a_m)$, the pole at $r = a_m$ is removable:
+Because the denominator contains $r^2 - a_m^2 = (r - a_m)(r + a_m)$, both apparent poles at $r = \pm a_m$ are removable:
 
-$$\lim_{r\to a_m} \frac{r \sin(rL/2)}{r^2 - a_m^2} = \lim_{r\to a_m} \frac{r}{r + a_m} \cdot \frac{\sin(rL/2)}{r - a_m} = \frac{1}{2} \cdot (-1)^m \frac{L}{2} = (-1)^m \frac{L}{4}.$$
+$$\lim_{r\to \pm a_m} \frac{r \sin(rL/2)}{r^2 - a_m^2} = (-1)^m \frac{L}{4}.$$
 
-Thus all apparent poles at $r = \pm a_m$ are removable, so $\Phi_v(r)$ extends to an entire function on the complex plane $\mathbb{C}$. Its exponential type is at most $L/2$. Because $v$ is real, $\Phi_v(r) \in \mathbb{R}$ for all $r \in \mathbb{R}$, which forces $\Phi_v(r)^2 \ge 0$ unconditionally on the real axis. $\blacksquare$
+Because there are only finitely many apparent singularities ($r = 0$ and $r = \pm a_m$ for $m \in \{1, \dots, N\}$) and each is removable, $\Phi_v(r)$ extends to an entire function on the complex plane $\mathbb{C}$. Its exponential type is at most $L/2$. Because $v$ is real, $\Phi_v(r) \in \mathbb{R}$ for all $r \in \mathbb{R}$, which forces $\Phi_v(r)^2 \ge 0$ unconditionally on the real axis. $\blacksquare$
 
 ### Theorem 4.2 (Spectral Lattice Sampling Identity)
 *At the discrete Fourier frequencies $a_m = 2\pi m / L$, the Archimedean kernel samples the squared Fourier coefficients orthogonally:*
@@ -337,7 +343,7 @@ While both quantities span approximately 43 decimal orders of magnitude, the rat
 
 $$\frac{\lambda_{\min}(N)}{A_0(N)} \approx 0.00246 \pm 0.0001 \quad (N = 18, \dots, 24).$$
 
-For fixed $c = 13$, the ratio appears to approach a non-zero limiting constant numerically. This demonstrates an empirical correlation while both quantities span approximately 43 decimal orders of magnitude, but does not prove asymptotic equivalence. We formulate this asymptotic relationship as a numerical conjecture:
+For fixed $c = 13$, the ratio appears to approach a non-zero limiting constant numerically. This shows an empirical correlation while both quantities span approximately 43 decimal orders of magnitude, but does not prove asymptotic equivalence. We formulate this asymptotic relationship as a numerical conjecture:
 
 ### Conjecture 5.2 (Numerical Conjecture: Eigenvalue Gap Law)
 *For a given cutoff $c > 1$, the minimum eigenvalue of the truncated Galerkin matrix is asymptotically proportional to the boundary leakage energy:*
@@ -386,15 +392,15 @@ This holds identically for all $N$. $\blacksquare$
 
    *with a single central maximum at $t = L/2$ of height $T_{\max} \approx 2.5382 \approx L$.*
 
-### Conjecture 6.3 (Conjectured Infinite-Order Boundary Flatness)
+### Conjecture 6.3 (Conjectured $C^\infty$ Boundary Flatness)
 *The limiting continuum solitary wave $T_\infty(t)$ is conjectured to satisfy infinite-order flat boundary contact at both endpoints:*
 
 $$T_\infty^{(k)}(0) = T_\infty^{(k)}(L) = 0 \qquad \forall k \ge 0.$$
 
-*Consequently, the extension of $T_\infty(t)$ by zero outside $[0, L]$, denoted $\widetilde{T}_\infty(t)$, belongs to $C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$.*
+*If $T_\infty$ exists with the required boundary regularity, these vanishing jets imply that the extension of $T_\infty(t)$ by zero outside $[0, L]$, denoted $\widetilde{T}_\infty(t)$, belongs to $C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$.*
 
 *Discussion of Convergence and Boundary Jet Extinction.*
-For fixed mode index $m$, the numerical coefficients $v_{N, m}$ converge to non-zero limiting values $v_{\infty, m}$. The rapid geometric mode decay $v_{N, m} \sim c^{-m/2}$ describes decay with respect to the mode index $m$, not convergence of a fixed mode as $N \to \infty$. Justifying the interchange of differentiation with the continuum limit ($\lim_{N\to\infty} T_{v_N}^{(2k)}(0) = T_\infty^{(2k)}(0)$) requires a uniform bound of the form $|v_{N, m}| \le C q^m$ ($q < 1$) valid uniformly in $N$, or an analogous weighted $\ell^2$ estimate controlling $\sum_{m=1}^\infty m^{2k} |v_{N, m}|$.
+For each fixed mode index $m$, the numerical sequence $v_{N, m}$ appears to converge to a non-zero limiting value $v_{\infty, m}$. The rapid geometric mode decay $v_{N, m} \sim c^{-m/2}$ describes decay with respect to the mode index $m$, not convergence of a fixed mode as $N \to \infty$. Justifying the interchange of differentiation with the continuum limit ($\lim_{N\to\infty} T_{v_N}^{(2k)}(0) = T_\infty^{(2k)}(0)$) requires a uniform bound of the form $|v_{N, m}| \le C q^m$ ($q < 1$) valid uniformly in $N$, or an analogous weighted $\ell^2$ estimate controlling $\sum_{m=1}^\infty m^{2k} |v_{N, m}|$.
 
 While such uniform bounds remain to be established analytically, numerical evaluation of the even derivatives $D_k(N) = T_{v_N}^{(2k)}(0)$ for $k \in \{0, 1, 2, 3\}$ across $N \in \{8, 16, 24\}$ (computed via the arbitrary-precision script `cell43.py` and recorded in `cell43.out` [10]) shows rapid extinction consistent with geometric decay across all computed orders:
 - $D_0$: $8.05 \times 10^{-11} \longrightarrow 1.78 \times 10^{-16} \longrightarrow 1.14 \times 10^{-20}$,
@@ -415,7 +421,7 @@ The boundary suppression can then be modeled semiclassically via the WKB tunneli
 
 $$\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{\frac{T''(t)}{T(t)}} \, dt,$$
 
-where $t_{\mathrm{turn}} \approx 0.4079 L$ is the classical inflection turning point where $T''(t_{\mathrm{turn}}) = 0$.
+where $t_{\mathrm{turn}} \approx 0.4079 L$ is the effective turning point, defined here by $T''(t_{\mathrm{turn}}) = 0$.
 
 *Numerical Comparison and WKB Barrier Computation.*
 At $N = 24$, the numerical turning point is $t_{\mathrm{turn}} \approx 1.046259$ ($0.40791 L$), computed via `cell44.py` (output log `cell44.out` [10]). The WKB barrier action evaluates to:
@@ -511,7 +517,7 @@ with no jump discontinuities of any finite order at $\omega = 1$. This would eli
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
 
 *Numerical Evidence for Continuum Equilibrium.*
-What is significant is the **independent numerical quadrature of the continuous components**: when $\mathcal{Q}_{\mathrm{arch}}(v_N)$ is evaluated independently by numerical quadrature of the continuous-variable integral $\frac{1}{\pi} \int_0^{80} h_+(r) \Phi_{v_N}(r)^2 \, dr$ (using the companion analysis script `cell46.py` and logged in `cell46.out` [10]), the independently computed $\mathcal{O}(1)$ components cancel to a residual of order $10^{-43}$:
+What is significant is the **independent numerical quadrature of the continuous Archimedean component**: when $\mathcal{Q}_{\mathrm{arch}}(v_N)$ is evaluated independently by numerical quadrature of the continuous-variable integral $\frac{1}{\pi} \int_0^{80} h_+(r) \Phi_{v_N}(r)^2 \, dr$ (using the companion analysis script `cell46.py` and logged in `cell46.out` [10]), the algebraic pole and prime contributions and the independently quadrature-evaluated Archimedean contribution cancel to a residual of order $10^{-43}$:
 
 1. **Stabilization of the Continuous Archimedean Integral:**
    Because $R_{v_{24}}(r)$ is extremely strongly suppressed over the computed range, the continuous Archimedean integral:
@@ -542,7 +548,7 @@ What is significant is the **independent numerical quadrature of the continuous 
    $$\mathcal{Q}_{\mathrm{prime}}^{(24)} \approx -0.07185443174267,$$
    $$\mathcal{Q}_{\mathrm{arch}}^{(24)} \approx -1.47979776397480,$$
    producing an apparent numerical balance at $N = 24$:
-   $$\frac{\mathcal{Q}_{\mathrm{pole}}^{(24)}}{|\mathcal{Q}_{\mathrm{prime}}^{(24)}| + |\mathcal{Q}_{\mathrm{arch}}^{(24)}|} = 1.00000000000000,$$
+   $$\frac{\mathcal{Q}_{\mathrm{pole}}^{(24)}}{|\mathcal{Q}_{\mathrm{prime}}^{(24)}| + |\mathcal{Q}_{\mathrm{arch}}^{(24)}|} \approx 1.00000000000000,$$
    with values that appear stabilized over the computed dimensions.
 
 4. **Prime-Power Decomposition of the Negative Barrier:**
@@ -572,7 +578,7 @@ What is significant is the **independent numerical quadrature of the continuous 
    - $c = 13$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.6681$ (*$99.75\%$ match to $5\pi$*),
    - $c = 17$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.8090$ (*$99.36\%$ match to $5\pi$*).
 
-   *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ decreases monotonically toward unity across the tested cutoffs ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across approximately 47 decimal orders of magnitude at $c = 17$, the WKB action agrees with the observed logarithmic boundary suppression to within $5.3\%$. The classical inflection turning point appears to stabilise near $t_{\mathrm{turn}} / L \approx 0.41$ across the tested cutoffs.*
+   *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ decreases monotonically across the tested cutoffs, from $1.121$ to $1.054$ ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$), moving toward unity. Across approximately 47 decimal orders of magnitude at $c = 17$, the WKB action agrees with the observed logarithmic boundary suppression to within $5.3\%$. The effective turning point appears to stabilise near $t_{\mathrm{turn}} / L \approx 0.41$ across the tested cutoffs.*
 
 3. **Prime Energy Share Across Cutoffs:**
    *For every cutoff $c$, the matrix decomposition satisfies the algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ is monotonically increasing over the tested cutoffs:*
@@ -613,7 +619,7 @@ The findings of this paper resolve the finite-$N$ algebraic reduction of the Arc
 
 In André Weil's 1952 explicit formula framework and Alain Connes' noncommutative geometry formulation:
 - The Riemann Hypothesis is mathematically equivalent to the **positivity of the Weil quadratic form** $\Delta_{\mathrm{Weil}}(f, f) \ge 0$ on the space of test functions on the idele class group $\mathbb{A}_{\mathbb{Q}} / \mathbb{Q}^\times$.
-- In the Connes–van Suijlekom truncation, the quadratic form is regularized on a finite scaling interval $[0, L] = [0, \log c]$ with cutoff $N$. For every finite $N$ and cutoff $c$, the ground-state eigenvalue is strictly positive: $\lambda_{\min}(N) > 0$.
+- In the Connes–van Suijlekom truncation, the quadratic form is regularized on a finite scaling interval $[0, L] = [0, \log c]$ with cutoff $N$. For the finite dimensions $N$ and prime cutoffs $c$ examined numerically, the ground-state eigenvalue is strictly positive: $\lambda_{\min}(N) > 0$.
 - As $N$ increases, numerical evidence shows that $\lambda_{\min}(N)$ decreases rapidly toward zero and is empirically proportional to the boundary leakage energy $A_0(N)$ (approaching zero strictly from above).
 - **The Defensible Mathematical Core:** The finite-$N$ Archimedean contribution has an exact positive-square representation, and numerical evidence indicates that the smallest Galerkin eigenvalue is driven toward zero by increasingly strong suppression of a boundary leakage term.
 - **The Analytical Roadmap toward Continuous Weil Positivity:** Bridging these finite-dimensional results to a formal proof of Weil positivity requires addressing three major analytical steps:
