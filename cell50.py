@@ -397,7 +397,9 @@ def main():
                 best_gz = gz
                 best_j = j + 1
 
-        print(f"{idx + 1:>5}  {mp.nstr(r_star, 8):>16}  gamma_{best_j} (~{mp.nstr(best_gz, 6)}){best_diff:18.6e}  {mp.nstr(min_val, 6):>20}")
+        gz_str = f"gamma_{best_j} (~{mp.nstr(best_gz, 4)})"
+        diff_str = mp.nstr(best_diff, 6)
+        print(f"{idx + 1:>5}  {mp.nstr(r_star, 8):>16}  {gz_str:>18}  {diff_str:>18}  {mp.nstr(min_val, 6):>20}")
 
     print("-" * 84)
     print()
