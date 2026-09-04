@@ -1,0 +1,317 @@
+==============================================================================
+CELL 38 — CLOSED FORM FOR THE ARCHIMEDEAN TAIL HIERARCHY
+==============================================================================
+c=13, L=log(c)=2.5649493574615367386, T=400, dps=50
+N_max=8, K_MAX=5
+
+Claim to test exactly at finite N:
+  A_k = (2/L)(-1)^k sum_{j=0}^k D_j D_(k-j),  k >= 1.
+
+GROUND STATE CACHE: HIT
+  key            = 7f242e706255090bac3bb5d242377e42beba6db7166a9be158e9f8c22982459b
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000610 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000160 s
+  validation     = 0.000188 s
+  total          = 0.000958 s
+
+==============================================================================
+N = 1
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1     -0.05712689155399495     -0.05712689155399495     -0.05712689155399495
+  2        18.14581138900935        18.14581138900935        18.14581138900935
+  3        219.8323073344164        219.8323073344164        219.8323073344164
+  4         1984.89452085857         1984.89452085857         1984.89452085857
+  5        15905.70760795549        15905.70760795549        15905.70760795549
+
+Independent residuals:
+k=1: original-moment = 8.3523897e-52, moment-jet = 1.5618969e-50, jet-expanded = 0.0
+k=2: original-moment = 8.5528471e-50, moment-jet = 4.2764235e-50, jet-expanded = 0.0
+k=3: original-moment = -3.4211388e-49, moment-jet = 1.3684555e-48, jet-expanded = 0.0
+k=4: original-moment = 0.0, moment-jet = 5.4738221e-48, jet-expanded = 0.0
+k=5: original-moment = 2.1895289e-47, moment-jet = 8.7581154e-47, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 0.0075228574484638434539
+D_1 = 4.8694124801977661043
+D_2 = -29.219899080146290292
+D_3 = 175.33994208255237483
+D_4 = -1052.1629525545541347
+D_5 = 6313.7176023880774015
+
+GROUND STATE CACHE: HIT
+  key            = a7b6909c5628d910f787175f412afde2817543d650cb3eb9c4a19c40eb2f1b91
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000651 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000254 s
+  validation     = 0.000210 s
+  total          = 0.001115 s
+
+==============================================================================
+N = 2
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1   -0.0002230206587485476   -0.0002230206587485476   -0.0002230206587485476
+  2       0.2585190142727711       0.2585190142727711       0.2585190142727711
+  3       -72.84910124310628       -72.84910124310628       -72.84910124310628
+  4        3933.730438273498        3933.730438273498        3933.730438273498
+  5        324855.5246750676        324855.5246750676        324855.5246750676
+
+Independent residuals:
+k=1: original-moment = 2.8041517e-50, moment-jet = 6.923348e-52, jet-expanded = 0.0
+k=2: original-moment = -4.3566065e-49, moment-jet = 2.7395838e-50, jet-expanded = 0.0
+k=3: original-moment = 1.060553e-47, moment-jet = -6.8422777e-49, jet-expanded = 0.0
+k=4: original-moment = -5.7475132e-46, moment-jet = 1.3137173e-46, jet-expanded = -5.4738221e-48
+k=5: original-moment = 0.0, moment-jet = -1.4012985e-45, jet-expanded = 7.0064923e-46
+
+Endpoint jets:
+D_0 = 0.00026849122186142540207
+D_1 = 0.53264003511162957977
+D_2 = 89.087982914092683671
+D_3 = -2749.6708681174246401
+D_4 = 69668.117184978184416
+D_5 = -1694243.0481597059567
+
+GROUND STATE CACHE: HIT
+  key            = 5c1f1143dbb80318759362a4716a500e62cd12645396d7682d8427505ef82f09
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000628 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000299 s
+  validation     = 0.000192 s
+  total          = 0.001119 s
+
+==============================================================================
+N = 3
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1     -1.11318613172626e-6     -1.11318613172626e-6     -1.11318613172626e-6
+  2      0.00325877599309841      0.00325877599309841      0.00325877599309841
+  3       -3.023482695672974       -3.023482695672974       -3.023482695672974
+  4        1057.812667924273        1057.812667924273        1057.812667924273
+  5        -101113.626984441        -101113.626984441        -101113.626984441
+
+Independent residuals:
+k=1: original-moment = 3.1642703e-50, moment-jet = 5.582449e-53, jet-expanded = 0.0
+k=2: original-moment = 4.7466109e-49, moment-jet = -5.5762642e-50, jet-expanded = 0.0
+k=3: original-moment = -1.2829271e-49, moment-jet = 4.9178871e-48, jet-expanded = 0.0
+k=4: original-moment = 1.3739294e-45, moment-jet = 1.3958246e-46, jet-expanded = 0.0
+k=5: original-moment = 2.0844315e-44, moment-jet = 6.375908e-44, jet-expanded = 1.7516231e-46
+
+Endpoint jets:
+D_0 = 0.00001229471307912409054
+D_1 = 0.058058818350028953941
+D_2 = 32.878819595046726328
+D_3 = 2429.0591220982540811
+D_4 = -262528.33764123011942
+D_5 = 17513344.587814772566
+
+GROUND STATE CACHE: HIT
+  key            = bb0004ccab612450ababdfd845c4c07e009dcd566c8e17346bb5dedcc1e9d9e1
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000623 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000350 s
+  validation     = 0.000246 s
+  total          = 0.001218 s
+
+==============================================================================
+N = 4
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1    -5.540399035821148e-9    -5.540399035821148e-9    -5.540399035821148e-9
+  2     3.483986013456003e-5     3.483986013456003e-5     3.483986013456003e-5
+  3     -0.07652343773860309     -0.07652343773860309     -0.07652343773860309
+  4        73.41835965832119        73.41835965832119        73.41835965832119
+  5       -30922.72719197369       -30922.72719197369       -30922.72719197369
+
+Independent residuals:
+k=1: original-moment = 3.7264088e-51, moment-jet = 1.3470289e-54, jet-expanded = 0.0
+k=2: original-moment = -5.5520047e-49, moment-jet = -9.4722951e-51, jet-expanded = 8.1566306e-56
+k=3: original-moment = -2.2556297e-47, moment-jet = 3.1216221e-48, jet-expanded = 1.6704779e-52
+k=4: original-moment = -1.9158377e-46, moment-jet = 2.7026997e-47, jet-expanded = 1.7105694e-49
+k=5: original-moment = -1.3513772e-43, moment-jet = -2.202666e-44, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 6.002280646152537709e-7
+D_1 = 0.0059189347286348240856
+D_2 = 8.0364870288424403441
+D_3 = 2502.7877433865067092
+D_4 = -46325.003569203436316
+D_5 = -17692029.688069937542
+
+GROUND STATE CACHE: HIT
+  key            = 044a3e71235e127a463b7ea577aaf02989a34b4f41735a32e1e70b324c90e37c
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000514 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000340 s
+  validation     = 0.000154 s
+  total          = 0.001008 s
+
+==============================================================================
+N = 5
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1   -7.198091918479594e-11   -7.198091918479594e-11   -7.198091918479594e-11
+  2      7.01150311251744e-7      7.01150311251744e-7      7.01150311251744e-7
+  3    -0.002559061559199334    -0.002559061559199334    -0.002559061559199334
+  4         4.44484294873364         4.44484294873364         4.44484294873364
+  5       -3947.011315348138       -3947.011315348138       -3947.011315348138
+
+Independent residuals:
+k=1: original-moment = 6.3801259e-50, moment-jet = 3.013925e-54, jet-expanded = 0.0
+k=2: original-moment = -1.3897529e-48, moment-jet = -3.4914559e-51, jet-expanded = 0.0
+k=3: original-moment = -1.0455326e-46, moment-jet = 4.9326447e-48, jet-expanded = 0.0
+k=4: original-moment = -5.7087368e-45, moment-jet = -5.8180742e-46, jet-expanded = 1.0691059e-50
+k=5: original-moment = -3.1356243e-43, moment-jet = -1.0615931e-43, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 5.5619646776931477144e-8
+D_1 = 0.00082986598761136093808
+D_2 = 1.8925862979203371117
+D_3 = 1265.2512611606475985
+D_4 = 166646.71429176183444
+D_5 = -34531073.988766427678
+
+GROUND STATE CACHE: HIT
+  key            = 73104989a3101e09f6b3ea46d34eb3df07bf969c28cdfc8e5da4fa193271c5dc
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000532 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000327 s
+  validation     = 0.000170 s
+  total          = 0.001029 s
+
+==============================================================================
+N = 6
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1   -1.084643221968063e-12   -1.084643221968063e-12   -1.084643221968063e-12
+  2       1.6184130263505e-8       1.6184130263505e-8       1.6184130263505e-8
+  3    -9.451186145066251e-5    -9.451186145066251e-5    -9.451186145066251e-5
+  4       0.2715955820601638       0.2715955820601638       0.2715955820601638
+  5       -420.5702431870397       -420.5702431870397       -420.5702431870397
+
+Independent residuals:
+k=1: original-moment = -5.2913263e-50, moment-jet = 2.8034452e-55, jet-expanded = 0.0
+k=2: original-moment = 7.7004499e-49, moment-jet = -6.6383678e-52, jet-expanded = 0.0
+k=3: original-moment = -4.6503884e-48, moment-jet = 7.1296994e-49, jet-expanded = -1.6313261e-55
+k=4: original-moment = -9.028519e-45, moment-jet = -1.0719724e-46, jet-expanded = 0.0
+k=5: original-moment = -7.6073127e-43, moment-jet = -2.1308905e-44, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 5.5640321888780877361e-9
+D_1 = 0.00012500174517425631715
+D_2 = 0.46102365959265075781
+D_3 = 534.82303091942619165
+D_4 = 185478.59038297623044
+D_5 = -11839378.259185781736
+
+GROUND STATE CACHE: HIT
+  key            = 0ea78ad3e55c639874ef6768ef1f46e12e28785682314b6ec9b738051613d7e2
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000523 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000358 s
+  validation     = 0.000199 s
+  total          = 0.001079 s
+
+==============================================================================
+N = 7
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1   -1.559250496105243e-14   -1.559250496105243e-14   -1.559250496105243e-14
+  2    3.354881874425135e-10    3.354881874425135e-10    3.354881874425135e-10
+  3      -2.9676984567447e-6      -2.9676984567447e-6      -2.9676984567447e-6
+  4       0.0133672392684949       0.0133672392684949       0.0133672392684949
+  5       -33.79202209788524       -33.79202209788524       -33.79202209788524
+
+Independent residuals:
+k=1: original-moment = 8.3719254e-50, moment-jet = 2.6016608e-56, jet-expanded = 0.0
+k=2: original-moment = 8.3436858e-49, moment-jet = -6.5575282e-53, jet-expanded = -6.2230153e-61
+k=3: original-moment = -6.3754993e-47, moment-jet = 6.2437265e-49, jet-expanded = 0.0
+k=4: original-moment = -1.4143182e-44, moment-jet = -6.4209685e-47, jet-expanded = 0.0
+k=5: original-moment = -1.2517279e-42, moment-jet = 1.6862793e-45, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 5.6156599546678680792e-10
+D_1 = 0.000017804668509096299021
+D_2 = 0.10083310385929322839
+D_3 = 191.78346686431964406
+D_4 = 130482.38993757280678
+D_5 = 13156797.144861910095
+
+GROUND STATE CACHE: HIT
+  key            = 73310fc216c9d6f409163894d343b820d350bd52b0bb898416e813840f9f55ec
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000529 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000394 s
+  validation     = 0.000182 s
+  total          = 0.001104 s
+
+==============================================================================
+N = 8
+==============================================================================
+  k               A_original                 A_moment                    A_jet
+  1   -4.223167464035578e-16   -4.223167464035578e-16   -4.223167464035578e-16
+  2    1.212365581667294e-11    1.212365581667294e-11    1.212365581667294e-11
+  3    -1.468762468343727e-7    -1.468762468343727e-7    -1.468762468343727e-7
+  4    0.0009232216326206593    0.0009232216326206593    0.0009232216326206593
+  5       -3.332963625483164       -3.332963625483164       -3.332963625483164
+
+Independent residuals:
+k=1: original-moment = -6.6658606e-50, moment-jet = 9.0555716e-58, jet-expanded = 0.0
+k=2: original-moment = -4.971543e-49, moment-jet = -1.7682968e-53, jet-expanded = 0.0
+k=3: original-moment = 2.0077957e-47, moment-jet = 1.0259942e-49, jet-expanded = 0.0
+k=4: original-moment = -1.9941919e-44, moment-jet = -1.3675831e-46, jet-expanded = 0.0
+k=5: original-moment = -7.1596e-44, moment-jet = 6.531712e-44, jet-expanded = 0.0
+
+Endpoint jets:
+D_0 = 8.050429069050530561e-11
+D_1 = 3.3638612862805075898e-6
+D_2 = 0.026288777957598346461
+D_3 = 71.433848451203065059
+D_4 = 76526.39016393718279
+D_5 = 23451986.826561366561
+
+==============================================================================
+END OF CELL 38
+==============================================================================
+If the residuals are at working-precision noise level, the entire higher tail hierarchy has been reduced to an endpoint-jet convolution.
