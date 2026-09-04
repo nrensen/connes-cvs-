@@ -1,0 +1,413 @@
+==============================================================================
+CELL 40 — EXACT RATIONAL KERNEL IDENTITY, POSITIVITY, & SPECTRAL LATTICE
+==============================================================================
+c=13, L=log(c)=2.5649493574615367386, T=400, dps=50
+N_max=8
+
+Core identity being tested:
+  R_v(r) == (2/L) [ v_0/r + sqrt(2) sum_{m=1}^N (r v_m)/(r^2 - a_m^2) ]^2
+  K_fourier(v, r, L) == [ Phi_v(r) ]^2 >= 0 for all real r.
+
+GROUND STATE CACHE: HIT
+  key            = 7f242e706255090bac3bb5d242377e42beba6db7166a9be158e9f8c22982459b
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000615 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000155 s
+  validation     = 0.000140 s
+  total          = 0.000910 s
+
+==============================================================================
+N = 1
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5            2.276172703076            2.276172703076            0.0
+     1.2          0.62600351223364          0.62600351223364    1.33638e-51
+ 2.54963           11.362272278192           11.362272278192            0.0
+     5.7       0.00074596752992902       0.00074596752992902    9.91846e-53
+    25.0       1.4740343927101e-10       1.4740343927101e-10    3.50949e-54
+   100.0        3.8597255323654e-9        3.8597255323654e-9    1.40451e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        8.3523897e-53
+  v_0 v_m block max diff:      3.3409559e-52
+  v_m^2 diagonal max diff:     3.3409559e-52
+  v_m v_n cross max diff:      0.0
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=1.72045328549  L*v_0^2=1.72045328549  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.422248035984  (L/2)*v_m^2=0.422248035984  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=     1.38020191507  Phi^2=     1.38020191507  diff= 2.67276e-51  (K >= 0: True)
+  r=  4.5: K_fourier=   0.0020649866603  Phi^2=   0.0020649866603  diff= 1.19544e-51  (K >= 0: True)
+  r= 15.0: K_fourier=  2.14276008692e-7  Phi^2=  2.14276008692e-7  diff= 5.00462e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   2.5168771e-16  scaling (a_N/r)^2=  0.006667
+  r=  60.0: exact remainder=   1.5269401e-20  scaling (a_N/r)^2=  0.001667
+  r= 120.0: exact remainder=    9.305707e-25  scaling (a_N/r)^2= 0.0004167
+
+GROUND STATE CACHE: HIT
+  key            = a7b6909c5628d910f787175f412afde2817543d650cb3eb9c4a19c40eb2f1b91
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000441 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000149 s
+  validation     = 0.000135 s
+  total          = 0.000725 s
+
+==============================================================================
+N = 2
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5            1.842005244809            1.842005244809    2.67276e-51
+     1.2          0.55661433298567          0.55661433298567            0.0
+ 2.54963           16.174175746424           16.174175746424    8.55285e-50
+     5.7        0.0036623423953486        0.0036623423953486    4.17619e-53
+    25.0       1.4757440130748e-10       1.4757440130748e-10    5.65538e-55
+   100.0       3.6420386826221e-12       3.6420386826221e-12    1.02631e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        0.0
+  v_0 v_m block max diff:      3.3409559e-52
+  v_m^2 diagonal max diff:     5.2202436e-54
+  v_m v_n cross max diff:      8.3523897e-53
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=1.3659019503  L*v_0^2=1.3659019503  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.570275283983  (L/2)*v_m^2=0.570275283983  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.0292484195962  (L/2)*v_m^2=0.0292484195962  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=     1.18449912397  Phi^2=     1.18449912397  diff= 2.67276e-51  (K >= 0: True)
+  r=  4.5: K_fourier=   0.0574540253765  Phi^2=   0.0574540253765  diff= 8.35239e-52  (K >= 0: True)
+  r= 15.0: K_fourier= 4.46585076476e-12  Phi^2= 4.46585076476e-12  diff= 4.60072e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   3.0861255e-14  scaling (a_N/r)^2=   0.02667
+  r=  60.0: exact remainder=   1.8279471e-18  scaling (a_N/r)^2=  0.006667
+  r= 120.0: exact remainder=   1.1074762e-22  scaling (a_N/r)^2=  0.001667
+
+GROUND STATE CACHE: HIT
+  key            = 5c1f1143dbb80318759362a4716a500e62cd12645396d7682d8427505ef82f09
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000400 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000205 s
+  validation     = 0.000154 s
+  total          = 0.000759 s
+
+==============================================================================
+N = 3
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.6153053403994           1.6153053403994    5.34553e-51
+     1.2          0.50803843245006          0.50803843245006    2.67276e-51
+ 2.54963           17.709331720413           17.709331720413            0.0
+     5.7         0.017479797445022         0.017479797445022    8.35239e-53
+    25.0       8.5990038979012e-14       8.5990038979012e-14    6.46819e-55
+   100.0        3.621627815523e-15        3.621627815523e-15    2.60955e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        8.3523897e-53
+  v_0 v_m block max diff:      8.3523897e-53
+  v_m^2 diagonal max diff:     2.0880974e-53
+  v_m v_n cross max diff:      1.6704779e-52
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=1.18791665213  L*v_0^2=1.18791665213  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.612712952158  (L/2)*v_m^2=0.612712952158  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.0745610518206  (L/2)*v_m^2=0.0745610518206  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.00124234868649  (L/2)*v_m^2=0.00124234868649  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=     1.06512732808  Phi^2=     1.06512732808  diff= 5.34553e-51  (K >= 0: True)
+  r=  4.5: K_fourier=    0.117609895711  Phi^2=    0.117609895711  diff= 3.17391e-51  (K >= 0: True)
+  r= 15.0: K_fourier= 2.20029512741e-12  Phi^2= 2.20029512741e-12  diff= 4.29169e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=     1.45987e-14  scaling (a_N/r)^2=   0.06001
+  r=  60.0: exact remainder=   9.2338584e-19  scaling (a_N/r)^2=     0.015
+  r= 120.0: exact remainder=   5.6706974e-23  scaling (a_N/r)^2=   0.00375
+
+GROUND STATE CACHE: HIT
+  key            = bb0004ccab612450ababdfd845c4c07e009dcd566c8e17346bb5dedcc1e9d9e1
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000435 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000301 s
+  validation     = 0.000152 s
+  total          = 0.000889 s
+
+==============================================================================
+N = 4
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.4733139410376           1.4733139410376            0.0
+     1.2          0.47382593032343          0.47382593032343    1.33638e-51
+ 2.54963           18.224045232811           18.224045232811            0.0
+     5.7         0.033581945179736         0.033581945179736    1.67048e-52
+    25.0       2.4457904631276e-15       2.4457904631276e-15    2.77169e-54
+   100.0       5.7927842533273e-19       5.7927842533273e-19    9.66449e-56
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        4.1761949e-53
+  v_0 v_m block max diff:      3.3409559e-52
+  v_m^2 diagonal max diff:     1.0022868e-51
+  v_m v_n cross max diff:      5.0114338e-52
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=1.07847355042  L*v_0^2=1.07847355042  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.624256487898  (L/2)*v_m^2=0.624256487898  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.113779396477  (L/2)*v_m^2=0.113779396477  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.00517223132625  (L/2)*v_m^2=0.00517223132625  diff=0.0
+  m=4 (r=9.7985):  K_direct=2.97878192588e-5  (L/2)*v_m^2=2.97878192588e-5  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=    0.985209345366  Phi^2=    0.985209345366  diff= 5.34553e-51  (K >= 0: True)
+  r=  4.5: K_fourier=    0.163589745802  Phi^2=    0.163589745802  diff= 5.01143e-51  (K >= 0: True)
+  r= 15.0: K_fourier= 5.80168711164e-13  Phi^2= 5.80168711164e-13  diff= 4.08989e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   9.4205285e-15  scaling (a_N/r)^2=    0.1067
+  r=  60.0: exact remainder=   5.4163895e-19  scaling (a_N/r)^2=   0.02667
+  r= 120.0: exact remainder=   3.2472052e-23  scaling (a_N/r)^2=  0.006667
+
+GROUND STATE CACHE: HIT
+  key            = 044a3e71235e127a463b7ea577aaf02989a34b4f41735a32e1e70b324c90e37c
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000356 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000248 s
+  validation     = 0.000178 s
+  total          = 0.000782 s
+
+==============================================================================
+N = 5
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.3804680593533           1.3804680593533    1.06911e-50
+     1.2          0.44997287745636          0.44997287745636            0.0
+ 2.54963           18.350380782826           18.350380782826            0.0
+     5.7         0.047655259733189         0.047655259733189    5.01143e-52
+    25.0       1.3550250867459e-17       1.3550250867459e-17    1.34809e-54
+   100.0       7.3204611681307e-21       7.3204611681307e-21    5.16489e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        8.3523897e-53
+  v_0 v_m block max diff:      5.2202436e-54
+  v_m^2 diagonal max diff:     3.3409559e-52
+  v_m v_n cross max diff:      1.5660731e-53
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=1.00767661836  L*v_0^2=1.00767661836  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.624892873106  (L/2)*v_m^2=0.624892873106  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.143092731481  (L/2)*v_m^2=0.143092731481  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.0104779025813  (L/2)*v_m^2=0.0104779025813  diff=0.0
+  m=4 (r=9.7985):  K_direct=0.000172643778013  (L/2)*v_m^2=0.000172643778013  diff=0.0
+  m=5 (r=12.248):  K_direct=2.18605181423e-7  (L/2)*v_m^2=2.18605181423e-7  diff=1.72054e-56
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=     0.93096165384  Phi^2=     0.93096165384  diff= 4.00915e-51  (K >= 0: True)
+  r=  4.5: K_fourier=     0.19560268035  Phi^2=     0.19560268035  diff= 6.68191e-51  (K >= 0: True)
+  r= 15.0: K_fourier= 1.21725579043e-12  Phi^2= 1.21725579043e-12  diff= 3.98706e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   2.9268363e-15  scaling (a_N/r)^2=    0.1667
+  r=  60.0: exact remainder=   2.0784203e-19  scaling (a_N/r)^2=   0.04167
+  r= 120.0: exact remainder=   1.3080861e-23  scaling (a_N/r)^2=   0.01042
+
+GROUND STATE CACHE: HIT
+  key            = 73104989a3101e09f6b3ea46d34eb3df07bf969c28cdfc8e5da4fa193271c5dc
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000402 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000408 s
+  validation     = 0.000183 s
+  total          = 0.000993 s
+
+==============================================================================
+N = 6
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.3158165428695           1.3158165428695    2.67276e-51
+     1.2          0.43271569278172          0.43271569278172    6.68191e-52
+ 2.54963           18.336056140439           18.336056140439    1.28293e-49
+     5.7         0.059064743678942         0.059064743678942    2.50572e-52
+    25.0       8.0929090223697e-21       8.0929090223697e-21    1.49027e-54
+   100.0       6.2982479976664e-22       6.2982479976664e-22    1.46388e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        0.0
+  v_0 v_m block max diff:      3.3409559e-52
+  v_m^2 diagonal max diff:     1.0022868e-51
+  v_m v_n cross max diff:      3.1321461e-53
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=0.958705138222  L*v_0^2=0.958705138222  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.622015696198  (L/2)*v_m^2=0.622015696198  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.164693467829  (L/2)*v_m^2=0.164693467829  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.0159718236173  (L/2)*v_m^2=0.0159718236173  diff=0.0
+  m=4 (r=9.7985):  K_direct=0.000439493898568  (L/2)*v_m^2=0.000439493898568  diff=0.0
+  m=5 (r=12.248):  K_direct=1.62764420982e-6  (L/2)*v_m^2=1.62764420982e-6  diff=1.04507e-55
+  m=6 (r=14.698):  K_direct=4.32323342068e-10  (L/2)*v_m^2=4.32323342068e-10  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=    0.892324170548  Phi^2=    0.892324170548  diff= 2.67276e-51  (K >= 0: True)
+  r=  4.5: K_fourier=    0.218139763622  Phi^2=    0.218139763622  diff=  7.3501e-51  (K >= 0: True)
+  r= 15.0: K_fourier=  4.0370592616e-10  Phi^2=  4.0370592616e-10  diff=  3.7501e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   4.5463346e-16  scaling (a_N/r)^2=      0.24
+  r=  60.0: exact remainder=   4.0181691e-20  scaling (a_N/r)^2=   0.06001
+  r= 120.0: exact remainder=   2.6794219e-24  scaling (a_N/r)^2=     0.015
+
+GROUND STATE CACHE: HIT
+  key            = 0ea78ad3e55c639874ef6768ef1f46e12e28785682314b6ec9b738051613d7e2
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000392 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000354 s
+  validation     = 0.000193 s
+  total          = 0.000939 s
+
+==============================================================================
+N = 7
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.2651903664536           1.2651903664536            0.0
+     1.2          0.41884931950181          0.41884931950181            0.0
+ 2.54963           18.265221481789           18.265221481789    1.71057e-49
+     5.7         0.068851180182871         0.068851180182871    6.68191e-52
+    25.0       1.9181969792783e-23       1.9181969792783e-23    4.67628e-54
+   100.0       1.1826141051231e-23       1.1826141051231e-23    2.19364e-55
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        8.3523897e-53
+  v_0 v_m block max diff:      3.3409559e-52
+  v_m^2 diagonal max diff:     3.3409559e-52
+  v_m v_n cross max diff:      3.3409559e-52
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=0.920532654381  L*v_0^2=0.920532654381  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.617842573026  (L/2)*v_m^2=0.617842573026  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.182028346568  (L/2)*v_m^2=0.182028346568  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.0215091615245  (L/2)*v_m^2=0.0215091615245  diff=0.0
+  m=4 (r=9.7985):  K_direct=0.000822918736666  (L/2)*v_m^2=0.000822918736666  diff=0.0
+  m=5 (r=12.248):  K_direct=5.34715399773e-6  (L/2)*v_m^2=5.34715399773e-6  diff=3.05874e-55
+  m=6 (r=14.698):  K_direct=4.38841255893e-9  (L/2)*v_m^2=4.38841255893e-9  diff=0.0
+  m=7 (r=17.147):  K_direct=1.42958999695e-10  (L/2)*v_m^2=1.42958999695e-10  diff=1.71133e-59
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=    0.861600524155  Phi^2=    0.861600524155  diff= 2.67276e-51  (K >= 0: True)
+  r=  4.5: K_fourier=    0.235634615207  Phi^2=    0.235634615207  diff=  7.3501e-51  (K >= 0: True)
+  r= 15.0: K_fourier=  5.15993284093e-9  Phi^2=  5.15993284093e-9  diff= 3.63478e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   4.5030699e-17  scaling (a_N/r)^2=    0.3267
+  r=  60.0: exact remainder=   5.0302188e-21  scaling (a_N/r)^2=   0.08168
+  r= 120.0: exact remainder=   3.6446655e-25  scaling (a_N/r)^2=   0.02042
+
+GROUND STATE CACHE: HIT
+  key            = 73310fc216c9d6f409163894d343b820d350bd52b0bb898416e813840f9f55ec
+  generation dps = 50
+  working dps    = 50
+  lookup         = 0.000466 s
+
+GROUND STATE CACHE: RETURN
+  generation dps = 50
+  working dps    = 50
+  decode         = 0.000470 s
+  validation     = 0.000180 s
+  total          = 0.001116 s
+
+==============================================================================
+N = 8
+==============================================================================
+
+1. Exact identity R_v(r) == R_closed(r) across frequency regimes:
+       r                R_original                  R_closed       abs diff
+     0.5           1.2285300259406           1.2285300259406    2.67276e-51
+     1.2          0.40861594407719          0.40861594407719    2.00457e-51
+ 2.54963           18.179903163831           18.179903163831    1.28293e-49
+     5.7         0.076375090765728         0.076375090765728    1.50343e-51
+    25.0       5.4552087096816e-24       5.4552087096816e-24    1.24322e-53
+   100.0       2.5347871368188e-25       2.5347871368188e-25    2.12765e-56
+
+2. Component-wise algebraic block verification at r = 3.5:
+  v_0^2 block max diff:        4.1761949e-53
+  v_0 v_m block max diff:      8.3523897e-53
+  v_m^2 diagonal max diff:     6.6819118e-52
+  v_m v_n cross max diff:      6.2642923e-53
+
+3. Spectral lattice formula K_fourier(a_m) == (L/2) v_m^2:
+  m=0 (r=0):      K_direct=0.892984879624  L*v_0^2=0.892984879624  diff=0.0
+  m=1 (r=2.4496):  K_direct=0.613730629426  (L/2)*v_m^2=0.613730629426  diff=0.0
+  m=2 (r=4.8993):  K_direct=0.194695450256  (L/2)*v_m^2=0.194695450256  diff=0.0
+  m=3 (r=7.3489):  K_direct=0.0262986246069  (L/2)*v_m^2=0.0262986246069  diff=0.0
+  m=4 (r=9.7985):  K_direct=0.00124617864575  (L/2)*v_m^2=0.00124617864575  diff=0.0
+  m=5 (r=12.248):  K_direct=1.13380669627e-5  (L/2)*v_m^2=1.13380669627e-5  diff=6.11747e-55
+  m=6 (r=14.698):  K_direct=1.62942975879e-8  (L/2)*v_m^2=1.62942975879e-8  diff=0.0
+  m=7 (r=17.147):  K_direct=1.62143210445e-9  (L/2)*v_m^2=1.62143210445e-9  diff=1.41885e-58
+  m=8 (r=19.597):  K_direct=1.00795655364e-12  (L/2)*v_m^2=1.00795655364e-12  diff=0.0
+
+4. Amplitude square K_fourier(r) == Phi_v(r)^2 and positivity:
+  r=  1.0: K_fourier=    0.839098329299  Phi^2=    0.839098329299  diff= 5.34553e-51  (K >= 0: True)
+  r=  4.5: K_fourier=    0.248086007611  Phi^2=    0.248086007611  diff= 9.68877e-51  (K >= 0: True)
+  r= 15.0: K_fourier=  2.10738355957e-8  Phi^2=  2.10738355957e-8  diff= 3.66381e-52  (K >= 0: True)
+
+5. Exact tail remainder: R_v(r) - sum_{k=0}^5 A_k / r^(2k+2):
+  r=  30.0: exact remainder=   4.9158347e-18  scaling (a_N/r)^2=    0.4267
+  r=  60.0: exact remainder=   6.5081504e-22  scaling (a_N/r)^2=    0.1067
+  r= 120.0: exact remainder=   5.1518887e-26  scaling (a_N/r)^2=   0.02667
+
+==============================================================================
+END OF CELL 40
+==============================================================================
+Conclusions established:
+  1. R_v(r) == (1/r^2) A(1/r^2) is an exact global identity for all r.
+  2. K_fourier(v, r, L) == Phi_v(r)^2 >= 0 is unconditionally positive.
+  3. At lattice frequencies r = a_m, K_fourier evaluates exactly to (L/2) v_m^2.
