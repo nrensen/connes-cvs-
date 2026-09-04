@@ -10,37 +10,38 @@ Following the decisive results of Cell 52:
    normalized heat profiles Theta_N(s) = H_N(s u_edge) / T_N(0) diverge rapidly
    (5900 -> 68700 at s = 1) because T_N(0) vanishes much faster than T_N''(0).
 2. Emerging Large-Deviation Structure:
-   On the negative axis, -(1 / (kappa*N)) log|D_N| displays stability across
-   N in {8, 12, 16, 20, 24} (0.854 -> 0.719 at xi = 1.07), suggesting an
-   N-dependent WKB / large-deviation rate function:
-       |D_N(-1/r^2)| ~ exp[ -kappa * N * I(r / (kappa * N)) ].
+   On the negative axis, -(1 / N) log|D_N| displays stability across
+   N in {8, 12, 16, 20, 24}, suggesting an N-dependent large-deviation form:
+       |D_N(-1/r^2)| ~ exp[ -N * I(r / (kappa * N)) ].
+   If I(xi) ~ C * xi for large xi, then -log|D_N| ~ C * N * xi = (C / kappa) * r,
+   yielding an exponential-in-r envelope |D_N| ~ exp[ -(C / kappa) * r ].
 
 Cell 53 executes the targeted two-prong investigation proposed by the reviewer:
 
 PART 1: THE ENDPOINT JET HIERARCHY & CANCELLATION TIME SCALES
   Computes the even endpoint derivatives D_k(N) = T_{v_N}^{(2k)}(0) for k = 0, ..., 5.
   Defines dimensionalized cancellation time scales:
-      u_{k, N} = (|D_0(N)| / |D_k(N)|)^{1/k}
-  and compares them against u_edge(N) = 1 / (kappa^2 * N^2).
+      u_{k, N} = (|D_0(N)| / |D_k(N)|)^{1/k}   for k = 1, ..., 5
+  comparing the first-jet cancellation scale u_{1, N} = |D_0/D_1| and higher-jet
+  scales u_{2}, ..., u_{5} against u_edge(N) = 1 / (kappa^2 * N^2).
   Tests the dimensionless cancellation parameter:
       s_cancel(N) = kappa^2 * N^2 * (|D_0| / |D_1|)
   and the dimensionless jet shape invariants:
       beta_N = D_0 * D_2 / D_1^2,   gamma_N = D_0^2 * D_3 / D_1^3.
 
-PART 2: SCALED HEAT PROFILES AT THE CANCELLATION SCALE
-  Evaluates H_N(u) under the true cancellation scale:
+PART 2: SCALED HEAT PROFILES AT THE FIRST-JET CANCELLATION SCALE
+  Evaluates H_N(u) under the first-jet cancellation scale:
       u = theta * u_{1, N} = theta * (|D_0| / |D_1|)
-  for theta in [0.01, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0].
-  Tests whether Theta_N^{cancel}(theta) = H_N(theta * u_cancel) / T_N(0) collapses
-  universally across N.
+  for theta in [0.01, 10.0]. The normalization makes the first-order Taylor
+  term 1 + theta + O(theta^2) for the ground state; the experiment tests
+  whether the higher-order profile structure collapses across N.
 
 PART 3: THE LARGE-DEVIATION RATE FUNCTION I_N(xi)
-  Samples xi = r / (kappa * N) across a dense grid xi in [0.20, 1.40]
-  with automated pole guards ensuring dist(N*xi, Z) >= 0.05 for all N.
+  Samples xi = r / (kappa * N) across a dense grid of universally pole-free
+  coordinates xi in [0.28, 1.48] where dist(N*xi, Z) >= 0.12 for all N.
   Computes:
       I_N(xi) = - (1 / N) * log|D_N(-1 / (kappa^2 * N^2 * xi^2))|
-      J_N(xi) = I_N(xi) / kappa = - (1 / (kappa * N)) * log|D_N|
-      S_N(xi) = I_N(xi) / xi   (effective large-xi slope)
+      S_N(xi) = I_N(xi) / xi   (effective secant ratio from origin)
   Tests convergence I_N(xi) -> I(xi) and asymptotic linearity I(xi) ~ C * xi.
 """
 
@@ -99,10 +100,8 @@ def compute_endpoint_jets(v, kappa, max_k=5):
     D_k = (-1)^k * sqrt(2) * sum_{m=1}^N (kappa * m)^{2k} * v_m   (k >= 1)
     """
     jets = {}
-    # k = 0
     jets[0] = v[0] + mp.sqrt(2) * sum(v[m] for m in range(1, len(v)))
 
-    # k >= 1
     for k in range(1, max_k + 1):
         sign = -1 if (k % 2 == 1) else 1
         s = mp.mpf(0)
@@ -167,18 +166,18 @@ def main():
     print("=" * 80)
     print("1. ENDPOINT JET HIERARCHY & CANCELLATION TIME SCALES")
     print("=" * 80)
-    print("A. Even endpoint derivatives D_k = T_N^{(2k)}(0) for k = 0, ..., 4:")
-    print(f"{'N':>4}  {'D_0':>14}  {'D_1':>14}  {'D_2':>14}  {'D_3':>14}  {'D_4':>14}")
-    print("-" * 76)
+    print("A. Even endpoint derivatives D_k = T_N^{(2k)}(0) for k = 0, ..., 5:")
+    print(f"{'N':>4}  {'D_0':>14}  {'D_1':>14}  {'D_2':>14}  {'D_3':>14}  {'D_4':>14}  {'D_5':>14}")
+    print("-" * 92)
     for N in N_LIST:
         j = jets_all[N]
-        print(f"{N:>4d}  {mp.nstr(j[0], 6):>14}  {mp.nstr(j[1], 6):>14}  {mp.nstr(j[2], 6):>14}  {mp.nstr(j[3], 6):>14}  {mp.nstr(j[4], 6):>14}")
-    print("-" * 76)
+        print(f"{N:>4d}  {mp.nstr(j[0], 6):>14}  {mp.nstr(j[1], 6):>14}  {mp.nstr(j[2], 6):>14}  {mp.nstr(j[3], 6):>14}  {mp.nstr(j[4], 6):>14}  {mp.nstr(j[5], 6):>14}")
+    print("-" * 92)
     print()
 
-    print("B. Dimensionalized cancellation time scales u_{k, N} = (|D_0| / |D_k|)^{1/k}:")
-    print(f"{'N':>4}  {'u_edge = 1/(kN)^2':>18}  {'u_{1} = D_0/D_1':>16}  {'u_{2}':>14}  {'u_{3}':>14}  {'u_{4}':>14}")
-    print("-" * 82)
+    print("B. Dimensionalized cancellation time scales u_{k, N} = (|D_0| / |D_k|)^{1/k} (units of heat time):")
+    print(f"{'N':>4}  {'u_edge = 1/(kN)^2':>18}  {'u_1 = D_0/D_1':>15}  {'u_2':>13}  {'u_3':>13}  {'u_4':>13}  {'u_5':>13}")
+    print("-" * 92)
     u_cancel_map = {}
     for N in N_LIST:
         j = jets_all[N]
@@ -188,15 +187,16 @@ def main():
         u2 = mp.sqrt(d0_abs / abs(j[2]))
         u3 = (d0_abs / abs(j[3])) ** (mp.mpf(1) / 3)
         u4 = (d0_abs / abs(j[4])) ** (mp.mpf(1) / 4)
+        u5 = (d0_abs / abs(j[5])) ** (mp.mpf(1) / 5)
         u_cancel_map[N] = u1
-        print(f"{N:>4d}  {mp.nstr(u_edge, 6):>18}  {mp.nstr(u1, 6):>16}  {mp.nstr(u2, 6):>14}  {mp.nstr(u3, 6):>14}  {mp.nstr(u4, 6):>14}")
-    print("-" * 82)
+        print(f"{N:>4d}  {mp.nstr(u_edge, 6):>18}  {mp.nstr(u1, 6):>15}  {mp.nstr(u2, 6):>13}  {mp.nstr(u3, 6):>13}  {mp.nstr(u4, 6):>13}  {mp.nstr(u5, 6):>13}")
+    print("-" * 92)
     print()
 
     print("C. Scale ratios against spectral edge: R_{k, N} = u_{k, N} / u_edge = (kappa*N)^2 * u_{k, N}:")
     print("   Note: s_cancel = R_{1, N} = (kappa*N)^2 * (D_0 / D_1).")
-    print(f"{'N':>4}  {'s_cancel = R_1':>16}  {'R_2':>14}  {'R_3':>14}  {'R_4':>14}  {'u_1 / u_2':>12}")
-    print("-" * 76)
+    print(f"{'N':>4}  {'s_cancel = R_1':>16}  {'R_2':>14}  {'R_3':>14}  {'R_4':>14}  {'R_5':>14}")
+    print("-" * 78)
     for N in N_LIST:
         j = jets_all[N]
         aN2 = (KAPPA * N) ** 2
@@ -205,18 +205,20 @@ def main():
         u2 = mp.sqrt(d0_abs / abs(j[2]))
         u3 = (d0_abs / abs(j[3])) ** (mp.mpf(1) / 3)
         u4 = (d0_abs / abs(j[4])) ** (mp.mpf(1) / 4)
+        u5 = (d0_abs / abs(j[5])) ** (mp.mpf(1) / 5)
         r1 = aN2 * u1
         r2 = aN2 * u2
         r3 = aN2 * u3
         r4 = aN2 * u4
-        ratio_12 = u1 / u2
-        print(f"{N:>4d}  {mp.nstr(r1, 6):>16}  {mp.nstr(r2, 6):>14}  {mp.nstr(r3, 6):>14}  {mp.nstr(r4, 6):>14}  {mp.nstr(ratio_12, 6):>12}")
-    print("-" * 76)
+        r5 = aN2 * u5
+        print(f"{N:>4d}  {mp.nstr(r1, 6):>16}  {mp.nstr(r2, 6):>14}  {mp.nstr(r3, 6):>14}  {mp.nstr(r4, 6):>14}  {mp.nstr(r5, 6):>14}")
+    print("-" * 78)
     print()
 
     print("D. Dimensionless jet shape invariants:")
-    print("   beta_N = D_0 * D_2 / D_1^2   and   gamma_N = D_0^2 * D_3 / D_1^3:")
-    print(f"{'N':>4}  {'beta_N':>16}  {'gamma_N':>16}  {'D_1^2 / (D_0*D_2)':>18}")
+    print("   In the normalized expansion H_N(u_{1, N} * theta) / D_0 = 1 + theta + (beta_N / 2)*theta^2 - (gamma_N / 6)*theta^3 + ...")
+    print("   beta_N = D_0 * D_2 / D_1^2   and   gamma_N = D_0^2 * D_3 / D_1^3 directly control profile curvature:")
+    print(f"{'N':>4}  {'beta_N':>16}  {'gamma_N':>16}  {'1 / beta_N':>18}")
     print("-" * 58)
     for N in N_LIST:
         j = jets_all[N]
@@ -229,13 +231,14 @@ def main():
     print()
 
     # -----------------------------------------------------------------------
-    # Part 2: Scaled Heat Profiles at the Cancellation Scale u_cancel = D_0 / D_1
+    # Part 2: Scaled Heat Profiles at the First-Jet Cancellation Scale
     # -----------------------------------------------------------------------
     print("=" * 80)
-    print("2. SCALED HEAT PROFILES AT THE CANCELLATION SCALE u = theta * (D_0 / D_1)")
+    print("2. SCALED HEAT PROFILES AT FIRST-JET CANCELLATION SCALE u = theta * (D_0 / D_1)")
     print("=" * 80)
-    print("Testing whether Theta_N^{cancel}(theta) = H_N(theta * u_cancel) / T_N(0)")
-    print("collapses universally across N (where linear growth 1 + theta is identical for all N):")
+    print("The normalization makes the first-order Taylor term 1 + theta + O(theta^2)")
+    print("for the present ground states (D_0, D_1 > 0); the experiment tests whether")
+    print("the higher-order profile structure collapses across N:")
     print()
 
     theta_test = [
@@ -250,8 +253,8 @@ def main():
         mp.mpf("10.0"),
     ]
 
-    print(f"{'theta = u / u_cancel':>22}  {'N = 8':>12}  {'N = 12':>12}  {'N = 16':>12}  {'N = 20':>12}  {'N = 24':>12}")
-    print("-" * 88)
+    print(f"{'theta = u / u_1':>20}  {'N = 8':>12}  {'N = 12':>12}  {'N = 16':>12}  {'N = 20':>12}  {'N = 24':>12}")
+    print("-" * 86)
 
     for theta in theta_test:
         row = []
@@ -262,9 +265,9 @@ def main():
             h_val = H_heat(v, u_phys, KAPPA)
             ratio = h_val / t0
             row.append(f"{mp.nstr(ratio, 6):>12}")
-        print(f"{mp.nstr(theta, 4):>22}  {'  '.join(row)}")
+        print(f"{mp.nstr(theta, 4):>20}  {'  '.join(row)}")
 
-    print("-" * 88)
+    print("-" * 86)
     print()
 
     # -----------------------------------------------------------------------
@@ -273,52 +276,52 @@ def main():
     print("=" * 80)
     print("3. LARGE-DEVIATION RATE FUNCTION: I_N(xi) = -(1/N) * log|D_N(-1/(kappa^2*N^2*xi^2))|")
     print("=" * 80)
-    print("Testing for large-N rate function collapse I_N(xi) -> I(xi) across xi in [0.25, 1.35]:")
-    print("Automated pole guard guarantees dist(N*xi, Z) >= 0.05 for every evaluation.")
+    print("Testing for large-N rate function collapse I_N(xi) -> I(xi) across xi in [0.28, 1.48]:")
+    print("Target coordinates are chosen so dist(N*xi, Z) >= 0.12 across all N in {8, 12, 16, 20, 24},")
+    print("with automated pole guards ensuring no pole is ever approached.")
     print()
 
-    # Selected non-pole target positions across bulk, transition, and exterior
-    xi_targets = [
-        mp.mpf("0.27"),
-        mp.mpf("0.37"),
-        mp.mpf("0.47"),
-        mp.mpf("0.53"),
-        mp.mpf("0.63"),
-        mp.mpf("0.71"),
-        mp.mpf("0.83"),
-        mp.mpf("0.87"),
-        mp.mpf("0.95"),
-        mp.mpf("1.03"),
-        mp.mpf("1.07"),
-        mp.mpf("1.15"),
-        mp.mpf("1.23"),
-        mp.mpf("1.31"),
+    # Universally safe non-pole coordinates (dist >= 0.12 to integers for N in 8, 12, 16, 20, 24)
+    xi_safe_grid = [
+        mp.mpf("0.28"),
+        mp.mpf("0.36"),
+        mp.mpf("0.48"),
+        mp.mpf("0.68"),
+        mp.mpf("0.78"),
+        mp.mpf("0.86"),
+        mp.mpf("0.98"),
+        mp.mpf("1.18"),
+        mp.mpf("1.28"),
+        mp.mpf("1.36"),
+        mp.mpf("1.48"),
     ]
 
     print(f"{'Target xi':>10}  {'I_8(xi)':>12}  {'I_12(xi)':>12}  {'I_16(xi)':>12}  {'I_20(xi)':>12}  {'I_24(xi)':>12}  {'I_24 / xi':>10}")
     print("-" * 86)
 
-    for xi_t in xi_targets:
+    for xi_t in xi_safe_grid:
         row = []
         i24_val = None
         for N in N_LIST:
             _, v_n, _ = ground_states[N]
             raw_m = N * xi_t
-            safe_m, _ = guard_pole(raw_m, min_dist=mp.mpf("0.05"))
+            safe_m, was_nudged = guard_pole(raw_m, min_dist=mp.mpf("0.05"))
             r_val = KAPPA * safe_m
             z_val = -1 / (r_val ** 2)
             d_val = abs(D_eval(v_n, z_val, KAPPA))
             i_n = -mp.log(d_val) / N if d_val > 0 else mp.mpf(0)
-            row.append(f"{mp.nstr(i_n, 5):>12}")
+            flag = "*" if was_nudged else " "
+            row.append(f"{mp.nstr(i_n, 5):>11}{flag}")
             if N == 24:
                 i24_val = i_n
 
-        slope_str = f"{mp.nstr(i24_val / xi_t, 4):>10}" if i24_val is not None else ""
-        print(f"{mp.nstr(xi_t, 3):>10}  {'  '.join(row)}  {slope_str}")
+        secant_str = f"{mp.nstr(i24_val / xi_t, 4):>10}" if i24_val is not None else ""
+        print(f"{mp.nstr(xi_t, 3):>10}  {' '.join(row)}  {secant_str}")
 
     print("-" * 86)
     print("Note: If I(xi) ~ C * xi for large xi, then -log|D_N| ~ C * N * xi = (C / kappa) * r,")
-    print("providing a rigorous large-N derivation of the exponential negative-axis decay envelope.")
+    print("providing strong numerical evidence for an N-scaled large-deviation form and,")
+    print("if I(xi) becomes asymptotically linear, evidence for an exponential-in-r envelope.")
     print()
 
     # -----------------------------------------------------------------------
@@ -327,22 +330,25 @@ def main():
     print("=" * 80)
     print("4. DECOUPLED TWO-SCALE ASYMPTOTIC SUMMARY")
     print("=" * 80)
-    print(f"{'N':>4}  {'u_edge ~ N^-2':>16}  {'u_cancel ~ D_0/D_1':>20}  {'u_cancel / u_edge':>18}  {'Slope I_N(1.07)/1.07':>22}")
-    print("-" * 86)
+    print("Comparing spectral-edge scale u_edge, first-jet cancellation scale u_1, and near-edge secant ratio:")
+    print()
+    print(f"{'N':>4}  {'u_edge ~ N^-2':>16}  {'u_1 = D_0/D_1':>18}  {'u_1 / u_edge':>16}  {'I_N(1.18) / 1.18':>22}")
+    print("-" * 82)
     for N in N_LIST:
         j = jets_all[N]
         u_edge = 1 / ((KAPPA * N) ** 2)
         u_c = abs(j[0]) / abs(j[1])
         ratio_scale = u_c / u_edge
-        # Rate function at xi = 1.07
+
+        # Rate function at near-edge point xi = 1.18
         _, v_n, _ = ground_states[N]
-        safe_m, _ = guard_pole(N * mp.mpf("1.07"), min_dist=mp.mpf("0.05"))
+        safe_m, _ = guard_pole(N * mp.mpf("1.18"), min_dist=mp.mpf("0.05"))
         r_v = KAPPA * safe_m
         d_v = abs(D_eval(v_n, -1 / (r_v ** 2), KAPPA))
         i_val = -mp.log(d_v) / N if d_v > 0 else mp.mpf(0)
-        slope_val = i_val / mp.mpf("1.07")
-        print(f"{N:>4d}  {mp.nstr(u_edge, 6):>16}  {mp.nstr(u_c, 6):>20}  {mp.nstr(ratio_scale, 6):>18}  {mp.nstr(slope_val, 5):>22}")
-    print("-" * 86)
+        secant_val = i_val / mp.mpf("1.18")
+        print(f"{N:>4d}  {mp.nstr(u_edge, 6):>16}  {mp.nstr(u_c, 6):>18}  {mp.nstr(ratio_scale, 6):>16}  {mp.nstr(secant_val, 5):>22}")
+    print("-" * 82)
     print()
     print("=" * 80)
     print("END OF CELL 53")
