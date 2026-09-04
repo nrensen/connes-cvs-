@@ -9,7 +9,7 @@
 
 ### Abstract
 
-The truncated Weil quadratic form developed by Connes–van Suijlekom and Connes–Consani–Moscovici at prime cutoff $c > 1$ and band $N$ produces finite-rank Galerkin matrices whose deep spectra provide an explicit computational window into Weil positivity and the Riemann Hypothesis. For over thirty exploratory iterations, the omitted Archimedean tail of this truncation was treated as a difficult oscillatory numerical integration problem or as an empirical asymptotic inverse-power expansion.
+The truncated Weil quadratic form developed by Connes–van Suijlekom and Connes–Consani–Moscovici at prime cutoff $c > 1$ and band $N$ produces finite-rank Galerkin matrices whose deep spectra provide an explicit computational window into Weil positivity and the Riemann Hypothesis. The omitted Archimedean tail of this truncation has historically been treated as a difficult oscillatory numerical integration problem or as an empirical asymptotic inverse-power expansion.
 
 In this paper, we establish the exact algebraic solution to the finite-$N$ Archimedean kernel and explore its infinite-dimensional limit $N \to \infty$ through exact theorems, empirical observations, and precise conjectures:
 
@@ -61,8 +61,8 @@ is the smooth Archimedean density.
 
 In finite implementations, numerical quadrature must truncate the $r$-integral at some cutoff $T$. This truncation introduced significant empirical and analytical difficulties:
 1. **Numerical Quadrature Failure:** At large $T$, oscillatory quadrature routines (such as unsubdivided Gauss–Legendre or double-exponential rules) suffer severe cancellation errors and false convergence.
-2. **Heuristic Asymptotics:** Early computational efforts in the literature and exploratory calculations attempted to expand $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ as an asymptotic inverse-power series $\sum_{k \ge 0} A_k / r^{2k+2}$. However, the coefficients $A_k$ appeared as highly non-trivial combinatorial sums of spectral moments, and bounding the remainder $\varepsilon_N(r)$ remained an open obstacle.
-3. **Question of Positivity:** The positivity of $K_{\mathrm{Fourier}}(v, r, L)$ was not made explicit in the finite-$N$ formulation used in exploratory calculations, leaving open whether sign-oscillations could induce negative eigenvalues at large $T$.
+2. **Heuristic Asymptotics:** In earlier computational iterations of this investigation series, the Archimedean tail was approached via oscillatory numerical quadrature or by expanding $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ as an asymptotic inverse-power series $\sum_{k \ge 0} A_k / r^{2k+2}$. However, the coefficients $A_k$ appeared as highly non-trivial combinatorial sums of spectral moments, and bounding the remainder $\varepsilon_N(r)$ remained an open obstacle.
+3. **Question of Positivity:** The positivity of $K_{\mathrm{Fourier}}(v, r, L)$ was not made explicit in earlier finite-$N$ formulations, leaving open whether sign-oscillations could induce negative eigenvalues at large $T$.
 
 This paper establishes the exact closed-form algebraic solution to this problem, proves global finite-$N$ non-negativity of the Fourier-side Archimedean kernel independently of numerical quadrature, and formulates the precise conjectures governing the infinite-dimensional limit $N \to \infty$.
 
@@ -227,7 +227,7 @@ $$\phi_0(t) = 1, \qquad \phi_m(t) = \sqrt{2} \cos\left(\frac{2\pi m t}{L}\right)
 
 3. **Boundary Resolvent Expansion:** *The Taylor coefficients of $D(z)$ around $z = 0$ are the boundary evaluations of the iterated Neumann Laplacian, reproducing the endpoint-jet hierarchy:*
 
-   $$D(z) = \sum_{k=0}^\infty (-1)^k \big[\mathcal{L}^k T_v\big](0) z^k = \sum_{k=0}^\infty (-1)^k T_v^{(2k)}(0) z^k = \sum_{k=0}^\infty D_k z^k.$$
+   $$D(z) = \sum_{k=0}^\infty (-1)^k \big[\mathcal{L}^k T_v\big](0) z^k = \sum_{k=0}^\infty T_v^{(2k)}(0) z^k = \sum_{k=0}^\infty D_k z^k.$$
 
 ### Proof of Theorem 3.2
 By spectral decomposition of the self-adjoint operator $\mathcal{L}$, the resolvent acts diagonally on the eigenbasis:
@@ -246,13 +246,24 @@ $$D(z) = \sum_{m=0}^N v_m \phi_m(0) \int_0^\infty e^{-s} e^{-s z a_m^2} \, ds = 
 
 which establishes (2). 
 
-Finally, expanding the resolvent as a geometric series $(I + z\mathcal{L})^{-1} = \sum_{k=0}^\infty (-1)^k z^k \mathcal{L}^k$ and observing that $\big[\mathcal{L}^k T_v\big](0) = (-1)^k T_v^{(2k)}(0) = \sqrt{2} \sum_{m=1}^N a_m^{2k} v_m$ reproduces the Taylor expansion (3) and the endpoint-jet coefficients $D_k = T_v^{(2k)}(0)$. $\blacksquare$
+> [!NOTE]
+> **Domain of the Heat Representation:** The Laplace integral representation (2) holds strictly in the right half-plane $\operatorname{Re}(z) > 0$, where $e^{-s z \mathcal{L}}$ acts as a contractive heat diffusion semigroup. On the negative spectral axis $z = -1/r^2 < 0$, substituting $z = -1/r^2$ inside the integrand produces terms of the form $e^{+a_m^2 s / r^2}$, so the integral fails to converge termwise. Thus, the heat-semigroup representation belongs naturally to the positive resolvent half-plane $\operatorname{Re}(z) > 0$; analytic continuation to the negative spectral axis is governed by the meromorphic rational resolvent $D_N(z)$ rather than direct continuation of the heat integral.
+
+Finally, expanding the resolvent as a formal geometric series $(I + z\mathcal{L})^{-1} = \sum_{k=0}^\infty (-1)^k z^k \mathcal{L}^k$, we compute the boundary evaluations of the powers of $\mathcal{L}$. Since $\mathcal{L}^k = (-1)^k \frac{d^{2k}}{dt^{2k}}$ and $T_v^{(2k)}(0) = (-1)^k \sqrt{2} \sum_{m=1}^N a_m^{2k} v_m$, we obtain the clean identity:
+
+$$\big[\mathcal{L}^k T_v\big](0) = \sqrt{2} \sum_{m=1}^N a_m^{2k} v_m = (-1)^k T_v^{(2k)}(0),$$
+
+which immediately yields:
+
+$$(-1)^k \big[\mathcal{L}^k T_v\big](0) = T_v^{(2k)}(0) = D_k,$$
+
+reproducing the Taylor expansion (3) and the endpoint-jet coefficients $D_k = T_v^{(2k)}(0)$. $\blacksquare$
 
 ---
 
 ## 4. Unconditional Finite-$N$ Positivity and the Spectral Lattice Identity
 
-### Theorem 4.1 (Unconditional Finite-$N$ Kernel Positivity and Entire Amplitude)
+### Theorem 4.1 (Unconditional Finite-$N$ Pointwise Kernel Positivity and Entire Amplitude)
 *The Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is unconditionally pointwise non-negative on the real line for all $v \in \mathbb{R}^{N+1}$:*
 
 $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R},$$
@@ -472,7 +483,7 @@ Given any positive profile $T(t)$, one can formally define an effective Schrödi
 
 $$V_{\mathrm{conf}}(t) - E := \frac{T''(t)}{T(t)}.$$
 
-Under this definition, $T(t)$ formally satisfies the stationary Schrödinger equation $-T''(t) + V_{\mathrm{conf}}(t) T(t) = E T(t)$ as an identity. This construction produces an effective potential whose minimum lies at the midpoint $t = L/2$ and which rises steeply toward the boundaries, but does not independently establish that the underlying mathematical system is a Schrödinger differential operator.
+Under this definition, $T(t)$ formally satisfies the stationary Schrödinger equation $-T''(t) + V_{\mathrm{conf}}(t) T(t) = E T(t)$ as an identity. For the computed ground-state profile, this construction produces an effective potential whose minimum lies at the midpoint $t = L/2$ and which rises steeply toward the boundaries, but does not independently establish that the underlying mathematical system is a Schrödinger differential operator.
 
 The boundary suppression can then be modeled semiclassically via the WKB tunneling action across the barrier $[0, t_{\mathrm{turn}}]$:
 
@@ -565,7 +576,7 @@ The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{
    As $N \to \infty$, the number of poles grows without bound and their locations accumulate at the origin:
    $$\lim_{m\to\infty} z_m = 0^-.$$
 2. **Conditional Obstruction to Analyticity (Analytic Mechanism):** The residue of $D_N(z)$ at each pole $z_m$ is proportional to $\frac{\sqrt{2} v_{N, m}}{a_m^2}$. If the mode coefficients $v_{N, m}$ persist with sufficient weight in the large-$N$ limit, the infinite accumulation of poles at $z = 0^-$ obstructs analytic continuation through the origin from the negative real axis.
-3. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** The numerical extinction of every fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ indicates that any limiting object $D_\infty(z)$ must be $C^\infty$ flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, because $z = 0$ is an accumulation boundary of singularities, this flatness does not force $D_\infty(z)$ to vanish identically on the negative axis.
+3. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** The numerical extinction of every tested fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ is consistent with a limiting object that is $C^\infty$-flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, because $z = 0$ is an accumulation boundary of singularities, this flatness does not force $D_\infty(z)$ to vanish identically on the negative axis.
 4. **Motivated Asymptotic Hypothesis:** While the accumulating-pole mechanism explains why ordinary Taylor analyticity fails, it does not by itself select a unique essential-singularity scale. The observed WKB quantum barrier behavior in Section 6.1 motivates testing an exponentially flat ansatz:
    $$D_\infty\left(-\frac{1}{r^2}\right) \sim e^{-C r} \qquad (r \to \infty),$$
    corresponding to $D_\infty(z) \sim e^{-C / \sqrt{-z}}$ as $z \to 0^-$. Whether the true continuum resolvent settles precisely to this exponential scale, a stretched exponential, or a broader boundary-layer scaling remains an open question under numerical investigation.
