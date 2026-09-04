@@ -1,35 +1,35 @@
 """
 CELL 52 — DOUBLE-SCALING BOUNDARY LAYER, HEAT-RESOLVENT SCALING COLLAPSE,
-AND DENSE NEGATIVE-AXIS CAUCHY LATTICE PROBE
+AND POLE-PROTECTED NEGATIVE-AXIS CAUCHY LATTICE PROBE
 
-Following the breakthrough results of Cell 51:
+Following the findings of Cell 51:
 1. Rejection of raw e^{-Cr} fits: |D_N(-1/r^2)| displays persistent lattice-scale
    oscillations across pole cells with irregular mode signs b_m = (-1)^m v_m.
 2. Heat relaxation: H_N(u) = [e^{-u L} T_N](0) plunges from O(1) down to
-   H_N(10^-6) = 1.77e-20 ~= T_N(0), revealing that the finite-N model contains
-   a shrinking boundary layer governed by the spectral edge scale:
+   H_N(10^-6) = 1.77e-20 ~= T_N(0), suggesting a shrinking boundary layer
+   associated with the spectral edge scale:
        u_N ~ 1 / a_N^2 = 1 / (kappa^2 * N^2).
    For N = 24, u_24 ~ 2.9e-4.
 
 Cell 52 executes the targeted double-scaling boundary-layer experiment proposed
-by the reviewer:
+by the reviewer, with four concrete safeguards:
 1. Double-Scaled Heat Semigroup:
        H_N(s / (kappa^2 * N^2))
-   for s in [10^-3, 10^2] across N in {8, 12, 16, 20, 24}.
+   testing whether curves approach an N-independent limiting profile H_infty(s).
 2. Normalized Boundary Profile:
        Theta_N(s) = H_N(s / (kappa^2 * N^2)) / T_N(0)
-   testing whether T_N(0) is the bottom of a universal boundary-layer profile.
-3. Scaled Resolvent:
+   testing whether H_N(u) ~ T_N(0) * Theta(kappa^2 * N^2 * u) exhibits universal
+   boundary-layer profile collapse (without assuming monotonicity).
+3. Scaled Resolvent (Double-Scaling Limit):
        D_N(sigma / (kappa^2 * N^2))
-   for sigma in [10^-2, 10^2] across N in {8, 12, 16, 20, 24}.
-4. Dense Negative-Axis Probe & Pole-Distance Decoupling:
-       r = kappa * N * xi
-   sampled densely across xi in [0.1, 1.4], tracking distance to the nearest
-   lattice pole |r/kappa - round(r/kappa)| to isolate envelope decay from
-   local pole oscillations.
-5. Two-Scale Resolvent Splitting:
-       D_N(x) = int_0^{u_N} e^{-t} H_N(t*x) dt + int_{u_N}^infinity e^{-t} H_N(t*x) dt
-   evaluating the boundary-layer share versus the bulk continuum integral.
+   for sigma = kappa^2 * N^2 * z fixed as N -> infty, z -> 0^+.
+4. Pole-Protected Negative-Axis Probe:
+   Non-pole spectral offsets (delta = 0.37) and automated pole guards guaranteeing
+   dist(r/kappa, Z) >= 0.05, eliminating all accidental pole encounters while
+   explicitly isolating lattice oscillations from envelope decay.
+5. Two-Scale Resolvent Decomposition (Exact Closed Form):
+   Decomposes D_N(x) = D_N^{BL}(x) + D_N^{bulk}(x) at u_N = 1 / (kappa*N)^2,
+   testing how the ratio D_BL / D_total transitions across sigma = kappa^2 * N^2 * x.
 """
 
 from __future__ import annotations
@@ -55,7 +55,7 @@ N_LIST = [8, 12, 16, 20, 24]
 
 
 # ---------------------------------------------------------------------------
-# Evaluators
+# Evaluators and Pole Guards
 # ---------------------------------------------------------------------------
 
 def D_eval(v, z, kappa):
@@ -83,6 +83,26 @@ def H_heat(v, u, kappa):
 def boundary_T0(v):
     """Boundary contact T_N(0) = v_0 + sqrt(2) * sum_{m=1}^N v_m."""
     return v[0] + mp.sqrt(2) * sum(v[m] for m in range(1, len(v)))
+
+
+def pole_distance(coord):
+    """Returns (distance_to_nearest_integer, nearest_integer_pole)."""
+    nearest = int(mp.floor(coord + mp.mpf("0.5")))
+    dist = abs(coord - nearest)
+    return dist, nearest
+
+
+def guard_pole(coord, min_dist=mp.mpf("0.05")):
+    """
+    Guarantees that coord is at least min_dist away from any integer pole.
+    If dist(coord, Z) < min_dist, shifts outward away from the pole.
+    Returns (safe_coord, was_nudged).
+    """
+    dist, nearest = pole_distance(coord)
+    if dist < min_dist:
+        shift = min_dist if coord >= nearest else -min_dist
+        return nearest + shift, True
+    return coord, False
 
 
 # ---------------------------------------------------------------------------
@@ -116,7 +136,8 @@ def main():
     print("=" * 80)
     print("1. DOUBLE-SCALED HEAT SEMIGROUP: H_N(s / (kappa^2 * N^2))")
     print("=" * 80)
-    print("Testing for universal scaling collapse under the boundary-layer variable s = kappa^2 * N^2 * u...")
+    print("Testing whether curves approach an N-independent limiting profile H_infty(s)")
+    print("under the boundary-layer variable s = kappa^2 * N^2 * u as N -> infty...")
     print()
 
     s_test = [
@@ -153,8 +174,9 @@ def main():
     print("=" * 80)
     print("2. NORMALIZED BOUNDARY PROFILE: Theta_N(s) = H_N(s / (kappa^2 * N^2)) / T_N(0)")
     print("=" * 80)
-    print("Testing whether the finite-N boundary value T_N(0) is the bottom of a universal profile...")
-    print("Note: Theta_N(0) = 1.0 identically. Inspecting growth for small s...")
+    print("Testing whether H_N(u) ~ T_N(0) * Theta(kappa^2 * N^2 * u) exhibits universal")
+    print("scaling profile collapse (without assuming monotonic growth)...")
+    print("Note: Theta_N(0) = 1.0 identically. Inspecting profile evolution for small s...")
     print()
 
     s_small = [
@@ -191,7 +213,8 @@ def main():
     print("=" * 80)
     print("3. SCALED POSITIVE RESOLVENT: D_N(sigma / (kappa^2 * N^2))")
     print("=" * 80)
-    print("Evaluating positive resolvent at the boundary-layer scale x = sigma / (kappa^2 * N^2)...")
+    print("Evaluating the double-scaling limit N -> infty, z -> 0^+ with sigma = kappa^2 * N^2 * z fixed...")
+    print("Probing the resolvent at the boundary-layer scale x = sigma / (kappa^2 * N^2)...")
     print()
 
     sigma_test = [
@@ -219,61 +242,87 @@ def main():
     print()
 
     # -----------------------------------------------------------------------
-    # Part 4: Dense Negative-Axis Scaling & Pole-Distance Decoupling (N = 24)
+    # Part 4: Pole-Protected Negative-Axis Probe & Lattice Oscillation Decoupling
     # -----------------------------------------------------------------------
     print("=" * 80)
-    print("4. DENSE NEGATIVE-AXIS PROBE & POLE-DISTANCE DECOUPLING (N = 24)")
+    print("4. POLE-PROTECTED NEGATIVE-AXIS PROBE & LATTICE DECOUPLING (N = 24)")
     print("=" * 80)
-    print("Sampling r = kappa * N * xi across xi in [0.10, 1.30] with N = 24...")
-    print("Tracking distance to nearest lattice pole delta = |m_coord - round(m_coord)|...")
-    print("where m_coord = r / kappa (pole locations are integers m = 1, ..., 24).")
+    print("A. Dense spectral sweep: m_coord = 24*xi + 0.37 across xi in [0.10, 1.30] (N = 24).")
+    print("   Automated pole guard guarantees dist(m_coord, Z) >= 0.05 (no pole can be hit).")
     print()
 
-    print(f"{'xi = r/a_24':>12}  {'r':>10}  {'m_coord':>10}  {'Pole m*':>8}  {'Dist delta':>12}  {'|D_24|':>14}  {'-log|D|':>12}  {'-log|D| / r':>14}")
-    print("-" * 98)
+    print(f"{'xi':>8}  {'r':>10}  {'m_coord':>10}  {'Pole m*':>8}  {'Dist delta':>12}  {'|D_24|':>14}  {'-log|D|':>12}  {'-log|D| / r':>14}")
+    print("-" * 94)
 
     _, v24, _ = ground_states[24]
     a24 = KAPPA * 24
 
-    # Dense test points: xi from 0.10 to 1.30 in steps of 0.05
+    # Dense test points: xi from 0.10 to 1.30 in steps of 0.05 with non-pole offset delta = 0.37
     xi_dense = [mp.mpf(step) * mp.mpf("0.05") for step in range(2, 27)]
 
     for xi in xi_dense:
-        r_val = a24 * xi
-        m_coord = r_val / KAPPA
-        m_nearest = int(mp.floor(m_coord + mp.mpf("0.5")))
-        dist_delta = abs(m_coord - m_nearest)
+        raw_m = 24 * xi + mp.mpf("0.37")
+        safe_m, was_nudged = guard_pole(raw_m, min_dist=mp.mpf("0.05"))
+        dist_delta, m_nearest = pole_distance(safe_m)
 
+        r_val = KAPPA * safe_m
         z_val = -1 / (r_val ** 2)
         b_val = abs(D_eval(v24, z_val, KAPPA))
         log_b = -mp.log(b_val) if b_val > 0 else mp.mpf(0)
         rate = log_b / r_val if r_val > 0 else mp.mpf(0)
 
-        print(f"{mp.nstr(xi, 3):>12}  {mp.nstr(r_val, 5):>10}  {mp.nstr(m_coord, 5):>10}  {m_nearest:>8d}  {mp.nstr(dist_delta, 4):>12}  {mp.nstr(b_val, 5):>14}  {mp.nstr(log_b, 5):>12}  {mp.nstr(rate, 5):>14}")
+        nudge_flag = "*" if was_nudged else " "
+        print(f"{mp.nstr(xi, 3):>8}  {mp.nstr(r_val, 5):>10}  {mp.nstr(safe_m, 5):>9}{nudge_flag} {m_nearest:>8d}  {mp.nstr(dist_delta, 4):>12}  {mp.nstr(b_val, 5):>14}  {mp.nstr(log_b, 5):>12}  {mp.nstr(rate, 5):>14}")
 
-    print("-" * 98)
+    print("-" * 94)
+    print("(* indicates automated pole guard adjusted coordinate to maintain delta >= 0.05)")
     print()
 
-    # Cross-dimension comparison at fixed scaled locations xi = 0.5, 0.8, 1.0
-    print("Cross-dimension comparison of -log|D_N| / (kappa*N) at fixed xi = r / (kappa*N):")
-    print(f"{'xi':>8}  {'N = 8':>12}  {'N = 12':>12}  {'N = 16':>12}  {'N = 20':>12}  {'N = 24':>12}")
-    print("-" * 72)
-    for xi_target in [mp.mpf("0.5"), mp.mpf("0.8"), mp.mpf("1.0")]:
+    # B. Multi-depth pole-cell delta traversals (extending Cell 51 delta-sampling)
+    print("B. Multi-depth pole-cell delta traversals: r = kappa * (m + delta) for N = 24:")
+    print("   Testing across low bulk (m=6), mid bulk (m=14), near edge (m=22), and exterior (m=26):")
+    print(f"{'Cell m':>8}  {'delta = 0.10':>16}  {'delta = 0.25':>16}  {'delta = 0.50':>16}  {'delta = 0.75':>16}  {'delta = 0.90':>16}")
+    print("-" * 94)
+
+    for m_cell in [6, 14, 22, 26]:
+        row = []
+        for delta_val in [mp.mpf("0.10"), mp.mpf("0.25"), mp.mpf("0.50"), mp.mpf("0.75"), mp.mpf("0.90")]:
+            m_probe = mp.mpf(m_cell) + delta_val
+            r_probe = KAPPA * m_probe
+            z_probe = -1 / (r_probe ** 2)
+            d_cell = abs(D_eval(v24, z_probe, KAPPA))
+            row.append(f"{mp.nstr(d_cell, 5):>16}")
+        print(f"{m_cell:>8d}  {'  '.join(row)}")
+
+    print("-" * 94)
+    print()
+
+    # C. Cross-dimension comparison with automated pole protection
+    print("C. Cross-dimension comparison of -log|D_N| / (kappa*N) at target scaled locations:")
+    print("   Using target locations with automated pole guard ensuring dist(N*xi, Z) >= 0.05:")
+    print(f"{'Target xi':>10}  {'N = 8':>14}  {'N = 12':>14}  {'N = 16':>14}  {'N = 20':>14}  {'N = 24':>14}")
+    print("-" * 86)
+
+    for xi_target in [mp.mpf("0.53"), mp.mpf("0.83"), mp.mpf("1.07")]:
         row = []
         for N in N_LIST:
             _, v_n, _ = ground_states[N]
-            a_n = KAPPA * N
-            r_target = a_n * xi_target
+            raw_m_n = N * xi_target
+            safe_m_n, _ = guard_pole(raw_m_n, min_dist=mp.mpf("0.05"))
+            r_target = KAPPA * safe_m_n
             z_target = -1 / (r_target ** 2)
             d_val = abs(D_eval(v_n, z_target, KAPPA))
+            a_n = KAPPA * N
             val_scaled = -mp.log(d_val) / a_n if d_val > 0 else mp.mpf(0)
-            row.append(f"{mp.nstr(val_scaled, 5):>12}")
-        print(f"{mp.nstr(xi_target, 3):>8}  {'  '.join(row)}")
-    print("-" * 72)
+            dist_n, _ = pole_distance(safe_m_n)
+            row.append(f"{mp.nstr(val_scaled, 5):>8} (d={mp.nstr(dist_n, 2):>4})")
+        print(f"{mp.nstr(xi_target, 3):>10}  {'  '.join(row)}")
+
+    print("-" * 86)
     print()
 
     # -----------------------------------------------------------------------
-    # Part 5: Two-Scale Resolvent Decomposition (Exact Closed Form & Quadrature)
+    # Part 5: Two-Scale Resolvent Decomposition (Exact Closed Form)
     # -----------------------------------------------------------------------
     print("=" * 80)
     print("5. TWO-SCALE RESOLVENT INTEGRAL SPLITTING (N = 24)")
@@ -282,7 +331,13 @@ def main():
     print("    D_N(x) = (1/x) int_0^{u_N} e^{-u/x} H_N(u) du  +  (1/x) int_{u_N}^infty e^{-u/x} H_N(u) du")
     print("           = D_N^{BL}(x)  +  D_N^{bulk}(x)")
     print()
-    print("Using exact closed-form evaluation:")
+    print("Physical interpretation:")
+    print("    The relevant dimensionless ratio is sigma = x / u_N = kappa^2 * N^2 * x:")
+    print("    - sigma << 1: resolvent kernel samples predominantly the boundary layer")
+    print("    - sigma ~  1: transition regime between boundary layer and bulk")
+    print("    - sigma >> 1: resolvent kernel samples predominantly the continuum bulk")
+    print()
+    print("Using exact algebraic closed-form evaluation:")
     print("    Term m:  (1/x) int_0^{u_N} e^{-u/x} e^{-kappa^2 m^2 u} du = [1 - exp(-(1/x + kappa^2 m^2) u_N)] / [1 + kappa^2 m^2 x]")
     print()
 
@@ -311,29 +366,30 @@ def main():
         return d_bl, d_bulk, d_total
 
     print("A. Fixed physical resolvent points x in {0.1, 1.0, 10.0}:")
-    print(f"{'x':>8}  {'D_24(x) exact':>18}  {'D_BL [0, u_24]':>22}  {'D_bulk [u_24, inf)':>22}  {'BL Share %':>12}")
-    print("-" * 88)
+    print(f"{'x':>8}  {'D_24(x) exact':>18}  {'D_BL':>22}  {'D_bulk':>22}  {'D_BL / D_total':>16}  {'|D_BL| / |D_bulk|':>18}")
+    print("-" * 110)
 
     for x_val in [mp.mpf("0.1"), mp.mpf("1.0"), mp.mpf("10.0")]:
         d_bl, d_bulk, d_sum = exact_splitting(v24, x_val, KAPPA, u_scale_24)
         d_direct = D_eval(v24, x_val, KAPPA)
-        bl_share = (d_bl / d_sum) * 100
-        print(f"{mp.nstr(x_val, 3):>8}  {mp.nstr(d_direct, 10):>18}  {mp.nstr(d_bl, 8):>22}  {mp.nstr(d_bulk, 8):>22}  {mp.nstr(bl_share, 4):>11}%")
+        ratio_total = d_bl / d_sum
+        ratio_bl_bulk = abs(d_bl) / abs(d_bulk) if abs(d_bulk) > 0 else mp.mpf(0)
+        print(f"{mp.nstr(x_val, 3):>8}  {mp.nstr(d_direct, 10):>18}  {mp.nstr(d_bl, 8):>22}  {mp.nstr(d_bulk, 8):>22}  {mp.nstr(ratio_total, 6):>16}  {mp.nstr(ratio_bl_bulk, 6):>18}")
 
-    print("-" * 88)
+    print("-" * 110)
     print()
 
     print("B. Scaled boundary-layer resolvent points x = sigma / (kappa*N)^2:")
-    print(f"{'sigma':>10}  {'x = sigma*u_24':>16}  {'D_24(x)':>18}  {'D_BL':>20}  {'D_bulk':>20}  {'BL Share %':>12}")
-    print("-" * 102)
+    print(f"{'sigma':>10}  {'x = sigma*u_24':>16}  {'D_24(x)':>18}  {'D_BL':>20}  {'D_bulk':>20}  {'D_BL / D_total':>16}")
+    print("-" * 106)
 
     for sigma in [mp.mpf("0.01"), mp.mpf("0.1"), mp.mpf("1.0"), mp.mpf("10.0"), mp.mpf("100.0")]:
         x_scaled = sigma * u_scale_24
         d_bl, d_bulk, d_sum = exact_splitting(v24, x_scaled, KAPPA, u_scale_24)
-        bl_share = (d_bl / d_sum) * 100
-        print(f"{mp.nstr(sigma, 4):>10}  {mp.nstr(x_scaled, 6):>16}  {mp.nstr(d_sum, 8):>18}  {mp.nstr(d_bl, 8):>20}  {mp.nstr(d_bulk, 8):>20}  {mp.nstr(bl_share, 4):>11}%")
+        ratio_total = d_bl / d_sum
+        print(f"{mp.nstr(sigma, 4):>10}  {mp.nstr(x_scaled, 6):>16}  {mp.nstr(d_sum, 8):>18}  {mp.nstr(d_bl, 8):>20}  {mp.nstr(d_bulk, 8):>20}  {mp.nstr(ratio_total, 6):>16}")
 
-    print("-" * 102)
+    print("-" * 106)
     print()
     print("=" * 80)
     print("END OF CELL 52")
