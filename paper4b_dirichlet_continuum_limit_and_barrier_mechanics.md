@@ -19,7 +19,7 @@ This manuscript sets forth the analytical and empirical research programme inves
 2. **The Continuum Solitary Wave and Infinite-Order Boundary Flatness (Conjecture):** As $N \to \infty$, the spatial trigonometric wave $T_{v_N}(t)$ converges to a smooth, strictly positive solitary wave $T_\infty(t)$ on $[0, L]$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact: $T_\infty^{(k)}(0) = T_\infty^{(k)}(L) = 0$ for all $k \ge 0$, such that the zero-extension $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$. This boundary flatness conditionally eliminates the finite-rank Volterra boundary jump at $\omega = 1$, removing the classical obstruction to continuous Weil positivity.
 3. **Semiclassical WKB Barrier Tunneling Mechanics:** Inverting the ground-state profile defines an effective Schrödinger potential $V_{\mathrm{conf}}(t) - E = T''(t)/T(t)$ whose midpoint well rises steeply toward the boundaries. Semiclassical WKB tunneling action across the barrier $\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ reproduces the observed logarithmic boundary suppression to within $5.3\%$ across 47 orders of magnitude, obeying the universal semiclassical scaling law $\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c$.
 4. **Legendre Multipole Decomposition and Asymptotic Tail Extinction:** Via Bauer's spherical Bessel expansion, $T_{v_N}(t)$ decomposes into Legendre multipoles with alternating signs, producing strictly constructive interference at the midpoint and destructive cancellation at the boundaries. The high-frequency Taylor coefficients $A_k(N)$ extinguish rapidly across all orders ($A_0 \sim 10^{-40}, A_1 \sim 10^{-34}, A_2 \sim 10^{-29}$ at $N = 24$), motivating the conjecture that the continuum resolvent $R_\infty(r) = o(r^{-k})$ decays faster than every inverse power of $r$.
-5. **Tri-Partite Zero-Energy Equilibrium and the Discretization Discrepancy:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates a genuine $\mathcal{O}(1)$ finite-rank Galerkin discretization discrepancy $\delta \mathcal{Q} = \langle u, Q_{\mathrm{arch}}^{\mathrm{matrix}} u \rangle - \mathcal{Q}_{\mathrm{arch}}^{\mathrm{cont}}(v) = -1.668 \times 10^{-43}$, certified free of numerical truncation error.
+5. **Tri-Partite Zero-Energy Equilibrium and Finite-$T$ Archimedean Leakage:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates the exact finite-$T$ Archimedean cutoff leakage $\delta_T^{\mathrm{tail}} = \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v) - \lambda_{\min}(24) = 1.668 \times 10^{-43}$, certified free of numerical truncation error and proven in Theorem 5.5 of Paper 4 to be 100% continuous tail leakage from the finite integration cutoff $T = 400$.
 6. **Formal Continuum Wiener–Hopf Scaling and Asymptotic Bounding Ladder:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Via the commutator resolvent formula and exact small-denominator cancellation, the $(E_k - \lambda)^{-1}$ singularity cancels identically; however, excited bound states ($k \ge 1$) have $D_0^{(k)} = \mathcal{O}(1)$ and contribute $81,232.4$ at $N = 24$, engaging in an intricate collective cancellation with scattering states to reconstruct $D_1/D_0$. Conditional on uniform scattering gap stability, this establishes two-sided subexponential bounds on the first-jet cancellation scale $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$.
 7. **The Analytical Roadmap toward Continuous Weil Positivity:** We formulate the three open mathematical stages required to convert these empirical and asymptotic findings into a complete proof of Weil positivity on the idele class group.
 
@@ -321,13 +321,13 @@ The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{
 
 ---
 
-## 7. Tri-Partite Zero-Energy Balance and the Finite-Rank Discretization Discrepancy
+## 7. Tri-Partite Zero-Energy Balance and Finite-$T$ Archimedean Cutoff Leakage
 
 Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically:
 
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
 
-### Proposition 7.1 (Continuous-Quadrature Balance and Discretization Discrepancy)
+### Proposition 7.1 (Continuous-Quadrature Balance and Finite-$T$ Archimedean Leakage)
 *When the Archimedean contribution is evaluated independently via continuous-variable quadrature $\frac{1}{\pi} \int_0^{80} h_+(r) \Phi_{v_N}(r)^2 \, dr$ (using `cell46.py`, logged in `cell46.out` [10]), the independently computed components cancel from $\mathcal{O}(1)$ down to a residual of order $10^{-43}$ at $N = 24$:*
 
 - $N = 4$: $\mathcal{Q}_{\mathrm{pole}} = +2.206186$, $\mathcal{Q}_{\mathrm{prime}} = -0.316153$, $\mathcal{Q}_{\mathrm{arch}} = -1.890032$, summing to $\mathcal{Q}_{\mathrm{total}} = 7.82 \times 10^{-15}$ ($\lambda_{\min} = 8.83 \times 10^{-15}$),
@@ -337,18 +337,18 @@ $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathc
 - $N = 20$: $\mathcal{Q}_{\mathrm{pole}} = +1.572288$, $\mathcal{Q}_{\mathrm{prime}} = -0.077529$, $\mathcal{Q}_{\mathrm{arch}} = -1.494759$, summing to $\mathcal{Q}_{\mathrm{total}} = 8.81 \times 10^{-40}$ ($\lambda_{\min} = 1.32 \times 10^{-39}$),
 - $N = 24$: $\mathcal{Q}_{\mathrm{pole}} = +1.5516521957$, $\mathcal{Q}_{\mathrm{prime}} = -0.0718544317$, $\mathcal{Q}_{\mathrm{arch}} = -1.4797977640$, summing to $\mathcal{Q}_{\mathrm{total}} = 4.20136 \times 10^{-43}$ ($\lambda_{\min} = 2.53348 \times 10^{-43}$).
 
-*The Certified Discretization Discrepancy $\delta \mathcal{Q}$ (`cell56.py`).*
+*The Certified Archimedean Cutoff Leakage $\delta_T^{\mathrm{tail}}$ (`cell56.py`, `cell57.py`).*
 Evaluating the continuous Archimedean functional via the exact closed-form digamma identity (Corollary 5.4 of Paper 4) yields $\mathcal{Q}_{\mathrm{arch}}^{\mathrm{exact}} = -1.479797763974798326397825\dots$, matching continuous numerical quadrature to $4.96 \times 10^{-25}$. The tripartite continuous balance cancels algebraically from $\mathcal{O}(1)$ to $\mathcal{Q}_{\mathrm{total}} = 4.2013606231 \times 10^{-43}$. 
 
-The ratio against the finite-rank Galerkin eigenvalue $\lambda_{\min}(24) = 2.5334848706 \times 10^{-43}$ is:
+The ratio against the finite-cutoff Galerkin eigenvalue $\lambda_{\min}(24) = 2.5334848706 \times 10^{-43}$ is:
 
 $$\frac{\lambda_{\min}(24)}{\mathcal{Q}_{\mathrm{total}}} = 0.6030153319\dots \qquad \left(\frac{\mathcal{Q}_{\mathrm{total}}}{\lambda_{\min}(24)} \approx 1.65837\right).$$
 
-This isolates a genuine finite-rank Galerkin discretization discrepancy:
+In the companion paper (Paper 4, Theorem 5.5) and Cell 57 (`cell57.py`), this residual is proven to be **100% finite-$T$ Archimedean cutoff tail leakage**:
 
-$$\delta \mathcal{Q} = \langle u, Q_{\mathrm{arch}}^{\mathrm{matrix}} u \rangle - \mathcal{Q}_{\mathrm{arch}}^{\mathrm{cont}}(v) = \lambda_{\min}(24) - \mathcal{Q}_{\mathrm{total}} = -1.66787575 \times 10^{-43}.$$
+$$\delta_T^{\mathrm{tail}} \equiv \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_{24}) - \lambda_{\min}(24) = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_{24}, r, L) \, dr = 1.66787575 \times 10^{-43}.$$
 
-Because the Archimedean value is evaluated via an exact closed form, this $\mathcal{O}(1)$ ratio is definitively free of numerical quadrature or pole truncation error, confirming that $\delta \mathcal{Q}$ is a genuine mathematical object arising from Galerkin truncation on the non-local Archimedean kernel.
+Because the Galerkin divided-difference matrix $Q_{\mathrm{arch}}^{(T)}$ truncates the continuous Fourier integral at $T = 400$, the discrete matrix quadratic form satisfies $v^T Q_{\mathrm{arch}}^{(T)} v \equiv \frac{1}{\pi}\int_0^T h_+ K_{\mathrm{Fourier}} dr$ identically. Across all tested dimensions $N \in \{8, 12, 16, 20, 24\}$, the discrepancy is identically the continuous cutoff tail $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\delta_T^{\mathrm{tail}}(v_N)$ (balance error $2.29 \times 10^{-45}$ at $N = 24$). This definitively retires the interpretation of the residual as an unexplained finite-rank subspace projection defect.
 
 ### 7.2 Prime-Power Decomposition of the Negative Barrier
 
@@ -527,7 +527,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 4 (WKB Barrier Mechanics) | Effective Schrödinger potential & WKB tunneling action | `cell44.py`, `cell47.py` | `cell44.out`, `cell47.out` |
 | Section 5 (Legendre Multipoles & Tail Extinction) | Bauer–Bessel Legendre transform & Taylor jet extinction $A_0\dots A_4$ | `cell44.py`, `cell45.py` | `cell44.out`, `cell45.out` |
 | Section 6 (Poles & Heat Dynamics) | Discrete Cauchy transform, heat boundary dynamics, profile collapse | `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
-| Section 7 (Tri-Partite Balance & Discrepancy) | Continuous-variable balance & finite-rank discrepancy $\delta \mathcal{Q}$ | `cell46.py`, `cell56.py` | `cell46.out`, `cell56.out` |
+| Section 7 (Tri-Partite Balance & Cutoff Leakage) | Continuous-variable balance & finite-$T$ Archimedean leakage $\delta_T^{\mathrm{tail}}$ | `cell46.py`, `cell56.py`, `cell57.py` | `cell46.out`, `cell56.out`, `cell57.out` |
 | Section 8 (Wiener–Hopf Scaling, Commutator Resolvent & Bounds) | Commutator resolvent formula, exact cancellation & collective spectral reorganization, Wiener–Hopf scaling & bounds | `cell49.py`, `cell50.py`, `cell53.py`, `cell54.py`, `cell55.py` | `cell49.out`, `cell50.out`, `cell53.out`, `cell54.out`, `cell55.out` |
 
 ---
