@@ -1300,302 +1300,433 @@ It also changes the numerical problem fundamentally: the tail is no longer an op
 
 ---
 
-## Cells 35–38 — from endpoint suppression to a closed form for the entire Archimedean tail hierarchy
+# Cell 33 — N-dependence of the leading Archimedean tail coefficient
 
-This sequence marks a significant analytical advance in the investigation of the $\text{finite-}N$ Archimedean tail.
+### Intended purpose
+
+Cell 33 begins the complementary $N$-dependence investigation suggested by Cell 32.
+
+For each finite Galerkin dimension $N$, Cell 32 gives the exact leading coefficient
+
+$$
+A_N=\frac{2}{L}T_{v_N}(0)^2,
+$$
+
+where $v_N$ is the corresponding ground-state vector and
+
+$$
+T_v(0)=v_0+\sqrt2\sum_{m=1}^{N}v_m.
+$$
+
+Cell 33 therefore asks whether the extraordinary suppression of $T_v(0)$ observed for the forensic $N=8$ state is an isolated numerical feature or a systematic property of the Galerkin ground state.
+
+The cell:
+
+* constructs ground states for a sequence of even $N$;
+* evaluates $T_v(0)$;
+* computes the exact leading tail coefficient $A_N$;
+* numerically extracts the next coefficient $B$ from the exact reduced rational kernel;
+* checks the stability of the extracted $B$ as $r$ increases;
+* reports $\|v\|$ and $\lambda_{\min}$ as numerical sanity checks.
+
+No Archimedean tail integration is performed.
+
+### What it established
+
+The survey showed that the strong suppression of $T_v(0)$, and hence of the leading coefficient $A_N$, is not peculiar to a single $N$. The leading tail coefficient decreases extremely rapidly as the Galerkin dimension increases.
+
+The experiment also supplied stable numerical estimates of the next $r^{-4}$ coefficient, providing a concrete target for an exact asymptotic derivation.
+
+At this stage, however, the $B$ coefficient remained numerical and no $N\to\infty$ law was claimed.
+
+### Status
+
+Diagnostic / structural $N$-dependence survey; precursor to the exact coefficient analysis of Cells 36–38.
+
+---
+
+# Cell 34 — systematic $N$-scan of ground-state tail structure
+
+### Intended purpose
+
+Cell 34 extends Cell 33 from a sparse even-$N$ survey to every integer
+
+$$
+N=1,\ldots,24,
+$$
+
+deliberately including both odd and even dimensions.
+
+The primary question remains whether the rapid suppression of
+
+$$
+T_v(0)=v_0+\sqrt2\sum_{m=1}^{N}v_m
+$$
+
+is systematic as $N$ increases.
+
+The cell also records:
+
+* $T_v(L)$;
+* the low-order spectral moments $M_2$ and $M_4$;
+* the exact leading coefficient
+
+$$A_N=\frac{2T_v(0)^2}{L};$$
+
+* numerical extraction of the next coefficient $B$;
+* $\lambda_{\min}$;
+* $\text{successive-}N$ scaling ratios.
+
+No Archimedean integration is performed. Existing ground-state cache entries are reused where available.
+
+### What it contributed
+
+The broader $N$-scan confirmed that the suppression of the endpoint quantity $T_v(0)$ persists across successive Galerkin dimensions and is not an artefact of selecting only even $N$.
+
+The scan also showed that the suppression extends beyond the leading coefficient and is accompanied by strong structure in the low-order spectral moments. This motivated the more targeted endpoint-jet investigation in Cell 35.
+
+The numerical $B$ extraction remained exploratory: it was useful for identifying the next coefficient but was not yet an analytical result.
+
+### Status
+
+Diagnostic / structural $N$-dependence survey; superseded quantitatively by the exact $\text{finite-}N$ coefficient derivation in Cells 36–38.
+
+---
+
+# Cells 35–38 — endpoint jets and the exact Archimedean tail hierarchy
+
+*Updated 4 September 2026.*
+
+This sequence marks the transition from empirical $\text{finite-}N$ tail observations to an exact analytical description of the complete inverse-power tail of the $\text{finite-}N$ Archimedean kernel.
 
 The starting point is the exact factorisation established in Cell 32,
 
 $$
-K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))\thinspace R_v(r),
+K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))R_v(r),
 $$
 
 with
 
 $$
-R_v(r) \sim \frac{A_0}{r^2} + \frac{A_1}{r^4} + \frac{A_2}{r^6} + \cdots.
+R_v(r)\sim \frac{A_0}{r^2} + \frac{A_1}{r^4} + \frac{A_2}{r^6} + \cdots.
 $$
 
-Cell 32 had already established the exact leading coefficient
+Cell 32 established
 
 $$
 A_0=\frac{2}{L}T_v(0)^2.
 $$
 
-The subsequent cells show that this is not an isolated coincidence: the complete inverse-power tail has an exact finite-dimensional boundary structure.
+Cells 35–38 show that this is the first member of an exact hierarchy governed by the even endpoint jet of the finite-band test function.
 
-### Cell 35 — endpoint jets and spectral moments
+## Cell 35 — endpoint jets and spectral moments
 
-Cell 35 surveyed the endpoint data of the finite-band test function
+### Intended purpose
 
-$$
-T_v(t) = v_0 + \sqrt2\sum_{m=1}^N v_m \cos\left(\frac{2\pi mt}{L}\right).
-$$
-
-In particular,
+Cell 35 investigates the endpoint data of
 
 $$
-T_v^{(2k)}(0) = \sqrt2\thinspace (-1)^k \left(\frac{2\pi}{L}\right)^{2k} M_{2k},
+T_v(t) = v_0+\sqrt2\sum_{m=1}^{N} v_m\cos\left(\frac{2\pi mt}{L}\right).
+$$
+
+For $k\ge1$,
+
+$$
+T_v^{(2k)}(0) = \sqrt2\thinspace(-1)^k \left(\frac{2\pi}{L}\right)^{2k} M_{2k},
 $$
 
 where
 
 $$
-M_{2k} = \sum_{m=1}^N m^{2k}v_m.
+M_{2k} = \sum_{m=1}^{N}m^{2k}v_m.
 $$
 
-The numerical survey showed strong suppression of the endpoint data as $N$ increases, suggesting that the small Archimedean tail might be connected to increasingly flat endpoint behaviour.
+The cell surveys $T_v(0)$, $T_v(L)$, and the even endpoint derivatives through $T_v^{(8)}(0)$, together with the corresponding dimensionless spectral moments.
 
-At this stage this remained a structural observation only; no $N\to\infty$ law was assumed.
+### What it established
 
-### Cell 36 — exact $\text{finite-}N$ tail coefficients
+The ground-state vectors exhibit strong suppression of endpoint quantities as $N$ increases. In particular, the small value of $T_v(0)$ identified in Cell 32 is part of a broader pattern involving higher even endpoint derivatives.
 
-Cell 36 converted the $\text{large-}r$ expansion into an exact algebraic calculation.
+This suggested that the increasingly small Archimedean tail may be connected to increasing suppression of the endpoint jet.
 
-For $k\ge1$, define
+At this stage the connection remained a structural observation. No asymptotic coefficient was yet expressed analytically in terms of the endpoint data.
+
+### Status
+
+Established structural observation / precursor to Cells 36–38.
+
+---
+
+## Cell 36 — exact $\text{finite-}N$ tail coefficients
+
+### Intended purpose
+
+Cell 36 converts the $\text{large-}r$ expansion of the exact reduced rational kernel into an explicit algebraic calculation.
+
+For
 
 $$
-H_k(m,n) = \frac{n^{2k+2}-m^{2k+2}}{n^2-m^2} = \sum_{j=0}^k n^{2(k-j)}m^{2j}.
+\kappa=\frac{2\pi}{L},
 $$
 
-The exact coefficient is
+and
+
+$$
+H_k(m,n) = \frac{n^{2k+2}-m^{2k+2}}{n^2-m^2} = \sum_{j=0}^{k}n^{2(k-j)}m^{2j},
+$$
+
+the coefficient for $k\ge1$ is
 
 $$
 A_k = \frac{4(k+1)}{L}\kappa^{2k} \sum_m m^{2k}v_m^2 +
-\frac{4\sqrt{2}}{L}\kappa^{2k}v_0 M_{2k} +
-\frac{4}{\pi}\kappa^{2k+1} \sum_{m < n}v_m v_n H_k(m,n),
+\frac{4\sqrt2}{L}\kappa^{2k}v_0M_{2k} +
+\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_mv_nH_k(m,n).
 $$
 
-where
+### What it established
 
-$$
-\kappa=\frac{2\pi}{L}.
-$$
+The coefficients obtained from this expression agree with numerical extraction from the exact rational kernel. Successive subtraction of the asymptotic terms exposes the predicted next inverse power of $r$.
 
-The numerical extraction checks confirmed that these are the actual asymptotic coefficients of the exact rational kernel, rather than coefficients inferred from numerical fitting. After subtraction of successive terms, the residual exhibited the predicted next inverse power of $r$.
+Thus the $\text{finite-}N$ inverse-power hierarchy is established algebraically rather than inferred from numerical fitting.
 
-Thus the $\text{finite-}N$ tail hierarchy was established algebraically.
+The result also identifies the precise polynomial structure that must be reorganised to obtain an endpoint formulation.
 
-### Cell 37 — discovery of the moment convolution identity
+### Status
 
-Cell 37 then examined the polynomial $H_k$ itself.
+Established — exact $\text{finite-}N$ asymptotic coefficient formula.
 
-The crucial identity is obtained by extending the $m<n$ sum to a symmetric full double sum. With the diagonal value
+---
+
+## Cell 37 — moment-convolution identity
+
+### Intended purpose
+
+Cell 37 examines the polynomial $H_k(m,n)$ appearing in Cell 36 and asks whether the pairwise spectral interaction can be expressed entirely through ordinary spectral moments.
+
+Using the diagonal continuation
 
 $$
 H_k(m,m)=(k+1)m^{2k},
 $$
 
-one obtains
+define
 
 $$
-Q_k := \sum_{m,n\ge1}v_mv_nH_k(m,n) = \sum_{j=0}^k M_{2j}M_{2(k-j)}.
+Q_k = \sum_{m,n\ge1} v_mv_nH_k(m,n).
 $$
 
-The numerical residuals were at working-precision noise across the complete $N$-survey, confirming the exact algebraic identity.
-
-This was the key step: the apparently complicated pairwise spectral interaction in the tail coefficient is actually a simple convolution of the even spectral moments.
-
-### Cell 38 — closed form for the complete tail hierarchy
-
-Cell 38 performs the remaining algebraic cancellation.
-
-For $k\ge1$, the original Cell-36 coefficient reduces exactly to
+The polynomial identity gives
 
 $$
-A_k = \frac{4}{L}\kappa^{2k} \left[ \sum_{j=0}^kM_{2j}M_{2(k-j)} + \sqrt2\thinspace v_0M_{2k} \right].
+Q_k = \sum_{j=0}^{k} M_{2j}M_{2(k-j)}.
 $$
 
-Introducing
+### What it established
+
+The numerical residuals between the two sides are at working-precision noise throughout the tested $N$-range, confirming the exact algebraic identity.
+
+This is the key simplification in the tail calculation: the apparently complicated pairwise spectral interaction is exactly a convolution of the even spectral moments.
+
+Cell 37 therefore supplies the algebraic bridge from the coefficient representation of Cell 36 to an endpoint-jet representation.
+
+### Status
+
+Established — exact moment-convolution identity.
+
+---
+
+## Cell 38 — closed form for the complete tail hierarchy
+
+### Intended purpose
+
+Cell 38 performs the remaining algebraic cancellation and rewrites the exact Cell-36 coefficients in terms of endpoint derivatives.
+
+For $k\ge1$, the Cell-36 coefficient reduces to
 
 $$
-D_0:=T_v(0), \qquad D_k:=T_v^{(2k)}(0)\quad(k\ge1),
+A_k = \frac{4}{L}\kappa^{2k} \left[ \sum_{j=0}^{k} M_{2j}M_{2(k-j)} + \sqrt2\thinspace v_0M_{2k} \right].
 $$
 
-this becomes the remarkably compact endpoint-jet formula
+Define
 
 $$
-A_k = \frac{2}{L}(-1)^k \sum_{j=0}^kD_jD_{k-j}, \qquad k\ge1.
+D_0:=T_v(0), \qquad D_k:=T_v^{(2k)}(0) \quad(k\ge1).
 $$
 
-Equivalently,
+Then
 
 $$
-A_k = \frac{4}{L}(-1)^k \left[ T_v(0)T_v^{(2k)}(0) + \frac12 \sum_{j=1}^{k-1} T_v^{(2j)}(0)T_v^{(2k-2j)}(0) \right].
+A_k = \frac{2}{L}(-1)^k \sum_{j=0}^{k}D_jD_{k-j}, \qquad k\ge1.
 $$
 
 Together with
 
 $$
-A_0=\frac{2}{L}T_v(0)^2,
+A_0=\frac{2}{L}D_0^2,
 $$
 
-the entire asymptotic hierarchy is therefore expressed in terms of the even endpoint jet of the finite-band test function.
+this gives the complete $\text{finite-}N$ inverse-power hierarchy in terms of the even endpoint jet.
 
-This is an exact $\text{finite-}N$ algebraic result. It does not depend on the ground state, does not involve numerical quadrature, and does not assume an $N\to\infty$ limit.
-
-### Why this matters
-
-This changes the interpretation of the earlier numerical tail work.
-
-The Archimedean tail is not merely observed to become small as $N$ increases. Its complete inverse-power expansion is controlled by the endpoint jet of $T_v$:
+Equivalently,
 
 $$
-R_v(r) \sim \frac{2}{L}D_0^2\thinspace r^{-2} + \frac{2}{L}(-1)D_0 D_1 \cdot 2\thinspace r^{-4} + \cdots,
+A_k = \frac{4}{L}(-1)^k \left[ T_v(0)T_v^{(2k)}(0) + \frac12 \sum_{j=1}^{k-1} T_v^{(2j)}(0) T_v^{(2k-2j)}(0) \right].
 $$
 
-with every higher coefficient given by the quadratic convolution above.
+### What it established
 
-Consequently, the endpoint suppression observed in Cell 35 has a precise mathematical meaning: suppression of successive endpoint derivatives directly suppresses successive coefficients of the $\text{large-}r$ Archimedean tail.
+Cell 38 establishes an exact $\text{finite-}N$ algebraic identity: every inverse-power coefficient of the reduced Archimedean tail is a quadratic convolution of the even endpoint derivatives of $T_v$.
 
-The remaining question is no longer whether such a relationship exists. It does.
+This result is independent of the ground-state property. It holds for any finite coefficient vector $v$ for which the finite Fourier representation is defined.
 
-The next question is quantitative:
+Consequently, the endpoint suppression observed numerically in Cell 35 has an exact analytical interpretation: small endpoint derivatives produce small coefficients in the $\text{large-}r$ expansion through the quadratic convolution above.
 
-> **What endpoint-jet structure is imposed on the ground state as $N$ increases, and what does that imply for a uniform or $N$-dependent bound on the Archimedean tail?**
+No $N\to\infty$ limit is assumed, and no numerical quadrature is involved.
 
-This is the point where the $\text{finite-}N$ tail analysis can potentially move from an exact asymptotic expansion to a rigorous tail bound.
+### Status
 
-No claim about the $N\to\infty$ behaviour has yet been made.
-
+Major established analytical result — exact closed form for the complete $\text{finite-}N$ Archimedean tail hierarchy.
 
 ---
 
-# Current research state after Cells 24–32
+# Current research state after Cells 24–38
 
-The investigation has now moved beyond merely validating the finite Archimedean dictionary.
+*Updated 4 September 2026.*
 
-The current sequence is:
-
-$$
-\text{validated analytic Archimedean functional}
-$$
+The investigation has now passed through three distinct stages:
 
 $$
-\downarrow
+\text{dictionary validation}
+\;\longrightarrow\;
+\text{numerical tail forensics}
+\;\longrightarrow\;
+\text{exact finite-}N\text{ tail analysis}.
 $$
 
-$$
-\text{finite-}T\text{ convergence}
-$$
+The important distinction between mathematical structure and numerical evaluation remains.
+
+For finite $N$,
 
 $$
-\downarrow
+K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))R_v(r),
 $$
 
-$$
-\text{large-}r\text{ tail anatomy}
-$$
+where $R_v(r)$ is rational and
 
 $$
-\downarrow
+R_v(r) \sim \sum_{k\ge0}\frac{A_k}{r^{2k+2}}.
 $$
 
-$$
-\text{integrated dyadic tail}
-$$
+The coefficients now have the exact representation
 
 $$
-\downarrow
+A_0=\frac{2}{L}D_0^2,
 $$
 
-$$
-\text{quadrature failure identified}
-$$
+and, for $k\ge1$,
 
 $$
-\downarrow
+A_k = \frac{2}{L}(-1)^k \sum_{j=0}^{k}D_jD_{k-j},
 $$
 
-$$
-\text{exact analytical tail structure}.
-$$
-
-The important current distinction is between **mathematical structure** and **numerical evaluation**.
-
-The analytical structure of the $\text{finite-}N$ kernel is now strongly constrained:
+where
 
 $$
-K_{\rm fourier}(v,r,L) = (1-\cos rL) \left[ \frac{A(v)}{r^2} + O(r^{-4}) \right],
+D_k=T_v^{(2k)}(0).
 $$
 
-with
+Thus the $\text{finite-}N$ tail is no longer an opaque numerical phenomenon. Its complete asymptotic coefficient structure is known exactly.
 
-$$
-A(v) = \frac{2}{L} \left( v_0+\sqrt2\sum_{m=1}^Nv_m \right)^2.
-$$
-
-The remaining numerical tail problem should therefore be attacked using this structure rather than by brute-force integration over enormous oscillatory intervals.
+The earlier extreme-range numerical experiments remain useful historically, but they are no longer the appropriate primary route for understanding the tail.
 
 ---
 
 # Current priorities
 
-## 1. Study the leading tail coefficient across N
+## 1. Understand the endpoint jet of the ground state as $N\to\infty$
 
-For the ground state $v_N$, evaluate
-
-$$
-T_{v_N}(0) = v_{N,0} + \sqrt2\sum_{m=1}^{N}v_{N,m}
-$$
-
-and
+The exact hierarchy reduces the remaining problem to the behaviour of
 
 $$
-A_N = \frac{2T_{v_N}(0)^2}{L}.
+D_k(N)=T_{v_N}^{(2k)}(0)
 $$
 
-The immediate question is whether the extraordinary suppression observed at $N=8$ is accidental or systematic as $N$ increases.
+for the sequence of Galerkin ground states $v_N$.
 
-This is the purpose of Cell 33.
-
-## 2. Derive the $r^{-4}$ coefficient analytically
-
-Cell 32 provides numerical evidence for a stable next coefficient.
-
-The next step is to derive that coefficient directly from the finite rational expression, rather than treating its numerical estimate as the result.
-
-## 3. Construct a rigorous tail bound
-
-Once the coefficients and remainder structure are understood, derive an explicit bound on
+The key question is now whether the observed suppression of
 
 $$
-\int_T^\infty h_+(r)K_{\rm fourier}(v,r,L)\thinspace dr.
+D_0(N),D_1(N),D_2(N),\ldots
 $$
 
-The goal is to replace empirical $\text{finite-}T$ convergence by a controlled error budget.
+has a systematic asymptotic structure.
 
-## 4. Develop phase-aware quadrature only after the analytic structure is understood
+In particular, we should distinguish:
 
-The Cell-31 result shows that simply increasing precision does not resolve the large-interval quadrature problem.
+* suppression of each fixed $D_k(N)$;
+* the rate of that suppression with $N$;
+* possible relationships between different $D_k(N)$;
+* whether the endpoint jet approaches zero in a controlled functional sense.
 
-The exact $1-\cos(rL)$ structure should therefore be exploited in any future numerical integration scheme.
+No $N\to\infty$ law has yet been established.
 
-## 5. Keep the N and T limits conceptually separate
+## 2. Determine whether the endpoint hierarchy yields a usable tail bound
 
-The current forensic calculations hold $N$ fixed while $T\to\infty$.
+The exact coefficient formula suggests a route to a controlled remainder estimate.
 
-Cell 33 begins the complementary investigation of how the tail coefficients themselves behave as $N\to\infty$.
+For finite $N$, one ultimately wants a bound of the form
 
-The ultimate finite-to-infinite problem therefore involves at least the two distinct limits
+$$
+\left| R_v(r) - \sum_{k=0}^{K} \frac{A_k}{r^{2k+2}} \right| \le \frac{C_{K,N}}{r^{2K+4}},
+$$
+
+with an explicit and preferably tractable $C_{K,N}$.
+
+Combined with bounds on $h_+(r)$, this would turn the asymptotic expansion into a rigorous estimate for the Archimedean tail integral.
+
+## 3. Look for a generating-function or boundary-operator interpretation
+
+The convolution
+
+$$
+\sum_{j=0}^{k}D_jD_{k-j}
+$$
+
+is characteristic of a product of two formal power series.
+
+This suggests that the entire hierarchy may admit a compact generating-function representation rather than being treated coefficient-by-coefficient.
+
+Such a representation could expose positivity, cancellation, or remainder structure that is difficult to see from the individual $A_k$.
+
+## 4. Keep $N$ and $T$ separate
+
+The two limiting questions remain distinct:
 
 $$
 T\to\infty
 $$
 
-and
+for the Archimedean integral at fixed finite $N$, and
 
 $$
-N\to\infty,
+N\to\infty
 $$
 
-which should not be interchanged without justification.
+for the Galerkin sequence itself.
+
+The exact $\text{finite-}N$ tail hierarchy substantially clarifies the first problem, but it does not by itself justify exchanging these limits.
+
+## 5. Return to numerical integration only when analytically justified
+
+Cell 31 demonstrated that extreme-range unsubdivided oscillatory quadrature can give apparently stable but incorrect results.
+
+The exact factorisation and coefficient hierarchy now provide the appropriate analytical basis for any future numerical tail computation. Brute-force extension of the old Cell-30 calculation should therefore not be treated as the primary research route.
 
 ---
 
 # Updated major historical arc
 
-```text
+```
 Cells 0–4
     Initial reconstruction
     ↓
@@ -1608,11 +1739,9 @@ Cells 6–20
 Cell 21
     Independent brute-force quadratic validation
     ↓
-Cell 22
+Cells 22–23
     Analytic elimination of inner integral
-    ↓
-Cell 23
-    Optimised analytic Archimedean implementation
+    + optimised Archimedean implementation
     ↓
 Cell 24
     Finite-T convergence map
@@ -1633,7 +1762,7 @@ Cell 29
     Dyadic integrated-tail scaling
     ↓
 Cell 30
-    Extreme-range asymptotic hypothesis test
+    Extreme-range asymptotic hypothesis
     [quantitative interpretation later invalidated]
     ↓
 Cell 31
@@ -1646,11 +1775,32 @@ Cell 32
     + suppressed leading coefficient
     ↓
 Cell 33
-    N-dependence of tail coefficients
-    [current]
+    Initial N-dependence survey
+    ↓
+Cell 34
+    Systematic N-scan
+    ↓
+Cell 35
+    Endpoint jets and spectral moments
+    ↓
+Cell 36
+    Exact finite-N tail coefficients
+    ↓
+Cell 37
+    Exact moment-convolution identity
+    ↓
+Cell 38
+    Exact endpoint-jet hierarchy
+    ↓
+Current
+    Ground-state endpoint-jet asymptotics
+    + rigorous tail bounds
+    + generating-function structure
 ```
 
 # Current status summary
+
+*Updated 4 September 2026.*
 
 At the current stage:
 
@@ -1664,15 +1814,17 @@ At the current stage:
 * Cells 22–23 establish an efficient analytic implementation.
 * Cells 24–26 establish the long-range $\text{finite-}T$ investigation.
 * Cell 27 identifies strong $rL$-dependent oscillatory structure.
-* Cells 28–30 investigate the integrated tail without and then with an empirical scaling hypothesis.
-* Cell 31 establishes that the extreme-range `mp.quad` results are not converged with respect to interval resolution, despite excellent working-precision stability.
+* Cells 28–30 investigate the integrated tail, while Cell 31 establishes that the extreme-range `mp.quad` results are not converged with respect to interval resolution.
 * Cell 32 analytically identifies the exact common factor $1-\cos(rL)$ and the leading $r^{-2}$ coefficient.
-* The extraordinary smallness of $T_{v_\star}(0)$ for the $N=8$ forensic ground state has emerged as a new structural question.
-* Cell 33 now begins the investigation of whether this suppression is systematic in $N$.
+* Cells 33–34 establish that the leading endpoint suppression is a systematic $N$-dependent phenomenon worth investigating further.
+* Cell 35 identifies corresponding suppression in higher even endpoint derivatives and spectral moments.
+* Cell 36 derives the exact $\text{finite-}N$ inverse-power coefficients algebraically.
+* Cell 37 proves the moment-convolution identity that reorganises the pairwise spectral terms.
+* Cell 38 reduces the entire tail hierarchy to an exact quadratic convolution of the even endpoint jet.
 
-The central research question has consequently shifted again:
+The central research question has therefore shifted again:
 
-> **What is the $\text{finite-}N$ Archimedean tail analytically, and how does its coefficient structure behave as $N\to\infty$?**
+> **What endpoint-jet structure is imposed on the Galerkin ground state as $N\to\infty$, and can that structure provide a uniform or $N$-dependent bound on the Archimedean tail?**
 
-That question should be answered before returning to very large numerical tail integrations.
+This is now the natural bridge from the exact $\text{finite-}N$ analysis to the $\text{large-}N$ problem.
 
