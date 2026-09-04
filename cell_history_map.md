@@ -1362,8 +1362,8 @@ The exact coefficient is
 
 $$
 A_k = \frac{4(k+1)}{L}\kappa^{2k} \sum_m m^{2k}v_m^2 +
-\frac{4\sqrt{2}}{L}\kappa^{2k}v_0M_{2k} +
-\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_m v_n H_k(m,n),
+\frac{4\sqrt{2}}{L}\kappa^{2k}v_0 M_{2k} +
+\frac{4}{\pi}\kappa^{2k+1} \sum_{m < n}v_m v_n H_k(m,n),
 $$
 
 where
@@ -1441,7 +1441,7 @@ This changes the interpretation of the earlier numerical tail work.
 The Archimedean tail is not merely observed to become small as $N$ increases. Its complete inverse-power expansion is controlled by the endpoint jet of $T_v$:
 
 $$
-R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0D_1^{\phantom{1}}2\,r^{-4} + \cdots,
+R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0 D_1 \cdot 2\,r^{-4} + \cdots,
 $$
 
 with every higher coefficient given by the quadratic convolution above.
