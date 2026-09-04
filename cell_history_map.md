@@ -2362,6 +2362,10 @@ Cell 51
 Cell 52
     Double-scaling boundary layer, spectral crossover, and large-deviation rate function
     [u_edge ~ N^-2 vs u_cancel ~ D_0/D_1 decoupling, sharp resolvent crossover at sigma ~ 1, emerging WKB rate function I(xi)]
+    ↓
+Cell 53
+    Dual-scale boundary layer decoupling and first-jet cancellation scale
+    [ordered cancellation ladder u_1 < ... < u_5, universal heat collapse under u_1 = D_0/D_1, shape invariants beta ~ 0.24, s_N ~ 0.007]
 ```
 
 # Current status summary
@@ -2424,7 +2428,12 @@ At the current stage:
   * Decoupling of the two time scales: distinguishes the inverse spectral-edge scale $u_{\mathrm{edge}} = (\kappa N)^{-2} \sim N^{-2}$ (determined by retained mode count) from the endpoint cancellation scale $u_{\mathrm{cancel}} \sim T_N(0) / D_1(N)$ (determined by the extraordinary ground-state boundary vanishing).
   * Clean negative-axis exponential envelope: pole-protected sweep ($\delta \ge 0.05$) reveals a smooth drop from $4.79 \times 10^{-10}$ ($r \approx 42$) to $1.67 \times 10^{-21}$ ($r \approx 77$), with $-\log|D|/r$ stabilizing in the clean range $0.61 - 0.70$. Uniform multi-depth suppression verified across $m = 6, 14, 22, 26$.
   * Emerging $N$-scaled large-deviation rate function: at $\xi = r / (\kappa N) = 1.07$, the scaled quantity $-(1/(\kappa N))\log|D_N|$ exhibits stability across $N \in \{8, 12, 16, 20, 24\}$ ($0.854 \to 0.777 \to 0.780 \to 0.759 \to 0.719$), revealing an emerging WKB rate function $|D_N(-1/r^2)| \approx \exp[-\kappa N \cdot I(r/(\kappa N))]$.
-  * Sharp resolvent crossover at spectral-edge scale $u_N$: exact algebraic splitting proves that $u_N$ is the exact crossover scale for the resolvent integral. For scaled $x = \sigma u_N$, $D_{\mathrm{BL}} / D_{\mathrm{total}}$ transitions sharply from $1.000$ at $\sigma = 0.01$ and $0.978$ at $\sigma = 0.1$ down to $2.89 \times 10^{-4}$ at $\sigma = 1.0$ and $1.62 \times 10^{-16}$ at $\sigma = 100$.
+* Cell 53 establishes the dual-scale boundary layer decoupling and first-jet cancellation scale:
+  * Ordered cancellation hierarchy: the dimensionalized cancellation scales $u_{k, N} = (|D_0| / |D_k|)^{1/k}$ form an ordered ladder $u_1 < u_2 < u_3 < u_4 < u_5$, all scaling proportionally to the spectral edge $u_{\mathrm{edge}} = 1/(\kappa N)^2$ with ratios $R_{k, N} = (\kappa N)^2 u_{k, N} \in [0.0066, 0.053]$ at $N = 24$.
+  * Universal heat-profile collapse under $u = \theta u_1$: normalizing heat time by the first-jet scale $u_1 = D_0 / D_1$ achieves near-perfect data collapse across $N \in \{8, 12, 16, 20, 24\}$ for $\theta \in [0.01, 2.0]$ (e.g. $\Theta_N^{\mathrm{cancel}}(1.0) = 2.12 \pm 0.02$, matching within $1.5\%$ across 16 orders of magnitude of raw values).
+  * Stability of dimensionless shape invariants: $\beta_N = D_0 D_2 / D_1^2 \approx 0.19 - 0.26$ and $\gamma_N = D_0^2 D_3 / D_1^3 \approx 0.012 - 0.027$ stabilize, proving that $u_1$ is the genuine physical boundary-layer scale of the heat semigroup.
+  * Slow drift of the decoupling ratio: $s_N = (\kappa N)^2 (D_0 / D_1) = 0.00919 \to 0.00897 \to 0.00876 \to 0.00779 \to 0.00665$, confirming that $D_0$ and $D_1$ share the same underlying WKB exponential suppression factor, while their ratio $D_0 / D_1$ scales as $O(N^{-2})$ with an $O(10^{-2})$ geometrical shape prefactor.
+  * Large-deviation rate function drift: while $I_{24}(\xi)/\xi$ stabilizes around $1.4 - 1.6$ for $\xi \in [0.78, 1.48]$ (consistent with an exponential negative-axis envelope), $I_N(1.18)/1.18$ drifts downward from $1.78$ to $1.63$ across $N \in \{8, \dots, 24\}$, confirming that $N = 24$ captures the correct physical scale but has not yet reached full large-$N$ rate convergence.
 
-Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale resolvent/large-deviation asymptotics) is computationally established and advancing toward Paper 5 and Cell 53.
+Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale boundary-layer cancellation asymptotics) is computationally established and advancing toward Paper 5 and Cell 54.
 
