@@ -558,18 +558,19 @@ Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `ce
 At high frequencies, the finite-$N$ resolvent plunges precipitously: $R_{v_{24}}(10.0) = 0.0368$, $R_{v_{24}}(15.0) = 6.30 \times 10^{-6}$, $R_{v_{24}}(20.0) = 1.10 \times 10^{-8}$, and $R_{v_{24}}(50.0) = 5.40 \times 10^{-30}$. The effective logarithmic slope $\gamma_{\mathrm{eff}}(r) = -r R'(r)/R(r)$ reaches $\gamma_{\mathrm{eff}} \approx 78.6$ at $r = 15.0$, $154.0$ at $r = 20.0$, and $270.3$ at $r = 30.0$, demonstrating extremely strong finite-$N$ suppression over the computed high-frequency range (though for any fixed finite $N$, the rational tail must eventually dominate at sufficiently large $r$).
 
 ### 6.7 The Accumulating Pole Mechanism and Non-Analytic Boundary Flatness
-The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Theorem 3.2 provides the conceptual mechanism reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$ for all $k \ge 0$) with a non-trivial limiting continuous-variable resolvent $R_\infty(r)$:
+The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Theorem 3.2 provides the conceptual mechanism for understanding how the high-frequency Fourier tail behaves in the continuum limit, reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$ for all $k \ge 0$) with a non-trivial continuous-variable resolvent $R_\infty(r)$:
 
-1. **Accumulation of Resolvent Poles at the Origin:** At every finite dimension $N$, $D_N(z)$ is a rational function whose poles are located on the negative real axis at:
+1. **Accumulation of Resolvent Poles at the Origin (Proven):** At every finite dimension $N$, $D_N(z)$ is a rational function whose poles lie on the negative real axis at:
    $$z_m = -\frac{1}{a_m^2} = -\frac{L^2}{4\pi^2 m^2} \in \left(-\frac{L^2}{4\pi^2}, 0\right) \quad (m = 1, \dots, N).$$
-   As $N \to \infty$, the number of poles grows without bound and their positions accumulate at the origin:
+   As $N \to \infty$, the number of poles grows without bound and their locations accumulate at the origin:
    $$\lim_{m\to\infty} z_m = 0^-.$$
-2. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** Because $z = 0$ is an accumulation boundary of singularities in the continuum limit, the limiting function $D_\infty(z)$ is **not analytic at $z = 0$**. 
-   The extinction of every fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ demonstrates that $D_\infty(z)$ is $C^\infty$ flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, on the negative real axis (where $z = -1/r^2 < 0$), the accumulating poles permit a strictly positive, non-analytic function:
-   $$D_\infty(z) \sim e^{-C / \sqrt{-z}} = e^{-C r} \qquad (z \to 0^-),$$
-   matching the exponential WKB barrier behavior observed in Section 6.1. 
+2. **Conditional Obstruction to Analyticity (Analytic Mechanism):** The residue of $D_N(z)$ at each pole $z_m$ is proportional to $\frac{\sqrt{2} v_{N, m}}{a_m^2}$. If the mode coefficients $v_{N, m}$ persist with sufficient weight in the large-$N$ limit, the infinite accumulation of poles at $z = 0^-$ obstructs analytic continuation through the origin from the negative real axis.
+3. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** The numerical extinction of every fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ indicates that any limiting object $D_\infty(z)$ must be $C^\infty$ flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, because $z = 0$ is an accumulation boundary of singularities, this flatness does not force $D_\infty(z)$ to vanish identically on the negative axis.
+4. **Motivated Asymptotic Hypothesis:** While the accumulating-pole mechanism explains why ordinary Taylor analyticity fails, it does not by itself select a unique essential-singularity scale. The observed WKB quantum barrier behavior in Section 6.1 motivates testing an exponentially flat ansatz:
+   $$D_\infty\left(-\frac{1}{r^2}\right) \sim e^{-C r} \qquad (r \to \infty),$$
+   corresponding to $D_\infty(z) \sim e^{-C / \sqrt{-z}}$ as $z \to 0^-$. Whether the true continuum resolvent settles precisely to this exponential scale, a stretched exponential, or a broader boundary-layer scaling remains an open question under numerical investigation.
 
-Consequently, the extinction of the asymptotic inverse-power hierarchy $A_k(\infty) = 0$ does not imply that the continuous resolvent $R_\infty(r)$ vanishes; rather, it reflects that the algebraic polynomial tail is superseded in the continuum limit by an exponentially flat, non-analytic boundary resolvent.
+Consequently, the extinction of the asymptotic inverse-power hierarchy $A_k(\infty) = 0$ does not imply that the continuous resolvent $R_\infty(r)$ vanishes; rather, it indicates that the algebraic polynomial tail is superseded in the continuum limit by a non-analytic, exponentially suppressed boundary resolvent.
 
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
@@ -582,7 +583,7 @@ $$\lim_{\omega \to 0} K_\infty(\omega) = 0, \qquad \lim_{\omega \to 1} K_\infty(
 
 with no jump discontinuities of any finite order at $\omega = 1$. This would eliminate the boundary jump that historically produced the oscillatory factor $1 - \cos(rL)$ and the $A_0/r^2$ tail in the finite-rank Galerkin models.
 
-### Proposition 6.7 (Tri-Partite Decomposition and Continuous-Quadrature Balance)
+### Proposition 6.8 (Tri-Partite Decomposition and Continuous-Quadrature Balance)
 *Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically by definition:*
 
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
@@ -625,7 +626,7 @@ What is significant is the **independent numerical quadrature of the continuous 
 4. **Prime-Power Decomposition of the Negative Barrier:**
    Direct point-evaluation of the Volterra convolution $K_{v_{24}}(\omega_q)$ at all prime powers $q \le 13$ matches the matrix-computed prime form to 52 decimal digits ($|\text{diff}| = 1.67 \times 10^{-52}$). The lowest prime $q = 2$ provides **$98.65\%$** of the entire prime energy ($-0.0708858$), $q = 3$ accounts for **$1.34\%$** ($-0.0009658$), while contributions above $q = 7$ decay exponentially below $10^{-13}$ ($q = 11$: $-9.52 \times 10^{-28}$). At the Volterra endpoint $\omega = 0$ ($q = 13$), $K_{v_{24}}(0) = 0$ identically. $\blacksquare$
 
-### Numerical Observation 6.8 (Numerical Multi-$c$ Observations)
+### Numerical Observation 6.9 (Numerical Multi-$c$ Observations)
 *Investigation across prime cutoffs $c \in \{5, 7, 11, 13, 17\}$ and dimensions $N \in \{4, 8, 12, 16, 20\}$ using the multi-parameter analysis suite (`cell47.py` and output log `cell47.out` [10]) reveals three striking empirical patterns governing the ground state:*
 
 1. **Approximate Constancy of the Scaling Ratio $\kappa$ Across Cutoffs:**
