@@ -478,6 +478,35 @@ To convert these findings into a complete, mathematically rigorous proof of Weil
 - **Challenge:** The prime cutoff $c > 1$ restricts the scaling interval to $[0, \log c]$. Extending positivity to the full idele class group requires taking $c \to \infty$ alongside $N \to \infty$.
 - **Required Theorem:** Establish uniform stability of the tri-partite balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} \ge 0$ as $c \to \infty$, showing that the prime-power dispersive energy continues to smoothly absorb the geometric dilation pole energy across the unbounded idele domain.
 
+### 9.1 Semiclassical Continuum Limit of the Archimedean Functional and Boundary Defect Mechanics
+
+An intriguing open question concerning Stage 3 is the analytical structure of the Archimedean quadratic form as the logarithmic cutoff $L = \log c \to \infty$. 
+
+Recent investigations have conjectured that under appropriate Sobolev regularization, the Archimedean form decouples in the continuum limit into an exact continuous Plancherel integral over the multiplier $h_+(r)$ plus an isolated localized boundary defect operator:
+
+$$\mathcal{Q}_{\mathrm{arch}}^{(\infty)}(\tau) \stackrel{?}{=} \frac{1}{\pi} \int_0^\infty h_+(r) |\widehat{\tau}(r)|^2 \, dr + \Delta_{\mathrm{boundary}}(\tau(0)).$$
+
+Auditing this conjecture against the exact algebraic identity of Corollary 5.4 in Paper 4 clarifies the exact asymptotic mechanics:
+
+1. **Exact Finite-$(N, L)$ Representation:**
+   From Corollary 5.4, for any finite dimension $N$ and interval length $L$:
+   $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2.$$
+   Notice that the boundary leakage term enters with a **positive sign** ($+ \sum \dots \ge 0$). Non-vanishing boundary amplitudes $D_0 \neq 0$ increase the Archimedean energy rather than incurring a negative penalty.
+
+2. **Scaling of the Boundary Leakage Term:**
+   For a fixed spatial profile $\tau(y) = T_v(y L)$, the bracketed resolvent term evaluates at leading order to $D(1/q_n^2) = T_v(0) + \mathcal{O}(q_n^{-2}) = D_0 + \mathcal{O}(q_n^{-2})$. The boundary sum therefore scales as:
+   $$\Delta \mathcal{Q}_{\mathrm{boundary}}(N, L) = \frac{2 D_0^2}{L} \sum_{n=0}^\infty \frac{1 - e^{-q_n L}}{q_n^4} + \mathcal{O}\left(\frac{D_0 D_1}{L}\right).$$
+   Because $\sum_{n=0}^\infty q_n^{-4} = 16 \sum_{n=0}^\infty (4n+1)^{-4} = \frac{\pi^4}{32} + \frac{\beta(4)}{4} \approx 3.321$ is a finite numerical constant, the boundary leakage term vanishes as $\mathcal{O}(L^{-1})$ for any fixed spatial profile as $L \to \infty$.
+
+3. **Requirement of the Double Scaling Limit:**
+   If $L \to \infty$ is taken at fixed mode number $N$, the lattice nodes $a_m = 2\pi m / L \to 0$, causing $h_+(a_m) \to h_+(0)$ and collapsing the discrete sum to the constant $h_+(0) \|v\|_2^2 = \psi(1/4) - \log \pi \approx -5.372$.
+   To recover the continuous Plancherel integral $\frac{1}{\pi} \int_0^\infty h_+(r) |\widehat{\tau}(r)|^2 dr$, the number of modes $N$ must scale proportionally with $L$:
+   $$\lim_{N, L \to \infty} \frac{2\pi N}{L} = \Omega_{\mathrm{cutoff}} \longrightarrow \infty,$$
+   converting the discrete Riemann sum $\sum_{m=1}^N v_m^2 h_+(a_m)$ into the continuous integral across the full half-line $\mathbb{R}_+$.
+
+4. **Quenching via Dual Dirichlet Boundary Vanishing:**
+   Under the dual Dirichlet boundary condition $T_\infty(0) = T_\infty(L) = 0$ (Conjecture 3.3), the leading boundary leakage amplitude $D_0 \sim 10^{-20}$ is already suppressed by 40 decimal orders of magnitude at finite $N = 24$. In the true continuum limit where $T_\infty \in C_c^\infty(\mathbb{R})$, the boundary term vanishes identically to all orders, cleanly decoupling the bulk continuous functional without singular boundary edge corrections.
+
 ---
 
 ## 10. Computational Reproducibility and Software Availability
