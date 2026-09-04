@@ -1,0 +1,113 @@
+================================================================================
+CELL 50 — PHASE II: STURM INTERLACING, TRANSMISSION LANDSCAPE & FREDHOLM
+================================================================================
+Working precision dps = 50
+
+Constructing Galerkin matrix Q(c=13, N=20, T=400)...
+Diagonalized full spectrum: 2N+1 = 41 eigenstates.
+
+================================================================================
+1. STURM OSCILLATION AND ZERO-INTERLACING THEOREM (c = 13, N = 20)
+================================================================================
+Evaluating interior nodal coordinates t_{k, j} in (0, L) for k = 0, ..., 7...
+Domain length L = ln(13) = 2.564949357
+
+State E_0  (even, E = 1.32324e-39): Node count = 0  | Nodes: [None]
+State E_1  (odd , E = 1.73788e-36): Node count = 0  | Nodes: [None]
+State E_2  (even, E = 1.2878e-33): Node count = 2  | Nodes: [0.167434, 2.39752]
+State E_3  (odd , E = 6.39991e-31): Node count = 2  | Nodes: [0.299957, 2.26499]
+State E_4  (even, E = 2.21511e-28): Node count = 4  | Nodes: [0.150549, 0.417644, 2.1473, 2.4144]
+State E_5  (odd , E = 6.1695e-26): Node count = 6  | Nodes: [0.0652948, 0.303291, 0.524912, 2.04004, 2.26166, 2.49965]
+State E_6  (even, E = 9.8428e-24): Node count = 8  | Nodes: [0.0832937, 0.253776, 0.431214, 0.618678, 1.94627, 2.13373, 2.31117, 2.48166]
+State E_7  (odd , E = 1.14379e-21): Node count = 8  | Nodes: [0.187011, 0.369997, 0.534045, 0.689831, 1.87512, 2.0309, 2.19495, 2.37794]
+
+--- Verifying Sturm Separation (Interlacing) Theorem ---
+  Between State E_1 (0 nodes) and State E_0 (0 nodes): STRICTLY INTERLACED (VERIFIED)
+  Between State E_2 (2 nodes) and State E_1 (0 nodes): INTERLACING FAILED
+  Between State E_3 (2 nodes) and State E_2 (2 nodes): INTERLACING FAILED
+  Between State E_4 (4 nodes) and State E_3 (2 nodes): INTERLACING FAILED
+  Between State E_5 (6 nodes) and State E_4 (4 nodes): INTERLACING FAILED
+  Between State E_6 (8 nodes) and State E_5 (6 nodes): INTERLACING FAILED
+  Between State E_7 (8 nodes) and State E_6 (8 nodes): INTERLACING FAILED
+
+Global Sturm Separation Theorem: UNCONFIRMED
+
+================================================================================
+2. GLOBAL TRANSMISSION LANDSCAPE |Phi_k(r)|^2 AND RIEMANN ZERO COINCIDENCE
+================================================================================
+Scanning |Phi_0(r)|^2 and |Phi_1(r)|^2 across r in [12.0, 34.0] (1000 sample points)...
+Searching for local minima r* and comparing against Riemann zeros gamma_1..gamma_5...
+
+Detected 5 local minima in |Phi_0(r)|^2 across [12, 34]:
+Index       Detected r*     Nearest gamma_j      |r* - gamma_j|         |Phi_0(r*)|^2
+------------------------------------------------------------------------------------
+    1            14.134    gamma_1 (~14.13)         0.000725142           2.79115e-12
+    2             21.02    gamma_2 (~21.02)          0.00203964           2.92271e-15
+    3            25.002    gamma_3 (~25.01)          0.00885758           2.24953e-16
+    4            30.414    gamma_4 (~30.42)           0.0108761           7.53406e-20
+    5            32.944    gamma_5 (~32.94)          0.00893841             1.002e-21
+------------------------------------------------------------------------------------
+
+================================================================================
+3. LOCALIZATION-DELOCALIZATION PHASE TRANSITION (N = 20, c = 13, Dim = 41)
+================================================================================
+Measuring boundary contact |T(0)| and inverse participation ratio (IPR)...
+ State  Parity      Eigenvalue E              |T(0)|             IPR  Regime          
+----------------------------------------------------------------------------------
+E_0      even     1.3232359e-39             1.57624         1.77468  Bound (Confined)
+E_1       odd     1.7378807e-36         1.99059e-50         1.34367  Bound (Confined)
+E_2      even     1.2878029e-33            0.966747         1.20554  Bound (Confined)
+E_3       odd     6.3999096e-31         1.87111e-50         1.20049  Bound (Confined)
+E_4      even     2.2151077e-28             0.50089         1.32061  Bound (Confined)
+E_5       odd     6.1694954e-26         1.22913e-50          1.4938  Bound (Confined)
+E_6      even     9.8427958e-24            0.512531         1.28879  Bound (Confined)
+E_7       odd      1.143793e-21          3.0894e-50        0.954678  Bound (Confined)
+E_8      even      1.133551e-19             1.11125         1.08563  Bound (Confined)
+E_9       odd     1.9299714e-17         3.35739e-50         1.70314  Bound (Confined)
+  ...  (states 10-15 omitted for brevity)  ...
+E_16     even      7.0233421e-6            0.362668         1.02832  Bound (Confined)
+E_17      odd     0.00010699507         5.57262e-50         1.14841  Transitional    
+E_18     even      0.0016810963            0.947562          1.8517  Transitional    
+E_19      odd       0.020983522          1.0433e-49          1.2565  Transitional    
+E_20     even        0.12332444            0.593757        0.910107  Transitional    
+E_21      odd        0.59990152         3.76249e-50          1.2545  Transitional    
+E_22     even           1.19869             0.10381         1.63044  Scattering (Free)
+E_23      odd         1.6575031          1.6532e-50         1.56047  Scattering (Free)
+  ...  (states 24-37 omitted for brevity)  ...
+E_38     even         3.3693587            0.739451        0.999494  Scattering (Free)
+E_39     even         3.6126764            0.834319         0.86602  Scattering (Free)
+E_40      odd          3.619409         1.58407e-49        0.769957  Scattering (Free)
+----------------------------------------------------------------------------------
+
+================================================================================
+4. MULTI-c UNIVERSALITY OF HIGHER BOUND LADDER (N = 20)
+================================================================================
+Tracking states k in {4, 5, 6, 7} across prime cutoffs c in {5, 7, 11, 13, 17}...
+
+   c        E_4 (even)         E_5 (odd)        E_6 (even)         E_7 (odd)     R_4=E_4/E_3     R_5=E_5/E_4
+----------------------------------------------------------------------------------------
+   5        5.92484e-7        6.37448e-5        0.00277304          0.125258         220.284         107.589
+   7        2.2838e-15       8.89154e-13        1.2794e-10        1.91992e-8          390.11         389.331
+  11       2.04061e-25       6.99418e-23       1.38341e-20       2.07377e-18         352.127          342.75
+  13       2.21511e-28        6.1695e-26        9.8428e-24       1.14379e-21         346.115         278.519
+  17       3.02809e-32       1.08486e-29       2.26897e-27       2.90847e-25         421.267         358.264
+----------------------------------------------------------------------------------------
+
+================================================================================
+5. REGULARIZED PUNCTURED FREDHOLM DETERMINANT (N = 20, c = 13)
+================================================================================
+Evaluating Hadamard-regularized determinant Delta'_N(s) and characteristic ratio Xi'_N(s)...
+
+                 s       Xi'_N(s) = prod (1 + s/E_k)        log10 Xi'_N(s)
+----------------------------------------------------------------------------
+           1.0e-10                        10^150.477             150.47723
+            1.0e-5                        10^219.747             219.74692
+              0.01                        10^270.518             270.51764
+              0.25                        10^297.916             297.91571
+               1.0                        10^312.089             312.08916
+         199.79045                        10^393.498             393.49766
+----------------------------------------------------------------------------
+
+================================================================================
+END OF CELL 50
+================================================================================
