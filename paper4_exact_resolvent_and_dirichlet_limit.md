@@ -300,13 +300,44 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) \equiv C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}
 
 *where each term $J(q_n)$ is evaluated in closed algebraic form via Theorem 5.1.*
 
-*Proof.* For each $n \ge 0$, define $w_n(r) = \frac{1}{n+1} - \frac{2 q_n}{q_n^2 + r^2} = \frac{r^2 - 4n^2 + 1/4}{(n+1)((2n + 1/2)^2 + r^2)}$. Since $K_{\mathrm{Fourier}}(v, r, L) \ge 0$ is smooth and decays as $\mathcal{O}(r^{-2})$, each term $I_n = \frac{1}{\pi} \int_0^\infty w_n(r) K_{\mathrm{Fourier}}(v, r, L) dr = \frac{\|v\|_2^2}{n+1} - J(q_n)$ is finite.
+*Proof.* 
+1. **Term-by-Term Finiteness:**
+   For each $n \ge 0$, define the rational kernel:
+   $$w_n(r) \equiv \frac{1}{n+1} - \frac{2 q_n}{q_n^2 + r^2} = \frac{r^2 - 4n^2 + 1/4}{(n+1)((2n + 1/2)^2 + r^2)}.$$
+   Since $K_{\mathrm{Fourier}}(v, r, L) \ge 0$ is continuous on $[0, \infty)$ and decays as $\mathcal{O}(r^{-2})$ as $r \to \infty$ (Theorem 3.1), and $w_n(r)$ is bounded on $[0, \infty)$, each individual integral:
+   $$I_n \equiv \frac{1}{\pi} \int_0^\infty w_n(r) K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{\|v\|_2^2}{n+1} - J(q_n)$$
+   is absolutely convergent and finite.
 
-To justify interchanging summation and integration $\sum_{n=0}^\infty \int_0^\infty = \int_0^\infty \sum_{n=0}^\infty$, we apply Lebesgue's Dominated Convergence Theorem. From the integral representation of the digamma function, the partial sums satisfy $|\sum_{n=0}^M w_n(r)| \le C(1 + \log(1 + r))$ uniformly in $M$ for all $r \ge 0$. Because $K_{\mathrm{Fourier}}(r) = \mathcal{O}(r^{-2})$, $(1 + \log(1 + r)) K_{\mathrm{Fourier}}(r) \in L^1([0, \infty))$, justifying term-by-term integration.
+2. **Dominated Convergence and Interchange of Limits:**
+   To justify interchanging summation and integration $\sum_{n=0}^\infty \int_0^\infty = \int_0^\infty \sum_{n=0}^\infty$, consider the partial sums $S_M(r) = C_{\mathrm{arch}} + \sum_{n=0}^M w_n(r)$.
+   Notice that for each $n \ge 0$ and all $r \ge 0$:
+   $$w_n(r) = \frac{1}{n+1} - \frac{2q_n}{q_n^2 + r^2} \ge \frac{1}{n+1} - \frac{2}{q_n} = \frac{1}{n+1} - \frac{1}{n + 1/4} = -\frac{3/4}{(n+1)(n + 1/4)}.$$
+   Thus the negative part of each term is uniformly bounded by a convergent numerical series independent of $r$:
+   $$\sum_{n=0}^\infty \max(0, -w_n(r)) \le \sum_{n=0}^\infty \frac{3/4}{(n+1)(n + 1/4)} = \psi(1) - \psi(1/4) = \frac{\pi}{2} + 3\log 2 < \infty.$$
+   Because the partial sums $S_M(r)$ converge pointwise to $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$, which satisfies the logarithmic bound $|h_+(r)| \le C_1 + \frac{1}{2} \log(1 + r^2)$ for all $r \ge 0$, the partial sums satisfy the uniform $M$-independent upper envelope:
+   $$|S_M(r)| \le |h_+(r)| + 2 \sum_{n=0}^\infty \max(0, -w_n(r)) \le C_0 + \log(1 + r) \equiv g(r).$$
+   Since $K_{\mathrm{Fourier}}(v, r, L) \le \frac{C_K}{1 + r^2}$, the dominant function satisfies $\int_0^\infty g(r) K_{\mathrm{Fourier}}(r) dr < \infty$. By Lebesgue's Dominated Convergence Theorem, term-by-term integration is unconditionally valid:
+   $$\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty \lim_{M\to\infty} S_M(r) K_{\mathrm{Fourier}}(r) \, dr = \lim_{M\to\infty} \sum_{n=0}^M I_n = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right].$$
 
-From Theorem 5.1, as $q_n \to \infty$, $J(q_n) = \frac{2\|v\|_2^2}{q_n} - \frac{2 M_2}{q_n^3} + \mathcal{O}(q_n^{-4}) = \frac{\|v\|_2^2}{n + 1/4} + \mathcal{O}(n^{-3})$. The summand satisfies:
-$$\frac{\|v\|_2^2}{n+1} - J(q_n) = \|v\|_2^2 \left( \frac{1}{n+1} - \frac{1}{n + 1/4} \right) + \mathcal{O}(n^{-3}) = -\frac{3 \|v\|_2^2}{4 n^2} + \mathcal{O}(n^{-3}).$$
-Since $\sum_{n=1}^\infty n^{-2} < \infty$, the series converges absolutely and unconditionally. $\blacksquare$
+3. **Large-$q$ Remainder and Absolute Convergence:**
+   To establish the convergence rate, from Theorem 5.1 we expand $J(q)$ for large $q > 0$:
+   $$J(q) = \frac{2v_0^2}{q} + \sum_{m=1}^N \frac{2qv_m^2}{q^2 + a_m^2} - \frac{2(1 - e^{-qL})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+   Using the exact algebraic identity $\frac{2qv_m^2}{q^2 + a_m^2} = \frac{2v_m^2}{q} - \frac{2 a_m^2 v_m^2}{q(q^2 + a_m^2)}$ and $\|v\|_2^2 = v_0^2 + \sum_{m=1}^N v_m^2$, we have:
+   $$\frac{2\|v\|_2^2}{q} - J(q) = \sum_{m=1}^N \frac{2 a_m^2 v_m^2}{q(q^2 + a_m^2)} + \frac{2(1 - e^{-qL})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+   For each $m$, $0 \le \frac{2 a_m^2 v_m^2}{q(q^2 + a_m^2)} \le \frac{2 a_m^2 v_m^2}{q^3}$. For the boundary term, $|v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2}| \le \sqrt{2N+1}\|v\|_2$. Thus:
+   $$\left| J(q) - \frac{2\|v\|_2^2}{q} \right| \le \frac{C_J}{q^2}, \qquad C_J \equiv \frac{2(2N+1)\|v\|_2^2}{L} + 2 \sum_{m=1}^N a_m^2 v_m^2.$$
+   Evaluating at $q_n = 2n + 1/2 = 2(n + 1/4)$, we obtain $\frac{2\|v\|_2^2}{q_n} = \frac{\|v\|_2^2}{n + 1/4}$, so the series summand satisfies:
+   $$\left| \frac{\|v\|_2^2}{n+1} - J(q_n) \right| \le \|v\|_2^2 \left( \frac{1}{n + 1/4} - \frac{1}{n+1} \right) + \frac{C_J}{(2n + 1/2)^2} = \frac{\frac{3}{4} \|v\|_2^2}{(n+1)(n + 1/4)} + \frac{C_J}{(2n + 1/2)^2} \le \frac{C_{\mathrm{tail}}}{n^2}.$$
+   Since $\sum_{n=1}^\infty n^{-2} = \frac{\pi^2}{6} < \infty$, the series converges absolutely and unconditionally with fast $\mathcal{O}(n^{-2})$ convergence. $\blacksquare$
+
+### Corollary 5.4 (Exact Closed-Form Digamma Identity for $\mathcal{Q}_{\mathrm{arch}}(v)$)
+*By summing the harmonic difference and the discrete lattice pole series in Corollary 5.3 analytically in terms of the digamma function $\psi(z)$, the Archimedean quadratic form reduces to the exact discrete lattice sum plus an exponentially suppressed boundary leakage term:*
+
+$$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2,$$
+
+*where $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$.*
+
+*Proof.* In the summand of Corollary 5.3, write $\frac{\|v\|_2^2}{n+1} - J(q_n) = (\frac{\|v\|_2^2}{n+1} - \frac{2\|v\|_2^2}{q_n}) + (\frac{2\|v\|_2^2}{q_n} - J(q_n))$. Summing the first part gives $\|v\|_2^2 \sum_{n=0}^\infty (\frac{1}{n+1} - \frac{1}{n+1/4}) = \|v\|_2^2 (\psi(1/4) + \gamma)$, which combined with $C_{\mathrm{arch}}\|v\|_2^2 = (-\gamma - \log\pi)\|v\|_2^2$ yields $(\psi(1/4) - \log\pi)\|v\|_2^2 = h_+(0)\|v\|_2^2$. For the second part, using the identity $\frac{2\|v\|_2^2}{q_n} - J(q_n) = \sum_{m=1}^N \frac{2 a_m^2 v_m^2}{q_n(q_n^2 + a_m^2)} + \text{boundary term}$, summing over $n$ using $\sum_{n=0}^\infty \frac{2 a_m^2}{q_n(q_n^2 + a_m^2)} = \operatorname{Re}\psi(1/4 + i a_m/2) - \psi(1/4) = h_+(a_m) - h_+(0)$ yields $\sum_{m=1}^N v_m^2 [h_+(a_m) - h_+(0)]$. Adding to $h_+(0)\|v\|_2^2$ cancels the $-h_+(0)\sum v_m^2$ term, leaving $h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m)$ plus the boundary sum. $\blacksquare$
 
 ---
 
@@ -378,21 +409,21 @@ In terms of the signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2}\sum_{m=1}
 ---
 
 ### Theorem 7.2 (Exact Small-Denominator Cancellation in the Odd-Even Spectral Coupling)
-*Let $Q_{\mathrm{even}}$ and $Q_{\mathrm{odd}}$ denote the restrictions of the Connes–van Suijlekom Galerkin matrix $Q$ to the even and odd subspaces of $\mathbb{C}^{2N+1}$. For any even eigenvector $u^{(k)}$ of $Q_{\mathrm{even}}$ with eigenvalue $E_k$, let $D_0^{(k)} = e^T u^{(k)}$ and define the arithmetic energy vector $\mathbf{w}(\lambda) = b + \mathcal{E}_{\mathrm{arith}}(\lambda) e$, where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}}(\lambda) = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$.*
+*Let $Q_{\mathrm{even}}$ and $Q_{\mathrm{odd}}$ denote the restrictions of the Connes–van Suijlekom Galerkin matrix $Q$ to the even and odd subspaces of $\mathbb{C}^{2N+1}$. For any even eigenvector $u^{(k)}$ of $Q_{\mathrm{even}}$ with eigenvalue $E_k$ satisfying the non-resonance condition $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ and $\lambda \notin \operatorname{spec}(Q_{\mathrm{odd}})$, let $D_0^{(k)} = e^T u^{(k)}$ and define the arithmetic energy vector $\mathbf{w}(\lambda) = b + \mathcal{E}_{\mathrm{arith}}(\lambda) e$, where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}}(\lambda) = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$.*
 
 *Then in the spectral expansion of $(Q_{\mathrm{even}} - \lambda I)^\dagger \mathbf{w}(\lambda)$, the numerator for mode $k$ factors identically as:*
 
 $$u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
-*Consequently, for every $E_k \ne \lambda$, the factor $(E_k - \lambda)$ cancels identically, yielding the exact non-singular algebraic summand:*
+*Consequently, for every $E_k \ne \lambda$ with $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$, the factor $(E_k - \lambda)$ cancels identically, yielding the exact non-singular algebraic summand:*
 
 $$\frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda))}{E_k - \lambda} \equiv - [D_0^{(k)}]^2 \cdot \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
-*Proof.* Expanding $(Q_{\mathrm{even}} - \lambda I)^\dagger$ along the orthonormal eigenbasis $\{u^{(k)}\}_{k \ge 1, \text{ even}}$ gives numerators $(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda)) = D_0^{(k)} [B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)}]$, where $B_1^{(k)} = \psi^T M u^{(k)}$. Since $[M, Q] u^{(k)} = D_0^{(k)} \psi$ by Theorem 6.1, we have $M u^{(k)} = -D_0^{(k)} (Q_{\mathrm{odd}} - E_k I)^{-1} \psi$, whence $B_1^{(k)} = \psi^T M u^{(k)} = -D_0^{(k)} \mathcal{E}_{\mathrm{arith}}(E_k)$. The bracket is therefore:
+*Proof.* Expanding $(Q_{\mathrm{even}} - \lambda I)^\dagger$ along the orthonormal eigenbasis $\{u^{(k)}\}_{k \ge 1, \text{ even}}$ gives numerators $(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda)) = D_0^{(k)} [B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)}]$, where $B_1^{(k)} = \psi^T M u^{(k)}$. Since $[M, Q] u^{(k)} = D_0^{(k)} \psi$ by Theorem 6.1 and $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$, the operator $(Q_{\mathrm{odd}} - E_k I)$ is boundedly invertible on $\mathcal{H}_{\mathrm{odd}}$, yielding $M u^{(k)} = -D_0^{(k)} (Q_{\mathrm{odd}} - E_k I)^{-1} \psi$, whence $B_1^{(k)} = \psi^T M u^{(k)} = -D_0^{(k)} \mathcal{E}_{\mathrm{arith}}(E_k)$. The bracket is therefore:
 
 $$B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)} = -D_0^{(k)} \big[ \mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) \big].$$
 
-By the first resolvent identity for the odd operator $Q_{\mathrm{odd}}$:
+By the first resolvent identity for the odd operator $Q_{\mathrm{odd}}$ (valid since $E_k, \lambda \notin \operatorname{spec}(Q_{\mathrm{odd}})$):
 
 $$(Q_{\mathrm{odd}} - E_k I)^{-1} - (Q_{\mathrm{odd}} - \lambda I)^{-1} = (E_k - \lambda) (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1}.$$
 
@@ -401,6 +432,9 @@ Taking the inner product with $\psi$:
 $$\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) = (E_k - \lambda) \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
 Substituting this into the numerator yields $u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle$. Dividing by $(E_k - \lambda)$ completes the algebraic cancellation. $\blacksquare$
+
+*Remark 7.2.1 (Non-Resonance and Spectral Disjointness).*
+The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that the odd resolvent $(Q_{\mathrm{odd}} - E_k I)^{-1}$ is well-defined. In all numerical Galerkin calculations across all tested dimensions and cutoffs ($N \in \{1, \dots, 24\}$, $c \in \{5, \dots, 17\}$), the even and odd spectra are strictly disjoint ($\operatorname{spec}(Q_{\mathrm{even}}) \cap \operatorname{spec}(Q_{\mathrm{odd}}) = \emptyset$). In particular, the lowest odd eigenvalue satisfies $E_{\mathrm{odd}, 1} \approx 0.05 \gg \lambda \sim 10^{-43}$, so no spectral degeneracies or resonances occur between the sectors.
 
 ---
 
@@ -420,6 +454,7 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Cauchy Transform Identity** | Closed algebraic form for $J(q)$ | Theorem 5.1 | Evaluates Archimedean Cauchy transform in closed form via contour integration. |
 | **Spatial Laplace Duality** | $J(q) = \int_0^L K_v^{\mathrm{phys}}(y) e^{-qy} dy$ | Theorem 5.2 | Duality between complex frequency Cauchy transform and physical Laplace transform. |
 | **Weierstrass Pole Series** | $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ | Corollary 5.3 | Unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ convergence. |
+| **Digamma Closed Form** | $\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum v_m^2 h_+(a_m) + \text{boundary}$ | Corollary 5.4 | Closed-form evaluation summing harmonic and lattice modes analytically. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
 | **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
@@ -444,8 +479,8 @@ The exact algebraic identities and theorems established in this manuscript were 
 | Theorem 3.2 | Operator resolvent & Taylor jet hierarchy $D_k = T_v^{(2k)}(0)$ | `cell38.py`, `cell43.py` | `cell38.out`, `cell43.out` |
 | Theorem 4.3 | Lattice orthogonality $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | `cell32.py` | `cell32.out` |
 | Theorem 5.1 & Theorem 5.2 | Exact Cauchy transform $J(q)$ & spatial Laplace duality | `cell56.py` | `cell56.out` |
-| Corollary 5.3 | Weierstrass pole decomposition with $\mathcal{O}(n^{-2})$ convergence | `cell56.py` | `cell56.out` |
-| Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py` | `cell54.out` |
+| Corollary 5.3 & Corollary 5.4 | Weierstrass pole decomposition & exact digamma closed form | `cell56.py` | `cell56.out` |
+| Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 7.1 | Exact Archimedean resolvent first-jet identity | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 7.2 | Small-denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
