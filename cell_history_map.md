@@ -1349,7 +1349,7 @@ Diagnostic / structural $N$-dependence survey; precursor to the exact coefficien
 
 ### Intended purpose
 
-Cell 34 extends Cell 33 from a sparse even-$N$ survey to every integer
+Cell 34 extends Cell 33 from a sparse $\text{even-}N$ survey to every integer
 
 $$
 N=1,\ldots,24,
@@ -1457,7 +1457,7 @@ Established structural observation / precursor to Cells 36–38.
 
 ---
 
-## Cell 36 — exact $\text{finite-}N$ tail coefficients
+## Cell 36 — exact finite $N$ tail coefficients
 
 ### Intended purpose
 
@@ -1479,8 +1479,8 @@ the coefficient for $k\ge1$ is
 
 $$
 A_k = \frac{4(k+1)}{L}\kappa^{2k} \sum_m m^{2k}v_m^2 +
-\frac{4\sqrt2}{L}\kappa^{2k}v_0M_{2k} +
-\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_mv_nH_k(m,n).
+\frac{4\sqrt{2}}{L}\kappa^{2k}v_0M_{2k} +
+\frac{4}{\pi}\kappa^{2k+1} \sum_{m < n}v_mv_nH_k(m,n).
 $$
 
 ### What it established
@@ -1597,9 +1597,9 @@ The investigation has now passed through three distinct stages:
 
 $$
 \text{dictionary validation}
-\;\longrightarrow\;
+\quad\longrightarrow\quad
 \text{numerical tail forensics}
-\;\longrightarrow\;
+\quad\longrightarrow\quad
 \text{exact finite-}N\text{ tail analysis}.
 $$
 
