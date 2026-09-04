@@ -1300,6 +1300,167 @@ It also changes the numerical problem fundamentally: the tail is no longer an op
 
 ---
 
+## Cells 35–38 — from endpoint suppression to a closed form for the entire Archimedean tail hierarchy
+
+This sequence marks a significant analytical advance in the investigation of the finite-$N$ Archimedean tail.
+
+The starting point is the exact factorisation established in Cell 32,
+
+$$
+K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))\,R_v(r),
+$$
+
+with
+
+$$
+R_v(r) \sim \frac{A_0}{r^2} + \frac{A_1}{r^4} + \frac{A_2}{r^6} + \cdots.
+$$
+
+Cell 32 had already established the exact leading coefficient
+
+$$
+A_0=\frac{2}{L}T_v(0)^2.
+$$
+
+The subsequent cells show that this is not an isolated coincidence: the complete inverse-power tail has an exact finite-dimensional boundary structure.
+
+### Cell 35 — endpoint jets and spectral moments
+
+Cell 35 surveyed the endpoint data of the finite-band test function
+
+$$
+T_v(t) = v_0 + \sqrt2\sum_{m=1}^N v_m \cos\left(\frac{2\pi mt}{L}\right).
+$$
+
+In particular,
+
+$$
+T_v^{(2k)}(0) = \sqrt2\,(-1)^k \left(\frac{2\pi}{L}\right)^{2k} M_{2k},
+$$
+
+where
+
+$$
+M_{2k} = \sum_{m=1}^N m^{2k}v_m.
+$$
+
+The numerical survey showed strong suppression of the endpoint data as $N$ increases, suggesting that the small Archimedean tail might be connected to increasingly flat endpoint behaviour.
+
+At this stage this remained a structural observation only; no $N\to\infty$ law was assumed.
+
+### Cell 36 — exact finite-$N$ tail coefficients
+
+Cell 36 converted the large-$r$ expansion into an exact algebraic calculation.
+
+For $k\ge1$, define
+
+$$
+H_k(m,n) = \frac{n^{2k+2}-m^{2k+2}}{n^2-m^2} = \sum_{j=0}^k n^{2(k-j)}m^{2j}.
+$$
+
+The exact coefficient is
+
+$$
+A_k = \frac{4(k+1)}{L}\kappa^{2k} \sum_m m^{2k}v_m^2 +
+\frac{4\sqrt2}{L}\kappa^{2k}v_0M_{2k} +
+\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_mv_nH_k(m,n),
+$$
+
+where
+
+$$
+\kappa=\frac{2\pi}{L}.
+$$
+
+The numerical extraction checks confirmed that these are the actual asymptotic coefficients of the exact rational kernel, rather than coefficients inferred from numerical fitting. After subtraction of successive terms, the residual exhibited the predicted next inverse power of $r$.
+
+Thus the finite-$N$ tail hierarchy was established algebraically.
+
+### Cell 37 — discovery of the moment convolution identity
+
+Cell 37 then examined the polynomial $H_k$ itself.
+
+The crucial identity is obtained by extending the $m<n$ sum to a symmetric full double sum. With the diagonal value
+
+$$
+H_k(m,m)=(k+1)m^{2k},
+$$
+
+one obtains
+
+$$
+Q_k := \sum_{m,n\ge1}v_mv_nH_k(m,n) = \sum_{j=0}^k M_{2j}M_{2(k-j)}.
+$$
+
+The numerical residuals were at working-precision noise across the complete $N$-survey, confirming the exact algebraic identity.
+
+This was the key step: the apparently complicated pairwise spectral interaction in the tail coefficient is actually a simple convolution of the even spectral moments.
+
+### Cell 38 — closed form for the complete tail hierarchy
+
+Cell 38 performs the remaining algebraic cancellation.
+
+For $k\ge1$, the original Cell-36 coefficient reduces exactly to
+
+$$
+A_k = \frac{4}{L}\kappa^{2k} \left[ \sum_{j=0}^kM_{2j}M_{2(k-j)} + \sqrt2\,v_0M_{2k} \right].
+$$
+
+Introducing
+
+$$
+D_0:=T_v(0), \qquad D_k:=T_v^{(2k)}(0)\quad(k\ge1),
+$$
+
+this becomes the remarkably compact endpoint-jet formula
+
+$$
+A_k = \frac{2}{L}(-1)^k \sum_{j=0}^kD_jD_{k-j}, \qquad k\ge1.
+$$
+
+Equivalently,
+
+$$
+A_k = \frac{4}{L}(-1)^k \left[ T_v(0)T_v^{(2k)}(0) + \frac12 \sum_{j=1}^{k-1} T_v^{(2j)}(0)T_v^{(2k-2j)}(0) \right].
+$$
+
+Together with
+
+$$
+A_0=\frac{2}{L}T_v(0)^2,
+$$
+
+the entire asymptotic hierarchy is therefore expressed in terms of the even endpoint jet of the finite-band test function.
+
+This is an exact finite-$N$ algebraic result. It does not depend on the ground state, does not involve numerical quadrature, and does not assume an $N\to\infty$ limit.
+
+### Why this matters
+
+This changes the interpretation of the earlier numerical tail work.
+
+The Archimedean tail is not merely observed to become small as $N$ increases. Its complete inverse-power expansion is controlled by the endpoint jet of $T_v$:
+
+$$
+R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0D_1^{\phantom1}2\,r^{-4} +\cdots,
+$$
+
+with every higher coefficient given by the quadratic convolution above.
+
+Consequently, the endpoint suppression observed in Cell 35 has a precise mathematical meaning: suppression of successive endpoint derivatives directly suppresses successive coefficients of the large-$r$ Archimedean tail.
+
+The remaining question is no longer whether such a relationship exists. It does.
+
+The next question is quantitative:
+
+> **What endpoint-jet structure is imposed on the ground state as $N$ increases, and what does that imply for a uniform or $N$-dependent bound on the Archimedean tail?**
+
+This is the point where the finite-$N$ tail analysis can potentially move from an exact asymptotic expansion to a rigorous tail bound.
+
+No claim about the $N\to\infty$ behaviour has yet been made.
+
+
+---
+
 # Current research state after Cells 24–32
 
 The investigation has now moved beyond merely validating the finite Archimedean dictionary.
