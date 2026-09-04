@@ -1,0 +1,206 @@
+================================================================================
+CELL 49 — PHASE II: COMPLETE SPECTRUM, GAP UNIVERSALITY & SPECTRAL ZETA
+================================================================================
+Working precision dps = 50
+
+================================================================================
+1. COMPLETE SPECTRUM & BOUND-STATE CLASSIFICATION (c = 13, N = 20)
+================================================================================
+Constructing and diagonalizing Q(c=13, N=8)...
+Constructing and diagonalizing Q(c=13, N=12)...
+Constructing and diagonalizing Q(c=13, N=16)...
+Constructing and diagonalizing Q(c=13, N=20)...
+
+--- Spectrum at N = 20 (Total dimension 2N+1 = 41) ---
+Index  Parity                 E(N=20)                 E(N=16)    Alpha (Slope)  Classification  
+--------------------------------------------------------------------------------------------
+    0    even         1.323235908e-39         7.118430151e-35           1.0617  Bound State     
+    1     odd         1.737880682e-36         7.667173377e-32           1.0424  Bound State     
+    2    even         1.287802917e-33         3.600780776e-29          0.99793  Bound State     
+    3     odd         6.399909638e-31          1.27595596e-26          0.96496  Bound State     
+    4    even         2.215107711e-28          3.00299591e-24          0.92737  Bound State     
+    5     odd         6.169495373e-26         7.670623846e-22          0.91894  Bound State     
+    6    even         9.842795812e-24         1.207133366e-19           0.9176  Bound State     
+    7     odd         1.143793037e-21         1.425436904e-17          0.91917  Bound State     
+    8    even         1.133551023e-19         8.463810885e-16          0.86924  Bound State     
+    9     odd         1.929971386e-17          7.54667142e-14          0.80619  Bound State     
+   10    even           1.9004989e-15         5.983208088e-12          0.78506  Bound State     
+   11     odd         1.192694282e-13         3.582073523e-10          0.78047  Bound State     
+   12    even         4.495141232e-12          8.499079403e-9          0.73537  Bound State     
+   13     odd          2.53817905e-10           2.00636933e-7          0.65037  Bound State     
+   14    even           9.54016399e-9          3.725935232e-6          0.58165  Bound State     
+   15     odd          4.189131838e-7          9.169374917e-5          0.52521  Bound State     
+   16    even          7.023342143e-6          0.001295926707          0.50856  Bound State     
+   17     odd          0.000106995067           0.01078031915          0.44959  Transitional    
+   18    even          0.001681096279           0.08358404935          0.38075  Transitional    
+   19     odd           0.02098352243            0.5236022216          0.31355  Transitional    
+   20    even            0.1233244358             1.031210358          0.20699  Transitional    
+   21     odd            0.5999015183             1.694400907           0.1012  Transitional    
+   22    even             1.198689964             1.975350318         0.048687  Continuum       
+   23     odd             1.657503138             2.089654377         0.022582  Continuum       
+   24    even             1.959703819             2.170223758        0.0099453  Continuum       
+   25     odd             2.042703425             2.490185043         0.019307  Continuum       
+   26    even             2.062473733             2.490613453         0.018385  Continuum       
+   27    even             2.459594439             2.711006249        0.0094859  Continuum       
+   28     odd             2.480644617             2.753226003         0.010161  Continuum       
+   29    even             2.548219131             2.754247427        0.0075781  Continuum       
+   30     odd             2.577291041             2.771751206        0.0070899  Continuum       
+   31    even             2.634328082             3.169630553          0.01803  Continuum       
+   32     odd             2.648759653             3.312046833         0.021782  Continuum       
+   33     odd             2.733356987                     0.0              0.0  Continuum       
+   34    even             2.767879524                     0.0              0.0  Continuum       
+   35    even             2.999390626                     0.0              0.0  Continuum       
+   36     odd             3.005958703                     0.0              0.0  Continuum       
+   37     odd             3.196058848                     0.0              0.0  Continuum       
+   38    even             3.369358722                     0.0              0.0  Continuum       
+   39    even             3.612676354                     0.0              0.0  Continuum       
+   40     odd             3.619409023                     0.0              0.0  Continuum       
+--------------------------------------------------------------------------------------------
+Total bound states (alpha >= 0.5):    17
+Total transitional states:           5
+Total scattering continuum states:   19
+Total dimension:                     41
+
+================================================================================
+2. MULTI-c SPECTRAL GAP UNIVERSALITY ACROSS PRIME CUTOFFS c in {5, 7, 11, 13, 17}
+================================================================================
+Evaluating lowest 4 eigenvalues at N = 16 and N = 20 across prime cutoffs...
+
+--- Cutoff c = 5 (L = 1.60944) ---
+  E_0 (even):   1.316452676e-17
+  E_1 (odd):    1.500378711e-14
+  E_2 (even):   6.079407776e-12
+  E_3 (odd):    2.689637737e-9
+  Delta E:      1.499062259e-14
+  Ratio E_1/E_0: 1139.71  -->  c^4.3733
+  Ratio E_2/E_1: 405.192  -->  c^3.7307
+  Ratio E_3/E_2: 442.418  -->  c^3.7853
+
+--- Cutoff c = 7 (L = 1.94591) ---
+  E_0 (even):   6.85479522e-27
+  E_1 (odd):    1.189516293e-23
+  E_2 (even):   8.578693687e-21
+  E_3 (odd):    5.854231472e-18
+  Delta E:      1.188830814e-23
+  Ratio E_1/E_0: 1735.31  -->  c^3.8331
+  Ratio E_2/E_1: 721.192  -->  c^3.3819
+  Ratio E_3/E_2: 682.415  -->  c^3.3535
+
+--- Cutoff c = 11 (L = 2.3979) ---
+  E_0 (even):   1.382505764e-36
+  E_1 (odd):    1.755504199e-33
+  E_2 (even):   1.18055277e-30
+  E_3 (odd):    5.795088937e-28
+  Delta E:      1.754121694e-33
+  Ratio E_1/E_0: 1269.8  -->  c^2.9804
+  Ratio E_2/E_1: 672.486  -->  c^2.7153
+  Ratio E_3/E_2: 490.879  -->  c^2.584
+
+--- Cutoff c = 13 (L = 2.56495) ---
+  E_0 (even):   1.323235908e-39
+  E_1 (odd):    1.737880682e-36
+  E_2 (even):   1.287802917e-33
+  E_3 (odd):    6.399909638e-31
+  Delta E:      1.736557446e-36
+  Ratio E_1/E_0: 1313.36  -->  c^2.7994
+  Ratio E_2/E_1: 741.019  -->  c^2.5763
+  Ratio E_3/E_2: 496.963  -->  c^2.4205
+
+--- Cutoff c = 17 (L = 2.83321) ---
+  E_0 (even):   1.150410827e-43
+  E_1 (odd):    1.67907517e-40
+  E_2 (even):   1.366001772e-37
+  E_3 (odd):    7.188066054e-35
+  Delta E:      1.677924759e-40
+  Ratio E_1/E_0: 1459.54  -->  c^2.5716
+  Ratio E_2/E_1: 813.544  -->  c^2.3653
+  Ratio E_3/E_2: 526.212  -->  c^2.2115
+
+--- Multi-c Summary Table (N = 20) ---
+   c                 E_0                 E_1             Delta E   R_1 = E_1/E_0    mu_1 (log_c R_1)
+------------------------------------------------------------------------------------
+   5       1.3164527e-17       1.5003787e-14       1.4990623e-14         1139.71             4.37329
+   7       6.8547952e-27       1.1895163e-23       1.1888308e-23         1735.31             3.83314
+  11       1.3825058e-36       1.7555042e-33       1.7541217e-33          1269.8             2.98037
+  13       1.3232359e-39       1.7378807e-36       1.7365574e-36         1313.36             2.79941
+  17       1.1504108e-43       1.6790752e-40       1.6779248e-40         1459.54              2.5716
+------------------------------------------------------------------------------------
+
+================================================================================
+3. HIGHER BOUND-STATE TRANSMISSION RESONANCES WITH RIEMANN ZEROS (N = 20, c = 13)
+================================================================================
+Testing extinction |Phi_k(gamma_j)|^2 across states k in {0, ..., 7} and zeros gamma_1..gamma_5...
+
+ State  Parity     Eigenvalue E  gamma_1 (~14.13)  gamma_2 (~21.02)  gamma_3 (~25.01)  gamma_4 (~30.42)  gamma_5 (~32.94)
+--------------------------------------------------------------------------------------------------------------
+E_0      even     1.323236e-39            1.97e-75            6.79e-72             6.4e-57            4.24e-66            1.89e-64
+E_1       odd     1.737881e-36            2.12e-70            2.75e-67            4.34e-55            7.18e-62            2.64e-60
+E_2      even     1.287803e-33            1.57e-65            6.97e-63            1.52e-53            7.38e-58            2.23e-56
+E_3       odd      6.39991e-31             8.2e-61            1.17e-58            3.75e-52            4.92e-54            1.22e-52
+E_4      even     2.215108e-28            2.68e-56            1.28e-54            8.16e-51            2.03e-50            4.08e-49
+E_5       odd     6.169495e-26            4.87e-52            1.41e-50            6.78e-49            7.01e-47            1.13e-45
+E_6      even     9.842796e-24            1.36e-49            1.12e-46            9.63e-46            1.32e-43            1.66e-42
+E_7       odd     1.143793e-21            6.53e-44            7.69e-43            3.02e-42            2.24e-40            2.18e-39
+--------------------------------------------------------------------------------------------------------------
+
+================================================================================
+4. DISCRETE SPECTRAL ZETA FUNCTION & PUNCTURED RESOLVENT TRACES
+================================================================================
+--- Dimension N = 12 (Excited subspace dimension = 24) ---
+  Punctured Resolvent Trace G'(s = 0): 7.241776983e+25
+  Punctured Resolvent Trace G'(s = 1.0e-20): 2.930932142e+20
+  Punctured Resolvent Trace G'(s = 1.0e-10): 7.956035111e+10
+  Punctured Resolvent Trace G'(s = 1.0): 18.20351596
+
+  Spectral Zeta zeta_Q(sigma=0.1): 932.9601386
+  Spectral Zeta zeta_Q(sigma=0.25): 3854806.862
+  Spectral Zeta zeta_Q(sigma=0.5): 9.02701421e+12
+  Spectral Zeta zeta_Q(sigma=0.75): 2.511939761e+19
+  Spectral Zeta zeta_Q(sigma=1.0): 7.241776983e+25
+
+--- Dimension N = 16 (Excited subspace dimension = 32) ---
+  Punctured Resolvent Trace G'(s = 0): 1.30704667e+31
+  Punctured Resolvent Trace G'(s = 1.0e-20): 5.005673229e+20
+  Punctured Resolvent Trace G'(s = 1.0e-10): 1.017318013e+11
+  Punctured Resolvent Trace G'(s = 1.0): 22.5179337
+
+  Spectral Zeta zeta_Q(sigma=0.1): 2970.445397
+  Spectral Zeta zeta_Q(sigma=0.25): 77008441.25
+  Spectral Zeta zeta_Q(sigma=0.5): 3.787574026e+15
+  Spectral Zeta zeta_Q(sigma=0.75): 2.192099756e+23
+  Spectral Zeta zeta_Q(sigma=1.0): 1.30704667e+31
+
+--- Dimension N = 20 (Excited subspace dimension = 40) ---
+  Punctured Resolvent Trace G'(s = 0): 5.7619158e+35
+  Punctured Resolvent Trace G'(s = 1.0e-20): 6.977961019e+20
+  Punctured Resolvent Trace G'(s = 1.0e-10): 1.224903024e+11
+  Punctured Resolvent Trace G'(s = 1.0): 25.93740465
+
+  Spectral Zeta zeta_Q(sigma=0.1): 8233.550928
+  Spectral Zeta zeta_Q(sigma=0.25): 1084257462.0
+  Spectral Zeta zeta_Q(sigma=0.5): 7.877477657e+17
+  Spectral Zeta zeta_Q(sigma=0.75): 6.653671464e+26
+  Spectral Zeta zeta_Q(sigma=1.0): 5.7619158e+35
+
+================================================================================
+5. SEMICLASSICAL CUMULATIVE SPECTRUM N(E) AND THE WEYL LAW (N = 20, c = 13)
+================================================================================
+  Energy Threshold E    N(E) = #{E_k <= E}    Fraction of Spectrum
+--------------------------------------------------------------------
+             1.0e-38                     1                 2.439%
+             1.0e-35                     2                 4.878%
+             1.0e-30                     4                 9.756%
+             1.0e-25                     6                 14.63%
+             1.0e-20                     8                 19.51%
+             1.0e-15                    10                 24.39%
+             1.0e-10                    13                 31.71%
+              1.0e-5                    17                 41.46%
+                0.01                    19                 46.34%
+                 0.1                    20                 48.78%
+                 1.0                    22                 53.66%
+                10.0                    41                 100.0%
+--------------------------------------------------------------------
+
+================================================================================
+END OF CELL 49
+================================================================================
