@@ -416,7 +416,7 @@ $$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2 
 
 *which enclose the numerical data to three decimal places, confirming that $u_1 = |D_0/D_1|$ is the genuine physical boundary-layer time scale.*
 
-### Theorem 8.6 (Conditional Asymptotic Bounding Ladder for $u_1$ and $s_N$)
+### Conditional Proposition 8.6 (Asymptotic Bounding Ladder for $u_1$ and $s_N$)
 *Conditional on the uniform scattering gap hypothesis $\inf_N E_{\mathrm{scatt},\min}(N) \ge E_{\mathrm{gap}} > 0$ (empirically supported by Cells 49–50) and uniform $H^1$ Sobolev boundedness $\|T'_v\|_{L^2} = \mathcal{O}(1)$:*
 
 1. **Upper Bound on First-Jet Ratio:**
