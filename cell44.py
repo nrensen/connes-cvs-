@@ -175,14 +175,20 @@ if __name__ == "__main__":
     print("2. WKB QUANTUM TUNNELING INTEGRAL")
     print("=" * 78)
 
-    # Find the classical turning point t_turn where T''(t_turn) = 0
+    # Robust high-precision bisection for turning point T''(t_turn) = 0
     # From Cell 43: T''(0.4 L) = +5.38 > 0, T''(0.45 L) = -30.37 < 0
-    # The zero is between 0.40 L and 0.45 L.
-    t_turn = mp.findroot(
-        lambda t: T_double_prime_eval(v24, t, L),
-        (0.40 * L, 0.45 * L),
-        solver="ridder",
-    )
+    a_turn = mp.mpf("0.40") * L
+    b_turn = mp.mpf("0.45") * L
+    fa_turn = T_double_prime_eval(v24, a_turn, L)
+    for _ in range(250):
+        mid_turn = (a_turn + b_turn) / 2
+        fmid_turn = T_double_prime_eval(v24, mid_turn, L)
+        if (fa_turn > 0 and fmid_turn > 0) or (fa_turn < 0 and fmid_turn < 0):
+            a_turn = mid_turn
+            fa_turn = fmid_turn
+        else:
+            b_turn = mid_turn
+    t_turn = (a_turn + b_turn) / 2
     print(f"Classical turning point (inflection point): t_turn = {mp.nstr(t_turn, 8)} ({mp.nstr(t_turn / L, 5)} L)")
 
     # WKB integrand: k(s) = sqrt(T''(s) / T(s)) for s in [0, t_turn]
@@ -193,7 +199,7 @@ if __name__ == "__main__":
         return mp.sqrt(max(mp.mpf(0), ratio))
 
     # Integrate from 0 to t_turn
-    S_wkb = mp.quad(wkb_integrand, [0, t_turn], maxdegree=10)
+    S_wkb = mp.quad(wkb_integrand, [0, t_turn])
 
     T_peak = T_eval(v24, t_center, L)
     T_edge = T_eval(v24, mp.mpf(0), L)
