@@ -1307,7 +1307,7 @@ This sequence marks a significant analytical advance in the investigation of the
 The starting point is the exact factorisation established in Cell 32,
 
 $$
-K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))\,R_v(r),
+K_{\mathrm{Fourier}}(v,r,L) = (1-\cos(rL))\thinspace R_v(r),
 $$
 
 with
@@ -1335,7 +1335,7 @@ $$
 In particular,
 
 $$
-T_v^{(2k)}(0) = \sqrt2\,(-1)^k \left(\frac{2\pi}{L}\right)^{2k} M_{2k},
+T_v^{(2k)}(0) = \sqrt2\thinspace (-1)^k \left(\frac{2\pi}{L}\right)^{2k} M_{2k},
 $$
 
 where
@@ -1403,7 +1403,7 @@ Cell 38 performs the remaining algebraic cancellation.
 For $k\ge1$, the original Cell-36 coefficient reduces exactly to
 
 $$
-A_k = \frac{4}{L}\kappa^{2k} \left[ \sum_{j=0}^kM_{2j}M_{2(k-j)} + \sqrt2\,v_0M_{2k} \right].
+A_k = \frac{4}{L}\kappa^{2k} \left[ \sum_{j=0}^kM_{2j}M_{2(k-j)} + \sqrt2\thinspace v_0M_{2k} \right].
 $$
 
 Introducing
@@ -1441,7 +1441,7 @@ This changes the interpretation of the earlier numerical tail work.
 The Archimedean tail is not merely observed to become small as $N$ increases. Its complete inverse-power expansion is controlled by the endpoint jet of $T_v$:
 
 $$
-R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0 D_1 \cdot 2\,r^{-4} + \cdots,
+R_v(r) \sim \frac{2}{L}D_0^2\thinspace r^{-2} + \frac{2}{L}(-1)D_0 D_1 \cdot 2\thinspace r^{-4} + \cdots,
 $$
 
 with every higher coefficient given by the quadratic convolution above.
