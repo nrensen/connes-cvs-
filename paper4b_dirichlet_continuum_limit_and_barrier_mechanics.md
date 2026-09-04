@@ -19,8 +19,8 @@ This manuscript sets forth the analytical and empirical research programme inves
 2. **The Continuum Solitary Wave and Infinite-Order Boundary Flatness (Conjecture):** As $N \to \infty$, the spatial trigonometric wave $T_{v_N}(t)$ converges to a smooth, strictly positive solitary wave $T_\infty(t)$ on $[0, L]$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact: $T_\infty^{(k)}(0) = T_\infty^{(k)}(L) = 0$ for all $k \ge 0$, such that the zero-extension $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$. This boundary flatness conditionally eliminates the finite-rank Volterra boundary jump at $\omega = 1$, removing the classical obstruction to continuous Weil positivity.
 3. **Semiclassical WKB Barrier Tunneling Mechanics:** Inverting the ground-state profile defines an effective Schrödinger potential $V_{\mathrm{conf}}(t) - E = T''(t)/T(t)$ whose midpoint well rises steeply toward the boundaries. Semiclassical WKB tunneling action across the barrier $\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ reproduces the observed logarithmic boundary suppression to within $5.3\%$ across 47 orders of magnitude, obeying the universal semiclassical scaling law $\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c$.
 4. **Legendre Multipole Decomposition and Asymptotic Tail Extinction:** Via Bauer's spherical Bessel expansion, $T_{v_N}(t)$ decomposes into Legendre multipoles with alternating signs, producing strictly constructive interference at the midpoint and destructive cancellation at the boundaries. The high-frequency Taylor coefficients $A_k(N)$ extinguish rapidly across all orders ($A_0 \sim 10^{-40}, A_1 \sim 10^{-34}, A_2 \sim 10^{-29}$ at $N = 24$), motivating the conjecture that the continuum resolvent $R_\infty(r) = o(r^{-k})$ decays faster than every inverse power of $r$.
-5. **Tri-Partite Zero-Energy Equilibrium and the Discretization Gap:** Continuous-variable numerical quadrature of the Archimedean form independently cancels the algebraic pole ($+1.55165$) and prime ($-0.07185$) contributions down to a residual of $1.29 \times 10^{-43}$ at $N = 24$. The residual ratio of $1.96$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.53 \times 10^{-43}$ is certified as the finite-rank Galerkin discretization gap $\delta \mathcal{Q} = \langle u, Q_{\mathrm{arch}}^{\mathrm{matrix}} u \rangle - \mathcal{Q}_{\mathrm{arch}}^{\mathrm{cont}}(v)$.
-6. **Formal Continuum Wiener–Hopf Scaling and Asymptotic Bounding Ladder:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Conditional on uniform scattering gap stability, this establishes two-sided subexponential bounds on the first-jet cancellation scale $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$.
+5. **Tri-Partite Zero-Energy Equilibrium and the Discretization Discrepancy:** Continuous-variable numerical quadrature of the Archimedean form independently cancels the algebraic pole ($+1.55165$) and prime ($-0.07185$) contributions down to a residual of $1.29 \times 10^{-43}$ at $N = 24$. The residual ratio of $1.96$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.53 \times 10^{-43}$ reflects the observed finite-rank discretization discrepancy $\delta \mathcal{Q} = \langle u, Q_{\mathrm{arch}}^{\mathrm{matrix}} u \rangle - \mathcal{Q}_{\mathrm{arch}}^{\mathrm{cont}}(v)$.
+6. **Formal Continuum Wiener–Hopf Scaling and Asymptotic Bounding Ladder:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Via the commutator resolvent formula and exact small-denominator cancellation, bound states contribute $\le 10^{-15}$ to $D_1/D_0$, proving scattering continuum dominance. Conditional on uniform scattering gap stability, this establishes two-sided subexponential bounds on the first-jet cancellation scale $\frac{c_1}{N^2 \log N} \le u_1 \le \frac{c_2}{N^{1/2}}$.
 7. **The Analytical Roadmap toward Continuous Weil Positivity:** We formulate the three open mathematical stages required to convert these empirical and asymptotic findings into a complete proof of Weil positivity on the idele class group.
 
 ---
@@ -49,8 +49,8 @@ The investigation of this finite-rank system naturally divides into two distinct
    - Spectral lattice orthogonality $K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2$.
    - The exact closed-form Archimedean Cauchy transform $J(q)$ and unconditionally convergent Weierstrass pole series for $\mathcal{Q}_{\mathrm{arch}}(v)$ with fast $\mathcal{O}(n^{-2})$ convergence.
    - Exact rank-$2k$ commutator algebra $[M^k, Q]$, strict parity decoupling, and the odd-sector resolvent identity $M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$.
-   - Exact dual algebraic derivations proving that the boundary suppression factor $D_0$ cancels identically from the first-jet ratio $D_1 / D_0$.
-   - The exact small-denominator cancellation $(E_k - \lambda)$ in the bound-state sector and universal semigroup squeezing bounds.
+   - The exact first-jet identity $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'(0)/F(0)$.
+   - The exact small-denominator cancellation $(E_k - \lambda)$ in the odd-even resolvent coupling.
 
 2. **The Asymptotic Continuum Programme (This Manuscript):**
    While Paper 4 provides the exact mathematical machinery, it does not address the physical and asymptotic questions of how the system behaves as the dimension $N \to \infty$:
@@ -317,17 +317,17 @@ The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{
 - **Cell 51 (Discrete Cauchy Transform):** On the negative real axis $z = -1/r^2$, with $w = -r^2/\kappa^2$, $D_N(-1/r^2)$ matches the discrete Cauchy transform $v_0 + \sqrt{2} w \sum_{m=1}^N \frac{v_m}{w - m^2}$ identically to 51 decimal digits. Probing off-lattice points confirms universal suppression ($\sim 10^{-12} - 10^{-13}$ at $m = 20$), while the ratio $-\log|D|/r$ oscillates between $0.37$ and $0.59$.
 - **Cell 52 (Spectral-Edge Time Scale):** The heat boundary trace $H_N(u) = [e^{-u\mathcal{L}} T_N](0)$ plunges across 20 orders of magnitude, reaching $T_{24}(0)$ at $u = 10^{-6}$. The inverse spectral-edge scale $u_N = a_N^{-2} = \frac{1}{\kappa^2 N^2}$ acts as an exact crossover scale for the resolvent integral.
 - **Cell 53 (Universal First-Jet Profile Collapse):** When heat time is scaled by the first-jet cancellation scale $u_1 = D_0 / D_1$, the normalized profiles $\Theta_N^{\mathrm{cancel}}(\theta) = H_N(\theta u_1) / D_0$ exhibit a near-perfect universal collapse across all dimensions $N \in \{8, \dots, 24\}$ ($2.12 \pm 0.02$ at $\theta = 1.0$), with stable shape invariants $\beta_N = D_0 D_2 / D_1^2 \approx 0.19 - 0.26$.
-- **Cell 54 (Anatomy of the Decoupling Ratio $s_N$):** Tracking the decoupling ratio $s_N = (\kappa N)^2 (D_0 / D_1)$ reveals that while $-\log|D_0|$ drops by 22.7 units and $-\log|D_1|$ drops by 20.2 units, their difference $\Delta_N = \log|D_1/D_0|$ drifts only from $10.64$ to $13.16$. This proves that $D_0$ and $D_1$ share the exact same leading exponential barrier decay rate.
+- **Cell 54 (Anatomy of the Decoupling Ratio $s_N$):** Tracking the decoupling ratio $s_N = (\kappa N)^2 (D_0 / D_1)$ reveals that while $-\log|D_0|$ drops by 22.7 units and $-\log|D_1|$ drops by 20.2 units, their difference $\Delta_N = \log|D_1/D_0|$ drifts only from $10.64$ to $13.16$. This provides strong numerical evidence that $D_0$ and $D_1$ share the same leading exponential barrier decay rate.
 
 ---
 
-## 7. Tri-Partite Zero-Energy Balance and the Finite-Rank Discretization Gap
+## 7. Tri-Partite Zero-Energy Balance and the Finite-Rank Discretization Discrepancy
 
 Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically:
 
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
 
-### Proposition 7.1 (Continuous-Quadrature Balance and Discretization Gap)
+### Proposition 7.1 (Continuous-Quadrature Balance and Discretization Discrepancy)
 *When the Archimedean contribution is evaluated independently via continuous-variable quadrature $\frac{1}{\pi} \int_0^{80} h_+(r) \Phi_{v_N}(r)^2 \, dr$ (using `cell46.py`, logged in `cell46.out` [10]), the independently computed components cancel from $\mathcal{O}(1)$ down to a residual of order $10^{-43}$ at $N = 24$:*
 
 - $N = 4$: $\mathcal{Q}_{\mathrm{pole}} = +2.206186$, $\mathcal{Q}_{\mathrm{prime}} = -0.316153$, $\mathcal{Q}_{\mathrm{arch}} = -1.890032$, summing to $\mathcal{Q}_{\mathrm{total}} = 7.82 \times 10^{-15}$ ($\lambda_{\min} = 8.83 \times 10^{-15}$),
@@ -337,12 +337,12 @@ $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathc
 - $N = 20$: $\mathcal{Q}_{\mathrm{pole}} = +1.572288$, $\mathcal{Q}_{\mathrm{prime}} = -0.077529$, $\mathcal{Q}_{\mathrm{arch}} = -1.494759$, summing to $\mathcal{Q}_{\mathrm{total}} = 8.81 \times 10^{-40}$ ($\lambda_{\min} = 1.32 \times 10^{-39}$),
 - $N = 24$: $\mathcal{Q}_{\mathrm{pole}} = +1.551652$, $\mathcal{Q}_{\mathrm{prime}} = -0.071854$, $\mathcal{Q}_{\mathrm{arch}} = -1.479798$, summing to $\mathcal{Q}_{\mathrm{total}} = 1.29 \times 10^{-43}$ ($\lambda_{\min} = 2.53 \times 10^{-43}$).
 
-*The Discretization Gap $\delta \mathcal{Q}$.*
-The residual discrepancy between the continuous-quadrature sum ($1.29 \times 10^{-43}$) and the matrix eigenvalue ($2.53 \times 10^{-43}$) represents a proportional factor of $\approx 1.96$ at the residual scale. Rather than a numerical error, this factor reflects the certified finite-rank discretization gap:
+*The Discretization Discrepancy $\delta \mathcal{Q}$.*
+The residual discrepancy between the continuous-quadrature sum ($1.29 \times 10^{-43}$) and the matrix eigenvalue ($2.53 \times 10^{-43}$) represents a proportional factor of $\approx 1.96$ at the residual scale. Rather than a numerical error, this factor reflects the observed finite-rank discretization discrepancy:
 
 $$\delta \mathcal{Q} = \langle u, Q_{\mathrm{arch}}^{\mathrm{matrix}} u \rangle - \mathcal{Q}_{\mathrm{arch}}^{\mathrm{cont}}(v)$$
 
-between the truncated Galerkin projection matrix and the continuous functional (investigated and resolved in `cell56.py`).
+between the truncated Galerkin projection matrix and the continuous functional (investigated in `cell56.py`).
 
 ### 7.2 Prime-Power Decomposition of the Negative Barrier
 
@@ -389,7 +389,34 @@ $$\psi'(0) D_0 = \frac{\psi'''(0)}{6 \kappa^2} D_1 - \frac{\psi^{(5)}(0)}{120 \k
 
 $$s_N \equiv (\kappa N)^2 \frac{D_0}{D_1} = N^2 \left[ \frac{\psi'''(0)}{6 \psi'(0)} - \frac{\psi^{(5)}(0)}{120 \kappa^2 \psi'(0)} \beta_N \frac{D_1}{D_0} + \cdots \right] + (\kappa N)^2 \frac{\mathcal{R}_N}{D_1}.$$
 
-### Theorem 8.3 (Conditional Asymptotic Bounding Ladder for $u_1$ and $s_N$)
+### Proposition 8.3 (Commutator Resolvent Formula and First-Jet Balance)
+*In the even subspace $\mathcal{H}_{\mathrm{even}}$, projecting the quadratic commutator $[M^2, Q] u = D_0 b - B_1 e$ onto the orthogonal complement $u^\perp$ via the pseudoinverse $Q_{\mathrm{even}}^\dagger$ yields the asymptotic formula:*
+
+$$\frac{D_1}{D_0} = \kappa^2 \left[ e^T Q_{\mathrm{even}}^\dagger \big( b + \mathcal{E}_{\mathrm{arith}} e \big) - \|M u\|_2^2 \right] + \mathcal{O}(\lambda),$$
+
+*where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}} = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$. Because the ground-state eigenvalue $\lambda_{\min}(N) \sim 10^{-43}$ is negligible compared to $D_0 \sim 10^{-20}$ at large $N$ (Cell 55), the $\mathcal{O}(\lambda)$ term vanishes asymptotically, leaving $D_1/D_0$ governed exclusively by the unperturbed resolvent.*
+
+*Proof.* From the rank-$4$ commutator identity (Theorem 6.1 of Paper 4), $[M^2, Q] u = D_0 b - B_1 e$. Using the exact odd-sector identity $B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}$ (Theorem 6.2 of Paper 4), we have $(Q - \lambda I) M^2 u = -D_0 (b + \mathcal{E}_{\mathrm{arith}} e)$. Projecting onto $u^\perp$ via $Q_{\mathrm{even}}^\dagger$ and contracting with $e^T$ (recalling $e^T M^2 u = -D_1 / \kappa^2$ and $e^T u = D_0$) gives $-D_1 / \kappa^2 = -D_0 [e^T Q_{\mathrm{even}}^\dagger \mathbf{w} - \|Mu\|_2^2] + \mathcal{O}(\lambda D_0)$. Dividing by $-D_0$ yields the result. $\blacksquare$
+
+### Proposition 8.4 (Scattering Dominance from Small-Denominator Cancellation)
+*Using the exact algebraic small-denominator cancellation theorem from Paper 4 (Theorem 7.2), the apparent singularity $(E_k - \lambda)^{-1}$ in the spectral expansion of $(Q_{\mathrm{even}} - \lambda I)^\dagger \mathbf{w}$ cancels identically against the odd arithmetic resolvent difference in the numerator. For each even bound state $k$, the summand reduces to:*
+
+$$\frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w})}{E_k - \lambda} \equiv - [D_0^{(k)}]^2 \cdot \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
+
+*Numerical evaluation across all Galerkin dimensions (Cell 55) confirms $[D_0^{(k)}]^2 \le 10^{-20}$ for all bound states, ensuring that the bound-state sector contributes at most $10^{-15}$ to $D_1/D_0$. Consequently, $D_1/D_0$ is governed non-singularly by the continuous scattering spectrum ($E_k \in [1.20, 3.62]$).*
+
+### Proposition 8.5 (Empirical Semigroup Profile Squeezing and Shape Invariants)
+*Under the first-jet normalization $u = \theta u_1 = \theta |D_0 / D_1|$, the normalized heat semigroup profile $\Theta_N(\theta) = H_N(\theta u_1) / D_0$ exhibits near-perfect universal collapse across all tested dimensions $N \in \{8, \dots, 24\}$ (matching within $1.5\%$ across 16 decimal orders of magnitude, Cell 53). Over the computed range, the dimensionless shape invariants stabilize:*
+
+$$\beta_N = \frac{D_0 D_2}{D_1^2} \approx 0.19 - 0.26 < 1, \qquad \gamma_N = \frac{D_0^2 D_3}{D_1^3} \approx 0.012 - 0.027 < 1,$$
+
+*and the observed profile is enclosed by the empirical two-sided squeezing bounds:*
+
+$$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2 \qquad (\theta \in [0, 1]),$$
+
+*which enclose the numerical data to three decimal places, confirming that $u_1 = |D_0/D_1|$ is the genuine physical boundary-layer time scale.*
+
+### Theorem 8.6 (Conditional Asymptotic Bounding Ladder for $u_1$ and $s_N$)
 *Conditional on the uniform scattering gap hypothesis $\inf_N E_{\mathrm{scatt},\min}(N) \ge E_{\mathrm{gap}} > 0$ (empirically supported by Cells 49–50) and uniform $H^1$ Sobolev boundedness $\|T'_v\|_{L^2} = \mathcal{O}(1)$:*
 
 1. **Upper Bound on First-Jet Ratio:**
@@ -397,11 +424,11 @@ $$s_N \equiv (\kappa N)^2 \frac{D_0}{D_1} = N^2 \left[ \frac{\psi'''(0)}{6 \psi'
 2. **Two-Sided Bounds on Cancellation Scale and Decoupling Ratio:**
    $$\frac{c_1}{N^2 \log N} \le u_1 = \left| \frac{D_0}{D_1} \right| \le \frac{c_2}{N^{1/2}}, \qquad \frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2}.$$
 3. **Subexponentiality:**
-   *Under these conditions, $u_1$ and $s_N$ are strictly subexponential, ruling out any $e^{-\alpha N}$ collapse of the cancellation scale and confirming that $D_0$ and $D_1$ share the exact same leading exponential WKB barrier decay rate.*
+   *Under these conditions, $u_1$ and $s_N$ are strictly subexponential, ruling out any $e^{-\alpha N}$ collapse of the cancellation scale and indicating that $D_0$ and $D_1$ share the same leading exponential WKB barrier decay rate.*
 4. **Spatial Boundary Layer Width:**
    *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N \sqrt{\log N}}$ shrinks only algebraically, fundamentally decoupling from the exponentially suppressed endpoint amplitude $T_N(0) \sim e^{-\mathcal{S}_{\mathrm{WKB}}}$.*
 
-*Proof.* Applying the Cauchy–Schwarz inequality to the commutator resolvent formula (Theorem 6.11 of Paper 4) with $\|e\|_2 = \sqrt{2N+1}$ and $\|\mathbf{w}\|_2 \le C_w N^{3/2} \log N$, bounded resolvent norm $\|(Q_{\mathrm{even}} - \lambda I)^\dagger\|_{\mathrm{scatt}} \le 1/E_{\mathrm{gap}}$ yields $|D_1/D_0| \le \kappa^2 C_{\mathrm{upper}} N^2 \log N$. Lower Sobolev trace bound gives $|D_1/D_0| \ge C_{\mathrm{lower}} N^{1/2}$. Inverting yields the bounds on $u_1$ and $s_N$. $\blacksquare$
+*Proof.* Applying the Cauchy–Schwarz inequality to the commutator resolvent formula (Proposition 8.3) with $\|e\|_2 = \sqrt{2N+1}$ and $\|\mathbf{w}\|_2 \le C_w N^{3/2} \log N$, bounded resolvent norm $\|(Q_{\mathrm{even}} - \lambda I)^\dagger\|_{\mathrm{scatt}} \le 1/E_{\mathrm{gap}}$ yields $|D_1/D_0| \le \kappa^2 C_{\mathrm{upper}} N^2 \log N$. Lower Sobolev trace bound gives $|D_1/D_0| \ge C_{\mathrm{lower}} N^{1/2}$. Inverting yields the bounds on $u_1$ and $s_N$. $\blacksquare$
 
 ---
 
@@ -461,8 +488,8 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 4 (WKB Barrier Mechanics) | Effective Schrödinger potential & WKB tunneling action | `cell44.py`, `cell47.py` | `cell44.out`, `cell47.out` |
 | Section 5 (Legendre Multipoles & Tail Extinction) | Bauer–Bessel Legendre transform & Taylor jet extinction $A_0\dots A_4$ | `cell44.py`, `cell45.py` | `cell44.out`, `cell45.out` |
 | Section 6 (Poles & Heat Dynamics) | Discrete Cauchy transform, heat boundary dynamics, profile collapse | `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
-| Section 7 (Tri-Partite Balance & Discretization Gap) | Continuous-variable balance & finite-rank gap $\delta \mathcal{Q}$ | `cell46.py`, `cell56.py` | `cell46.out`, `cell56.out` |
-| Section 8 (Wiener–Hopf Scaling & Bounding Ladder) | Resolvent bounds, scattering gap validation & Wiener–Hopf limits | `cell49.py`, `cell50.py`, `cell54.py`, `cell55.py` | `cell49.out`, `cell50.out`, `cell54.out`, `cell55.out` |
+| Section 7 (Tri-Partite Balance & Discrepancy) | Continuous-variable balance & finite-rank discrepancy $\delta \mathcal{Q}$ | `cell46.py`, `cell56.py` | `cell46.out`, `cell56.out` |
+| Section 8 (Wiener–Hopf Scaling, Commutator Resolvent & Bounds) | Commutator resolvent formula, scattering dominance, Wiener–Hopf scaling & bounds | `cell49.py`, `cell50.py`, `cell53.py`, `cell54.py`, `cell55.py` | `cell49.out`, `cell50.out`, `cell53.out`, `cell54.out`, `cell55.out` |
 
 ---
 

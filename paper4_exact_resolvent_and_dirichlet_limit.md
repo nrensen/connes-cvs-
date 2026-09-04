@@ -27,7 +27,9 @@ In this paper, we establish the **exact algebraic solution** to the finite-$N$ A
 4. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorems):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via contour integration in the complex frequency plane, isolating the origin residue ($2v_0^2/q$), the discrete lattice poles ($2qv_m^2/(q^2+a_m^2)$), and the imaginary pole at $z = iq$. We establish the spatial Laplace duality $J(q) \equiv \int_0^L K_v^{\mathrm{phys}}(y) e^{-qy} dy$. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ (with $C_{\mathrm{arch}} = -\gamma - \log \pi$) as an unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ absolute convergence, eliminating the need for numerical quadrature.
 5. **Exact Commutator Algebra and Parity Factorization (Theorem):** For the coordinate operator $M = \operatorname{diag}(n)$ and the Galerkin matrix $Q$, the commutator $[M^k, Q]$ has rank at most $2k$. Parity reflection decouples the system into even and odd sectors, yielding the exact odd-sector resolvent identity:
    $$M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi, \qquad B_1 = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
-6. **Dual First-Jet Identities, Small-Denominator Cancellation, and Semigroup Squeezing (Theorems):** We establish side-by-side dual algebraic derivations (Archimedean resolvent vs. Commutator algebra) proving that the barrier suppression factor $D_0$ cancels identically from the first-jet ratio $D_1/D_0 \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)}$. Via the first resolvent identity on $Q_{\mathrm{odd}}$, small bound-state denominators $(E_k - \lambda)$ cancel identically in the spectral expansion, proving that $D_1/D_0$ is governed exclusively by the non-singular scattering continuum. Finally, we establish the universal semigroup squeezing bounds $1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$, explaining the universal profile collapse observed across Galerkin dimensions.
+6. **Exact First-Jet Resolvent Identity and Small-Denominator Cancellation (Theorems):** We prove algebraically that the first-jet cancellation ratio is identically the relative first correction of the large-$r$ Archimedean resolvent:
+   $$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m}.$$
+   In terms of the discrete signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2} \sum_{m=1}^N v_m \delta_{a_m^2}$, this ratio equals $-\frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}$ as an algebraic quotient of finite sums. Furthermore, we establish the exact small-denominator cancellation theorem: in the spectral expansion of the resolvent $(Q_{\mathrm{even}} - \lambda I)^\dagger$ coupled to the odd arithmetic energy, the apparent denominator $(E_k - \lambda)$ for any even eigenstate $k$ cancels identically against the odd resolvent difference in the numerator via the first resolvent identity, proving algebraically that the resolvent coupling is non-singular.
 
 ---
 
@@ -347,80 +349,64 @@ $$(M^r e)^T u = \begin{cases} 0, & r \text{ odd}, \\[6pt] (-1)^{r/2} \dfrac{D_{r
 
 ---
 
-## 7. The First-Jet Ratio $D_1/D_0$: Dual Identities, Small-Denominator Cancellation, and Semigroup Squeezing
+## 7. The First-Jet Ratio $D_1/D_0$ and Exact Resolvent Small-Denominator Cancellation
 
-We now establish the exact algebraic structure of the first-jet cancellation ratio $D_1 / D_0$.
+We now establish the exact algebraic structure of the first-jet cancellation ratio $D_1 / D_0$ and the non-singular cancellation of small denominators in the resolvent spectral expansion.
 
-### 7.1 Side-by-Side Dual Algebraic Derivations of $D_1/D_0$
-
-The ratio $D_1 / D_0$ admits two completely independent algebraic representations that both factor out the boundary suppression factor $D_0$ identically:
-
-```
-[Archimedean Resolvent Identity]                 [Commutator Resolvent Identity]
-R_v(r) = A_0/r^2 + A_1/r^4 + ...                 [M^2, Q] u = D_0 b - B_1 e
-A_0 = (2/L) D_0^2,  A_1 = -(4/L) D_0 D_1         B_1 = -D_0 E_arith  (Theorem 6.2)
-         |                                                 |
-         v                                                 v
--A_1 / (2 A_0) = D_1 / D_0                       Q M^2 u = \lambda M^2 u - D_0 (b + E_arith e)
-D_1/D_0 = -D'(0)/D(0) = -\kappa^2 F'(0)/F(0)     D_1/D_0 = \kappa^2 [e^T Q_even^\dagger w - ||Mu||^2]
-         |                                                 |
-         +------------------------+------------------------+
-                                  |
-                                  v
-              D_0 CANCELS IDENTICALLY IN BOTH SECTORS
-```
-
-### Theorem 7.1 (Archimedean Resolvent Jet Representation)
+### Theorem 7.1 (Exact Archimedean Resolvent Jet Representation)
 *The first-jet cancellation ratio $D_1 / D_0$ is identically equal to the relative first correction of the large-$r$ Archimedean resolvent:*
 
-$$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = -\frac{\displaystyle\int_0^\infty x \, d\mu_N(x)}{\displaystyle\int_0^\infty d\mu_N(x)},$$
+$$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m},$$
 
-*where $D(w) \equiv \big[(I + w\mathcal{L})^{-1} T_v\big](0) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$, $F(z) = e^T (I - z M^2)^{-1} v$ is the discrete mode generating function, and $\mu_N = v_0 \delta_0 + \sqrt{2} \sum_{m=1}^N v_m \delta_{a_m^2}$.*
+*where $D(w) \equiv \big[(I + w\mathcal{L})^{-1} T_v\big](0) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$ is the operator resolvent generating function, and $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$ is the discrete mode generating function.*
 
-*Proof.* From Theorem 3.1, $R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \mathcal{O}(r^{-6})$ where $A_0 = \frac{2}{L} D_0^2$ and $A_1 = -\frac{4}{L} D_0 D_1$. Taking the ratio gives $-A_1 / (2 A_0) = D_1 / D_0$. Taylor expansion of $D(w) = D_0 - D_1 w + \mathcal{O}(w^2)$ gives $-D'(0)/D(0) = D_1/D_0$. In terms of $F(z) = D_0 - \frac{D_1}{\kappa^2} z + \mathcal{O}(z^2)$, differentiating at $z = 0$ yields $F'(0)/F(0) = -D_1/(\kappa^2 D_0)$, which gives $\frac{D_1}{D_0} = -\kappa^2 \frac{F'(0)}{F(0)}$. $\blacksquare$
+*Proof.* From Theorem 3.1, the large-$r$ expansion of the reduced Fourier kernel is:
 
-### Theorem 7.2 (Commutator Resolvent Formula for $D_1/D_0$)
-*In the even subspace $\mathcal{H}_{\mathrm{even}}$, projecting onto the orthogonal complement $u^\perp$ via the Moore–Penrose pseudoinverse $Q_{\mathrm{even}}^\dagger$ yields:*
+$$R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \mathcal{O}(r^{-6}),$$
 
-$$\frac{D_1}{D_0} = \kappa^2 \left[ e^T Q_{\mathrm{even}}^\dagger \big( b + \mathcal{E}_{\mathrm{arith}} e \big) - \|M u\|_2^2 \right] + \mathcal{O}(\lambda),$$
+where $A_0 = \frac{2}{L} D_0^2$ and $A_1 = -\frac{4}{L} D_0 D_1$. Taking the ratio gives $-A_1 / (2 A_0) = -(-\frac{4}{L} D_0 D_1) / (\frac{4}{L} D_0^2) = D_1 / D_0$. 
 
-*where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}} = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle$.*
+In terms of the operator resolvent generating function $D(w) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$, Taylor expansion around $w = 0$ gives $D(w) = D_0 - D_1 w + \mathcal{O}(w^2)$, whence $D(0) = D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m$ and $D'(0) = -D_1 = -\sqrt{2}\sum_{m=1}^N a_m^2 v_m$. Thus:
 
-*Proof.* Setting $k = 2$ in Theorem 6.1 gives $[M^2, Q] u = D_0 b - B_1 e$. Substituting $B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}$ yields $Q M^2 u = \lambda M^2 u - D_0 \mathbf{w}$ with $\mathbf{w} = b + \mathcal{E}_{\mathrm{arith}} e$. Since $Q u = \lambda u$, the component of $M^2 u$ along $u$ is $\langle u, M^2 u \rangle = \|M u\|_2^2$. Inverting $Q$ on $u^\perp$ yields $M^2 u = -D_0 Q_{\mathrm{even}}^\dagger \mathbf{w} + \|M u\|_2^2 u$. Contracting with $e^T$ (noting $e^T M^2 u = -D_1 / \kappa^2$ and $e^T u = D_0$) and dividing by $-D_0$ proves the formula. $\blacksquare$
+$$-\frac{D'(0)}{D(0)} = \frac{D_1}{D_0} = -\frac{\sqrt{2}\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\sum_{m=1}^N v_m}.$$
 
-### Theorem 7.3 (Exact Small-Denominator Cancellation in the Bound-State Sector)
-*In the spectral expansion of $D_1 / D_0$ on the even subspace:*
+In terms of the unscaled coordinate generating function $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$, expanding around $z = 0$ gives $F(z) = D_0 + (\sqrt{2}\sum_{m=1}^N m^2 v_m) z + \mathcal{O}(z^2) = D_0 - \frac{D_1}{\kappa^2} z + \mathcal{O}(z^2)$. Differentiating at $z = 0$ yields $F'(0) = -D_1 / \kappa^2$, whence $F'(0) / F(0) = -D_1 / (\kappa^2 D_0)$, which gives $\frac{D_1}{D_0} = -\kappa^2 \frac{F'(0)}{F(0)}$. $\blacksquare$
 
-$$\frac{D_1}{D_0} = \kappa^2 \left[ -\|Mu\|_2^2 + \sum_{k \ge 1, \text{ even}} \frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w})}{E_k - \lambda} \right],$$
+*Remark 7.1.1 (Algebraic Ratio vs. Measure Expectation).*
+In terms of the signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2}\sum_{m=1}^N v_m \delta_{a_m^2}$ supported on the discrete Neumann Laplacian spectrum $\{0, a_1^2, \dots, a_N^2\}$, this ratio evaluates formally as $-\frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}$. Because the Fourier coefficients $v_m$ alternate and take negative values, $\mu_N$ is a signed measure rather than a positive probability distribution. The identity is a strictly algebraic relation between finite sums, not a probabilistic expectation.
 
-*for every even bound state $k$ with eigenvalue $E_k \to 0$, the first resolvent identity on the odd arithmetic energy yields:*
+---
 
-$$u^{(k)T} \mathbf{w} = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
+### Theorem 7.2 (Exact Small-Denominator Cancellation in the Odd-Even Spectral Coupling)
+*Let $Q_{\mathrm{even}}$ and $Q_{\mathrm{odd}}$ denote the restrictions of the Connes–van Suijlekom Galerkin matrix $Q$ to the even and odd subspaces of $\mathbb{C}^{2N+1}$. For any even eigenvector $u^{(k)}$ of $Q_{\mathrm{even}}$ with eigenvalue $E_k$, let $D_0^{(k)} = e^T u^{(k)}$ and define the arithmetic energy vector $\mathbf{w}(\lambda) = b + \mathcal{E}_{\mathrm{arith}}(\lambda) e$, where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}}(\lambda) = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$.*
 
-*The factor $(E_k - \lambda)$ cancels the denominator identically, reducing the bound-state summand to:*
+*Then in the spectral expansion of $(Q_{\mathrm{even}} - \lambda I)^\dagger \mathbf{w}(\lambda)$, the numerator for mode $k$ factors identically as:*
 
-$$\frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w})}{E_k - \lambda} \equiv - [D_0^{(k)}]^2 \cdot \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
+$$u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
-*Consequently, the bound-state sector contributes at most $[D_0^{(k)}]^2 \le 10^{-20}$ to $D_1 / D_0$, proving that $D_1 / D_0$ is governed non-singularly by the continuous scattering spectrum.*
+*Consequently, for every $E_k \ne \lambda$, the factor $(E_k - \lambda)$ cancels identically, yielding the exact non-singular algebraic summand:*
 
-*Proof.* Expanding $(Q_{\mathrm{even}} - \lambda I)^\dagger$ along the orthonormal eigenbasis $\{u^{(k)}\}_{k \ge 1, \text{ even}}$ gives numerators $(e^T u^{(k)}) (u^{(k)T} \mathbf{w}) = D_0^{(k)} [B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)}]$. Since $[M, Q] u^{(k)} = D_0^{(k)} \psi$, we have $M u^{(k)} = -D_0^{(k)} (Q_{\mathrm{odd}} - E_k I)^{-1} \psi$, whence $B_1^{(k)} = \psi^T M u^{(k)} = -D_0^{(k)} \mathcal{E}_{\mathrm{arith}}(E_k)$. The bracket is therefore $-D_0^{(k)} [\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda)]$. By the first resolvent identity for $Q_{\mathrm{odd}}$:
-$$\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) = \langle \psi, [(Q_{\mathrm{odd}} - E_k I)^{-1} - (Q_{\mathrm{odd}} - \lambda I)^{-1}] \psi \rangle = (E_k - \lambda) \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
-The factor $(E_k - \lambda)$ cancels identically with the denominator, proving the claim. $\blacksquare$
+$$\frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda))}{E_k - \lambda} \equiv - [D_0^{(k)}]^2 \cdot \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
-### Theorem 7.4 (Universal Semigroup Squeezing Bounds)
-*Under the first-jet normalization $u = \theta u_1 = \theta |D_0 / D_1|$, the normalized heat semigroup profile $\Theta_N(\theta) = H_N(\theta u_1) / D_0$ satisfies the universal two-sided squeezing bounds for all $\theta \in [0, 1]$:*
+*Proof.* Expanding $(Q_{\mathrm{even}} - \lambda I)^\dagger$ along the orthonormal eigenbasis $\{u^{(k)}\}_{k \ge 1, \text{ even}}$ gives numerators $(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda)) = D_0^{(k)} [B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)}]$, where $B_1^{(k)} = \psi^T M u^{(k)}$. Since $[M, Q] u^{(k)} = D_0^{(k)} \psi$ by Theorem 6.1, we have $M u^{(k)} = -D_0^{(k)} (Q_{\mathrm{odd}} - E_k I)^{-1} \psi$, whence $B_1^{(k)} = \psi^T M u^{(k)} = -D_0^{(k)} \mathcal{E}_{\mathrm{arith}}(E_k)$. The bracket is therefore:
 
-$$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2,$$
+$$B_1^{(k)} + \mathcal{E}_{\mathrm{arith}}(\lambda) D_0^{(k)} = -D_0^{(k)} \big[ \mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) \big].$$
 
-*where $\beta_N = D_0 D_2 / D_1^2$ is the dimensionless shape invariant ($0.19 \le \beta_N \le 0.26$ across all $N \in \{8, \dots, 24\}$).*
+By the first resolvent identity for the odd operator $Q_{\mathrm{odd}}$:
 
-*Proof.* Writing $H_N(u) = \int_0^\infty e^{-u x} d\mu_N(x)$ and using Taylor's theorem with Lagrange remainder $H_N(u) = D_0 + D_1 u + \frac{1}{2} H_N''(\xi) u^2$ with $\xi \in (0, u)$, dividing by $D_0$ and substituting $u = \theta u_1 = \theta D_0 / D_1$ yields $\Theta_N(\theta) = 1 + \theta + \frac{1}{2} \frac{D_0 H_N''(\xi)}{D_1^2} \theta^2$. Since $H_N''(u) \ge 0$ for all $u \in [0, u_1]$ and $H_N''(\xi) \le H_N''(0) = D_2$, the remainder is bounded between $0$ and $\frac{1}{2} \beta_N \theta^2$. $\blacksquare$
+$$(Q_{\mathrm{odd}} - E_k I)^{-1} - (Q_{\mathrm{odd}} - \lambda I)^{-1} = (E_k - \lambda) (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1}.$$
+
+Taking the inner product with $\psi$:
+
+$$\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) = (E_k - \lambda) \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
+
+Substituting this into the numerator yields $u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle$. Dividing by $(E_k - \lambda)$ completes the algebraic cancellation. $\blacksquare$
 
 ---
 
 ## 8. Conclusion and Toolkit Index
 
-This manuscript establishes the exact, rigorous operator-theoretic foundation for the finite-rank Connes–van Suijlekom truncated Weil quadratic form. All results in this paper are exact algebraic identities or unconditionally proven mathematical theorems:
+This manuscript establishes the exact, rigorous operator-theoretic foundation for the finite-rank Connes–van Suijlekom truncated Weil quadratic form. Every result in this paper is an exact algebraic identity or an unconditionally proven finite-dimensional theorem:
 
 **Table: Index of Exact Mathematical Tools**
 
@@ -436,9 +422,8 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Weierstrass Pole Series** | $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ | Corollary 5.3 | Unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ convergence. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
-| **Dual First-Jet Identities** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 & 7.2 | Identical cancellation of $D_0$ barrier factor from Archimedean and Commutator sides. |
-| **Small-Denominator Cancellation** | Numerator $(E_k - \lambda)$ cancels denominator | Theorem 7.3 | Eliminates bound-state singularity; proves non-singular scattering dominance. |
-| **Semigroup Squeezing Bounds** | $1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$ | Theorem 7.4 | Explains universal profile collapse across Galerkin dimensions. |
+| **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
+| **Small-Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraically that odd-even resolvent coupling is non-singular. |
 
 ---
 
@@ -462,9 +447,8 @@ The exact algebraic identities and theorems established in this manuscript were 
 | Corollary 5.3 | Weierstrass pole decomposition with $\mathcal{O}(n^{-2})$ convergence | `cell56.py` | `cell56.out` |
 | Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py` | `cell54.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
-| Theorem 7.1 & Theorem 7.2 | Dual algebraic first-jet identities & $D_0$ cancellation | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
-| Theorem 7.3 | Small-denominator cancellation $(E_k - \lambda)$ in bound sector | `cell55.py` | `cell55.out` |
-| Theorem 7.4 | Universal semigroup squeezing bounds $1 + \theta \le \Theta_N \le 1 + \theta + \frac{1}{2}\beta_N \theta^2$ | `cell53.py` | `cell53.out` |
+| Theorem 7.1 | Exact Archimedean resolvent first-jet identity | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
+| Theorem 7.2 | Small-denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
 
 ---
 
