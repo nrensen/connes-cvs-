@@ -1302,7 +1302,7 @@ It also changes the numerical problem fundamentally: the tail is no longer an op
 
 ## Cells 35–38 — from endpoint suppression to a closed form for the entire Archimedean tail hierarchy
 
-This sequence marks a significant analytical advance in the investigation of the finite-$N$ Archimedean tail.
+This sequence marks a significant analytical advance in the investigation of the $\text{finite-}N$ Archimedean tail.
 
 The starting point is the exact factorisation established in Cell 32,
 
@@ -1348,9 +1348,9 @@ The numerical survey showed strong suppression of the endpoint data as $N$ incre
 
 At this stage this remained a structural observation only; no $N\to\infty$ law was assumed.
 
-### Cell 36 — exact finite-$N$ tail coefficients
+### Cell 36 — exact $\text{finite-}N$ tail coefficients
 
-Cell 36 converted the large-$r$ expansion into an exact algebraic calculation.
+Cell 36 converted the $\text{large-}r$ expansion into an exact algebraic calculation.
 
 For $k\ge1$, define
 
@@ -1362,8 +1362,8 @@ The exact coefficient is
 
 $$
 A_k = \frac{4(k+1)}{L}\kappa^{2k} \sum_m m^{2k}v_m^2 +
-\frac{4\sqrt2}{L}\kappa^{2k}v_0M_{2k} +
-\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_mv_nH_k(m,n),
+\frac{4\sqrt{2}}{L}\kappa^{2k}v_0M_{2k} +
+\frac{4}{\pi}\kappa^{2k+1} \sum_{m<n}v_m v_n H_k(m,n),
 $$
 
 where
@@ -1374,7 +1374,7 @@ $$
 
 The numerical extraction checks confirmed that these are the actual asymptotic coefficients of the exact rational kernel, rather than coefficients inferred from numerical fitting. After subtraction of successive terms, the residual exhibited the predicted next inverse power of $r$.
 
-Thus the finite-$N$ tail hierarchy was established algebraically.
+Thus the $\text{finite-}N$ tail hierarchy was established algebraically.
 
 ### Cell 37 — discovery of the moment convolution identity
 
@@ -1432,7 +1432,7 @@ $$
 
 the entire asymptotic hierarchy is therefore expressed in terms of the even endpoint jet of the finite-band test function.
 
-This is an exact finite-$N$ algebraic result. It does not depend on the ground state, does not involve numerical quadrature, and does not assume an $N\to\infty$ limit.
+This is an exact $\text{finite-}N$ algebraic result. It does not depend on the ground state, does not involve numerical quadrature, and does not assume an $N\to\infty$ limit.
 
 ### Why this matters
 
@@ -1441,12 +1441,12 @@ This changes the interpretation of the earlier numerical tail work.
 The Archimedean tail is not merely observed to become small as $N$ increases. Its complete inverse-power expansion is controlled by the endpoint jet of $T_v$:
 
 $$
-R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0D_1^{\phantom1}2\,r^{-4} +\cdots,
+R_v(r) \sim \frac{2}{L}D_0^2\,r^{-2} + \frac{2}{L}(-1)D_0D_1^{\phantom{1}}2\,r^{-4} + \cdots,
 $$
 
 with every higher coefficient given by the quadratic convolution above.
 
-Consequently, the endpoint suppression observed in Cell 35 has a precise mathematical meaning: suppression of successive endpoint derivatives directly suppresses successive coefficients of the large-$r$ Archimedean tail.
+Consequently, the endpoint suppression observed in Cell 35 has a precise mathematical meaning: suppression of successive endpoint derivatives directly suppresses successive coefficients of the $\text{large-}r$ Archimedean tail.
 
 The remaining question is no longer whether such a relationship exists. It does.
 
@@ -1454,7 +1454,7 @@ The next question is quantitative:
 
 > **What endpoint-jet structure is imposed on the ground state as $N$ increases, and what does that imply for a uniform or $N$-dependent bound on the Archimedean tail?**
 
-This is the point where the finite-$N$ tail analysis can potentially move from an exact asymptotic expansion to a rigorous tail bound.
+This is the point where the $\text{finite-}N$ tail analysis can potentially move from an exact asymptotic expansion to a rigorous tail bound.
 
 No claim about the $N\to\infty$ behaviour has yet been made.
 
