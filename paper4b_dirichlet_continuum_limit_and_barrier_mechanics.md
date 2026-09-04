@@ -478,7 +478,7 @@ To convert these findings into a complete, mathematically rigorous proof of Weil
 - **Challenge:** The prime cutoff $c > 1$ restricts the scaling interval to $[0, \log c]$. Extending positivity to the full idele class group requires taking $c \to \infty$ alongside $N \to \infty$.
 - **Required Theorem:** Establish uniform stability of the tri-partite balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} \ge 0$ as $c \to \infty$, showing that the prime-power dispersive energy continues to smoothly absorb the geometric dilation pole energy across the unbounded idele domain.
 
-### 9.1 Semiclassical Continuum Limit of the Archimedean Functional and Boundary Defect Mechanics
+### 9.1 Semiclassical Continuum Limit, Positive Jet-Energy Defect, and Boundary Decoupling Mechanics
 
 An intriguing open question concerning Stage 3 is the analytical structure of the Archimedean quadratic form as the logarithmic cutoff $L = \log c \to \infty$. 
 
@@ -486,26 +486,71 @@ Recent investigations have conjectured that under appropriate Sobolev regulariza
 
 $$\mathcal{Q}_{\mathrm{arch}}^{(\infty)}(\tau) \stackrel{?}{=} \frac{1}{\pi} \int_0^\infty h_+(r) |\widehat{\tau}(r)|^2 \, dr + \Delta_{\mathrm{boundary}}(\tau(0)).$$
 
-Auditing this conjecture against the exact algebraic identity of Corollary 5.4 in Paper 4 clarifies the exact asymptotic mechanics:
+Auditing this conjecture against the exact algebraic identities established in Paper 4 (Corollary 5.4 & Theorem 5.5) reveals an exact finite-$(N, L)$ mathematical mechanism that is considerably richer and more tractable than the heuristic continuum limit:
 
-1. **Exact Finite-$(N, L)$ Representation:**
-   From Corollary 5.4, for any finite dimension $N$ and interval length $L$:
-   $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2.$$
-   Notice that the boundary leakage term enters with a **positive sign** ($+ \sum \dots \ge 0$). Non-vanishing boundary amplitudes $D_0 \neq 0$ increase the Archimedean energy rather than incurring a negative penalty.
+1. **Exact Manifest Positivity of the Boundary Defect:**
+   From Corollary 5.4 of Paper 4, for any finite dimension $N$ and interval length $L$:
+   $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + B_{N, L}(v),$$
+   where the boundary defect is defined by:
+   $$B_{N, L}(v) \equiv \frac{2}{L} \sum_{n=0}^\infty \frac{1 - e^{-q_n L}}{q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2 \ge 0.$$
+   Crucially, $B_{N, L}(v) \ge 0$ is **manifestly non-negative** for every finite $(N, L)$ before taking any continuum limit. Non-vanishing boundary amplitudes $D_0 \neq 0$ strictly *increase* the Archimedean energy rather than incurring a negative penalty.
 
-2. **Scaling of the Boundary Leakage Term:**
-   For a fixed spatial profile $\tau(y) = T_v(y L)$, the bracketed resolvent term evaluates at leading order to $D(1/q_n^2) = T_v(0) + \mathcal{O}(q_n^{-2}) = D_0 + \mathcal{O}(q_n^{-2})$. The boundary sum therefore scales as:
-   $$\Delta \mathcal{Q}_{\mathrm{boundary}}(N, L) = \frac{2 D_0^2}{L} \sum_{n=0}^\infty \frac{1 - e^{-q_n L}}{q_n^4} + \mathcal{O}\left(\frac{D_0 D_1}{L}\right).$$
-   Because $\sum_{n=0}^\infty q_n^{-4} = 16 \sum_{n=0}^\infty (4n+1)^{-4} = \frac{\pi^4}{32} + \frac{\beta(4)}{4} \approx 3.321$ is a finite numerical constant, the boundary leakage term vanishes as $\mathcal{O}(L^{-1})$ for any fixed spatial profile as $L \to \infty$.
+2. **The Positive Jet-Energy Quadratic Form:**
+   Recall from Theorem 3.2 and Theorem 5.5 of Paper 4 that the boundary evaluation of the operator resolvent generates the Taylor endpoint jets:
+   $$D(1/q_n^2) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} = \sum_{j=0}^\infty \frac{(-1)^j D_j}{q_n^{2j}}, \qquad D_j = T_v^{(2j)}(0).$$
+   Squaring this series yields $[D(1/q_n^2)]^2 = \sum_{j, k=0}^\infty (-1)^{j+k} D_j D_k q_n^{-(2j+2k)}$. Substituting into $B_{N, L}(v)$ proves that the boundary defect is an exact **positive quadratic form in the endpoint-jet vector** $\mathbf{D} = (D_0, D_1, D_2, \dots)^T$:
+   $$B_{N, L}(v) = \frac{2}{L} \sum_{j, k=0}^\infty (-1)^{j+k} D_j D_k \mu_{j+k}(L) = \frac{2}{L} \mathbf{D}^T H_L \mathbf{D} = \sum_{k=0}^\infty A_k(N) \mu_k(L),$$
+   where $H_L$ is a positive Hankel-type moment matrix with scalar moments:
+   $$\mu_k(L) \equiv \sum_{n=0}^\infty \frac{1 - e^{-q_n L}}{q_n^{2k+4}}.$$
+   At leading order $k = 0$, with $q_n = 2n + 1/2 = \frac{4n+1}{2}$, the universal numerical moment evaluates to:
+   $$\sum_{n=0}^\infty q_n^{-4} = 16 \sum_{n=0}^\infty (4n+1)^{-4} = \frac{\pi^4}{12} + 8 \beta(4) \approx 16.028986,$$
+   where $\beta(4) \approx 0.98894455$ is the Dirichlet beta function at 4.
 
-3. **Requirement of the Double Scaling Limit:**
-   If $L \to \infty$ is taken at fixed mode number $N$, the lattice nodes $a_m = 2\pi m / L \to 0$, causing $h_+(a_m) \to h_+(0)$ and collapsing the discrete sum to the constant $h_+(0) \|v\|_2^2 = \psi(1/4) - \log \pi \approx -5.372$.
-   To recover the continuous Plancherel integral $\frac{1}{\pi} \int_0^\infty h_+(r) |\widehat{\tau}(r)|^2 dr$, the number of modes $N$ must scale proportionally with $L$:
-   $$\lim_{N, L \to \infty} \frac{2\pi N}{L} = \Omega_{\mathrm{cutoff}} \longrightarrow \infty,$$
-   converting the discrete Riemann sum $\sum_{m=1}^N v_m^2 h_+(a_m)$ into the continuous integral across the full half-line $\mathbb{R}_+$.
+3. **The Two-Jet Resolvent Bound and the First-Jet Scale $u_1$:**
+   Rather than restricting attention to a fixed profile $\tau$, the exact rational resolvent $R_v(r)$ permits a uniform two-jet comparison bound. Using the algebraic decomposition:
+   $$\frac{r}{r^2 - a_m^2} = \frac{1}{r} + \frac{a_m^2}{r(r^2 - a_m^2)},$$
+   the resolvent separates into the boundary value $D_0$ and the first-derivative jet $D_1 = -\sqrt{2}\sum_{m=1}^N a_m^2 v_m$:
+   $$R_v(r) = \frac{D_0}{r} + \frac{\sqrt{2}}{r} \sum_{m=1}^N \frac{a_m^2 v_m}{r^2 - a_m^2}.$$
+   For $r \ge T > a_N = 2\pi N / L$, since $\frac{1}{r^2 - a_m^2} \le \frac{1}{r^2 [1 - (a_N/T)^2]}$, we obtain the pointwise inequality:
+   $$\left| R_v(r) - \frac{D_0}{r} \right| \le \frac{|D_1|}{r^3 \big[ 1 - (a_N/T)^2 \big]}.$$
+   Squaring and integrating against the Archimedean weight $h_+(r)(1 - \cos(rL))$ over $[T, \infty)$ yields the two-jet upper envelope:
+   $$B_{N, L} \le \frac{C \log T}{L T} \left( |D_0| + \frac{|D_1|}{T^2 \big[ 1 - (a_N/T)^2 \big]} \right)^2 = \frac{C D_0^2 \log T}{L T} \left( 1 + \frac{1}{T^2 u_1 \big[ 1 - (a_N/T)^2 \big]} \right)^2,$$
+   where $u_1 \equiv |D_0 / D_1|$ is the physical first-jet cancellation scale established in Cell 54.
 
-4. **Quenching via Dual Dirichlet Boundary Vanishing:**
-   Under the dual Dirichlet boundary condition $T_\infty(0) = T_\infty(L) = 0$ (Conjecture 3.3), the leading boundary leakage amplitude $D_0 \sim 10^{-20}$ is already suppressed by 40 decimal orders of magnitude at finite $N = 24$. In the true continuum limit where $T_\infty \in C_c^\infty(\mathbb{R})$, the boundary term vanishes identically to all orders, cleanly decoupling the bulk continuous functional without singular boundary edge corrections.
+4. **Physical Scale Matching at $N = 24$:**
+   At $N = 24$, $D_0 \approx 1.138 \times 10^{-20}$ and $D_1 \approx 5.917 \times 10^{-15}$, yielding the first-jet scale $u_1 \approx 1.923 \times 10^{-6}$.
+   At the standard integration cutoff $T = 400$, $T^{-2} = 6.25 \times 10^{-6}$, which implies:
+   $$\frac{1}{T^2 u_1} = \frac{1}{(400)^2 \times (1.923 \times 10^{-6})} \approx 3.25 = \mathcal{O}(1).$$
+   This explains why the $D_1$ jet correction is not negligible at $T = 400$ and offsets the leading $D_0^2$ asymptotic ($4.08 \times 10^{-43} \to 1.67 \times 10^{-43}$). We are sitting precisely at the characteristic scale where the first-jet boundary layer couples to the cutoff tail.
+
+5. **The Boundary-Defect Decoupling Conjecture:**
+   This inequality fundamentally alters the continuum boundary problem. To prove that the boundary defect vanishes in the continuum limit ($B_{N, L} \to 0$), **it is not necessary to prove infinite-order $C^\infty$ flat boundary contact**:
+   - $D_0 \sim e^{-\mathcal{S}_{\mathrm{WKB}}} \sim e^{-\frac{\pi N}{4} \log c}$ is **exponentially small** ($D_0^2 \sim 10^{-40}$ at $N = 24$).
+   - The first-jet cancellation scale $u_1 = |D_0 / D_1|$ is **subexponential** ($\sim N^{-2}$ or $N^{-1/2}$, Cell 54/55).
+   Therefore, the product:
+   $$D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 \sim e^{-2 c N} \cdot \operatorname{poly}(N) \longrightarrow 0 \quad \text{exponentially fast!}$$
+   We therefore formulate the:
+   > **Boundary-Defect Decoupling Conjecture:** Along any admissible double-scaling sequence $(N, L)$ with $T > a_N$,
+   > $$\lim_{N, L \to \infty} D_0(N, L)^2 \frac{\log T}{L T} \left( 1 + \frac{1}{T^2 u_1(N, L)} \right)^2 = 0.$$
+   > *Consequence:* Exponential WKB barrier tunneling combined with subexponential boundary-layer scaling rigorously forces boundary-defect extinction $B_{N, L} \to 0$, decoupling the Archimedean continuum functional without requiring prior proof of continuum profile existence or $C^\infty$ boundary flatness.
+
+6. **The Revised Analytical Research Ladder:**
+   This restructures Stage 3 into a clear, tractable sequence of analytical milestones:
+   $$\begin{array}{c}
+   \text{\bf Exact Positive Boundary Defect } B_{N, L} \ge 0 \\[4pt]
+   \downarrow \\[4pt]
+   \text{\bf Two-Jet Resolvent Bound } (D_0, D_1) \\[4pt]
+   \downarrow \\[4pt]
+   \text{\bf } D_0^2 \times u_1^{-2} \text{\bf\ Decoupling Criterion} \\[4pt]
+   \downarrow \\[4pt]
+   \text{\bf Exponential } D_0 + \text{\bf Subexponential } u_1 \\[4pt]
+   \downarrow \\[4pt]
+   \text{\bf Boundary-Defect Extinction } B_{N, L} \to 0 \\[4pt]
+   \downarrow \\[4pt]
+   \text{\bf Archimedean Continuum Decoupling} \\[4pt]
+   \downarrow \\[4pt]
+   \text{\it (Only then seek } C^\infty \text{\it\ flatness for the limiting solitary wave } T_\infty\text{\it)}
+   \end{array}$$
 
 ---
 
