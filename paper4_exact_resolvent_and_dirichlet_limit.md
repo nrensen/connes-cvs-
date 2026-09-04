@@ -9,7 +9,7 @@
 
 ### Abstract
 
-The truncated Weil quadratic form developed by Connes–van Suijlekom and Connes–Consani–Moscovici at prime cutoff $c > 1$ and band $N$ produces finite-rank Galerkin matrices whose deep spectra provide an explicit computational window into Weil positivity and the Riemann Hypothesis. For over thirty exploratory iterations, the omitted Archimedean tail of this truncation was treated as an intractable oscillatory numerical integration problem or as an empirical asymptotic inverse-power expansion.
+The truncated Weil quadratic form developed by Connes–van Suijlekom and Connes–Consani–Moscovici at prime cutoff $c > 1$ and band $N$ produces finite-rank Galerkin matrices whose deep spectra provide an explicit computational window into Weil positivity and the Riemann Hypothesis. For over thirty exploratory iterations, the omitted Archimedean tail of this truncation was treated as a difficult oscillatory numerical integration problem or as an empirical asymptotic inverse-power expansion.
 
 In this paper, we establish the exact algebraic solution to the finite-$N$ Archimedean kernel and explore its infinite-dimensional limit $N \to \infty$ through exact theorems, empirical observations, and precise conjectures:
 
@@ -26,7 +26,7 @@ In this paper, we establish the exact algebraic solution to the finite-$N$ Archi
    $$|T_{v_N}(0)| \sim C(c) \cdot \rho(c)^N \quad \text{with } 0 < \rho(c) < 1 \quad \text{(Conjectured)}.$$
    While both quantities span approximately 43 decimal orders of magnitude, the ground-state eigenvalue $\lambda_{\min}(N)$ appears asymptotically proportional to the boundary leakage energy:
    $$\lambda_{\min}(N) \sim \kappa_c \cdot [T_{v_N}(0)]^2 \longrightarrow 0 \quad \text{(Numerical Conjecture)}.$$
-5. **Continuum Solitary Wave and Dirichlet Nodes (Conjectural):** Numerical evidence suggests that in the continuum limit $N \to \infty$, $T_{v_N}(t)$ converges to a symmetric, strictly positive solitary wave $T_\infty(L - t) = T_\infty(t)$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty \subseteq [0, L]$.
+5. **Continuum Solitary Wave and Dirichlet Nodes (Conjectural):** Numerical evidence suggests that in the continuum limit $N \to \infty$, $T_{v_N}(t)$ appears to converge to a symmetric, strictly positive solitary wave $T_\infty(L - t) = T_\infty(t)$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty \subseteq [0, L]$.
    Conditional on this flat contact, the Volterra boundary jump at $\omega = 1$ is eliminated, removing the finite-rank obstruction to Weil positivity.
 
 ---
@@ -308,7 +308,7 @@ The boundary value $D_0(N) = T_{v_N}(0) = v_0 + \sqrt{2} \sum_{m=1}^N v_m$ and t
 | 20 | $8.38 \times 10^{-19}$ | $2.58 \times 10^{-13}$ | 0.3105 | 1.170 |
 | 24 | $1.14 \times 10^{-20}$ | $5.92 \times 10^{-15}$ | 0.3244 | 1.126 |
 
-Between $N = 1$ and $N = 24$, the boundary value drops from $7.52 \times 10^{-3}$ to $1.14 \times 10^{-20}$, i.e., by approximately **17.8 decimal orders of magnitude**. The effective decay exponent $\alpha_N = -\frac{\log(|D_0(N)|/|D_0(N-1)|)}{\log c}$ decreases from $3.333$ toward values near $1.1$ over the computed range. Although the observed ratios are qualitatively consistent with an eventual geometric suppression law, they do not yet provide convincing numerical evidence that the asymptotic exponent is $1/2$ or that it tends to $L/2$. We formulate this behavior with appropriate generality:
+Between $N = 1$ and $N = 24$, the boundary value drops from $7.52 \times 10^{-3}$ to $1.14 \times 10^{-20}$, i.e., by approximately **17.8 decimal orders of magnitude**. The effective decay exponent $\alpha_N = -\frac{\log(|D_0(N)|/|D_0(N-1)|)}{\log c}$ decreases from $3.333$ toward values near $1.1$ over the computed range. Thus the data do not support identifying a limiting exponent from the present range of $N$; the weaker geometric-decay conjecture below is the only asymptotic claim made here. We formulate this behavior with appropriate generality:
 
 ### Conjecture 5.1 (Geometric Boundary Suppression)
 *For fixed prime cutoff $c > 1$, the boundary values of the normalized Galerkin ground states satisfy:*
@@ -396,7 +396,7 @@ $$T_\infty^{(k)}(0) = T_\infty^{(k)}(L) = 0 \qquad \forall k \ge 0.$$
 *Discussion of Convergence and Boundary Jet Extinction.*
 For fixed mode index $m$, the numerical coefficients $v_{N, m}$ converge to non-zero limiting values $v_{\infty, m}$. The rapid geometric mode decay $v_{N, m} \sim c^{-m/2}$ describes decay with respect to the mode index $m$, not convergence of a fixed mode as $N \to \infty$. Justifying the interchange of differentiation with the continuum limit ($\lim_{N\to\infty} T_{v_N}^{(2k)}(0) = T_\infty^{(2k)}(0)$) requires a uniform bound of the form $|v_{N, m}| \le C q^m$ ($q < 1$) valid uniformly in $N$, or an analogous weighted $\ell^2$ estimate controlling $\sum_{m=1}^\infty m^{2k} |v_{N, m}|$.
 
-While such uniform bounds remain to be established analytically, numerical evaluation of the even derivatives $D_k(N) = T_{v_N}^{(2k)}(0)$ for $k \in \{0, 1, 2, 3\}$ across $N \in \{8, 16, 24\}$ (computed via the arbitrary-precision script `cell43.py` and recorded in `cell43.out` [10]) demonstrates geometric extinction across all computed orders:
+While such uniform bounds remain to be established analytically, numerical evaluation of the even derivatives $D_k(N) = T_{v_N}^{(2k)}(0)$ for $k \in \{0, 1, 2, 3\}$ across $N \in \{8, 16, 24\}$ (computed via the arbitrary-precision script `cell43.py` and recorded in `cell43.out` [10]) shows rapid extinction consistent with geometric decay across all computed orders:
 - $D_0$: $8.05 \times 10^{-11} \longrightarrow 1.78 \times 10^{-16} \longrightarrow 1.14 \times 10^{-20}$,
 - $D_1$: $3.36 \times 10^{-6} \longrightarrow 3.13 \times 10^{-11} \longrightarrow 5.92 \times 10^{-15}$,
 - $D_2$: $2.63 \times 10^{-2} \longrightarrow 1.37 \times 10^{-6} \longrightarrow 7.20 \times 10^{-10}$,
@@ -470,7 +470,7 @@ $$A_k(\infty) = \lim_{N\to\infty} \frac{2}{L} (-1)^k \sum_{j=0}^k D_j(N) D_{k-j}
 
 $$R_\infty(r) = \lim_{N\to\infty} \frac{2}{L} \left[ \frac{v_{N, 0}}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_{N, m}}{r^2 - a_m^2} \right]^2$$
 
-*is conjectured to decay super-polynomially without a power-law tail:*
+*is conjectured to decay faster than every inverse power of $r$:*
 
 $$R_\infty(r) = o(r^{-k}) \qquad \forall k \in \mathbb{N}.$$
 
@@ -480,12 +480,12 @@ The mathematical status of the tail extinction decomposes into four distinct log
    $$A_k(N) = \frac{2}{L} (-1)^k \sum_{j=0}^k D_j(N) D_{k-j}(N).$$
 2. **Numerically Observed:** High-precision evaluation confirms $A_k(N) \to 0$ across all tested orders $k \in \{0, \dots, 4\}$ and dimensions $N \in \{4, \dots, 24\}$.
 3. **Conjectured:** For each fixed $k \ge 0$, $\lim_{N\to\infty} A_k(N) = 0$.
-4. **Further Conjectured (Requiring an Additional Uniformity Theorem):** Conditional on uniform control over the expansion remainder in $N$ permitting the interchange of $\lim_{N\to\infty}$ and $r \to \infty$, the limiting continuous resolvent decays super-polynomially: $R_\infty(r) = o(r^{-k})$ for all $k \in \mathbb{N}$.
+4. **Further Conjectured (Requiring an Additional Uniformity Theorem):** Conditional on uniform control over the expansion remainder in $N$ permitting the interchange of $\lim_{N\to\infty}$ and $r \to \infty$, the limiting continuous resolvent is conjectured to decay faster than every inverse power of $r$: $R_\infty(r) = o(r^{-k})$ for all $k \in \mathbb{N}$.
 
 *High-Frequency Resolvent Asymptotics and Remainder Extinction.*
-While $A_k(N) \to 0$ demonstrates the extinction of each individual Taylor-jet coefficient at finite $N$, establishing $R_\infty(r) = o(r^{-k})$ requires uniform control over the expansion remainder to justify interchanging $\lim_{N\to\infty}$ and $r \to \infty$. 
+While $A_k(N) \to 0$ reflects the extinction of each individual Taylor-jet coefficient at finite $N$, establishing $R_\infty(r) = o(r^{-k})$ requires uniform control over the expansion remainder to justify interchanging $\lim_{N\to\infty}$ and $r \to \infty$. 
 
-Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `cell45.py` and logged in `cell45.out` [10]) confirms geometric extinction across all computed orders:
+Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `cell45.py` and logged in `cell45.out` [10]) shows rapid extinction consistent with geometric decay across all computed orders:
 - $A_0$: $2.81 \times 10^{-13} \to 5.05 \times 10^{-21} \to 1.01 \times 10^{-40}$ (collapsing by 27 orders of magnitude),
 - $A_1$: $5.54 \times 10^{-9} \to 4.22 \times 10^{-16} \to 1.05 \times 10^{-34}$,
 - $A_2$: $3.48 \times 10^{-5} \to 1.21 \times 10^{-11} \to 4.01 \times 10^{-29}$,
@@ -546,7 +546,7 @@ What is significant is the **independent numerical quadrature of the continuous 
    with values that appear stabilized over the computed dimensions.
 
 4. **Prime-Power Decomposition of the Negative Barrier:**
-   Direct point-evaluation of the Volterra convolution $K_{v_{24}}(\omega_q)$ at all prime powers $q \le 13$ matches the matrix-computed prime form to 52 decimal digits ($|\text{diff}| = 1.67 \times 10^{-52}$). The lowest prime $q = 2$ provides **$98.65\%$** of the entire prime energy ($-0.0708858$), $q = 3$ accounts for **$1.34\%$** ($-0.0009658$), while contributions above $q = 7$ decay exponentially below $10^{-13}$ ($q = 11$: $-9.52 \times 10^{-28}$). At the boundary $\omega = 0$ ($q = 13$), $K_{v_{24}}(0) = 0$ identically. $\blacksquare$
+   Direct point-evaluation of the Volterra convolution $K_{v_{24}}(\omega_q)$ at all prime powers $q \le 13$ matches the matrix-computed prime form to 52 decimal digits ($|\text{diff}| = 1.67 \times 10^{-52}$). The lowest prime $q = 2$ provides **$98.65\%$** of the entire prime energy ($-0.0708858$), $q = 3$ accounts for **$1.34\%$** ($-0.0009658$), while contributions above $q = 7$ decay exponentially below $10^{-13}$ ($q = 11$: $-9.52 \times 10^{-28}$). At the Volterra endpoint $\omega = 0$ ($q = 13$), $K_{v_{24}}(0) = 0$ identically. $\blacksquare$
 
 ### Numerical Observation 6.8 (Numerical Multi-$c$ Observations)
 *Investigation across prime cutoffs $c \in \{5, 7, 11, 13, 17\}$ and dimensions $N \in \{4, 8, 12, 16, 20\}$ using the multi-parameter analysis suite (`cell47.py` and output log `cell47.out` [10]) reveals three striking empirical patterns governing the ground state:*
@@ -572,7 +572,7 @@ What is significant is the **independent numerical quadrature of the continuous 
    - $c = 13$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.6681$ (*$99.75\%$ match to $5\pi$*),
    - $c = 17$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.8090$ (*$99.36\%$ match to $5\pi$*).
 
-   *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ converges monotonically toward unity as $c$ increases ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across 47 decimal orders of magnitude ($c = 17$), WKB tunneling predicts boundary extinction within $5.3\%$. The classical inflection turning point appears to stabilise near $t_{\mathrm{turn}} / L \approx 0.41$ across the tested cutoffs.*
+   *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ decreases monotonically toward unity across the tested cutoffs ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across approximately 47 decimal orders of magnitude at $c = 17$, the WKB action agrees with the observed logarithmic boundary suppression to within $5.3\%$. The classical inflection turning point appears to stabilise near $t_{\mathrm{turn}} / L \approx 0.41$ across the tested cutoffs.*
 
 3. **Prime Energy Share Across Cutoffs:**
    *For every cutoff $c$, algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$ holds. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ is monotonically increasing over the tested cutoffs:*
@@ -600,7 +600,7 @@ The findings of this paper resolve the finite-$N$ algebraic reduction of the Arc
    $$\lambda_{\min}(N) \sim \kappa_c A_0(N) \longrightarrow 0 \quad \text{(Numerical Conjecture)}.$$
 
 3. **Conjectured Emergence of Smooth Compact Support (Conjecture):**
-   Numerical evidence indicates that as $N \to \infty$, the ground state $T_\infty(t)$ develops infinite-order flat boundary contact ($\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$), modeled semiclassically by WKB quantum barrier penetration ($\mathcal{S}_{\mathrm{WKB}} \approx 44.36$). Conditional on this boundary flatness, all boundary jumps in the Volterra kernel vanish, and the continuous resolvent decays super-polynomially without a power-law tail.
+   Numerical evidence indicates that as $N \to \infty$, the ground state $T_\infty(t)$ develops infinite-order flat boundary contact ($\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$), modeled semiclassically by WKB quantum barrier penetration ($\mathcal{S}_{\mathrm{WKB}} \approx 44.36$). Conditional on this boundary flatness, all boundary jumps in the Volterra kernel vanish, and the continuous resolvent is conjectured to decay faster than every inverse power of $r$.
 
 4. **Observed Tri-Partite Zero-Energy Balance (Observation):**
    On finite Galerkin subspaces, the matrix quadratic form decomposes into pole, prime, and Archimedean terms. When the Archimedean contribution is evaluated independently via continuous-variable quadrature, the independently computed $\mathcal{O}(1)$ terms cancel to a residual of order $10^{-43}$ at $N = 24$:
