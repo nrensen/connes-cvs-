@@ -1393,7 +1393,7 @@ Diagnostic / structural $N$-dependence survey; superseded quantitatively by the 
 
 ---
 
-# Cells 35–39 — endpoint jets and the exact Archimedean tail hierarchy
+# Cells 35–40 — endpoint jets, exact rational kernel identity, and generating functions
 
 *Updated 4 September 2026.*
 
@@ -1417,7 +1417,7 @@ $$
 A_0=\frac{2}{L}T_v(0)^2.
 $$
 
-Cells 35–39 show that this is the first member of an exact hierarchy governed by the even endpoint jet of the finite-band test function, culminating in a closed rational generating function.
+Cells 35–40 show that this is the first member of an exact hierarchy governed by the even endpoint jet of the finite-band test function, culminating in an exact closed rational generating function and unconditional kernel positivity.
 
 ## Cell 35 — endpoint jets and spectral moments
 
@@ -1652,7 +1652,53 @@ Major established analytical result — closed rational generating function for 
 
 ---
 
-# Current research state after Cells 24–39
+## Cell 40 — exact rational kernel identity, positivity, and spectral lattice formula
+
+### Intended purpose
+
+Cell 40 tests and establishes that the generating-function relation from Cell 39 is not merely an asymptotic approximation as $r\to\infty$, but an exact, non-asymptotic algebraic identity valid for all $r \in \mathbb{C} \setminus \{0, \pm a_1, \dots, \pm a_N\}$:
+
+$$
+R_v(r) \equiv \frac{1}{r^2} A\left(\frac{1}{r^2}\right) = \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^{N} \frac{r v_m}{r^2 - a_m^2} \right]^2,
+$$
+
+where $a_m = \kappa m = 2\pi m / L$.
+
+The cell tests five exact consequences of this identification:
+
+1. **Global identity across frequency regimes**: evaluating $R_v(r) = R_{\mathrm{closed}}(r)$ at non-asymptotic frequencies ($r = 0.5, 1.2$), in the immediate vicinity of poles ($r = a_1 + 0.1$), at intermediate frequencies ($r = 5.7$), and in the asymptotic regime ($r = 25.0, 100.0$).
+2. **Component-wise algebraic mode decomposition**: verifying that each of the four interaction blocks ($v_0^2$, $v_0 v_m$, $v_m^2$, and $v_m v_n$ for $m < n$) in $R_v(r)$ matches the algebraic expansion of the square term-by-term.
+3. **Spectral lattice formula**: proving that at the lattice frequencies $r = a_m$, the apparent poles cancel cleanly against the zeros of $\sin(rL/2)$, yielding the exact discrete values:
+
+$$
+K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2, \qquad K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 \quad (m = 1, \dots, N).
+$$
+
+4. **Unconditional non-negativity**: showing that $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ everywhere on the real line, where
+
+$$
+\Phi_v(r) = \frac{2}{\sqrt{L}} \left[ v_0 \frac{\sin(rL/2)}{r} + \sqrt{2} \sum_{m=1}^{N} v_m \frac{r \sin(rL/2)}{r^2 - a_m^2} \right]
+$$
+
+is an entire function of exponential type $L/2$.
+5. **Exact asymptotic remainder**: showing that the truncation error of the asymptotic series $\sum_{k=0}^K A_k / r^{2k+2}$ is identically the Taylor remainder of the rational function $A(z)$ at $z = 1/r^2$, contracting geometrically by $(a_N / r)^2$.
+
+### What it established
+
+Cell 40 proves analytically and verifies numerically that:
+
+* $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ holds to working precision ($\sim 10^{-50}$ or exact $0.0$) across all $N \in \{1, \dots, 8\}$ and all frequency regimes. There is no remainder term between $R_v(r)$ and the closed square formula.
+* The Fourier-side Archimedean kernel is unconditionally positive semi-definite: $K_{\mathrm{Fourier}}(v, r, L) \ge 0$ for all real $r$ and any coefficient vector $v$.
+* At the Fourier frequencies $r = a_m$, the kernel evaluates exactly to $L u_m^2$ (where $u$ is the full symmetric coefficient vector), establishing a direct orthogonal sampling identity at the spectral lattice points.
+* The finite-$N$ Archimedean tail problem is completely closed in finite terms: the kernel is the square of an explicit single-sum entire amplitude $\Phi_v(r)$.
+
+### Status
+
+Major established analytical result — exact non-asymptotic closed form, global positivity, and spectral lattice formula for the Archimedean kernel.
+
+---
+
+# Current research state after Cells 24–40
 
 *Updated 4 September 2026.*
 
@@ -1867,10 +1913,13 @@ Cell 39
     Generating function for the tail hierarchy
     [A(z) = (2/L) D(-z)^2]
     ↓
+Cell 40
+    Exact non-asymptotic kernel identity
+    [R_v(r) = (1/r^2) A(1/r^2), K_fourier = Phi_v(r)^2 >= 0]
+    ↓
 Current
-    Ground-state endpoint-jet asymptotics
-    + generating-function remainder bounds
-    + boundary-operator structure
+    Ground-state amplitude asymptotics as N -> infinity
+    + operator-theoretic boundary resolvent
 ```
 
 # Current status summary
@@ -1897,11 +1946,12 @@ At the current stage:
 * Cell 37 proves the moment-convolution identity that reorganises the pairwise spectral terms.
 * Cell 38 reduces the entire tail hierarchy to an exact quadratic convolution of the even endpoint jet.
 * Cell 39 resums the exact endpoint-jet convolution into a closed rational generating function $A(z) = \frac{2}{L} D(-z)^2$.
+* Cell 40 establishes that $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ is an exact non-asymptotic identity everywhere, proving unconditional non-negativity $K_{\mathrm{Fourier}}(v, r, L) \ge 0$ and the spectral lattice formula $K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2$.
 
-The central research question has therefore shifted again:
+The central research question has therefore shifted:
 
-> **What endpoint-jet structure is imposed on the Galerkin ground state as $N\to\infty$, and can that structure provide a uniform or $N$-dependent bound on the Archimedean tail?**
+> **How does the entire amplitude function $\Phi_{v_N}(r)$ behave for the sequence of Galerkin ground states as $N\to\infty$, and does its limit define an admissible boundary distribution on the prolate spectrum?**
 
-This is now the natural bridge from the exact $\text{finite-}N$ analysis to the $\text{large-}N$ problem.
+This is now the precise, unencumbered bridge from the exact $\text{finite-}N$ theory to the $\text{large-}N$ limit.
 
 
