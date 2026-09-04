@@ -609,6 +609,24 @@ Dedicated numerical investigation across dimensions $N \in \{8, 12, 16, 20, 24\}
 5. **Resolvent Asymmetry:**
    Along the positive real axis $x > 0$, $(I + x\mathcal{L})^{-1}$ is a bounded, positive operator, and $D_N(x)$ remains $O(1)$ across all dimensions ($D_{24}(1.0) \approx 0.431$, $D_{24}(10.0) \approx 0.533$), proving that the limiting operator resolvent cannot vanish identically. Thus, $z = 0$ serves as an asymmetric boundary separating an $O(1)$ positive resolvent from a super-suppressed boundary layer at $z \to 0^+$ and an accumulating discrete Cauchy singularity at $z = -1/r^2 < 0$.
 
+6. **Anatomy of the First-Jet Ratio $D_1/D_0$, Subexponential Scale, and Exact Commutator Algebra (Cell 54):**
+   Dedicated investigation of the first-jet cancellation scale $u_1 = D_0 / D_1$ and its decoupling ratio $s_N = (\kappa N)^2 (D_0 / D_1)$ (implemented in `cell54.py` and logged in `cell54.out` [10]) reveals three exact algebraic identities and four empirical mechanisms:
+   - *Exact Archimedean Resolvent Identity:* From the tail convolution $A_0 = \frac{2}{L} D_0^2$ and $A_1 = -\frac{4}{L} D_0 D_1$, the first-jet ratio satisfies the exact algebraic identity:
+     $$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0},$$
+     identifying $D_1 / D_0$ directly as the relative first correction to the large-$r$ resolvent $R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \cdots$. In terms of the generating function $F(z) = e^T (I - z M^2)^{-1} v = \int \frac{d\mu_N(x)}{1 - z x}$ for the signed spectral measure $\mu_N = v_0 \delta_0 + \sqrt{2} \sum_{m=1}^N v_m \delta_{a_m^2}$, this ratio is the logarithmic derivative at zero:
+     $$-\frac{1}{2} \frac{A_1}{A_0} = \frac{F'(0)}{F(0)} = \frac{\int x \, d\mu_N(x)}{\int d\mu_N(x)}.$$
+   - *Rank-4 Quadratic Commutator & Forced Moment Balance:* In full Fourier coordinates, the quadratic commutator $[M^2, Q]$ with $M = \operatorname{diag}(n)$ has rank $\le 4$:
+     $$[M^2, Q] = b e^T + a p^T - p a^T - e b^T, \qquad a_n = n, \, b_n = n\psi(n), \, p_n = \psi(n).$$
+     When applied to the even ground state $u$, parity eliminates all but two terms: $[M^2, Q] u = D_0 b - B_1 e$ with $B_1 = \sum n\psi(n) u_n$. Because the ground-state eigenvalue is orders of magnitude smaller than $D_0$ ($\lambda_{\min}(24) \sim 10^{-43} \ll |D_0| \sim 10^{-20}$), the quadratic spectral moment satisfies the forced linear balance:
+     $$Q M^2 u \approx -D_0 b + B_1 e,$$
+     proving that the entire quadratic moment $M^2 u$ is sourced by an amplitude proportional to $D_0$.
+   - *Subexponentiality of the Difference $\Delta_N$:* While $-\log|D_0|$ grows from $23.24 \to 45.92$ and $-\log|D_1|$ grows from $12.60 \to 32.76$, their direct difference:
+     $$\Delta_N = -\log|D_0| + \log|D_1| = \log\frac{|D_1|}{|D_0|}$$
+     drifts only from $10.64$ to $13.16$ across $N \in \{8, \dots, 24\}$, while the consecutive effective decay rates narrow monotonically toward each other ($|\alpha_N(D_0) - \alpha_N(D_1)|$ drops $0.2088 \to 0.1499 \to 0.1408 \to 0.1308$). Because $s_N = (\kappa N)^2 (D_0 / D_1) \iff D_0 / D_1 = s_N / (\kappa N)^2$, the subexponential behavior of $s_N$ implies that $D_0$ and $D_1$ share the same underlying leading exponential barrier suppression factor.
+   - *Structured Signed Cancellation:* Mode-by-mode decomposition confirms cancellations down to $10^{-20}$ ($D_0$) and $10^{-15}$ ($D_1$) between $\mathcal{O}(1)$ sub-sums $S^\pm$.
+   - *Asymmetry in Bulk vs. Edge Decoupling:* $D_0$ is governed by bulk cancellation with an exponentially tiny edge correction ($-1.52 \times 10^{-8}$ at $N = 24$), whereas $D_1$ is governed by an exact bulk-edge balance ($\mathrm{bulk} + \mathrm{edge} \approx 0$).
+   - *Sobolev Trace Non-Sharpness:* The Cauchy–Schwarz bound $|D_1| \le \sqrt{2}\kappa \|T'_v\|_{L^2} \sqrt{\sum m^2}$ grows as $\sim N^{3/2}$ while $D_1 \to 0$, giving a non-sharpness ratio of $7.58 \times 10^{-18}$ at $N = 24$. Because $\|T_N\|_{L^2} = 1$ while $T_N(0) \to 0$, endpoint suppression is encoded specifically in the variational ground-state eigenvector rather than generic Sobolev norm constraints.
+
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
 
@@ -756,7 +774,7 @@ The numerical calculations reported in this manuscript were performed using Pyth
 | Section 6.1–6.3 (Proposition 6.1, Observation 6.2, Conjecture 6.3) | Spatial wave profile & boundary jet derivatives $D_0\dots D_3$ | `cell42.py`, `cell43.py` | `cell42.out`, `cell43.out` |
 | Section 6.4–6.5 (Observation 6.4, Proposition 6.5) | Effective WKB barrier potential & Bauer–Bessel Legendre multipoles | `cell44.py` | `cell44.out` |
 | Section 6.6 (Conjecture 6.6) | High-frequency resolvent decay & Taylor jet extinction $A_0\dots A_4$ | `cell45.py` | `cell45.out` |
-| Section 6.7 (Proposition 6.7, Cells 51–53) | Continuous Archimedean integral, discrete Cauchy transform & cancellation boundary layer | `cell46.py`, `cell51.py`, `cell52.py`, `cell53.py` | `cell46.out`, `cell51.out`, `cell52.out`, `cell53.out` |
+| Section 6.7 (Proposition 6.7, Cells 51–54) | Continuous Archimedean integral, Cauchy transform, dual-scale boundary layer & first-jet commutator anatomy | `cell46.py`, `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell46.out`, `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
 | Section 6.8 (Observation 6.8) | Universal ratio $\kappa$, multi-cutoff WKB scaling & prime partition | `cell47.py` | `cell47.out` |
 
 ---

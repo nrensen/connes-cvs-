@@ -240,7 +240,7 @@ def main():
     print("Dirichlet kinetic energy ||T'_v||, curvature ||T''_v||, and Cauchy-Schwarz trace bounds:")
     print("    |D_1| <= sqrt(2) * kappa * ||T'_v||_2 * sqrt(sum_{m=1}^N m^2)")
     print()
-    print(f"{'N':>4}  {'||T_v||_{L^2}':>14}  {'||T_v\'||_{H^1}':>16}  {'||T_v\'\'||_{H^2}':>16}  {'CS Bound Ratio':>18}")
+    print(f"{'N':>4}  {'||T_v||_{L^2}':>14}  {'||T_v\'||_{L^2}':>16}  {'||T_v\'\'||_{L^2}':>16}  {'CS Bound Ratio':>18}")
     print("-" * 74)
     for N in N_LIST:
         d = data[N]
