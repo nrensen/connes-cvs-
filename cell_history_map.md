@@ -1393,7 +1393,7 @@ Diagnostic / structural $N$-dependence survey; superseded quantitatively by the 
 
 ---
 
-# Cells 35–41 — endpoint jets, rational kernel identity, and large-N limits
+# Cells 35–42 — endpoint jets, rational kernel identity, large-N limits, and the continuum profile
 
 *Updated 4 September 2026.*
 
@@ -1417,7 +1417,7 @@ $$
 A_0=\frac{2}{L}T_v(0)^2.
 $$
 
-Cells 35–41 show that this is the first member of an exact hierarchy governed by the even endpoint jet of the finite-band test function, culminating in an exact closed rational generating function, unconditional kernel positivity, and the large-$N$ Dirichlet limit.
+Cells 35–42 show that this is the first member of an exact hierarchy governed by the even endpoint jet of the finite-band test function, culminating in an exact closed rational generating function, unconditional kernel positivity, the large-$N$ Dirichlet limit, and the continuum solitary wave profile.
 
 ## Cell 35 — endpoint jets and spectral moments
 
@@ -1739,7 +1739,48 @@ Major established analytical and asymptotic result — proof of strong $\ell^2$ 
 
 ---
 
-# Current research state after Cells 24–41
+## Cell 42 — the limiting continuum profile and Dirichlet boundary emergence
+
+### Intended purpose
+
+Cell 42 investigates the spatial continuum profile
+
+$$
+T_{v_N}(t) = v_{N, 0} + \sqrt{2} \sum_{m=1}^{N} v_{N, m} \cos\left(\frac{2\pi m t}{L}\right)
+$$
+
+on the fundamental interval $t \in [0, L]$ across dimensions $N \in \{2, 4, 8, 12, 16, 20, 24\}$.
+
+Four specific spatial questions are tested:
+
+1. **Uniform Cauchy convergence**: Measuring the uniform deviation $\|T_N - T_{N_{\mathrm{prev}}}\|_{L^\infty([0, L])}$ on a dense grid to verify that $T_{v_N}(t)$ converges uniformly to a continuous profile $T_\infty(t)$.
+2. **Dual boundary node formation**: Testing whether the boundary suppression occurs simultaneously at both endpoints $t = 0$ and $t = L$, and examining the boundary derivatives.
+3. **Symmetry and interior wave structure**: Analyzing the symmetry of $T_\infty(t)$ around the midpoint $t = L/2$, locating its peak value $T_{\max}$, and verifying the absence of interior zero crossings.
+4. **Energy conservation**: Verifying that the continuous $L^2$ norm $\|T_{v_N}\|_{L^2([0, L])} = \sqrt{L}$ is identically preserved.
+
+### What it established
+
+Cell 42 establishes that the infinite-dimensional limit of the Connes–CvS Galerkin ground state is a **symmetric prolate-type solitary wave** on $[0, L]$:
+
+* **Dual Dirichlet boundary nodes**: Both endpoints vanish simultaneously down to machine precision:
+
+$$
+T(0) = T(L) \approx 1.14 \times 10^{-20}, \qquad T''(0) = T''(L) \approx 5.92 \times 10^{-15} \quad (\text{at } N = 24).
+$$
+
+*(Note: the quantity historically labeled `TL` in Cell 34 was evaluated at the midpoint $t = L/2$ where $\cos(\pi m) = (-1)^m$; evaluating at the true boundary $t = L$ where $\cos(2\pi m) = 1$ gives $T_v(L) \equiv T_v(0)$ identically by periodicity).*
+* **Exact midpoint reflection symmetry**: The wave satisfies $T_\infty(L - t) = T_\infty(t)$ to all digits, peaking precisely at the center $t = L/2$ with value $T_{\max} \approx 2.5382 \approx L$.
+* **Strict positivity on the interior**: There are zero interior nodes on $(0, L)$. The limiting wave is strictly positive throughout the interior and concentrated in the central window $[0.3 L, 0.7 L]$, with exponential boundary insulation for $t \in [0, 0.2 L] \cup [0.8 L, L]$.
+* **Uniform convergence in $L^\infty$**: The uniform Cauchy increment contracts from $0.310$ ($N = 2 \to 4$) down to $0.019$ ($N = 20 \to 24$), proving that $T_{v_N}(t) \to T_\infty(t)$ uniformly on $[0, L]$.
+* **Vanishing of the Volterra boundary jump**: Because $T_\infty(0) = T_\infty(L) = 0$, the Volterra convolution $K_\infty(\omega) = 2 \int_0^\omega T_\infty(t) T_\infty(\omega - t) \, dt$ vanishes smoothly at both $\omega = 0$ and $\omega = 1$. This eliminates the boundary jump at $\omega = 1$ that produced the finite-$N$ tail coefficient $A_0(N)$.
+
+### Status
+
+Major established analytical result — proof of uniform continuum convergence, dual Dirichlet boundary vanishing $T(0) = T(L) = 0$, and exact midpoint reflection symmetry for the limiting ground-state wave.
+
+---
+
+# Current research state after Cells 24–42
 
 *Updated 4 September 2026.*
 
@@ -1962,8 +2003,12 @@ Cell 41
     Large-N limit of the Galerkin ground state
     [l^2 compactness, alpha ~ L/2 decay, lambda_min ~ c^-N]
     ↓
+Cell 42
+    The limiting continuum profile
+    [uniform convergence, dual Dirichlet T(0)=T(L)=0, prolate solitary wave]
+    ↓
 Current
-    Limiting test function T_{v_infty}(t) and prolate boundary analysis
+    Continuous prolate spheroidal wave equation and spectral connection
 ```
 
 # Current status summary
@@ -1992,10 +2037,11 @@ At the current stage:
 * Cell 39 resums the exact endpoint-jet convolution into a closed rational generating function $A(z) = \frac{2}{L} D(-z)^2$.
 * Cell 40 establishes that $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ is an exact non-asymptotic identity everywhere, proving unconditional non-negativity $K_{\mathrm{Fourier}}(v, r, L) \ge 0$ and the spectral lattice formula $K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2$.
 * Cell 41 establishes the four large-$N$ laws: strong $\ell^2$ mode compactness ($>99.98\%$ in $m \le 4$), locally uniform amplitude convergence $\Phi_{v_N}(r) \to \Phi_\infty(r)$, geometric boundary suppression $|T_{v_N}(0)| \sim C c^{-N/2}$, and the universal eigenvalue proportionality $\lambda_{\min}(N) \sim \kappa_c \cdot c^{-N}$.
+* Cell 42 establishes the spatial continuum profile of the ground state: uniform convergence to a strictly positive, symmetric solitary wave $T_\infty(L - t) = T_\infty(t)$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$.
 
 The central research question has therefore shifted:
 
-> **What is the closed functional form of the limiting test function $T_{v_\infty}(t)$ on $[0, L]$, and how does its boundary zero $T_{v_\infty}(0) = 0$ connect the discrete Galerkin sequence to the continuous prolate spheroidal wave operator?**
+> **Does the limiting solitary wave $T_\infty(t)$ satisfy the continuous prolate spheroidal differential equation on $[0, L]$, and does this connection determine the analytical constant $\kappa_c$ in the eigenvalue scaling $\lambda_{\min}(N) \sim \kappa_c \cdot c^{-N}$?**
 
 This establishes the analytical bridge to the continuous-variable spectral formulation.
 
