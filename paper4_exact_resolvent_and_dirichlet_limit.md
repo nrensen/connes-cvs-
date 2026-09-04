@@ -13,12 +13,14 @@ The truncated Weil quadratic form developed by Connes–van Suijlekom and Connes
 
 In this paper, we establish the exact algebraic solution to the finite-$N$ Archimedean kernel and explore its infinite-dimensional limit $N \to \infty$ through exact theorems, empirical observations, and precise conjectures:
 
-1. **Exact Rational Resolvent (Theorem):** Starting from the four-term analytic reduction of the Archimedean Volterra integral, we prove algebraically and independently of numerical quadrature that the reduced Fourier kernel $R_v(r) = K_{\mathrm{Fourier}}(v, r, L) / (1 - \cos(rL))$ is identically equal to the squared Cauchy resolvent:
+1. **Exact Rational Resolvent & Operator Identity (Theorem):** Starting from the four-term analytic reduction of the Archimedean Volterra integral, we prove algebraically and independently of numerical quadrature that the reduced Fourier kernel $R_v(r) = K_{\mathrm{Fourier}}(v, r, L) / (1 - \cos(rL))$ is identically equal to the squared Cauchy resolvent:
    $$R_v(r) \equiv \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^{N} \frac{r v_m}{r^2 - a_m^2} \right]^2, \qquad a_m = \frac{2\pi m}{L},$$
-   on the punctured complex plane $\mathbb{C} \setminus \{0, \pm a_1, \dots, \pm a_N\}$. There is no remainder term; the formal generating function $A(z) = \frac{2}{L} D(-z)^2$ evaluated at $z = 1/r^2$ yields the exact kernel identically.
-2. **Unconditional Finite-$N$ Kernel Positivity (Theorem):** The Fourier-side kernel is an exact square on the real axis:
-   $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R},$$
-   where $\Phi_v(r)$ is an entire function of exponential type at most $L/2$. Since $\Phi_v(r)$ is real for real $r$, this may equivalently be written as $|\Phi_v(r)|^2$ on the real axis, proving algebraically and unconditionally that the Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is pointwise non-negative for all real $r$ and all real coefficient vectors $v \in \mathbb{R}^{N+1}$. (This pointwise non-negativity does not imply positivity of the integrated Archimedean quadratic form $Q_{\mathrm{arch}}$, whose digamma weight $h_+(r)$ changes sign).
+   on the punctured complex plane $\mathbb{C} \setminus \{0, \pm a_1, \dots, \pm a_N\}$. Furthermore, introducing the Neumann Laplacian $\mathcal{L} = -d^2/dt^2$ on $[0, L]$ with $T'(0) = T'(L) = 0$, the rational generating function $D(z)$ is the boundary evaluation of the operator resolvent:
+   $$D(z) \equiv \big[(I + z\mathcal{L})^{-1} T_v\big](0) = \int_0^\infty e^{-s} \big[ e^{-sz\mathcal{L}} T_v \big](0) \, ds \quad (\operatorname{Re} z > 0),$$
+   whose Taylor expansion around $z = 0$ reproduces the entire endpoint-jet hierarchy $D_k = T_v^{(2k)}(0)$.
+2. **Universal Fourier Factorization and Unconditional Kernel Positivity (Theorem):** The entire Fourier-side amplitude $\Phi_v(r)$ factors directly in terms of the boundary Neumann resolvent evaluated at the inverted spectral variable $z = -1/r^2$:
+   $$\Phi_v(r) \equiv \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D\left(-\frac{1}{r^2}\right), \qquad K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 = \frac{4}{L} \frac{\sin^2(rL/2)}{r^2} D\left(-\frac{1}{r^2}\right)^2 \ge 0,$$
+   proving algebraically and unconditionally that the Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is pointwise non-negative for all real $r$ and all real coefficient vectors $v \in \mathbb{R}^{N+1}$. (This pointwise non-negativity does not imply positivity of the integrated Archimedean quadratic form $Q_{\mathrm{arch}}$, whose digamma weight $h_+(r)$ changes sign).
 3. **Spectral Lattice Orthogonality (Theorem):** At the lattice nodes $r = a_m$, the apparent poles cancel cleanly against the envelope zeros via removable singularities, yielding the exact sampling identity:
    $$K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2 = L u_0^2, \qquad K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 = L u_m^2 \quad (m = 1, \dots, N),$$
    uncoupling the kernel into the squared Fourier coefficients.
@@ -207,6 +209,45 @@ $$\frac{4 v_m v_n}{\pi} \cdot \frac{2\pi}{L} \frac{r^2}{(r^2 - a_m^2)(r^2 - a_n^
 
 This matches the cross-terms of the square identically. Since all four blocks match identically, the algebraic identity $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ is exact. $\blacksquare$
 
+### Theorem 3.2 (Neumann Resolvent Representation and Heat-Kernel Identity)
+*Let $\mathcal{L} = -\frac{d^2}{dt^2}$ denote the Neumann Laplacian on the physical interval $[0, L]$ with domain $\mathcal{D}(\mathcal{L}) = \{f \in H^2(0, L) : f'(0) = f'(L) = 0\}$. The normalized cosine eigenbasis of $\mathcal{L}$ is given by:*
+
+$$\phi_0(t) = 1, \qquad \phi_m(t) = \sqrt{2} \cos\left(\frac{2\pi m t}{L}\right) \quad (m \ge 1),$$
+
+*with eigenvalues $\mathcal{L} \phi_m = a_m^2 \phi_m$, where $a_m = \frac{2\pi m}{L}$. For any canonical coefficient vector $v \in \mathbb{R}^{N+1}$, the spatial trigonometric wave $T_v(t) = v_0 + \sqrt{2} \sum_{m=1}^N v_m \cos(a_m t)$ expands in this basis as $T_v(t) = \sum_{m=0}^N v_m \phi_m(t)$.*
+
+*Then:*
+1. **Boundary Resolvent Identity:** *The rational function $D(z)$ is identically equal to the boundary evaluation of the operator resolvent $(I + z\mathcal{L})^{-1}$ acting on the spatial profile $T_v$:*
+
+   $$D(z) \equiv \big[(I + z\mathcal{L})^{-1} T_v\big](0) \qquad \forall z \in \mathbb{C} \setminus \{-a_1^{-2}, \dots, -a_N^{-2}\}.$$
+
+2. **Heat-Resolvent Integral Representation:** *For $\operatorname{Re}(z) > 0$, $D(z)$ admits the exact Laplace representation against the heat evolution of the spatial wave profile:*
+
+   $$D(z) = \int_0^\infty e^{-s} \big[ e^{-s z \mathcal{L}} T_v \big](0) \, ds.$$
+
+3. **Boundary Resolvent Expansion:** *The Taylor coefficients of $D(z)$ around $z = 0$ are the boundary evaluations of the iterated Neumann Laplacian, reproducing the endpoint-jet hierarchy:*
+
+   $$D(z) = \sum_{k=0}^\infty (-1)^k \big[\mathcal{L}^k T_v\big](0) z^k = \sum_{k=0}^\infty (-1)^k T_v^{(2k)}(0) z^k = \sum_{k=0}^\infty D_k z^k.$$
+
+### Proof of Theorem 3.2
+By spectral decomposition of the self-adjoint operator $\mathcal{L}$, the resolvent acts diagonally on the eigenbasis:
+
+$$(I + z\mathcal{L})^{-1} \phi_m = \frac{1}{1 + a_m^2 z} \phi_m \qquad (m = 0, 1, \dots, N),$$
+
+with $a_0 = 0$. Evaluating at the boundary $t = 0$, where $\phi_0(0) = 1$ and $\phi_m(0) = \sqrt{2}$ for all $m \ge 1$:
+
+$$\big[(I + z\mathcal{L})^{-1} T_v\big](0) = v_0 \phi_0(0) + \sum_{m=1}^N \frac{v_m}{1 + a_m^2 z} \phi_m(0) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 z} = D(z),$$
+
+which proves (1). 
+
+For $\operatorname{Re}(z) > 0$, using the elementary Laplace transform identity $(1 + a_m^2 z)^{-1} = \int_0^\infty e^{-s(1 + a_m^2 z)} \, ds = \int_0^\infty e^{-s} e^{-s z a_m^2} \, ds$, we substitute into the eigenmode expansion:
+
+$$D(z) = \sum_{m=0}^N v_m \phi_m(0) \int_0^\infty e^{-s} e^{-s z a_m^2} \, ds = \int_0^\infty e^{-s} \left[ \sum_{m=0}^N v_m e^{-s z \mathcal{L}} \phi_m \right](0) \, ds = \int_0^\infty e^{-s} \big[ e^{-s z \mathcal{L}} T_v \big](0) \, ds,$$
+
+which establishes (2). 
+
+Finally, expanding the resolvent as a geometric series $(I + z\mathcal{L})^{-1} = \sum_{k=0}^\infty (-1)^k z^k \mathcal{L}^k$ and observing that $\big[\mathcal{L}^k T_v\big](0) = (-1)^k T_v^{(2k)}(0) = \sqrt{2} \sum_{m=1}^N a_m^{2k} v_m$ reproduces the Taylor expansion (3) and the endpoint-jet coefficients $D_k = T_v^{(2k)}(0)$. $\blacksquare$
+
 ---
 
 ## 4. Unconditional Finite-$N$ Positivity and the Spectral Lattice Identity
@@ -246,14 +287,30 @@ $$\lim_{r\to \pm a_m} \frac{r \sin(rL/2)}{r^2 - a_m^2} = (-1)^m \frac{L}{4}.$$
 
 Because there are only finitely many apparent singularities ($r = 0$ and $r = \pm a_m$ for $m \in \{1, \dots, N\}$) and each is removable, $\Phi_v(r)$ extends to an entire function on the complex plane $\mathbb{C}$. Its exponential type is at most $L/2$. Because $v$ is real, $\Phi_v(r) \in \mathbb{R}$ for all $r \in \mathbb{R}$, which forces $\Phi_v(r)^2 \ge 0$ unconditionally on the real axis. $\blacksquare$
 
-### Theorem 4.2 (Spectral Lattice Sampling Identity)
+### Corollary 4.2 (Universal Fourier Factorization)
+*The entire Fourier amplitude $\Phi_v(r)$ factors directly into the product of the universal sinc envelope and the boundary Neumann resolvent evaluated at the inverted spectral variable $z = -1/r^2$:*
+
+$$\Phi_v(r) \equiv \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D\left(-\frac{1}{r^2}\right),$$
+
+*and consequently the reduced rational kernel satisfies:*
+
+$$R_v(r) \equiv \frac{2}{L r^2} \left[ D\left(-\frac{1}{r^2}\right) \right]^2.$$
+
+### Proof of Corollary 4.2
+Factoring $1/r$ from the bracketed term in Theorem 4.1:
+
+$$\frac{v_0}{r} + \sqrt{2}\sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} = \frac{1}{r} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{r^2 v_m}{r^2 - a_m^2} \right] = \frac{1}{r} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - a_m^2 / r^2} \right].$$
+
+Recalling the definition $D(z) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 z}$, evaluating at $z = -1/r^2$ yields precisely $D(-1/r^2)$. Substituting this into $\Phi_v(r) = \frac{2}{\sqrt{L}} \sin(rL/2) \left[ \frac{v_0}{r} + \sqrt{2}\sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} \right]$ yields the factorized amplitude $\Phi_v(r) = \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D(-1/r^2)$. Squaring and multiplying by $1 - \cos(rL) = 2\sin^2(rL/2)$ produces $R_v(r) = \frac{2}{L r^2} D(-1/r^2)^2$. $\blacksquare$
+
+### Theorem 4.3 (Spectral Lattice Sampling Identity)
 *At the discrete Fourier frequencies $a_m = 2\pi m / L$, the Archimedean kernel samples the squared Fourier coefficients orthogonally:*
 
 $$K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2 = L u_0^2,$$
 
 $$K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 = L u_m^2 \qquad (m = 1, \dots, N).$$
 
-### Proof of Theorem 4.2
+### Proof of Theorem 4.3
 At $r = 0$, $\Phi_v(0) = \sqrt{L} v_0$, so $K_{\mathrm{Fourier}}(v, 0, L) = \Phi_v(0)^2 = L v_0^2$. 
 
 For $m \in \{1, \dots, N\}$, evaluate $\Phi_v(a_m)$. For every $n \ne m$, $\sin(a_m L/2) = \sin(\pi m) = 0$ while the denominator $a_m^2 - a_n^2 \ne 0$, so all non-diagonal terms vanish identically. The leading term $v_0 \frac{\sin(a_m L/2)}{a_m}$ also vanishes. 
@@ -500,6 +557,21 @@ Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `ce
 
 At high frequencies, the finite-$N$ resolvent plunges precipitously: $R_{v_{24}}(10.0) = 0.0368$, $R_{v_{24}}(15.0) = 6.30 \times 10^{-6}$, $R_{v_{24}}(20.0) = 1.10 \times 10^{-8}$, and $R_{v_{24}}(50.0) = 5.40 \times 10^{-30}$. The effective logarithmic slope $\gamma_{\mathrm{eff}}(r) = -r R'(r)/R(r)$ reaches $\gamma_{\mathrm{eff}} \approx 78.6$ at $r = 15.0$, $154.0$ at $r = 20.0$, and $270.3$ at $r = 30.0$, demonstrating extremely strong finite-$N$ suppression over the computed high-frequency range (though for any fixed finite $N$, the rational tail must eventually dominate at sufficiently large $r$).
 
+### 6.7 The Accumulating Pole Mechanism and Non-Analytic Boundary Flatness
+The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Theorem 3.2 provides the conceptual mechanism for understanding how the high-frequency Fourier tail behaves in the continuum limit, reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$ for all $k \ge 0$) with a non-trivial continuous-variable resolvent $R_\infty(r)$:
+
+1. **Accumulation of Resolvent Poles at the Origin (Proven):** At every finite dimension $N$, $D_N(z)$ is a rational function whose poles lie on the negative real axis at:
+   $$z_m = -\frac{1}{a_m^2} = -\frac{L^2}{4\pi^2 m^2} \in \left(-\frac{L^2}{4\pi^2}, 0\right) \quad (m = 1, \dots, N).$$
+   As $N \to \infty$, the number of poles grows without bound and their locations accumulate at the origin:
+   $$\lim_{m\to\infty} z_m = 0^-.$$
+2. **Conditional Obstruction to Analyticity (Analytic Mechanism):** The residue of $D_N(z)$ at each pole $z_m$ is proportional to $\frac{\sqrt{2} v_{N, m}}{a_m^2}$. If the mode coefficients $v_{N, m}$ persist with sufficient weight in the large-$N$ limit, the infinite accumulation of poles at $z = 0^-$ obstructs analytic continuation through the origin from the negative real axis.
+3. **Vanishing Taylor Jet $\not\Rightarrow$ Triviality:** The numerical extinction of every fixed Taylor coefficient $D_k(N) = T_{v_N}^{(2k)}(0) \to 0$ indicates that any limiting object $D_\infty(z)$ must be $C^\infty$ flat at $z = 0$ from the right ($\operatorname{Re}(z) > 0$). However, because $z = 0$ is an accumulation boundary of singularities, this flatness does not force $D_\infty(z)$ to vanish identically on the negative axis.
+4. **Motivated Asymptotic Hypothesis:** While the accumulating-pole mechanism explains why ordinary Taylor analyticity fails, it does not by itself select a unique essential-singularity scale. The observed WKB quantum barrier behavior in Section 6.1 motivates testing an exponentially flat ansatz:
+   $$D_\infty\left(-\frac{1}{r^2}\right) \sim e^{-C r} \qquad (r \to \infty),$$
+   corresponding to $D_\infty(z) \sim e^{-C / \sqrt{-z}}$ as $z \to 0^-$. Whether the true continuum resolvent settles precisely to this exponential scale, a stretched exponential, or a broader boundary-layer scaling remains an open question under numerical investigation.
+
+Consequently, the extinction of the asymptotic inverse-power hierarchy $A_k(\infty) = 0$ does not imply that the continuous resolvent $R_\infty(r)$ vanishes; rather, it indicates that the algebraic polynomial tail is superseded in the continuum limit by a non-analytic, exponentially suppressed boundary resolvent.
+
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
 
@@ -511,7 +583,7 @@ $$\lim_{\omega \to 0} K_\infty(\omega) = 0, \qquad \lim_{\omega \to 1} K_\infty(
 
 with no jump discontinuities of any finite order at $\omega = 1$. This would eliminate the boundary jump that historically produced the oscillatory factor $1 - \cos(rL)$ and the $A_0/r^2$ tail in the finite-rank Galerkin models.
 
-### Proposition 6.7 (Tri-Partite Decomposition and Continuous-Quadrature Balance)
+### Proposition 6.8 (Tri-Partite Decomposition and Continuous-Quadrature Balance)
 *Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically by definition:*
 
 $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
@@ -554,7 +626,7 @@ What is significant is the **independent numerical quadrature of the continuous 
 4. **Prime-Power Decomposition of the Negative Barrier:**
    Direct point-evaluation of the Volterra convolution $K_{v_{24}}(\omega_q)$ at all prime powers $q \le 13$ matches the matrix-computed prime form to 52 decimal digits ($|\text{diff}| = 1.67 \times 10^{-52}$). The lowest prime $q = 2$ provides **$98.65\%$** of the entire prime energy ($-0.0708858$), $q = 3$ accounts for **$1.34\%$** ($-0.0009658$), while contributions above $q = 7$ decay exponentially below $10^{-13}$ ($q = 11$: $-9.52 \times 10^{-28}$). At the Volterra endpoint $\omega = 0$ ($q = 13$), $K_{v_{24}}(0) = 0$ identically. $\blacksquare$
 
-### Numerical Observation 6.8 (Numerical Multi-$c$ Observations)
+### Numerical Observation 6.9 (Numerical Multi-$c$ Observations)
 *Investigation across prime cutoffs $c \in \{5, 7, 11, 13, 17\}$ and dimensions $N \in \{4, 8, 12, 16, 20\}$ using the multi-parameter analysis suite (`cell47.py` and output log `cell47.out` [10]) reveals three striking empirical patterns governing the ground state:*
 
 1. **Approximate Constancy of the Scaling Ratio $\kappa$ Across Cutoffs:**
