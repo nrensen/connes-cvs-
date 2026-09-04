@@ -1,0 +1,150 @@
+================================================================================
+CELL 54 — ANALYTIC ANATOMY OF D_0 / D_1 & THE CANCELLATION SCALE
+================================================================================
+Parameters: c = 13, L = ln(13) = 2.564949357, kappa = 2.44963328
+Working precision: 50 decimal digits
+
+Loading ground states via persistent cache (.cell_cache)...
+    N =  8 [cache hit (0.00s)]: lambda_min = 6.7109353e-23, D_0 = 8.05043e-11, D_1 = 3.36386e-6
+    N = 12 [cache hit (0.00s)]: lambda_min = 1.7824766e-29, D_0 = 6.6471e-14, D_1 = 6.40237e-9
+    N = 16 [cache hit (0.00s)]: lambda_min = 7.1184302e-35, D_0 = 1.78268e-16, D_1 = 3.12757e-11
+    N = 20 [cache hit (0.00s)]: lambda_min = 1.3232359e-39, D_0 = 8.38352e-19, D_1 = 2.58316e-13
+    N = 24 [cache hit (0.00s)]: lambda_min = 2.5334849e-43, D_0 = 1.13796e-20, D_1 = 5.91698e-15
+
+================================================================================
+1. MODE-BY-MODE ANATOMY & SIGNED/DESTRUCTIVE CANCELLATION MECHANICS
+================================================================================
+Decomposing D_0 and D_1 into positive/negative sums to quantify destructive interference:
+    epsilon_0 = |D_0| / (v_0 + sqrt(2)*S_0^+),   epsilon_1 = |D_1| / (sqrt(2)*kappa^2*S_1^+)
+
+   N             D_0    Positive S_0^+    Negative S_0^-    Cancellation eps_0
+----------------------------------------------------------------------------
+   8     8.05043e-11          0.420839          0.838061           6.79248e-11
+  12      6.6471e-14          0.467941           0.86934           5.40664e-14
+  16     1.78268e-16          0.491293          0.884964            1.4244e-16
+  20     8.38352e-19          0.504942          0.894131           6.62995e-19
+  24     1.13796e-20          0.512598          0.899285           8.94779e-21
+----------------------------------------------------------------------------
+
+   N             D_1    Positive S_1^+    Negative S_1^-    Cancellation eps_1
+----------------------------------------------------------------------------
+   8      3.36386e-6           2.05902           2.05902            1.92513e-7
+  12      6.40237e-9           2.46629           2.46629           3.05901e-10
+  16     3.12757e-11            2.6922            2.6922           1.36893e-12
+  20     2.58316e-13           2.83259           2.83259           1.07461e-14
+  24     5.91698e-15           2.91427           2.91427           2.39251e-16
+----------------------------------------------------------------------------
+
+Bulk (m <= N/2) vs. Edge (m > N/2) contributions to the Fourier sums:
+   N    Bulk Sum (D_0)    Edge Sum (D_0)    Bulk Sum (D_1)    Edge Sum (D_1)
+--------------------------------------------------------------------------
+   8         -0.414171       -0.00305139         0.0767055        -0.0767059
+  12         -0.401624        0.00022516        -0.0106928         0.0106928
+  16         -0.393666       -4.52877e-6       0.000351063      -0.000351063
+  20          -0.38919        5.68144e-7       -6.71088e-5        6.71088e-5
+  24         -0.386687       -1.51929e-8        2.64627e-6       -2.64627e-6
+--------------------------------------------------------------------------
+
+================================================================================
+2. SOBOLEV NORMS & CAUCHY-SCHWARZ TRACE BOUNDS
+================================================================================
+Dirichlet kinetic energy ||T'_v||, curvature ||T''_v||, and Cauchy-Schwarz trace bounds:
+    |D_1| <= sqrt(2) * kappa * ||T'_v||_2 * sqrt(sum_{m=1}^N m^2)
+
+   N   ||T_v||_{L^2}    ||T_v'||_{H^1}   ||T_v''||_{H^2}      CS Bound Ratio
+--------------------------------------------------------------------------
+   8             1.0           2.77807           13.1781          2.44717e-8
+  12             1.0           2.99621           15.2875         2.41934e-11
+  16             1.0           3.11013           16.4351         7.50492e-14
+  20             1.0           3.17849            17.138         4.37899e-16
+  24             1.0            3.2174           17.5428          7.5837e-18
+--------------------------------------------------------------------------
+Note: The elementary Cauchy–Schwarz bound is extremely non-sharp for D_1.
+This provides evidence that signed cancellation is active, but because the bound
+itself grows with N (scaling as ~ N^{3/2}), its ratio to D_1 becoming tiny is an
+expected consequence of D_1 -> 0 rather than a separate proof of mechanism.
+Furthermore, because ||T_N||_{L^2} = 1 while T_N(0) = D_0 -> 0, the endpoint value
+is not controlled by the global L^2 norm in any useful asymptotic sense.
+Endpoint suppression is encoded in the specific ground-state mode vector rather
+than being a generic Sobolev phenomenon.
+
+================================================================================
+3. ASYMPTOTIC EXPONENTIAL RATES & DIRECT DIFFERENCE Delta_N
+================================================================================
+Testing whether D_0 and D_1 share a common leading exponential decay rate:
+    alpha_0(N) = -log|D_0(N)| / N   vs.   alpha_1(N) = -log|D_1(N)| / N
+and tracking the direct difference Delta_N = -log|D_0| + log|D_1|:
+    If alpha_0 = alpha_1, the leading exponential factor cancels in D_0 / D_1.
+
+   N       -log|D_0|       -log|D_1|    alpha_0(N)    alpha_1(N)         Delta_N             s_N
+----------------------------------------------------------------------------------------
+   8         23.2427         12.6024       2.90534        1.5753         10.6403      0.00919101
+  12          30.342         18.8666        2.5285       1.57222         11.4754      0.00897132
+  16         36.2632         24.1882       2.26645       1.51176         12.0751      0.00875607
+  20         41.6228         28.9846       2.08114       1.44923         12.6383      0.00778999
+  24         45.9225          32.761       1.91344       1.36504         13.1615      0.00664741
+----------------------------------------------------------------------------------------
+
+Two-point consecutive logarithmic decay rates alpha_N = -[log|D(N)| - log|D(N-4)|] / 4:
+   Step N -> N+4      alpha_N(D_0)      alpha_N(D_1)     |alpha_0 - alpha_1|
+------------------------------------------------------------
+    8 -> 12              1.77482           1.56604                0.208781
+   12 -> 16              1.48031            1.3304                0.149912
+   16 -> 20               1.3399            1.1991                0.140799
+   20 -> 24               1.0749           0.94409                0.130814
+------------------------------------------------------------
+Note: The finite-N effective exponential rates can be compared to test whether
+D_0 and D_1 share a common leading exponential factor. The present N-range does not
+establish asymptotic equality.
+
+================================================================================
+4. SCALING DIAGNOSTICS FOR s_N = (kappa*N)^2 * (D_0 / D_1)
+================================================================================
+Connection between Part 3 and Part 4 via the subexponential decomposition:
+    log(s_N) = 2*log(kappa*N) - [-log|D_1| + log|D_0|] = 2*log(kappa*N) - Delta_N
+where Delta_N = -log|D_0| + log|D_1| removes the leading exponential order.
+
+   N             s_N         Delta_N    2*log(kappa*N)        log(s_N)    Identity Check
+----------------------------------------------------------------------------------
+   8    0.0091910064        10.64029         5.9507597      -4.6895298         1.069e-50
+  12    0.0089713158       11.475413           6.76169      -4.7137229         1.069e-50
+  16    0.0087560698       12.075062         7.3370541      -4.7380081         1.069e-50
+  20    0.0077899933       12.638256         7.7833412      -4.8549153               0.0
+  24    0.0066474141       13.161512         8.1479843      -5.0135274               0.0
+----------------------------------------------------------------------------------
+
+Diagnostic A: Quadratic extrapolation diagnostic on N in {16, 20, 24}:
+    Assumes s_N = s_infty + c_1 / N + c_2 / N^2 (exploratory 3-point interpolation):
+        Extrapolated s_infty = -0.00504782
+        Fitted c_1           = 0.400332
+        Fitted c_2           = -2.87152
+
+Diagnostic B: Local power-law diagnostic s_N ~ A * N^(-p) on N in {20, 24}:
+        Local effective power p = 0.87
+        Local prefactor A       = 0.105531
+
+Diagnostic C: Local logarithmic diagnostic s_N ~ A / (log N)^p on N in {20, 24}:
+        Local logarithmic power p = 2.685
+        Local prefactor A         = 0.148183
+
+Comparison of diagnostic models against observed s_N:
+   N    s_N observed    Diag A (Quad Extrap)    Diag B (Local Power)    Diag C (Local Log)
+----------------------------------------------------------------------------------------
+   8      0.00919101             0.000126192               0.0172873             0.0207592
+  12      0.00897132              0.00837208               0.0121489             0.0128681
+  16      0.00875607              0.00875607              0.00945899            0.00958936
+  20      0.00778999              0.00778999              0.00778999            0.00778999
+  24      0.00664741              0.00664741              0.00664741            0.00664741
+----------------------------------------------------------------------------------------
+Note: These scaling diagnostics are exploratory. With N in {16, 20, 24}, Diagnostic A
+is a 3-point interpolation, while Diagnostics B and C have a single degree of information.
+They serve as diagnostics to guide larger-N calculations rather than inferential proof.
+
+Strategic observation: If Delta_N = -log|D_0| + log|D_1| behaves smoothly across N
+while -log|D_0| and -log|D_1| grow rapidly, this confirms that the ratio D_0 / D_1
+(the first-jet scale u_1) is the analytically tractable object to target for higher-N
+calculations (e.g. N = 40, 60, 100).
+
+================================================================================
+END OF CELL 54
+================================================================================
