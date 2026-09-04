@@ -2358,6 +2358,10 @@ Cell 50 (Phase II)
 Cell 51
     Operator resolvent anatomy, discrete Cauchy transform, and accumulating pole geometry
     [Cauchy identity verified to 10^-51, persistent lattice oscillations, irregular mode signs, u_N ~ N^-2 boundary layer]
+    ↓
+Cell 52
+    Double-scaling boundary layer, spectral crossover, and large-deviation rate function
+    [u_edge ~ N^-2 vs u_cancel ~ D_0/D_1 decoupling, sharp resolvent crossover at sigma ~ 1, emerging WKB rate function I(xi)]
 ```
 
 # Current status summary
@@ -2414,6 +2418,13 @@ At the current stage:
   * Universal suppression across pole cells: $\delta$-sampling confirms that suppression is not a half-integer artifact, remaining $\sim 10^{-12} - 10^{-13}$ across the entire cell between poles at $m = 20$.
   * Irregular mode coefficient signs: $b_m = (-1)^m v_m$ reverses sign at $m = 6, 7, 8$, disproving simple geometric decay $v_m \sim (-1)^m C q^m$ and exposing an oscillatory edge correction near $m \sim N$.
   * Discovery of the $u_N \sim (\kappa N)^{-2}$ heat boundary layer: $H_N(u)$ drops by 20 orders of magnitude toward $T_N(0)$, identifying an $N^{-2}$ double-scaling boundary layer connecting the finite-rank model to the Dirichlet continuum.
+* Cell 52 establishes the double-scaling boundary layer, spectral crossover, and large-deviation rate function:
+  * Rejection of universal $N^{-2}$ heat-profile collapse: $H_N(s / (\kappa^2 N^2))$ continues to plunge rapidly to zero at each fixed $s$ ($4.75 \times 10^{-7} \to 7.82 \times 10^{-16}$ at $s = 1.0$), disproving the existence of a non-zero limiting profile $H_*(s)$ at the spectral-edge scale.
+  * Normalized profile divergence: $\Theta_N(s) = H_N(s/(\kappa^2 N^2)) / T_N(0)$ diverges systematically with $N$ ($5906 \to 68737$ at $s = 1.0$), with initial slope governed by $\alpha_N = D_1(N) / (\kappa^2 N^2 T_N(0)) \approx 11 - 15$.
+  * Decoupling of the two time scales: distinguishes the inverse spectral-edge scale $u_{\mathrm{edge}} = (\kappa N)^{-2} \sim N^{-2}$ (determined by retained mode count) from the endpoint cancellation scale $u_{\mathrm{cancel}} \sim T_N(0) / D_1(N)$ (determined by the extraordinary ground-state boundary vanishing).
+  * Clean negative-axis exponential envelope: pole-protected sweep ($\delta \ge 0.05$) reveals a smooth drop from $4.79 \times 10^{-10}$ ($r \approx 42$) to $1.67 \times 10^{-21}$ ($r \approx 77$), with $-\log|D|/r$ stabilizing in the clean range $0.61 - 0.70$. Uniform multi-depth suppression verified across $m = 6, 14, 22, 26$.
+  * Emerging $N$-scaled large-deviation rate function: at $\xi = r / (\kappa N) = 1.07$, the scaled quantity $-(1/(\kappa N))\log|D_N|$ exhibits stability across $N \in \{8, 12, 16, 20, 24\}$ ($0.854 \to 0.777 \to 0.780 \to 0.759 \to 0.719$), revealing an emerging WKB rate function $|D_N(-1/r^2)| \approx \exp[-\kappa N \cdot I(r/(\kappa N))]$.
+  * Sharp resolvent crossover at spectral-edge scale $u_N$: exact algebraic splitting proves that $u_N$ is the exact crossover scale for the resolvent integral. For scaled $x = \sigma u_N$, $D_{\mathrm{BL}} / D_{\mathrm{total}}$ transitions sharply from $1.000$ at $\sigma = 0.01$ and $0.978$ at $\sigma = 0.1$ down to $2.89 \times 10^{-4}$ at $\sigma = 1.0$ and $1.62 \times 10^{-16}$ at $\sigma = 100$.
 
-Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and operator-resolvent boundary layer scaling) is computationally established and advancing toward Paper 5 and Cell 52.
+Phase I (ground-state resolvent identity, tail extinction, and continuum balance) is finalized and frozen in Paper 4. Phase II (excited bound states, Sturm–Liouville nodal hierarchy, spectral gap universality, transmission zeros, and two-scale resolvent/large-deviation asymptotics) is computationally established and advancing toward Paper 5 and Cell 53.
 
