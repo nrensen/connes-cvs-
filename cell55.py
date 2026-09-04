@@ -8,8 +8,8 @@ numerical validation of the exact operator-theoretic framework:
 
 PART 1: EXACT COMMUTATOR ALGEBRA & FORCED MOMENT BALANCE
   1. Verifies the exact outer-product commutator identities:
-         [M, Q]  = p e^T - e p^T
-         [M^2, Q] = b e^T + a p^T - p a^T - e b^T
+         [M, Q]   = p e^T - e p^T
+         [M^2, Q] = b e^T + p a^T - a p^T - e b^T
      where a_n = n, p_n = psi(n) = n Q_{0, n}, b_n = n psi(n), e = (1,...,1)^T.
   2. Verifies strict parity decoupling on the even ground state u:
          p^T u = 0,   a^T u = 0,   e^T u = D_0,   b^T u = B_1.
@@ -26,8 +26,8 @@ PART 2: NON-SINGULAR SPECTRAL RESOLVENT RESUMMATION (Theorem 6.15, Statement 1)
      where T_k = (e^T u^{(k)}) (u^{(k)T} w) / (E_k - lambda) with w = b + E_arith e.
   3. Demonstrates the exact small-denominator cancellation:
          T_k = - [D_0^{(k)}]^2 * <p, (Q_odd - E_k I)^{-1} (Q_odd - lambda I)^{-1} p>
-     proving that bound states (E_k -> 0) contribute <= 10^-15 to D_1 / D_0,
-     and the ratio is 100% dominated by the non-singular scattering continuum.
+     proving that the apparent singular denominator (E_k - lambda) cancels identically.
+     Quantifies the exact bound-state vs. scattering sector contributions to D_1 / D_0.
 
 PART 3: TWO-SIDED BOUNDING LADDER & ASYMPTOTIC TRAJECTORY OF s_N
   1. Tests the rigorous two-sided operator bounds:
@@ -161,7 +161,7 @@ def main():
     print("=" * 80)
     print("Testing Theorems 6.10 and 6.11:")
     print("  [M, Q]   = p e^T - e p^T")
-    print("  [M^2, Q] = b e^T + a p^T - p a^T - e b^T")
+    print("  [M^2, Q] = b e^T + p a^T - a p^T - e b^T")
     print("  (Q - lambda I) M^2 u = -D_0 b + B_1 e")
     print()
     print(f"{'N':>4}  {'Comm1 MaxErr':>14}  {'Comm2 MaxErr':>14}  {'p^T u':>12}  {'Moment Balance RelErr':>22}")
@@ -210,9 +210,9 @@ def main():
         comm1_pred = p * e.T - e * p.T
         err_comm1 = max(abs(comm1[i, j] - comm1_pred[i, j]) for i in range(dim) for j in range(dim))
 
-        # Commutator 2: [M^2, Q] vs b e^T + a p^T - p a^T - e b^T
+        # Commutator 2: [M^2, Q] vs b e^T + p a^T - a p^T - e b^T
         comm2 = M2 * Q - Q * M2
-        comm2_pred = b * e.T + a * p.T - p * a.T - e * b.T
+        comm2_pred = b * e.T + p * a.T - a * p.T - e * b.T
         err_comm2 = max(abs(comm2[i, j] - comm2_pred[i, j]) for i in range(dim) for j in range(dim))
 
         # Ground state in full coordinates
@@ -385,10 +385,61 @@ def main():
         d = resum_data[N]
         print(f"{N:>4d}  {mp.nstr(d['err_b1_d0'], 6):>14}  {mp.nstr(d['bound_sum'], 6):>18}  {mp.nstr(d['scatt_sum'], 6):>22}  {mp.nstr(d['max_diff_cancel'], 6):>18}  {mp.nstr(d['rel_err_recon'], 6):>18}")
     print("-" * 102)
-    print("Theorem 6.15 Confirmation: The bound-state sector contribution is <= 10^-15,")
-    print("proving that the small bound eigenvalues do not induce any singularity in D_1/D_0.")
-    print("The (E_k - lambda) cancellation identity holds to machine precision across all states.")
-    print("The entire ratio D_1/D_0 is governed 100% by the non-singular scattering continuum.")
+    print("Interpretation:")
+    print("1. Small-denominator cancellation: The factor (E_k - lambda) cancels identically")
+    print("   across all states, with identity error down to 10^-32, proving that the coupling")
+    print("   is algebraically non-singular.")
+    print("2. Bound-state sector: For excited bound states (k >= 1), D_0^{(k)} = e^T u^{(k)} is O(1)")
+    print("   (boundary vanishing T(0) ~ 10^-20 holds strictly for the ground state k = 0).")
+    print("   Consequently, bound states contribute substantially to the resolvent sum,")
+    print("   combining with the scattering continuum to reconstruct D_1/D_0 exactly.")
+    print()
+
+    # Detailed per-mode table for N = 24 lowest states
+    print("Detailed Mode Breakdown for Lowest Even States (N = 24):")
+    print(f"{'Rank k':>6}  {'E_k':>14}  {'D_0^(k) = e^T u':>16}  {'w^T u':>16}  {'T_k (Uncancelled)':>20}  {'Cancel Diff':>14}")
+    print("-" * 92)
+    Q24 = galerkin_matrices[24]
+    V_ev24, V_od24 = build_parity_projectors(24)
+    Q_ev24 = V_ev24.T * Q24 * V_ev24
+    Q_od24 = V_od24.T * Q24 * V_od24
+    eigs24, vecs24 = mp.eigsy(Q_ev24)
+    idx24 = sorted(range(len(eigs24)), key=lambda i: eigs24[i])
+    lam24 = ground_states[24]["lam"]
+    p24 = mp.matrix(49, 1)
+    for i in range(49):
+        n_idx = i - 24
+        p24[i, 0] = mp.mpf(n_idx) * Q24[24, i] if n_idx != 0 else mp.mpf(0)
+    p_od24 = V_od24.T * p24
+    I_od24 = mp.eye(24)
+    res_od_lam24 = (Q_od24 - lam24 * I_od24) ** -1
+    e_full24 = mp.matrix(49, 1)
+    for i in range(49):
+        e_full24[i, 0] = mp.mpf(1)
+    b24 = mp.matrix(49, 1)
+    for i in range(49):
+        n_idx = i - 24
+        b24[i, 0] = mp.mpf(n_idx) * p24[i, 0]
+    e_arith24 = (p_od24.T * res_od_lam24 * p_od24)[0, 0]
+    w24 = b24 + e_arith24 * e_full24
+
+    for r_k, k_idx in enumerate(idx24[:7]):
+        Ek = eigs24[k_idx]
+        v_can = [vecs24[row, k_idx] for row in range(25)]
+        nrm = mp.sqrt(sum(x ** 2 for x in v_can))
+        v_can = [x / nrm for x in v_can]
+        uk = V_ev24 * mp.matrix(v_can)
+        e_uk = (e_full24.T * uk)[0, 0]
+        w_uk = (w24.T * uk)[0, 0]
+        if r_k == 0:
+            print(f"{r_k:>6d}  {mp.nstr(Ek, 6):>14}  {mp.nstr(e_uk, 6):>16}  {mp.nstr(w_uk, 6):>16}  {'(Ground state: omitted)':>20}  {'—':>14}")
+        else:
+            t_unc = (e_uk * w_uk) / (Ek - lam24)
+            res_Ek = (Q_od24 - Ek * I_od24) ** -1
+            t_canc = - (e_uk ** 2) * (p_od24.T * (res_Ek * res_od_lam24) * p_od24)[0, 0]
+            diff = abs(t_unc - t_canc)
+            print(f"{r_k:>6d}  {mp.nstr(Ek, 6):>14}  {mp.nstr(e_uk, 6):>16}  {mp.nstr(w_uk, 6):>16}  {mp.nstr(t_unc, 8):>20}  {mp.nstr(diff, 6):>14}")
+    print("-" * 92)
     print()
 
     # -----------------------------------------------------------------------
@@ -422,7 +473,7 @@ def main():
         print(f"{N:>4d}  {mp.nstr(u1, 6):>18}  {mp.nstr(u_edge, 6):>18}  {mp.nstr(s_N, 6):>18}  {mp.nstr(beta_N, 6):>12}")
     print("-" * 76)
     print("Note: beta_N = D_0 D_2 / D_1^2 remains strictly within [0.19, 0.26] < 1,")
-    print("proving Theorem 6.15, Statement 4 (the strict cancellation hierarchy u_1 < u_2 < ...).")
+    print("providing empirical evidence for the second-jet inequality u_1 < u_2 across tested dimensions.")
     print()
 
     # Fit asymptotic trajectory of s_N
