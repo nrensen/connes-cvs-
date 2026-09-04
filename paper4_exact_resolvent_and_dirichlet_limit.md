@@ -1,4 +1,4 @@
-# Exact Rational Resolvent and Archimedean Positivity in the Truncated Weil Quadratic Form: Numerical Evidence for a Dirichlet Continuum Limit
+# Exact Rational Resolvent and Pointwise Positivity of the Archimedean Kernel in the Truncated Weil Quadratic Form: Numerical Evidence for a Dirichlet Continuum Limit
 
 **Authors:** Research Record / Connes–CvS Investigation Series  
 **Date:** September 2026  
@@ -16,16 +16,16 @@ In this paper, we establish the exact algebraic solution to the finite-$N$ Archi
 1. **Exact Rational Resolvent (Theorem):** Starting from the four-term analytic reduction of the Archimedean Volterra integral, we prove algebraically and independently of numerical quadrature that the reduced Fourier kernel $R_v(r) = K_{\mathrm{Fourier}}(v, r, L) / (1 - \cos(rL))$ is identically equal to the squared Cauchy resolvent:
    $$R_v(r) \equiv \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^{N} \frac{r v_m}{r^2 - a_m^2} \right]^2, \qquad a_m = \frac{2\pi m}{L},$$
    on the punctured complex plane $\mathbb{C} \setminus \{0, \pm a_1, \dots, \pm a_N\}$. There is no remainder term; the formal generating function $A(z) = \frac{2}{L} D(-z)^2$ evaluated at $z = 1/r^2$ yields the exact kernel identically.
-2. **Unconditional Finite-$N$ Positivity (Theorem):** The Fourier-side kernel is an exact square on the real axis:
+2. **Unconditional Finite-$N$ Kernel Positivity (Theorem):** The Fourier-side kernel is an exact square on the real axis:
    $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R},$$
-   where $\Phi_v(r)$ is an entire function of exponential type at most $L/2$. Since $\Phi_v(r)$ is real for real $r$, this may equivalently be written as $|\Phi_v(r)|^2$ on the real axis, proving algebraically and unconditionally that the Archimedean kernel is positive semi-definite for all coefficient vectors $v \in \mathbb{R}^{N+1}$.
+   where $\Phi_v(r)$ is an entire function of exponential type at most $L/2$. Since $\Phi_v(r)$ is real for real $r$, this may equivalently be written as $|\Phi_v(r)|^2$ on the real axis, proving algebraically and unconditionally that the Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is pointwise non-negative for all real $r$ and all real coefficient vectors $v \in \mathbb{R}^{N+1}$. (This pointwise non-negativity does not imply positivity of the integrated Archimedean quadratic form $Q_{\mathrm{arch}}$, whose digamma weight $h_+(r)$ changes sign).
 3. **Spectral Lattice Orthogonality (Theorem):** At the lattice nodes $r = a_m$, the apparent poles cancel cleanly against the envelope zeros via removable singularities, yielding the exact sampling identity:
    $$K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2 = L u_0^2, \qquad K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 = L u_m^2 \quad (m = 1, \dots, N),$$
    uncoupling the kernel into the squared Fourier coefficients.
-4. **Observed Mode Concentration and Asymptotic Laws (Numerical & Conjectural):** Across 24 Galerkin dimensions ($N = 1, \dots, 24$), the computed ground states exhibit rapidly decreasing successive differences and strong concentration of their $\ell^2$ mass in the lowest modes (over $99.98\%$ in $m \le 4$). The boundary value drops by 18 orders of magnitude, with the effective decay exponent increasing toward $L/2$:
-   $$|T_{v_N}(0)| \sim C \cdot c^{-N/2} \quad \text{(Conjectured)}.$$
+4. **Observed Mode Concentration and Asymptotic Laws (Numerical & Conjectural):** Across 24 Galerkin dimensions ($N = 1, \dots, 24$), the computed ground states exhibit rapidly decreasing successive differences and strong concentration of their $\ell^2$ mass in the lowest modes (over $99.98\%$ in $m \le 4$). The boundary value drops by 18 orders of magnitude, with the effective decay exponent decreasing toward values near $1.1$:
+   $$|T_{v_N}(0)| \sim C(c) \cdot \rho(c)^N \quad \text{with } 0 < \rho(c) < 1 \quad \text{(Conjectured)}.$$
    Across 43 orders of magnitude, the ground-state eigenvalue $\lambda_{\min}(N)$ appears asymptotically proportional to the boundary leakage energy:
-   $$\lambda_{\min}(N) \sim \kappa_c \cdot [T_{v_N}(0)]^2 \sim \widetilde{\kappa}_c \cdot c^{-N} \longrightarrow 0 \quad \text{(Numerical Conjecture)}.$$
+   $$\lambda_{\min}(N) \sim \kappa_c \cdot [T_{v_N}(0)]^2 \longrightarrow 0 \quad \text{(Numerical Conjecture)}.$$
 5. **Continuum Solitary Wave and Dirichlet Nodes (Conjectural):** Numerical evidence suggests that in the continuum limit $N \to \infty$, $T_{v_N}(t)$ converges to a symmetric, strictly positive solitary wave $T_\infty(L - t) = T_\infty(t)$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty \subseteq [0, L]$.
    Conditional on this flat contact, the Volterra boundary jump at $\omega = 1$ is eliminated, removing the finite-rank obstruction to Weil positivity.
 
@@ -62,7 +62,7 @@ In finite implementations, numerical quadrature must truncate the $r$-integral a
 2. **Heuristic Asymptotics:** Early computational efforts in the literature and exploratory calculations attempted to expand $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ as an asymptotic inverse-power series $\sum_{k \ge 0} A_k / r^{2k+2}$. However, the coefficients $A_k$ appeared as highly non-trivial combinatorial sums of spectral moments, and bounding the remainder $\varepsilon_N(r)$ remained an open obstacle.
 3. **Question of Positivity:** It remained unproven whether $K_{\mathrm{Fourier}}(v, r, L)$ was unconditionally positive for all real $r$ and all vectors $v$, or whether sign-oscillations could induce negative eigenvalues at large $T$.
 
-This paper establishes the exact closed-form algebraic solution to this problem, proves global finite-$N$ non-negativity independently of numerical quadrature, and formulates the precise conjectures governing the infinite-dimensional limit $N \to \infty$.
+This paper establishes the exact closed-form algebraic solution to this problem, proves global finite-$N$ non-negativity of the Fourier-side Archimedean kernel independently of numerical quadrature, and formulates the precise conjectures governing the infinite-dimensional limit $N \to \infty$.
 
 ---
 
@@ -205,8 +205,8 @@ This matches the cross-terms of the square identically. Since all four blocks ma
 
 ## 4. Unconditional Finite-$N$ Positivity and the Spectral Lattice Identity
 
-### Theorem 4.1 (Unconditional Finite-$N$ Positivity and Entire Amplitude)
-*The Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is unconditionally positive semi-definite on the real line for all $v \in \mathbb{R}^{N+1}$:*
+### Theorem 4.1 (Unconditional Finite-$N$ Kernel Positivity and Entire Amplitude)
+*The Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is unconditionally pointwise non-negative on the real line for all $v \in \mathbb{R}^{N+1}$:*
 
 $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R},$$
 
@@ -215,6 +215,9 @@ $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb
 $$\Phi_v(r) = \frac{2}{\sqrt{L}} \left[ v_0 \frac{\sin(rL/2)}{r} + \sqrt{2} \sum_{m=1}^{N} v_m \frac{r \sin(rL/2)}{r^2 - a_m^2} \right].$$
 
 *Since $\Phi_v(r)$ is real for real $r$ and real $v$, this may equivalently be written as $|\Phi_v(r)|^2$ on the real axis.*
+
+> [!IMPORTANT]
+> **Pointwise Kernel Non-Negativity vs Integrated Form Positivity:** Theorem 4.1 establishes that the Fourier-side kernel $K_{\mathrm{Fourier}}(v, r, L)$ is pointwise non-negative for every real $r$. This does **not** imply that the integrated Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$ is positive semi-definite, because the smooth Archimedean density $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ takes negative values at low frequencies ($h_+(0) \approx -5.37$). In our numerical evaluations, the integrated Archimedean contribution is negative ($\mathcal{Q}_{\mathrm{arch}} \approx -1.48$), acting as a negative barrier that counterbalances the positive zeta pole dilation energy.
 
 ### Proof of Theorem 4.1
 Using the trigonometric identity $1 - \cos(rL) = 2 \sin^2(rL/2)$, we factor the full kernel:
@@ -305,14 +308,14 @@ The boundary value $D_0(N) = T_{v_N}(0) = v_0 + \sqrt{2} \sum_{m=1}^N v_m$ and t
 | 20 | $8.38 \times 10^{-19}$ | $2.58 \times 10^{-13}$ | 0.3105 | 1.170 |
 | 24 | $1.14 \times 10^{-20}$ | $5.92 \times 10^{-15}$ | 0.3244 | 1.126 |
 
-Between $N = 1$ and $N = 24$, the boundary value drops by **18 orders of magnitude**. The effective decay exponent $\alpha_N = -\frac{\log(|D_0(N)|/|D_0(N-1)|)}{\log c}$ evolves from $3.333$ down to $1.126$, increasing steadily toward $L/2 = 1.2825$. The data are consistent with the conjectural geometric law $|T_{v_N}(0)| \sim C c^{-N/2}$, but the available range $N \le 24$ does not establish the asymptotic. We formulate this behavior as:
+Between $N = 1$ and $N = 24$, the boundary value drops by **18 orders of magnitude**. The effective decay exponent $\alpha_N = -\frac{\log(|D_0(N)|/|D_0(N-1)|)}{\log c}$ decreases from $3.333$ toward values near $1.1$ over the computed range. Although the observed ratios are qualitatively consistent with an eventual geometric suppression law, they do not yet provide convincing numerical evidence that the asymptotic exponent is $1/2$ or that it tends to $L/2$. We formulate this behavior with appropriate generality:
 
 ### Conjecture 5.1 (Geometric Boundary Suppression)
 *For fixed prime cutoff $c > 1$, the boundary values of the normalized Galerkin ground states satisfy:*
 
-$$|T_{v_N}(0)| \sim C \cdot c^{-N/2} \qquad (N \to \infty),$$
+$$|T_{v_N}(0)| \sim C(c) \cdot \rho(c)^N \qquad (N \to \infty),$$
 
-*for some positive constant $C = C(c)$.*
+*for some positive constant $C(c)$ and decay base $0 < \rho(c) < 1$. A secondary hypothesis suggests $\rho(c) \approx c^{-1/2}$, but determining the exact asymptotic base remains an open problem.*
 
 ### 5.3 Observed Eigenvalue-to-Boundary Proportionality and Numerical Conjecture 5.2
 
@@ -339,9 +342,9 @@ For fixed $c = 13$, the ratio appears to approach a non-zero limiting constant n
 ### Conjecture 5.2 (Numerical Conjecture: Eigenvalue Gap Law)
 *For a given cutoff $c > 1$, the minimum eigenvalue of the truncated Galerkin matrix is asymptotically proportional to the boundary leakage energy:*
 
-$$\lambda_{\min}(N) \sim \kappa_c A_0(N) \sim \frac{2 \kappa_c}{L} [T_{v_N}(0)]^2 \sim \widetilde{\kappa}_c \cdot c^{-N} \longrightarrow 0 \qquad (N \to \infty),$$
+$$\lambda_{\min}(N) \sim \kappa_c A_0(N) \equiv \frac{2 \kappa_c}{L} [T_{v_N}(0)]^2 \longrightarrow 0 \qquad (N \to \infty),$$
 
-*where $\kappa_c = \kappa(c) > 0$ is a cutoff-dependent constant.*
+*where $\kappa_c = \kappa(c) > 0$ is a cutoff-dependent constant. If Conjecture 5.1 holds with secondary exponent $\rho(c) = c^{-1/2}$, then Conjecture 5.2 further predicts $\lambda_{\min}(N) \sim \widetilde{\kappa}_c \cdot c^{-N}$.*
 
 ---
 
@@ -364,7 +367,7 @@ was evaluated across $[0, L]$ on a dense uniform grid of 2,000 points using the 
 
    $$\|T_{v_N}\|_{L^2([0, L])}^2 = \int_0^L T_{v_N}(t)^2 \, dt = L.$$
 
-*Proof.* Parity symmetry follows immediately from the centrosymmetry of the Galerkin matrix $Q_{c, N}$, which commutes with the reflection operator and restricts the ground state to the even subspace ($u_{-m} = u_m = v_m / \sqrt{2}$). Energy normalization follows from Fourier orthogonality on $[0, L]$:
+*Proof.* Because $Q_{c, N}$ commutes with the reflection operator, its eigenspaces are reflection-invariant; in particular, an even ground-state eigenvector may always be chosen ($u_{-m} = u_m = v_m / \sqrt{2}$). (Numerically, the ground state is simple and non-degenerate for all $N$ examined). Energy normalization follows from Fourier orthogonality on $[0, L]$:
 
 $$\int_0^L T_{v_N}(t)^2 \, dt = L \left( v_0^2 + \sum_{m=1}^N v_m^2 \right) = L \|v_N\|_2^2 = L.$$
 
@@ -428,7 +431,7 @@ $$\frac{\text{Actual Suppression}}{\mathcal{S}_{\mathrm{WKB}}} = \frac{46.853901
 The numerically constructed effective potential yields a WKB action whose exponential scale matches the observed boundary suppression within **$5.6\%$** over 20 decimal orders of magnitude. The agreement is consistent with a WKB interpretation of the observed boundary suppression, but does not by itself establish that quantum tunneling is the underlying mathematical mechanism.
 
 ### Proposition 6.5 (Legendre Expansion via Bauer–Bessel Transform)
-*In normalized coordinates $x = \frac{2t}{L} - 1 \in [-1, 1]$, the finite-$N$ normalized even wave $\psi_N(x) = T_{v_N}\left(\frac{x+1}{2} L\right)$ admits an exact Legendre polynomial expansion:*
+*In normalized coordinates $x = \frac{2t}{L} - 1 \in [-1, 1]$, the finite-$N$ normalized even wave $\psi_N(x) = T_{v_N}\left(\frac{x+1}{2} L\right)$ admits an exact Legendre expansion in $L^2([-1, 1])$ (converging uniformly on $[-1, 1]$ since $\psi_N$ is smooth):*
 
 $$\psi_N(x) = \sum_{k=0}^\infty c_{2k}^{(N)} P_{2k}(x),$$
 
@@ -450,24 +453,24 @@ Numerical evaluation of the Legendre expansion coefficients via the Bauer–Bess
 
    $$c_{2k}^{(N)} = (-1)^k |c_{2k}^{(N)}|.$$
 
-   Because $P_{2k}(0) = (-1)^k \frac{(2k)!}{2^{2k}(k!)^2}$, all Legendre modes interfere **constructively** at the center $x = 0$ ($t = L/2$):
+   Because $P_{2k}(0) = (-1)^k \frac{(2k)!}{2^{2k}(k!)^2}$, for the resolved multipoles $k \le 10$, the observed alternating signs make the contributions at the center $x = 0$ ($t = L/2$) strictly constructive:
 
-   $$\psi_N(0) = \sum_{k=0}^\infty |c_{2k}^{(N)}| \frac{(2k)!}{2^{2k}(k!)^2} > 0.$$
+   $$\psi_N(0) \approx \sum_{k=0}^{10} |c_{2k}^{(N)}| \frac{(2k)!}{2^{2k}(k!)^2} > 0.$$
 
-   Conversely, at the boundaries $x = \pm 1$ ($t = 0, L$), $P_{2k}(\pm 1) = 1$. If the limiting expansion converges uniformly at the boundary, destructive cancellation yields:
+   Conversely, at the boundaries $x = \pm 1$ ($t = 0, L$), $P_{2k}(\pm 1) = 1$. If the limiting expansion converges uniformly at the boundary and the alternating sign pattern continues to all orders, destructive cancellation yields:
 
    $$\psi_\infty(\pm 1) = \sum_{k=0}^\infty c_{2k}^{(\infty)} = |c_0^{(\infty)}| - |c_2^{(\infty)}| + |c_4^{(\infty)}| - |c_6^{(\infty)}| + \dots = 0.$$
 
-### Conjecture 6.6 (Extinction of the Asymptotic Tail Hierarchy and Super-Polynomial Resolvent Decay)
-*In the continuum limit $N \to \infty$, every coefficient $A_k(N)$ in the inverse-power asymptotic expansion of the Archimedean resolvent vanishes identically:*
+### Conjecture 6.6 (Extinction of the Asymptotic Tail Hierarchy)
+*For every fixed $k \ge 0$, the $k$-th coefficient $A_k(N)$ in the inverse-power asymptotic expansion of the Archimedean resolvent vanishes identically in the continuum limit:*
 
 $$A_k(\infty) = \lim_{N\to\infty} \frac{2}{L} (-1)^k \sum_{j=0}^k D_j(N) D_{k-j}(N) = 0 \qquad \forall k \ge 0.$$
 
-*Furthermore, the continuous-variable resolvent:*
+*If, in addition, the asymptotic expansion is sufficiently uniform in $N$ to permit the interchange of $\lim_{N\to\infty}$ and $r \to \infty$, the limiting continuous-variable resolvent:*
 
 $$R_\infty(r) = \lim_{N\to\infty} \frac{2}{L} \left[ \frac{v_{N, 0}}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_{N, m}}{r^2 - a_m^2} \right]^2$$
 
-*decays super-polynomially as $r \to \infty$:*
+*is conjectured to decay super-polynomially without a power-law tail:*
 
 $$R_\infty(r) = o(r^{-k}) \qquad \forall k \in \mathbb{N}.$$
 
@@ -481,7 +484,7 @@ Numerical evaluation across $N \in \{4, 8, 12, 16, 20, 24\}$ (implemented in `ce
 - $A_3$: $7.65 \times 10^{-2} \to 1.47 \times 10^{-7} \to 7.28 \times 10^{-24}$,
 - $A_4$: $73.42 \to 9.23 \times 10^{-4} \to 7.53 \times 10^{-19}$.
 
-At high frequencies, the finite-$N$ resolvent plunges precipitously: $R_{v_{24}}(10.0) = 0.0368$, $R_{v_{24}}(15.0) = 6.30 \times 10^{-6}$, $R_{v_{24}}(20.0) = 1.10 \times 10^{-8}$, and $R_{v_{24}}(50.0) = 5.40 \times 10^{-30}$. The effective logarithmic slope $\gamma_{\mathrm{eff}}(r) = -r R'(r)/R(r)$ reaches $\gamma_{\mathrm{eff}} \approx 78.6$ at $r = 15.0$, $154.0$ at $r = 20.0$, and $270.3$ at $r = 30.0$, supporting super-polynomial decay.
+At high frequencies, the finite-$N$ resolvent plunges precipitously: $R_{v_{24}}(10.0) = 0.0368$, $R_{v_{24}}(15.0) = 6.30 \times 10^{-6}$, $R_{v_{24}}(20.0) = 1.10 \times 10^{-8}$, and $R_{v_{24}}(50.0) = 5.40 \times 10^{-30}$. The effective logarithmic slope $\gamma_{\mathrm{eff}}(r) = -r R'(r)/R(r)$ reaches $\gamma_{\mathrm{eff}} \approx 78.6$ at $r = 15.0$, $154.0$ at $r = 20.0$, and $270.3$ at $r = 30.0$, demonstrating extremely strong finite-$N$ suppression over the computed high-frequency range (though for any fixed finite $N$, the rational tail must eventually dominate at sufficiently large $r$).
 
 ### Conditional Vanishing of the Volterra Boundary Jump
 If the conjectured infinite-order boundary flatness holds (Conjecture 6.3), then the corresponding Volterra convolution:
@@ -494,13 +497,13 @@ $$\lim_{\omega \to 0} K_\infty(\omega) = 0, \qquad \lim_{\omega \to 1} K_\infty(
 
 with no jump discontinuities of any finite order at $\omega = 1$. This would eliminate the boundary jump that historically produced the oscillatory factor $1 - \cos(rL)$ and the $A_0/r^2$ tail in the finite-rank Galerkin models.
 
-### Theorem 6.7 (Exact Finite-$N$ Tri-Partite Balance and Observed Continuum Equilibrium)
-*Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic sum of the three pieces matches the minimum eigenvalue identically:*
+### Proposition 6.7 (Tri-Partite Decomposition and Observed Continuum Equilibrium)
+*Let $\mathcal{Q}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v)$ be the Connes–van Suijlekom quadratic form on the Galerkin subspace of dimension $2N+1$. For every finite dimension $N$, the algebraic matrix sum matches the minimum eigenvalue identically by definition:*
 
-$$\mathcal{Q}_{\mathrm{total}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}(v_N) \equiv \lambda_{\min}(N).$$
+$$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{matrix}}(v_N) \equiv \lambda_{\min}(N).$$
 
 *Numerical Evidence for Continuum Equilibrium.*
-High-precision integration and spectral evaluation across Galerkin dimensions $N \in \{4, 8, 12, 16, 20, 24\}$ (computed via the companion analysis script `cell46.py` and logged in `cell46.out` [10]) provide empirical confirmation of the tri-partite balance:
+What is significant is the **independent numerical quadrature of the continuous components**: when $\mathcal{Q}_{\mathrm{arch}}(v_N)$ is evaluated independently by numerical quadrature of the continuous-variable integral $\frac{1}{\pi} \int_0^{80} h_+(r) \Phi_{v_N}(r)^2 \, dr$ (using the companion analysis script `cell46.py` and logged in `cell46.out` [10]), the three independently computed terms cancel across **43 decimal orders of magnitude** (from $\mathcal{O}(1)$ down to $\sim 10^{-43}$):
 
 1. **Stabilization of the Continuous Archimedean Integral:**
    Because $R_{v_{24}}(r)$ decays super-polynomially, the continuous Archimedean integral:
@@ -514,42 +517,45 @@ High-precision integration and spectral evaluation across Galerkin dimensions $N
    - $R_{\max} = 60$: $-1.479797763974798$ (tail increment $4.49 \times 10^{-29}$),
    - $R_{\max} = 80$: $-1.479797763974798326397825$ (tail increment $7.57 \times 10^{-40}$).
 
-2. **Dimension-by-Dimension Spectral Sum:**
-   Across all Galerkin dimensions $N \in \{4, 8, 12, 16, 20, 24\}$, the independently evaluated pieces match $\lambda_{\min}(N)$ to full precision:
-   - $N = 4$: $\mathcal{Q}_{\mathrm{pole}} = +2.206186$, $\mathcal{Q}_{\mathrm{prime}} = -0.316153$, $\mathcal{Q}_{\mathrm{arch}} = -1.890032$, summing to $\mathcal{Q}_{\mathrm{total}} = 7.82 \times 10^{-15}$ ($\lambda_{\min} = 8.83 \times 10^{-15}$),
-   - $N = 8$: $\mathcal{Q}_{\mathrm{pole}} = +1.813949$, $\mathcal{Q}_{\mathrm{prime}} = -0.154916$, $\mathcal{Q}_{\mathrm{arch}} = -1.659033$, summing to $\mathcal{Q}_{\mathrm{total}} = 5.38 \times 10^{-23}$ ($\lambda_{\min} = 6.71 \times 10^{-23}$),
-   - $N = 12$: $\mathcal{Q}_{\mathrm{pole}} = +1.675166$, $\mathcal{Q}_{\mathrm{prime}} = -0.108101$, $\mathcal{Q}_{\mathrm{arch}} = -1.567065$, summing to $\mathcal{Q}_{\mathrm{total}} = 1.32 \times 10^{-29}$ ($\lambda_{\min} = 1.78 \times 10^{-29}$),
-   - $N = 16$: $\mathcal{Q}_{\mathrm{pole}} = +1.609630$, $\mathcal{Q}_{\mathrm{prime}} = -0.088194$, $\mathcal{Q}_{\mathrm{arch}} = -1.521436$, summing to $\mathcal{Q}_{\mathrm{total}} = 5.11 \times 10^{-35}$ ($\lambda_{\min} = 7.12 \times 10^{-35}$),
-   - $N = 20$: $\mathcal{Q}_{\mathrm{pole}} = +1.572288$, $\mathcal{Q}_{\mathrm{prime}} = -0.077529$, $\mathcal{Q}_{\mathrm{arch}} = -1.494759$, summing to $\mathcal{Q}_{\mathrm{total}} = 8.81 \times 10^{-40}$ ($\lambda_{\min} = 1.32 \times 10^{-39}$),
-   - $N = 24$: $\mathcal{Q}_{\mathrm{pole}} = +1.551652$, $\mathcal{Q}_{\mathrm{prime}} = -0.071854$, $\mathcal{Q}_{\mathrm{arch}} = -1.479798$, summing to $\mathcal{Q}_{\mathrm{total}} = 1.29 \times 10^{-43}$ ($\lambda_{\min} = 2.53 \times 10^{-43}$).
+2. **Dimension-by-Dimension Continuous-Quadrature Sum:**
+   Across all Galerkin dimensions $N \in \{4, 8, 12, 16, 20, 24\}$, the three independent components cancel from $\mathcal{O}(1)$ down to the order of $\lambda_{\min}(N)$:
+   - $N = 4$: $\mathcal{Q}_{\mathrm{pole}} = +2.206186$, $\mathcal{Q}_{\mathrm{prime}} = -0.316153$, $\mathcal{Q}_{\mathrm{arch}} = -1.890032$, summing to $\mathcal{Q}_{\mathrm{total}} = 7.82 \times 10^{-15}$ (matrix eigenvalue $\lambda_{\min} = 8.83 \times 10^{-15}$),
+   - $N = 8$: $\mathcal{Q}_{\mathrm{pole}} = +1.813949$, $\mathcal{Q}_{\mathrm{prime}} = -0.154916$, $\mathcal{Q}_{\mathrm{arch}} = -1.659033$, summing to $\mathcal{Q}_{\mathrm{total}} = 5.38 \times 10^{-23}$ (matrix eigenvalue $\lambda_{\min} = 6.71 \times 10^{-23}$),
+   - $N = 12$: $\mathcal{Q}_{\mathrm{pole}} = +1.675166$, $\mathcal{Q}_{\mathrm{prime}} = -0.108101$, $\mathcal{Q}_{\mathrm{arch}} = -1.567065$, summing to $\mathcal{Q}_{\mathrm{total}} = 1.32 \times 10^{-29}$ (matrix eigenvalue $\lambda_{\min} = 1.78 \times 10^{-29}$),
+   - $N = 16$: $\mathcal{Q}_{\mathrm{pole}} = +1.609630$, $\mathcal{Q}_{\mathrm{prime}} = -0.088194$, $\mathcal{Q}_{\mathrm{arch}} = -1.521436$, summing to $\mathcal{Q}_{\mathrm{total}} = 5.11 \times 10^{-35}$ (matrix eigenvalue $\lambda_{\min} = 7.12 \times 10^{-35}$),
+   - $N = 20$: $\mathcal{Q}_{\mathrm{pole}} = +1.572288$, $\mathcal{Q}_{\mathrm{prime}} = -0.077529$, $\mathcal{Q}_{\mathrm{arch}} = -1.494759$, summing to $\mathcal{Q}_{\mathrm{total}} = 8.81 \times 10^{-40}$ (matrix eigenvalue $\lambda_{\min} = 1.32 \times 10^{-39}$),
+   - $N = 24$: $\mathcal{Q}_{\mathrm{pole}} = +1.551652$, $\mathcal{Q}_{\mathrm{prime}} = -0.071854$, $\mathcal{Q}_{\mathrm{arch}} = -1.479798$, summing to $\mathcal{Q}_{\mathrm{total}} = 1.29 \times 10^{-43}$ (matrix eigenvalue $\lambda_{\min} = 2.53 \times 10^{-43}$).
 
-3. **Observed Continuum Equilibrium Constants ($c = 13$):**
-   In the infinite-dimensional limit:
-   $$\mathcal{Q}_{\mathrm{pole}}(\infty) \approx +1.55165219571747,$$
-   $$\mathcal{Q}_{\mathrm{prime}}(\infty) \approx -0.07185443174267,$$
-   $$\mathcal{Q}_{\mathrm{arch}}(\infty) \approx -1.47979776397480,$$
-   producing an observed numerical zero-energy balance ratio:
-   $$\frac{\mathcal{Q}_{\mathrm{pole}}(\infty)}{|\mathcal{Q}_{\mathrm{prime}}(\infty)| + |\mathcal{Q}_{\mathrm{arch}}(\infty)|} = 1.00000000000000.$$
+   The $\mathcal{O}(10^{-43})$ residual difference between the continuous-quadrature sum ($1.29 \times 10^{-43}$) and the matrix eigenvalue ($2.53 \times 10^{-43}$) reflects the minute residual difference between the continuous $R_{\max} = 80$ quadrature and the discrete Galerkin $T = 400$ truncation used to construct the matrix entries.
+
+3. **Observed Continuum Equilibrium Candidates ($c = 13$):**
+   The $N = 24$ values appear numerically stabilized and suggest the following candidate continuum values:
+   $$\mathcal{Q}_{\mathrm{pole}}^{(24)} \approx +1.55165219571747,$$
+   $$\mathcal{Q}_{\mathrm{prime}}^{(24)} \approx -0.07185443174267,$$
+   $$\mathcal{Q}_{\mathrm{arch}}^{(24)} \approx -1.47979776397480,$$
+   producing an apparent numerical balance at $N = 24$:
+   $$\frac{\mathcal{Q}_{\mathrm{pole}}^{(24)}}{|\mathcal{Q}_{\mathrm{prime}}^{(24)}| + |\mathcal{Q}_{\mathrm{arch}}^{(24)}|} = 1.00000000000000,$$
+   with values that appear stabilized over the computed dimensions.
 
 4. **Prime-Power Decomposition of the Negative Barrier:**
    Direct point-evaluation of the Volterra convolution $K_{v_{24}}(\omega_q)$ at all prime powers $q \le 13$ matches the matrix-computed prime form to 52 decimal digits ($|\text{diff}| = 1.67 \times 10^{-52}$). The lowest prime $q = 2$ provides **$98.65\%$** of the entire prime energy ($-0.0708858$), $q = 3$ accounts for **$1.34\%$** ($-0.0009658$), while contributions above $q = 7$ decay exponentially below $10^{-13}$ ($q = 11$: $-9.52 \times 10^{-28}$). At the boundary $\omega = 0$ ($q = 13$), $K_{v_{24}}(0) = 0$ identically. $\blacksquare$
 
-### Numerical Observation 6.8 (Universal Multi-$c$ Semiclassical Scaling and Arithmetic Partition)
-*Investigation across prime cutoffs $c \in \{5, 7, 11, 13, 17\}$ and dimensions $N \in \{4, 8, 12, 16, 20\}$ using the multi-parameter analysis suite (`cell47.py` and output log `cell47.out` [10]) reveals three universal laws governing the ground state:*
+### Numerical Observation 6.8 (Numerical Multi-$c$ Observations)
+*Investigation across prime cutoffs $c \in \{5, 7, 11, 13, 17\}$ and dimensions $N \in \{4, 8, 12, 16, 20\}$ using the multi-parameter analysis suite (`cell47.py` and output log `cell47.out` [10]) reveals three striking empirical patterns governing the ground state:*
 
-1. **Universality of the Scaling Ratio $\kappa$ Across Cutoffs:**
-   *Across all prime cutoffs $c \ge 7$ at $N = 20$, the scaling ratio $\kappa_c(N) = \lambda_{\min}(N) / A_0(N)$ is strictly invariant:*
+1. **Approximate Constancy of the Scaling Ratio $\kappa$ Across Cutoffs:**
+   *Across prime cutoffs $c \ge 7$ at $N = 20$, the scaling ratio $\kappa_c(N) = \lambda_{\min}(N) / A_0(N)$ shows remarkable stability:*
 
    $$\kappa_7 = 0.0024026, \quad \kappa_{11} = 0.0023670, \quad \kappa_{13} = 0.0024145, \quad \kappa_{17} = 0.0023362.$$
 
-   *While the ground-state eigenvalue $\lambda_{\min}(20)$ drops across 17 orders of magnitude (from $6.85 \times 10^{-27}$ at $c = 7$ to $1.15 \times 10^{-43}$ at $c = 17$), $\kappa$ remains constant to within $<1.6\%$ variation:*
+   *While the ground-state eigenvalue $\lambda_{\min}(20)$ drops across 17 orders of magnitude (from $6.85 \times 10^{-27}$ at $c = 7$ to $1.15 \times 10^{-43}$ at $c = 17$), the values of $\kappa_c(20)$ remain within approximately $1.6\%$ of their mean:*
 
    $$\kappa \approx 0.00238 \pm 0.00004.$$
 
-   *This establishes that $\kappa$ is a universal dimensionless geometric constant of the Connes–CvS Galerkin operator, independent of the cutoff $c$.*
+   *This suggests, but does not establish, approximate cutoff-independence of $\kappa$ across prime cutoffs $c \ge 7$.*
 
-2. **Exact WKB Semiclassical Scaling Law:**
-   *The WKB barrier tunneling action $\mathcal{S}_{\mathrm{WKB}}(N, c) = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ satisfies the exact semiclassical scaling relation:*
+2. **Observed WKB Semiclassical Scaling at $N = 20$:**
+   *The WKB barrier tunneling action $\mathcal{S}_{\mathrm{WKB}}(N, c) = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ closely tracks the semiclassical relation:*
 
    $$\frac{\mathcal{S}_{\mathrm{WKB}}(N, c)}{L} \approx \frac{\pi N}{4}.$$
 
@@ -558,10 +564,10 @@ High-precision integration and spectral evaluation across Galerkin dimensions $N
    - $c = 13$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.6681$ (*$99.75\%$ match to $5\pi$*),
    - $c = 17$: $\mathcal{S}_{\mathrm{WKB}} / L = 15.8090$ (*$99.36\%$ match to $5\pi$*).
 
-   *The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ converges monotonically toward unity as $c$ increases ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across 47 decimal orders of magnitude ($c = 17$), WKB tunneling predicts boundary extinction within $5.3\%$. The classical inflection turning point stabilizes universally at $t_{\mathrm{turn}} / L \approx 0.41$.*
+   *The three tested cutoffs give values within approximately $2.5\%$ of $\pi N / 4$. This suggests a possible semiclassical scaling relation requiring further testing in both $N$ and $c$. The ratio $\text{Actual Suppression} / \mathcal{S}_{\mathrm{WKB}}$ converges monotonically toward unity as $c$ increases ($1.121 \to 1.084 \to 1.063 \to 1.059 \to 1.054$). Across 47 decimal orders of magnitude ($c = 17$), WKB tunneling predicts boundary extinction within $5.3\%$. The classical inflection turning point stabilizes universally at $t_{\mathrm{turn}} / L \approx 0.41$.*
 
-3. **Monotonic Growth of the Discrete Prime Energy Partition:**
-   *For every cutoff $c$, exact algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$ holds. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ grows strictly monotonically with $c$:*
+3. **Prime Energy Share Across Cutoffs:**
+   *For every cutoff $c$, algebraic balance $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = \lambda_{\min}(20) \sim 10^{-17}\text{ to }10^{-44}$ holds. The fraction of negative dispersive energy shouldered by the discrete prime powers $f_{\mathrm{prime}}(c) = |\mathcal{Q}_{\mathrm{prime}}| / \mathcal{Q}_{\mathrm{pole}}$ is monotonically increasing over the tested cutoffs:*
    - $c = 5$: $2.79\%$ prime / $97.21\%$ arch,
    - $c = 7$: $3.42\%$ prime / $96.58\%$ arch,
    - $c = 11$: $4.47\%$ prime / $95.53\%$ arch,
@@ -576,22 +582,22 @@ High-precision integration and spectral evaluation across Galerkin dimensions $N
 
 The findings of this paper resolve the longstanding finite-$N$ Archimedean tail problem and clarify the relationship between Galerkin truncation and the continuous Weil quadratic form:
 
-1. **Exact Resolvent Formula and Structural Finite-$N$ Positivity (Theorem):**
-   The finite-$N$ Archimedean kernel is an exact non-asymptotic square on the real axis:
+1. **Exact Resolvent Formula and Pointwise Kernel Positivity (Theorem):**
+   The finite-$N$ Archimedean Fourier kernel is an exact non-asymptotic square on the real axis:
    $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R}.$$
-   This establishes algebraically, independently of numerical quadrature, that the Archimedean quadratic form is positive semi-definite on any finite-dimensional Galerkin subspace.
+   This establishes algebraically, independently of numerical quadrature, that the Fourier-side Archimedean kernel is pointwise non-negative for every real coefficient vector. It does not by itself imply positivity of the integrated Archimedean quadratic form, since the Archimedean density $h_+(r)$ is not everywhere non-negative.
 
 2. **The Galerkin Cutoff as a Confinement Barrier (Observation & Conjecture):**
    The finite-rank spectral gap $\lambda_{\min}(N) > 0$ is an artifact of band limitation. The finite rank $N$ prevents the trigonometric polynomial from satisfying the Dirichlet boundary condition $T(0) = 0$ identically. The boundary energy leaks out as $A_0(N) = \frac{2}{L} [T_{v_N}(0)]^2$, driving the observed numerical eigenvalue gap:
-   $$\lambda_{\min}(N) \sim \kappa_c A_0(N) \sim \widetilde{\kappa}_c \cdot c^{-N} \quad \text{(Numerical Conjecture)}.$$
+   $$\lambda_{\min}(N) \sim \kappa_c A_0(N) \longrightarrow 0 \quad \text{(Numerical Conjecture)}.$$
 
 3. **Conjectured Emergence of Smooth Compact Support (Conjecture):**
    Numerical evidence indicates that as $N \to \infty$, the ground state $T_\infty(t)$ develops infinite-order flat boundary contact ($\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$), modeled semiclassically by WKB quantum barrier penetration ($\mathcal{S}_{\mathrm{WKB}} \approx 44.36$). Conditional on this boundary flatness, all boundary jumps in the Volterra kernel vanish, and the continuous resolvent decays super-polynomially without a power-law tail.
 
-4. **Observed Tri-Partite Zero-Energy Balance (Theorem & Observation):**
-   On finite Galerkin subspaces, the three components satisfy the exact identity $\mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}(v_N) \equiv \lambda_{\min}(N)$. In the continuum limit, the three terms settle into an observed numerical equilibrium:
+4. **Observed Tri-Partite Zero-Energy Balance (Observation):**
+   On finite Galerkin subspaces, the matrix quadratic form decomposes into pole, prime, and Archimedean terms. When the Archimedean contribution is evaluated independently via continuous-variable quadrature, the three terms cancel across 43 decimal orders of magnitude to an observed numerical equilibrium at $N = 24$:
 
-   $$\mathcal{Q}_{\mathrm{pole}}(\infty) + \mathcal{Q}_{\mathrm{prime}}(\infty) + \mathcal{Q}_{\mathrm{arch}}(\infty) \approx 0,$$
+   $$\mathcal{Q}_{\mathrm{pole}}^{(24)} + \mathcal{Q}_{\mathrm{prime}}^{(24)} + \mathcal{Q}_{\mathrm{arch}}^{(24)} \approx 1.29 \times 10^{-43} \approx \lambda_{\min}(24),$$
 
    where the positive geometric dilation energy from the zeta pole ($+1.55165$) is counterbalanced by the combined dispersive negative contributions of the prime powers ($-0.07185$) and Archimedean places ($-1.47980$).
 
