@@ -1,4 +1,5 @@
 # An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form
+### Fourier–Resolvent Factorization, Reflected Autocorrelation, and Commutator Algebra
 
 **Authors:** Research Record / Connes–CvS Investigation Series  
 **Date:** September 2026  
@@ -9,7 +10,7 @@
 
 ### Abstract
 
-The truncated Weil quadratic form developed by Connes–van Suijlekom (2025) and Connes–Consani–Moscovici (2026) discretizes the explicit formula of prime number theory using a finite-rank Galerkin projection of band $N$ on a logarithmic scaling interval $[0, L] = [0, \log c]$. The omitted Archimedean tail of this truncation has historically been treated as a difficult oscillatory numerical integration problem or as an empirical asymptotic inverse-power expansion.
+The truncated Weil quadratic form developed by Connes–van Suijlekom (2025) and Connes–Consani–Moscovici (2026) discretizes the explicit formula of prime number theory using a finite-rank Galerkin projection of band $N$ on a logarithmic scaling interval $[0, L] = [0, \log c]$. In finite-dimensional computational implementations of this model, the omitted Archimedean tail has previously been treated by oscillatory numerical quadrature or empirical asymptotic inverse-power fits.
 
 In this paper, we establish the **exact algebraic solution** to the finite-$N$ Archimedean kernel and the associated commutator algebra, proving unconditionally and independently of numerical quadrature:
 
@@ -24,7 +25,7 @@ In this paper, we establish the **exact algebraic solution** to the finite-$N$ A
 3. **Spectral Lattice Sampling Identity (Theorem):** At the lattice nodes $r = a_m$, the apparent poles cancel cleanly against the envelope zeros via removable singularities, yielding the exact sampling identity:
    $$K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2 = L u_0^2, \qquad K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 = L u_m^2 \quad (m = 1, \dots, N),$$
    sampling the kernel directly into the squared Fourier coefficients.
-4. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorems):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via contour integration in the complex frequency plane, isolating the origin residue ($2v_0^2/q$), the discrete lattice poles ($2qv_m^2/(q^2+a_m^2)$), and the imaginary pole at $z = iq$. We establish the spatial Laplace duality $J(q) \equiv \frac{1}{L}\int_0^L K_v^{\mathrm{phys}}(L-y) e^{-qy} dy$ via the reflected autocorrelation kernel. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ (with $C_{\mathrm{arch}} = -\gamma - \log \pi$) as an unconditionally convergent algebraic series with an explicit $\mathcal{O}(M^{-1})$ finite-$M$ remainder bound and fast $\mathcal{O}(n^{-2})$ summand convergence, eliminating the need for numerical quadrature.
+4. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorems):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via spatial Laplace transform of the reflected autocorrelation kernel (with an independent verification via contour integration in the complex frequency plane), isolating the origin residue ($2v_0^2/q$), the discrete lattice poles ($2qv_m^2/(q^2+a_m^2)$), and the boundary leakage term. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ (with $C_{\mathrm{arch}} = -\gamma - \log \pi$) as an unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ summand convergence, yielding an explicit $\mathcal{O}(M^{-1})$ finite-$M$ remainder bound and eliminating the need for numerical quadrature.
 5. **Finite-$T$ Archimedean Cutoff Defect and Endpoint-Jet Representation (Theorem):** In finite-rank Galerkin implementations where the continuous Archimedean density is evaluated with a finite integration cutoff $T > 0$, we prove the exact identity $v^T Q_{\mathrm{arch}}^{(T)} v \equiv \frac{1}{\pi}\int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$. Consequently, the discrepancy between the Galerkin eigenvalue $\lambda_N$ and the continuous tripartite functional $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N)$ is identically the Archimedean cutoff tail $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\frac{1}{\pi}\int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_N, r, L) \, dr \equiv -\delta_T^{\mathrm{tail}}(v_N)$, resolving the exact relationship for the continuous Weil functional evaluated on the finite Galerkin test vector $v_N$. For $T > a_N = 2\pi N/L$, this tail admits an exact Laurent series $\sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L)$ in terms of endpoint derivatives $D_j = T_v^{(2j)}(0)$ and universal moment integrals $\mathcal{J}_k(T, L)$, converging geometrically with step ratio $(a_N/T)^2$. This proves that the observed $10^{-43}$ numerical residual for $v_N$ is identically continuous Archimedean cutoff tail leakage $\delta_T^{\mathrm{tail}}(v_N)$, rigorously separating the finite cutoff artifact from the infinite-dimensional continuum minimizer projection problem.
 6. **Exact Commutator Algebra and Parity Factorization (Theorem):** For the coordinate operator $M = \operatorname{diag}(n)$ and the Galerkin matrix $Q$, the commutator $[M^k, Q]$ has rank at most $2k$. Under the positive-gap condition $\lambda < \min \operatorname{spec}(Q_{\mathrm{odd}})$, parity reflection decouples the system into even and odd sectors, yielding the exact odd-sector resolvent identity:
    $$M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi, \qquad B_1 = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
@@ -58,19 +59,25 @@ $$h_+(r) = \operatorname{Re} \psi\left(\frac{1}{4} + \frac{i r}{2}\right) - \log
 
 is the smooth Archimedean density.
 
-### The Problem of the Archimedean Tail and the Role of the Toolkit
+### The Role of the Toolkit and Relationship to Connes–van Suijlekom
 
-In finite implementations, numerical quadrature of the Archimedean integral suffered from severe oscillatory cancellation errors, while asymptotic inverse-power expansions $\sum A_k / r^{2k+2}$ presented non-trivial remainder bounds. Furthermore, whether $K_{\mathrm{Fourier}}(v, r, L)$ possessed sign-oscillations that could induce negative eigenvalues at large frequencies remained an open question.
+In finite-dimensional numerical implementations of the Connes–van Suijlekom model, evaluating the Archimedean integral has previously been performed using oscillatory numerical quadrature or empirical inverse-power Laurent fits $\sum A_k / r^{2k+2}$. Furthermore, whether $K_{\mathrm{Fourier}}(v, r, L)$ possessed sign-oscillations that could induce negative eigenvalues at large frequencies remained an open question.
 
-The objective of this manuscript is to provide a **100% rigorous, pure-mathematics toolkit** that resolves all finite-$N$ algebraic and operator questions unconditionally. We establish:
-- The exact squared rational resolvent identity for $K_{\mathrm{Fourier}}$, proving pointwise non-negativity globally.
+The Connes–van Suijlekom Galerkin discretization [2] provides the underlying divided-difference framework and basis projections. The primary contribution of this manuscript is to establish the explicit Fourier–resolvent factorization:
+
+$$\boxed{\text{CvS finite Fourier amplitude} \implies \text{explicit squared amplitude} \implies \text{Neumann-resolvent formula} \implies \text{closed } J(q),}$$
+
+establishing exact closed-form algebraic solutions for the Archimedean Cauchy transform, the Weierstrass pole decomposition, and the low-rank commutator projections. No novelty is claimed for the general autocorrelation/Fourier-square principle itself.
+
+We emphasize that **every theorem and identity established in this paper is an exact, unconditional finite-$N$ mathematical statement**. We do not assert that finite-$N$ kernel non-negativity proves Weil positivity or the Riemann Hypothesis. All asymptotic questions concerning the infinite-dimensional limit $N \to \infty$ (such as solitary wave profiles, semiclassical WKB barrier tunneling, and formal Wiener–Hopf continuum scaling) are systematically investigated in the companion paper, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation* [Paper 4B].
+
+The toolkit established herein proves:
+- The exact squared rational resolvent identity for $K_{\mathrm{Fourier}}$, proving pointwise non-negativity globally on $\mathbb{R}$.
 - The operator representation of the generating function as a Neumann resolvent.
-- The closed-form contour evaluation of the Archimedean Cauchy transform $J(q)$ and the unconditionally convergent Weierstrass pole series for $\mathcal{Q}_{\mathrm{arch}}(v)$, completely eliminating numerical quadrature.
+- The closed-form evaluation of the Archimedean Cauchy transform $J(q)$ via reflected autocorrelation and the unconditionally convergent Weierstrass pole series for $\mathcal{Q}_{\mathrm{arch}}(v)$, completely eliminating numerical quadrature.
 - The finite-$T$ Archimedean cutoff defect identity and geometric endpoint-jet Laurent series, resolving the exact relationship for the Weil functional evaluated on the finite Galerkin test vector $v_N$.
 - The exact rank-$2k$ commutator algebra of the Galerkin matrix, yielding explicit closed-form representations for coordinate moments and the first-jet ratio.
 - The exact algebraic cancellation of small bound-state denominators in the odd-even resolvent coupling away from resonances.
-
-All exploratory and asymptotic questions concerning the infinite-dimensional limit $N \to \infty$ (such as solitary wave profiles, semiclassical WKB barrier tunneling, and formal Wiener–Hopf continuum scaling) are systematically investigated in the companion paper, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation* [Paper 4B].
 
 ---
 
@@ -276,8 +283,43 @@ Evaluating the integrated Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}
 
 $$J(q) \equiv \frac{1}{\pi} \int_0^\infty \frac{2 q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{2 v_0^2}{q} + \sum_{m=1}^N \frac{2 q v_m^2}{q^2 + a_m^2} - \frac{2(1 - e^{-q L})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
 
-### Proof of Theorem 5.1
-Decompose the kernel into $K_{\mathrm{Fourier}}(v, r, L) = f_1(r) + f_2(r)$ where $f_1(z) = H(z)(1 - e^{i z L})$, $f_2(z) = H(z)(1 - e^{-i z L})$, and $H(z) = \frac{1}{2} R_v(z) = \frac{1}{L z^2} [D(-1/z^2)]^2$. Extending over $(-\infty, \infty)$:
+### Primary Proof via Reflected Spatial Autocorrelation and Poisson Kernel
+By definition of the Fourier amplitude $\Phi_v(r) = \frac{1}{\sqrt{L}} \int_0^L T_v(t) e^{-i r t} \, dt$, the Fourier Archimedean kernel is the power spectrum:
+$$K_{\mathrm{Fourier}}(v, r, L) = \frac{1}{L} \left| \int_0^L T_v(t) e^{-i r t} \, dt \right|^2 = \frac{1}{L} \int_0^L \int_0^L T_v(t_1) T_v(t_2) \cos(r(t_1 - t_2)) \, dt_1 dt_2.$$
+Substituting this double integral into the Cauchy transform $J(q) = \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ and interchanging integration via Fubini's theorem (justified since $T_v$ is smooth and bounded on $[0, L]$):
+$$J(q) = \frac{1}{L} \int_0^L \int_0^L T_v(t_1) T_v(t_2) \left[ \frac{2q}{\pi} \int_0^\infty \frac{\cos(r(t_1 - t_2))}{q^2 + r^2} \, dr \right] dt_1 dt_2.$$
+The inner integral is the classical Poisson kernel:
+$$\frac{2q}{\pi} \int_0^\infty \frac{\cos(r y)}{q^2 + r^2} \, dr = e^{-q |y|} \qquad (q > 0),$$
+which yields the exact spatial representation:
+$$J(q) = \frac{1}{L} \int_0^L \int_0^L T_v(t_1) T_v(t_2) e^{-q |t_1 - t_2|} \, dt_1 dt_2.$$
+
+Expanding $T_v(t) = \sum_{m=0}^N c_m \cos(a_m t)$ where $c_0 = v_0$, $c_m = \sqrt{2} v_m$ ($m \ge 1$), and $a_m = \frac{2\pi m}{L}$ (with $a_0 = 0$):
+$$J(q) = \frac{1}{L} \sum_{m,n=0}^N c_m c_n I_{mn}(q), \qquad I_{mn}(q) \equiv \int_0^L \int_0^L \cos(a_m t_1) \cos(a_n t_2) e^{-q |t_1 - t_2|} \, dt_1 dt_2.$$
+By reflection symmetry in $t_1, t_2$, the integral decomposes over the triangle $t_2 \le t_1$:
+$$I_{mn}(q) = \int_0^L dt_1 \cos(a_m t_1) \int_0^{t_1} dt_2 \cos(a_n t_2) e^{-q(t_1 - t_2)} + \int_0^L dt_2 \cos(a_n t_2) \int_0^{t_2} dt_1 \cos(a_m t_1) e^{-q(t_2 - t_1)}.$$
+Evaluating the inner elementary integral:
+$$\int_0^{t_1} \cos(a_n t_2) e^{q t_2} \, dt_2 = \frac{q e^{q t_1} \cos(a_n t_1) + a_n e^{q t_1} \sin(a_n t_1) - q}{q^2 + a_n^2}.$$
+Multiplying by $e^{-q t_1} \cos(a_m t_1)$ and integrating $t_1 \in [0, L]$:
+1. **Orthogonality Term:**
+   $$\frac{q}{q^2 + a_n^2} \int_0^L \cos(a_m t_1) \cos(a_n t_1) \, dt_1 = \frac{q}{q^2 + a_n^2} \frac{L}{2} (1 + \delta_{m0}) \delta_{mn}.$$
+2. **Sine Cross-Term:**
+   $$\frac{a_n}{q^2 + a_n^2} \int_0^L \cos(a_m t_1) \sin(a_n t_1) \, dt_1 = 0 \qquad \forall m, n \ge 0,$$
+   since $a_k = 2\pi k / L$ implies $\sin((a_n \pm a_m)t_1)$ has integer periods over $[0, L]$.
+3. **Boundary Exponential Term:**
+   $$-\frac{q}{q^2 + a_n^2} \int_0^L e^{-q t_1} \cos(a_m t_1) \, dt_1 = -\frac{q}{q^2 + a_n^2} \operatorname{Re}\left( \frac{1 - e^{-(q - i a_m)L}}{q - i a_m} \right) = -\frac{q^2 (1 - e^{-q L})}{(q^2 + a_n^2)(q^2 + a_m^2)},$$
+   using $e^{i a_m L} = e^{i 2\pi m} = 1$.
+
+Adding the symmetric transpose ($m \leftrightarrow n$), the diagonal term doubles and the boundary term produces:
+$$I_{mn}(q) = \frac{q L (1 + \delta_{m0})}{q^2 + a_m^2} \delta_{mn} - \frac{2 q^2 (1 - e^{-q L})}{(q^2 + a_m^2)(q^2 + a_n^2)}.$$
+Summing against $\frac{1}{L} c_m c_n$:
+- For the diagonal sum:
+  $$\frac{1}{L} \sum_{m=0}^N c_m^2 \frac{q L (1 + \delta_{m0})}{q^2 + a_m^2} = \frac{2 v_0^2}{q} + \sum_{m=1}^N \frac{2 q v_m^2}{q^2 + a_m^2}.$$
+- For the boundary sum:
+  $$-\frac{2(1 - e^{-q L})}{L} \sum_{m,n=0}^N c_m c_n \frac{q^2}{(q^2 + a_m^2)(q^2 + a_n^2)} = -\frac{2(1 - e^{-q L})}{L q^2} \left[ \sum_{m=0}^N c_m \frac{q^2}{q^2 + a_m^2} \right]^2 = -\frac{2(1 - e^{-q L})}{L q^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q^2 v_m}{q^2 + a_m^2} \right]^2.$$
+This completes the direct, elementary derivation. $\blacksquare$
+
+### Alternative Proof via Complex Frequency Contour Integration
+Alternatively, Theorem 5.1 can be derived by contour integration in the complex frequency plane. Decompose the kernel into $K_{\mathrm{Fourier}}(v, r, L) = f_1(r) + f_2(r)$ where $f_1(z) = H(z)(1 - e^{i z L})$, $f_2(z) = H(z)(1 - e^{-i z L})$, and $H(z) = \frac{1}{2} R_v(z) = \frac{1}{L z^2} [D(-1/z^2)]^2$. Extending over $(-\infty, \infty)$:
 
 $$J(q) = \frac{q}{\pi} \lim_{\epsilon \to 0^+} \left[ \int_{C_\epsilon^+} \frac{f_1(z)}{z^2 + q^2} \, dz + \int_{C_\epsilon^+} \frac{f_2(z)}{z^2 + q^2} \, dz \right],$$
 
@@ -295,19 +337,22 @@ where $C_\epsilon^+$ is the real axis indented into the upper half-plane $\mathb
    - At $z = \pm a_m$: The double pole of $H(z)$ is regularized by the zero of $1 - e^{-izL}$, yielding residue $\operatorname{Res}_{z = \pm a_m} f_2(z) = \frac{i}{2} v_m^2$. Evaluating in the integrand gives $-2\pi i \frac{i v_m^2}{q^2 + a_m^2} = \frac{2\pi v_m^2}{q^2 + a_m^2}$. Multiplying by $\frac{q}{\pi}$ gives:
      $$\frac{2 q v_m^2}{q^2 + a_m^2}.$$
 
-Summing all contributions proves the identity. $\blacksquare$
+Summing all contributions matches the result of the primary proof identically. $\blacksquare$
 
 ### Theorem 5.2 (Spatial Laplace Duality via the Reflected Autocorrelation Kernel)
 *The Archimedean Cauchy transform $J(q)$ is identically the spatial Laplace transform of the reflected physical kernel:*
 
 $$J(q) \equiv \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-q y} \, dy \qquad \forall q > 0.$$
 
-*Proof.* By the spatial autocorrelation representation of the Fourier kernel (Section 2.2):
-$$K_{\mathrm{Fourier}}(v, r, L) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \cos(r y) \, dy.$$
-Substituting this into the definition of the Cauchy transform $J(q) = \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ and interchanging integrals via Fubini's theorem (valid since $K_v^{\mathrm{phys}}$ is smooth on $[0, L]$):
-$$J(q) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \left[ \frac{2q}{\pi} \int_0^\infty \frac{\cos(r y)}{q^2 + r^2} \, dr \right] dy.$$
-The inner integral is the standard contour evaluation $\frac{2q}{\pi} \int_0^\infty \frac{\cos(ry)}{q^2 + r^2} dr = e^{-qy}$ for $y \ge 0$ and $q > 0$. Therefore:
+*Proof.* In the spatial representation of $J(q)$ derived in the primary proof of Theorem 5.1:
+$$J(q) = \frac{1}{L} \int_0^L \int_0^L T_v(t_1) T_v(t_2) e^{-q|t_1 - t_2|} \, dt_1 dt_2.$$
+Splitting into $t_1 \ge t_2$ and setting $y = t_1 - t_2 \in [0, L]$ (with $t_2 = t \in [0, L-y]$), symmetry gives:
+$$J(q) = \frac{2}{L} \int_0^L e^{-qy} \left( \int_0^{L-y} T_v(t) T_v(t + y) \, dt \right) dy.$$
+By the reflection symmetry $T_v(L - s) = T_v(s)$ on $[0, L]$, setting $s = t + y$ yields $T_v(t + y) = T_v(L - y - t)$. Recalling the physical Volterra convolution $K_v^{\mathrm{phys}}(x) = 2 \int_0^x T_v(t) T_v(x - t) dt$ (Section 2.1), evaluating at $x = L - y$ gives:
+$$K_v^{\mathrm{phys}}(L - y) = 2 \int_0^{L-y} T_v(t) T_v(L - y - t) \, dt = 2 \int_0^{L-y} T_v(t) T_v(t + y) \, dt.$$
+Substituting this into the double integral yields:
 $$J(q) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-q y} \, dy.$$
+
 *Verification on Constant Wave:* Taking $v = (1, 0, \dots, 0)$, we have $T_v(t) = 1$, whence $K_v^{\mathrm{phys}}(x) = 2 \int_0^x 1 \cdot 1 \, dt = 2x$, and $K_v^{\mathrm{phys}}(L - y) = 2(L - y)$. Evaluating the Laplace transform:
 $$\frac{1}{L} \int_0^L 2(L - y) e^{-qy} \, dy = \frac{2}{q} - \frac{2(1 - e^{-qL})}{L q^2},$$
 which matches the closed-form evaluation from Theorem 5.1 identically. $\blacksquare$
@@ -360,16 +405,27 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) \equiv C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}
    Since $\sum_{n=1}^\infty n^{-2} = \frac{\pi^2}{6} < \infty$, the series converges absolutely and unconditionally with fast $\mathcal{O}(n^{-2})$ convergence. $\blacksquare$
 
 ### Corollary 5.4 (Exact Closed-Form Digamma Identity for $\mathcal{Q}_{\mathrm{arch}}(v)$)
-*By summing the harmonic difference and the discrete lattice pole series in Corollary 5.3 analytically in terms of the digamma function $\psi(z)$, the Archimedean quadratic form reduces to the exact discrete lattice sum plus an exponentially suppressed boundary leakage term:*
+*By summing the harmonic difference and the discrete lattice pole series in Corollary 5.3 analytically in terms of the digamma function $\psi(z)$, the Archimedean quadratic form decomposes into the exact discrete lattice sum plus an exponentially suppressed boundary leakage term:*
 
-$$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2,$$
+$$\mathcal{Q}_{\mathrm{arch}}(v) = \mathcal{Q}_{\mathrm{arch}}^{\mathrm{lattice}}(v) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{leakage}}(v),$$
 
-*where $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$.*
+*where the discrete lattice contribution is:*
+$$\mathcal{Q}_{\mathrm{arch}}^{\mathrm{lattice}}(v) \equiv h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m),$$
+*and the boundary leakage is:*
+$$\mathcal{Q}_{\mathrm{arch}}^{\mathrm{leakage}}(v) \equiv \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2 = \sum_{n=0}^\infty \frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ D\left(\frac{1}{q_n^2}\right) \right]^2 \ge 0,$$
+*with $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ and $q_n = 2n + 1/2$.*
 
-*Proof.* In the summand of Corollary 5.3, write $\frac{\|v\|_2^2}{n+1} - J(q_n) = (\frac{\|v\|_2^2}{n+1} - \frac{2\|v\|_2^2}{q_n}) + (\frac{2\|v\|_2^2}{q_n} - J(q_n))$. Summing the first part gives $\|v\|_2^2 \sum_{n=0}^\infty (\frac{1}{n+1} - \frac{1}{n+1/4}) = $\|v\|_2^2 (\psi(1/4) + \gamma)$, which combined with $C_{\mathrm{arch}}\|v\|_2^2 = (-\gamma - \log\pi)\|v\|_2^2$ yields $(\psi(1/4) - \log\pi)\|v\|_2^2 = h_+(0)\|v\|_2^2$. For the second part, using the identity $\frac{2\|v\|_2^2}{q_n} - J(q_n) = \sum_{m=1}^N \frac{2 a_m^2 v_m^2}{q_n(q_n^2 + a_m^2)} + \text{boundary term}$, summing over $n$ using $\sum_{n=0}^\infty \frac{2 a_m^2}{q_n(q_n^2 + a_m^2)} = \operatorname{Re}\psi(1/4 + i a_m/2) - \psi(1/4) = h_+(a_m) - h_+(0)$ yields $\sum_{m=1}^N v_m^2 [h_+(a_m) - h_+(0)]$. Adding to $h_+(0)\|v\|_2^2$ cancels the $-h_+(0)\sum v_m^2$ term, leaving $h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m)$ plus the boundary sum. $\blacksquare$
+*Proof.* In the summand of Corollary 5.3, write $\frac{\|v\|_2^2}{n+1} - J(q_n) = (\frac{\|v\|_2^2}{n+1} - \frac{2\|v\|_2^2}{q_n}) + (\frac{2\|v\|_2^2}{q_n} - J(q_n))$. Summing the first part gives $\|v\|_2^2 \sum_{n=0}^\infty (\frac{1}{n+1} - \frac{1}{n+1/4}) = \|v\|_2^2 (\psi(1/4) + \gamma)$, which combined with $C_{\mathrm{arch}}\|v\|_2^2 = (-\gamma - \log\pi)\|v\|_2^2$ yields $(\psi(1/4) - \log\pi)\|v\|_2^2 = h_+(0)\|v\|_2^2$. For the second part, using the identity $\frac{2\|v\|_2^2}{q_n} - J(q_n) = \sum_{m=1}^N \frac{2 a_m^2 v_m^2}{q_n(q_n^2 + a_m^2)} + \text{boundary term}$, summing over $n$ using $\sum_{n=0}^\infty \frac{2 a_m^2}{q_n(q_n^2 + a_m^2)} = \operatorname{Re}\psi(1/4 + i a_m/2) - \psi(1/4) = h_+(a_m) - h_+(0)$ yields $\sum_{m=1}^N v_m^2 [h_+(a_m) - h_+(0)]$. Adding to $h_+(0)\|v\|_2^2$ cancels the $-h_+(0)\sum v_m^2$ term, leaving $h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m)$ plus the boundary sum. $\blacksquare$
+
+### Corollary 5.4.1 (Exact Lattice Lower Bound)
+*Because $L > 0$, $q_n > 0$, and the boundary summand involves the square $[D(1/q_n^2)]^2$, every term in the boundary leakage series $\mathcal{Q}_{\mathrm{arch}}^{\mathrm{leakage}}(v)$ is non-negative:*
+$$\frac{2(1 - e^{-q_n L})}{L q_n^2} \left[ D\left(\frac{1}{q_n^2}\right) \right]^2 \ge 0 \qquad \forall n \ge 0.$$
+*Consequently, the discrete lattice sum provides an unconditional lower bound on the Archimedean quadratic form for every canonical vector $v$ and all finite $N$:*
+
+$$\mathcal{Q}_{\mathrm{arch}}(v) \ge h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m).$$
 
 ### Theorem 5.5 (Finite-$T$ Archimedean Cutoff Defect and Endpoint-Jet Representation)
-*Let $Q_{\mathrm{arch}}^{(T)}$ be the finite-cutoff Galerkin Archimedean matrix of band $N$ defined via divided differences of the cutoff test function $\psi_{\mathrm{arch}}^{(T)}(x) = \frac{1}{\pi^2}\int_0^T h_+(r) \operatorname{Re}\hat{S}_x(r) \, dr$ for $T > 0$.*
+*Let $Q_{\mathrm{arch}}^{(T)}$ be the finite-cutoff Galerkin Archimedean matrix of band $N$ defined via divided differences of the cutoff test function $\psi_{\mathrm{arch}}^{(T)}(x) = \frac{1}{2\pi^2}\int_{-T}^T h_+(r) \operatorname{Re}\hat{S}_x(r) \, dr$ for $T > 0$.*
 
 1. **Exact Divided-Difference Integral Identity:**
    *For any canonical coefficient vector $v \in \mathbb{R}^{N+1}$ corresponding to the even full vector $u \in \mathbb{R}^{2N+1}$, the matrix quadratic form is identically equal to the continuous Fourier integral truncated at $T$:*
@@ -383,7 +439,7 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
 3. **Taylor Endpoint-Jet Laurent Decomposition:**
    *For any cutoff $T > a_N = \frac{2\pi N}{L}$, the rational resolvent $R_v(r) = \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2}\sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} \right]^2$ converges uniformly on $[T, \infty)$ as the Laurent series:*
    $$R_v(r) = \sum_{k=0}^\infty \frac{A_k(N)}{r^{2k+2}}, \qquad A_k(N) = \frac{2}{L} (-1)^k \sum_{j=0}^k D_j D_{k-j},$$
-   *where $D_j = T_v^{(2j)}(0)$ are the physical endpoint derivatives (Theorem 3.2). Consequently, the tail defect admits the exact series representation:*
+   *where $D_0 = T_v(0) = v_0 + \sqrt{2}\sum_{m=1}^N v_m$ and $D_j = T_v^{(2j)}(0) = (-1)^j \sqrt{2}\sum_{m=1}^N a_m^{2j} v_m$ ($j \ge 1$) are the physical endpoint derivatives (Theorem 3.2). Consequently, the tail defect admits the exact series representation:*
    $$\delta_T^{\mathrm{tail}}(v_N) = \sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L),$$
    *where the universal tail moments:*
    $$\mathcal{J}_k(T, L) \equiv \frac{1}{\pi} \int_T^\infty \frac{h_+(r) (1 - \cos(rL))}{r^{2k+2}} \, dr$$
@@ -399,14 +455,14 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
    *where $C_0(v, L, T) \equiv \frac{8 (\log T + 1)}{\pi L} \|v\|_1^2$ is strictly independent of the truncation order $K$ and bandwidth $a_N$. Consequently, the Laurent series converges unconditionally and geometrically with base ratio $(a_N/T)^2 < 1$. Away from non-generic algebraic cancellations among the endpoint derivatives, successive non-vanishing terms scale with this characteristic geometric step ratio.*
 
 *Proof.*
-1. **Divided-Difference Integral Identity:**
-   In the Connes–van Suijlekom Galerkin discretization [2, 3], the Archimedean coordinate function $\psi_{\mathrm{arch}}^{(T)}(x)$ is defined by integrating the smooth test-function transform $S_x(r) = \int_{-L/2}^{L/2} e^{i r y} \frac{\cos(2\pi x y / L)}{L/2} dy$ over $[-T, T]$ against $h_+(r)$:
-   $$\psi_{\mathrm{arch}}^{(T)}(x) = \frac{1}{2\pi^2} \int_{-T}^T h_+(r) S_x(r) \, dr.$$
-   The matrix entries $(Q_{\mathrm{arch}}^{(T)})_{mn}$ are defined by divided differences for $m \ne n$ and derivatives for $m = n$. Interchanging the finite sum over $m, n \in \{-N, \dots, N\}$ with the compact Riemann integral on $[-T, T]$:
-   $$u^T Q_{\mathrm{arch}}^{(T)} u = \sum_{m,n=-N}^N u_m u_n (Q_{\mathrm{arch}}^{(T)})_{mn} = \frac{1}{2\pi^2} \int_{-T}^T h_+(r) \left[ \sum_{m,n=-N}^N u_m u_n \frac{S_m(r) - S_n(r)}{m - n} \right] dr.$$
-   For any even coefficient vector $u$ ($u_{-m} = u_m$), the discrete bilinear form inside the integral evaluates via the Fourier-side kernel identity (Theorem 4.1 & Theorem 4.3) identically to $2\pi K_{\mathrm{Fourier}}(v, r, L)$. Since $h_+(r)$ and $K_{\mathrm{Fourier}}(v, r, L)$ are even functions of $r$:
-   $$\frac{1}{2\pi^2} \int_{-T}^T h_+(r) \big[ 2\pi K_{\mathrm{Fourier}}(v, r, L) \big] dr = \frac{1}{\pi} \int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr,$$
-   establishing identity (1) identically for every $T > 0$.
+1. **Divided-Difference Integral Identity and Constant Normalization:**
+   In the Connes–van Suijlekom Galerkin discretization [2, 3], the Archimedean coordinate function $\psi_{\mathrm{arch}}^{(T)}(x)$ is defined by integrating the smooth test-function transform $S_x(r) = \int_{-L/2}^{L/2} e^{i r y} \frac{\cos(2\pi x y / L)}{L/2} dy$ over $[-T, T]$ against the Archimedean weight $h_+(r)$:
+   $$\psi_{\mathrm{arch}}^{(T)}(x) = \frac{1}{2\pi^2} \int_{-T}^T h_+(r) \operatorname{Re} S_x(r) \, dr.$$
+   The matrix entries $(Q_{\mathrm{arch}}^{(T)})_{mn}$ are defined by divided differences for $m \ne n$ and derivatives for $m = n$. Contracting with the full symmetric Fourier coefficient vector $u \in \mathbb{R}^{2N+1}$ ($u_{-m} = u_m$) and interchanging the finite sum with the compact Riemann integral on $[-T, T]$:
+   $$u^T Q_{\mathrm{arch}}^{(T)} u = \sum_{m,n=-N}^N u_m u_n (Q_{\mathrm{arch}}^{(T)})_{mn} = \frac{1}{2\pi^2} \int_{-T}^T h_+(r) \left[ \sum_{m,n=-N}^N u_m u_n \frac{\operatorname{Re} S_m(r) - \operatorname{Re} S_n(r)}{m - n} \right] dr.$$
+   For any symmetric vector $u$, the discrete divided-difference bilinear form inside the brackets evaluates identically to $\pi K_{\mathrm{Fourier}}(v, r, L)$ (Theorem 4.1 & Theorem 4.3). Because both $h_+(r)$ and $K_{\mathrm{Fourier}}(v, r, L)$ are even functions of $r$, the integral over $[-T, T]$ is exactly $2 \int_0^T$:
+   $$\frac{1}{2\pi^2} \int_{-T}^T h_+(r) \Big[ \pi K_{\mathrm{Fourier}}(v, r, L) \Big] dr = \frac{1}{2\pi^2} \cdot 2 \pi \int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{1}{\pi} \int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr.$$
+   The normalization constants cancel identically: $\frac{1}{2\pi^2} \times \pi \times 2 = \frac{1}{\pi}$, establishing identity (1) unconditionally for every $T > 0$.
 
 2. **Exact Archimedean Cutoff Defect:**
    The full discrete Galerkin matrix is $Q^{(T)} = Q_{\mathrm{arch}}^{(T)} + Q_{\mathrm{pole}} + Q_{\mathrm{prime}}$. Since the pole and prime matrices have no frequency cutoff and match their continuous functional counterparts identically ($u_N^T Q_{\mathrm{pole}} u_N = \mathcal{Q}_{\mathrm{pole}}(v_N)$ and $u_N^T Q_{\mathrm{prime}} u_N = \mathcal{Q}_{\mathrm{prime}}(v_N)$), subtracting the exact continuous functional $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{(\infty)}(v_N)$ gives:
@@ -418,7 +474,9 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
    $$\frac{r v_m}{r^2 - a_m^2} = \frac{v_m}{r} \frac{1}{1 - a_m^2 / r^2} = \sum_{j=0}^\infty \frac{a_m^{2j} v_m}{r^{2j+1}}.$$
    Summing over $m$ and adding $v_0/r$:
    $$\frac{v_0}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} = \frac{1}{r} \left[ v_0 + \sqrt{2}\sum_{m=1}^N v_m + \sum_{j=1}^\infty \frac{\sqrt{2}\sum_{m=1}^N a_m^{2j} v_m}{r^{2j}} \right] = \sum_{j=0}^\infty \frac{(-1)^j D_j}{r^{2j+1}},$$
-   where $D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m = T_v(0)$ and $D_j = (-1)^j \sqrt{2}\sum_{m=1}^N a_m^{2j} v_m = T_v^{(2j)}(0)$ for $j \ge 1$ are the physical endpoint derivatives (Theorem 3.2).
+   where the endpoint derivatives (Theorem 3.2) are explicitly given by:
+   $$D_0 \equiv T_v(0) = v_0 + \sqrt{2}\sum_{m=1}^N v_m, \qquad D_j \equiv T_v^{(2j)}(0) = (-1)^j \sqrt{2}\sum_{m=1}^N a_m^{2j} v_m \quad (j \ge 1).$$
+   (Note that the constant mode $v_0$ has vanishing derivatives of positive order, so $v_0$ contributes strictly to $D_0$ and does not appear in $D_j$ for $j \ge 1$.)
    Squaring this series and taking the Cauchy product yields:
    $$R_v(r) = \frac{2}{L} \left[ \sum_{j=0}^\infty \frac{(-1)^j D_j}{r^{2j+1}} \right]^2 = \sum_{k=0}^\infty \frac{A_k(N)}{r^{2k+2}}, \qquad A_k(N) = \frac{2}{L} (-1)^k \sum_{j=0}^k D_j D_{k-j}.$$
    Since $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ (Theorem 4.1), substituting into the tail integral gives $\delta_T^{\mathrm{tail}}(v_N) = \sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L)$. Term-by-term integration is justified by the dominated convergence theorem, as the series converges uniformly on $[T, \infty)$ and $h_+(r)(1 - \cos(rL)) = \mathcal{O}(\log r)$.
@@ -652,10 +710,11 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Pointwise Kernel Positivity** | $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ | Theorem 4.1 | Proves Fourier Archimedean kernel is globally non-negative for all real $r$. |
 | **Universal Factorization** | $\Phi_v(r) = \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D(-1/r^2)$ | Corollary 4.2 | Factors entire amplitude into universal sinc and operator resolvent. |
 | **Lattice Sampling Identity** | $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | Theorem 4.3 | Samples squared Fourier coefficients orthogonally at discrete lattice frequencies. |
-| **Cauchy Transform Identity** | Closed algebraic form for $J(q)$ | Theorem 5.1 | Evaluates Archimedean Cauchy transform in closed form via contour integration. |
+| **Cauchy Transform Identity** | Closed algebraic form for $J(q)$ | Theorem 5.1 | Evaluates Archimedean Cauchy transform in closed form via reflected autocorrelation and contour integration. |
 | **Spatial Laplace Duality** | $J(q) = \frac{1}{L}\int_0^L K_v^{\mathrm{phys}}(L-y) e^{-qy} dy$ | Theorem 5.2 | Duality between complex frequency Cauchy transform and reflected spatial autocorrelation. |
 | **Weierstrass Pole Series** | $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ | Corollary 5.3 | Unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ convergence. |
-| **Digamma Closed Form** | $\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum v_m^2 h_+(a_m) + \text{boundary}$ | Corollary 5.4 | Closed-form evaluation summing harmonic and lattice modes analytically. |
+| **Digamma Closed Form** | $\mathcal{Q}_{\mathrm{arch}}(v) = \mathcal{Q}_{\mathrm{arch}}^{\mathrm{lattice}}(v) + \mathcal{Q}_{\mathrm{arch}}^{\mathrm{leakage}}(v)$ | Corollary 5.4 | Closed-form evaluation summing harmonic and lattice modes analytically. |
+| **Lattice Lower Bound** | $\mathcal{Q}_{\mathrm{arch}}(v) \ge h_+(0) v_0^2 + \sum v_m^2 h_+(a_m)$ | Corollary 5.4.1 | Establishes discrete diagonal lattice sum as an unconditional lower bound on $\mathcal{Q}_{\mathrm{arch}}(v)$. |
 | **Finite-$T$ Cutoff Defect** | $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\delta_T^{\mathrm{tail}}(v_N)$ | Theorem 5.5 | Proves residual on $v_N$ is identically Archimedean cutoff tail leakage; geometric jet expansion. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
@@ -685,7 +744,7 @@ The exact algebraic identities and theorems established in this manuscript were 
 | Theorem 3.2 | Operator resolvent & Taylor jet hierarchy $D_k = T_v^{(2k)}(0)$ | `cell38.py`, `cell43.py` | `cell38.out`, `cell43.out` |
 | Theorem 4.3 | Lattice sampling identity $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | `cell32.py` | `cell32.out` |
 | Theorem 5.1 & Theorem 5.2 | Exact Cauchy transform $J(q)$ & reflected Laplace duality | `cell56.py` | `cell56.out` |
-| Corollary 5.3 & Corollary 5.4 | Weierstrass pole decomposition & exact digamma closed form | `cell56.py` | `cell56.out` |
+| Corollary 5.3, 5.4 & 5.4.1 | Weierstrass pole series, digamma closed form & lattice lower bound | `cell56.py` | `cell56.out` |
 | Theorem 5.5 | Finite-$T$ Archimedean cutoff defect & endpoint-jet reconstruction | `cell57.py` | `cell57.out` |
 | Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
