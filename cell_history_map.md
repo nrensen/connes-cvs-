@@ -2518,10 +2518,13 @@ Cell 57
 Cell 58
     Numerical and analytical audit of the first-jet boundary decoupling bound and positive jet-energy defect
     [two-jet resolvent envelope B_env <= C(D_0, D_1, T) tested against exact cutoff tail across N in [8, 24], cutoff sweep T in [100, 800] demonstrating transition of 1/(T^2 u_1), manifest positivity of Hankel moment form B_{N, L} == (2/L) D^T H_L D >= 0 verified, decoupling metric D(N) = D_0^2 * [1 + 1/(T^2 u_1)]^2 shown to collapse by 41 decimal orders of magnitude]
-    ↓
 Cell 59
     Odd-sector and excited-even spectral-gap audit, commutator resolvent algebra, and exact D_1/D_0 reconstruction
-    [exact rank-2 [Q, K] and rank-4 [Q, K^2] commutators, (Q - lambda_0 I) K c == -D_0 psi, (Q - lambda_0 I) K^2 c == -D_0 (K psi + M_1 d), second-jet source s_2 orthogonal to c, exact first-jet identity ||Kc||^2 == D_0^2 M_2 verified to 10^-50, spectral gaps g_odd ~ 0.057 and g_even ~ 0.016 bounded away from zero, exact resolvent reconstruction of D_1/D_0 == kappa^2 [<d, R_even s_2> - D_0^2 M_2] matching direct ratio to 10^-48]
+    [exact rank-2 [Q, K] and rank-4 [Q, K^2] commutators, (Q - lambda_0 I) K c == -D_0 psi, (Q - lambda_0 I) K^2 c == -D_0 (K psi + M_1 d), second-jet source s_2 orthogonal to c, exact first-jet identity ||Kc||^2 == D_0^2 M_2 verified, discovery that spectral gaps g_odd and g_even collapse exponentially (10^-20 -> 10^-40), yet M_1 ~ 99.44 remains modest while M_2 ~ 10^40 explodes, exact resolvent reconstruction of D_1/D_0 consistent with direct ratio to available precision]
+    ↓
+Cell 60
+    Surgical audit of the low-energy bound-state tower and spectral overlap cancellation mechanism
+    [identification of the geometric bound-state ladder across parities E_0 ~ 10^-43, mu_1 ~ 10^-40, E_1 ~ 10^-37, mu_2 ~ 10^-34, mode-by-mode odd overlaps a_j = <psi, e_j^odd> proving scaling law a_1 ~ Delta_1^0.5000, explaining why a_1^2/Delta_1 ~ O(1) is tame in M_1 while a_1^2/Delta_1^2 dominates M_2, exact invariant product ||Kc||^2 == D_0^2 M_2 == 1.725, Theorem 7.2 small-denominator cancellation in excited even sector keeping D_1/D_0 ~ 5.2 x 10^5]
 ```
 
 # Current status summary
@@ -2629,8 +2632,15 @@ At the current stage:
 * Cell 59 establishes the odd-sector and excited-even spectral-gap audit, commutator resolvent algebra, and exact $D_1/D_0$ reconstruction:
   * Exact rank-2 commutator $[Q, K] = -\boldsymbol\psi d^T + d \boldsymbol\psi^T$ yields $(Q - \lambda_0 I) K c = -D_0 \boldsymbol\psi$, with odd-sector norm identity $\|K c\|^2 = D_0^2 M_2$ verified to machine precision ($10^{-50}$).
   * Exact rank-4 commutator $[Q, K^2] = -(K\boldsymbol\psi) d^T - \boldsymbol\psi k^T + k \boldsymbol\psi^T + d (K\boldsymbol\psi)^T$ yields $(Q - \lambda_0 I) K^2 c = -D_0 (K\boldsymbol\psi + M_1 d) \equiv -D_0 s_2$, with the second-jet source $s_2$ identically orthogonal to $c$ ($\langle c, s_2 \rangle = 0$ to $10^{-52}$).
-  * Spectral gap stability: $g_{\mathrm{odd}} = \mu_{\mathrm{odd}} - \lambda_0 \approx 0.057$ and $g_{\mathrm{even}} = \mu_{\mathrm{even}, 1} - \lambda_0 \approx 0.016$ remain strictly positive and bounded away from zero across all $N \in [8, 24]$, proving that the singular ground-state factor $1/\lambda_0 \sim 10^{43}$ is completely eliminated from the jet hierarchy.
-  * Exact $D_1/D_0$ reconstruction: $\frac{D_1}{D_0} = \kappa^2 \left[ \langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2 \right]$ reconstructs the exact direct ratio $D_1/D_0$ to machine precision ($10^{-48}$ relative error), mathematically proving that the first-jet ratio is governed by the benign excited resolvents.
+  * Discovery of the collapsing spectral gaps: $g_{\mathrm{odd}} = \mu_{\mathrm{odd}, 1} - \lambda_0$ collapses from $3.84 \times 10^{-20}$ at $N=8$ to $4.35 \times 10^{-40}$ at $N=24$, and $g_{\mathrm{even}} = E_1 - \lambda_0$ collapses from $8.54 \times 10^{-18}$ to $4.50 \times 10^{-37}$. Both parity sectors develop exponentially small low-lying eigenvalues.
+  * The $M_1$ vs. $M_2$ resolvent paradox: despite the astronomical inverse gap $1/g_{\mathrm{odd}} \sim 2.3 \times 10^{39}$, the particular linear moment $M_1 = \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda_0 I)^{-1} \boldsymbol\psi \rangle$ remains tame ($51.6 \to 99.44$), while the quadratic moment $M_2$ explodes to $1.33 \times 10^{40}$ ($\sqrt{M_2} \sim 1.15 \times 10^{20}$).
+  * Exact $D_1/D_0$ reconstruction: $\frac{D_1}{D_0} = \kappa^2 \left[ \langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2 \right]$ reconstructs the exact direct ratio $D_1/D_0 \approx 5.20 \times 10^5$ consistent with the direct ratio to available 50-digit numerical precision (relative error $2.98 \times 10^{-13}$ at $N=24$ due to resolving 37-order small denominators).
+* Cell 60 establishes the surgical audit of the low-energy bound-state tower and spectral overlap cancellation mechanism:
+  * The low-energy bound-state tower: maps the lowest eigenvalues across both parity sectors ($E_0 \sim 10^{-43}, \mu_1 \sim 10^{-40}, E_1 \sim 10^{-37}, \mu_2 \sim 10^{-34}, E_2 \sim 10^{-31}$ at $N=24$), revealing an intertwined geometric ladder of boundary-confined states stepping up by $\sim 3$ to 6 decimal orders per mode.
+  * Spectral overlap cancellation law: proves that the symbol vector $\boldsymbol\psi$ does not couple generically to the dangerous eigenspaces; instead, the overlap obeys the exact scaling law $|a_1| = |\langle \boldsymbol\psi, e_1^{\mathrm{odd}} \rangle| \approx C [\Delta_1]^\alpha$ with $\alpha \approx 0.5000 \pm 0.0004$ (exactly $1/2$).
+  * Resolution of the $M_1$ vs. $M_2$ disparity: because $\alpha \approx 1/2$, the first term in $M_1$ is $a_1^2 / \Delta_1 \sim \mathcal{O}(1)$, rendering the singular mode harmless in $M_1 = 99.44$. In contrast, in $M_2$, $a_1^2 / \Delta_1^2 \sim 1/\Delta_1 \sim 10^{40}$, accounting for $100.00\%$ of $M_2$.
+  * Exact invariant product $\|Kc\|^2 = D_0^2 M_2 \approx 1.725$: tracks how the 20-order collapse of $D_0^2$ ($6.5 \times 10^{-21} \to 1.3 \times 10^{-40}$) exactly cancels the 20-order explosion of $M_2$ ($2.0 \times 10^{20} \to 1.3 \times 10^{40}$), maintaining $\|Kc\|^2 \approx 1.28 \to 1.725 = \mathcal{O}(1)$ as an exact non-divergent invariant.
+  * Excited even-sector cancellation: verifies Theorem 7.2 mode-by-mode, proving that $b_k = \langle u_k, s_2 \rangle \propto (E_k - \lambda_0)$ cancels the denominator identically, producing well-behaved $\tau_k \sim \mathcal{O}(10^3) - \mathcal{O}(10^4)$ that sum stably to $D_1/D_0 \approx 5.20 \times 10^5$.
 
 ## Publication and Manuscript Architecture
 

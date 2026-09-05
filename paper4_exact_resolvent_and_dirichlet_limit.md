@@ -616,7 +616,7 @@ The exact algebraic identities and theorems established in this manuscript were 
 | Theorem 5.5 | Finite-$T$ Archimedean cutoff defect & endpoint-jet reconstruction | `cell57.py` | `cell57.out` |
 | Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
-| Proposition 6.3 & Theorem 7.3 | Exact $K$ & $K^2$ commutators, spectral gap stability & $D_1/D_0$ reconstruction | `cell59.py` | `cell59.out` |
+| Proposition 6.3 & Theorem 7.3 | Exact $K$ & $K^2$ commutators, first-jet norm identity & $D_1/D_0$ reconstruction | `cell59.py` | `cell59.out` |
 | Theorem 7.1 | Exact Archimedean resolvent first-jet identity | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 7.2 | Small-denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
 
