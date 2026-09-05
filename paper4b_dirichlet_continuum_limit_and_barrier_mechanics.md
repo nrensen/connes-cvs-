@@ -507,50 +507,89 @@ Auditing this conjecture against the exact algebraic identities established in P
    where $\beta(4) \approx 0.98894455$ is the Dirichlet beta function at 4.
 
 3. **The Two-Jet Resolvent Bound and the First-Jet Scale $u_1$:**
-   Rather than restricting attention to a fixed profile $\tau$, the exact rational resolvent $R_v(r)$ permits a uniform two-jet comparison bound. Using the algebraic decomposition:
+   Rather than restricting attention to a fixed profile $\tau$, the exact rational resolvent $R_v(r)$ permits a two-jet comparison bound. Using the algebraic decomposition:
    $$\frac{r}{r^2 - a_m^2} = \frac{1}{r} + \frac{a_m^2}{r(r^2 - a_m^2)},$$
    the resolvent separates into the boundary value $D_0$ and the first-derivative jet $D_1 = -\sqrt{2}\sum_{m=1}^N a_m^2 v_m$:
    $$R_v(r) = \frac{D_0}{r} + \frac{\sqrt{2}}{r} \sum_{m=1}^N \frac{a_m^2 v_m}{r^2 - a_m^2}.$$
    For $r \ge T > a_N = 2\pi N / L$, since $\frac{1}{r^2 - a_m^2} \le \frac{1}{r^2 [1 - (a_N/T)^2]}$, we obtain the pointwise inequality:
    $$\left| R_v(r) - \frac{D_0}{r} \right| \le \frac{|D_1|}{r^3 \big[ 1 - (a_N/T)^2 \big]}.$$
-   Squaring and integrating against the Archimedean weight $h_+(r)(1 - \cos(rL))$ over $[T, \infty)$ yields the two-jet upper envelope:
-   $$B_{N, L} \le \frac{C \log T}{L T} \left( |D_0| + \frac{|D_1|}{T^2 \big[ 1 - (a_N/T)^2 \big]} \right)^2 = \frac{C D_0^2 \log T}{L T} \left( 1 + \frac{1}{T^2 u_1 \big[ 1 - (a_N/T)^2 \big]} \right)^2,$$
-   where $u_1 \equiv |D_0 / D_1|$ is the physical first-jet cancellation scale established in Cell 54.
+   Squaring and integrating against the Archimedean weight $h_+(r)(1 - \cos(rL))$ over $[T, \infty)$ yields the proposed two-jet upper envelope:
+   $$\mathcal{B}_{\mathrm{env}} \equiv \frac{C D_0^2 \log T}{L T} \left( 1 + \frac{1}{T^2 u_1 \big[ 1 - (a_N/T)^2 \big]} \right)^2, \qquad u_1 \equiv \left| \frac{D_0}{D_1} \right|,$$
+   where $u_1$ is the physical first-jet cancellation scale established in Cell 54.
 
-4. **Physical Scale Matching at $N = 24$:**
-   At $N = 24$, $D_0 \approx 1.138 \times 10^{-20}$ and $D_1 \approx 5.917 \times 10^{-15}$, yielding the first-jet scale $u_1 \approx 1.923 \times 10^{-6}$.
-   At the standard integration cutoff $T = 400$, $T^{-2} = 6.25 \times 10^{-6}$, which implies:
-   $$\frac{1}{T^2 u_1} = \frac{1}{(400)^2 \times (1.923 \times 10^{-6})} \approx 3.25 = \mathcal{O}(1).$$
-   This explains why the $D_1$ jet correction is not negligible at $T = 400$ and offsets the leading $D_0^2$ asymptotic ($4.08 \times 10^{-43} \to 1.67 \times 10^{-43}$). We are sitting precisely at the characteristic scale where the first-jet boundary layer couples to the cutoff tail.
+4. **Empirical Validation of the Controlling Scale (Cell 58 Audit):**
+   Computational audit via Cell 58 across dimensions $N \in \{8, 12, 16, 20, 24\}$ at $T = 400$ provides strong empirical evidence that $u_1$ is the genuine crossover parameter:
 
-5. **The Boundary-Defect Decoupling Conjecture:**
-   This inequality fundamentally alters the continuum boundary problem. To prove that the boundary defect vanishes in the continuum limit ($B_{N, L} \to 0$), **it is not necessary to prove infinite-order $C^\infty$ flat boundary contact**:
-   - $D_0 \sim e^{-\mathcal{S}_{\mathrm{WKB}}} \sim e^{-\frac{\pi N}{4} \log c}$ is **exponentially small** ($D_0^2 \sim 10^{-40}$ at $N = 24$).
-   - The first-jet cancellation scale $u_1 = |D_0 / D_1|$ is **subexponential** ($\sim N^{-2}$ or $N^{-1/2}$, Cell 54/55).
-   Therefore, the product:
-   $$D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 \sim e^{-2 c N} \cdot \operatorname{poly}(N) \longrightarrow 0 \quad \text{exponentially fast!}$$
-   We therefore formulate the:
+   $$\begin{array}{c|c|c|c|c|c}
+   N & |D_0| & |D_1| & u_1 = |D_0/D_1| & 1 / (T^2 u_1) & \eta = a_N / T \\
+   \hline
+   8  & 8.050 \times 10^{-11} & 3.364 \times 10^{-6} & 2.393 \times 10^{-5} & 0.261 & 0.049 \\
+   12 & 6.647 \times 10^{-14} & 6.402 \times 10^{-9} & 1.038 \times 10^{-5} & 0.602 & 0.073 \\
+   16 & 1.783 \times 10^{-16} & 3.128 \times 10^{-11} & 5.700 \times 10^{-6} & 1.097 & 0.098 \\
+   20 & 8.384 \times 10^{-19} & 2.583 \times 10^{-13} & 3.245 \times 10^{-6} & 1.926 & 0.122 \\
+   24 & 1.138 \times 10^{-20} & 5.917 \times 10^{-15} & 1.923 \times 10^{-6} & 3.250 & 0.147
+   \end{array}$$
+
+   The parameter $1 / (T^2 u_1)$ rises from $0.26$ to $3.25$ over this range, directly explaining why the first-jet boundary layer couples to the cutoff tail and reconciles the leading asymptotic $E_T \approx 4.14 \times 10^{-43}$ with the observed tail $\delta_T \approx 1.67 \times 10^{-43}$.
+
+5. **Envelope Comparison and Epistemic Qualifications:**
+   Comparing the proposed upper envelope $\mathcal{B}_{\mathrm{env}}$ against the exact continuous tail quadrature $\delta_T^{\mathrm{tail}} = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) dr$ yields:
+
+   $$\begin{array}{c|c|c|c|c}
+   N & \delta_T^{\mathrm{tail}} \text{ (Exact Tail)} & B_1 \text{ (Leading Asymptotic)} & \mathcal{B}_{\mathrm{env}} \text{ (Two-Jet Bound)} & \text{Ratio } \mathcal{B}_{\mathrm{env}} / \delta_T^{\mathrm{tail}} \\
+   \hline
+   8  & 1.762 \times 10^{-23} & 2.072 \times 10^{-23} & 3.300 \times 10^{-23} & 1.87 \\
+   12 & 1.010 \times 10^{-29} & 1.413 \times 10^{-29} & 3.641 \times 10^{-29} & 3.60 \\
+   16 & 5.939 \times 10^{-35} & 1.016 \times 10^{-34} & 4.512 \times 10^{-34} & 7.60 \\
+   20 & 1.045 \times 10^{-39} & 2.248 \times 10^{-39} & 1.963 \times 10^{-38} & 18.77 \\
+   24 & 1.645 \times 10^{-43} & 4.141 \times 10^{-43} & 7.734 \times 10^{-42} & 47.01
+   \end{array}$$
+
+   *Scientific Qualifications:*
+   - The proposed envelope dominates the computed tail throughout the tested range ($\mathcal{B}_{\mathrm{env}} > \delta_T^{\mathrm{tail}}$).
+   - However, the ratio grows systematically with $N$ (roughly doubling every $\Delta N = 4$). This indicates that Cell 58 has not yet demonstrated a uniform-in-$N$ constant.
+   - Crucially, this excess remains vastly smaller than the inverse tunnelling scale ($47.0 \ll 10^{40}$), meaning that boundary-layer expansion does not endanger continuum decoupling.
+
+6. **Cutoff Sweep and Finite-Cutoff Transition (Cell 58 Part 3):**
+   Holding $N = 24$ fixed while sweeping $T \in [100, 800]$ demonstrates the collapse of the first-jet correction:
+
+   $$\begin{array}{c|c|c|c|c|c}
+   T & 1 / (T^2 u_1) & \delta_T^{\mathrm{tail}} \text{ (Exact Tail)} & B_1 & \mathcal{B}_{\mathrm{env}} & \text{Ratio } \mathcal{B}_{\mathrm{env}} / \delta_T^{\mathrm{tail}} \\
+   \hline
+   100 & 79.46 & 2.485 \times 10^{-43} & 1.211 \times 10^{-42} & 7.839 \times 10^{-39} & 31544.5 \\
+   200 & 14.23 & 1.987 \times 10^{-43} & 7.168 \times 10^{-43} & 1.662 \times 10^{-40} & 836.5 \\
+   400 & 3.32  & 1.645 \times 10^{-43} & 4.141 \times 10^{-43} & 7.734 \times 10^{-42} & 47.0 \\
+   800 & 0.817 & 1.422 \times 10^{-43} & 2.349 \times 10^{-43} & 7.754 \times 10^{-43} & 5.45
+   \end{array}$$
+
+   As $T$ increases from $100$ to $800$, the coupling parameter drops by two orders of magnitude ($79.46 \to 0.817$), and the envelope ratio collapses from $31544.5$ down to $5.45$. This confirms that the first-jet amplification is strictly a finite-cutoff artifact that extinguishes as $T^2 u_1 \to \infty$.
+
+7. **The Boundary-Defect Decoupling Conjecture:**
+   The decoupling metric $\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2$ evaluated in Cell 58 demonstrates rapid collapse:
+
+   $$\begin{array}{c|c|c|c|c}
+   N & D_0^2 \text{ (Tunneling)} & u_1 \text{ (Boundary Scale)} & \left[1 + \frac{1}{T^2 u_1}\right]^2 & \mathcal{D}(N) \\
+   \hline
+   8  & 6.481 \times 10^{-21} & 2.393 \times 10^{-5} & 1.591  & 1.031 \times 10^{-20} \\
+   12 & 4.418 \times 10^{-27} & 1.038 \times 10^{-5} & 2.566  & 1.134 \times 10^{-26} \\
+   16 & 3.178 \times 10^{-32} & 5.700 \times 10^{-6} & 4.395  & 1.397 \times 10^{-31} \\
+   20 & 7.028 \times 10^{-37} & 3.245 \times 10^{-6} & 8.560  & 6.016 \times 10^{-36} \\
+   24 & 1.295 \times 10^{-40} & 1.923 \times 10^{-6} & 18.060 & 2.339 \times 10^{-39}
+   \end{array}$$
+
+   We distinguish three epistemic tiers for $D_0$: (i) empirical rapid collapse, (ii) proven semiclassical WKB barrier tunneling $\mathcal{S}_{\mathrm{WKB}} \approx \frac{\pi N}{4} \log c$, and (iii) uniform asymptotic control.
+   
+   To establish decoupling, we formulate the:
    > **Boundary-Defect Decoupling Conjecture:** Along any admissible double-scaling sequence $(N, L)$ with $T > a_N$,
    > $$\lim_{N, L \to \infty} D_0(N, L)^2 \frac{\log T}{L T} \left( 1 + \frac{1}{T^2 u_1(N, L)} \right)^2 = 0.$$
-   > *Consequence:* Exponential WKB barrier tunneling combined with subexponential boundary-layer scaling rigorously forces boundary-defect extinction $B_{N, L} \to 0$, decoupling the Archimedean continuum functional without requiring prior proof of continuum profile existence or $C^\infty$ boundary flatness.
 
-6. **The Revised Analytical Research Ladder:**
-   This restructures Stage 3 into a clear, tractable sequence of analytical milestones:
-   $$\begin{array}{c}
-   \text{\bf Exact Positive Boundary Defect } B_{N, L} \ge 0 \\[4pt]
-   \downarrow \\[4pt]
-   \text{\bf Two-Jet Resolvent Bound } (D_0, D_1) \\[4pt]
-   \downarrow \\[4pt]
-   \text{\bf } D_0^2 \times u_1^{-2} \text{\bf\ Decoupling Criterion} \\[4pt]
-   \downarrow \\[4pt]
-   \text{\bf Exponential } D_0 + \text{\bf Subexponential } u_1 \\[4pt]
-   \downarrow \\[4pt]
-   \text{\bf Boundary-Defect Extinction } B_{N, L} \to 0 \\[4pt]
-   \downarrow \\[4pt]
-   \text{\bf Archimedean Continuum Decoupling} \\[4pt]
-   \downarrow \\[4pt]
-   \text{\it (Only then seek } C^\infty \text{\it\ flatness for the limiting solitary wave } T_\infty\text{\it)}
-   \end{array}$$
+8. **The Power-Law Bridge and the Next Analytical Target:**
+   Examining the empirical trajectory of $u_1(N)$ reveals a remarkably stable power-law decay:
+   $$u_1(N) \sim N^{-p}, \qquad p \approx 2.3 \quad (2.39 \times 10^{-5} \to 1.92 \times 10^{-6} \text{ over } N \in [8, 24]).$$
+   Because $u_1 = \frac{|v_0 + \sqrt{2}\sum v_m|}{\sqrt{2}|\sum a_m^2 v_m|}$, the denominator is controlled by $D_1 = -\sqrt{2}\sum a_m^2 v_m$. By Cauchy–Schwarz, $|D_1| \le \sqrt{2N} a_N^2 = \frac{4\sqrt{2}\pi^2}{L^2} N^{5/2}$.
+   Any polynomial lower bound $u_1(N) \ge C N^{-p}$ implies:
+   $$\mathcal{D}(N) \sim e^{-2 c N} \operatorname{poly}(N) \longrightarrow 0 \quad \text{exponentially fast!}$$
+   This identifies the surgical analytical target for the research programme: **establish subexponential control on $u_1^{-1}$ via ground-state spectral moment bounds**, bridging Cell 58 directly to continuous Weil positivity without requiring prior proof of infinite-order $C^\infty$ boundary flatness.
 
 ---
 
@@ -574,6 +613,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 6 (Poles & Heat Dynamics) | Discrete Cauchy transform, heat boundary dynamics, profile collapse | `cell51.py`, `cell52.py`, `cell53.py`, `cell54.py` | `cell51.out`, `cell52.out`, `cell53.out`, `cell54.out` |
 | Section 7 (Tri-Partite Balance & Cutoff Leakage) | Continuous-variable balance & finite-$T$ Archimedean leakage $\delta_T^{\mathrm{tail}}$ | `cell46.py`, `cell56.py`, `cell57.py` | `cell46.out`, `cell56.out`, `cell57.out` |
 | Section 8 (Wiener–Hopf Scaling, Commutator Resolvent & Bounds) | Commutator resolvent formula, exact cancellation & collective spectral reorganization, Wiener–Hopf scaling & bounds | `cell49.py`, `cell50.py`, `cell53.py`, `cell54.py`, `cell55.py` | `cell49.out`, `cell50.out`, `cell53.out`, `cell54.out`, `cell55.out` |
+| Section 9.1 (Jet Defect & Decoupling Mechanics) | Two-jet resolvent envelope, cutoff sweep & first-jet scale $u_1$ audit | `cell58.py` | `cell58.out` |
 
 ---
 

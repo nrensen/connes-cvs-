@@ -289,9 +289,9 @@ def main():
         )
 
     print("-" * 90)
-    print("Finding Part 2: Across all dimensions, the two-jet upper envelope B_env strictly")
-    print("dominates the exact tail delta_T with a stable, O(1) ratio between 18 and 44,")
-    print("rigorously validating the two-jet resolvent bound.")
+    print("Finding Part 2: Across all dimensions, the proposed two-jet envelope B_env dominates")
+    print("the computed tail delta_T throughout the tested range (ratios 1.87 to 47.0).")
+    print("While the excess grows with N, it remains vastly smaller than the inverse tunnelling scale.")
 
     # =======================================================================
     # PART 3: CUTOFF SWEEP (N = 24) ACROSS T in {100, 200, 400, 800}
@@ -344,8 +344,8 @@ def main():
 
     print("-" * 110)
     print("Finding Part 3: As T increases from 100 to 800, coupling parameter 1 / (T^2 * u_1)")
-    print("drops from 52 to 0.81, showing the smooth transition toward pure D_0 dominance,")
-    print("with B_env tracking the exact tail across all cutoffs.")
+    print("drops from 79.5 to 0.82, showing the smooth transition toward pure D_0 dominance,")
+    print("with B_env/delta_T collapsing from 31544 to 5.45 as the finite-cutoff correction extinguishes.")
 
     # =======================================================================
     # PART 4: POSITIVE JET-ENERGY FORM & HANKEL MOMENTS AUDIT
@@ -414,7 +414,7 @@ def main():
     print("1. While the boundary-layer amplification factor grows only moderately from 2.6 to 18.0,")
     print("   the tunneling amplitude D_0^2 collapses by over 36 orders of magnitude (4.5e-4 -> 1.3e-40).")
     print("2. The product D(N) collapses exponentially to 2.3e-39 at N = 24.")
-    print("3. This rigorously confirms the Reviewer's Decoupling Conjecture:")
+    print("3. This provides compelling numerical evidence for the Decoupling Conjecture:")
     print("   Exponential WKB tunneling + subexponential boundary layer => Boundary defect extinction,")
     print("   decoupling the Archimedean continuum form WITHOUT needing C^infty boundary flatness.")
     print("=" * 80)
