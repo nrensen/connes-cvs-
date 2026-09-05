@@ -41,9 +41,9 @@ Theoretical Bound Components:
  20      1.04538386211e-39      2.247522197e-39      1.96267866643e-38              18.7747
  24      1.64495390443e-43      4.141019388e-43      7.73356764545e-42              47.0139
 ------------------------------------------------------------------------------------------
-Finding Part 2: Across all dimensions, the two-jet upper envelope B_env strictly
-dominates the exact tail delta_T with a stable, O(1) ratio between 18 and 44,
-rigorously validating the two-jet resolvent bound.
+Finding Part 2: Across all dimensions, the proposed two-jet envelope B_env dominates
+the computed tail delta_T throughout the tested range (ratios 1.87 to 47.0).
+While the excess grows with N, it remains vastly smaller than the inverse tunnelling scale.
 
 ================================================================================
 PART 3: CUTOFF SWEEP FOR N = 24 ACROSS T in {100, 200, 400, 800}
@@ -59,8 +59,8 @@ Testing cutoff scaling and transition of coupling parameter 1 / (T^2 * u_1)...
   800       0.81685269      1.42243105826e-43      2.348989095e-43      7.75390422549e-43              5.45116
 --------------------------------------------------------------------------------------------------------------
 Finding Part 3: As T increases from 100 to 800, coupling parameter 1 / (T^2 * u_1)
-drops from 52 to 0.81, showing the smooth transition toward pure D_0 dominance,
-with B_env tracking the exact tail across all cutoffs.
+drops from 79.5 to 0.82, showing the smooth transition toward pure D_0 dominance,
+with B_env/delta_T collapsing from 31544 to 5.45 as the finite-cutoff correction extinguishes.
 
 ================================================================================
 PART 4: MANIFEST POSITIVITY & HANKEL MOMENT MATRIX AUDIT
@@ -103,7 +103,7 @@ CONCLUSION:
 1. While the boundary-layer amplification factor grows only moderately from 2.6 to 18.0,
    the tunneling amplitude D_0^2 collapses by over 36 orders of magnitude (4.5e-4 -> 1.3e-40).
 2. The product D(N) collapses exponentially to 2.3e-39 at N = 24.
-3. This rigorously confirms the Reviewer's Decoupling Conjecture:
+3. This provides compelling numerical evidence for the Decoupling Conjecture:
    Exponential WKB tunneling + subexponential boundary layer => Boundary defect extinction,
    decoupling the Archimedean continuum form WITHOUT needing C^infty boundary flatness.
 ================================================================================
