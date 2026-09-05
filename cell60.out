@@ -67,8 +67,8 @@ Total M_1 (All 24 modes) = 99.4426865369
 Total M_2 (All 24 modes) = 1.33214298407e+40
 Mode 1 share of M_2      = 99.9999%
 
-Finding Part 2: For the lowest mode (j = 1), alpha_1 = 0.4996 approx 1/2!
-Because a_1 approx Delta_1^{1/2}, the term a_1^2 / Delta_1 is O(1) (~ 4.5e-10),
+Finding Part 2: For the lowest mode (j = 1), alpha_1 = 0.4903 approx 1/2.
+Because a_1 ~ Delta_1^{1/2}, the term a_1^2 / Delta_1 is genuinely finite and O(1) (~ 5.79),
 completely harmless in M_1. But in M_2, the squared denominator yields
 a_1^2 / Delta_1^2 ~ 1 / Delta_1 ~ 1.33 x 10^40, which accounts for 100.00% of M_2!
 
@@ -131,28 +131,31 @@ Testing the precise power law: |a_1(N)| = C * [Delta_1(N)]^alpha
 Mean Empirical Exponent across all dimensions: alpha = 0.487303
 
 ============================================================================================
-CELL 60 CONCLUSION: THE SPECTRAL OVERLAP CANCELLATION LAW IS PROVEN
+CELL 60 CONCLUSION: NUMERICAL EVIDENCE FOR A SQUARE-ROOT SPECTRAL OVERLAP LAW
 ============================================================================================
 1. THE EXPONENTIALLY COLLAPSING LOW-ENERGY TOWER:
-   The lowest eigenvalues in both sectors form an intertwined geometric ladder:
-   E_0 ~ 10^-43,  mu_odd,1 ~ 10^-40,  E_even,1 ~ 10^-37,  mu_odd,2 ~ 10^-34.
+   The Galerkin matrix exhibits an exponentially collapsing low-energy tower in both
+   parity sectors: E_0 ~ 10^-43, mu_odd,1 ~ 10^-40, E_even,1 ~ 10^-37, mu_odd,2 ~ 10^-34.
    The operator norm of the odd resolvent is indeed catastrophically large (~ 10^39).
 
-2. THE EXACT SPECTRAL OVERLAP LAW:
-   The symbol vector psi does NOT couple generically to the dangerous eigenspaces.
-   Instead, the overlap obeys the exact scaling law:
-       |a_1| = C * [Delta_1]^alpha   with alpha = 0.5000 +- 0.0004  (EXACTLY 1/2!)
+2. THE SQUARE-ROOT OVERLAP PHENOMENON:
+   The lowest odd-sector overlap satisfies numerically:
+       |a_1| / sqrt(Delta_1) = O(1),
+   with the observed values remaining near 2 across the tested dimensions (1.97 to 2.76).
+   Consequently:
+       a_1^2 / Delta_1 = O(1) (~ 5.79),      a_1^2 / Delta_1^2 = O(Delta_1^-1) (~ 1.33e+40),
+   explaining the simultaneous boundedness of M_1 and the astronomical value of M_2.
 
-3. EXPLANATION OF THE M_1 vs M_2 PARADOX:
-   - For M_1:  a_1^2 / Delta_1 ~ Delta_1^{2*alpha - 1} = Delta_1^0 = O(1),
-     which completely extinguishes the singularity and keeps M_1 = O(10^2)!
-   - For M_2:  a_1^2 / Delta_1^2 ~ 1 / Delta_1 ~ 10^40, which dominates M_2.
-   - For ||Kc||^2: D_0^2 * M_2 ~ Delta_1 * (1 / Delta_1) = O(1) invariant (1.725)!
+3. THE EXACT COMMUTATOR CONNECTION:
+   The exact commutator identity [Q, K] = -psi d^T + d psi^T projected onto <e_1, . c>
+   yields the exact relationship:
+       Delta_1 <e_1, K c> = -D_0 a_1   ==>   a_1 = - (Delta_1 / D_0) <e_1, K c>.
+   The numerical data suggest the common scaling D_0^2 asymp Delta_1 and <e_1, K c> = O(1),
+   which would naturally enforce the square-root overlap law |a_1| ~ sqrt(Delta_1).
 
-4. COMPLETE RESOLUTION IN THE EVEN SECTOR:
-   By Theorem 7.2, the source overlap b_k = <u_k, s_2> contains an exact factor of
-   Delta_{even, k}, cancelling the small denominator algebraically mode-by-mode,
-   yielding the gentle, stable trajectory D_1 / D_0 ~ 5.2 x 10^5.
+4. RESOLUTION IN THE EXCITED EVEN SECTOR:
+   In the even sector, the source overlap b_k = <u_k, s_2> is small enough that the quotient
+   tau_k = (d_k b_k) / Delta_k remains finite (tau_k ~ 10^3 - 10^4), summing to D_1/D_0 ~ 5.2e+5.
 ============================================================================================
 CELL 60 SCRIPT EXECUTION COMPLETE
 ============================================================================================
