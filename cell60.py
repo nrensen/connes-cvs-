@@ -54,7 +54,7 @@ from cell import (
 # Configuration
 # -----------------------------------------------------------------------------
 
-mp.mp.dps = 60
+mp.mp.dps = 50
 
 C_PARAM = 13
 L_PARAM = mp.log(C_PARAM)
