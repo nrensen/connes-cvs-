@@ -543,7 +543,7 @@ The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that t
 ---
 
 ### Theorem 7.3 (Exact $K^2$-Commutator Resolvent Representation of $D_1/D_0$)
-*Let $K = \operatorname{diag}(-N, \dots, N)$, $d = (1, \dots, 1)^T$, $k = K d$, and let $c$ be the normalized even ground state satisfying $Q c = \lambda c$. Let $R_{\mathrm{even}} \equiv (Q_{\mathrm{even}} - \lambda I)_{c^\perp}^{-1}$ denote the even resolvent restricted to the orthogonal complement $c^\perp$.*
+*Let $K = \operatorname{diag}(-N, \dots, N)$, $d = (1, \dots, 1)^T$, $k = K d$, and let $c$ be the normalized even ground state satisfying $Q c = \lambda c$. Assume that the ground-state eigenvalue $\lambda = \lambda_{\min}(N)$ is simple in the even sector, and let $R_{\mathrm{even}} \equiv (Q_{\mathrm{even}} - \lambda I)_{c^\perp}^{-1}$ denote the inverse of $Q_{\mathrm{even}} - \lambda I$ restricted to the orthogonal complement $c^\perp$.*
 
 1. **Rank-4 Commutator Identity:**
    *The commutator $[Q, K^2]$ admits the exact rank-4 representation:*
@@ -561,10 +561,10 @@ The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that t
 
 Applying to $c$, parity gives $k^T c = 0$ and $\boldsymbol\psi^T c = 0$. Meanwhile $d^T c = D_0$, and by Proposition 6.3, $(K\boldsymbol\psi)^T c = \boldsymbol\psi^T K c = -D_0 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle = -D_0 M_1$. Thus $[Q, K^2] c = -D_0 K\boldsymbol\psi - D_0 M_1 d = -D_0 s_2$, with $\langle c, s_2 \rangle = -D_0 M_1 + M_1 D_0 = 0$, proving statement 2.
 
-Because $s_2 \in c^\perp$, $(Q - \lambda I)$ is invertible on $c^\perp$ with resolvent $R_{\mathrm{even}}$. Writing $K^2 c = \alpha c - D_0 R_{\mathrm{even}} s_2$, where $\alpha = c^T K^2 c = \|K c\|^2 = D_0^2 M_2$ by Proposition 6.3, taking the inner product with $d$ yields $d^T K^2 c = \alpha (d^T c) - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Recalling from Theorem 7.1 that $d^T K^2 c = \sum m^2 c_m = \sqrt{2}\sum_{m=1}^N m^2 v_m = -D_1 / \kappa^2$, we obtain $-D_1 / \kappa^2 = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Multiplying by $-\kappa^2$ and dividing by $D_0$ proves statement 3. $\blacksquare$
+Because $s_2 \in c^\perp$ and $\lambda$ is simple in the even sector, $(Q_{\mathrm{even}} - \lambda I)$ is invertible on $c^\perp$ with resolvent $R_{\mathrm{even}}$. Writing $K^2 c = \alpha c - D_0 R_{\mathrm{even}} s_2$, where $\alpha = c^T K^2 c = \|K c\|^2 = D_0^2 M_2$ by Proposition 6.3, taking the inner product with $d$ yields $d^T K^2 c = \alpha (d^T c) - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Recalling from Theorem 7.1 that $d^T K^2 c = \sum m^2 c_m = \sqrt{2}\sum_{m=1}^N m^2 v_m = -D_1 / \kappa^2$, we obtain $-D_1 / \kappa^2 = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Multiplying by $-\kappa^2$ and dividing by $D_0$ proves statement 3. $\blacksquare$
 
 *Remark 7.3.1 (Elimination of the Exponential Ground-State Singularity).*
-In Theorem 7.3, the exponentially tiny tunneling factor $D_0$ factors out algebraically. Crucially, because $s_2 \perp c$, the excited resolvent $R_{\mathrm{even}}$ acts exclusively on $c^\perp$. The smallest eigenvalue encountered in $R_{\mathrm{even}}$ is the first *excited* even eigenvalue $\mu_{\mathrm{even}, 1} \approx 0.016$, while the odd resolvent in $M_1, M_2$ is governed by $\mu_{\mathrm{odd}} \approx 0.057$. The catastrophic ground-state singularity $1/\lambda \sim 10^{43}$ is completely eliminated from the jet hierarchy.
+In Theorem 7.3, the exponentially tiny tunneling factor $D_0$ factors out algebraically. The catastrophic ground-state singularity $1/\lambda$ is completely eliminated from the jet hierarchy: the remaining resolvents are reduced resolvents on the odd sector and on the orthogonal complement $c^\perp$ of the even ground state. Their quantitative behaviour with $N$ is a separate spectral question investigated numerically below.
 
 ---
 
@@ -588,10 +588,10 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Finite-$T$ Cutoff Defect** | $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)} \equiv -\delta_T^{\mathrm{tail}} \equiv -\sum A_k \mathcal{J}_k(T, L)$ | Theorem 5.5 | Proves residual is 100% Archimedean cutoff leakage; geometric jet expansion. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
-| **First-Jet Norm Identity** | $\|Kc\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2}\boldsymbol\psi \rangle$ | Proposition 6.3 | Reduces first Fourier moment to odd resolvent; proves $\|Kc\| \propto |D_0|$. |
+| **First-Jet Norm Identity** | $\|Kc\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2}\boldsymbol\psi \rangle$ | Proposition 6.3 | Gives the exact ratio $\|Kc\| / |D_0|$ as an odd-sector resolvent norm. |
 | **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
 | **Small-Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraically that odd-even resolvent coupling is non-singular. |
-| **Exact $K^2$ Resolvent Representation** | $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$ | Theorem 7.3 | Eliminates $D_0$ and $1/\lambda$; expresses $D_1/D_0$ via benign excited resolvents. |
+| **Exact $K^2$ Resolvent Representation** | $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$ | Theorem 7.3 | Eliminates the ground-state factor $1/\lambda$ and reduces $D_1/D_0$ to excited-sector resolvent matrix elements. |
 
 ---
 
