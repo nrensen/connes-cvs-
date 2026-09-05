@@ -2524,7 +2524,11 @@ Cell 59
     ↓
 Cell 60
     Surgical audit of the low-energy bound-state tower and spectral overlap cancellation mechanism
-    [identification of the geometric bound-state ladder across parities E_0 ~ 10^-43, mu_1 ~ 10^-40, E_1 ~ 10^-37, mu_2 ~ 10^-34, mode-by-mode odd overlaps a_j = <psi, e_j^odd> proving scaling law a_1 ~ Delta_1^0.5000, explaining why a_1^2/Delta_1 ~ O(1) is tame in M_1 while a_1^2/Delta_1^2 dominates M_2, exact invariant product ||Kc||^2 == D_0^2 M_2 == 1.725, Theorem 7.2 small-denominator cancellation in excited even sector keeping D_1/D_0 ~ 5.2 x 10^5]
+    [identification of the geometric bound-state ladder across parities E_0 ~ 10^-43, mu_1 ~ 10^-40, E_1 ~ 10^-37, mu_2 ~ 10^-34, mode-by-mode odd overlaps |a_1|/sqrt(Delta_1) ~ 2.4, explaining why a_1^2/Delta_1 ~ 5.79 is finite in M_1 while a_1^2/Delta_1^2 dominates M_2, exact invariant product ||Kc||^2 == D_0^2 M_2 == 1.725, Theorem 7.2 small-denominator cancellation in excited even sector keeping D_1/D_0 ~ 5.2 x 10^5]
+    ↓
+Cell 61
+    Surgical audit of the common tunnelling scale and exact commutator projection identities
+    [exact identity <e_j, Kc> == -(D_0 a_j)/Delta_j verified across all odd modes, Parseval sum ||Kc||^2 == sum <e_j, Kc>^2 == D_0^2 M_2, proof that mode 1 carries 99.9999% of ||Kc||^2 with |<e_1, Kc>| ~ 1.31, verification of single tunnelling scale D_0^2 asymp Delta_1 with R_D = D_0/sqrt(Delta_1) in [0.41, 0.64], exact even-sector projection <u_k, K^2 c> == -(D_0 b_k)/Delta_k proving algebraic non-singularity of tau_k]
 ```
 
 # Current status summary
@@ -2637,10 +2641,15 @@ At the current stage:
   * Exact $D_1/D_0$ reconstruction: $\frac{D_1}{D_0} = \kappa^2 \left[ \langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2 \right]$ reconstructs the exact direct ratio $D_1/D_0 \approx 5.20 \times 10^5$ consistent with the direct ratio to available 50-digit numerical precision (relative error $2.98 \times 10^{-13}$ at $N=24$ due to resolving 37-order small denominators).
 * Cell 60 establishes the surgical audit of the low-energy bound-state tower and spectral overlap cancellation mechanism:
   * The low-energy bound-state tower: maps the lowest eigenvalues across both parity sectors ($E_0 \sim 10^{-43}, \mu_1 \sim 10^{-40}, E_1 \sim 10^{-37}, \mu_2 \sim 10^{-34}, E_2 \sim 10^{-31}$ at $N=24$), revealing an intertwined geometric ladder of boundary-confined states stepping up by $\sim 3$ to 6 decimal orders per mode.
-  * Spectral overlap cancellation law: proves that the symbol vector $\boldsymbol\psi$ does not couple generically to the dangerous eigenspaces; instead, the overlap obeys the exact scaling law $|a_1| = |\langle \boldsymbol\psi, e_1^{\mathrm{odd}} \rangle| \approx C [\Delta_1]^\alpha$ with $\alpha \approx 0.5000 \pm 0.0004$ (exactly $1/2$).
-  * Resolution of the $M_1$ vs. $M_2$ disparity: because $\alpha \approx 1/2$, the first term in $M_1$ is $a_1^2 / \Delta_1 \sim \mathcal{O}(1)$, rendering the singular mode harmless in $M_1 = 99.44$. In contrast, in $M_2$, $a_1^2 / \Delta_1^2 \sim 1/\Delta_1 \sim 10^{40}$, accounting for $100.00\%$ of $M_2$.
+  * Square-root overlap phenomenon: numerical evidence indicates that the lowest odd-sector overlap satisfies $|a_1| / \sqrt{\Delta_1} \approx 2.0 - 2.8$ across $N \in [8, 24]$.
+  * Resolution of the $M_1$ vs. $M_2$ disparity: because $a_1 \sim \sqrt{\Delta_1}$, the lowest mode contributes a genuinely finite $\mathcal{O}(1)$ value $a_1^2 / \Delta_1 \approx 5.79$ to $M_1 = 99.44$, while the squared denominator yields $a_1^2 / \Delta_1^2 \sim 1/\Delta_1 \approx 1.33 \times 10^{40}$, accounting for $100.00\%$ of $M_2$.
   * Exact invariant product $\|Kc\|^2 = D_0^2 M_2 \approx 1.725$: tracks how the 20-order collapse of $D_0^2$ ($6.5 \times 10^{-21} \to 1.3 \times 10^{-40}$) exactly cancels the 20-order explosion of $M_2$ ($2.0 \times 10^{20} \to 1.3 \times 10^{40}$), maintaining $\|Kc\|^2 \approx 1.28 \to 1.725 = \mathcal{O}(1)$ as an exact non-divergent invariant.
-  * Excited even-sector cancellation: verifies Theorem 7.2 mode-by-mode, proving that $b_k = \langle u_k, s_2 \rangle \propto (E_k - \lambda_0)$ cancels the denominator identically, producing well-behaved $\tau_k \sim \mathcal{O}(10^3) - \mathcal{O}(10^4)$ that sum stably to $D_1/D_0 \approx 5.20 \times 10^5$.
+  * Excited even-sector cancellation: verifies Theorem 7.2 mode-by-mode, demonstrating that $b_k = \langle u_k, s_2 \rangle$ is small enough that $\tau_k = (d_k b_k)/\Delta_k \sim \mathcal{O}(10^3) - \mathcal{O}(10^4)$ remains finite, summing stably to $D_1/D_0 \approx 5.20 \times 10^5$.
+* Cell 61 establishes the surgical audit of the common tunnelling scale and exact commutator projection identities:
+  * Exact commutator projection theorem: proves algebraically and verifies to machine precision ($10^{-50}$) that $\langle e_j, Kc \rangle \equiv -D_0 \frac{a_j}{\Delta_j}$ for all odd modes $j$, and $\langle u_k, K^2 c \rangle \equiv -D_0 \frac{b_k}{\Delta_{\mathrm{even}, k}}$ for all excited even modes $k$.
+  * Parseval sum rule for the first jet: proves $\|Kc\|^2 = \sum_j \langle e_j, Kc \rangle^2 = D_0^2 \sum_j \frac{a_j^2}{\Delta_j^2} \equiv D_0^2 M_2$, with mode 1 carrying $99.9999\%$ of the norm ($|\langle e_1, Kc \rangle| \approx 1.3134$).
+  * The single WKB tunnelling scale: demonstrates that $D_0^2$ and the odd spectral gap $\Delta_1 = \mu_1 - \lambda_0$ share the exact same exponential scale, with $R_D = D_0 / \sqrt{\Delta_1} \in [0.41, 0.64]$ remaining bounded across 20 decimal orders, directly explaining the square-root overlap law $|a_1| \sim \sqrt{\Delta_1}$ as an exact algebraic consequence of the commutator identity.
+  * Algebraic non-singularity in the even sector: proves $\tau_k = -\frac{\langle u_k, d \rangle \langle u_k, K^2 c \rangle}{D_0} = \frac{d_k b_k}{\Delta_k}$, confirming that the small denominator is cancelled algebraically by the second-jet commutator.
 
 ## Publication and Manuscript Architecture
 
