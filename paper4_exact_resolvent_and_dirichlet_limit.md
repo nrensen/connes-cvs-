@@ -98,11 +98,17 @@ $$K_v(\omega) = 2 \int_0^\omega \tau_v(s) \tau_v(\omega - s) \, ds = \frac{2}{L}
 
 In physical coordinates $x = L\omega \in [0, L]$, the convolution evaluates to $K_v^{\mathrm{phys}}(x) = 2 \int_0^x T_v(t) T_v(x - t) \, dt = L K_v(x/L)$.
 
-### 2.2 The Fourier-Side Representation
+### 2.2 The Fourier-Side Representation and Spatial Autocorrelation
 
-Transforming $K_v(\omega)$ to the spectral variable $r \in \mathbb{R}$ against $\cos(r L \omega)$ on $[0, 1]$ produces the Fourier-side kernel $K_{\mathrm{Fourier}}(v, r, L)$. 
+Conceptually, the Fourier-side Archimedean kernel represents the power spectral density of the compactly supported trigonometric wave $T_v(t) \mathbf{1}_{[0, L]}(t)$:
 
-By direct integration of the Volterra convolution against $\cos(r L \omega)$, the boundary terms at the endpoint $\omega = 1$ ($x = L$) factor out cleanly, isolating the common oscillatory factor $1 - \cos(rL)$:
+$$K_{\mathrm{Fourier}}(v, r, L) \equiv \frac{1}{L} \left| \int_0^L T_v(t) e^{-i r t} \, dt \right|^2.$$
+
+Because $T_v(t) = v_0 + \sqrt{2}\sum_{m=1}^N v_m \cos(2\pi m t / L)$ satisfies the reflection symmetry $T_v(L - t) = T_v(t)$ on $[0, L]$, the Fourier power spectrum is identically the cosine transform of the spatial autocorrelation function of $T_v$. In terms of the causal Volterra convolution $K_v^{\mathrm{phys}}(x) = 2\int_0^x T_v(t) T_v(x - t) dt$, the autocorrelation corresponds to the reflected kernel $\frac{1}{L} K_v^{\mathrm{phys}}(L - y)$:
+
+$$K_{\mathrm{Fourier}}(v, r, L) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \cos(r y) \, dy.$$
+
+By direct integration of the Volterra convolution against $\cos(r L \omega)$ on $[0, 1]$, the boundary terms at the endpoint $x = L$ factor out cleanly, isolating the common oscillatory factor $1 - \cos(rL)$:
 
 $$K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r),$$
 
@@ -114,7 +120,7 @@ and the elementary mode integrals:
 
 $$S_{\mathrm{bar}}(m) = \frac{a_m}{a_m^2 - r^2}, \qquad C_{\mathrm{bar}}(m) = \frac{r^2 + a_m^2}{L (r^2 - a_m^2)^2},$$
 
-the rational kernel was originally defined by the four-part interaction sum:
+the rational kernel was originally obtained by expanding the four-part interaction sum:
 
 $$\begin{aligned}
 R_v(r) &= \frac{2 v_0^2}{L r^2} + 2 \sum_{m=1}^{N} v_m^2 C_{\mathrm{bar}}(m) - \frac{2\sqrt{2} v_0}{\pi} \sum_{m=1}^{N} \frac{v_m S_{\mathrm{bar}}(m)}{m} - \frac{1}{\pi} \sum_{m=1}^{N} \frac{v_m^2 S_{\mathrm{bar}}(m)}{m} \\
@@ -234,6 +240,9 @@ $$\lim_{r\to \pm a_m} \frac{r \sin(rL/2)}{r^2 - a_m^2} = (-1)^m \frac{L}{4}.$$
 
 Because all singularities are removable, $\Phi_v(r)$ is entire on $\mathbb{C}$ of exponential type at most $L/2$. Because $v$ is real, $\Phi_v(r) \in \mathbb{R}$ for all $r \in \mathbb{R}$, which forces $\Phi_v(r)^2 \ge 0$ unconditionally. $\blacksquare$
 
+*Remark 4.1.1 (Distinction Between Kernel Positivity and Functional Positivity).*
+The unconditional pointwise non-negativity $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ on the real line guarantees that the Fourier spectral density is non-negative everywhere. However, this does *not* imply that the integrated Archimedean functional $\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$ is non-negative, because the Archimedean weight $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ is not positive everywhere (it is negative for $r < r_0 \approx 9.77$ and positive for $r > r_0$). Consequently, kernel non-negativity $K_{\mathrm{Fourier}} \ge 0$ does not imply positivity of the full Weil quadratic form $\mathcal{Q}(v) \ge 0$, nor does it imply the Riemann Hypothesis. It provides an unconditionally positive spectral density entering the explicit formula.
+
 ### Corollary 4.2 (Universal Fourier Factorization)
 *The entire Fourier amplitude $\Phi_v(r)$ factors directly into the product of the universal sinc envelope and the boundary Neumann resolvent evaluated at $z = -1/r^2$:*
 
@@ -282,14 +291,20 @@ where $C_\epsilon^+$ is the real axis indented into the upper half-plane $\mathb
 
 Summing all contributions proves the identity. $\blacksquare$
 
-### Theorem 5.2 (Spatial Laplace Duality)
-*The Archimedean Cauchy transform $J(q)$ is identically the spatial Laplace transform of the physical Volterra kernel:*
+### Theorem 5.2 (Spatial Laplace Duality via the Reflected Autocorrelation Kernel)
+*The Archimedean Cauchy transform $J(q)$ is identically the spatial Laplace transform of the reflected physical kernel:*
 
-$$J(q) \equiv \int_0^L K_v^{\mathrm{phys}}(y) e^{-q y} \, dy \qquad \forall q > 0.$$
+$$J(q) \equiv \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-q y} \, dy \qquad \forall q > 0.$$
 
-*Proof.* By the spatial cosine representation of the Volterra convolution $K_{\mathrm{Fourier}}(v, r, L) = \int_0^L K_v^{\mathrm{phys}}(y) \cos(ry) dy$. Substituting into the Cauchy transform and interchanging integrals via Fubini's theorem (valid since $K_v^{\mathrm{phys}}$ is smooth on $[0, L]$):
-$$J(q) = \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} \left[ \int_0^L K_v^{\mathrm{phys}}(y) \cos(ry) \, dy \right] dr = \int_0^L K_v^{\mathrm{phys}}(y) \left[ \frac{2q}{\pi} \int_0^\infty \frac{\cos(ry)}{q^2 + r^2} \, dr \right] dy.$$
-The inner integral is the standard Laplace contour integral $\frac{2q}{\pi} \frac{\pi}{2q} e^{-qy} = e^{-qy}$, establishing $J(q) = \int_0^L K_v^{\mathrm{phys}}(y) e^{-qy} dy$. $\blacksquare$
+*Proof.* By the spatial autocorrelation representation of the Fourier kernel (Section 2.2):
+$$K_{\mathrm{Fourier}}(v, r, L) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \cos(r y) \, dy.$$
+Substituting this into the definition of the Cauchy transform $J(q) = \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ and interchanging integrals via Fubini's theorem (valid since $K_v^{\mathrm{phys}}$ is smooth on $[0, L]$):
+$$J(q) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \left[ \frac{2q}{\pi} \int_0^\infty \frac{\cos(r y)}{q^2 + r^2} \, dr \right] dy.$$
+The inner integral is the standard contour evaluation $\frac{2q}{\pi} \int_0^\infty \frac{\cos(ry)}{q^2 + r^2} dr = e^{-qy}$ for $y \ge 0$ and $q > 0$. Therefore:
+$$J(q) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-q y} \, dy.$$
+*Verification on Constant Wave:* Taking $v = (1, 0, \dots, 0)$, we have $T_v(t) = 1$, whence $K_v^{\mathrm{phys}}(x) = 2 \int_0^x 1 \cdot 1 \, dt = 2x$, and $K_v^{\mathrm{phys}}(L - y) = 2(L - y)$. Evaluating the Laplace transform:
+$$\frac{1}{L} \int_0^L 2(L - y) e^{-qy} \, dy = \frac{2}{q} - \frac{2(1 - e^{-qL})}{L q^2},$$
+which matches the closed-form evaluation from Theorem 5.1 identically. $\blacksquare$
 
 ### Corollary 5.3 (Exact Closed-Form Pole Decomposition of $\mathcal{Q}_{\mathrm{arch}}(v)$)
 *Using the Weierstrass partial fraction expansion for the Digamma function:*
@@ -310,16 +325,22 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) \equiv C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}
    $$I_n \equiv \frac{1}{\pi} \int_0^\infty w_n(r) K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{\|v\|_2^2}{n+1} - J(q_n)$$
    is absolutely convergent and finite.
 
-2. **Dominated Convergence and Interchange of Limits:**
-   To justify interchanging summation and integration $\sum_{n=0}^\infty \int_0^\infty = \int_0^\infty \sum_{n=0}^\infty$, consider the partial sums $S_M(r) = C_{\mathrm{arch}} + \sum_{n=0}^M w_n(r)$.
-   Notice that for each $n \ge 0$ and all $r \ge 0$:
-   $$w_n(r) = \frac{1}{n+1} - \frac{2q_n}{q_n^2 + r^2} \ge \frac{1}{n+1} - \frac{2}{q_n} = \frac{1}{n+1} - \frac{1}{n + 1/4} = -\frac{3/4}{(n+1)(n + 1/4)}.$$
-   Thus the negative part of each term is uniformly bounded by a convergent numerical series independent of $r$:
-   $$\sum_{n=0}^\infty \max(0, -w_n(r)) \le \sum_{n=0}^\infty \frac{3/4}{(n+1)(n + 1/4)} = \psi(1) - \psi(1/4) = \frac{\pi}{2} + 3\log 2 < \infty.$$
-   Because the partial sums $S_M(r)$ converge pointwise to $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$, which satisfies the logarithmic bound $|h_+(r)| \le C_1 + \frac{1}{2} \log(1 + r^2)$ for all $r \ge 0$, the partial sums satisfy the uniform $M$-independent upper envelope:
-   $$|S_M(r)| \le |h_+(r)| + 2 \sum_{n=0}^\infty \max(0, -w_n(r)) \le C_0 + \log(1 + r) \equiv g(r).$$
-   Since $K_{\mathrm{Fourier}}(v, r, L) \le \frac{C_K}{1 + r^2}$, the dominant function satisfies $\int_0^\infty g(r) K_{\mathrm{Fourier}}(r) dr < \infty$. By Lebesgue's Dominated Convergence Theorem, term-by-term integration is unconditionally valid:
-   $$\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty \lim_{M\to\infty} S_M(r) K_{\mathrm{Fourier}}(r) \, dr = \lim_{M\to\infty} \sum_{n=0}^M I_n = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right].$$
+2. **Rigorous Finite-$M$ Remainder Bound and Summation-Integration Interchange:**
+   To establish the identity without relying on heuristic dominated-convergence envelopes, consider the partial sum:
+   $$h_M(r) \equiv C_{\mathrm{arch}} + \sum_{n=0}^M w_n(r), \qquad w_n(r) = \frac{1}{n+1} - \frac{2q_n}{q_n^2 + r^2}.$$
+   The remainder function $R_M(r) \equiv h_+(r) - h_M(r) = \sum_{n=M+1}^\infty w_n(r)$ decomposes algebraically as:
+   $$w_n(r) = \left( \frac{1}{n+1} - \frac{2}{q_n} \right) + \frac{2r^2}{q_n(q_n^2 + r^2)} = -\frac{3/4}{(n+1)(n + 1/4)} + \frac{2r^2}{q_n(q_n^2 + r^2)}.$$
+   Summing over $n \ge M+1$, the negative part is an $r$-independent convergent numerical tail bounded by:
+   $$\sum_{n=M+1}^\infty \frac{3/4}{(n+1)(n + 1/4)} \le \frac{3}{4} \sum_{n=M+1}^\infty \frac{1}{n^2} \le \frac{3}{4M}.$$
+   For the positive part, since $K_{\mathrm{Fourier}}(v, r, L) \le \frac{C_K}{1 + r^2}$ on $[0, \infty)$ (Theorem 4.1), integrating each term against $K_{\mathrm{Fourier}}(r)$ yields:
+   $$\int_0^\infty \frac{2r^2}{q_n(q_n^2 + r^2)} K_{\mathrm{Fourier}}(v, r, L) \, dr \le C_K \int_0^\infty \frac{2r^2}{(1 + r^2) q_n (q_n^2 + r^2)} \, dr = \frac{\pi C_K}{q_n(q_n + 1)} \le \frac{\pi C_K}{4n^2}.$$
+   Summing over $n \ge M+1$:
+   $$\sum_{n=M+1}^\infty \frac{\pi C_K}{4n^2} \le \frac{\pi C_K}{4M}.$$
+   Consequently, the integrated remainder satisfies the uniform finite-$M$ bound:
+   $$\left| \mathcal{Q}_{\mathrm{arch}}(v) - \frac{1}{\pi} \int_0^\infty h_M(r) K_{\mathrm{Fourier}}(v, r, L) \, dr \right| \le \frac{1}{\pi} \int_0^\infty |R_M(r)| K_{\mathrm{Fourier}}(v, r, L) \, dr \le \frac{C_{\mathrm{rem}}}{M},$$
+   where $C_{\mathrm{rem}} = \frac{3}{4\pi} \|K_{\mathrm{Fourier}}\|_{L^1} + \frac{C_K}{4} < \infty$.
+   Taking $M \to \infty$ proves unconditionally that:
+   $$\mathcal{Q}_{\mathrm{arch}}(v) = \lim_{M\to\infty} \frac{1}{\pi} \int_0^\infty h_M(r) K_{\mathrm{Fourier}}(v, r, L) \, dr = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right].$$
 
 3. **Large-$q$ Remainder and Absolute Convergence:**
    To establish the convergence rate, from Theorem 5.1 we expand $J(q)$ for large $q > 0$:
@@ -351,7 +372,7 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
 2. **Exact Archimedean Cutoff Defect:**
    *Let $Q^{(T)} = Q_{\mathrm{arch}}^{(T)} + Q_{\mathrm{pole}} + Q_{\mathrm{prime}}$ be the full Galerkin matrix with cutoff $T$, and let $u_N$ be an even ground-state eigenvector with eigenvalue $\lambda_N = u_N^T Q^{(T)} u_N$. Let $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathcal{Q}_{\mathrm{prime}}(v_N) + \mathcal{Q}_{\mathrm{arch}}^{(\infty)}(v_N)$ be the exact continuous tripartite functional evaluated at $T = \infty$ (via Corollary 5.4). Then the discrepancy between the Galerkin eigenvalue and the continuous functional is identically the Archimedean cutoff tail:*
    $$\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_N, r, L) \, dr \equiv -\delta_T^{\mathrm{tail}}(v_N).$$
-   *In particular, the residual is 100% Archimedean cutoff tail leakage and does not originate from a finite-rank subspace projection defect.*
+   *In particular, this identity proves that for the fixed finite-dimensional Galerkin vector $v_N$, the entire discrepancy between the finite-cutoff Galerkin eigenvalue $\lambda_N = u_N^T Q^{(T)} u_N$ and the continuous infinite-cutoff functional $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N)$ is identically the continuous Archimedean cutoff tail $\delta_T^{\mathrm{tail}}(v_N)$. (This identity applies strictly to the functional evaluated on $v_N$, and does not assert the absence of projection errors between $v_N$ and any infinite-dimensional continuum minimizer.)*
 
 3. **Taylor Endpoint-Jet Laurent Decomposition:**
    *For any cutoff $T > a_N = \frac{2\pi N}{L}$, the rational resolvent $R_v(r) = \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2}\sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} \right]^2$ converges uniformly on $[T, \infty)$ as the Laurent series:*
@@ -391,14 +412,17 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
    $$\frac{r v_m}{r^2 - a_m^2} = \frac{v_m}{r} \frac{1}{1 - a_m^2 / r^2} = \sum_{j=0}^\infty \frac{a_m^{2j} v_m}{r^{2j+1}}.$$
    Summing over $m$ and adding $v_0/r$:
    $$\frac{v_0}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} = \frac{1}{r} \left[ v_0 + \sqrt{2}\sum_{m=1}^N v_m + \sum_{j=1}^\infty \frac{\sqrt{2}\sum_{m=1}^N a_m^{2j} v_m}{r^{2j}} \right] = \sum_{j=0}^\infty \frac{(-1)^j D_j}{r^{2j+1}},$$
-   where $D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m$ and $D_j = (-1)^j \sqrt{2}\sum_{m=1}^N a_m^{2j} v_m = T_v^{(2j)}(0)$ are the physical endpoint derivatives (Theorem 3.2).
+   where $D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m = T_v(0)$ and $D_j = (-1)^j \sqrt{2}\sum_{m=1}^N a_m^{2j} v_m = T_v^{(2j)}(0)$ for $j \ge 1$ are the physical endpoint derivatives (Theorem 3.2).
    Squaring this series and taking the Cauchy product yields:
    $$R_v(r) = \frac{2}{L} \left[ \sum_{j=0}^\infty \frac{(-1)^j D_j}{r^{2j+1}} \right]^2 = \sum_{k=0}^\infty \frac{A_k(N)}{r^{2k+2}}, \qquad A_k(N) = \frac{2}{L} (-1)^k \sum_{j=0}^k D_j D_{k-j}.$$
    Since $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$ (Theorem 4.1), substituting into the tail integral gives $\delta_T^{\mathrm{tail}}(v_N) = \sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L)$. Term-by-term integration is justified by the dominated convergence theorem, as the series converges uniformly on $[T, \infty)$ and $h_+(r)(1 - \cos(rL)) = \mathcal{O}(\log r)$.
 
 4. **Explicit Geometric Remainder Bound:**
-   To establish the explicit remainder bound with full parameter accounting, let $r \ge T > a_N$. Since $a_m \le a_N$ for all $m$, the endpoint derivatives satisfy the uniform upper bound:
-   $$|D_j| \le \sqrt{2} \sum_{m=1}^N a_m^{2j} |v_m| \le \sqrt{2} a_N^{2j} \sum_{m=0}^N |v_m| = \sqrt{2} \|v\|_1 a_N^{2j} \qquad (\forall j \ge 0).$$
+   To establish the explicit remainder bound with full parameter accounting, let $r \ge T > a_N$. Since $a_m \le a_N$ for all $m \in \{1, \dots, N\}$, the endpoint derivatives satisfy the uniform upper bounds:
+   $$|D_0| = \left| v_0 + \sqrt{2}\sum_{m=1}^N v_m \right| \le |v_0| + \sqrt{2}\sum_{m=1}^N |v_m| \le \sqrt{2} \sum_{m=0}^N |v_m| = \sqrt{2} \|v\|_1,$$
+   and for each $j \ge 1$:
+   $$|D_j| = \sqrt{2} \left| \sum_{m=1}^N a_m^{2j} v_m \right| \le \sqrt{2} a_N^{2j} \sum_{m=1}^N |v_m| \le \sqrt{2} \|v\|_1 a_N^{2j}.$$
+   Thus the bound $|D_j| \le \sqrt{2} \|v\|_1 a_N^{2j}$ holds uniformly for all $j \ge 0$ (with $a_N^0 \equiv 1$).
    The Laurent coefficients $A_k(N) = \frac{2}{L}(-1)^k \sum_{j=0}^k D_j D_{k-j}$ are the Cauchy convolution of the endpoint jets. By the triangle inequality:
    $$|A_k(N)| \le \frac{2}{L} \sum_{j=0}^k |D_j D_{k-j}| \le \frac{2}{L} \sum_{j=0}^k \Big( \sqrt{2} \|v\|_1 a_N^{2j} \Big) \Big( \sqrt{2} \|v\|_1 a_N^{2(k-j)} \Big) = \frac{4 (k + 1)}{L} \|v\|_1^2 a_N^{2k}.$$
    Subtracting the partial sum of order $K$ from the rational resolvent $R_v(r) = \sum_{k=0}^\infty \frac{A_k(N)}{r^{2k+2}}$:
@@ -479,6 +503,25 @@ $$(M^r e)^T u = \begin{cases} 0, & r \text{ odd}, \\[6pt] (-1)^{r/2} \dfrac{D_{r
 
 *Proof.* For $m \ne n$, $[Q, K]_{mn} = Q_{mn}(n - m) = \frac{\psi(m) - \psi(n)}{m - n}(n - m) = -(\psi(m) - \psi(n))$. The rank-2 outer product $(-\boldsymbol\psi d^T + d \boldsymbol\psi^T)_{mn} = -\psi(m) \cdot 1 + 1 \cdot \psi(n) = -(\psi(m) - \psi(n))$. On the diagonal $m = n$, both sides vanish identically. Applying to $c$ and noting $\boldsymbol\psi^T c = 0$ gives $(Q - \lambda I) K c = [Q, K] c = -\boldsymbol\psi (d^T c) = -D_0 \boldsymbol\psi$. Since $K c$ and $\boldsymbol\psi$ are purely odd, inverting $Q - \lambda I$ on $\mathcal{H}_{\mathrm{odd}}$ and taking the squared norm yields $\|K c\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2} \boldsymbol\psi \rangle$. $\blacksquare$
 
+### Corollary 6.3.1 (Exact Mode-by-Mode Commutator Projections and Parseval Decomposition)
+*For every orthonormal odd eigenmode $e_j \in \mathcal{H}_{\mathrm{odd}}$ with eigenvalue $\mu_j$ and odd spectral gap $\Delta_j \equiv \mu_j - \lambda$, the projection of the coordinate action $Kc$ onto $e_j$ satisfies the exact identity:*
+
+$$\langle e_j, K c \rangle \equiv - D_0 \frac{\langle \boldsymbol\psi, e_j \rangle}{\mu_j - \lambda} \equiv - D_0 \frac{a_j}{\Delta_j}, \qquad a_j \equiv \langle \boldsymbol\psi, e_j \rangle.$$
+
+*Consequently, the Euclidean norm of $Kc$ satisfies the exact Parseval decomposition:*
+
+$$\|K c\|^2 = \sum_{j=1}^N |\langle e_j, K c \rangle|^2 = D_0^2 \sum_{j=1}^N \frac{a_j^2}{\Delta_j^2} \equiv D_0^2 M_2.$$
+
+*In particular, for the lowest odd mode $e_1$, the coordinate projection factors into the product of the two dimensionless tunneling invariants:*
+
+$$|\langle e_1, K c \rangle| = \left(\frac{D_0}{\sqrt{\Delta_1}}\right) \left(\frac{|a_1|}{\sqrt{\Delta_1}}\right) \equiv R_D \cdot C_N,$$
+
+*where $R_D \equiv D_0 / \sqrt{\Delta_1}$ and $C_N \equiv |a_1| / \sqrt{\Delta_1}$.*
+
+*Proof.* Taking the inner product of $(Q - \lambda I) K c = -D_0 \boldsymbol\psi$ (Proposition 6.3) with $e_j$ yields:
+$$\langle e_j, (Q - \lambda I) K c \rangle = \langle (Q - \lambda I) e_j, K c \rangle = (\mu_j - \lambda) \langle e_j, K c \rangle = -D_0 \langle e_j, \boldsymbol\psi \rangle = -D_0 a_j.$$
+Dividing by $\Delta_j = \mu_j - \lambda \ne 0$ establishes the projection identity. Squaring and summing over the complete orthonormal basis $\{e_j\}_{j=1}^N$ of $\mathcal{H}_{\mathrm{odd}}$ yields the Parseval formula. Factoring $\Delta_1 = \sqrt{\Delta_1}\sqrt{\Delta_1}$ in the $j=1$ term gives $|\langle e_1, K c \rangle| = R_D \cdot C_N$. $\blacksquare$
+
 *Remark 6.3.1 (Finite-Rank Commutator Hierarchy).*
 The appearance of low-rank commutators is an inherent consequence of the divided-difference structure: for any power $K^p$, $\frac{m^p - n^p}{m - n}$ is a polynomial of degree $p-1$ in $m$ and $n$, ensuring that $[Q, K^p]$ has rank at most $2p$.
 
@@ -512,14 +555,14 @@ In terms of the signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2}\sum_{m=1}
 
 ---
 
-### Theorem 7.2 (Exact Small-Denominator Cancellation in the Odd-Even Spectral Coupling)
+### Theorem 7.2 (Exact Denominator Cancellation in the Odd-Even Spectral Coupling Away from Resonances)
 *Let $Q_{\mathrm{even}}$ and $Q_{\mathrm{odd}}$ denote the restrictions of the Connes–van Suijlekom Galerkin matrix $Q$ to the even and odd subspaces of $\mathbb{C}^{2N+1}$. For any even eigenvector $u^{(k)}$ of $Q_{\mathrm{even}}$ with eigenvalue $E_k$ satisfying the non-resonance condition $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ and $\lambda \notin \operatorname{spec}(Q_{\mathrm{odd}})$, let $D_0^{(k)} = e^T u^{(k)}$ and define the arithmetic energy vector $\mathbf{w}(\lambda) = b + \mathcal{E}_{\mathrm{arith}}(\lambda) e$, where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}}(\lambda) = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$.*
 
 *Then in the spectral expansion of $(Q_{\mathrm{even}} - \lambda I)^\dagger \mathbf{w}(\lambda)$, the numerator for mode $k$ factors identically as:*
 
 $$u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
-*Consequently, for every $E_k \ne \lambda$ with $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$, the factor $(E_k - \lambda)$ cancels identically, yielding the exact non-singular algebraic summand:*
+*Consequently, for every $E_k \ne \lambda$ with $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$, the factor $(E_k - \lambda)$ cancels identically, yielding the exact algebraic summand with the $(E_k - \lambda)$ denominator eliminated:*
 
 $$\frac{(e^T u^{(k)}) (u^{(k)T} \mathbf{w}(\lambda))}{E_k - \lambda} \equiv - [D_0^{(k)}]^2 \cdot \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
 
@@ -538,7 +581,7 @@ $$\mathcal{E}_{\mathrm{arith}}(E_k) - \mathcal{E}_{\mathrm{arith}}(\lambda) = (E
 Substituting this into the numerator yields $u^{(k)T} \mathbf{w}(\lambda) = -(E_k - \lambda) D_0^{(k)} \langle \psi, (Q_{\mathrm{odd}} - E_k I)^{-1} (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle$. Dividing by $(E_k - \lambda)$ completes the algebraic cancellation. $\blacksquare$
 
 *Remark 7.2.1 (Non-Resonance and Spectral Disjointness).*
-The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that the odd resolvent $(Q_{\mathrm{odd}} - E_k I)^{-1}$ is well-defined. In all numerical Galerkin calculations across all tested dimensions and cutoffs ($N \in \{1, \dots, 24\}$, $c \in \{5, \dots, 17\}$), the even and odd spectra are strictly disjoint ($\operatorname{spec}(Q_{\mathrm{even}}) \cap \operatorname{spec}(Q_{\mathrm{odd}}) = \emptyset$). In particular, the lowest odd eigenvalue satisfies $E_{\mathrm{odd}, 1} \approx 0.05 \gg \lambda \sim 10^{-43}$, so no spectral degeneracies or resonances occur between the sectors.
+The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that the odd resolvent $(Q_{\mathrm{odd}} - E_k I)^{-1}$ is well-defined. Theorem 7.2 eliminates the explicit $(E_k - \lambda)$ denominator algebraically, but the odd-sector resolvent $(Q_{\mathrm{odd}} - E_k I)^{-1}$ possesses genuine poles if $E_k \in \operatorname{spec}(Q_{\mathrm{odd}})$. In all numerical Galerkin calculations across all tested dimensions and cutoffs ($N \in \{1, \dots, 24\}$, $c \in \{5, \dots, 17\}$), the even and odd spectra are strictly disjoint ($\operatorname{spec}(Q_{\mathrm{even}}) \cap \operatorname{spec}(Q_{\mathrm{odd}}) = \emptyset$), so no spectral degeneracies or resonances occur between the sectors.
 
 ---
 
@@ -563,6 +606,19 @@ Applying to $c$, parity gives $k^T c = 0$ and $\boldsymbol\psi^T c = 0$. Meanwhi
 
 Because $s_2 \in c^\perp$ and $\lambda$ is simple in the even sector, $(Q_{\mathrm{even}} - \lambda I)$ is invertible on $c^\perp$ with resolvent $R_{\mathrm{even}}$. Writing $K^2 c = \alpha c - D_0 R_{\mathrm{even}} s_2$, where $\alpha = c^T K^2 c = \|K c\|^2 = D_0^2 M_2$ by Proposition 6.3, taking the inner product with $d$ yields $d^T K^2 c = \alpha (d^T c) - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Recalling from Theorem 7.1 that $d^T K^2 c = \sum m^2 c_m = \sqrt{2}\sum_{m=1}^N m^2 v_m = -D_1 / \kappa^2$, we obtain $-D_1 / \kappa^2 = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Multiplying by $-\kappa^2$ and dividing by $D_0$ proves statement 3. $\blacksquare$
 
+### Corollary 7.3.1 (Exact Even-Sector Mode Projections and Small-Denominator Cancellation)
+*For every excited even eigenmode $u^{(k)} \in \mathcal{H}_{\mathrm{even}} \cap c^\perp$ ($k \ge 1$) with eigenvalue $E_k$ and gap $\Delta_{\mathrm{even}, k} \equiv E_k - \lambda$, the projection of $K^2 c$ satisfies the exact identity:*
+
+$$\langle u^{(k)}, K^2 c \rangle \equiv - D_0 \frac{\langle u^{(k)}, s_2 \rangle}{E_k - \lambda} \equiv - D_0 \frac{b_k}{\Delta_{\mathrm{even}, k}}, \qquad b_k \equiv \langle u^{(k)}, s_2 \rangle.$$
+
+*Consequently, the excited-state contribution to the resolvent inner product in Theorem 7.3 admits the exact representation:*
+
+$$\tau_k \equiv \frac{d_k b_k}{\Delta_{\mathrm{even}, k}} \equiv - \frac{d_k \langle u^{(k)}, K^2 c \rangle}{D_0}, \qquad d_k \equiv \langle u^{(k)}, d \rangle.$$
+
+*The small denominator $\Delta_{\mathrm{even}, k}$ is algebraically extinguished by $b_k \propto \Delta_{\mathrm{even}, k}$, leaving each spectral summand $\tau_k$ finite and directly determined by the projection $\langle u^{(k)}, K^2 c \rangle$.*
+
+*Proof.* Taking the inner product of $(Q - \lambda I) K^2 c = -D_0 s_2$ from Theorem 7.3 with $u^{(k)}$ yields $(E_k - \lambda) \langle u^{(k)}, K^2 c \rangle = -D_0 \langle u^{(k)}, s_2 \rangle = -D_0 b_k$. Dividing by $\Delta_{\mathrm{even}, k}$ gives the projection identity. Substituting $b_k / \Delta_{\mathrm{even}, k} = -\langle u^{(k)}, K^2 c \rangle / D_0$ into $\tau_k = d_k b_k / \Delta_{\mathrm{even}, k}$ immediately yields the formula. $\blacksquare$
+
 *Remark 7.3.1 (Elimination of the Exponential Ground-State Singularity).*
 In Theorem 7.3, the exponentially tiny tunneling factor $D_0$ factors out algebraically. The catastrophic ground-state singularity $1/\lambda$ is completely eliminated from the jet hierarchy: the remaining resolvents are reduced resolvents on the odd sector and on the orthogonal complement $c^\perp$ of the even ground state. Their quantitative behaviour with $N$ is a separate spectral question investigated numerically below.
 
@@ -580,18 +636,20 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Neumann Resolvent Identity** | $D(z) \equiv [(I + z\mathcal{L})^{-1} T_v](0)$ | Theorem 3.2 | Identifies generating function as boundary operator resolvent; heat representation. |
 | **Pointwise Kernel Positivity** | $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ | Theorem 4.1 | Proves Fourier Archimedean kernel is globally non-negative for all real $r$. |
 | **Universal Factorization** | $\Phi_v(r) = \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D(-1/r^2)$ | Corollary 4.2 | Factors entire amplitude into universal sinc and operator resolvent. |
-| **Lattice Orthogonality** | $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | Theorem 4.3 | Samples squared Fourier coefficients orthogonally at lattice nodes. |
+| **Lattice Sampling Identity** | $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | Theorem 4.3 | Samples squared Fourier coefficients orthogonally at discrete lattice frequencies. |
 | **Cauchy Transform Identity** | Closed algebraic form for $J(q)$ | Theorem 5.1 | Evaluates Archimedean Cauchy transform in closed form via contour integration. |
-| **Spatial Laplace Duality** | $J(q) = \int_0^L K_v^{\mathrm{phys}}(y) e^{-qy} dy$ | Theorem 5.2 | Duality between complex frequency Cauchy transform and physical Laplace transform. |
+| **Spatial Laplace Duality** | $J(q) = \frac{1}{L}\int_0^L K_v^{\mathrm{phys}}(L-y) e^{-qy} dy$ | Theorem 5.2 | Duality between complex frequency Cauchy transform and reflected spatial autocorrelation. |
 | **Weierstrass Pole Series** | $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ | Corollary 5.3 | Unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ convergence. |
 | **Digamma Closed Form** | $\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum v_m^2 h_+(a_m) + \text{boundary}$ | Corollary 5.4 | Closed-form evaluation summing harmonic and lattice modes analytically. |
-| **Finite-$T$ Cutoff Defect** | $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)} \equiv -\delta_T^{\mathrm{tail}} \equiv -\sum A_k \mathcal{J}_k(T, L)$ | Theorem 5.5 | Proves residual is 100% Archimedean cutoff leakage; geometric jet expansion. |
+| **Finite-$T$ Cutoff Defect** | $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\delta_T^{\mathrm{tail}}(v_N)$ | Theorem 5.5 | Proves residual on $v_N$ is identically Archimedean cutoff tail leakage; geometric jet expansion. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
 | **First-Jet Norm Identity** | $\|Kc\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2}\boldsymbol\psi \rangle$ | Proposition 6.3 | Gives the exact ratio $\|Kc\| / |D_0|$ as an odd-sector resolvent norm. |
+| **Odd-Sector Mode Projections** | $\langle e_j, K c \rangle = -D_0 \frac{a_j}{\Delta_j}$, $\|Kc\|^2 = D_0^2 M_2$ | Corollary 6.3.1 | Exact coordinate projections, Parseval decomposition, and tunneling product $|\langle e_1, Kc \rangle| = R_D C_N$. |
 | **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
-| **Small-Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraically that odd-even resolvent coupling is non-singular. |
+| **Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraic cancellation of the $(E_k - \lambda)$ denominator away from odd resonances. |
 | **Exact $K^2$ Resolvent Representation** | $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$ | Theorem 7.3 | Eliminates the ground-state factor $1/\lambda$ and reduces $D_1/D_0$ to excited-sector resolvent matrix elements. |
+| **Even-Sector Mode Projections** | $\langle u_k, K^2 c \rangle = -D_0 \frac{b_k}{\Delta_k}$, $\tau_k = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$ | Corollary 7.3.1 | Exact second-jet coordinate projections and resolvent summand representation. |
 
 ---
 
@@ -610,15 +668,16 @@ The exact algebraic identities and theorems established in this manuscript were 
 | :--- | :--- | :--- | :--- |
 | Theorem 3.1 & Theorem 4.1 | 4-term Volterra reduction & squared resolvent validation | `cell32.py` | `cell32.out` |
 | Theorem 3.2 | Operator resolvent & Taylor jet hierarchy $D_k = T_v^{(2k)}(0)$ | `cell38.py`, `cell43.py` | `cell38.out`, `cell43.out` |
-| Theorem 4.3 | Lattice orthogonality $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | `cell32.py` | `cell32.out` |
-| Theorem 5.1 & Theorem 5.2 | Exact Cauchy transform $J(q)$ & spatial Laplace duality | `cell56.py` | `cell56.out` |
+| Theorem 4.3 | Lattice sampling identity $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ | `cell32.py` | `cell32.out` |
+| Theorem 5.1 & Theorem 5.2 | Exact Cauchy transform $J(q)$ & reflected Laplace duality | `cell56.py` | `cell56.out` |
 | Corollary 5.3 & Corollary 5.4 | Weierstrass pole decomposition & exact digamma closed form | `cell56.py` | `cell56.out` |
 | Theorem 5.5 | Finite-$T$ Archimedean cutoff defect & endpoint-jet reconstruction | `cell57.py` | `cell57.out` |
 | Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
-| Proposition 6.3 & Theorem 7.3 | Exact $K$ & $K^2$ commutators, first-jet norm identity & $D_1/D_0$ reconstruction | `cell59.py` | `cell59.out` |
+| Proposition 6.3 & Corollary 6.3.1 | Exact $K$ commutator, Parseval norm identity & mode projections | `cell59.py`, `cell61.py` | `cell59.out`, `cell61.out` |
 | Theorem 7.1 | Exact Archimedean resolvent first-jet identity | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
-| Theorem 7.2 | Small-denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
+| Theorem 7.2 | Denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
+| Theorem 7.3 & Corollary 7.3.1 | Exact $K^2$ commutator, even mode projections & $D_1/D_0$ representation | `cell59.py`, `cell61.py` | `cell59.out`, `cell61.out` |
 
 ---
 
