@@ -461,6 +461,27 @@ $$(M^r e)^T u = \begin{cases} 0, & r \text{ odd}, \\[6pt] (-1)^{r/2} \dfrac{D_{r
 
 *Proof.* Setting $k = 1$ in Theorem 6.1 gives $[M, Q] = p e^T - e p^T$. Applying to $u$ and using $p^T u = 0$ yields $[M, Q] u = D_0 \psi$. Since $[M, Q] u = \lambda M u - Q M u$, we obtain $(Q - \lambda I)(M u) = -D_0 \psi$. Because $M u$ and $\psi$ are odd, inverting on $\mathcal{H}_{\mathrm{odd}}$ establishes $M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$. Taking the inner product with $\psi$ yields $B_1 = \psi^T M u = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle = -D_0 \mathcal{E}_{\mathrm{arith}}$. $\blacksquare$
 
+### Proposition 6.3 (Exact $K$-Commutator and First-Jet Resolvent Norm Identity)
+*Let $K \equiv M = \operatorname{diag}(-N, \dots, N)$ denote the Fourier-index operator, $d \equiv e = (1, \dots, 1)^T$, $\boldsymbol\psi \equiv p = (\psi(-N), \dots, \psi(N))^T$, and let $c \equiv u$ denote the normalized even ground state ($Q c = \lambda c$).*
+
+1. **Exact Rank-2 Commutator:**
+   *The commutator $[Q, K]$ satisfies the exact rank-2 identity on $\mathbb{C}^{2N+1}$:*
+   $$[Q, K] = -\boldsymbol\psi d^T + d \boldsymbol\psi^T.$$
+2. **Ground-State Action:**
+   *Acting on the even ground state $c$, because $\boldsymbol\psi^T c = 0$ and $d^T c = D_0$:*
+   $$(Q - \lambda I) K c = -D_0 \boldsymbol\psi.$$
+3. **Odd-Sector Resolvent Expansion & Norm Identity:**
+   *Expanding along the orthonormal odd-sector eigenbasis $\{e_j\}_{j \ge 1}$ of $Q_{\mathrm{odd}}$ ($Q e_j = \lambda_j e_j$):*
+   $$K c = -D_0 \sum_{j \ge 1} \frac{\langle \boldsymbol\psi, e_j \rangle}{\lambda_j - \lambda} e_j.$$
+   *Consequently, taking Euclidean norms yields the exact closed-form identity:*
+   $$\|K c\|^2 = D_0^2 \sum_{j \ge 1} \frac{|\langle \boldsymbol\psi, e_j \rangle|^2}{(\lambda_j - \lambda)^2} = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2} \boldsymbol\psi \rangle \equiv D_0^2 M_2,$$
+   *where $M_2 \equiv \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2} \boldsymbol\psi \rangle$.*
+
+*Proof.* For $m \ne n$, $[Q, K]_{mn} = Q_{mn}(n - m) = \frac{\psi(m) - \psi(n)}{m - n}(n - m) = -(\psi(m) - \psi(n))$. The rank-2 outer product $(-\boldsymbol\psi d^T + d \boldsymbol\psi^T)_{mn} = -\psi(m) \cdot 1 + 1 \cdot \psi(n) = -(\psi(m) - \psi(n))$. On the diagonal $m = n$, both sides vanish identically. Applying to $c$ and noting $\boldsymbol\psi^T c = 0$ gives $(Q - \lambda I) K c = [Q, K] c = -\boldsymbol\psi (d^T c) = -D_0 \boldsymbol\psi$. Since $K c$ and $\boldsymbol\psi$ are purely odd, inverting $Q - \lambda I$ on $\mathcal{H}_{\mathrm{odd}}$ and taking the squared norm yields $\|K c\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2} \boldsymbol\psi \rangle$. $\blacksquare$
+
+*Remark 6.3.1 (Finite-Rank Commutator Hierarchy).*
+The appearance of low-rank commutators is an inherent consequence of the divided-difference structure: for any power $K^p$, $\frac{m^p - n^p}{m - n}$ is a polynomial of degree $p-1$ in $m$ and $n$, ensuring that $[Q, K^p]$ has rank at most $2p$.
+
 ---
 
 ## 7. The First-Jet Ratio $D_1/D_0$ and Exact Resolvent Small-Denominator Cancellation
@@ -521,6 +542,32 @@ The hypothesis $E_k \notin \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that t
 
 ---
 
+### Theorem 7.3 (Exact $K^2$-Commutator Resolvent Representation of $D_1/D_0$)
+*Let $K = \operatorname{diag}(-N, \dots, N)$, $d = (1, \dots, 1)^T$, $k = K d$, and let $c$ be the normalized even ground state satisfying $Q c = \lambda c$. Let $R_{\mathrm{even}} \equiv (Q_{\mathrm{even}} - \lambda I)_{c^\perp}^{-1}$ denote the even resolvent restricted to the orthogonal complement $c^\perp$.*
+
+1. **Rank-4 Commutator Identity:**
+   *The commutator $[Q, K^2]$ admits the exact rank-4 representation:*
+   $$[Q, K^2] = -(K\boldsymbol\psi) d^T - \boldsymbol\psi k^T + k \boldsymbol\psi^T + d (K\boldsymbol\psi)^T.$$
+2. **Ground-State Action and Automatic Orthogonality:**
+   *Applying $[Q, K^2]$ to $c$ yields:*
+   $$(Q - \lambda I) K^2 c = -D_0 (K\boldsymbol\psi + M_1 d) \equiv -D_0 s_2,$$
+   *where $M_1 \equiv \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle$. The source vector $s_2$ is identically orthogonal to the ground state:*
+   $$\langle c, s_2 \rangle = \langle c, K\boldsymbol\psi \rangle + M_1 \langle c, d \rangle = -D_0 M_1 + M_1 D_0 \equiv 0.$$
+3. **Exact Resolvent Representation of $D_1/D_0$:**
+   *Consequently, $K^2 c = D_0^2 M_2 c - D_0 R_{\mathrm{even}} s_2$, and contracting with $d^T$ yields the exact closed form:*
+   $$\boxed{\frac{D_1}{D_0} = \kappa^2 \left[ \langle d, R_{\mathrm{even}}(K\boldsymbol\psi + M_1 d) \rangle - D_0^2 M_2 \right],} \qquad \kappa = \frac{2\pi}{L}.$$
+
+*Proof.* For $m \ne n$, $[Q, K^2]_{mn} = Q_{mn}(n^2 - m^2) = -(\psi(m) - \psi(n))(m + n)$. The $(m, n)$ entry of the right-hand side is $-(m \psi(m)) \cdot 1 - \psi(m) \cdot n + m \cdot \psi(n) + 1 \cdot (n \psi(n)) = -(m + n)\psi(m) + (m + n)\psi(n) = -(\psi(m) - \psi(n))(m + n)$, and on the diagonal both sides vanish, proving statement 1.
+
+Applying to $c$, parity gives $k^T c = 0$ and $\boldsymbol\psi^T c = 0$. Meanwhile $d^T c = D_0$, and by Proposition 6.3, $(K\boldsymbol\psi)^T c = \boldsymbol\psi^T K c = -D_0 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle = -D_0 M_1$. Thus $[Q, K^2] c = -D_0 K\boldsymbol\psi - D_0 M_1 d = -D_0 s_2$, with $\langle c, s_2 \rangle = -D_0 M_1 + M_1 D_0 = 0$, proving statement 2.
+
+Because $s_2 \in c^\perp$, $(Q - \lambda I)$ is invertible on $c^\perp$ with resolvent $R_{\mathrm{even}}$. Writing $K^2 c = \alpha c - D_0 R_{\mathrm{even}} s_2$, where $\alpha = c^T K^2 c = \|K c\|^2 = D_0^2 M_2$ by Proposition 6.3, taking the inner product with $d$ yields $d^T K^2 c = \alpha (d^T c) - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Recalling from Theorem 7.1 that $d^T K^2 c = \sum m^2 c_m = \sqrt{2}\sum_{m=1}^N m^2 v_m = -D_1 / \kappa^2$, we obtain $-D_1 / \kappa^2 = D_0^3 M_2 - D_0 \langle d, R_{\mathrm{even}} s_2 \rangle$. Multiplying by $-\kappa^2$ and dividing by $D_0$ proves statement 3. $\blacksquare$
+
+*Remark 7.3.1 (Elimination of the Exponential Ground-State Singularity).*
+In Theorem 7.3, the exponentially tiny tunneling factor $D_0$ factors out algebraically. Crucially, because $s_2 \perp c$, the excited resolvent $R_{\mathrm{even}}$ acts exclusively on $c^\perp$. The smallest eigenvalue encountered in $R_{\mathrm{even}}$ is the first *excited* even eigenvalue $\mu_{\mathrm{even}, 1} \approx 0.016$, while the odd resolvent in $M_1, M_2$ is governed by $\mu_{\mathrm{odd}} \approx 0.057$. The catastrophic ground-state singularity $1/\lambda \sim 10^{43}$ is completely eliminated from the jet hierarchy.
+
+---
+
 ## 8. Conclusion and Toolkit Index
 
 This manuscript establishes the exact, rigorous operator-theoretic foundation for the finite-rank Connes–van Suijlekom truncated Weil quadratic form. Every result in this paper is an exact algebraic identity or an unconditionally proven finite-dimensional theorem:
@@ -541,8 +588,10 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Finite-$T$ Cutoff Defect** | $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)} \equiv -\delta_T^{\mathrm{tail}} \equiv -\sum A_k \mathcal{J}_k(T, L)$ | Theorem 5.5 | Proves residual is 100% Archimedean cutoff leakage; geometric jet expansion. |
 | **Rank-$2k$ Commutator** | $[M^k, Q] = \sum (M^j p)(M^{k-1-j} e)^T - (M^j e)(M^{k-1-j} p)^T$ | Theorem 6.1 | Determines exact commutator structure of Galerkin matrix. |
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
+| **First-Jet Norm Identity** | $\|Kc\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2}\boldsymbol\psi \rangle$ | Proposition 6.3 | Reduces first Fourier moment to odd resolvent; proves $\|Kc\| \propto |D_0|$. |
 | **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
 | **Small-Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraically that odd-even resolvent coupling is non-singular. |
+| **Exact $K^2$ Resolvent Representation** | $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$ | Theorem 7.3 | Eliminates $D_0$ and $1/\lambda$; expresses $D_1/D_0$ via benign excited resolvents. |
 
 ---
 
@@ -567,6 +616,7 @@ The exact algebraic identities and theorems established in this manuscript were 
 | Theorem 5.5 | Finite-$T$ Archimedean cutoff defect & endpoint-jet reconstruction | `cell57.py` | `cell57.out` |
 | Theorem 6.1 & Corollary 6.1.1 | Rank-$2k$ commutator algebra & strict parity decoupling | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 6.2 | Odd-sector resolvent identity $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi$ | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
+| Proposition 6.3 & Theorem 7.3 | Exact $K$ & $K^2$ commutators, spectral gap stability & $D_1/D_0$ reconstruction | `cell59.py` | `cell59.out` |
 | Theorem 7.1 | Exact Archimedean resolvent first-jet identity | `cell54.py`, `cell55.py` | `cell54.out`, `cell55.out` |
 | Theorem 7.2 | Small-denominator cancellation $(E_k - \lambda)$ in odd-even coupling | `cell55.py` | `cell55.out` |
 
