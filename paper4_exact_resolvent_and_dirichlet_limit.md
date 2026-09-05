@@ -21,16 +21,16 @@ In this paper, we establish the **exact algebraic solution** to the finite-$N$ A
 2. **Universal Fourier Factorization and Unconditional Pointwise Positivity (Theorem):** The entire Fourier-side amplitude $\Phi_v(r)$ factors directly in terms of the boundary Neumann resolvent evaluated at the inverted spectral variable $z = -1/r^2$:
    $$\Phi_v(r) \equiv \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D\left(-\frac{1}{r^2}\right), \qquad K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 = \frac{4}{L} \frac{\sin^2(rL/2)}{r^2} D\left(-\frac{1}{r^2}\right)^2 \ge 0,$$
    proving algebraically and unconditionally that the Fourier-side Archimedean kernel $K_{\mathrm{Fourier}}(v, r, L)$ is pointwise non-negative for all real $r$ and all real coefficient vectors $v \in \mathbb{R}^{N+1}$.
-3. **Spectral Lattice Orthogonality (Theorem):** At the lattice nodes $r = a_m$, the apparent poles cancel cleanly against the envelope zeros via removable singularities, yielding the exact sampling identity:
+3. **Spectral Lattice Sampling Identity (Theorem):** At the lattice nodes $r = a_m$, the apparent poles cancel cleanly against the envelope zeros via removable singularities, yielding the exact sampling identity:
    $$K_{\mathrm{Fourier}}(v, 0, L) = L v_0^2 = L u_0^2, \qquad K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 = L u_m^2 \quad (m = 1, \dots, N),$$
-   uncoupling the kernel into the squared Fourier coefficients.
-4. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorems):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via contour integration in the complex frequency plane, isolating the origin residue ($2v_0^2/q$), the discrete lattice poles ($2qv_m^2/(q^2+a_m^2)$), and the imaginary pole at $z = iq$. We establish the spatial Laplace duality $J(q) \equiv \int_0^L K_v^{\mathrm{phys}}(y) e^{-qy} dy$. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ (with $C_{\mathrm{arch}} = -\gamma - \log \pi$) as an unconditionally convergent algebraic series with fast $\mathcal{O}(n^{-2})$ absolute convergence, eliminating the need for numerical quadrature.
-5. **Finite-$T$ Archimedean Cutoff Defect and Endpoint-Jet Representation (Theorem):** In finite-rank Galerkin implementations where the continuous Archimedean density is evaluated with a finite integration cutoff $T > 0$, we prove the exact identity $v^T Q_{\mathrm{arch}}^{(T)} v \equiv \frac{1}{\pi}\int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$. Consequently, the discrepancy between the Galerkin eigenvalue $\lambda_N$ and the continuous tripartite functional $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N)$ is identically the Archimedean cutoff tail $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\frac{1}{\pi}\int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_N, r, L) \, dr$. For $T > a_N = 2\pi N/L$, this tail admits an exact Laurent series $\sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L)$ in terms of endpoint derivatives $D_j = T_v^{(2j)}(0)$ and universal moment integrals $\mathcal{J}_k(T, L)$, converging geometrically with step ratio $(a_N/T)^2$. This proves that the observed $10^{-43}$ numerical residual at $N = 24$ is 100% continuous cutoff leakage rather than a finite-rank subspace projection defect.
-6. **Exact Commutator Algebra and Parity Factorization (Theorem):** For the coordinate operator $M = \operatorname{diag}(n)$ and the Galerkin matrix $Q$, the commutator $[M^k, Q]$ has rank at most $2k$. Parity reflection decouples the system into even and odd sectors, yielding the exact odd-sector resolvent identity:
+   sampling the kernel directly into the squared Fourier coefficients.
+4. **Exact Archimedean Cauchy Transform and Closed-Form Pole Decomposition (Theorems):** We evaluate the continuous Archimedean Cauchy transform $J(q) = \frac{1}{\pi}\int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr$ in exact closed algebraic form via contour integration in the complex frequency plane, isolating the origin residue ($2v_0^2/q$), the discrete lattice poles ($2qv_m^2/(q^2+a_m^2)$), and the imaginary pole at $z = iq$. We establish the spatial Laplace duality $J(q) \equiv \frac{1}{L}\int_0^L K_v^{\mathrm{phys}}(L-y) e^{-qy} dy$ via the reflected autocorrelation kernel. Combined with the Weierstrass partial fraction expansion of the digamma function, this expresses the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [ \frac{\|v\|_2^2}{n+1} - J(q_n) ]$ (with $C_{\mathrm{arch}} = -\gamma - \log \pi$) as an unconditionally convergent algebraic series with an explicit $\mathcal{O}(M^{-1})$ finite-$M$ remainder bound and fast $\mathcal{O}(n^{-2})$ summand convergence, eliminating the need for numerical quadrature.
+5. **Finite-$T$ Archimedean Cutoff Defect and Endpoint-Jet Representation (Theorem):** In finite-rank Galerkin implementations where the continuous Archimedean density is evaluated with a finite integration cutoff $T > 0$, we prove the exact identity $v^T Q_{\mathrm{arch}}^{(T)} v \equiv \frac{1}{\pi}\int_0^T h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$. Consequently, the discrepancy between the Galerkin eigenvalue $\lambda_N$ and the continuous tripartite functional $\mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N)$ is identically the Archimedean cutoff tail $\lambda_N - \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_N) \equiv -\frac{1}{\pi}\int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_N, r, L) \, dr \equiv -\delta_T^{\mathrm{tail}}(v_N)$, resolving the exact relationship for the continuous Weil functional evaluated on the finite Galerkin test vector $v_N$. For $T > a_N = 2\pi N/L$, this tail admits an exact Laurent series $\sum_{k=0}^\infty A_k(N) \mathcal{J}_k(T, L)$ in terms of endpoint derivatives $D_j = T_v^{(2j)}(0)$ and universal moment integrals $\mathcal{J}_k(T, L)$, converging geometrically with step ratio $(a_N/T)^2$. This proves that the observed $10^{-43}$ numerical residual for $v_N$ is identically continuous Archimedean cutoff tail leakage $\delta_T^{\mathrm{tail}}(v_N)$, rigorously separating the finite cutoff artifact from the infinite-dimensional continuum minimizer projection problem.
+6. **Exact Commutator Algebra and Parity Factorization (Theorem):** For the coordinate operator $M = \operatorname{diag}(n)$ and the Galerkin matrix $Q$, the commutator $[M^k, Q]$ has rank at most $2k$. Under the positive-gap condition $\lambda < \min \operatorname{spec}(Q_{\mathrm{odd}})$, parity reflection decouples the system into even and odd sectors, yielding the exact odd-sector resolvent identity:
    $$M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi, \qquad B_1 = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle.$$
-7. **Exact First-Jet Resolvent Identity and Small-Denominator Cancellation (Theorems):** We prove algebraically that the first-jet cancellation ratio is identically the relative first correction of the large-$r$ Archimedean resolvent:
-   $$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m}.$$
-   In terms of the discrete signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2} \sum_{m=1}^N v_m \delta_{a_m^2}$, this ratio equals $-\frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}$ as an algebraic quotient of finite sums. Furthermore, we establish the exact small-denominator cancellation theorem: in the spectral expansion of the resolvent $(Q_{\mathrm{even}} - \lambda I)^\dagger$ coupled to the odd arithmetic energy, the apparent denominator $(E_k - \lambda)$ for any even eigenstate $k$ cancels identically against the odd resolvent difference in the numerator via the first resolvent identity, proving algebraically that the resolvent coupling is non-singular.
+7. **Exact First-Jet Resolvent Identity and Small-Denominator Cancellation (Theorems):** We prove algebraically that the first-jet cancellation ratio is identically equal to the relative first correction of the large-$r$ Archimedean resolvent:
+   $$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} \equiv \frac{D'(0)}{D(0)} \equiv -\kappa^2 \frac{F'(0)}{F(0)} \equiv -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m}.$$
+   In terms of the discrete signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2} \sum_{m=1}^N v_m \delta_{a_m^2}$, this ratio equals $-\frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}$ as an algebraic quotient of finite sums. Furthermore, we establish the exact small-denominator cancellation theorem: in the spectral expansion of the resolvent $(Q_{\mathrm{even}} - \lambda I)^\dagger$ coupled to the odd arithmetic energy, the apparent denominator $(E_k - \lambda)$ for any even eigenstate $k$ cancels identically against the odd resolvent difference in the numerator via the first resolvent identity away from odd resonances.
 
 ---
 
@@ -66,9 +66,9 @@ The objective of this manuscript is to provide a **100% rigorous, pure-mathemati
 - The exact squared rational resolvent identity for $K_{\mathrm{Fourier}}$, proving pointwise non-negativity globally.
 - The operator representation of the generating function as a Neumann resolvent.
 - The closed-form contour evaluation of the Archimedean Cauchy transform $J(q)$ and the unconditionally convergent Weierstrass pole series for $\mathcal{Q}_{\mathrm{arch}}(v)$, completely eliminating numerical quadrature.
-- The finite-$T$ Archimedean cutoff defect identity and geometric endpoint-jet Laurent series, resolving the exact relationship between finite Galerkin truncations and continuous Weil functionals.
-- The exact rank-$2k$ commutator algebra of the Galerkin matrix, proving that barrier suppression factors cancel identically in the first-jet ratio.
-- The exact cancellation of small bound-state denominators and universal semigroup squeezing bounds.
+- The finite-$T$ Archimedean cutoff defect identity and geometric endpoint-jet Laurent series, resolving the exact relationship for the Weil functional evaluated on the finite Galerkin test vector $v_N$.
+- The exact rank-$2k$ commutator algebra of the Galerkin matrix, yielding explicit closed-form representations for coordinate moments and the first-jet ratio.
+- The exact algebraic cancellation of small bound-state denominators in the odd-even resolvent coupling away from resonances.
 
 All exploratory and asymptotic questions concerning the infinite-dimensional limit $N \to \infty$ (such as solitary wave profiles, semiclassical WKB barrier tunneling, and formal Wiener–Hopf continuum scaling) are systematically investigated in the companion paper, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation* [Paper 4B].
 
@@ -187,7 +187,7 @@ Therefore:
 $$\frac{m S_{\mathrm{bar}}(m) - n S_{\mathrm{bar}}(n)}{n^2 - m^2} = \frac{\kappa r^2 (n^2 - m^2)}{(n^2 - m^2)(r^2 - a_m^2)(r^2 - a_n^2)} = \frac{2\pi}{L} \frac{r^2}{(r^2 - a_m^2)(r^2 - a_n^2)}.$$
 Multiplying by $\frac{4 v_m v_n}{\pi}$:
 $$\frac{4 v_m v_n}{\pi} \cdot \frac{2\pi}{L} \frac{r^2}{(r^2 - a_m^2)(r^2 - a_n^2)} = \frac{8 v_m v_n}{L} \frac{r^2}{(r^2 - a_m^2)(r^2 - a_n^2)}.$$
-This matches the cross-terms of the square identically. Since all four blocks match identically, the algebraic identity $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ is exact. $\blacksquare$
+This matches the cross-terms of the square identically. Since all four blocks match identically, the algebraic identity $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ is exact. Although the bracketed representation inside the square contains the odd factor $1/r$, every cross-term in its square expansion is an even function of $r$, so that $R_v(r)$ is identically an even rational function of $r$, hence a rational function of $r^2$. $\blacksquare$
 
 ### Theorem 3.2 (Neumann Resolvent Representation and Heat-Kernel Identity)
 *Let $\mathcal{L} = -\frac{d^2}{dt^2}$ denote the Neumann Laplacian on the physical interval $[0, L]$ with domain $\mathcal{D}(\mathcal{L}) = \{f \in H^2(0, L) : f'(0) = f'(L) = 0\}$. The normalized cosine eigenbasis of $\mathcal{L}$ is:*
@@ -242,6 +242,12 @@ Because all singularities are removable, $\Phi_v(r)$ is entire on $\mathbb{C}$ o
 
 *Remark 4.1.1 (Distinction Between Kernel Positivity and Functional Positivity).*
 The unconditional pointwise non-negativity $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ on the real line guarantees that the Fourier spectral density is non-negative everywhere. However, this does *not* imply that the integrated Archimedean functional $\mathcal{Q}_{\mathrm{arch}}(v) = \frac{1}{\pi} \int_0^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$ is non-negative, because the Archimedean weight $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ is not positive everywhere (it is negative for $r < r_0 \approx 9.77$ and positive for $r > r_0$). Consequently, kernel non-negativity $K_{\mathrm{Fourier}} \ge 0$ does not imply positivity of the full Weil quadratic form $\mathcal{Q}(v) \ge 0$, nor does it imply the Riemann Hypothesis. It provides an unconditionally positive spectral density entering the explicit formula.
+
+*Remark 4.1.2 (Three-Level Analytic Hierarchy: Meromorphic $R_v$, Entire $K_{\mathrm{Fourier}}$, and Entire $\Phi_v$).*
+The analytic structure of the Fourier Archimedean kernel forms a precise three-level hierarchy:
+1. **The Reduced Resolvent $R_v(r)$:** A meromorphic rational function on $\mathbb{C}$ possessing second-order poles at $r = 0$ and $r = \pm a_m$ ($m = 1, \dots, N$).
+2. **The Archimedean Kernel $K_{\mathrm{Fourier}}(v, r, L) = (1 - \cos(rL)) R_v(r)$:** The second-order zeros of the trigonometric envelope $1 - \cos(rL) = 2\sin^2(rL/2)$ at $r = 0$ and at each discrete lattice node $r = \pm a_m = \pm 2\pi m/L$ exactly cancel each second-order pole of $R_v(r)$ via removable singularities, extending $K_{\mathrm{Fourier}}$ to an entire function on the full complex plane $\mathbb{C}$.
+3. **The Entire Amplitude $\Phi_v(r)$:** Factoring $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2$, the physical Fourier amplitude $\Phi_v(r) = \frac{1}{\sqrt{L}} \int_0^L T_v(t) e^{-irt} dt$ is itself an entire function of exponential type at most $L/2$ by the Paley–Wiener theorem, ensuring that $K_{\mathrm{Fourier}} \ge 0$ unconditionally on $\mathbb{R}$.
 
 ### Corollary 4.2 (Universal Fourier Factorization)
 *The entire Fourier amplitude $\Phi_v(r)$ factors directly into the product of the universal sinc envelope and the boundary Neumann resolvent evaluated at $z = -1/r^2$:*
@@ -385,12 +391,12 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
 
 4. **Explicit Geometric Remainder Bound:**
    *For any integration cutoff $T > a_N = \frac{2\pi N}{L}$ and any truncation order $K \ge 0$, the tail truncation remainder is unconditionally bounded by:*
-   $$\left| \delta_T^{\mathrm{tail}}(v_N) - \sum_{k=0}^K A_k(N) \mathcal{J}_k(T, L) \right| \le \frac{C(v, N, L)}{T^{2K+3}} \frac{1}{1 - (a_N/T)^2},$$
-   *where the constant depends explicitly on the physical wave norm $\|v\|_1 = \sum_{m=0}^N |v_m|$, frequency bandwidth $a_N$, and interval length $L$:*
-   $$C(v, N, L) \equiv \frac{8 (\log T + 1)}{\pi L} \|v\|_1^2 a_N^{2K+2}.$$
-   *Equivalently, expressed in dimensionless scaling form:*
+   $$\left| \delta_T^{\mathrm{tail}}(v_N) - \sum_{k=0}^K A_k(N) \mathcal{J}_k(T, L) \right| \le \frac{C_K(v, N, L, T)}{T^{2K+3}} \frac{1}{1 - (a_N/T)^2},$$
+   *where the order-dependent constant is:*
+   $$C_K(v, N, L, T) \equiv \frac{8 (\log T + 1)}{\pi L} \|v\|_1^2 a_N^{2K+2}.$$
+   *Equivalently, factoring the powers of $T$ into dimensionless geometric form:*
    $$\left| \delta_T^{\mathrm{tail}}(v_N) - \sum_{k=0}^K A_k(N) \mathcal{J}_k(T, L) \right| \le \frac{C_0(v, L, T)}{T} \left( \frac{a_N}{T} \right)^{2K+2} \frac{1}{1 - (a_N/T)^2},$$
-   *with $C_0(v, L, T) = \frac{8 (\log T + 1)}{\pi L} \|v\|_1^2$. Consequently, the Laurent series converges unconditionally and geometrically with base ratio $(a_N/T)^2 < 1$. Away from non-generic algebraic cancellations among the endpoint derivatives, successive non-vanishing terms scale with this characteristic geometric step ratio.*
+   *where $C_0(v, L, T) \equiv \frac{8 (\log T + 1)}{\pi L} \|v\|_1^2$ is strictly independent of the truncation order $K$ and bandwidth $a_N$. Consequently, the Laurent series converges unconditionally and geometrically with base ratio $(a_N/T)^2 < 1$. Away from non-generic algebraic cancellations among the endpoint derivatives, successive non-vanishing terms scale with this characteristic geometric step ratio.*
 
 *Proof.*
 1. **Divided-Difference Integral Identity:**
@@ -436,8 +442,8 @@ $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + 
    Integrating by parts:
    $$\int_T^\infty \frac{\log r}{r^{2K+4}} \, dr = \frac{\log T}{(2K+3) T^{2K+3}} + \frac{1}{(2K+3)^2 T^{2K+3}} \le \frac{\log T + 1}{(2K+3) T^{2K+3}}.$$
    Since $\frac{K+2}{2K+3} \le \frac{2}{3} < 1$, combining factors yields:
-   $$\left| \delta_T^{\mathrm{tail}}(v_N) - \sum_{k=0}^K A_k(N) \mathcal{J}_k(T, L) \right| \le \frac{C(v, N, L)}{T^{2K+3}} \frac{1}{1 - (a_N/T)^2} = \frac{C_0(v, L, T)}{T} \left( \frac{a_N}{T} \right)^{2K+2} \frac{1}{1 - (a_N/T)^2},$$
-   where $C(v, N, L) = \frac{8(\log T + 1)}{\pi L} \|v\|_1^2 a_N^{2K+2}$ and $C_0(v, L, T) = \frac{8(\log T + 1)}{\pi L} \|v\|_1^2$. This completes the rigorous proof. $\blacksquare$
+   $$\left| \delta_T^{\mathrm{tail}}(v_N) - \sum_{k=0}^K A_k(N) \mathcal{J}_k(T, L) \right| \le \frac{C_K(v, N, L, T)}{T^{2K+3}} \frac{1}{1 - (a_N/T)^2} = \frac{C_0(v, L, T)}{T} \left( \frac{a_N}{T} \right)^{2K+2} \frac{1}{1 - (a_N/T)^2},$$
+   where $C_K(v, N, L, T) \equiv \frac{8(\log T + 1)}{\pi L} \|v\|_1^2 a_N^{2K+2}$ and $C_0(v, L, T) \equiv \frac{8(\log T + 1)}{\pi L} \|v\|_1^2$. This completes the rigorous proof. $\blacksquare$
 
 ### Remark 5.6 (Leading Non-Oscillatory Asymptotics and Alternating Jet Compensation)
 At leading order $k = 0$, evaluating the non-oscillatory part of $\mathcal{J}_0(T, L) = \frac{1}{\pi} \int_T^\infty \frac{h_+(r)}{r^2} dr + \text{oscillatory}$ using $h_+(r) = \log(r/(2\pi)) + \mathcal{O}(r^{-2})$ yields the leading asymptotic formula:
@@ -475,7 +481,12 @@ $$(M^r e)^T u = \begin{cases} 0, & r \text{ odd}, \\[6pt] (-1)^{r/2} \dfrac{D_{r
 *Every inner product appearing in $[M^k, Q] u$ reduces strictly to either an endpoint jet $D_m$ or an arithmetic moment $B_r$.*
 
 ### Theorem 6.2 (Exact Odd-Sector Resolvent Identity for $B_1$)
-*Let $u$ be the even ground-state eigenvector satisfying $Q u = \lambda u$ with $\lambda = \lambda_{\min}(N) > 0$.*
+*Let $u$ be the even ground-state eigenvector satisfying $Q u = \lambda u$ with $\lambda = \lambda_{\min}(N) > 0$. Assume the odd-sector positive-gap condition:*
+
+$$\lambda < \min \operatorname{spec}(Q_{\mathrm{odd}}),$$
+
+*so that $Q_{\mathrm{odd}} - \lambda I$ is strictly positive definite on $\mathcal{H}_{\mathrm{odd}}$ and boundedly invertible.*
+
 1. **Odd-Sector Resolvent Identity:**
    *The $k = 1$ commutator applied to $u$ yields:*
    $$M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi.$$
@@ -483,7 +494,7 @@ $$(M^r e)^T u = \begin{cases} 0, & r \text{ odd}, \\[6pt] (-1)^{r/2} \dfrac{D_{r
    *Consequently, the arithmetic moment scalar $B_1$ is strictly proportional to $D_0$:*
    $$B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}, \qquad \mathcal{E}_{\mathrm{arith}} \equiv \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle > 0.$$
 
-*Proof.* Setting $k = 1$ in Theorem 6.1 gives $[M, Q] = p e^T - e p^T$. Applying to $u$ and using $p^T u = 0$ yields $[M, Q] u = D_0 \psi$. Since $[M, Q] u = \lambda M u - Q M u$, we obtain $(Q - \lambda I)(M u) = -D_0 \psi$. Because $M u$ and $\psi$ are odd, inverting on $\mathcal{H}_{\mathrm{odd}}$ establishes $M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$. Taking the inner product with $\psi$ yields $B_1 = \psi^T M u = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle = -D_0 \mathcal{E}_{\mathrm{arith}}$. $\blacksquare$
+*Proof.* Setting $k = 1$ in Theorem 6.1 gives $[M, Q] = p e^T - e p^T$. Applying to $u$ and using $p^T u = 0$ yields $[M, Q] u = D_0 \psi$. Since $[M, Q] u = \lambda M u - Q M u$, we obtain $(Q - \lambda I)(M u) = -D_0 \psi$. Because $M u$ and $\psi$ are purely odd, and because $\lambda < \min \operatorname{spec}(Q_{\mathrm{odd}})$ ensures that $(Q_{\mathrm{odd}} - \lambda I)$ is strictly positive definite and boundedly invertible on $\mathcal{H}_{\mathrm{odd}}$, inverting on $\mathcal{H}_{\mathrm{odd}}$ establishes $M u = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$. Taking the inner product with $\psi$ yields $B_1 = \psi^T M u = -D_0 \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi \rangle = -D_0 \mathcal{E}_{\mathrm{arith}}$. Since $Q_{\mathrm{odd}} - \lambda I > 0$ and $\psi \ne 0$, $\mathcal{E}_{\mathrm{arith}} > 0$ is strictly positive. $\blacksquare$
 
 ### Proposition 6.3 (Exact $K$-Commutator and First-Jet Resolvent Norm Identity)
 *Let $K \equiv M = \operatorname{diag}(-N, \dots, N)$ denote the Fourier-index operator, $d \equiv e = (1, \dots, 1)^T$, $\boldsymbol\psi \equiv p = (\psi(-N), \dots, \psi(N))^T$, and let $c \equiv u$ denote the normalized even ground state ($Q c = \lambda c$).*
@@ -534,9 +545,11 @@ We now establish the exact algebraic structure of the first-jet cancellation rat
 ### Theorem 7.1 (Exact Archimedean Resolvent Jet Representation)
 *The first-jet cancellation ratio $D_1 / D_0$ is identically equal to the relative first correction of the large-$r$ Archimedean resolvent:*
 
-$$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} = -\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m},$$
+$$\frac{D_1}{D_0} \equiv -\frac{1}{2} \frac{A_1}{A_0} \equiv \frac{D'(0)}{D(0)} \equiv -\kappa^2 \frac{F'(0)}{F(0)} \equiv -\frac{\sqrt{2}\displaystyle\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\displaystyle\sum_{m=1}^N v_m},$$
 
-*where $D(w) \equiv \big[(I + w\mathcal{L})^{-1} T_v\big](0) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$ is the operator resolvent generating function, and $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$ is the discrete mode generating function.*
+*where $D(w) \equiv \big[(I + w\mathcal{L})^{-1} T_v\big](0) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$ is the operator resolvent generating function, and $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$ is the discrete mode generating function. The two generating functions are related identically by:*
+
+$$D(w) \equiv F(-\kappa^2 w), \qquad \kappa = \frac{2\pi}{L}.$$
 
 *Proof.* From Theorem 3.1, the large-$r$ expansion of the reduced Fourier kernel is:
 
@@ -544,11 +557,13 @@ $$R_v(r) = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \mathcal{O}(r^{-6}),$$
 
 where $A_0 = \frac{2}{L} D_0^2$ and $A_1 = -\frac{4}{L} D_0 D_1$. Taking the ratio gives $-A_1 / (2 A_0) = -(-\frac{4}{L} D_0 D_1) / (\frac{4}{L} D_0^2) = D_1 / D_0$. 
 
-In terms of the operator resolvent generating function $D(w) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$, Taylor expansion around $w = 0$ gives $D(w) = D_0 - D_1 w + \mathcal{O}(w^2)$, whence $D(0) = D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m$ and $D'(0) = -D_1 = -\sqrt{2}\sum_{m=1}^N a_m^2 v_m$. Thus:
+In terms of the operator resolvent generating function $D(w) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + a_m^2 w}$, Taylor expansion around $w = 0$ gives $D(w) = D_0 + D_1 w + \mathcal{O}(w^2)$, whence $D(0) = D_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m$ and $D'(0) = D_1 = -\sqrt{2}\sum_{m=1}^N a_m^2 v_m$. Thus:
 
-$$-\frac{D'(0)}{D(0)} = \frac{D_1}{D_0} = -\frac{\sqrt{2}\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\sum_{m=1}^N v_m}.$$
+$$\frac{D'(0)}{D(0)} = \frac{D_1}{D_0} = -\frac{\sqrt{2}\sum_{m=1}^N a_m^2 v_m}{v_0 + \sqrt{2}\sum_{m=1}^N v_m}.$$
 
-In terms of the unscaled coordinate generating function $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$, expanding around $z = 0$ gives $F(z) = D_0 + (\sqrt{2}\sum_{m=1}^N m^2 v_m) z + \mathcal{O}(z^2) = D_0 - \frac{D_1}{\kappa^2} z + \mathcal{O}(z^2)$. Differentiating at $z = 0$ yields $F'(0) = -D_1 / \kappa^2$, whence $F'(0) / F(0) = -D_1 / (\kappa^2 D_0)$, which gives $\frac{D_1}{D_0} = -\kappa^2 \frac{F'(0)}{F(0)}$. $\blacksquare$
+In terms of the unscaled coordinate generating function $F(z) = e^T (I - z M^2)^{-1} v = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - z m^2}$, expanding around $z = 0$ gives $F(z) = D_0 + (\sqrt{2}\sum_{m=1}^N m^2 v_m) z + \mathcal{O}(z^2) = D_0 - \frac{D_1}{\kappa^2} z + \mathcal{O}(z^2)$. Differentiating at $z = 0$ yields $F'(0) = -D_1 / \kappa^2$, whence $F'(0) / F(0) = -D_1 / (\kappa^2 D_0)$, which gives $\frac{D_1}{D_0} = -\kappa^2 \frac{F'(0)}{F(0)}$. 
+
+Equivalently, substituting $a_m = \kappa m$ into $D(w)$ gives $D(w) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 - (-\kappa^2 w) m^2} \equiv F(-\kappa^2 w)$. Differentiating via the chain rule gives $D'(0) = -\kappa^2 F'(0)$, immediately establishing $\frac{D'(0)}{D(0)} = -\kappa^2 \frac{F'(0)}{F(0)} = \frac{D_1}{D_0}$. $\blacksquare$
 
 *Remark 7.1.1 (Algebraic Ratio vs. Measure Expectation).*
 In terms of the signed atomic measure $\mu_N = v_0 \delta_0 + \sqrt{2}\sum_{m=1}^N v_m \delta_{a_m^2}$ supported on the discrete Neumann Laplacian spectrum $\{0, a_1^2, \dots, a_N^2\}$, this ratio evaluates formally as $-\frac{\int_0^\infty x \, d\mu_N(x)}{\int_0^\infty d\mu_N(x)}$. Because the Fourier coefficients $v_m$ alternate and take negative values, $\mu_N$ is a signed measure rather than a positive probability distribution. The identity is a strictly algebraic relation between finite sums, not a probabilistic expectation.
@@ -646,7 +661,7 @@ This manuscript establishes the exact, rigorous operator-theoretic foundation fo
 | **Odd-Sector Resolvent** | $Mu = -D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \psi$ | Theorem 6.2 | Solves first spectral moment and arithmetic energy uniquely in odd sector. |
 | **First-Jet Norm Identity** | $\|Kc\|^2 = D_0^2 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-2}\boldsymbol\psi \rangle$ | Proposition 6.3 | Gives the exact ratio $\|Kc\| / |D_0|$ as an odd-sector resolvent norm. |
 | **Odd-Sector Mode Projections** | $\langle e_j, K c \rangle = -D_0 \frac{a_j}{\Delta_j}$, $\|Kc\|^2 = D_0^2 M_2$ | Corollary 6.3.1 | Exact coordinate projections, Parseval decomposition, and tunneling product $|\langle e_1, Kc \rangle| = R_D C_N$. |
-| **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail. |
+| **Exact First-Jet Identity** | $D_1/D_0 \equiv -\frac{1}{2} A_1/A_0 \equiv D'/D \equiv -\kappa^2 F'/F$ | Theorem 7.1 | Relates endpoint derivative ratio directly to large-$r$ resolvent tail and generating functions ($D(w) \equiv F(-\kappa^2 w)$). |
 | **Denominator Cancellation** | $(E_k - \lambda)$ cancels identically in resolvent coupling | Theorem 7.2 | Proves algebraic cancellation of the $(E_k - \lambda)$ denominator away from odd resonances. |
 | **Exact $K^2$ Resolvent Representation** | $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$ | Theorem 7.3 | Eliminates the ground-state factor $1/\lambda$ and reduces $D_1/D_0$ to excited-sector resolvent matrix elements. |
 | **Even-Sector Mode Projections** | $\langle u_k, K^2 c \rangle = -D_0 \frac{b_k}{\Delta_k}$, $\tau_k = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$ | Corollary 7.3.1 | Exact second-jet coordinate projections and resolvent summand representation. |
