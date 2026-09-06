@@ -640,8 +640,8 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
      6. The Dirichlet kernel equivalence $\langle d, Q d \rangle = \mathcal{W}[F_N]$.
    - **Open Analytical Objectives:**
      1. *Dirichlet Functional Lower Bound:* Prove $\mathcal{W}[F_N] \ge c_0 N$ from the tri-partite decomposition $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}}$ (resolved in Proposition 8.9).
-     2. *Overlap-Weighted Odd Resolvent Moment:* Prove $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda} \le C N^p$ directly via the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ (established conditionally in Proposition 8.10 under non-tunneling spectral gap and tunneling-flux hypotheses).
-     3. *Polynomial Boundary Decoupling:* Prove $|D_1/D_0| \le C N^p$ and exponential boundary-defect collapse $\mathcal{D}(N) \to 0$ (established conditionally in Proposition 8.10).
+     2. *Overlap-Weighted Odd Resolvent Moment:* Prove $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda} \le C N^p$ directly via the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ (established conditionally in Proposition 8.10 under Hypotheses H1–H2).
+     3. *Polynomial Boundary Decoupling:* Prove $|D_1/D_0| \le C N^p$ and exponential boundary-defect collapse $\mathcal{D}(N) \to 0$ (established conditionally in Proposition 8.10 under Hypotheses H1–H3).
 
 ---
 
@@ -727,35 +727,40 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    *Because the partial sums satisfy $0 < S_1 \le S_k \le M_1$ for all $k \ge 1$, the primary sum is strictly bounded:*
    $$S_1 \langle d, R_{\mathrm{even}} d \rangle \le \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} S_k \le M_1 \langle d, R_{\mathrm{even}} d \rangle. \tag{8.10.7}$$
    *Using the filtering bound $|\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1 = |d_k| \frac{E_k - \lambda}{\mu_{k+1} - E_k} M_1$ (Proposition 8.7), the filtering remainder satisfies:*
-   $$\left| \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda} \right| \le M_1 \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k} \le \frac{M_1}{\mu_2 - E_1} \sum_{k \ge 1} d_k^2 \le \frac{2N+1}{\mu_2 - E_1} M_1. \tag{8.10.8}$$
+   $$\left| \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda} \right| \le M_1 \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k} \le \frac{M_1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} \sum_{k \ge 1} d_k^2 \le \frac{2N+1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} M_1. \tag{8.10.8}$$
 
-#### Part II: Conditional Polynomial Decoupling under Spectral-Gap Hypotheses
+#### Part II: Conditional Polynomial Decoupling under Spectral-Gap and Boundary Hypotheses
 
-*We introduce two explicit hypotheses governing the low-energy spectrum:*
+*We introduce three explicit hypotheses governing the low-energy spectrum and Dirichlet boundary amplitude:*
 - **Hypothesis H1 (Tunneling-Flux Relation):** *The ground-state tunneling splitting and boundary amplitude satisfy:*
   $$\frac{\mu_0 - \lambda}{D_0^2} \le C_{\mathrm{tun}} < \infty \qquad (N \to \infty).$$
   *Status:* Semiclassical WKB barrier tunneling analysis indicates that both $\mu_0 - \lambda$ and $D_0^2$ are governed by the same boundary barrier flux $e^{-2\mathcal{S}_{\mathrm{WKB}}}$, with numerical agreement within $5.6\%$ at $N = 24$ (Cell 47, Cell 60). We record this relation here as an explicit hypothesis rather than an unconditional finite-$N$ theorem.
-- **Hypothesis H2 (Non-Tunneling Spectral Separation):** *The excited even and odd eigenvalues lying above the tunneling doublet satisfy polynomial lower bounds:*
-  $$\mu_1 - \lambda \ge c_1 N^{-\gamma}, \qquad E_1 - \lambda \ge c_0 N^{-\gamma_e}, \qquad \mu_2 - E_1 \ge c_2 N^{-\gamma_o},$$
+- **Hypothesis H2 (Uniform Non-Tunneling Spectral Separation):** *The excited even and odd eigenvalues lying above the tunneling doublet satisfy uniform polynomial lower bounds:*
+  $$\inf_{j \ge 1}(\mu_j - \lambda) \ge c_1 N^{-\gamma}, \qquad \inf_{k \ge 1}(E_k - \lambda) \ge c_0 N^{-\gamma_e}, \qquad \inf_{k \ge 1}(\mu_{k+1} - E_k) \ge c_2 N^{-\gamma_o},$$
   *for positive constants $c_0, c_1, c_2 > 0$ and exponents $\gamma, \gamma_e, \gamma_o \ge 0$.*
-  *Status:* These gaps correspond to macroscopic inter-doublet spacings in the bound-state ladder below the barrier top, where numerical spectra (Cell 59, Cell 60) exhibit no exponential tunneling collapse.
+  *Status:* These gaps correspond to macroscopic inter-doublet spacings across the bound-state ladder below the barrier top, where numerical spectra (Cell 59, Cell 60) exhibit no exponential tunneling collapse. Uniformity in $k \ge 1$ ensures that the full filtering remainder (8.10.8) is rigorously controlled.
+- **Hypothesis H3 (Exponential Boundary Suppression):** *The Dirichlet ground-state boundary amplitude satisfies exponential decay:*
+  $$D_0^2 \le C_0 e^{-\sigma N} \qquad (N \to \infty),$$
+  *for positive constants $C_0 > 0$ and $\sigma > 0$.*
+  *Status:* Semiclassical WKB barrier penetration and numerical measurements across dimensions $N \in \{1, \dots, 24\}$ (Cell 44, Cell 47, Table 2) strongly support this geometric suppression, with decay rate $\sigma \approx \frac{\pi}{2}\log c$ ($\approx 2.014$ at $c = 13$). In Section 3 and Section 9.1, this geometric boundary extinction is catalogued as an empirical scaling observation / WKB prediction; we isolate it here as an explicit hypothesis required for the decoupling conclusion.
 
-*Under Hypotheses H1 and H2, the odd-sector resolvent moment and first-jet ratio satisfy polynomial bounds:*
+*Under Hypotheses H1, H2, and H3, the odd-sector resolvent moment, first-jet ratio, and boundary-defect metric satisfy:*
 
 1. **Polynomial Bound on the Odd Resolvent Moment $M_1$:**
-   *Combining (8.10.2), (8.10.3), Hypothesis H1, and Hypothesis H2:*
-   $$M_1 = \frac{a_0^2}{\mu_0 - \lambda} + \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_{\mathrm{tun}} b_{00}^2 + \frac{1}{\mu_1 - \lambda} \sum_{j \ge 1} a_j^2 \le C_{\mathrm{tun}} N^2 + \frac{2 \Lambda_*^2}{c_1} N^{1 + \gamma} = \mathcal{O}(N^{1 + \gamma}). \tag{8.10.9}$$
+   *Combining (8.10.2), (8.10.3), Hypothesis H1, and Hypothesis H2, and noting $|b_{00}| \le \|K\| = N$:*
+   $$M_1 = \frac{a_0^2}{\mu_0 - \lambda} + \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_{\mathrm{tun}} b_{00}^2 + \frac{1}{\inf_{j \ge 1}(\mu_j - \lambda)} \sum_{j \ge 1} a_j^2 \le C_{\mathrm{tun}} N^2 + \frac{2 \Lambda_*^2}{c_1} N^{1 + \gamma} = \mathcal{O}(N^\eta), \tag{8.10.9}$$
+   *with polynomial exponent $\eta \equiv \max(2, 1 + \gamma)$. For $\gamma \in [0, 1)$, the $N^2$ dipole envelope dominates; for $\gamma \ge 1$, the excited odd spectral gap dominates.*
 
 2. **Polynomial Control of the First-Jet Ratio $|D_1/D_0|$:**
-   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{E_1 - \lambda} \le \frac{3}{c_0} N^{1 + \gamma_e}$. Combining (8.10.7), (8.10.8), and (8.10.9) in the exact decomposition (8.10.6):*
-   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\mu_2 - E_1} M_1 + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
+   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{\inf_{k \ge 1}(E_k - \lambda)} \le \frac{3}{c_0} N^{1 + \gamma_e}$. Combining (8.10.7), (8.10.8), and (8.10.9) in the exact decomposition (8.10.6):*
+   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} M_1 + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
    *with finite polynomial exponent:*
-   $$p = 2 + \gamma + \max(\gamma_e, \gamma_o) < \infty. \tag{8.10.11}$$
+   $$p = 1 + \eta + \max(\gamma_e, \gamma_o) = 1 + \max(2, 1 + \gamma) + \max(\gamma_e, \gamma_o) < \infty. \tag{8.10.11}$$
    *Remark (Non-Sharp Exponent):* No attempt is made here to optimize the polynomial exponent $p$; only the finiteness of a polynomial exponent is required for exponential-over-polynomial boundary decoupling.
 
 3. **Exponential Boundary Decoupling:**
-   *Consequently, the boundary-defect metric satisfies:*
-   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C e^{-\frac{\pi N}{2}\log c} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0 \tag{8.10.12}$$
+   *Consequently, under Hypotheses H1, H2, and H3, the boundary-defect metric satisfies:*
+   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C_0 e^{-\sigma N} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \sim e^{-\sigma N} N^{2p} \longrightarrow 0 \tag{8.10.12}$$
    *exponentially fast as $N \to \infty$. This conditionally establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples exponentially in the continuum limit.*
 
 ---
@@ -915,7 +920,7 @@ Auditing this conjecture against the exact algebraic identities established in P
    > $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 \sim e^{-\frac{\pi N}{2}\log c} \left[ 1 + \mathcal{O}(N^p) \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0$$
    > collapses exponentially fast to zero as $N \to \infty$.
 
-   Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. This requirement is established by **Proposition 8.10**, which proves the exact finite-$N$ commutator cancellations and Cauchy–Schwarz resolvent coercivity (Part I), reducing the Polynomial Decoupling Criterion to polynomial non-tunneling spectral gaps and the WKB tunneling-flux relation (Part II), thereby ensuring that boundary-defect leakage decouples exponentially in the continuum limit.
+   Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. This requirement is established by **Proposition 8.10**, which proves the exact finite-$N$ commutator cancellations and Cauchy–Schwarz resolvent coercivity (Part I), reducing the Polynomial Decoupling Criterion to Hypotheses H1–H3 (Part II), thereby ensuring that boundary-defect leakage decouples exponentially in the continuum limit.
 
 ---
 
