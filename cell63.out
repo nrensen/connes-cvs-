@@ -1,0 +1,218 @@
+================================================================================
+CELL 63 — FINITE-RANK OPERATOR DOMINANCE & SPECTRUM OF Q_arch^{(-)}
+================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
+Computed Archimedean zero r_* = 6.28983598883690277966509 (0.051 s)
+
+--------------------------------------------------------------------------------
+DIMENSION N = 4 (Canonical Basis Dimension = 5)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 34.357 s, Q_weil = 59.259 s
+  sigma_max(Q_-) = 2.96947307630387
+  sigma_min(Q_-) = 4.02981005257163e-5
+  Condition number kappa(Q_-) = 73687.66859
+  Numerical nullspace dimension = 0 (Rank = 5 / 5)
+  Top 5 eigenvalues of Q_- : ['2.9694731', '0.76546723', '0.20178872', '0.010037289', '4.0298101e-5']
+  Bottom 3 eigenvalues of Q_- : ['0.20178872', '0.010037289', '4.0298101e-5']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0000000000000046694
+  Operator dominance margin mu_min = lambda_min - 1 = 4.6693541571873972824e-15
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 3.796276557e-51
+  Next 4 generalized eigenvalues : ['1.000000002', '1.000065035', '1.60877729', '1189.530669']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.995944055164121
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.00405594483587852
+  Fractional 3-mode energy E_low / E_total = 0.995944055164 (99.5944 %)
+  Leading coordinates of x_min : ['0.64843574', '-0.69768105', '0.29785279', '-0.063503711', '0.0048190853']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 2 x 2
+  Minimum eigenvalue of high-mode block min eig(C) = 0.00115072887500733
+  Eigenvalues of 3x3 Schur complement S_low = ['8.86335798527e-15', '9.86608294227e-10', '3.34710898321e-5']
+  Minimum eigenvalue of S_low = 8.86335798526857e-15
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 4: 93.655 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 8 (Canonical Basis Dimension = 9)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 34.903 s, Q_weil = 107.884 s
+  sigma_max(Q_-) = 2.9696045898218
+  sigma_min(Q_-) = 1.16478966021718e-18
+  Condition number kappa(Q_-) = 2.549477121e+18
+  Numerical nullspace dimension = 0 (Rank = 9 / 9)
+  Top 5 eigenvalues of Q_- : ['2.9696046', '0.76559414', '0.20197328', '0.010905482', '7.9894954e-5']
+  Bottom 3 eigenvalues of Q_- : ['9.0563884e-11', '1.9144644e-14', '1.1647897e-18']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0
+  Operator dominance margin mu_min = lambda_min - 1 = 4.0381217619913444472e-23
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 9.834435976e-51
+  Next 4 generalized eigenvalues : ['1.0', '1.0', '1.000000809', '1.065736787']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.978514067350584
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.0214859326494155
+  Fractional 3-mode energy E_low / E_total = 0.978514067351 (97.8514 %)
+  Leading coordinates of x_min : ['0.5900433', '-0.69177487', '0.38962868', '-0.14319723', '0.031171023', '-0.0029731758']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 6 x 6
+  Minimum eigenvalue of high-mode block min eig(C) = 2.01232324430466e-10
+  Eigenvalues of 3x3 Schur complement S_low = ['6.85829694568e-23', '1.62683083897e-17', '4.21273271365e-12']
+  Minimum eigenvalue of S_low = 6.85829694568319e-23
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 8: 142.948 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 12 (Canonical Basis Dimension = 13)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 34.909 s, Q_weil = 154.232 s
+  sigma_max(Q_-) = 2.96962013941274
+  sigma_min(Q_-) = 7.62698577667571e-36
+  Condition number kappa(Q_-) = 3.893569788e+35
+  Numerical nullspace dimension = 1 (Rank = 12 / 13)
+  Top 5 eigenvalues of Q_- : ['2.9696201', '0.76560738', '0.20199509', '0.010995968', '8.5313859e-5']
+  Bottom 3 eigenvalues of Q_- : ['4.8852942e-26', '1.0246603e-30', '7.6269858e-36']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0
+  Operator dominance margin mu_min = lambda_min - 1 = 3.4666983191986766073e-27
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 1.131146385e-21
+  Next 4 generalized eigenvalues : ['1.0', '1.0', '1.000000003', '1.00187109']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.975042806575217
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.0249571934247827
+  Fractional 3-mode energy E_low / E_total = 0.975042806575 (97.5043 %)
+  Leading coordinates of x_min : ['0.5826119', '-0.6897365', '0.39983715', '-0.15389902', '0.035491452', '-0.0035530548']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 10 x 10
+  Minimum eigenvalue of high-mode block min eig(C) = 6.22865708929055e-16
+  Eigenvalues of 3x3 Schur complement S_low = ['1.84573665298e-29', '9.27784686607e-24', '1.15682252466e-17']
+  Minimum eigenvalue of S_low = 1.84573665298302e-29
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 12: 189.532 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 16 (Canonical Basis Dimension = 17)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 34.920 s, Q_weil = 199.266 s
+  sigma_max(Q_-) = 2.9696241619682
+  sigma_min(Q_-) = -3.47530539814006e-51
+  Condition number kappa(Q_-) = +inf
+  Numerical nullspace dimension = 4 (Rank = 13 / 17)
+  Top 5 eigenvalues of Q_- : ['2.9696242', '0.76561072', '0.20200071', '0.011018764', '8.6761346e-5']
+  Bottom 3 eigenvalues of Q_- : ['3.0591551e-44', '1.3055679e-49', '-3.4753054e-51']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0
+  Operator dominance margin mu_min = lambda_min - 1 = 3.5208348276617883215e-26
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 9.52827357e-17
+  Next 4 generalized eigenvalues : ['1.0', '1.0', '1.000000027', '1.012696069']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.978192137270698
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.0218078627293023
+  Fractional 3-mode energy E_low / E_total = 0.978192137271 (97.8192 %)
+  Leading coordinates of x_min : ['0.58884019', '-0.69162511', '0.39129794', '-0.14431397', '0.031196399', '-0.0028491028']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 14 x 14
+  Minimum eigenvalue of high-mode block min eig(C) = 1.62088403443209e-20
+  Eigenvalues of 3x3 Schur complement S_low = ['7.43061812405e-35', '9.29091524109e-29', '1.73810198174e-22']
+  Minimum eigenvalue of S_low = 7.43061812405104e-35
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 16: 234.941 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 20 (Canonical Basis Dimension = 21)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 35.130 s, Q_weil = 256.700 s
+  sigma_max(Q_-) = 2.96962564168101
+  sigma_min(Q_-) = -3.93829462092881e-51
+  Condition number kappa(Q_-) = +inf
+  Numerical nullspace dimension = 8 (Rank = 13 / 21)
+  Top 5 eigenvalues of Q_- : ['2.9696256', '0.76561193', '0.20200278', '0.011027065', '8.7300659e-5']
+  Bottom 3 eigenvalues of Q_- : ['-1.2026273e-54', '-1.0709456e-51', '-3.9382946e-51']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0
+  Operator dominance margin mu_min = lambda_min - 1 = 6.5723327249169329964e-23
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 1.499661963e-11
+  Next 4 generalized eigenvalues : ['1.0', '1.0', '1.000000209', '1.020151923']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.982953524900604
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.0170464750993961
+  Fractional 3-mode energy E_low / E_total = 0.982953524901 (98.2954 %)
+  Leading coordinates of x_min : ['0.59953354', '-0.6943431', '0.37603287', '-0.12823057', '0.024494581', '-0.001846873']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 18 x 18
+  Minimum eigenvalue of high-mode block min eig(C) = 1.40867901401591e-24
+  Eigenvalues of 3x3 Schur complement S_low = ['1.20359120826e-34', '8.05059489578e-33', '1.47919760029e-26']
+  Minimum eigenvalue of S_low = 1.20359120825699e-34
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 20: 293.100 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 24 (Canonical Basis Dimension = 25)
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Gram Matrix Audit of Q_arch^{(-)}:
+  Build time: Q_minus = 35.528 s, Q_weil = 310.997 s
+  sigma_max(Q_-) = 2.96962630915975
+  sigma_min(Q_-) = -3.67142921599129e-51
+  Condition number kappa(Q_-) = +inf
+  Numerical nullspace dimension = 12 (Rank = 13 / 25)
+  Top 5 eigenvalues of Q_- : ['2.9696263', '0.76561247', '0.20200371', '0.011030791', '8.7545513e-5']
+  Bottom 3 eigenvalues of Q_- : ['-3.8742289e-55', '-4.193112e-53', '-3.6714292e-51']
+
+GENERALIZED EIGENSYSTEM AUDIT (Q_positive x = lambda * Q_arch^{(-)} x):
+  Smallest generalized eigenvalue lambda_min = 1.0
+  Operator dominance margin mu_min = lambda_min - 1 = 2.0443388355288719353e-22
+  Eigenpair residual ||Q_pos x_min - lam_min Q_- x_min||_2 = 1.936314888e-11
+  Next 4 generalized eigenvalues : ['1.0', '1.0', '1.000000313', '1.020814647']
+
+DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:
+  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = 0.984121509258194
+  Energy in high modes {e_3, ..., e_N}   : E_high = 0.0158784907418061
+  Fractional 3-mode energy E_low / E_total = 0.984121509258 (98.4122 %)
+  Leading coordinates of x_min : ['0.60255113', '-0.69495759', '0.3716014', '-0.12390685', '0.022867006', '-0.001637895']
+
+DIAGNOSTIC 3: Schur Complement Partition of Q_Weil:
+  High-mode block C dimension: 22 x 22
+  Minimum eigenvalue of high-mode block min eig(C) = 2.01262728833487e-27
+  Eigenvalues of 3x3 Schur complement S_low = ['5.84159906514e-36', '1.17492841809e-30', '2.16630112736e-29']
+  Minimum eigenvalue of S_low = 5.84159906513934e-36
+  High-mode elimination condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 24: 348.590 s
+
+================================================================================
+MULTI-DIMENSION SYNTHESIS TABLE (c = 13, Sweep N in {4, 8, 12, 16, 20, 24})
+================================================================================
+  N |  sigma_min(Q_-) |  kappa(Q_-) |      lambda_min |  lambda_min - 1 | E_low/E_tot |      min_eig(S)
+-------------------------------------------------------------------------------------------------------
+  4 |    4.0298101e-5 |     73687.7 |             1.0 |  4.66935416e-15 |     99.594% |    8.863358e-15
+  8 |   1.1647897e-18 | 2.54948e+18 |             1.0 |  4.03812176e-23 |     97.851% |   6.8582969e-23
+ 12 |   7.6269858e-36 | 3.89357e+35 |             1.0 |  3.46669832e-27 |     97.504% |   1.8457367e-29
+ 16 |  -3.4753054e-51 |        +inf |             1.0 |  3.52083483e-26 |     97.819% |   7.4306181e-35
+ 20 |  -3.9382946e-51 |        +inf |             1.0 |  6.57233272e-23 |     98.295% |   1.2035912e-34
+ 24 |  -3.6714292e-51 |        +inf |             1.0 |  2.04433884e-22 |     98.412% |   5.8415991e-36
+================================================================================
+CELL 63 EXECUTION COMPLETE
+================================================================================
