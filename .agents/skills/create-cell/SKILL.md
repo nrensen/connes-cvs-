@@ -62,6 +62,19 @@ GROUND_DPS = 50
 N_LIST = [4, 8, 12, 16, 20, 24]
 ```
 
+### 3.1.1 `mp.mpf` Precision, Literal Construction & String Formatting
+1. **Explicit String Wrapping for Constants:**
+   Never pass raw floating-point numbers to `mp.mpf` if precision loss can occur. Always wrap constants in strings:
+   - ❌ Incorrect: `mp.mpf(0.5)`, `mp.mpf(1e-35)` (causes binary float rounding prior to mpmath conversion)
+   - ✅ Correct: `mp.mpf('0.5')`, `mp.mpf('1e-35')`
+
+2. **No Python Float Format Specifiers on `mp.mpf` Objects:**
+   `mpmath.mpf` objects do **NOT** support standard Python float format specifiers like `f"{val:.2f}"` or `f"{val:.6e}"` directly. Doing so raises `TypeError: unsupported format string passed to mpf.__format__`.
+   - ❌ Incorrect: `shift_pct = f"{rec['rel_diff_pct']:.2f}%"` (crashes with TypeError)
+   - ✅ Correct (via `mp.nstr`): `shift_pct = mp.nstr(rec['rel_diff_pct'], 4) + "%"`
+   - ✅ Correct (via explicit float cast): `shift_pct = f"{float(rec['rel_diff_pct']):.2f}%"`
+   - Always use `mp.nstr(val, digits)` for table entries and scientific outputs.
+
 ### 3.2 Canonical Parity Projection Matrix ($v$-Basis)
 Always ensure calculations on the even sector operate in the canonical $(N+1)$-dimensional $v$-basis rather than the full $(2N+1)$-dimensional exponential basis:
 ```python
@@ -218,6 +231,9 @@ Before committing any cell script, audit against this checklist:
 - [ ] **F-String Bracket Escaping:** Are mathematical sets in f-strings escaped with double braces?
   - ❌ Incorrect: `print(f"Energy in {e_0, e_1} = {val}")` (causes `NameError: name 'e_0' is not defined`)
   - ✅ Correct: `print(f"Energy in {{e_0, e_1}} = {val}")`
+- [ ] **`mp.mpf` String Formatting:** Are all `mp.mpf` objects formatted without Python float specifiers (like `:.2f`)?
+  - ❌ Incorrect: `f"{rec['shift_pct']:.2f}%"` (crashes with `TypeError: unsupported format string passed to mpf.__format__`)
+  - ✅ Correct: `mp.nstr(val, digits)` or `f"{float(val):.2f}%"`
 - [ ] **Basis Consistency:** Is the script operating strictly in the intended basis ($v$-basis of size $N+1$ vs full-space exponential basis of size $2N+1$)?
 - [ ] **Removable Singularities:** Are all denominators protected against algebraic zeroes via Taylor series expansions?
 - [ ] **Eigenpair Residual Checking:** Are computed eigenvalues and eigenvectors checked for numerical residuals (e.g. $\|A x - \lambda B x\|_2$)?
