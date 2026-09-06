@@ -387,12 +387,13 @@ Tasks:
                                      v
 ========================================================================================
 STAGE VI: CONTINUUM ASYMPTOTICS & SUBSPACES DENSITY
-Status: ACTIVE ANALYTICAL ADVANCE (Paper 4B Propositions 8.7 & 8.8)
+Status: ACTIVE ANALYTICAL ADVANCE (Paper 4B Propositions 8.7, 8.8 & 8.9)
 Tasks:
   1. Prove polynomial bound |D_1/D_0| <= C N^p via sector-decomposed resolvents.
      - Advance: Exact rank-two commutator identity [K, Q] = \psi d^T - d \psi^T proved (Proposition 8.8).
-     - Advance: D_0-free bound a_j^2 <= 4 N^2 \Lambda_*^4 / ((E_1 - \lambda) [W[F_N] - \lambda(2N+1)]) established.
-     - Next Target: Lower-bound Dirichlet functional W[F_N] and odd-sector resolvent trace.
+     - Advance: D_0-free bound a_j^2 <= 4 N^2 \Lambda_*^4 / ((E_1 - \lambda) [W[F_N] - \lambda(2N+1)]) established (Proposition 8.8).
+     - Advance: Exact linear coercivity W[F_N] = 2\pi(1 + \log(\log c / 2)) N + O(\log N) proved via Archimedean boundary layer (Proposition 8.9).
+     - Next Target: Odd-sector resolvent trace bound Tr[(Q_odd - \lambda I)^{-1}] <= C N^q and even spectral gap E_1 - \lambda.
   2. Establish exponential boundary-defect decoupling D(N) -> 0.
   3. Formulate formal WKB double-well potential and prove density of union_{c, N} H_{c, N}.
 ========================================================================================
@@ -419,7 +420,8 @@ Tasks:
 | **M3** | Analyze coordinates and modal energy of the dangerous vector $x_{\min}$ | Diagnostic Report | **COMPLETED** (Confirmed $98\%$ energy in $\{e_0, e_1, e_2\}$ across all $N$) |
 | **M4** | Formulate certified positivity suite via Schur complement block decoupling | `cell64.py` | **COMPLETED** (`cell64.out`: $LDL^T$ pivots $D_{ii}(C) > 0, D_{ii}(S_{\mathrm{low}}) > 0$ verified at 80 dps across all $N$; backward error $\le 2.6 \times 10^{-81}$) |
 | **M5** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation (Stage IV) |
-| **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ and odd resolvent trace | Analytical Derivation | $D_0$-free bound on $M_1$ and first-jet ratio (Stage VI, Prop 8.8) |
+| **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ and odd resolvent trace | Paper 4B Proposition 8.9 | **COMPLETED** (Closed-form boundary-layer evaluation: $\mathcal{W}[F_N] = 2\pi\left(1 + \log\frac{\log c}{2}\right) N + \mathcal{O}(\log N)$, proving linear coercivity $\mathcal{M}_d^{(1)} \ge c_0 N$) |
+| **M7** | Bound the odd-sector resolvent trace $\operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda I)^{-1}]$ and even spectral gap $E_1 - \lambda$ | Analytical Derivation | Polynomial norm bound on $(Q_{\mathrm{odd}} - \lambda I)^{-1}$ (Stage VI) |
 
 ---
 
