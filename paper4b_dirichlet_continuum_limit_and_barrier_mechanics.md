@@ -544,16 +544,8 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
    *At $N = 24$, Cell 62 evaluates $M_1 \approx 97.2975$, with modal terms $\frac{a_j^2}{\mu_j - \lambda}$ across the low modes given by:*
    $$5.79, \; 5.13, \; 4.39, \; 4.55, \; 5.30, \; 6.04, \; 8.23, \; 9.99, \; 12.66, \; 16.16, \; 16.06, \; 3.00.$$
    *These values demonstrate that $M_1$ is a smooth, accumulated resolvent energy rather than a quantity dominated by a single isolated resonance.*
-   *The source vector $\boldsymbol\psi(m) = m Q_{0m}$ is the index-weighted first row: in full coordinates, $\boldsymbol\psi = K Q e_0$, where $K = \operatorname{diag}(-N, \dots, N)$. Defining the commutator $[K, Q] = KQ - QK$, its matrix entries are:*
-   $$[K, Q]_{mn} = (m - n) Q_{mn}.$$
-   *Because the Galerkin matrix $Q$ possesses a Cauchy-type kernel $Q_{mn} \sim \frac{\log(m/n)}{m - n}$, multiplication by $(m - n)$ algebraically eliminates the Cauchy singularity:*
-   $$[K, Q]_{mn} \sim \log(m/n).$$
-   *For an odd eigenvector $e_j$ with $Q e_j = \mu_j e_j$, the commutator identity yields $Q K e_j = \mu_j K e_j - [K, Q] e_j$. Taking the inner product with $e_0$:*
-   $$\langle e_0, Q K e_j \rangle = \mu_j \langle e_0, K e_j \rangle - \langle e_0, [K, Q] e_j \rangle.$$
-   *Because $e_j$ is odd and $K$ is odd, $K e_j$ is even with $(K e_j)(0) = 0 \cdot e_j(0) = 0$, which implies $\langle e_0, K e_j \rangle = 0$ identically. By symmetry of $Q$ and skew-symmetry of $[K, Q]$ (since $[K, Q]^T = -[K, Q]$):*
-   $$a_j = \langle \boldsymbol\psi, e_j \rangle = \langle K Q e_0, e_j \rangle = \langle e_0, Q K e_j \rangle = -\langle e_0, [K, Q] e_j \rangle = \langle [K, Q] e_0, e_j \rangle.$$
-   *(Noting also $[K, Q] e_0 = K Q e_0 - Q K e_0 = \boldsymbol\psi$ since $K e_0 = 0$.)*
-   *Thus, the mode overlaps $a_j$ are direct matrix elements of the smoothed commutator $[K, Q]$. Bounding the smoothed operator $\|[K, Q]\| \le C N^p$ guarantees a polynomial bound on the source overlaps $a_j^2 \le C (\mu_j - \lambda) w_j$ with $\sum w_j \le C N^p$, ensuring $M_1 \le C N^p$ without encountering any small denominators.*
+   *The source vector $\boldsymbol\psi(m) = m Q_{0m}$ is the index-weighted first row: in full coordinates, $\boldsymbol\psi = K Q e_0$, where $K = \operatorname{diag}(-N, \dots, N)$. Defining the commutator $[K, Q] = KQ - QK$, its matrix entries satisfy $[K, Q]_{mn} = (m - n) Q_{mn} = \psi(m) - \psi(n) = (\boldsymbol\psi d^T - d \boldsymbol\psi^T)_{mn}$, establishing that $[K, Q]$ is an exact rank-two operator (see Proposition 8.8 for the full algebraic development). For an odd eigenvector $e_j$ with $Q e_j = \mu_j e_j$, the overlap evaluates identically to $a_j = \langle [K, Q] e_0, e_j \rangle$.*
+   *This connects the mode overlaps $a_j$ and the resolvent moment $M_1$ directly to the smoothed rank-two commutator $[K, Q]$ rather than to near-singular eigenvalue denominators.*
 
 6. **Epistemic Status and The Analytical Reduction Chain:**
    *The complete analytical reduction chain takes the form:*
@@ -564,11 +556,92 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
      2. Closed nonlinear jet equation $\psi'(0) = \alpha_1 X_N - \alpha_2 \beta_N X_N^2 + \dots$ in $X_N = D_1/D_0$ with dimensionless shape invariants.
      3. Operator decomposition $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$ with small-denominator cancellation.
      4. Operator bound on the high-mode spectral-filtering tail $|\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1$, entirely free of $D_0^{-1}$.
-     5. Commutator identity $[K, Q]_{mn} = (m - n) Q_{mn} \sim \log(m/n)$ eliminating the Cauchy denominator, and the exact overlap formula $a_j = \langle [K, Q] e_0, e_j \rangle$.
+     5. Exact rank-two commutator identity $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ and overlap representation $a_j = \langle [K, Q] e_0, e_j \rangle$.
    - **Open Analytical Targets (Required to Complete the Proof):**
      1. *Uniform Spectral Separation:* Proving $\rho_k = \frac{E_k - \lambda}{\mu_{k+1} - E_k} \le C'$ uniformly across the bound-state ladder.
-     2. *Commutator Operator Bound:* Proving $\|[K, Q]\| \le C N^p$, establishing $M_1 \le C N^p$.
+     2. *Odd-Sector Resolvent Bound:* Proving $M_1 = \langle \boldsymbol\psi, R_{\mathrm{odd}}(\lambda) \boldsymbol\psi \rangle \le C N^p$.
      3. *Epistemic Discipline:* Until these two operator estimates are rigorously proved, the polynomial bound $|D_1/D_0| \le C N^p$ remains an open analytical target, supported by comprehensive numerical evidence but not yet an unconditional mathematical theorem.
+
+### Proposition 8.8 (Exact Finite-$N$ Rank-Two Commutator Theorem, Excited-Sector Resolvent Coupling, and $D_0$-Free Overlap Bounds)
+*The finite-dimensional Galerkin matrix $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ and its coordinate commutator $[K, Q]$ possess an exact rank-two algebraic structure that eliminates the small source overlaps $a_j$ in favor of even-sector resolvent norms, providing a completely $D_0$-free upper bound on the odd-sector resolvent moment $M_1$:*
+
+1. **The Exact Rank-Two Commutator Identity:**
+   *Let $Q$ be the finite-rank Galerkin matrix with divided-difference kernel entries:*
+   $$Q_{mn} = \begin{cases} \dfrac{\psi(m) - \psi(n)}{m - n}, & m \ne n, \\[6pt] \psi'(n), & m = n, \end{cases} \qquad (m, n \in \{-N, \dots, N\}),$$
+   *where $\psi(x)$ is the odd kernel function ($\psi(-x) = -\psi(x)$). Let $K = \operatorname{diag}(-N, \dots, N)$, $d = (1, \dots, 1)^T \in \mathbb{R}^{2N+1}$, and $\boldsymbol\psi = (\psi(-N), \dots, \psi(N))^T$. Then for all $m \ne n$:*
+   $$[K, Q]_{mn} = (m - n) Q_{mn} = \psi(m) - \psi(n),$$
+   *and on the diagonal $[K, Q]_{nn} = 0 = \psi(n) - \psi(n)$. Consequently, the commutator identity holds identically for every $m, n \in \{-N, \dots, N\}$:*
+   $$[K, Q]_{mn} = \psi(m) - \psi(n) = \psi(m) d_n - d_m \psi(n) \implies [K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T. \tag{8.8.1}$$
+   *Because $\psi$ is odd and $d$ is even, $\langle \boldsymbol\psi, d \rangle = \sum_{n=-N}^N \psi(n) = 0$, establishing that $\boldsymbol\psi \perp d$. Therefore, for all $N \ge 1$ (with non-trivial $\boldsymbol\psi$):*
+   $$\operatorname{rank}[K, Q] = 2 \quad \text{identically}.$$
+   *Moreover, letting $e_0 = (0, \dots, 1, \dots, 0)^T$ denote the central Fourier basis vector ($m = 0$), since $K e_0 = 0$ and $\psi(0) = 0$, we have:*
+   $$[K, Q] e_0 = \boldsymbol\psi (d^T e_0) - d (\boldsymbol\psi^T e_0) = \boldsymbol\psi \cdot 1 - d \cdot 0 = \boldsymbol\psi. \tag{8.8.2}$$
+   *Thus, $\boldsymbol\psi = [K, Q] e_0 = K Q e_0$ is an exact finite-$N$ commutator vector.*
+
+2. **Resolvent Operator Equation on Odd Eigenspaces:**
+   *Let $Q u_j = \mu_j u_j$ be an odd eigenvector ($u_j(-n) = -u_j(n)$), and define the odd mode overlap $a_j \equiv \langle u_j, \boldsymbol\psi \rangle$. Because $u_j$ is odd and $d$ is even, $\langle d, u_j \rangle = 0$. Applying the rank-two identity (8.8.1):*
+   $$[K, Q] u_j = \boldsymbol\psi \langle d, u_j \rangle - d \langle \boldsymbol\psi, u_j \rangle = -a_j d.$$
+   *Expanding the commutator $[K, Q] u_j = K Q u_j - Q K u_j = \mu_j K u_j - Q K u_j$ and equating terms yields the exact resolvent equation:*
+   $$(Q - \mu_j I) K u_j = a_j d. \tag{8.8.3}$$
+   *Remark:* The entire coupling of an odd eigenstate $u_j$ to the source vector $\boldsymbol\psi$ is generated by applying the resolvent of $Q$ at energy $\mu_j$ to the single uniform vector $d$.
+
+3. **Even/Odd Spectral Coupling and Exact Overlap Representation:**
+   *Let $Q u_k^{(+)} = E_k u_k^{(+)}$ denote the even eigenvectors. Taking the inner product of (8.8.3) with $u_k^{(+)}$:*
+   $$(E_k - \mu_j) \langle u_k^{(+)}, K u_j \rangle = a_j \langle u_k^{(+)}, d \rangle.$$
+   *Defining the constant-vector overlap $d_k \equiv \langle u_k^{(+)}, d \rangle$ and the coordinate transition matrix element $b_{kj} \equiv \langle u_k^{(+)}, K u_j \rangle$, we obtain the exact even/odd spectral coupling formula:*
+   $$b_{kj} = \frac{a_j d_k}{E_k - \mu_j}. \tag{8.8.4}$$
+   *Because $u_j$ is odd and $K$ is odd, the vector $K u_j$ is strictly even ($(-n) u_j(-n) = n u_j(n)$). Expanding $K u_j$ in the complete orthonormal even eigenbasis yields:*
+   $$\|K u_j\|^2 = \sum_k b_{kj}^2 = a_j^2 \sum_k \frac{d_k^2}{(E_k - \mu_j)^2} = a_j^2 \left\| (Q_{\mathrm{even}} - \mu_j I)^{-1} d \right\|^2. \tag{8.8.5}$$
+   *Inverting (8.8.5) eliminates the source overlaps $a_j$ entirely in terms of even resolvent norms:*
+   $$a_j^2 = \frac{\|K u_j\|^2}{\displaystyle\sum_k \frac{d_k^2}{(E_k - \mu_j)^2}} = \frac{\|K u_j\|^2}{\left\| (Q_{\mathrm{even}} - \mu_j I)^{-1} d \right\|^2}. \tag{8.8.6}$$
+   *Substituting this into the odd-sector resolvent moment $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda}$ gives the exact structural representation:*
+   $$M_1 = \sum_j \frac{\|K u_j\|^2}{(\mu_j - \lambda) \left\| (Q_{\mathrm{even}} - \mu_j I)^{-1} d \right\|^2}. \tag{8.8.7}$$
+
+4. **The Ground-State Pole Trap and Excited-Sector Isolation:**
+   *At $k = 0$, $u_0^{(+)} = c$ is the ground state with $E_0 = \lambda$ and $d_0 = \langle c, d \rangle = D_0$. Retaining only the $k = 0$ term in the denominator of (8.8.6) yields:*
+   $$a_j^2 \le \|K u_j\|^2 \frac{(\mu_j - \lambda)^2}{D_0^2}.$$
+   *Because $D_0 \sim e^{-\mathcal{S}_{\mathrm{WKB}}}$ collapses exponentially fast via destructive Dirichlet boundary interference, this crude lower bound divides by $D_0^2$ and diverges exponentially. The ground-state contribution is therefore mathematically deceptive: the effective spectral coupling is fundamentally driven by the excited even sector ($k \ge 1$).*
+   *To isolate the excited sector without knowing the ground state $c$, define the explicit residual vector:*
+   $$r \equiv (Q_{\mathrm{even}} - \lambda I) d.$$
+   *Because $(Q - \lambda I) c = 0$ and $Q$ is symmetric, we have $\langle r, c \rangle = \langle d, (Q - \lambda I) c \rangle = 0$. Hence, $r$ is an explicitly computable even vector lying **entirely in the excited even subspace** $c^\perp$.*
+   *Expanding in the excited even eigenbasis:*
+   $$r = \sum_{k \ge 1} (E_k - \lambda) d_k u_k^{(+)} \implies \|r\|^2 = \sum_{k \ge 1} (E_k - \lambda)^2 d_k^2. \tag{8.8.8}$$
+   *Since $E_k - \lambda \ge E_1 - \lambda > 0$ for all $k \ge 1$, we obtain:*
+   $$\|r\|^2 \ge (E_1 - \lambda) \sum_{k \ge 1} (E_k - \lambda) d_k^2 = (E_1 - \lambda) \left[ \langle d, Q d \rangle - \lambda \|d\|^2 \right].$$
+   *Because $\|d\|^2 = 2N + 1$, this yields the exact spectral lower bound:*
+   $$\|r\|^2 \ge (E_1 - \lambda) \big[ \langle d, Q d \rangle - \lambda (2N + 1) \big]. \tag{8.8.9}$$
+
+5. **Completely $D_0$-Free Bound on $a_j$ and Resolvent Moments:**
+   *Let $\Lambda_* \equiv \max(\|Q_{\mathrm{even}}\|, \|Q_{\mathrm{odd}}\|)$. Since $0 \le E_k \le \Lambda_*$ and $0 \le \mu_j \le \Lambda_*$, the spectral distance is bounded by $|E_k - \mu_j| \le 2\Lambda_*$. Discarding the $k = 0$ contribution in (8.8.6):*
+   $$\sum_{k \ge 1} \frac{d_k^2}{(E_k - \mu_j)^2} \ge \frac{1}{4\Lambda_*^2} \sum_{k \ge 1} d_k^2 \ge \frac{1}{4\Lambda_*^4} \sum_{k \ge 1} (E_k - \lambda)^2 d_k^2 = \frac{\|r\|^2}{4\Lambda_*^4}.$$
+   *Combining with (8.8.9) and noting $\|K u_j\|^2 \le \|K\|^2 \|u_j\|^2 \le N^2$, we obtain the completely $D_0$-free bound:*
+   $$a_j^2 \le \frac{4 N^2 \Lambda_*^4}{\|r\|^2} \le \frac{4 N^2 \Lambda_*^4}{(E_1 - \lambda) \big[ \langle d, Q d \rangle - \lambda (2N + 1) \big]}. \tag{8.8.10}$$
+   *Consequently, the odd-sector resolvent moment $M_1$ is bounded by:*
+   $$M_1 \le \frac{4 N^2 \Lambda_*^4}{(E_1 - \lambda) \big[ \langle d, Q d \rangle - \lambda (2N + 1) \big]} \operatorname{Tr}\big[ (Q_{\mathrm{odd}} - \lambda I)^{-1} \big]. \tag{8.8.11}$$
+   *Sharpened Two-Resolvent Identity:* Since $P_{\perp c} d = (Q_{\mathrm{even}} - \lambda I)^{-1} r$, the excited denominator satisfies the exact two-resolvent representation:
+   $$\sum_{k \ge 1} \frac{d_k^2}{(E_k - \mu_j)^2} = \left\| (Q_{\mathrm{even}} - \mu_j I)^{-1} (Q_{\mathrm{even}} - \lambda I)^{-1} r \right\|^2. \tag{8.8.12}$$
+
+6. **The Dirichlet/Fejér Kernel Representation $\langle d, Q d \rangle = \mathcal{W}[F_N]$:**
+   *The constant vector $d = (1, \dots, 1)^T \in \mathbb{R}^{2N+1}$ is the Fourier coefficient vector of the classical Dirichlet kernel:*
+   $$F_N(t) \equiv \sum_{m=-N}^N e^{2\pi i m t / L} = \frac{\sin\left((2N+1)\frac{\pi t}{L}\right)}{\sin\left(\frac{\pi t}{L}\right)}.$$
+   *By definition of the Galerkin matrix $Q_{mn} = \langle e_m, \mathcal{W} e_n \rangle$, the quadratic form $\langle d, Q d \rangle = \sum_{m, n} Q_{mn}$ is identically the continuous André Weil quadratic functional evaluated on this explicit test function:*
+   $$\langle d, Q d \rangle = \mathcal{W}[F_N] = \mathcal{Q}_{\mathrm{arch}}(F_N) + \mathcal{Q}_{\mathrm{pole}}(F_N) + \mathcal{Q}_{\mathrm{prime}}(F_N). \tag{8.8.13}$$
+   *Algebraically, pairing $(m, n)$ and $(-m, -n)$ in the divided difference entries yields the explicit finite positive-index sum:*
+   $$\langle d, Q d \rangle = \psi'(0) + 2\sum_{m=1}^N \psi'(m) + 4\sum_{1 \le m < n \le N} \left[ \frac{\psi(m) - \psi(n)}{m - n} + \frac{\psi(m) + \psi(n)}{m + n} \right] + 4\sum_{m=1}^N \frac{\psi(m)}{m}. \tag{8.8.14}$$
+   *Strategic Reduction:* Controlling the denominator in the $D_0$-free bound (8.8.10) does not require analyzing elusive matrix nullspaces or delicate boundary cancellations; it reduces to establishing a lower bound on the Weil functional evaluated on the explicit Dirichlet wavepacket $F_N(t)$.
+
+7. **Epistemic Status and Open Analytical Targets:**
+   - **Rigorously Established Finite-$N$ Theorems:**
+     1. The dyadic rank-two commutator identity $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ and $\boldsymbol\psi = [K, Q] e_0$.
+     2. The resolvent equation $(Q - \mu_j I) K u_j = a_j d$ and spectral coupling $b_{kj} = \frac{a_j d_k}{E_k - \mu_j}$.
+     3. The exact overlap formulas $a_j^2 = \|K u_j\|^2 / \|(Q_{\mathrm{even}} - \mu_j I)^{-1} d\|^2$ and $M_1 = \sum_j \frac{\|K u_j\|^2}{(\mu_j - \lambda) \|(Q_{\mathrm{even}} - \mu_j I)^{-1} d\|^2}$.
+     4. The excited-sector residual identity $r = (Q - \lambda I) d \perp c$ and the spectral gap bound $\|r\|^2 \ge (E_1 - \lambda) [\langle d, Q d \rangle - \lambda (2N + 1)]$.
+     5. The completely $D_0$-free overlap bound (8.8.10) and two-resolvent representation (8.8.12).
+     6. The Dirichlet kernel equivalence $\langle d, Q d \rangle = \mathcal{W}[F_N]$.
+   - **Open Analytical Objectives:**
+     1. *Dirichlet Functional Lower Bound:* Prove $\mathcal{W}[F_N] \ge c_0 N^\alpha$ ($\alpha \ge 1$) from the tri-partite decomposition $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}}$.
+     2. *Odd-Sector Resolvent Trace:* Prove $\operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda I)^{-1}] \le C N^q$ for some finite $q$.
+     3. *Even-Sector Spectral Gap:* Establish a polynomial lower bound on the even gap $E_1 - \lambda \ge c_1 N^{-\gamma}$.
 
 ---
 
