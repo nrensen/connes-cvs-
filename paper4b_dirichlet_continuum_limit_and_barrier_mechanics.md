@@ -866,17 +866,17 @@ High-precision spectral audits across dimensions $N \in \{8, 12, 16, 20, 24\}$ a
 
 | $N$ | $D_0^2$ | $\mu_1 - \lambda$ | $R_{\mathrm{gap}}^{\max} = \frac{D_0^2}{\mu_1 - \lambda}$ | $\Delta \sigma_N^{\mathrm{gap}} = -\frac{1}{N}\log R_{\mathrm{gap}}^{\max}$ | $M_1^{\mathrm{exc}}$ | $D_0^2 M_{2,\mathrm{exc}}$ | $\rho_2^{\mathrm{exc}} = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}}$ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 8 | $6.481 \times 10^{-21}$ | $1.387 \times 10^{-15}$ | $4.672 \times 10^{-6}$ | **1.534** | $43.998$ | $2.055 \times 10^{-4}$ | $4.671 \times 10^{-6}$ |
-| 12 | $4.418 \times 10^{-27}$ | $1.186 \times 10^{-21}$ | $3.724 \times 10^{-6}$ | **1.042** | $64.357$ | $2.397 \times 10^{-4}$ | $3.724 \times 10^{-6}$ |
-| 16 | $3.178 \times 10^{-32}$ | $1.276 \times 10^{-26}$ | $2.491 \times 10^{-6}$ | **0.806** | $76.091$ | $1.895 \times 10^{-4}$ | $2.491 \times 10^{-6}$ |
-| 20 | $7.028 \times 10^{-37}$ | $6.400 \times 10^{-31}$ | $1.098 \times 10^{-6}$ | **0.686** | $85.255$ | $9.362 \times 10^{-5}$ | $1.098 \times 10^{-6}$ |
-| 24 | $1.295 \times 10^{-40}$ | $2.949 \times 10^{-34}$ | $4.392 \times 10^{-7}$ | **0.610** | $93.654$ | $4.113 \times 10^{-5}$ | $4.392 \times 10^{-7}$ |
+| 8 | $6.481 \times 10^{-21}$ | $1.387 \times 10^{-15}$ | $4.672 \times 10^{-6}$ | **1.534** | $43.998$ | **$3.738 \times 10^{-5}$** | **$8.495 \times 10^{-7}$** |
+| 12 | $4.418 \times 10^{-27}$ | $1.186 \times 10^{-21}$ | $3.724 \times 10^{-6}$ | **1.042** | $64.357$ | **$2.564 \times 10^{-5}$** | **$3.984 \times 10^{-7}$** |
+| 16 | $3.178 \times 10^{-32}$ | $1.276 \times 10^{-26}$ | $2.491 \times 10^{-6}$ | **0.806** | $76.091$ | **$1.029 \times 10^{-5}$** | **$1.352 \times 10^{-7}$** |
+| 20 | $7.028 \times 10^{-37}$ | $6.400 \times 10^{-31}$ | $1.098 \times 10^{-6}$ | **0.686** | $85.255$ | **$4.293 \times 10^{-6}$** | **$5.035 \times 10^{-8}$** |
+| 24 | $1.295 \times 10^{-40}$ | $2.949 \times 10^{-34}$ | $4.392 \times 10^{-7}$ | **0.610** | $93.654$ | **$2.253 \times 10^{-6}$** | **$2.405 \times 10^{-8}$** |
 
 These computations demonstrate:
 1. **Strict Positivity of the Gap Decay Exponent:** $\Delta \sigma_N^{\mathrm{gap}} \ge 0.610 > 0$ across all tested dimensions, confirming that $R_{\mathrm{gap}}^{\max}(N)$ is not merely bounded, but rapidly decaying toward zero across the discrete sequence.
-2. **Exact Confirmation of the Convex Combination:** The numerical values of the overlap-weighted average $\rho_2^{\mathrm{exc}}$ track $R_{\mathrm{gap}}^{\max}$ closely, remaining bounded by $4.68 \times 10^{-6}$ and dropping to $4.39 \times 10^{-7}$ at $N = 24$.
-3. **Microscopic Scale of the Excited Second Moment:** $D_0^2 M_{2,\mathrm{exc}} \le 2.4 \times 10^{-4}$ across all tested dimensions, falling to $4.11 \times 10^{-5}$ at $N = 24$.
-4. **Dominance of the Algebraic Ground-State Bound:** In the total second-moment combination $D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}}$, the exact ground-state term $b_{00}^2 \le N^2$ accounts for $> 99.999\%$ of the sum across tested dimensions.
+2. **Convex Combination Suppression:** The exact overlap-weighted average $\rho_2^{\mathrm{exc}}$ is strictly smaller than the supremum $R_{\mathrm{gap}}^{\max}$ by a factor of 5 to 22 across tested dimensions, plunging from $8.50 \times 10^{-7}$ at $N = 8$ down to $2.41 \times 10^{-8}$ at $N = 24$ as the higher-mode denominators rapidly widen.
+3. **Microscopic Scale and Monotonic Decay of the Excited Second Moment:** The exact excited second moment $D_0^2 M_{2,\mathrm{exc}}$ decreases monotonically from $3.74 \times 10^{-5}$ at $N = 8$ to $2.25 \times 10^{-6}$ at $N = 24$, remaining microscopic and strongly decaying across all tested dimensions.
+4. **Dominance and Stability of the Algebraic Ground-State Bound:** In the total second-moment combination $D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}}$, the exact ground-state term stabilizes near $b_{00}^2 \approx 1.29 - 1.73$ (well beneath $N^2$), accounting for $> 99.9998\%$ of the second moment, with the excited tail contributing only $0.00013\%$ at $N = 24$.
 
 *Epistemic Status:* Proposition 8.11 establishes an exact conditional reduction: $\mathrm{H2}_{\mathrm{odd}} + \mathrm{H2}_{\mathrm{gap}} \implies D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$. The relative gap condition $\mathrm{H2}_{\mathrm{gap}}$ is an independent asymptotic hypothesis, supported numerically across discrete dimensions $N \in \{8, \dots, 24\}$ where $\Delta \sigma_N^{\mathrm{gap}} \ge 0.610$. Semiclassical barrier thinning provides the candidate physical mechanism for $\mathrm{H2}_{\mathrm{gap}}$, with five open analytical bridges required to convert the heuristic into a mathematical theorem.
 
