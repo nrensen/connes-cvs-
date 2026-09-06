@@ -234,9 +234,9 @@ The lattice sampling suggests a natural three-mode low-frequency sector. The ext
 
 ---
 
-## 7. Concrete Computational Suites: Reconnaissance (Cell 63) and Certified Schur Decoupling (Cell 64)
+## 7. Concrete Computational Suites: Reconnaissance (Cell 63) and High-Precision Schur Decoupling (Cell 64)
 
-Before attempting formal proofs, we execute targeted computational suites to inspect the negative operator directly and certify finite-rank positivity:
+Before attempting formal proofs, we execute targeted computational suites to inspect the negative operator directly and verify finite-rank positivity at high precision:
 
 ### Objectives & Mathematical Protocol of `cell63.py` (Reconnaissance)
 1. **Explicit Matrix Construction of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$:**
@@ -289,47 +289,48 @@ The execution of `cell63.py` across $N \in \{4, 8, 12, 16, 20, 24\}$ at 50-digit
 
 ---
 
-### Objectives & Mathematical Protocol of `cell64.py` (Certified Schur Decoupling)
+### Objectives & Mathematical Protocol of `cell64.py` (High-Precision Schur Decoupling)
 
 Motivated by the ill-conditioning of the Gram matrix $\mathcal{Q}_-^{(N)}$ diagnosed in Cell 63, `cell64.py` formulates an alternative, numerically well-conditioned pathway to verify finite-rank Weil positivity without inverting $\mathcal{Q}_-$:
-1. **$LDL^T$ Diagonal Pivot Certification at 80 dps:** Rather than performing generalized eigenvalue whitening, compute the exact symmetric $LDL^T$ factorization of the high-mode block $C$ and the low-mode Schur complement $S_{\mathrm{low}} = A - B C^{-1} B^T$ at 80 decimal digits of precision (`dps = 80`). Strict positivity of all diagonal pivots $D_{ii} > 0$ certifies positive definiteness with certified backward stability ($\|M - L D L^T\|_\infty / \|M\|_\infty \le 10^{-81}$).
-2. **Three-Mode Schur Decoupling Test:** Partition $\mathcal{Q}_{\mathrm{Weil}}$ into the low-frequency sector $\mathcal{V}_{\mathrm{low}} = \operatorname{span}\{e_0, e_1, e_2\}$ and high-frequency sector $\mathcal{V}_{\mathrm{high}} = \operatorname{span}\{e_3, \dots, e_N\}$. Certify $C \succ 0$ and $S_{\mathrm{low}} \succ 0$ across $N \in \{4, 8, 12, 16, 20, 24\}$, verifying $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ via the classical symmetric Schur complement criterion.
+1. **$LDL^T$ Diagonal Pivot Audit at 80 dps:** Rather than performing generalized eigenvalue whitening, compute the symmetric $LDL^T$ factorization of the high-mode block $C$ and the low-mode Schur complement $S_{\mathrm{low}} = A - B C^{-1} B^T$ at 80 decimal digits of precision (`dps = 80`). Strict positivity of all diagonal pivots $D_{ii} > 0$ verifies positive definiteness of the computed matrix with backward reconstruction residual $\|M - L D L^T\|_\infty / \|M\|_\infty \le 10^{-81}$.
+2. **Three-Mode Schur Decoupling Test:** Partition $\mathcal{Q}_{\mathrm{Weil}}$ into the low-frequency sector $\mathcal{V}_{\mathrm{low}} = \operatorname{span}\{e_0, e_1, e_2\}$ and high-frequency sector $\mathcal{V}_{\mathrm{high}} = \operatorname{span}\{e_3, \dots, e_N\}$. Verify $C \succ 0$ and $S_{\mathrm{low}} \succ 0$ across $N \in \{4, 8, 12, 16, 20, 24\}$, testing $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ via the classical symmetric Schur complement criterion.
 3. **Cutoff Sensitivity Sweep at $N=24$:** Sweep $m_{\mathrm{cut}} \in \{1, 2, 3, 4, 6, 8, 12 = N/2\}$ to test the stability of Schur elimination across the semiclassical barrier.
 
 ---
 
-### 7.2 Key Findings of Cell 64 Certified Positivity (`cell64.out`)
+### 7.2 Key Findings of Cell 64 High-Precision Positivity Verification (`cell64.out`)
 
-The execution of `cell64.py` across $N \in \{4, 8, 12, 16, 20, 24\}$ at 80-digit precision (`dps = 80`) has achieved certified numerical verification of finite-rank Weil positivity via symmetric Schur complement block decoupling, completely bypassing the ill-conditioned Gram inversion:
+The execution of `cell64.py` across $N \in \{4, 8, 12, 16, 20, 24\}$ at 80-digit precision (`dps = 80`) has achieved high-precision computational verification of finite-rank Weil positivity via symmetric Schur complement block decoupling, completely bypassing the ill-conditioned Gram inversion:
 
-1. **High-Precision Factorization and Certified Backward Stability:**
+1. **High-Precision Factorization and Backward Stability:**
    - Evaluated using an exact self-contained $LDL^T$ symmetric factorization algorithm at 80 decimal digits of precision.
-   - The relative backward errors $\|M - L D L^T\|_{\infty} / \|M\|_{\infty}$ for both the high-mode block $C$ and the $3 \times 3$ Schur complement $S_{\mathrm{low}}$ remain stably bounded between $10^{-81}$ and $10^{-82}$ across all tested dimensions ($N \in \{4, 8, 12, 16, 20, 24\}$), providing over 35 decimal orders of certified precision headroom above the smallest physical eigenvalue ($\lambda_0 \sim 10^{-43}$ at $N=24$).
+   - The relative backward errors $\|M - L D L^T\|_{\infty} / \|M\|_{\infty}$ for both the high-mode block $C$ and the $3 \times 3$ Schur complement $S_{\mathrm{low}}$ remain stably bounded between $10^{-81}$ and $10^{-82}$ across all tested dimensions ($N \in \{4, 8, 12, 16, 20, 24\}$), demonstrating backward stability of the factorization over 35 decimal orders below the physical ground state $\lambda_0 \sim 10^{-43}$ at $N=24$. (This accurately measures reconstruction error of the computed matrix; rigorous enclosure of the continuous mathematical operator is reserved for subsequent interval methods).
 
 2. **Strict Pivot Positivity Across All Dimensions:**
-   - **High-Mode Block Certification:** All diagonal pivots $D_{ii}(C) > 0$ are strictly positive across all dimensions $N \in \{4, \dots, 24\}$, certifying $C \succ 0$. The minimum pivot $\min(D_C) \approx 1.46 \times 10^{-6}$ stabilizes asymptotically for $N \ge 12$.
-   - **Low-Mode Schur Complement Certification:** All diagonal pivots $D_{ii}(S_{\mathrm{low}}) > 0$ are strictly positive across all dimensions $N \in \{4, \dots, 24\}$, certifying $S_{\mathrm{low}} \succ 0$.
-   - **Finite-Rank Positivity Verified:** By the classical symmetric Schur complement criterion ($\mathcal{Q}_{\mathrm{Weil}} \succ 0 \iff C \succ 0 \text{ and } S_{\mathrm{low}} \succ 0$), finite-rank Weil positivity $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ is rigorously certified for all tested dimensions $N \in \{4, 8, 12, 16, 20, 24\}$ at $c = 13$ without inverting $\mathcal{Q}_-$.
+   - **High-Mode Block Definiteness:** All diagonal pivots $D_{ii}(C) > 0$ are strictly positive across all dimensions $N \in \{4, \dots, 24\}$, confirming $C \succ 0$. The minimum pivot $\min(D_C) \approx 1.46 \times 10^{-6}$ stabilizes asymptotically for $N \ge 12$.
+   - **Low-Mode Schur Complement Definiteness:** All diagonal pivots $D_{ii}(S_{\mathrm{low}}) > 0$ are strictly positive across all dimensions $N \in \{4, \dots, 24\}$, confirming $S_{\mathrm{low}} \succ 0$.
+   - **Finite-Rank Positivity Verified:** By the classical symmetric Schur complement criterion ($\mathcal{Q}_{\mathrm{Weil}} \succ 0 \iff C \succ 0 \text{ and } S_{\mathrm{low}} \succ 0$), finite-rank Weil positivity $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ is numerically verified to 80-digit precision for all tested dimensions $N \in \{4, 8, 12, 16, 20, 24\}$ at $c = 13$ without inverting $\mathcal{Q}_-$.
 
-3. **Ground-State Scale Preservation in the 3-Mode Schur Complement:**
-   - The smallest eigenvalue $\lambda_{\min}(S_{\mathrm{low}})$ tracks the exact ground state $\lambda_0(\mathcal{Q}_{\mathrm{Weil}})$ within $5\%$ across 30 decimal orders of magnitude:
-     $$\begin{array}{c|c|c|c}
-     N & \lambda_0(\mathcal{Q}_{\mathrm{Weil}}) & \lambda_{\min}(S_{\mathrm{low}}) & \lambda_{\min}(C) \\
+3. **Ground-State Scale Preservation and Spectral Separation in the 3-Mode Schur Complement:**
+   - The smallest eigenvalue $\lambda_{\min}(S_{\mathrm{low}})$ tracks the full matrix ground state $\lambda_0(\mathcal{Q}_{\mathrm{Weil}})$ within $0.4\%$–$5.3\%$ across 30 decimal orders of magnitude:
+     $$\begin{array}{c|c|c|c|c}
+     N & \lambda_0(\mathcal{Q}_{\mathrm{Weil}}) & \lambda_{\min}(S_{\mathrm{low}}) & \text{Relative Shift} & \lambda_{\min}(C) \\
      \hline
-     4  & 8.827 \times 10^{-15} & 8.863 \times 10^{-15} & 1.151 \times 10^{-3} \\
-     8  & 6.711 \times 10^{-23} & 6.858 \times 10^{-23} & 2.012 \times 10^{-10} \\
-     12 & 1.782 \times 10^{-29} & 1.846 \times 10^{-29} & 6.229 \times 10^{-16} \\
-     16 & 7.118 \times 10^{-35} & 7.431 \times 10^{-35} & 1.621 \times 10^{-20} \\
-     20 & 1.323 \times 10^{-39} & 1.389 \times 10^{-39} & 1.409 \times 10^{-24} \\
-     24 & 2.533 \times 10^{-43} & 2.667 \times 10^{-43} & 2.013 \times 10^{-27}
+     4  & 8.8274 \times 10^{-15} & 8.8634 \times 10^{-15} & +0.41\% & 1.151 \times 10^{-3} \\
+     8  & 6.7109 \times 10^{-23} & 6.8583 \times 10^{-23} & +2.20\% & 2.012 \times 10^{-10} \\
+     12 & 1.7825 \times 10^{-29} & 1.8457 \times 10^{-29} & +3.55\% & 6.229 \times 10^{-16} \\
+     16 & 7.1184 \times 10^{-35} & 7.4309 \times 10^{-35} & +4.39\% & 1.621 \times 10^{-20} \\
+     20 & 1.3232 \times 10^{-39} & 1.3886 \times 10^{-39} & +4.94\% & 1.409 \times 10^{-24} \\
+     24 & 2.5335 \times 10^{-43} & 2.6669 \times 10^{-43} & +5.26\% & 2.0126 \times 10^{-27}
      \end{array}$$
-   - This demonstrates that eliminating high modes $m \ge 3$ numerically preserves the physical ground-state scale to within 5% across tested dimensions, confirming that the effective $3 \times 3$ operator $S_{\mathrm{low}}$ captures the entire ground-state tunneling scale.
+   - **Structural Significance:** After exactly integrating out all high modes $m \ge 3$, the resulting 3D effective operator $S_{\mathrm{low}} = A - B C^{-1} B^T$ captures essentially the entire exponentially small ground-state tunneling scale, while the high sector remains strongly positive relative to it ($\lambda_{\min}(C) \gg \lambda_0(\mathcal{Q}_{\mathrm{Weil}})$, being $\sim 16$ orders of magnitude larger at $N=24$). The physical near-zero direction lives squarely inside the low-mode effective operator.
    - The condition number of $S_{\mathrm{low}}$ is bounded by $\kappa(S_{\mathrm{low}}) \approx 4.22 \times 10^{13}$ at $N=24$, completely resolving the whitening conditioning collapse of Cell 63 ($\kappa(\mathcal{Q}_-) > 10^{50}$).
 
-4. **Cutoff Sensitivity Sweep at $N = 24$:**
+4. **Cutoff Hierarchy Sweep at $N = 24$:**
    - Sweeping the partition threshold $m_{\mathrm{cut}} \in \{1, 2, 3, 4, 6, 8, 12 = N/2\}$ demonstrates that all pivots remain strictly positive ($D_{ii} > 0$) for every cutoff.
-   - At the semiclassical barrier top $m_{\mathrm{cut}} = 12 = N/2$, the scattering block $C_{\mathrm{scatt}}$ has $\min\operatorname{eig}(C) \approx 3.087 \times 10^{-4}$, which is 33 orders of magnitude larger than at $m_{\mathrm{cut}} = 1$ ($2.94 \times 10^{-37}$).
-   - Furthermore, for $m_{\mathrm{cut}} \ge 6$, the Schur complement eigenvalue $\min\operatorname{eig}(S)$ matches $\lambda_0(\mathcal{Q}_{\mathrm{Weil}}) = 2.53348484008 \times 10^{-43}$ to 12 significant figures, confirming that modes $m \ge 6$ decouple with negligible back-reaction on the low-frequency sector.
+   - Furthermore, once $m_{\mathrm{cut}} \ge 6$, the Schur complement eigenvalue $\min\operatorname{eig}(S)$ matches $\lambda_0(\mathcal{Q}_{\mathrm{Weil}}) = 2.53348484008 \times 10^{-43}$ to 12 significant figures, establishing a clean hierarchy:
+     $$m \ge 12 \quad \longrightarrow \quad m \ge 8 \quad \longrightarrow \quad m \ge 6 \quad \text{(increasingly negligible back-reaction)}$$
+     rather than the decoupling being an artifact of $m_{\mathrm{cut}} = 3$.
 
 ---
 
@@ -358,10 +359,12 @@ Results:
   1. Q_- Gram matrix condition collapse diagnosed; generalized eigenvalue whitening
      identified as ill-posed for N >= 12 (Cell 63).
   2. Three-Mode Sector Hypothesis confirmed empirically (98% modal energy in {e0, e1, e2}) (Cell 63).
-  3. Finite-rank positivity Q_Weil > 0 certified via LDL^T Schur complement decoupling
-     at 80 decimal digits (all pivots D_{ii}(C) > 0 and D_{ii}(S_low) > 0 verified with
+  3. High-precision numerical verification of Q_Weil > 0 via symmetric LDL^T Schur complement
+     decoupling at 80 dps (all pivots D_{ii}(C) > 0 and D_{ii}(S_low) > 0 verified with
      relative backward error <= 2.6e-81 across all N in {4, 8, 12, 16, 20, 24}) (Cell 64).
-Next Target: Stage IV (Analytical Pairing of Weierstrass Resolvents) & Stage V (Three-Mode Reduction)
+  4. Ground-state scale capture established: \lambda_min(S_low) tracks \lambda_0(Q_Weil) within 5%
+     across 30 orders of magnitude, while \lambda_min(C) >> \lambda_0(Q_Weil) (16 orders higher at N=24).
+Next Target: Stage IV (Analytical Pairing of Weierstrass Resolvents) & Stage V (Three-Mode Schur Reduction)
 ========================================================================================
                                      |
                                      v
@@ -376,12 +379,14 @@ Tasks:
                                      |
                                      v
 ========================================================================================
-STAGE V: THREE-MODE SECTOR REDUCTION AND ANALYTICAL COUPLING
-Status: PLANNED
+STAGE V: THREE-MODE SECTOR REDUCTION AND EFFECTIVE HAMILTONIAN ANALYSIS
+Status: PLANNED (Motivated by Cell 64 Ground-State Scale Invariance)
 Tasks:
-  1. Leverage Cell 63's 98% modal concentration to formulate a rigorous 3x3 effective model.
-  2. Bound the high-frequency tail via the discrete lattice inequality h_+(a_m) > 0.
-  3. Formulate analytic perturbation bounds for the off-lattice coupling B C^{-1} B^T.
+  1. Formulate the finite-dimensional effective Hamiltonian S_low(N) = A_N - \Sigma_low(N)
+     with self-energy \Sigma_low(N) = B_N C_N^{-1} B_N^T.
+  2. Prove block definiteness reduction: Q_N > 0 <=> C_k(N) > 0 and S_k(N) > 0 for fixed small k.
+  3. Establish analytical bounds on the Schur self-energy ||B_N C_N^{-1} B_N^T|| and connect
+     its N -> \infty asymptotic behavior to the D_0, D_1 / first-jet resolvent machinery.
 ========================================================================================
                                      |
                                      v
@@ -418,7 +423,7 @@ Tasks:
 | **M1** | Implement the finite-band negative operator and generalized eigenvalue suite | `cell63.py` | **COMPLETED** (`cell63.out`: Gram conditioning & modal localization) |
 | **M2** | Audit the generalized spectrum conditioning across $N \in \{4, 8, 12, 16, 20, 24\}$ | Analytical Review | **COMPLETED** (Diagnosed whitening breakdown at $N \ge 12$; residual loss) |
 | **M3** | Analyze coordinates and modal energy of the dangerous vector $x_{\min}$ | Diagnostic Report | **COMPLETED** (Confirmed $98\%$ energy in $\{e_0, e_1, e_2\}$ across all $N$) |
-| **M4** | Formulate certified positivity suite via Schur complement block decoupling | `cell64.py` | **COMPLETED** (`cell64.out`: $LDL^T$ pivots $D_{ii}(C) > 0, D_{ii}(S_{\mathrm{low}}) > 0$ verified at 80 dps across all $N$; backward error $\le 2.6 \times 10^{-81}$) |
+| **M4** | Formulate high-precision positivity suite via Schur complement block decoupling | `cell64.py` | **COMPLETED** (`cell64.out`: High-precision numerical verification via $LDL^T$ pivots $D_{ii}(C) > 0, D_{ii}(S_{\mathrm{low}}) > 0$ at 80 dps across all $N$; backward error $\le 2.6 \times 10^{-81}$; ground-state scale capture within 5%) |
 | **M5** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation (Stage IV) |
 | **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ and odd resolvent trace | Paper 4B Proposition 8.9 | **COMPLETED** (Closed-form boundary-layer evaluation: $\mathcal{W}[F_N] = 2\pi\left(1 + \log\frac{\log c}{2}\right) N + \mathcal{O}(\log N)$, proving linear coercivity $\mathcal{M}_d^{(1)} \ge c_0 N$) |
 | **M7** | Bound the odd-sector resolvent trace $\operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda I)^{-1}]$ and even spectral gap $E_1 - \lambda$ | Analytical Derivation | Polynomial norm bound on $(Q_{\mathrm{odd}} - \lambda I)^{-1}$ (Stage VI) |

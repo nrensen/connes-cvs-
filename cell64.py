@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-CELL 64 — CERTIFIED POSITIVITY VIA SCHUR COMPLEMENT BLOCK DECOUPLING
+CELL 64 — HIGH-PRECISION SCHUR COMPLEMENT BLOCK POSITIVITY VERIFICATION
 ================================================================================
 
 PURPOSE:
 --------
-Execute the Stage III certified positivity protocol specified in ROADMAP.md:
+Execute the Stage III high-precision Schur positivity protocol specified in ROADMAP.md:
 Following the Cell 63 diagnosis that generalized eigenvalue whitening
 (Q_-^{-1/2} Q_pos Q_-^{-1/2}) becomes numerically ill-posed for N >= 12,
 Cell 64 investigates finite-rank Weil positivity directly via the symmetric
@@ -126,11 +126,14 @@ def ldl_factorization(A: mp.matrix) -> tuple[mp.matrix, list[mp.mpf], mp.mpf]:
             d_val -= (L[j, k] ** 2) * D[k]
         D[j] = d_val
 
-        # If pivot is zero, singular matrix
-        if abs(D[j]) < mp.mpf('1e-75'):
-            inv_d = mp.mpf('0')
-        else:
-            inv_d = 1 / D[j]
+        # Abort if pivot lacks sufficient separation above numerical floor
+        pivot_tol = mp.mpf('1e-75')
+        if abs(D[j]) < pivot_tol:
+            raise ZeroDivisionError(
+                f"Pivoting breakdown at index {j}: |D[{j}]| = {abs(D[j])} < {pivot_tol}. "
+                "Insufficient spectral separation for stable LDL^T factorization."
+            )
+        inv_d = 1 / D[j]
 
         # Compute L[i, j] for i > j
         for i in range(j + 1, n):
