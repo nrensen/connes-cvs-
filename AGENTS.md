@@ -67,6 +67,13 @@ The repository maintains a strict architectural and epistemological boundary bet
   1. *Programme 1:* Finite-rank Galerkin positivity ($\mathcal{Q}_{c, N} \succeq 0$ for all $c, N$).
   2. *Programme 2:* Continuum density and the Weil criterion ($\bigcup_{c, N} \mathcal{H}_{c, N}$ dense in Weil's test class $\implies \mathrm{RH}$).
   Never conflate finite-dimensional matrix positivity with the density theorem needed for the Riemann Hypothesis.
+- **Roadmap Traceability Principle:**
+  Every computational script, analytical investigation, diagnostic suite, and manuscript revision must trace back directly to an active stage or milestone defined in `ROADMAP.md`. Uncharted excursions and speculative side-tracks are strictly prohibited.
+- **Living Document Governance (Update the Roadmap First):**
+  The roadmap is a living, working document, not a rigid straitjacket. When computational evidence or analytical discoveries suggest that a pivot, refinement, or change of direction is warranted:
+  1. *Pause and articulate the rationale:* Clearly state why the course needs to evolve.
+  2. *Update `ROADMAP.md` first:* Record the specific reasons for the change of direction, update the active stages/milestones, and explicitly connect the new course back to the overarching architecture.
+  3. *Proceed only along the updated path:* Never head down an unmapped rabbit hole without first embedding the new path in the canonical roadmap.
 
 ---
 
