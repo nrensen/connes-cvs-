@@ -472,12 +472,12 @@ $$R_{\mathrm{even}} = R_{\mathrm{bound}} + R_{\mathrm{scatt}},$$
    $$u_1 = \left| \frac{D_0}{D_1} \right| \ge \frac{c_1}{N^{\max(2, p)} \log N},$$
    *ruling out any exponential $e^{-\alpha N}$ collapse of the cancellation scale and indicating that $D_0$ and $D_1$ share the same leading exponential WKB barrier decay rate.*
 3. **Spatial Boundary Layer Width and Decoupling:**
-   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically. Substituting this polynomial lower bound into the boundary-defect metric $\mathcal{D}(N) = D_0^2 [1 + 1/(T^2 u_1)]^2$ proves that $\mathcal{D}(N) \to 0$ collapses exponentially fast like $e^{-2\mathcal{S}_{\mathrm{WKB}}} N^{2\max(2, p)} (\log N)^2 \to 0$, establishing the Boundary-Defect Decoupling Conjecture.*
+   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically. Substituting this polynomial lower bound into the boundary-defect metric $\mathcal{D}(N) = D_0^2 [1 + 1/(T^2 u_1)]^2$ demonstrates that $\mathcal{D}(N) \to 0$ collapses exponentially fast like $e^{-2\mathcal{S}_{\mathrm{WKB}}} N^{2\max(2, p)} (\log N)^2 \to 0$, which would establish the Boundary-Defect Decoupling Conjecture under these hypotheses.*
 
 *Proof.* By Theorem 7.3 and Corollary 7.3.1 of Paper 4, $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$. Splitting $R_{\mathrm{even}} = R_{\mathrm{scatt}} + R_{\mathrm{bound}}$:
 For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$, applying the Cauchy–Schwarz inequality with $\|d\|_2 = \sqrt{2N+1}$ and the scattering growth hypothesis $\|s_2\|_2 \le C_s N^{3/2} \log N$ yields $|\langle d, R_{\mathrm{scatt}} s_2 \rangle| \le C_{\mathrm{scatt}} N^2 \log N$.
 For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 3, this sum is bounded by $C_{\mathrm{bound}} N^p$.
-Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound $|D_1/D_0| \le C_{\mathrm{upper}} N^{\max(2, p)} \log N$. Inverting this bound directly yields the polynomial lower bound on $u_1 = |D_0/D_1|$, which is precisely the condition required for exponential boundary-defect decoupling. $\blacksquare$
+Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound $|D_1/D_0| \le C_{\mathrm{upper}} N^{\max(2, p)} \log N$. Inverting this bound directly yields the polynomial lower bound on $u_1 = |D_0/D_1|$, which would establish boundary-defect decoupling under these hypotheses. $\blacksquare$
 
 ---
 

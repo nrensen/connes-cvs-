@@ -230,15 +230,15 @@ $$\mathbb{R}^{N+1} = \mathcal{V}_{\mathrm{low}} \oplus \mathcal{V}_{\mathrm{high
 is therefore a **natural structural and numerical ansatz to investigate**, rather than an established mathematical reduction to a $3 \times 3$ problem:
 $$\mathcal{Q}_{\mathrm{Weil}} = \begin{pmatrix} \mathcal{Q}_{\mathrm{low}} & \mathcal{Q}_{\mathrm{cross}} \\ \mathcal{Q}_{\mathrm{cross}}^T & \mathcal{Q}_{\mathrm{high}} \end{pmatrix}.$$
 
-The lattice sampling suggests a natural three-mode low-frequency sector. The extent to which the negative Archimedean operator is effectively confined to, or dominated by, this sector is an open question to be tested directly by Cell 63a. The generalized eigenvectors of $(\mathcal{Q}_{\mathrm{positive}}, \mathcal{Q}_{\mathrm{arch}}^{(-)})$ will reveal whether the dangerous subspace actually collapses onto $\operatorname{span}\{v_0, v_1, v_2\}$ or requires broader modal participation.
+The lattice sampling suggests a natural three-mode low-frequency sector. The extent to which the negative Archimedean operator is effectively confined to, or dominated by, this sector is an open question to be tested directly by Cell 63. The generalized eigenvectors of $(\mathcal{Q}_{\mathrm{positive}}, \mathcal{Q}_{\mathrm{arch}}^{(-)})$ will reveal whether the dangerous subspace actually collapses onto $\operatorname{span}\{v_0, v_1, v_2\}$ or requires broader modal participation.
 
 ---
 
-## 7. Concrete Experimental Suite: Cell 63a Specification
+## 7. Concrete Experimental Suite: Cell 63 Specification
 
 Before attempting formal proofs, we execute a targeted computational reconnaissance to construct and inspect the negative operator directly:
 
-### Objectives & Mathematical Protocol of `cell63a.py`
+### Objectives & Mathematical Protocol of `cell63.py`
 1. **Explicit Matrix Construction of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$:**
    Compute the $(N+1) \times (N+1)$ positive semi-definite Gram matrix:
    $$\big[\mathcal{Q}_{\mathrm{arch}}^{(-)}\big]_{mn} = \frac{1}{\pi} \int_0^{r_*} |h_+(r)| \Phi_m(r) \Phi_n(r) \, dr,$$
@@ -282,8 +282,8 @@ Result: Closed-form Cauchy transform J(q), Weierstrass pole series, rank-2k comm
                                      |
                                      v
 ========================================================================================
-STAGE III: LOW-FREQUENCY OPERATOR DECOMPOSITION & CERTIFICATION
-Status: ACTIVE TARGET (Cell 63a)
+STAGE III: LOW-FREQUENCY OPERATOR DECOMPOSITION & DOMINANCE ANALYSIS
+Status: ACTIVE TARGET (Cell 63)
 Tasks:
   1. Construct explicit matrix for Q_arch^{(-)} on [0, r_*].
   2. Compute generalized spectrum of (Q_positive, Q_arch^{(-)}).
@@ -306,7 +306,7 @@ Tasks:
 STAGE V: THREE-MODE SECTOR TESTING AND OPERATOR COUPLING
 Status: PLANNED
 Tasks:
-  1. Inspect the principal components of the extremal eigenvector x_min from Cell 63a.
+  1. Inspect the principal components of the extremal eigenvector x_min from Cell 63.
   2. Test the dominance of the 3-mode sector V_low = span{v_0, v_1, v_2} vs off-lattice coupling.
   3. Bound the high-frequency tail via the discrete lattice inequality h_+(a_m) > 0.
 ========================================================================================
@@ -338,8 +338,8 @@ Tasks:
 
 | Milestone | Action Item | Target Artifact / Script | Deliverable |
 | :---: | :--- | :--- | :--- |
-| **M1** | Implement the finite-band negative operator and generalized eigenvalue suite | `cell63a.py` | `cell63a.out` (Certificate $\lambda_{\min}$) |
-| **M2** | Audit the generalized spectrum across $N \in \{8, 12, 16, 20, 24\}$ | Analytical Review | Determination of the dominance margin |
+| **M1** | Implement the finite-band negative operator and generalized eigenvalue suite | `cell63.py` | `cell63.out` (Numerical Dominance & Diagnostics) |
+| **M2** | Audit the generalized spectrum across $N \in \{4, 8, 12, 16, 20, 24\}$ | Analytical Review | Determination of the dominance margin |
 | **M3** | Analyze the coordinates and spatial wave profile of the dangerous vector $x_{\min}$ | Diagnostic Report | Identification of the physical obstruction |
 | **M4** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation |
 
