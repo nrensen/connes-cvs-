@@ -742,7 +742,7 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
   *for positive constants $C_{\mathrm{trans}}, C_E > 0$ and exponents $\gamma_{\mathrm{filt}}, \gamma_e \ge 0$.*
   *Epistemic Distinction: Analytic Hypothesis vs. Semiclassical Mechanism:*
   1. *Analytic Hypothesis:* The statement required by the decoupling proof is strictly the polynomial growth of the weighted sums $\Sigma_{\mathrm{filt}}(N)$ and $\mathcal{M}_d^{(-1)}$.
-  2. *Underlying Semiclassical Mechanism Conjecture:* High-precision spectral audits (Cell 66) demonstrate that bare spectral gaps collapse exponentially ($E_1 - \lambda \approx 4.50 \times 10^{-37}$, $\mu_2 - E_1 \approx 2.95 \times 10^{-34}$ at $N=24$) due to the $\sim N/2$ bound states residing beneath the barrier top. The physical mechanism keeping the weighted sums polynomial is **mode-by-mode resonant transmission matching**: each boundary overlap density $d_k^2$ carries the exact same barrier penetration factor as the spectral spacing:
+  2. *Underlying Semiclassical Mechanism Conjecture:* High-precision spectral audits (Cell 66) demonstrate that bare spectral gaps collapse exponentially ($E_1 - \lambda \approx 4.50 \times 10^{-37}$, $\mu_2 - E_1 \approx 2.95 \times 10^{-34}$ at $N=24$) due to the $\sim N/2$ bound states residing beneath the barrier top. The physical mechanism keeping the weighted sums polynomial is **mode-by-mode resonant transmission matching**: the working semiclassical conjecture is that, for the relevant bound-state ladder beneath the barrier top, there exist prefactors $A_k, B_k$ with:
      $$d_k^2 \sim A_k e^{-2\mathcal{S}_k N}, \qquad \mu_{k+1} - E_k \sim B_k e^{-2\mathcal{S}_k N} \implies \frac{d_k^2}{\mu_{k+1} - E_k} \sim \frac{A_k}{B_k} = \mathcal{O}(1).$$
      In Cell 66, this cancellation is confirmed across the ladder, with individual quotients remaining universally $\mathcal{O}(1)$:
      $$\frac{d_k^2}{E_k - \lambda} \approx 580, \qquad \frac{d_k^2}{\mu_{k+1} - E_k} \le 6.85.$$
@@ -759,21 +759,27 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
   *for positive constants $C_0 > 0$ and $\sigma > 0$.*
   *Status:* Supported by semiclassical WKB barrier penetration with action $\sigma_{\mathrm{WKB}} = \frac{\pi}{2}\log c$ ($\approx 4.029$ at $c = 13$). In Cell 66, the effective decay rate $\sigma(N) \equiv -\frac{1}{N}\log(D_0^2)$ converges toward $4.029$ within $5.0\%$ at $N = 24$ ($\sigma(24) \approx 3.827$). We isolate it here as an explicit hypothesis required for the decoupling conclusion.
 
-*Under Hypotheses H1, H2, and H2$_{\mathrm{odd}}$, the odd-sector resolvent moment and first-jet ratio satisfy polynomial bounds; adding Hypothesis H3 yields exponential boundary-defect decoupling:*
+*Under Hypotheses H1, H2, and H2$_{\mathrm{odd}}$ and the technical excited second-moment condition $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$, the odd-sector resolvent moment and first-jet ratio satisfy polynomial bounds; adding Hypothesis H3 yields exponential boundary-defect decoupling:*
 
 1. **Polynomial Bound on the Odd Resolvent Moment $M_1$:**
    *Combining (8.10.2), Hypothesis H1 (ground-state doublet), and Hypothesis H2$_{\mathrm{odd}}$ (excited odd sector), and noting $|b_{00}| \le \|K\| = N$:*
    $$M_1 = \frac{a_0^2}{\mu_0 - \lambda} + M_1^{\mathrm{exc}} \le C_{\mathrm{tun}} b_{00}^2 + C_1 N^\gamma \le C_{\mathrm{tun}} N^2 + C_1 N^\gamma = \mathcal{O}(N^\eta), \tag{8.10.9}$$
    *with polynomial exponent $\eta \equiv \max(2, \gamma)$. This cleanly separates the ground-state dipole envelope ($N^2$ via H1) from the excited odd resolvent energy ($N^\gamma$ via H2$_{\mathrm{odd}}$).*
 
-2. **Polynomial Control of the First-Jet Ratio $|D_1/D_0|$:**
-   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le C_E N^{\gamma_e}$, and the filtering sum satisfies $\Sigma_{\mathrm{filt}}(N) \le C_{\mathrm{trans}} N^{\gamma_{\mathrm{filt}}}$. For the higher odd resolvent moment $M_2 \equiv \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$, the exact doublet cancellation identity (8.10.1) gives identically:*
+2. **Polynomial Control of the First-Jet Ratio $|D_1/D_0|$ and Excited Second-Resolvent Moment:**
+   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le C_E N^{\gamma_e}$, and the filtering sum satisfies $\Sigma_{\mathrm{filt}}(N) \le C_{\mathrm{trans}} N^{\gamma_{\mathrm{filt}}}$.*
+   *For the higher odd resolvent moment $M_2 \equiv \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$, the ground-state doublet ($j = 0$) evaluates identically via (8.10.1) to:*
    $$D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le \|K\|^2 = N^2,$$
-   *which holds for all $N$ independently of $D_0$, while the excited odd sum satisfies $D_0^2 \sum_{j \ge 1} \frac{a_j^2}{(\mu_j - \lambda)^2} \le \mathcal{O}(1)$ under exponential boundary extinction. Thus $D_0^2 M_2 = \mathcal{O}(N^2)$.*
-   *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the three terms are bounded polynomially with overall exponent:*
-   $$p = \max\Big( \eta + \gamma_e, \; \eta + \gamma_{\mathrm{filt}}, \; 2 \Big) < \infty, \tag{8.10.11}$$
-   *yielding under Hypotheses H1, H2, and H2$_{\mathrm{odd}}$ the polynomial control:*
-   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + M_1 \Sigma_{\mathrm{filt}}(N) + D_0^2 M_2 \right] \le C N^p. \tag{8.10.10}$$
+   *which is an unconditional finite-$N$ identity that holds independently of $D_0$.*
+   *For the excited odd sector ($j \ge 1$), we define the excited second moment:*
+   $$M_{2,\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{(\mu_j - \lambda)^2} = \sum_{j \ge 1} \frac{1}{\mu_j - \lambda} \left( \frac{a_j^2}{\mu_j - \lambda} \right).$$
+   *Because the bare gaps $\mu_j - \lambda$ collapse exponentially fast along the bound-state ladder beneath the barrier top, controlling $M_{2,\mathrm{exc}}$ upon multiplication by $D_0^2$ requires that the excited tunneling scales $\Delta_j \asymp \mu_j - \lambda$ do not collapse faster than the ground-state boundary tunneling scale $D_0^2 \sim e^{-\sigma N}$. Specifically, we identify the explicit technical requirement:*
+   $$D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q,$$
+   *for some finite exponent $q \ge 0$. Semiclassically, this condition is expected to arise from relative tunneling-scale ordering across the interlaced bound doublet ladder ($D_0^2 / \Delta_j \le C N^q$), ensuring $D_0^2 M_2 \le N^2 + C_2 N^q = \mathcal{O}(N^{\max(2, q)})$.*
+   *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the three terms in the first-jet ratio are bounded polynomially:*
+   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + M_1 \Sigma_{\mathrm{filt}}(N) + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
+   *with overall polynomial exponent:*
+   $$p = \max\left\{ \eta + \gamma_e, \; \eta + \gamma_{\mathrm{filt}}, \; \max(2, q) \right\} < \infty. \tag{8.10.11}$$
    *Remark (Non-Sharp Exponent):* No attempt is made here to optimize the polynomial exponent $p$; only the finiteness of a polynomial exponent is required for exponential-over-polynomial boundary decoupling.
 
 3. **Exponential Boundary Decoupling:**
