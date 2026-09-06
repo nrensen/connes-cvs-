@@ -64,9 +64,35 @@ This formulation is entirely independent of the ground-state eigenvector $v_0$. 
 
 ---
 
-## 3. Analysis of Methodological Routes
+## 3. Resolvent Structure of the Negative Operator
 
-We identify three distinct routes of increasing mathematical depth to establish operator dominance:
+Because the negative interval $[0, r_*]$ is compact and bounded, we have:
+$$\mathcal{Q}_{\mathrm{arch}}^{(-)}(v) = \frac{1}{\pi} \int_0^{r_*} |h_+(r)| \Phi_v(r)^2 \, dr.$$
+From Paper 4 (Theorem 2.1 & Proposition 2.2), the Fourier amplitude $\Phi_v(r)$ admits the exact boundary resolvent representation:
+$$\Phi_v(r) = \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D\left(-\frac{1}{r^2}\right),$$
+where $D(z) = v_0 + \sum_{m=1}^N \frac{v_m}{1 + z a_m^2}$ is the canonical scalar boundary resolvent.
+Substituting this into $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ yields the exact formula:
+
+$$\boxed{\mathcal{Q}_{\mathrm{arch}}^{(-)}(v) = \frac{4}{\pi L} \int_0^{r_*} |h_+(r)| \frac{\sin^2(rL/2)}{r^2} D\left(-\frac{1}{r^2}\right)^2 \, dr.}$$
+
+### Algebraic Simplification & Resolvent Pole Geometry
+This identity represents an enormous mathematical simplification:
+1. **Domain of the Inverted Spectral Variable:** Under the change of variables $z = -1/r^2$, the compact integration domain $r \in [0, r_*]$ is mapped onto the semi-infinite negative ray:
+   $$z \in (-\infty, z_*], \qquad z_* = -\frac{1}{r_*^2} \approx -\frac{1}{(6.28984)^2} \approx -0.025277.$$
+2. **Poles of the Boundary Resolvent:** The rational function $D(z)$ has isolated simple poles located on the negative real axis at the inverse squared Fourier frequencies:
+   $$z_m = -\frac{1}{a_m^2} = -\frac{L^2}{4\pi^2 m^2}, \qquad m = 1, 2, \dots, N.$$
+3. **Finite Pole Trapping in the Negative Domain:** For our primary benchmark $c = 13$ ($L = \log 13 \approx 2.56495$):
+   $$z_1 = -\frac{1}{a_1^2} \approx -0.16664 \in (-\infty, z_*],$$
+   $$z_2 = -\frac{1}{a_2^2} \approx -0.04166 \in (-\infty, z_*],$$
+   $$z_3 = -\frac{1}{a_3^2} \approx -0.01852 > z_* \quad (\text{outside the negative zone!}).$$
+   Only the first two Fourier resolvent poles $(z_1, z_2)$ fall inside the integration window of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$. All higher poles $z_m$ ($m \ge 3$) lie outside the negative integration domain.
+4. **Reduction to Finite Pole Control:** The entire negative Archimedean contribution is therefore algebraically governed by the behavior of $D(z)$ near a finite set of known, isolated resolvent poles $\{z_m\}$. The task of establishing operator dominance is converted from an opaque numerical integral into controlling this finite cluster of rational poles against the positive resolvents and prime distributions.
+
+---
+
+## 4. Analysis of Methodological Routes
+
+We identify three primary routes of increasing mathematical depth to establish operator dominance, supplemented by a real-space transfer method:
 
 ```
 [Route A: Archimedean Positivity via Uncertainty] (Deprecated / Unlikely)
@@ -77,6 +103,9 @@ We identify three distinct routes of increasing mathematical depth to establish 
   Decompose h+(r) into Weierstrass poles -> Q_arch = C||v||^2 + sum [||v||^2/(n+1) - J(q_n)].
   Pair negative J(q_n) resolvents against explicit pole/prime boundary terms.
         |
+        +---> [Advanced Extension: DLMF Completely Monotone Physical-Space Transfer]
+        |       Decompose h+(r) via digamma integral into completely monotone density;
+        |       pull negative well into physical coordinate space against prime Dirac deltas.
         v
 [Route C: Integrated Bivariate Kernel & Dual Lattice Sampling] (Grand Unified Architecture)
   Represent Q_Weil as a single spatial integral against K_Weil(x, y).
@@ -95,21 +124,61 @@ Integrating against $K_{\mathrm{Fourier}}$ yields the exact series:
 $$\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \frac{\|v\|_2^2}{n+1} - \sum_{n=0}^\infty J(q_n),$$
 where every $J(q_n) = \frac{1}{\pi}\int_0^\infty \frac{2q_n}{q_n^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) dr > 0$ is a **positive algebraic resolvent form** with exact closed-form evaluation:
 $$J(q) = \frac{2 v_0^2}{q} + \sum_{m=1}^N \frac{2 q v_m^2}{q^2 + a_m^2} + \text{boundary leakage term } B_q(v).$$
-The negative terms in the Archimedean functional are precisely the discrete sequence $-J(q_n)$.  
-*Objective:* Pair the negative resolvent sequence $-\sum_{n=0}^\infty J(q_n)$ directly with the pole form $\mathcal{Q}_{\mathrm{pole}}$ and prime form $\mathcal{Q}_{\mathrm{prime}}$ to produce manifestly positive blocks.
+The negative terms in the Archimedean functional are precisely the discrete sequence $-J(q_n)$.
+
+#### The Remarkable Cancellation Hypothesis (Pairing $-J(q_n)$ with $\mathcal{Q}_{\mathrm{pole}}$)
+The Archimedean quadratic form has the schematic structure:
+$$\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \frac{\|v\|_2^2}{n+1} - \sum_{n=0}^\infty J(q_n).$$
+The negative part is solely generated by the sequence $-\sum_{n=0}^\infty J(q_n)$.  
+Now, recall that the pole contribution $\mathcal{Q}_{\mathrm{pole}}$ in Weil's explicit formula evaluates the test function at the poles of the Riemann zeta function ($s = 1$ and $s = 0$, or $s = \pm 1/2$ in the critical strip centering). In the boundary representation of Paper 4, the pole term introduces explicit boundary and resolvent evaluations at the endpoints $t = 0$ and $t = L$.  
+The central hypothesis of Route B is that **the negative resolvent sequence $-\sum_{n=0}^\infty J(q_n)$ contains precisely the algebraic partners needed to pair with and absorb $\mathcal{Q}_{\mathrm{pole}}$**, reorganizing the total functional into:
+
+$$\boxed{\mathcal{Q}_{\mathrm{total}} = \text{manifestly positive quadratic terms} + \text{prime-power correction terms}.}$$
+
+Once this pairing is achieved, the pole terms no longer act as an independent hazard, and the prime-power terms $\mathcal{Q}_{\mathrm{prime}}$ remain as the sole structured correction to be bounded.
+
+### Advanced Analytical Route: Completely Monotone Representations & Physical-Space Transfer (DLMF Formulation)
+Beyond the discrete Weierstrass series, the digamma function $\psi(z)$ admits the classical Binet / Gauss integral representation (DLMF §5.9.12):
+$$\psi(z) = \log z + \int_0^\infty \left( \frac{1}{t} - \frac{1}{1 - e^{-t}} \right) e^{-t z} \, dt \qquad (\operatorname{Re} z > 0).$$
+Setting $z = \frac{1}{4} + \frac{i r}{2}$ and taking the real part:
+$$h_+(r) = \operatorname{Re}\psi\left(\frac{1}{4} + \frac{i r}{2}\right) - \log \pi = \log\left|\frac{1}{4} + \frac{ir}{2}\right| - \log \pi + \int_0^\infty \left( \frac{1}{t} - \frac{1}{1 - e^{-t}} \right) e^{-t/4} \cos\left(\frac{r t}{2}\right) \, dt.$$
+The integrand factor $\left(\frac{1}{1 - e^{-t}} - \frac{1}{t}\right)$ is strictly positive and completely monotone on $(0, \infty)$.  
+This representation decomposes $h_+(r)$ into an asymptotic positive logarithm plus an oscillatory cosine transform of a completely monotone density.
+
+If this representation is split as:
+$$h_+(r) = h_{\mathrm{positive}}(r) - h_{\mathrm{elementary}}(r),$$
+where $h_{\mathrm{elementary}}(r)$ captures the compact negative well on $[0, r_*]$ and possesses an explicit, tractable inverse Fourier transform, then the integral:
+$$\frac{1}{\pi} \int_0^\infty h_{\mathrm{elementary}}(r) K_{\mathrm{Fourier}}(v, r, L) \, dr$$
+can be pulled back directly into physical coordinate space $[0, L]$ via the reflected autocorrelation identity (Paper 4, Theorem 2.3):
+$$K_{\mathrm{Fourier}}(v, r, L) = \frac{1}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \cos(r y) \, dy.$$
+In physical coordinate space, the prime-power contributions:
+$$\mathcal{Q}_{\mathrm{prime}}(v) = -\frac{1}{L} \sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v^{\mathrm{phys}}(L - \log p^k)$$
+are naturally localized Dirac evaluations at points $y = \log p^k$.  
+Mapping the negative Archimedean piece into physical space would allow a **pointwise, spatial comparison** between the negative Archimedean density and the discrete prime delta masses, completely bypassing the oscillatory Gibbs phenomenon of the Fourier transform.
 
 ### Route C: Integrated Bivariate Kernel & Dual Lattice Sampling (Grand Unified Theory)
 *Concept:* Formulate the complete Weil quadratic form as a single bivariate Fredholm integral on $[0, L] \times [0, L]$:
 $$\mathcal{Q}_{\mathrm{Weil}}(v) = \iint_{[0, L]^2} T_v(x) \, \mathcal{K}_{\mathrm{Weil}}(x, y) \, T_v(y) \, dx \, dy.$$
-The operator structure is governed by the collision of **two distinct discrete lattices**:
-1. **The Fourier Spectral Lattice:** $a_m = \frac{2\pi m}{L}$, where $K_{\mathrm{Fourier}}(a_m) = \frac{L}{2} v_m^2$ samples the wave orthogonally.
-2. **The Arithmetic Prime Lattice:** $\log(p^k)$, where prime-power Dirac masses act as discrete shifts on the spatial wave.
+Then Weil positivity becomes the positive semi-definiteness of the Fredholm kernel $\mathcal{K}_{\mathrm{Weil}} \succeq 0$ on the appropriate function space.
 
-In this framework, Weil positivity transforms into a discrete measure perturbation problem on an entire function of exponential type, establishing a rigorous connection to the spectral theory of de Branges and Beurling spaces.
+#### The Dual Lattice Sampling Mechanism: Fourier Spectral Lattice vs Arithmetic Prime Lattice
+A crucial structural discovery in Paper 4 is the exact lattice sampling property of the Fourier kernel:
+$$K_{\mathrm{Fourier}}(v, a_m, L) = \frac{L}{2} v_m^2 \qquad \text{for } a_m = \frac{2\pi m}{L}.$$
+Thus, the Fourier-side kernel acts as an orthogonal sampling functional on the **Fourier spectral lattice**:
+$$\Lambda_{\mathrm{Fourier}} = \left\{ a_m = \frac{2\pi m}{L} : m \in \mathbb{Z} \right\}.$$
+Meanwhile, the prime contribution in Weil's explicit formula:
+$$\mathcal{Q}_{\mathrm{prime}}(v) = -\sum_{p, k} \frac{\log p}{p^{k/2}} \big[ F_v(\log p^k) + F_v(-\log p^k) \big]$$
+is built entirely from discrete evaluations at the **arithmetic prime lattice**:
+$$\Lambda_{\mathrm{arith}} = \left\{ \log(p^k) : p \text{ prime}, k \ge 1 \right\}.$$
+Therefore, the entire Weil positivity problem is fundamentally an inquiry into the **interaction between these two incommensurate discrete sampling structures**:
+- The periodic Fourier lattice $\Lambda_{\mathrm{Fourier}}$ (generated by the box size $L = \log c$).
+- The rigid arithmetic lattice $\Lambda_{\mathrm{arith}}$ (generated by the primes $\log p$).
+
+Because the spatial wave $T_v(x)$ is an entire function of exponential type $L/2$, both sampling functionals act on the same Paley–Wiener / de Branges space. Weil positivity is thereby transformed from an intractable general quadratic-form inequality into a statement about a positive discrete spectral measure minus an arithmetic discrete measure acting on entire functions of exponential type. This connects the Connes–CvS Galerkin truncation directly to the axiomatic positivity theory of Louis de Branges and Arne Beurling.
 
 ---
 
-## 4. The Two Distinct Research Programmes
+## 5. The Two Distinct Research Programmes
 
 To maintain absolute mathematical discipline, the project strictly bifurcates the overall objective into two independent programmes:
 
@@ -137,7 +206,7 @@ Paper 4 and Paper 4B are dedicated to Programme 1 and the bridge to Programme 2,
 
 ---
 
-## 5. Low-Mode Arithmetic Localization for $c = 13$
+## 6. Low-Mode Arithmetic Localization for $c = 13$
 
 For the primary benchmark cutoff $c = 13$, an arithmetic coincidence severely restricts the dimension of the dangerous subspace:
 $$L = \log 13 \approx 2.56495, \qquad a_m = \frac{2\pi m}{L} \approx 2.4496 \cdot m.$$
@@ -160,7 +229,7 @@ Because $\mathcal{Q}_{\mathrm{high}}$ is dominated by positive lattice weights $
 
 ---
 
-## 6. Concrete Experimental Suite: Cell 63a Specification
+## 7. Concrete Experimental Suite: Cell 63a Specification
 
 Before attempting formal proofs, we execute a targeted computational experiment to construct and inspect the negative operator directly:
 
@@ -182,7 +251,7 @@ Before attempting formal proofs, we execute a targeted computational experiment 
 
 ---
 
-## 7. The 7-Stage Strategic Project Roadmap
+## 8. The 7-Stage Strategic Project Roadmap
 
 ```
 ========================================================================================
@@ -253,7 +322,7 @@ Tasks:
 
 ---
 
-## 8. Immediate Operational Milestones
+## 9. Immediate Operational Milestones
 
 | Milestone | Action Item | Target Artifact / Script | Deliverable |
 | :---: | :--- | :--- | :--- |
@@ -265,3 +334,4 @@ Tasks:
 ---
 
 *Document approved for implementation as the canonical guiding architecture for the Connes–CvS research programme.*
+
