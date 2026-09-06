@@ -756,9 +756,9 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    $$D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le \|K\|^2 = N^2,$$
    *which holds for all $N$ independently of $D_0$, while Hypothesis H2 and Bessel's inequality / Parseval's identity bound the excited odd sum unconditionally by:*
    $$D_0^2 \sum_{j \ge 1} \frac{a_j^2}{(\mu_j - \lambda)^2} \le D_0^2 \frac{1}{\inf_{j \ge 1}(\mu_j - \lambda)^2} \sum_{j \ge 1} a_j^2 \le D_0^2 \frac{2 N \Lambda_*^2}{c_1^2 N^{-2\gamma}} = \mathcal{O}(D_0^2 N^{1 + 2\gamma}).$$
-   *Since $D_0^2 \le 1$ for all $N \ge 1$ (and collapses exponentially under H3), we obtain $D_0^2 M_2 \le N^2 + \mathcal{O}(D_0^2 N^{1 + 2\gamma}) = \mathcal{O}(N^{\max(2, 1 + 2\gamma)})$.*
-   *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the first two terms dominate with exponent:*
-   $$p = 1 + \eta + \max(\gamma_e, \gamma_o) = 1 + \max(2, 1 + \gamma) + \max(\gamma_e, \gamma_o) \ge 3 > 2,$$
+   *Since $D_0^2 \le 1$ for all $N \ge 1$ (and collapses exponentially under H3), we obtain $D_0^2 M_2 \le N^2 + \mathcal{O}(D_0^2 N^{1 + 2\gamma}) = \mathcal{O}(N^{\eta_2})$ where $\eta_2 \equiv \max(2, 1 + 2\gamma)$.*
+   *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the three terms are bounded polynomially with overall exponent:*
+   $$p = \max\Big( 1 + \eta + \max(\gamma_e, \gamma_o), \; \eta_2 \Big) = \max\Big( 1 + \max(2, 1 + \gamma) + \max(\gamma_e, \gamma_o), \; \max(2, 1 + 2\gamma) \Big) < \infty, \tag{8.10.11}$$
    *yielding under Hypotheses H1 and H2 alone the polynomial control:*
    $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} M_1 + D_0^2 M_2 \right] \le C N^p. \tag{8.10.10}$$
    *Remark (Non-Sharp Exponent):* No attempt is made here to optimize the polynomial exponent $p$; only the finiteness of a polynomial exponent is required for exponential-over-polynomial boundary decoupling.
