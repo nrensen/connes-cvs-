@@ -199,7 +199,10 @@ def main():
         # Relative tunneling ratio for lowest excited mode j=1
         delta_1 = odd_vals[1] - lam0
         R_gap_max = D0_sq / delta_1
-        ratio_M2_to_M1 = D0_sq_M2_exc / M1_exc
+        rho_2_exc = D0_sq_M2_exc / M1_exc
+
+        # Decisive relative gap decay exponent: Delta sigma_N^gap = - (1 / N) * log(R_gap_max)
+        delta_sigma_gap = - (mp.log(R_gap_max) / N)
 
         # Effective barrier actions
         sigma_0 = - (mp.log(delta_0) / N)
@@ -209,16 +212,17 @@ def main():
         elapsed = time.perf_counter() - t0
 
         print(f"--- DIMENSION N = {N:2d} (Elapsed: {elapsed:.2f}s) ---")
-        print(f"  Ground scale:  D_0^2       = {mp.nstr(D0_sq, 9)}")
-        print(f"  Ground gap:    mu0 - lam0  = {mp.nstr(delta_0, 9)}")
-        print(f"  Mode 1 gap:    mu1 - lam0  = {mp.nstr(delta_1, 9)}")
-        print(f"  Ratio R_gap:   D0^2/gap_1  = {mp.nstr(R_gap_max, 9)}")
-        print(f"  Excited M_1:   M_1^exc     = {mp.nstr(M1_exc, 9)}")
-        print(f"  Excited M_2:   D0^2*M2_exc = {mp.nstr(D0_sq_M2_exc, 9)}")
-        print(f"  Ratio rho_2:   D0^2*M2/M1  = {mp.nstr(ratio_M2_to_M1, 9)}")
-        print(f"  Ground b00^2:  b00^2       = {mp.nstr(b00_sq, 9)} (<= N^2 = {N*N})")
-        print(f"  Total D0^2*M2: D0^2 * M_2  = {mp.nstr(D0_sq_M2_total, 9)}")
-        print(f"  Actions:       sigma_0 = {mp.nstr(sigma_0, 6)}, sigma_1 = {mp.nstr(sigma_1, 6)}, Delta_sigma = {mp.nstr(delta_sigma, 6)}")
+        print(f"  Ground scale:    D_0^2          = {mp.nstr(D0_sq, 9)}")
+        print(f"  Ground gap:      mu0 - lam0     = {mp.nstr(delta_0, 9)}")
+        print(f"  Mode 1 gap:      mu1 - lam0     = {mp.nstr(delta_1, 9)}")
+        print(f"  Ratio R_gap:     D0^2/gap_1     = {mp.nstr(R_gap_max, 9)}")
+        print(f"  Gap Action:      -(1/N)logR_gap = {mp.nstr(delta_sigma_gap, 6)}")
+        print(f"  Excited M_1:     M_1^exc        = {mp.nstr(M1_exc, 9)}")
+        print(f"  Excited M_2:     D0^2*M2_exc    = {mp.nstr(D0_sq_M2_exc, 9)}")
+        print(f"  Ratio rho_2^exc: D0^2*M2/M1_exc = {mp.nstr(rho_2_exc, 9)}")
+        print(f"  Ground b00^2:    b00^2          = {mp.nstr(b00_sq, 9)} (<= N^2 = {N*N})")
+        print(f"  Total D0^2*M2:   D0^2 * M_2     = {mp.nstr(D0_sq_M2_total, 9)}")
+        print(f"  Actions:         sigma_0 = {mp.nstr(sigma_0, 6)}, sigma_1 = {mp.nstr(sigma_1, 6)}, Delta_sigma = {mp.nstr(delta_sigma, 6)}")
 
         # Ladder breakdown for excited modes j = 1, ..., min(5, N-1)
         print("\n  Excited Odd Modes (Barrier Thinning Progression):")
@@ -240,9 +244,10 @@ def main():
             "delta_0": delta_0,
             "delta_1": delta_1,
             "R_gap_max": R_gap_max,
+            "delta_sigma_gap": delta_sigma_gap,
             "M1_exc": M1_exc,
             "D0_sq_M2_exc": D0_sq_M2_exc,
-            "ratio_M2_to_M1": ratio_M2_to_M1,
+            "rho_2_exc": rho_2_exc,
             "b00_sq": b00_sq,
             "D0_sq_M2_total": D0_sq_M2_total,
             "sigma_0": sigma_0,
@@ -253,21 +258,22 @@ def main():
     # -------------------------------------------------------------------------
     # Multi-Dimension Synthesis Tables
     # -------------------------------------------------------------------------
-    print("=" * 96)
-    print("SYNTHESIS TABLE 1: RELATIVE TUNNELING GAP & EXCITED SECOND-MOMENT BOUNDS")
-    print("=" * 96)
-    print(f"{'N':>4s} | {'D_0^2':>16s} | {'mu_1 - lam_0':>16s} | {'D_0^2/gap_1':>14s} | {'M_1^exc':>10s} | {'D_0^2*M_{2,exc}':>16s} | {'rho_2':>12s}")
-    print("-" * 96)
+    print("=" * 112)
+    print("SYNTHESIS TABLE 1: RELATIVE TUNNELING GAP, DECAY ACTION & EXCITED SECOND-MOMENT BOUNDS")
+    print("=" * 112)
+    print(f"{'N':>4s} | {'D_0^2':>16s} | {'mu_1 - lam_0':>16s} | {'D_0^2/gap_1':>14s} | {'-(1/N)logRgap':>14s} | {'M_1^exc':>10s} | {'D_0^2*M_{2,exc}':>16s} | {'rho_2^exc':>12s}")
+    print("-" * 112)
     for rec in summary_records:
         n_str = f"{rec['N']:4d}"
         d0_str = mp.nstr(rec['D0_sq'], 8)
         gap1_str = mp.nstr(rec['delta_1'], 8)
         rgap_str = mp.nstr(rec['R_gap_max'], 6)
+        dsig_gap_str = mp.nstr(rec['delta_sigma_gap'], 6)
         m1_str = mp.nstr(rec['M1_exc'], 6)
         m2_str = mp.nstr(rec['D0_sq_M2_exc'], 8)
-        rho_str = mp.nstr(rec['ratio_M2_to_M1'], 6)
-        print(f"{n_str} | {d0_str:>16s} | {gap1_str:>16s} | {rgap_str:>14s} | {m1_str:>10s} | {m2_str:>16s} | {rho_str:>12s}")
-    print("=" * 96)
+        rho_str = mp.nstr(rec['rho_2_exc'], 6)
+        print(f"{n_str} | {d0_str:>16s} | {gap1_str:>16s} | {rgap_str:>14s} | {dsig_gap_str:>14s} | {m1_str:>10s} | {m2_str:>16s} | {rho_str:>12s}")
+    print("=" * 112)
 
     print("\n" + "=" * 96)
     print("SYNTHESIS TABLE 2: SEMICLASSICAL BARRIER THINNING & TOTAL SECOND MOMENT D_0^2 M_2")

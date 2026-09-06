@@ -789,80 +789,96 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
 
 ---
 
-### 8.11 Proposition 8.11 (Barrier Thinning, Relative Tunneling-Scale Hierarchy, and Automatic Control of the Excited Second Moment)
+### 8.11 Proposition 8.11 (Conditional Second-Moment Reduction via Relative Tunneling-Scale Control, Weighted Average Structure, and Semiclassical Barrier Thinning)
 
-The technical condition $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$ introduced in Proposition 8.10 governs the excited odd-sector contribution to the second resolvent moment $M_2 = \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$. The following proposition establishes that this condition is not an independent, isolated hypothesis; rather, it is structurally subordinate to Hypothesis $\mathrm{H2}_{\mathrm{odd}}$ via the universal semiclassical phenomenon of **barrier thinning** across the interlaced bound-state ladder.
+The technical condition $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$ introduced in Proposition 8.10 governs the excited odd-sector contribution to the second resolvent moment $M_2 = \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$. The following proposition establishes an exact algebraic reduction of this condition: assuming the excited first-moment bound Hypothesis $\mathrm{H2}_{\mathrm{odd}}$ alongside an explicit relative tunneling-gap bound Hypothesis $\mathrm{H2}_{\mathrm{gap}}$, the second-moment condition $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$ is established rigorously without requiring an independent second-moment hypothesis:
+$$\boxed{ \mathrm{H2}_{\mathrm{odd}} + \mathrm{H2}_{\mathrm{gap}} \Longrightarrow D_0^2 M_{2,\mathrm{exc}} \text{ control.} }$$
+The relative gap control $\mathrm{H2}_{\mathrm{gap}}$ is an independent asymptotic hypothesis, for which semiclassical barrier thinning provides the candidate physical mechanism.
 
-**Proposition 8.11 (Automatic Second-Moment Control via Relative Tunneling-Scale Ordering):**
-*Let $N \ge 2$, $c > 1$, and let $\lambda = \lambda_0(Q_N)$ be the ground-state eigenvalue. Suppose that:*
-1. *The excited odd-sector resolvent moment satisfies Hypothesis $\mathrm{H2}_{\mathrm{odd}}$:*
-   $$M_1^{\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_1 N^\gamma.$$
-2. *The relative tunneling ratio between the ground-state boundary scale $D_0^2$ and the first excited odd gap $\mu_1 - \lambda$ is bounded:*
-   $$R_{\mathrm{gap}}^{\max}(N) \equiv \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} = \frac{D_0^2}{\mu_1 - \lambda} \le C_{\mathrm{gap}} N^{q_0},$$
-   *for some constants $C_{\mathrm{gap}} > 0$ and $q_0 \in \mathbb{R}$.*
+- **Hypothesis H2$_{\mathrm{gap}}$ (Relative Tunneling-Gap Scale Bound):** *The ratio between the ground-state boundary tunneling scale $D_0^2$ and the first excited odd gap $\mu_1 - \lambda$ satisfies a polynomial upper bound:*
+  $$R_{\mathrm{gap}}^{\max}(N) \equiv \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} = \frac{D_0^2}{\mu_1 - \lambda} \le C_{\mathrm{gap}} N^{q_0},$$
+  *for constants $C_{\mathrm{gap}} > 0$ and $q_0 \in \mathbb{R}$.*
+
+**Proposition 8.11 (Conditional Second-Moment Reduction and Weighted Average Structure):**
+*Let $N \ge 2$, $c > 1$, and let $\lambda = \lambda_0(Q_N)$ be the ground-state eigenvalue. Suppose that Hypotheses $\mathrm{H2}_{\mathrm{odd}}$ ($M_1^{\mathrm{exc}} \le C_1 N^\gamma$) and $\mathrm{H2}_{\mathrm{gap}}$ ($R_{\mathrm{gap}}^{\max}(N) \le C_{\mathrm{gap}} N^{q_0}$) hold.*
 
 *Then:*
 1. *(Automatic Excited Second-Moment Bound): The excited second resolvent moment satisfies:*
    $$D_0^2 M_{2,\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} \le R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}} \le C_2 N^q, \tag{8.11.1}$$
    *with exponent $q = \gamma + \max(0, q_0)$ and prefactor $C_2 = C_{\mathrm{gap}} C_1$. In particular, if $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(1)$ (or decays to zero), then $q = \gamma$.*
-2. *(Total Second-Moment Bound): The total second resolvent moment scaled by $D_0^2$ satisfies:*
-   $$D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}} \le N^2 + C_2 N^q = \mathcal{O}\big(N^{\max(2, q)}\big), \tag{8.11.2}$$
+2. *(Exact Weighted Average Representation): The ratio of the excited second moment to the excited first moment is identically the overlap-weighted average of the individual relative gap scales:*
+   $$\rho_2^{\mathrm{exc}} \equiv \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}} = \frac{\sum_{j \ge 1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \left( \frac{a_j^2}{\mu_j - \lambda} \right)}{\sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda}} = \sum_{j \ge 1} w_j \left( \frac{D_0^2}{\mu_j - \lambda} \right), \tag{8.11.2}$$
+   *where the normalized weights $w_j \equiv \frac{a_j^2 / (\mu_j - \lambda)}{\sum_{l \ge 1} a_l^2 / (\mu_l - \lambda)}$ satisfy $w_j \ge 0$ and $\sum_{j \ge 1} w_j = 1$. Consequently:*
+   $$0 \le \rho_2^{\mathrm{exc}} \le R_{\mathrm{gap}}^{\max}(N) = \frac{D_0^2}{\mu_1 - \lambda}. \tag{8.11.3}$$
+   *Remark (Weaker Average Gap Control):* Because $\rho_2^{\mathrm{exc}}$ is a convex combination, bounding $D_0^2 M_{2,\mathrm{exc}}$ does not strictly require a uniform modewise bound $\frac{D_0^2}{\mu_j - \lambda} \le C N^{q_0}$ across all $j$; a weighted-average estimate on the inverse gaps against the $a_j^2/(\mu_j - \lambda)$ measure is strictly sufficient.
+3. *(Total Second-Moment Bound): The total second resolvent moment scaled by $D_0^2$ satisfies:*
+   $$D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}} \le N^2 + C_2 N^q = \mathcal{O}\big(N^{\max(2, q)}\big), \tag{8.11.4}$$
    *where $b_{00}^2 = D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} \le \|K\|^2 = N^2$ is an exact finite-$N$ identity holding independently of any asymptotic hypothesis.*
 
 *Proof.*
-For any $j \ge 1$, we rewrite the $j$-th term of the excited second moment as:
+For any $j \ge 1$, rewriting the $j$-th term of the excited second moment gives:
 $$\frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} = \left( \frac{D_0^2}{\mu_j - \lambda} \right) \left( \frac{a_j^2}{\mu_j - \lambda} \right).$$
-Since $\mu_j$ is monotonically non-decreasing with mode index $j$, the bare gaps satisfy $\mu_j - \lambda \ge \mu_1 - \lambda > 0$ for all $j \ge 1$. Consequently:
+Because the odd eigenvalues are monotonically ordered $\mu_1 \le \mu_2 \le \dots \le \mu_{N-1}$, the bare gaps satisfy $\mu_j - \lambda \ge \mu_1 - \lambda > 0$ for all $j \ge 1$, which proves:
 $$\sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} = \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N).$$
-Pulling this supremum out of the sum yields:
-$$D_0^2 M_{2,\mathrm{exc}} = \sum_{j \ge 1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \left( \frac{a_j^2}{\mu_j - \lambda} \right) \le \left( \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} \right) \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} = R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}}.$$
-Applying the bounds $R_{\mathrm{gap}}^{\max}(N) \le C_{\mathrm{gap}} N^{q_0}$ and $M_1^{\mathrm{exc}} \le C_1 N^\gamma$ yields (8.11.1).
-For the total second moment, decomposing $M_2 = \frac{a_0^2}{(\mu_0 - \lambda)^2} + M_{2,\mathrm{exc}}$ and applying the ground-state commutator identity (8.10.1) gives $D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le N^2$, from which (8.11.2) follows immediately. $\blacksquare$
+Pulling this supremum out of the sum yields $D_0^2 M_{2,\mathrm{exc}} \le R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}}$. Applying Hypotheses $\mathrm{H2}_{\mathrm{odd}}$ and $\mathrm{H2}_{\mathrm{gap}}$ yields (8.11.1).
+Dividing by $M_1^{\mathrm{exc}} = \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} > 0$ produces the convex combination (8.11.2), from which the bound (8.11.3) follows immediately.
+Finally, decomposing $M_2 = \frac{a_0^2}{(\mu_0 - \lambda)^2} + M_{2,\mathrm{exc}}$ and invoking the ground-state commutator identity (8.10.1) proves $D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le N^2$, completing the proof of (8.11.4). $\blacksquare$
 
 ---
 
-#### Semiclassical Mechanism: Barrier Thinning Beneath the Barrier Top
-The physical mechanism ensuring that $R_{\mathrm{gap}}^{\max}(N) \le \mathcal{O}(1)$—and in fact decays exponentially with $N$—is the universal semiclassical phenomenon of **barrier thinning** in double-well potentials (Landau–Lifshitz *Quantum Mechanics* §50).
+#### Candidate Semiclassical Mechanism: Barrier Thinning & The Five Unproved Bridges
+The following is the **candidate semiclassical mechanism** conjectured to imply Hypothesis $\mathrm{H2}_{\mathrm{gap}}$.
 
-In the Galerkin phase space, the bound states residing beneath the barrier top $V_{\max}$ form an interlaced ladder of even and odd quasidegenerate doublets $(E_k, \mu_k)$. In WKB theory, the tunneling action at energy $E$ is given by the phase integral through the classically forbidden barrier:
+In double-well tunneling theory (Landau–Lifshitz *Quantum Mechanics* §50), the bound states residing beneath the barrier top $V_{\max}$ form an interlaced ladder of even and odd quasidegenerate doublets $(E_k, \mu_k)$. The WKB phase integral across the barrier at energy $E$ is:
 $$\mathcal{S}(E) = \int_{x_-(E)}^{x_+(E)} \sqrt{2\big(V(x) - E\big)} \, dx,$$
-where $x_\pm(E)$ are the classical turning points satisfying $V(x_\pm) = E$.
-Differentiating with respect to energy yields:
+where $x_\pm(E)$ are the classical turning points satisfying $V(x_\pm) = E$. Differentiating with respect to energy yields:
 $$\frac{d\mathcal{S}}{dE} = - \int_{x_-(E)}^{x_+(E)} \frac{dx}{\sqrt{2\big(V(x) - E\big)}} = - \frac{T_{\mathrm{barrier}}(E)}{2} < 0,$$
-where $T_{\mathrm{barrier}}(E) > 0$ is the imaginary-time traversal period of the barrier.
-Because $\frac{d\mathcal{S}}{dE}$ is strictly negative:
+where $T_{\mathrm{barrier}}(E) > 0$ is the imaginary-time barrier traversal period. Because $\frac{d\mathcal{S}}{dE}$ is strictly negative, states higher in the well perceive a thinner barrier:
 $$\mathcal{S}(E_0) > \mathcal{S}(E_1) > \mathcal{S}(E_2) > \dots$$
-The tunneling action is a strictly decreasing function of excitation energy.
 
 The parity tunneling splittings scale as $\Delta_k \asymp \mu_k - E_k \sim \exp\big(-2\mathcal{S}(E_k) N\big)$.
-By Hypothesis H1 (flux matching), the ground-state boundary amplitude scales with the ground-state barrier flux:
-$$D_0^2 \asymp \mu_0 - \lambda \sim e^{-2\mathcal{S}(E_0) N}.$$
+Now, assume a **two-sided ground-state flux-matching relation**:
+$$D_0^2 \asymp \mu_0 - \lambda \sim e^{-2\mathcal{S}(E_0) N},$$
+which is stronger than the one-sided bound $\frac{\mu_0 - \lambda}{D_0^2} \le C_{\mathrm{tun}}$ asserted in formal Hypothesis H1.
 For the first excited odd mode $j = 1$, the bare gap to the ground state satisfies:
 $$\mu_1 - \lambda = (\mu_1 - E_1) + (E_1 - \lambda) > \mu_1 - E_1 \asymp \Delta_1 \sim e^{-2\mathcal{S}(E_1) N}.$$
-Therefore, the relative tunneling-scale ratio scales as:
-$$\frac{D_0^2}{\mu_1 - \lambda} \asymp \frac{e^{-2\mathcal{S}(E_0) N}}{e^{-2\mathcal{S}(E_1) N}} = \exp\Big( -2\big[\mathcal{S}(E_0) - \mathcal{S}(E_1)\big] N \Big) \longrightarrow 0,$$
-which is **exponentially suppressed** as $N \to \infty$ with decay exponent $\Delta \sigma = 2[\mathcal{S}(E_0) - \mathcal{S}(E_1)] > 0$.
-Rather than threatening a polynomial blowup, the factor $\frac{D_0^2}{\mu_1 - \lambda}$ acts as an exponential suppressor!
+Combining these gives the heuristic scaling for the relative tunneling ratio:
+$$\frac{D_0^2}{\mu_1 - \lambda} \asymp \frac{e^{-2\mathcal{S}(E_0) N}}{e^{-2\mathcal{S}(E_1) N}} = \exp\Big( -2\big[\mathcal{S}(E_0) - \mathcal{S}(E_1)\big] N \Big) \longrightarrow 0.$$
+
+**The Five Unproved Bridges:**
+In the finite-rank Galerkin truncation, the effective potential, turning points, and bound-state energies all depend on $N$ ($\mathcal{S}_N(E_{k, N})$). What is required for an asymptotic exponential law is $\liminf_{N \to \infty} [\mathcal{S}_N(E_{1, N}) - \mathcal{S}_N(E_{0, N})] > 0$, or at least a polynomial bound on the resulting ratio. Converting this heuristic differential relation into a rigorous analytical proof of $\mathrm{H2}_{\mathrm{gap}}$ requires crossing five distinct mathematical bridges:
+1. *Semiclassical Spectral Identification:* Rigorously identifying the discrete Galerkin spectrum below the barrier top with a genuine semiclassical double-well Schrödinger operator.
+2. *Uniform WKB Splittings:* Establishing the asymptotic doublet splitting formula $\Delta_k \sim e^{-2\mathcal{S}_k N}$ uniformly across the bound-state ladder.
+3. *Two-Sided Flux Matching:* Establishing two-sided boundary flux matching $D_0^2 \asymp \mu_0 - \lambda$, whereas formal H1 provides only a one-sided upper bound on the ratio.
+4. *Control of $N$-Dependent Barrier Geometry:* Controlling the $N$-dependence of the effective barrier action $\mathcal{S}_N(E)$ as $N \to \infty$.
+5. *Positive Limiting Action Separation:* Proving a strictly positive asymptotic action separation $\liminf_{N \to \infty} [\mathcal{S}_N(E_{1, N}) - \mathcal{S}_N(E_{0, N})] > 0$.
+
+Because these five bridges remain open analytical problems, barrier thinning is designated as a **candidate semiclassical mechanism** for $\mathrm{H2}_{\mathrm{gap}}$, rather than an established mathematical theorem.
 
 ---
 
-#### Numerical Evidence: High-Precision Audit Across Tested Dimensions
-High-precision spectral audits across dimensions $N \in \{8, 12, 16, 20, 24\}$ at 50-digit precision (Cell 66 and Cell 67, $c = 13$, $T = 400$) provide concrete quantitative verification of this hierarchy:
+#### Decisive Asymptotic Diagnostic & Numerical Evidence Across Tested Dimensions
+To audit Hypothesis $\mathrm{H2}_{\mathrm{gap}}$ directly—independent of the two-sided WKB heuristic—the decisive asymptotic quantity to measure is:
+$$\Delta \sigma_N^{\mathrm{gap}} \equiv - \frac{1}{N} \log R_{\mathrm{gap}}^{\max}(N) = - \frac{1}{N} \log\left( \frac{D_0^2}{\mu_1 - \lambda} \right).$$
+If $\Delta \sigma_N^{\mathrm{gap}} \ge -\frac{q_0 \log N}{N} \to 0$, then $\mathrm{H2}_{\mathrm{gap}}$ holds polynomially. If $\liminf_{N \to \infty} \Delta \sigma_N^{\mathrm{gap}} > 0$, then $R_{\mathrm{gap}}^{\max}(N)$ decays exponentially.
 
-| $N$ | $D_0^2$ | $\mu_1 - \lambda$ | $R_{\mathrm{gap}}^{\max} = \frac{D_0^2}{\mu_1 - \lambda}$ | $M_1^{\mathrm{exc}}$ | $D_0^2 M_{2,\mathrm{exc}}$ | $\rho_2 = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}}$ |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 8 | $6.481 \times 10^{-21}$ | $1.387 \times 10^{-15}$ | $4.672 \times 10^{-6}$ | $43.998$ | $2.055 \times 10^{-4}$ | $4.671 \times 10^{-6}$ |
-| 12 | $4.418 \times 10^{-27}$ | $1.186 \times 10^{-21}$ | $3.724 \times 10^{-6}$ | $64.357$ | $2.397 \times 10^{-4}$ | $3.724 \times 10^{-6}$ |
-| 16 | $3.178 \times 10^{-32}$ | $1.276 \times 10^{-26}$ | $2.491 \times 10^{-6}$ | $76.091$ | $1.895 \times 10^{-4}$ | $2.491 \times 10^{-6}$ |
-| 20 | $7.028 \times 10^{-37}$ | $6.400 \times 10^{-31}$ | $1.098 \times 10^{-6}$ | $85.255$ | $9.362 \times 10^{-5}$ | $1.098 \times 10^{-6}$ |
-| 24 | $1.295 \times 10^{-40}$ | $2.949 \times 10^{-34}$ | $4.392 \times 10^{-7}$ | $93.654$ | $4.113 \times 10^{-5}$ | $4.392 \times 10^{-7}$ |
+High-precision spectral audits across dimensions $N \in \{8, 12, 16, 20, 24\}$ at 50-digit precision (Cell 66 and Cell 67, $c = 13$, $T = 400$) evaluate this diagnostic:
+
+| $N$ | $D_0^2$ | $\mu_1 - \lambda$ | $R_{\mathrm{gap}}^{\max} = \frac{D_0^2}{\mu_1 - \lambda}$ | $\Delta \sigma_N^{\mathrm{gap}} = -\frac{1}{N}\log R_{\mathrm{gap}}^{\max}$ | $M_1^{\mathrm{exc}}$ | $D_0^2 M_{2,\mathrm{exc}}$ | $\rho_2^{\mathrm{exc}} = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 8 | $6.481 \times 10^{-21}$ | $1.387 \times 10^{-15}$ | $4.672 \times 10^{-6}$ | **1.534** | $43.998$ | $2.055 \times 10^{-4}$ | $4.671 \times 10^{-6}$ |
+| 12 | $4.418 \times 10^{-27}$ | $1.186 \times 10^{-21}$ | $3.724 \times 10^{-6}$ | **1.042** | $64.357$ | $2.397 \times 10^{-4}$ | $3.724 \times 10^{-6}$ |
+| 16 | $3.178 \times 10^{-32}$ | $1.276 \times 10^{-26}$ | $2.491 \times 10^{-6}$ | **0.806** | $76.091$ | $1.895 \times 10^{-4}$ | $2.491 \times 10^{-6}$ |
+| 20 | $7.028 \times 10^{-37}$ | $6.400 \times 10^{-31}$ | $1.098 \times 10^{-6}$ | **0.686** | $85.255$ | $9.362 \times 10^{-5}$ | $1.098 \times 10^{-6}$ |
+| 24 | $1.295 \times 10^{-40}$ | $2.949 \times 10^{-34}$ | $4.392 \times 10^{-7}$ | **0.610** | $93.654$ | $4.113 \times 10^{-5}$ | $4.392 \times 10^{-7}$ |
 
 These computations demonstrate:
-1. **Universal Boundedness and Monotonic Suppression:** The ratio $R_{\mathrm{gap}}^{\max}(N) \le 4.68 \times 10^{-6}$ across all tested dimensions, and decreases monotonically from $4.67 \times 10^{-6}$ at $N = 8$ to $4.39 \times 10^{-7}$ at $N = 24$, in full agreement with semiclassical exponential barrier thinning.
-2. **Microscopic Scale of the Excited Second Moment:** $D_0^2 M_{2,\mathrm{exc}}$ remains strictly below $2.4 \times 10^{-4}$ across all tested dimensions, falling to $4.11 \times 10^{-5}$ at $N = 24$.
-3. **Dominance of the Algebraic Ground-State Bound:** In the total second-moment combination $D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}}$, the excited tail contributes less than $0.00025$, while the exact ground-state term $b_{00}^2 \le N^2$ accounts for $> 99.999\%$ of the sum.
+1. **Strict Positivity of the Gap Decay Exponent:** $\Delta \sigma_N^{\mathrm{gap}} \ge 0.610 > 0$ across all tested dimensions, confirming that $R_{\mathrm{gap}}^{\max}(N)$ is not merely bounded, but rapidly decaying toward zero across the discrete sequence.
+2. **Exact Confirmation of the Convex Combination:** The numerical values of the overlap-weighted average $\rho_2^{\mathrm{exc}}$ track $R_{\mathrm{gap}}^{\max}$ closely, remaining bounded by $4.68 \times 10^{-6}$ and dropping to $4.39 \times 10^{-7}$ at $N = 24$.
+3. **Microscopic Scale of the Excited Second Moment:** $D_0^2 M_{2,\mathrm{exc}} \le 2.4 \times 10^{-4}$ across all tested dimensions, falling to $4.11 \times 10^{-5}$ at $N = 24$.
+4. **Dominance of the Algebraic Ground-State Bound:** In the total second-moment combination $D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}}$, the exact ground-state term $b_{00}^2 \le N^2$ accounts for $> 99.999\%$ of the sum across tested dimensions.
 
-*Epistemic Status:* The algebraic inequality $D_0^2 M_{2,\mathrm{exc}} \le R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}}$ is an exact, unconditional identity. The numerical boundedness $R_{\mathrm{gap}}^{\max}(N) \le 5 \times 10^{-6}$ is established across discrete dimensions $N \in \{8, \dots, 24\}$, and the underlying physical explanation is provided by semiclassical barrier thinning $\frac{d\mathcal{S}}{dE} < 0$. Together, they demonstrate that Hypothesis $\mathrm{H2}_{\mathrm{odd}}$ structurally controls $D_0^2 M_{2,\mathrm{exc}}$, unifying the second-moment condition with the first-moment transmission framework.
+*Epistemic Status:* Proposition 8.11 establishes an exact conditional reduction: $\mathrm{H2}_{\mathrm{odd}} + \mathrm{H2}_{\mathrm{gap}} \implies D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$. The relative gap condition $\mathrm{H2}_{\mathrm{gap}}$ is an independent asymptotic hypothesis, supported numerically across discrete dimensions $N \in \{8, \dots, 24\}$ where $\Delta \sigma_N^{\mathrm{gap}} \ge 0.610$. Semiclassical barrier thinning provides the candidate physical mechanism for $\mathrm{H2}_{\mathrm{gap}}$, with five open analytical bridges required to convert the heuristic into a mathematical theorem.
 
 ---
 
