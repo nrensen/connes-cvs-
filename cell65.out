@@ -148,11 +148,19 @@ SYNTHESIS TABLE: EFFECTIVE HAMILTONIAN RENORMALIZATION ACROSS DIMENSIONS
 ================================================================================
    N |            lambda_0(Q) |      lambda_min(S_low) | Track Shift % |   max eig(Sigma) | Loewner >= 0? | ||Delta Sigma||_inf | Time (s)
 ------------------------------------------------------------------------------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/data/src/rh/connes-cvs-/cell65.py", line 441, in <module>
-    main()
-    ~~~~^^
-  File "/data/src/rh/connes-cvs-/cell65.py", line 419, in main
-    shift_pct = f"{rec['rel_diff_pct']:.2f}%"
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: unsupported format string passed to mpf.__format__
+   4 |        8.827406198e-15 |        8.863357985e-15 |         0.41% |       0.21906506 |           NO |           BASELINE |   197.14
+   8 |         6.71093525e-23 |        6.858296946e-23 |         2.20% |       0.21909583 |          YES |       4.0151258e-5 |   365.56
+  12 |        1.782476576e-29 |        1.845736653e-29 |         3.55% |       0.21909583 |          YES |       4.960904e-12 |   528.98
+  16 |        7.118430151e-35 |        7.430944813e-35 |         4.39% |       0.21909583 |          YES |      1.3472109e-17 |   685.27
+  20 |        1.323235908e-39 |        1.388586331e-39 |         4.94% |       0.21909583 |          YES |      2.0126989e-22 |   868.79
+  24 |         2.53348484e-43 |        2.666882521e-43 |         5.27% |       0.21909583 |          YES |      1.7062218e-26 |  1077.54
+
+Key Analytical Takeaways:
+  1. Bare operator A is strictly positive definite and independent of N.
+  2. Self-energy Sigma_low(N) = B C^{-1} B^T is positive semidefinite and monotonically increasing in Loewner order.
+  3. Ground-state scaling lambda_0 ~ 10^{-43} arises from the near-cancellation A - Sigma_low(N) -> S_low(infty) >= 0.
+  4. High modes m >= 12 exhibit power-law / rapid decay, demonstrating exponential shielding of the barrier top.
+
+================================================================================
+CELL 65 EXECUTION COMPLETE
+================================================================================
