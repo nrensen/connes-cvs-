@@ -563,7 +563,7 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
      3. *Epistemic Discipline:* Until these two operator estimates are rigorously proved, the polynomial bound $|D_1/D_0| \le C N^p$ remains an open analytical target, supported by comprehensive numerical evidence but not yet an unconditional mathematical theorem.
 
 ### Proposition 8.8 (Exact Finite-$N$ Rank-Two Commutator Theorem, Excited-Sector Resolvent Coupling, and $D_0$-Free Overlap Bounds)
-*The finite-dimensional Galerkin matrix $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ and its coordinate commutator $[K, Q]$ possess an exact rank-two algebraic structure that eliminates the small source overlaps $a_j$ in favor of even-sector resolvent norms, providing a completely $D_0$-free upper bound on the odd-sector resolvent moment $M_1$:*
+*The finite-dimensional Galerkin matrix $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ and its coordinate commutator $[K, Q]$ possess an exact rank-two algebraic structure that eliminates the small source overlaps $a_j$ in favor of even-sector resolvent norms, providing a completely $D_0$-free upper bound on the odd-sector overlaps $a_j$, and hence a $D_0$-free reduction of the bound on $M_1$:*
 
 1. **The Exact Rank-Two Commutator Identity:**
    *Let $Q$ be the finite-rank Galerkin matrix with divided-difference kernel entries:*
@@ -640,8 +640,8 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
      6. The Dirichlet kernel equivalence $\langle d, Q d \rangle = \mathcal{W}[F_N]$.
    - **Open Analytical Objectives:**
      1. *Dirichlet Functional Lower Bound:* Prove $\mathcal{W}[F_N] \ge c_0 N$ from the tri-partite decomposition $\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}}$ (resolved in Proposition 8.9).
-     2. *Overlap-Weighted Odd Resolvent Moment:* Prove $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda} \le C N^p$ directly via the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ (resolved in Proposition 8.10).
-     3. *Polynomial Boundary Decoupling:* Prove $|D_1/D_0| \le C N^p$ and exponential boundary-defect collapse $\mathcal{D}(N) \to 0$ (resolved in Proposition 8.10).
+     2. *Overlap-Weighted Odd Resolvent Moment:* Prove $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda} \le C N^p$ directly via the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ (established conditionally in Proposition 8.10 under non-tunneling spectral gap and tunneling-flux hypotheses).
+     3. *Polynomial Boundary Decoupling:* Prove $|D_1/D_0| \le C N^p$ and exponential boundary-defect collapse $\mathcal{D}(N) \to 0$ (established conditionally in Proposition 8.10).
 
 ---
 
@@ -649,7 +649,7 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
 
 *Let $d = (1, \dots, 1)^T \in \mathbb{R}^{2N+1}$ be the Dirichlet coefficient vector, and let $F_N(t) = \frac{\sin((2N+1)\pi t / L)}{\sin(\pi t / L)}$ denote the corresponding Dirichlet wavepacket on the scaling interval $[0, L]$ ($L = \log c$). In the finite Guinand–Weil source calculus, the quadratic evaluation:*
 $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] + \mathcal{W}_{\mathrm{prime}}[F_N] + \mathcal{W}_{\mathrm{arch}}[F_N]$$
-*admits the following exact asymptotic decomposition as $N \to \infty$:*
+*admits the following large-$N$ asymptotic decomposition, with an explicit leading coefficient:*
 
 1. **Sub-Leading Order of the Prime and Pole Sectors:**
    - *Prime Contribution:* In the Guinand–Weil source calculus, the prime quadratic form evaluated on the Dirichlet vector $d = (1, \dots, 1)^T$ contracts the Galerkin entries of the von Mangoldt distribution $-\sum_{q \le c} \frac{\Lambda(q)}{\sqrt{q}} \delta_{\log q}$ into the exact linear combination of the total source wavepacket $G_N(y) = \sum_{m, n = -N}^N q(U_m, U_n)(y)$:
@@ -689,57 +689,74 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    $$\mathcal{M}_d^{(1)} \ge c_0 N \qquad (N \ge N_0). \tag{8.9.7}$$
    *In particular, one may unconditionally take $c_0 = \frac{1}{2} \mathcal{C}_{\mathbb{R}} = \pi \left(1 + \log\frac{\log c}{2}\right) > 0$ (yielding $c_0 \approx 3.923256 > 0$ at $c = 13$) for all sufficiently large $N$.*
 
-*Remark (Operational Significance for Proposition 8.8):* Proposition 8.9 proves that the denominator $\langle d, Q d \rangle - \lambda(2N+1)$ in the $D_0$-free bound (8.8.10) does not vanish, does not collapse to $\mathcal{O}(\log N)$, and does not suffer from negative interference. Its linear growth is an exact, unconditional property of the Archimedean boundary layer, providing the rigorous coercive lower bound required by Milestone M6.
+*Remark (Operational Significance for Proposition 8.8):* Proposition 8.9 proves that the denominator $\langle d, Q d \rangle - \lambda(2N+1)$ in the $D_0$-free bound (8.8.10) does not vanish, does not collapse to $\mathcal{O}(\log N)$, and does not suffer from negative interference. Its linear growth is an exact, unconditional property of the Archimedean boundary layer, providing a solid denominator for resolvent coercivity.
 
 ---
 
-### Proposition 8.10 (Complete Commutator Resolvent Bounds, Elimination of the Odd-Sector Tunneling Singularity, and Proof of the Polynomial Decoupling Criterion)
+### Proposition 8.10 (Commutator Resolvent Reduction and Conditional Polynomial Decoupling)
 
 *Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Galerkin matrix, $K = \operatorname{diag}(-N, \dots, N)$, and let $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ be the exact rank-two commutator identity of Proposition 8.8. Let $c$ be the even ground state with eigenvalue $\lambda$ and boundary amplitude $D_0 = \langle d, c \rangle$, and let $\{u_j\}_{j \ge 0}$ denote the orthonormal eigenbasis of the odd subspace with eigenvalues $\mu_0 < \mu_1 \le \mu_2 \le \dots \le \mu_N$.*
 
-*The odd-sector resolvent moment $M_1 \equiv \langle \boldsymbol\psi_{\mathrm{odd}}, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi_{\mathrm{odd}} \rangle = \sum_{j \ge 0} \frac{a_j^2}{\mu_j - \lambda}$ and the first-jet ratio $D_1/D_0$ satisfy the following exact finite-$N$ identities and unconditional polynomial bounds:*
+*The structural analysis of the odd-sector resolvent moment $M_1 \equiv \langle \boldsymbol\psi_{\mathrm{odd}}, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi_{\mathrm{odd}} \rangle = \sum_{j \ge 0} \frac{a_j^2}{\mu_j - \lambda}$ and the first-jet ratio $D_1/D_0$ decomposes into unconditional finite-$N$ identities and coercivity bounds (Part I), and conditional polynomial decoupling under explicit spectral-gap hypotheses (Part II):*
+
+#### Part I: Unconditional Finite-$N$ Identities and Coercivity Bounds
 
 1. **Exact Tunneling Ground-State Doublet Cancellation ($j = 0$):**
    *For the tunneling ground-state doublet $(c, u_0)$, let $b_{00} \equiv \langle c, K u_0 \rangle$ denote the transition dipole matrix element. Taking the inner product of the odd resolvent equation $(Q - \mu_0 I) K u_0 = a_0 d$ with $c$ yields identically:*
    $$a_0 = - \frac{\mu_0 - \lambda}{D_0} b_{00}. \tag{8.10.1}$$
-   *Consequently, the ground-state doublet contribution to $M_1$ evaluates to:*
+   *Consequently, the ground-state doublet contribution to $M_1$ evaluates to the exact identity:*
    $$\frac{a_0^2}{\mu_0 - \lambda} = \frac{1}{\mu_0 - \lambda} \left[ - \frac{\mu_0 - \lambda}{D_0} b_{00} \right]^2 = \frac{\mu_0 - \lambda}{D_0^2} b_{00}^2. \tag{8.10.2}$$
-   *In barrier tunneling mechanics, the exponentially small splitting $\mu_0 - \lambda$ is governed by the same WKB boundary flux as $D_0^2$, yielding the finite, non-singular ratio $\frac{\mu_0 - \lambda}{D_0^2} = \mathcal{O}(1)$. Since $|b_{00}| \le \|K\| = N$ (and empirically saturated at $|b_{00}| \approx 1.3134 = \mathcal{O}(1)$ by mode 1, Cell 61), the ground-state contribution is non-singular and polynomial:*
-   $$\frac{a_0^2}{\mu_0 - \lambda} \le N^2 \frac{\mu_0 - \lambda}{D_0^2} = \mathcal{O}(N^2). \tag{8.10.3}$$
+   *This identity removes the naive small denominator $\mu_0 - \lambda$ from the $j=0$ term, expressing it entirely as the product of the tunneling-flux ratio $\frac{\mu_0 - \lambda}{D_0^2}$ and the squared transition dipole $b_{00}^2$.*
 
-2. **Parseval Enclosure of the Excited Odd Resolvent Sector ($j \ge 1$):**
-   *For all excited odd modes $j \ge 1$, the eigenvalue $\mu_j$ lies above the tunneling doublet, bounded below by the non-tunneling spectral gap $\mu_j - \lambda \ge \mu_1 - \lambda \equiv \Delta_{\mathrm{odd}} > 0$. Factoring out this uniform spectral bound:*
-   $$\sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{1}{\mu_1 - \lambda} \sum_{j \ge 1} a_j^2. \tag{8.10.4}$$
-   *Since $a_j \equiv \langle u_j, \boldsymbol\psi \rangle$ and $\{u_j\}_{j \ge 0}$ forms an orthonormal basis of the odd subspace, Bessel's inequality / Parseval's identity gives:*
-   $$\sum_{j \ge 1} a_j^2 \le \sum_{j \ge 0} |\langle u_j, \boldsymbol\psi \rangle|^2 \le \|\boldsymbol\psi_{\mathrm{odd}}\|^2 \le \sum_{m=-N}^N \psi(m)^2 \le 2 N \Lambda_*^2. \tag{8.10.5}$$
-   *Assuming the non-tunneling odd spectral gap satisfies $\mu_1 - \lambda \ge c_1 N^{-\gamma}$ ($\gamma \ge 0$), combining (8.10.3) and (8.10.5) completely eliminates the bare odd trace and yields:*
-   $$M_1 = \frac{a_0^2}{\mu_0 - \lambda} + \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{\mu_0 - \lambda}{D_0^2} b_{00}^2 + \frac{2 \Lambda_*^2}{c_1} N^{1 + \gamma} = \mathcal{O}(N^{1 + \gamma}). \tag{8.10.6}$$
+2. **Parseval Enclosure of the Excited Odd Sector ($j \ge 1$):**
+   *For all excited odd modes $j \ge 1$, Bessel's inequality / Parseval's identity yields unconditionally:*
+   $$\sum_{j \ge 1} a_j^2 \le \sum_{j \ge 0} |\langle u_j, \boldsymbol\psi \rangle|^2 \le \|\boldsymbol\psi_{\mathrm{odd}}\|^2 \le \sum_{m=-N}^N \psi(m)^2 \le 2 N \Lambda_*^2. \tag{8.10.3}$$
 
-3. **Unconditional Coercivity of the Even Resolvent Norm via Cauchy–Schwarz:**
-   *Let $\mathcal{M}_d^{(p)} \equiv \sum_{k \ge 1} (E_k - \lambda)^p d_k^2$ denote the spectral moments of the Dirichlet vector on the excited even subspace. By the Cauchy–Schwarz inequality on the spectral measure $\nu = \sum_{k \ge 1} d_k^2 \delta_{E_k - \lambda}$:*
+3. **Unconditional Coercivity of the Even Resolvent Quadratic Form via Cauchy–Schwarz:**
+   *Let $\mathcal{M}_d^{(p)} \equiv \sum_{k \ge 1} (E_k - \lambda)^p d_k^2$ denote the spectral moments of the Dirichlet vector on the excited even subspace $c^\perp$. By the Cauchy–Schwarz inequality on the positive spectral measure $\nu = \sum_{k \ge 1} d_k^2 \delta_{E_k - \lambda}$:*
    $$\left( \sum_{k \ge 1} d_k^2 \right)^2 = \left( \sum_{k \ge 1} \sqrt{E_k - \lambda} d_k \cdot \frac{d_k}{\sqrt{E_k - \lambda}} \right)^2 \le \left( \sum_{k \ge 1} (E_k - \lambda) d_k^2 \right) \left( \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} \right),$$
    *which is the exact moment inequality:*
-   $$\big( \mathcal{M}_d^{(0)} \big)^2 \le \mathcal{M}_d^{(1)} \cdot \mathcal{M}_d^{(-1)}. \tag{8.10.7}$$
-   *Substituting $\mathcal{M}_d^{(0)} = (2N + 1) - D_0^2 \ge 2N$ and the Archimedean linear coercivity $\mathcal{M}_d^{(1)} = \mathcal{C}_{\mathbb{R}} N + \mathcal{O}(\log N)$ established in Proposition 8.9 yields the unconditional lower bound:*
-   $$\boxed{\langle d, R_{\mathrm{even}} d \rangle = \mathcal{M}_d^{(-1)} \ge \frac{(2N+1 - D_0^2)^2}{\mathcal{C}_{\mathbb{R}} N + \mathcal{O}(\log N)} \ge \frac{4}{\mathcal{C}_{\mathbb{R}}} N - \mathcal{O}(\log N),} \tag{8.10.8}$$
+   $$\big( \mathcal{M}_d^{(0)} \big)^2 \le \mathcal{M}_d^{(1)} \cdot \mathcal{M}_d^{(-1)}. \tag{8.10.4}$$
+   *Substituting $\mathcal{M}_d^{(0)} = (2N + 1) - D_0^2 \ge 2N$ and the Archimedean linear coercivity $\mathcal{M}_d^{(1)} = \mathcal{W}[F_N] - \lambda(2N+1) = \mathcal{C}_{\mathbb{R}} N + \mathcal{O}(\log N)$ established in Proposition 8.9 yields the linear lower bound on the even resolvent quadratic form:*
+   $$\boxed{\langle d, R_{\mathrm{even}} d \rangle = \mathcal{M}_d^{(-1)} \ge \frac{(2N+1 - D_0^2)^2}{\mathcal{C}_{\mathbb{R}} N + \mathcal{O}(\log N)} \ge \frac{4}{\mathcal{C}_{\mathbb{R}}} N - \mathcal{O}(\log N),} \tag{8.10.5}$$
    *with explicit leading constant $\frac{4}{\mathcal{C}_{\mathbb{R}}} = \frac{2}{\pi(1 + \log\frac{\log c}{2})} > 0$ ($\approx 0.50978$ at $c = 13$).*
 
 4. **Spectral Filtering Partial-Sum Enclosure of the First-Jet Numerator:**
    *In the exact operator decomposition $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, the joint numerator evaluates to $\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} = \langle d, R_{\mathrm{even}} s_2 \rangle$ where $s_2 = M_1 d + K\boldsymbol\psi$. Expanding in the even eigenbasis and applying the spectral filtering identity $\langle u_k, s_2 \rangle = d_k S_k + \mathcal{R}_{\mathrm{filt}}(k)$ (Proposition 8.7) with partial sums $S_k \equiv \sum_{j=1}^k \frac{a_j^2}{\mu_j - \lambda}$:*
-   $$\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} = \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} S_k + \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda}. \tag{8.10.9}$$
+   $$\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} = \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} S_k + \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda}. \tag{8.10.6}$$
    *Because the partial sums satisfy $0 < S_1 \le S_k \le M_1$ for all $k \ge 1$, the primary sum is strictly bounded:*
-   $$S_1 \langle d, R_{\mathrm{even}} d \rangle \le \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} S_k \le M_1 \langle d, R_{\mathrm{even}} d \rangle. \tag{8.10.10}$$
+   $$S_1 \langle d, R_{\mathrm{even}} d \rangle \le \sum_{k \ge 1} \frac{d_k^2}{E_k - \lambda} S_k \le M_1 \langle d, R_{\mathrm{even}} d \rangle. \tag{8.10.7}$$
    *Using the filtering bound $|\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1 = |d_k| \frac{E_k - \lambda}{\mu_{k+1} - E_k} M_1$ (Proposition 8.7), the filtering remainder satisfies:*
-   $$\left| \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda} \right| \le M_1 \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k} \le \frac{M_1}{\mu_2 - E_1} \sum_{k \ge 1} d_k^2 \le \frac{2N+1}{\mu_2 - E_1} M_1. \tag{8.10.11}$$
-   *Here, $\mu_{k+1} - E_k$ is the macroscopic inter-doublet gap, which possesses no tunneling singularity.*
+   $$\left| \sum_{k \ge 1} \frac{d_k \mathcal{R}_{\mathrm{filt}}(k)}{E_k - \lambda} \right| \le M_1 \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k} \le \frac{M_1}{\mu_2 - E_1} \sum_{k \ge 1} d_k^2 \le \frac{2N+1}{\mu_2 - E_1} M_1. \tag{8.10.8}$$
 
-5. **Proof of the Polynomial Decoupling Criterion:**
-   *Assuming the even and odd non-tunneling spectral gaps satisfy $E_1 - \lambda \ge c_0 N^{-\gamma_e}$ and $\mu_2 - E_1 \ge c_2 N^{-\gamma_o}$, the resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{E_1 - \lambda} \le \frac{3}{c_0} N^{1 + \gamma_e}$. Combining (8.10.6), (8.10.10), and (8.10.11):*
-   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\mu_2 - E_1} M_1 + D_0^2 M_2 \right] \le C N^p, \tag{8.10.12}$$
-   *with finite polynomial exponent $p = 2 + \gamma + \max(\gamma_e, \gamma_o) < \infty$.*
+#### Part II: Conditional Polynomial Decoupling under Spectral-Gap Hypotheses
+
+*We introduce two explicit hypotheses governing the low-energy spectrum:*
+- **Hypothesis H1 (Tunneling-Flux Relation):** *The ground-state tunneling splitting and boundary amplitude satisfy:*
+  $$\frac{\mu_0 - \lambda}{D_0^2} \le C_{\mathrm{tun}} < \infty \qquad (N \to \infty).$$
+  *Status:* Semiclassical WKB barrier tunneling analysis indicates that both $\mu_0 - \lambda$ and $D_0^2$ are governed by the same boundary barrier flux $e^{-2\mathcal{S}_{\mathrm{WKB}}}$, with numerical agreement within $5.6\%$ at $N = 24$ (Cell 47, Cell 60). We record this relation here as an explicit hypothesis rather than an unconditional finite-$N$ theorem.
+- **Hypothesis H2 (Non-Tunneling Spectral Separation):** *The excited even and odd eigenvalues lying above the tunneling doublet satisfy polynomial lower bounds:*
+  $$\mu_1 - \lambda \ge c_1 N^{-\gamma}, \qquad E_1 - \lambda \ge c_0 N^{-\gamma_e}, \qquad \mu_2 - E_1 \ge c_2 N^{-\gamma_o},$$
+  *for positive constants $c_0, c_1, c_2 > 0$ and exponents $\gamma, \gamma_e, \gamma_o \ge 0$.*
+  *Status:* These gaps correspond to macroscopic inter-doublet spacings in the bound-state ladder below the barrier top, where numerical spectra (Cell 59, Cell 60) exhibit no exponential tunneling collapse.
+
+*Under Hypotheses H1 and H2, the odd-sector resolvent moment and first-jet ratio satisfy polynomial bounds:*
+
+1. **Polynomial Bound on the Odd Resolvent Moment $M_1$:**
+   *Combining (8.10.2), (8.10.3), Hypothesis H1, and Hypothesis H2:*
+   $$M_1 = \frac{a_0^2}{\mu_0 - \lambda} + \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_{\mathrm{tun}} b_{00}^2 + \frac{1}{\mu_1 - \lambda} \sum_{j \ge 1} a_j^2 \le C_{\mathrm{tun}} N^2 + \frac{2 \Lambda_*^2}{c_1} N^{1 + \gamma} = \mathcal{O}(N^{1 + \gamma}). \tag{8.10.9}$$
+
+2. **Polynomial Control of the First-Jet Ratio $|D_1/D_0|$:**
+   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{E_1 - \lambda} \le \frac{3}{c_0} N^{1 + \gamma_e}$. Combining (8.10.7), (8.10.8), and (8.10.9) in the exact decomposition (8.10.6):*
+   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\mu_2 - E_1} M_1 + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
+   *with finite polynomial exponent:*
+   $$p = 2 + \gamma + \max(\gamma_e, \gamma_o) < \infty. \tag{8.10.11}$$
+   *Remark (Non-Sharp Exponent):* No attempt is made here to optimize the polynomial exponent $p$; only the finiteness of a polynomial exponent is required for exponential-over-polynomial boundary decoupling.
+
+3. **Exponential Boundary Decoupling:**
    *Consequently, the boundary-defect metric satisfies:*
-   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C e^{-\frac{\pi N}{2}\log c} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0 \tag{8.10.13}$$
-   *exponentially fast as $N \to \infty$. This rigorously establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples unconditionally in the continuum limit.*
+   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C e^{-\frac{\pi N}{2}\log c} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0 \tag{8.10.12}$$
+   *exponentially fast as $N \to \infty$. This conditionally establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples exponentially in the continuum limit.*
 
 ---
 
@@ -898,7 +915,7 @@ Auditing this conjecture against the exact algebraic identities established in P
    > $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 \sim e^{-\frac{\pi N}{2}\log c} \left[ 1 + \mathcal{O}(N^p) \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0$$
    > collapses exponentially fast to zero as $N \to \infty$.
 
-   Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. This requirement is rigorously fulfilled by **Proposition 8.10**, which establishes the unconditional polynomial bound $|D_1/D_0| \le C N^p$ ($p < \infty$) via the rank-two commutator identity, thereby proving the Polynomial Decoupling Criterion and establishing that the boundary-defect metric $\mathcal{D}(N) \to 0$ collapses exponentially fast to zero.
+   Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. This requirement is established by **Proposition 8.10**, which proves the exact finite-$N$ commutator cancellations and Cauchy–Schwarz resolvent coercivity (Part I), reducing the Polynomial Decoupling Criterion to polynomial non-tunneling spectral gaps and the WKB tunneling-flux relation (Part II), thereby ensuring that boundary-defect leakage decouples exponentially in the continuum limit.
 
 ---
 
