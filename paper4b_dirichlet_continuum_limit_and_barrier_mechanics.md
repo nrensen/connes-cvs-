@@ -20,7 +20,7 @@ This manuscript sets forth the analytical and empirical research programme inves
 3. **Semiclassical WKB Barrier Tunneling Mechanics:** Inverting the ground-state profile defines an effective Schrödinger potential $V_{\mathrm{conf}}(t) - E = T''(t)/T(t)$ whose midpoint well rises steeply toward the boundaries. Semiclassical WKB tunneling action across the barrier $\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ reproduces the observed logarithmic boundary suppression to within $5.3\%$ across 47 orders of magnitude, consistent with the empirical scaling law $\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c$.
 4. **Legendre Multipole Decomposition and Asymptotic Tail Extinction:** Via Bauer's spherical Bessel expansion, $T_{v_N}(t)$ decomposes into Legendre multipoles with alternating signs, producing strictly constructive interference at the midpoint and destructive cancellation at the boundaries. The high-frequency Taylor coefficients $A_k(N)$ extinguish rapidly across all orders ($A_0 \sim 10^{-40}, A_1 \sim 10^{-34}, A_2 \sim 10^{-29}$ at $N = 24$), motivating the conjecture that the continuum resolvent $R_\infty(r) = o(r^{-k})$ decays faster than every inverse power of $r$.
 5. **Tri-Partite Zero-Energy Equilibrium and Finite-$T$ Archimedean Leakage:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates the exact finite-$T$ Archimedean cutoff leakage $\delta_T^{\mathrm{tail}} = \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v) - \lambda_{\min}(24) = 1.668 \times 10^{-43}$, certified free of numerical truncation error and proven in Theorem 5.5 of Paper 4 to be 100% continuous tail leakage from the finite integration cutoff $T = 400$.
-6. **Formal Continuum Wiener–Hopf Scaling, Interlaced Tunneling Ladders, and Operator Reformulation of the First Jet:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Below the double-well barrier top, the even and odd spectra form an interlaced ladder of bound tunneling doublets ($E_0 < \mu_1 < E_1 < \dots < \mu_{N/2} < E_{N/2}$). The first coordinate transition dipole moment $\langle e_1, Kc \rangle = -D_0 a_1 / \Delta_1 \approx 1.3134 = \mathcal{O}(1)$ carries $99.9999\%$ of the coordinate norm $\|Kc\|^2$, structurally linking the overlap ratio $C_N = |a_1| / \sqrt{\Delta_1} \approx 2.4$ to the transition dipole moment. The first-jet ratio decomposes into exact operator components $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, and exhibits numerical behaviour consistent with an asymptotic spectral filtering mechanism where the ratio appears to stabilize near $\approx -0.77$ with net ratio $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}] \sim 0.23$ across tested dimensions. The square-root overlap scaling ($|d_k| \approx 24.1 \sqrt{\Delta_k}$, $|a_j| \approx 2.24 \sqrt{\Delta_j}$) keeps small denominators bounded mode by mode, supporting the hypothesis that $u_1^{-1} = |D_1/D_0|$ is bounded polynomially ($\sim N^{2.6 - 2.8}$ over the tested range), which would guarantee exponential boundary-defect decoupling in the continuum limit.
+6. **Formal Continuum Wiener–Hopf Scaling, Interlaced Tunneling Ladders, and Operator Reformulation of the First Jet:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Below the double-well barrier top, the even and odd spectra form an interlaced ladder of bound tunneling doublets ($E_0 < \mu_1 < E_1 < \dots < \mu_{N/2} < E_{N/2}$). The first coordinate transition dipole moment $\langle e_1, Kc \rangle = -D_0 a_1 / \Delta_1 \approx 1.3134 = \mathcal{O}(1)$ carries $99.9999\%$ of the coordinate norm $\|Kc\|^2$, providing empirical evidence connecting the overlap ratio $C_N = |a_1| / \sqrt{\Delta_1} \approx 2.4$ to the transition dipole moment. The first-jet ratio decomposes into exact operator components $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, and exhibits numerical behaviour consistent with an asymptotic spectral filtering mechanism where the ratio appears to stabilize near $\approx -0.77$ with net ratio $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}] \sim 0.23$ across tested dimensions. The square-root overlap scaling ($|d_k| \approx 24.1 \sqrt{\Delta_k}$, $|a_j| \approx 2.24 \sqrt{\Delta_j}$) keeps small denominators bounded mode by mode, supporting the hypothesis that $u_1^{-1} = |D_1/D_0|$ is bounded polynomially ($\sim N^{2.6 - 2.8}$ over the tested range), which would guarantee exponential boundary-defect decoupling in the continuum limit.
 7. **The Analytical Roadmap toward Continuous Weil Positivity:** We formulate the three open mathematical stages required to convert these empirical and asymptotic findings into a complete proof of Weil positivity on the idele class group.
 
 ---
@@ -744,9 +744,9 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
   1. *Analytic Hypothesis:* The statement required by the decoupling proof is strictly the polynomial growth of the weighted sums $\Sigma_{\mathrm{filt}}(N)$ and $\mathcal{M}_d^{(-1)}$.
   2. *Underlying Semiclassical Mechanism Conjecture:* High-precision spectral audits (Cell 66) demonstrate that bare spectral gaps collapse exponentially ($E_1 - \lambda \approx 4.50 \times 10^{-37}$, $\mu_2 - E_1 \approx 2.95 \times 10^{-34}$ at $N=24$) due to the $\sim N/2$ bound states residing beneath the barrier top. The physical mechanism keeping the weighted sums polynomial is **mode-by-mode resonant transmission matching**: the working semiclassical conjecture is that, for the relevant bound-state ladder beneath the barrier top, there exist prefactors $A_k, B_k$ with:
      $$d_k^2 \sim A_k e^{-2\mathcal{S}_k N}, \qquad \mu_{k+1} - E_k \sim B_k e^{-2\mathcal{S}_k N} \implies \frac{d_k^2}{\mu_{k+1} - E_k} \sim \frac{A_k}{B_k} = \mathcal{O}(1).$$
-     In Cell 66, this cancellation is confirmed across the ladder, with individual quotients remaining universally $\mathcal{O}(1)$:
+     In Cell 66, this cancellation is supported numerically across the examined ladder, with individual quotients remaining universally $\mathcal{O}(1)$:
      $$\frac{d_k^2}{E_k - \lambda} \approx 580, \qquad \frac{d_k^2}{\mu_{k+1} - E_k} \le 6.85.$$
-     Summing across the $\le N$ bound modes naturally yields polynomial growth ($\Sigma_{\mathrm{filt}}(24) = 94.66 \sim \mathcal{O}(N)$), completely bypassing the exponentially collapsing bare gaps.
+     If this modewise $\mathcal{O}(1)$ control persists uniformly, summing across the $\mathcal{O}(N)$ bound modes would yield polynomial, indeed linear, growth (compatible with the observed value $\Sigma_{\mathrm{filt}}(24) = 94.66$), completely bypassing the exponentially collapsing bare gaps.
 
 - **Hypothesis H2$_{\mathrm{odd}}$ (Odd-Sector Overlap-Weighted Resolvent Bound / Odd Transmission Cancellation):** *The excited odd-sector resolvent moment satisfies a polynomial upper bound:*
   $$M_1^{\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_1 N^\gamma,$$
@@ -773,9 +773,9 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    *which is an unconditional finite-$N$ identity that holds independently of $D_0$.*
    *For the excited odd sector ($j \ge 1$), we define the excited second moment:*
    $$M_{2,\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{(\mu_j - \lambda)^2} = \sum_{j \ge 1} \frac{1}{\mu_j - \lambda} \left( \frac{a_j^2}{\mu_j - \lambda} \right).$$
-   *Because the bare gaps $\mu_j - \lambda$ collapse exponentially fast along the bound-state ladder beneath the barrier top, controlling $M_{2,\mathrm{exc}}$ upon multiplication by $D_0^2$ requires that the excited tunneling scales $\Delta_j \asymp \mu_j - \lambda$ do not collapse faster than the ground-state boundary tunneling scale $D_0^2 \sim e^{-\sigma N}$. Specifically, we identify the explicit technical requirement:*
-   $$D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q,$$
-   *for some finite exponent $q \ge 0$. Semiclassically, this condition is expected to arise from relative tunneling-scale ordering across the interlaced bound doublet ladder ($D_0^2 / \Delta_j \le C N^q$), ensuring $D_0^2 M_2 \le N^2 + C_2 N^q = \mathcal{O}(N^{\max(2, q)})$.*
+   *Because the bare gaps $\mu_j - \lambda$ collapse exponentially fast along the bound-state ladder beneath the barrier top, controlling $M_{2,\mathrm{exc}}$ upon multiplication by $D_0^2$ requires comparing the excited tunneling scales with the ground-state boundary tunneling scale. Semiclassically, if $\Delta_j \asymp \mu_j - \lambda$ and $D_0^2 / \Delta_j \le C N^q$, then the second-moment condition follows directly from the first-moment transmission estimate:*
+   $$D_0^2 M_{2,\mathrm{exc}} = \sum_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} \left( \frac{a_j^2}{\mu_j - \lambda} \right) \le \left( \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} \right) M_1^{\mathrm{exc}} \le C_2 N^q.$$
+   *We record $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$ as an explicit technical requirement governing the second moment, ensuring $D_0^2 M_2 \le N^2 + C_2 N^q = \mathcal{O}(N^{\max(2, q)})$.*
    *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the three terms in the first-jet ratio are bounded polynomially:*
    $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + M_1 \Sigma_{\mathrm{filt}}(N) + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
    *with overall polynomial exponent:*
@@ -786,6 +786,83 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    *Consequently, adding Hypothesis H3, the boundary-defect metric satisfies for any scaling sequence with $T \ge 1$:*
    $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C_0 e^{-\sigma N} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \le C' e^{-\sigma N} (1 + N^p)^2 = \mathcal{O}\big(e^{-\sigma N} N^{2p}\big) \longrightarrow 0 \tag{8.10.12}$$
    *exponentially fast as $N \to \infty$. This establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples exponentially in the continuum limit under Hypotheses H1–H3 (with H2$_{\mathrm{odd}}$).*
+
+---
+
+### 8.11 Proposition 8.11 (Barrier Thinning, Relative Tunneling-Scale Hierarchy, and Automatic Control of the Excited Second Moment)
+
+The technical condition $D_0^2 M_{2,\mathrm{exc}} \le C_2 N^q$ introduced in Proposition 8.10 governs the excited odd-sector contribution to the second resolvent moment $M_2 = \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$. The following proposition establishes that this condition is not an independent, isolated hypothesis; rather, it is structurally subordinate to Hypothesis $\mathrm{H2}_{\mathrm{odd}}$ via the universal semiclassical phenomenon of **barrier thinning** across the interlaced bound-state ladder.
+
+**Proposition 8.11 (Automatic Second-Moment Control via Relative Tunneling-Scale Ordering):**
+*Let $N \ge 2$, $c > 1$, and let $\lambda = \lambda_0(Q_N)$ be the ground-state eigenvalue. Suppose that:*
+1. *The excited odd-sector resolvent moment satisfies Hypothesis $\mathrm{H2}_{\mathrm{odd}}$:*
+   $$M_1^{\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} \le C_1 N^\gamma.$$
+2. *The relative tunneling ratio between the ground-state boundary scale $D_0^2$ and the first excited odd gap $\mu_1 - \lambda$ is bounded:*
+   $$R_{\mathrm{gap}}^{\max}(N) \equiv \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} = \frac{D_0^2}{\mu_1 - \lambda} \le C_{\mathrm{gap}} N^{q_0},$$
+   *for some constants $C_{\mathrm{gap}} > 0$ and $q_0 \in \mathbb{R}$.*
+
+*Then:*
+1. *(Automatic Excited Second-Moment Bound): The excited second resolvent moment satisfies:*
+   $$D_0^2 M_{2,\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} \le R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}} \le C_2 N^q, \tag{8.11.1}$$
+   *with exponent $q = \gamma + \max(0, q_0)$ and prefactor $C_2 = C_{\mathrm{gap}} C_1$. In particular, if $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(1)$ (or decays to zero), then $q = \gamma$.*
+2. *(Total Second-Moment Bound): The total second resolvent moment scaled by $D_0^2$ satisfies:*
+   $$D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}} \le N^2 + C_2 N^q = \mathcal{O}\big(N^{\max(2, q)}\big), \tag{8.11.2}$$
+   *where $b_{00}^2 = D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} \le \|K\|^2 = N^2$ is an exact finite-$N$ identity holding independently of any asymptotic hypothesis.*
+
+*Proof.*
+For any $j \ge 1$, we rewrite the $j$-th term of the excited second moment as:
+$$\frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} = \left( \frac{D_0^2}{\mu_j - \lambda} \right) \left( \frac{a_j^2}{\mu_j - \lambda} \right).$$
+Since $\mu_j$ is monotonically non-decreasing with mode index $j$, the bare gaps satisfy $\mu_j - \lambda \ge \mu_1 - \lambda > 0$ for all $j \ge 1$. Consequently:
+$$\sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} = \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N).$$
+Pulling this supremum out of the sum yields:
+$$D_0^2 M_{2,\mathrm{exc}} = \sum_{j \ge 1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \left( \frac{a_j^2}{\mu_j - \lambda} \right) \le \left( \sup_{j \ge 1} \frac{D_0^2}{\mu_j - \lambda} \right) \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda} = R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}}.$$
+Applying the bounds $R_{\mathrm{gap}}^{\max}(N) \le C_{\mathrm{gap}} N^{q_0}$ and $M_1^{\mathrm{exc}} \le C_1 N^\gamma$ yields (8.11.1).
+For the total second moment, decomposing $M_2 = \frac{a_0^2}{(\mu_0 - \lambda)^2} + M_{2,\mathrm{exc}}$ and applying the ground-state commutator identity (8.10.1) gives $D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le N^2$, from which (8.11.2) follows immediately. $\blacksquare$
+
+---
+
+#### Semiclassical Mechanism: Barrier Thinning Beneath the Barrier Top
+The physical mechanism ensuring that $R_{\mathrm{gap}}^{\max}(N) \le \mathcal{O}(1)$—and in fact decays exponentially with $N$—is the universal semiclassical phenomenon of **barrier thinning** in double-well potentials (Landau–Lifshitz *Quantum Mechanics* §50).
+
+In the Galerkin phase space, the bound states residing beneath the barrier top $V_{\max}$ form an interlaced ladder of even and odd quasidegenerate doublets $(E_k, \mu_k)$. In WKB theory, the tunneling action at energy $E$ is given by the phase integral through the classically forbidden barrier:
+$$\mathcal{S}(E) = \int_{x_-(E)}^{x_+(E)} \sqrt{2\big(V(x) - E\big)} \, dx,$$
+where $x_\pm(E)$ are the classical turning points satisfying $V(x_\pm) = E$.
+Differentiating with respect to energy yields:
+$$\frac{d\mathcal{S}}{dE} = - \int_{x_-(E)}^{x_+(E)} \frac{dx}{\sqrt{2\big(V(x) - E\big)}} = - \frac{T_{\mathrm{barrier}}(E)}{2} < 0,$$
+where $T_{\mathrm{barrier}}(E) > 0$ is the imaginary-time traversal period of the barrier.
+Because $\frac{d\mathcal{S}}{dE}$ is strictly negative:
+$$\mathcal{S}(E_0) > \mathcal{S}(E_1) > \mathcal{S}(E_2) > \dots$$
+The tunneling action is a strictly decreasing function of excitation energy.
+
+The parity tunneling splittings scale as $\Delta_k \asymp \mu_k - E_k \sim \exp\big(-2\mathcal{S}(E_k) N\big)$.
+By Hypothesis H1 (flux matching), the ground-state boundary amplitude scales with the ground-state barrier flux:
+$$D_0^2 \asymp \mu_0 - \lambda \sim e^{-2\mathcal{S}(E_0) N}.$$
+For the first excited odd mode $j = 1$, the bare gap to the ground state satisfies:
+$$\mu_1 - \lambda = (\mu_1 - E_1) + (E_1 - \lambda) > \mu_1 - E_1 \asymp \Delta_1 \sim e^{-2\mathcal{S}(E_1) N}.$$
+Therefore, the relative tunneling-scale ratio scales as:
+$$\frac{D_0^2}{\mu_1 - \lambda} \asymp \frac{e^{-2\mathcal{S}(E_0) N}}{e^{-2\mathcal{S}(E_1) N}} = \exp\Big( -2\big[\mathcal{S}(E_0) - \mathcal{S}(E_1)\big] N \Big) \longrightarrow 0,$$
+which is **exponentially suppressed** as $N \to \infty$ with decay exponent $\Delta \sigma = 2[\mathcal{S}(E_0) - \mathcal{S}(E_1)] > 0$.
+Rather than threatening a polynomial blowup, the factor $\frac{D_0^2}{\mu_1 - \lambda}$ acts as an exponential suppressor!
+
+---
+
+#### Numerical Evidence: High-Precision Audit Across Tested Dimensions
+High-precision spectral audits across dimensions $N \in \{8, 12, 16, 20, 24\}$ at 50-digit precision (Cell 66 and Cell 67, $c = 13$, $T = 400$) provide concrete quantitative verification of this hierarchy:
+
+| $N$ | $D_0^2$ | $\mu_1 - \lambda$ | $R_{\mathrm{gap}}^{\max} = \frac{D_0^2}{\mu_1 - \lambda}$ | $M_1^{\mathrm{exc}}$ | $D_0^2 M_{2,\mathrm{exc}}$ | $\rho_2 = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 8 | $6.481 \times 10^{-21}$ | $1.387 \times 10^{-15}$ | $4.672 \times 10^{-6}$ | $43.998$ | $2.055 \times 10^{-4}$ | $4.671 \times 10^{-6}$ |
+| 12 | $4.418 \times 10^{-27}$ | $1.186 \times 10^{-21}$ | $3.724 \times 10^{-6}$ | $64.357$ | $2.397 \times 10^{-4}$ | $3.724 \times 10^{-6}$ |
+| 16 | $3.178 \times 10^{-32}$ | $1.276 \times 10^{-26}$ | $2.491 \times 10^{-6}$ | $76.091$ | $1.895 \times 10^{-4}$ | $2.491 \times 10^{-6}$ |
+| 20 | $7.028 \times 10^{-37}$ | $6.400 \times 10^{-31}$ | $1.098 \times 10^{-6}$ | $85.255$ | $9.362 \times 10^{-5}$ | $1.098 \times 10^{-6}$ |
+| 24 | $1.295 \times 10^{-40}$ | $2.949 \times 10^{-34}$ | $4.392 \times 10^{-7}$ | $93.654$ | $4.113 \times 10^{-5}$ | $4.392 \times 10^{-7}$ |
+
+These computations demonstrate:
+1. **Universal Boundedness and Monotonic Suppression:** The ratio $R_{\mathrm{gap}}^{\max}(N) \le 4.68 \times 10^{-6}$ across all tested dimensions, and decreases monotonically from $4.67 \times 10^{-6}$ at $N = 8$ to $4.39 \times 10^{-7}$ at $N = 24$, in full agreement with semiclassical exponential barrier thinning.
+2. **Microscopic Scale of the Excited Second Moment:** $D_0^2 M_{2,\mathrm{exc}}$ remains strictly below $2.4 \times 10^{-4}$ across all tested dimensions, falling to $4.11 \times 10^{-5}$ at $N = 24$.
+3. **Dominance of the Algebraic Ground-State Bound:** In the total second-moment combination $D_0^2 M_2 = b_{00}^2 + D_0^2 M_{2,\mathrm{exc}}$, the excited tail contributes less than $0.00025$, while the exact ground-state term $b_{00}^2 \le N^2$ accounts for $> 99.999\%$ of the sum.
+
+*Epistemic Status:* The algebraic inequality $D_0^2 M_{2,\mathrm{exc}} \le R_{\mathrm{gap}}^{\max}(N) M_1^{\mathrm{exc}}$ is an exact, unconditional identity. The numerical boundedness $R_{\mathrm{gap}}^{\max}(N) \le 5 \times 10^{-6}$ is established across discrete dimensions $N \in \{8, \dots, 24\}$, and the underlying physical explanation is provided by semiclassical barrier thinning $\frac{d\mathcal{S}}{dE} < 0$. Together, they demonstrate that Hypothesis $\mathrm{H2}_{\mathrm{odd}}$ structurally controls $D_0^2 M_{2,\mathrm{exc}}$, unifying the second-moment condition with the first-moment transmission framework.
 
 ---
 
