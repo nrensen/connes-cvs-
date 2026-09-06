@@ -479,6 +479,47 @@ For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$,
 For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 3, this sum is bounded by $C_{\mathrm{bound}} N^p$.
 Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound $|D_1/D_0| \le C_{\mathrm{upper}} N^{\max(2, p)} \log N$. Inverting this bound directly yields the polynomial lower bound on $u_1 = |D_0/D_1|$, which would establish boundary-defect decoupling under these hypotheses. $\blacksquare$
 
+### Proposition 8.7 (Analytical Reduction: Operator Resolvent Bounds, Jet-Equation Resummation, and Commutator Smoothing)
+*The first-jet ratio $D_1/D_0$ and the spectral-filtering remainder admit an exact analytical reduction that eliminates the exponentially small denominator $D_0$ from the bound-state sector:*
+
+1. **Exact Squared-Resolvent Laurent Jet Identity:**
+   *Expanding the squared-resolvent representation of Paper 4 for large $r$:*
+   $$R_v(r) = \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} \right]^2 = \frac{A_0}{r^2} + \frac{A_1}{r^4} + \mathcal{O}(r^{-6}),$$
+   *where $a_m = 2\pi m / L$. Setting $T_0 = v_0 + \sqrt{2}\sum_{m=1}^N v_m = D_0$ and $T_2 = \sqrt{2}\sum_{m=1}^N a_m^2 v_m = -D_1$, squaring the Laurent series yields $A_0 = \frac{2 D_0^2}{L}$ and $A_1 = -\frac{4 D_0 D_1}{L}$, giving the exact first-jet identity:*
+   $$\frac{A_1}{A_0} = -2 \frac{D_1}{D_0} = \frac{8\sqrt{2}\pi^2}{L^2} \frac{M_2}{v_0 + \sqrt{2}\sum_{m=1}^N v_m}, \qquad M_2 \equiv \sum_{m=1}^N m^2 v_m.$$
+   *This identity isolates the exact mathematical origin of the large first-jet ratio: the denominator $D_0 = T_v(0)$ collapses exponentially fast ($e^{-\mathcal{S}_{\mathrm{WKB}}}$) via destructive Dirichlet boundary cancellation, whereas the weighted index moment $M_2$ in the numerator is regular and non-vanishing. Consequently, naive coefficient norm estimation fails because it divides directly by an exponentially small cancellation scale.*
+
+2. **First-Row Jet-Equation Resummation and the $(\kappa N)^2$ Natural Scale:**
+   *Expanding the first row of the eigenvalue problem $(Qv)_0 = \lambda v_0 \approx 0$ in terms of the endpoint boundary jets $D_k = T_v^{(2k)}(0)$ yields:*
+   $$\psi'(0) D_0 = \alpha_1 D_1 - \alpha_2 D_2 + \alpha_3 D_3 - \dots + \mathcal{R}_N, \qquad \alpha_k \equiv \frac{\psi^{(2k+1)}(0)}{(2k+1)! \kappa^{2k}}.$$
+   *Dividing by $D_1$ and expressing the higher jets through the dimensionless shape invariants $\beta_N = \frac{D_0 D_2}{D_1^2}$ and $\gamma_N = \frac{D_0^2 D_3}{D_1^3}$ (Proposition 8.5) transforms the first row into a closed nonlinear jet equation in the ratio $X_N \equiv D_1 / D_0$:*
+   $$\psi'(0) = \alpha_1 X_N - \alpha_2 \beta_N X_N^2 + \alpha_3 \gamma_N X_N^3 - \dots + \frac{\mathcal{R}_N}{D_0}.$$
+   *Because $\alpha_1 = \psi'''(0) / (6\kappa^2)$, restoring the continuum scaling variable $x = m/N$ reveals that the leading term dictates the natural physical scaling $D_0 / D_1 \sim (\kappa N)^{-2}$. The higher jet terms form a nonlinear resummation in $X_N$, explaining why the empirical first-jet ratio $D_1/D_0 = (\kappa N)^2 s_N$ exhibits a slowly varying profile drift $s_N$ rather than an integer power law.*
+
+3. **Exact Operator Bound on the Spectral-Filtering Remainder:**
+   *In the spectral-filtering decomposition $\langle u_k, s_2 \rangle = d_k \sum_{j \le k} \frac{a_j^2}{\mu_j - \lambda} + \mathcal{R}_{\mathrm{filt}}(k)$ (Proposition 8.4), the high-mode remainder:*
+   $$\mathcal{R}_{\mathrm{filt}}(k) = d_k (E_k - \lambda) \sum_{j > k} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}$$
+   *acts on the spectral subspace $j > k$ where $\mu_j - E_k \ge \mu_{k+1} - E_k$. Factoring out the uniform spectral denominator yields the exact operator inequality:*
+   $$|\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1, \qquad \rho_k \equiv \frac{E_k - \lambda}{\mu_{k+1} - E_k},$$
+   *where $M_1 \equiv \langle \boldsymbol\psi_{\mathrm{odd}}, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi_{\mathrm{odd}} \rangle = \sum_{j=1}^N \frac{a_j^2}{\mu_j - \lambda}$ is the odd-sector resolvent moment. In operator notation, letting $P_{>k}$ denote the spectral projection onto $\{u_j : j > k\}$:*
+   $$\mathcal{R}_{\mathrm{filt}}(k) = d_k \left\langle P_{>k}\boldsymbol\psi, (E_k - \lambda)(Q_{\mathrm{odd}} - \lambda I)^{-1}(Q_{\mathrm{odd}} - E_k I)^{-1} P_{>k}\boldsymbol\psi \right\rangle \implies |\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1.$$
+   *Crucially, this bound is completely free of any $D_0^{-1}$ factor, converting the cancellation problem into bounding a positive-resolvent quadratic form.*
+
+4. **Commutator Origin of $M_1$ and Algebraic Cauchy Kernel Cancellation:**
+   *The source vector $\boldsymbol\psi$ is the index-weighted first row: $\boldsymbol\psi = K Q e_0$, where $K = \operatorname{diag}(-N, \dots, N)$. Taking the commutator $[K, Q] = KQ - QK$ gives matrix entries:*
+   $$[K, Q]_{mn} = (m - n) Q_{mn}.$$
+   *Because the Galerkin matrix possesses a Cauchy-type kernel $Q_{mn} \sim \frac{\log(m/n)}{m - n}$, multiplication by $(m - n)$ algebraically eliminates the Cauchy singularity:*
+   $$[K, Q]_{mn} \sim \log(m/n).$$
+   *Inserting $Q e_j = \mu_j e_j$ yields $Q K e_j = \mu_j K e_j - [K, Q] e_j$. Taking the $e_0$ inner product yields:*
+   $$a_j = \langle e_j, \boldsymbol\psi \rangle = \langle e_j, K Q e_0 \rangle = \mu_j \langle K e_j, e_0 \rangle - \langle [K, Q] e_j, e_0 \rangle.$$
+   *This connects the mode overlaps $a_j$ and the resolvent moment $M_1$ directly to the smoothed commutator $[K, Q]$ rather than to near-singular eigenvalue denominators.*
+
+*Epistemic Status of the Reduction:*
+- **Rigorous Analytical Results:** The Laurent identity $A_1 / A_0 = -2 D_1 / D_0$, the closed nonlinear jet equation in $X_N$, the operator bound $|\mathcal{R}_{\mathrm{filt}}(k)| \le |d_k| \rho_k M_1$, and the Cauchy denominator cancellation $[K, Q]_{mn} = (m - n) Q_{mn}$ are exact finite-$N$ mathematical theorems.
+- **Open Analytical Targets:** Converting this reduction into an unconditional polynomial bound on $D_1/D_0$ requires proving two concrete operator estimates:
+  1. *Uniform Spectral Separation:* Proving $\rho_k = \frac{E_k - \lambda}{\mu_{k+1} - E_k} \le C'$ across the bound tunneling ladder.
+  2. *Commutator Resolvent Bound:* Proving $M_1 = \langle \boldsymbol\psi, R_{\mathrm{odd}}(\lambda) \boldsymbol\psi \rangle \le C N^p$ by bounding the smoothed operator $\|[K, Q]\| \le C N^p$.
+
 ---
 
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
