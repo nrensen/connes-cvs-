@@ -453,7 +453,7 @@ $$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2 
 
 *which enclose the numerical data to three decimal places, confirming that $u_1 = |D_0/D_1|$ is the genuine physical boundary-layer time scale.*
 
-### Conditional Proposition 8.6 (Sector-Decomposed Bounding Ladder for $u_1$ and $s_N$)
+### Conditional Proposition 8.6 (Sector-Decomposed Polynomial Bound on $D_1/D_0$ — Conditional on Proof Audit)
 *Decompose the reduced even resolvent into bound-state and scattering components:*
 
 $$R_{\mathrm{even}} = R_{\mathrm{bound}} + R_{\mathrm{scatt}},$$
@@ -462,29 +462,28 @@ $$R_{\mathrm{even}} = R_{\mathrm{bound}} + R_{\mathrm{scatt}},$$
 
 *Assume:*
 1. *Uniform Scattering Gap:* $\inf_N E_{\mathrm{scatt},\min}(N) \ge E_{\mathrm{gap}} > 0$ (empirically supported by Cells 49–50).
-2. *Polynomial Bound-State Moment Control:* The bound-state coordinate projections satisfy $\sum_{k=1}^{N/2} \left| \frac{d_k \langle u_k, K^2 c \rangle}{D_0} \right| \le C_{\mathrm{bound}} N^p$ for some finite $p < \infty$ (empirically supported by Cell 62).
-3. *Uniform $H^1$ Sobolev Boundedness:* $\|T'_v\|_{L^2} = \mathcal{O}(1)$.
+2. *Scattering Source Growth Hypothesis:* The effective source vector $s_2 = M_1 d + K\boldsymbol\psi$ satisfies $\|s_2\|_2 \le C_s N^{3/2} \log N$ on the scattering sector (subject to rigorous operator proof audit).
+3. *Polynomial Bound-State Moment Control:* The bound-state coordinate projections satisfy $\sum_{k=1}^{N/2} \left| \frac{d_k \langle u_k, K^2 c \rangle}{D_0} \right| \le C_{\mathrm{bound}} N^p$ for some finite $p < \infty$ (empirically supported by Cell 62).
 
 *Then:*
-1. **Upper Bound on First-Jet Ratio:**
+1. **Polynomial Upper Bound on First-Jet Ratio:**
    $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left( C_{\mathrm{scatt}} N^2 \log N + C_{\mathrm{bound}} N^p \right) \le C_{\mathrm{upper}} N^{\max(2, p)} \log N.$$
-2. **Two-Sided Bounds on Cancellation Scale and Decoupling Ratio:**
-   $$\frac{c_1}{N^{\max(2, p)} \log N} \le u_1 = \left| \frac{D_0}{D_1} \right| \le \frac{c_2}{N^{1/2}}, \qquad \frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{\max(2, p) - 1/2}.$$
-3. **Subexponentiality:**
-   *Under these conditions, $u_1$ and $s_N$ are strictly subexponential, ruling out any $e^{-\alpha N}$ collapse of the cancellation scale and indicating that $D_0$ and $D_1$ share the same leading exponential WKB barrier decay rate.*
-4. **Spatial Boundary Layer Width:**
-   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically, fundamentally decoupling from the exponentially suppressed endpoint amplitude $T_N(0) \sim e^{-\mathcal{S}_{\mathrm{WKB}}}$.*
+2. **Polynomial Lower Bound on Cancellation Scale:**
+   $$u_1 = \left| \frac{D_0}{D_1} \right| \ge \frac{c_1}{N^{\max(2, p)} \log N},$$
+   *ruling out any exponential $e^{-\alpha N}$ collapse of the cancellation scale and indicating that $D_0$ and $D_1$ share the same leading exponential WKB barrier decay rate.*
+3. **Spatial Boundary Layer Width and Decoupling:**
+   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically. Substituting this polynomial lower bound into the boundary-defect metric $\mathcal{D}(N) = D_0^2 [1 + 1/(T^2 u_1)]^2$ proves that $\mathcal{D}(N) \to 0$ collapses exponentially fast like $e^{-2\mathcal{S}_{\mathrm{WKB}}} N^{2\max(2, p)} (\log N)^2 \to 0$, establishing the Boundary-Defect Decoupling Conjecture.*
 
 *Proof.* By Theorem 7.3 and Corollary 7.3.1 of Paper 4, $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$. Splitting $R_{\mathrm{even}} = R_{\mathrm{scatt}} + R_{\mathrm{bound}}$:
-For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$, applying the Cauchy–Schwarz inequality with $\|d\|_2 = \sqrt{2N+1}$ and $\|s_2\|_2 \le C_s N^{3/2} \log N$ yields $|\langle d, R_{\mathrm{scatt}} s_2 \rangle| \le C_{\mathrm{scatt}} N^2 \log N$.
-For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 2, this sum is bounded by $C_{\mathrm{bound}} N^p$.
-Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound. The lower bound follows from Sobolev trace embedding. Inverting yields the two-sided bounds on $u_1$ and $s_N$. $\blacksquare$
+For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$, applying the Cauchy–Schwarz inequality with $\|d\|_2 = \sqrt{2N+1}$ and the scattering growth hypothesis $\|s_2\|_2 \le C_s N^{3/2} \log N$ yields $|\langle d, R_{\mathrm{scatt}} s_2 \rangle| \le C_{\mathrm{scatt}} N^2 \log N$.
+For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 3, this sum is bounded by $C_{\mathrm{bound}} N^p$.
+Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound $|D_1/D_0| \le C_{\mathrm{upper}} N^{\max(2, p)} \log N$. Inverting this bound directly yields the polynomial lower bound on $u_1 = |D_0/D_1|$, which is precisely the condition required for exponential boundary-defect decoupling. $\blacksquare$
 
 ---
 
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
 
-The empirical and asymptotic results established in this research programme indicate that the finite-rank Galerkin truncation provides a faithful, convergent approximation to the continuous Weil quadratic form. 
+The empirical and asymptotic results established in this research programme suggest that the finite-rank Galerkin truncation may provide a convergent approximation to the continuous Weil quadratic form. 
 
 To convert these findings into a complete, mathematically rigorous proof of Weil positivity on the idele class group, three major analytical hurdles must be resolved:
 

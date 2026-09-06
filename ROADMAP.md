@@ -202,7 +202,7 @@ Method: Semiclassical continuum limits, Sobolev regularizations, adelic harmonic
 ========================================================================================
 ```
 
-Paper 4 and Paper 4B are dedicated to Programme 1 and the bridge to Programme 2, respectively. Finite-rank positivity $\mathcal{Q}_{c, N} \succeq 0$ is a self-contained, mathematically rigorous theorem that does not require prior resolution of Programme 2.
+Paper 4 and Paper 4B provide the exact finite-rank toolkit and the analytical programme for Programme 1. Finite-rank positivity $\mathcal{Q}_{c, N} \succeq 0$ remains an open target of the present investigation and does not require prior resolution of Programme 2.
 
 ---
 
@@ -236,23 +236,30 @@ The lattice sampling suggests a natural three-mode low-frequency sector. The ext
 
 ## 7. Concrete Experimental Suite: Cell 63a Specification
 
-Before attempting formal proofs, we execute a targeted computational experiment to construct and inspect the negative operator directly:
+Before attempting formal proofs, we execute a targeted computational reconnaissance to construct and inspect the negative operator directly:
 
-### Objectives of `cell63a.py`
+### Objectives & Mathematical Protocol of `cell63a.py`
 1. **Explicit Matrix Construction of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$:**
-   Compute the $(N+1) \times (N+1)$ positive semi-definite matrix:
+   Compute the $(N+1) \times (N+1)$ positive semi-definite Gram matrix:
    $$\big[\mathcal{Q}_{\mathrm{arch}}^{(-)}\big]_{mn} = \frac{1}{\pi} \int_0^{r_*} |h_+(r)| \Phi_m(r) \Phi_n(r) \, dr,$$
    in the canonical basis $v$, where $\Phi_m(r)$ are the canonical Fourier basis amplitudes.
 2. **Explicit Construction of $\mathcal{Q}_{\mathrm{positive\ side}}$:**
    Compute $\mathcal{Q}_{\mathrm{positive}} = \mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}}^{(+)}$, where:
    $$\mathcal{Q}_{\mathrm{arch}}^{(+)} = \mathcal{Q}_{\mathrm{arch}} + \mathcal{Q}_{\mathrm{arch}}^{(-)}.$$
-3. **Generalized Spectral Decomposition:**
+3. **Gram Matrix Definiteness & Nullspace Audit:**
+   Establish whether $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ is strictly positive definite on the finite Galerkin basis or possesses an effective numerical nullspace. If $\mathcal{Q}_{\mathrm{arch}}^{(-)} \succ 0$, the generalized eigenproblem is standard. If $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ has near-zero singular values, restrict the generalized problem to $(\ker \mathcal{Q}_{\mathrm{arch}}^{(-)})^\perp$ while verifying independent positivity $\mathcal{Q}_{\mathrm{positive}} \succ 0$ on $\ker \mathcal{Q}_{\mathrm{arch}}^{(-)}$.
+4. **Generalized Spectral Decomposition:**
    Solve the generalized eigenvalue problem:
    $$\mathcal{Q}_{\mathrm{positive}} x = \lambda \mathcal{Q}_{\mathrm{arch}}^{(-)} x.$$
-   - **Positivity Certificate:** If $\lambda_{\min} \ge 1$, then $\mathcal{Q}_{\mathrm{Weil}} \succeq 0$ is rigorously certified on $\mathbb{R}^{N+1}$.
+   - **Numerical Dominance Test:** If the computed generalized spectrum satisfies $\lambda_{\min} > 1$ with a margin substantially larger than numerical error, this provides strong finite-$N$ numerical evidence for $\mathcal{Q}_{\mathrm{Weil}} \succeq 0$. A rigorous certificate would require certified eigenvalue / interval error bounds (planned as a subsequent Cell 63b).
    - **Dangerous State Identification:** The generalized eigenvector $x_{\min}$ corresponding to $\lambda_{\min}$ defines the exact profile of the "most dangerous test vector" challenging Weil positivity.
-4. **Dimension Sweep ($N \in \{4, 8, 12, 16, 20, 24\}$):**
-   Track the trajectory of $\lambda_{\min}(N)$ to establish whether the dominance margin $\lambda_{\min} - 1$ is bounded away from zero or approaches 1.
+5. **Three Core Diagnostic Suites:**
+   - **Diagnostic 1 (Spectrum & Effective Rank of $\mathcal{Q}_-$):** Tabulate the full spectrum of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ to determine its conditioning and effective dimensional rank across $N \in \{4, 8, 12, 16, 20, 24\}$.
+   - **Diagnostic 2 (Modal Projection of Dangerous State):** Compute the fractional energy projection of $x_{\min}$ onto the 3-mode sector $\operatorname{span}\{e_0, e_1, e_2\}$ vs. its orthogonal complement $\operatorname{span}\{e_3, \dots, e_N\}$ to test the Three-Mode Sector Hypothesis directly.
+   - **Diagnostic 3 (Schur-Complement Test for High Modes):** Partition the full Weil matrix as $\mathcal{Q}_{\mathrm{Weil}} = \begin{pmatrix} A & B \\ B^T & C \end{pmatrix}$, where $A$ is $3 \times 3$ (low modes) and $C$ is $(N-2) \times (N-2)$ (high modes). Verify whether $C \succ 0$ and evaluate the spectrum of the Schur complement:
+     $$S_{\mathrm{low}} = A - B C^{-1} B^T$$
+     to determine whether high modes can be eliminated while rigorously preserving positivity.
+
 
 ---
 
