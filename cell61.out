@@ -20,7 +20,9 @@ and tracking the stability of the ratios R_D = D_0 / sqrt(Delta_1) and C_N = |a_
   24     1.137963e-20    2.0845324e-20         0.545908           2.405934       -1.3134189         -1.3134189      1.56712e-12
 -------------------------------------------------------------------------------------------------------------------------------
 Finding Part 1:
-1. Exact Identity Verified: |<e_1, Kc> + (D_0 a_1)/Delta_1| < 10^-50 across all dimensions!
+1. Exact Identity Verified: The exact identity is verified numerically to the precision
+   permitted by the conditioning of each finite matrix; the residual grows at the largest N
+   as expected from the exponentially small spectral gaps.
 2. The Single Tunnelling Scale: Both D_0 and sqrt(Delta_1) collapse by 10 decimal orders
    (8.05e-11 -> 1.14e-20), while their ratio R_D = D_0 / sqrt(Delta_1) remains strictly
    bounded in [0.41, 0.64] across the entire range.
