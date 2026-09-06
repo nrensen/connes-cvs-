@@ -1,0 +1,195 @@
+================================================================================
+CELL 64 — CERTIFIED POSITIVITY VIA SCHUR COMPLEMENT BLOCK DECOUPLING
+================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 80
+Primary Partition: m_cut = 3 (Low modes: {e_0, e_1, e_2}, High modes: {e_3, ..., e_N})
+
+--------------------------------------------------------------------------------
+DIMENSION N = 4 (Canonical Basis Dimension = 5)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 198.975 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 8.827406198365735349650571e-15
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 7.9095634863158e-10
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 2x2):
+  Smallest eigenvalue min eig(C) = 0.001150728875007326532210365
+  Largest eigenvalue  max eig(C) = 0.238152795555481
+  Condition number kappa(C)      = 206.958216421
+  LDL^T factorization relative residual = 1.040848991e-81
+  Minimum diagonal pivot min(D_C)       = 0.002648200987231112294031042
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['0.0011507289', '0.2381528']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['8.863357985268573751012023e-15', '9.866082942274546454071654e-10', '0.00003347108983209888643357344']
+  Smallest eigenvalue min eig(S_low) = 8.863357985268573751012023e-15
+  Condition number kappa(S_low)      = 3776344122.37
+  LDL^T factorization relative residual = 4.006378953e-82
+  Pivots of S_low [D_00, D_11, D_22] = ['0.000011096923851789661068', '2.6510867556962387105e-10', '9.9491587402362318222e-14']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 4: 198.998 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 8 (Canonical Basis Dimension = 9)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 366.120 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 6.710935250125962103470959e-23
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 8.54331975948526e-18
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 6x6):
+  Smallest eigenvalue min eig(C) = 2.012323244304663822329318e-10
+  Largest eigenvalue  max eig(C) = 2.62240380244817
+  Condition number kappa(C)      = 13031722462.4
+  LDL^T factorization relative residual = 7.085402735e-82
+  Minimum diagonal pivot min(D_C)       = 0.00001020075714449100127047863
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['2.0123232e-10', '1.1266005e-6', '0.00033677131']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['6.858296945683188144620716e-23', '1.626830838970611011076785e-17', '4.212732713650006473149442e-12']
+  Smallest eigenvalue min eig(S_low) = 6.858296945683188144620716e-23
+  Condition number kappa(S_low)      = 61425347240.2
+  LDL^T factorization relative residual = 0.0
+  Pivots of S_low [D_00, D_11, D_22] = ['1.6635444248786715015e-12', '6.3917515918984406784e-18', '4.4204684496924122961e-22']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 8: 366.209 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 12 (Canonical Basis Dimension = 13)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 533.931 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 1.782476576272269447043514e-29
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 3.98733381675716e-24
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 10x10):
+  Smallest eigenvalue min eig(C) = 6.228657089290546554557328e-16
+  Largest eigenvalue  max eig(C) = 3.24667023489386
+  Condition number kappa(C)      = 5.21247226866e+15
+  LDL^T factorization relative residual = 7.634884029e-82
+  Minimum diagonal pivot min(D_C)       = 0.000001554913284592407476714806
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['6.2286571e-16', '7.5916113e-12', '1.6262413e-8']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['1.845736652983020787006718e-29', '9.277846866065590559716332e-24', '1.156822524659076050297304e-17']
+  Smallest eigenvalue min eig(S_low) = 1.845736652983020787006718e-29
+  Condition number kappa(S_low)      = 626753834459.0
+  LDL^T factorization relative residual = 1.35743597e-81
+  Pivots of S_low [D_00, D_11, D_22] = ['4.7799363726050521564e-18', '4.0834530937656816391e-24', '1.0149250834737494114e-28']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 12: 534.202 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 16 (Canonical Basis Dimension = 17)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 689.161 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 7.118430150813116688753164e-35
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 3.60078077614994e-29
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 14x14):
+  Smallest eigenvalue min eig(C) = 1.620884034432092072445869e-20
+  Largest eigenvalue  max eig(C) = 3.30132752904168
+  Condition number kappa(C)      = 2.03674504709e+20
+  LDL^T factorization relative residual = 2.373258465e-81
+  Minimum diagonal pivot min(D_C)       = 0.000001554913284592407476714806
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['1.620884e-20', '3.2983177e-16', '2.4890952e-12']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['7.430944812855824377676278e-35', '9.290915246368458031186474e-29', '1.738101981737275345539147e-22']
+  Smallest eigenvalue min eig(S_low) = 7.430944812855824377676278e-35
+  Condition number kappa(S_low)      = 2.33900536945e+12
+  LDL^T factorization relative residual = 2.772655025e-82
+  Pivots of S_low [D_00, D_11, D_22] = ['7.3218771561749396681e-23', '4.2983256950759218116e-29', '3.8129054047799989259e-34']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 16: 689.795 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 20 (Canonical Basis Dimension = 21)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 843.754 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 1.323235908109911798715256e-39
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 1.28780291682685e-33
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 18x18):
+  Smallest eigenvalue min eig(C) = 1.408679014015906789822831e-24
+  Largest eigenvalue  max eig(C) = 3.60869865964672
+  Condition number kappa(C)      = 2.56176078705e+24
+  LDL^T factorization relative residual = 2.340462851e-81
+  Minimum diagonal pivot min(D_C)       = 0.000001458369273138276366415441
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['1.408679e-24', '3.9874201e-20', '8.5898463e-16']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['1.388586331205172944917144e-39', '3.529916944844982306951587e-33', '1.479195530295319300509437e-26']
+  Smallest eigenvalue min eig(S_low) = 1.388586331205172944917144e-39
+  Condition number kappa(S_low)      = 1.06525283812e+13
+  LDL^T factorization relative residual = 1.994922262e-82
+  Pivots of S_low [D_00, D_11, D_22] = ['6.2960532945707630898e-27', '1.6786133922725807161e-33', '6.8603121910199937838e-39']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 20: 845.033 s
+
+--------------------------------------------------------------------------------
+DIMENSION N = 24 (Canonical Basis Dimension = 25)
+--------------------------------------------------------------------------------
+  Matrix build elapsed time: 995.177 s
+  Full matrix Q_Weil smallest eigenvalue lambda_0 = 2.53348484007809227351107e-43
+  Full matrix Q_Weil second eigenvalue   lambda_1 = 4.49583650561819e-37
+
+DIAGNOSTIC 1: High-Mode Block C Audit (dimension: 22x22):
+  Smallest eigenvalue min eig(C) = 2.012627288334870365148579e-27
+  Largest eigenvalue  max eig(C) = 3.81305488677656
+  Condition number kappa(C)      = 1.89456582889e+27
+  LDL^T factorization relative residual = 2.620656886e-81
+  Minimum diagonal pivot min(D_C)       = 0.000001458369273138276366415441
+  All pivots D_{ii}(C) strictly positive: True
+  Bottom 3 eigenvalues of C : ['2.0126273e-27', '9.6860542e-23', '3.0120245e-18']
+
+DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
+  Eigenvalues of S_low: ['2.666882521345003460285924e-43', '1.275330304525861857233078e-36', '1.125893726454743718642947e-29']
+  Smallest eigenvalue min eig(S_low) = 2.666882521345003460285924e-43
+  Condition number kappa(S_low)      = 4.22175974173e+13
+  LDL^T factorization relative residual = 3.846187017e-82
+  Pivots of S_low [D_00, D_11, D_22] = ['4.8191381544239865904e-30', '6.1554401921160879402e-37', '1.2909085317072995195e-42']
+  All pivots D_{ii}(S_low) strictly positive: True
+  Schur complement condition satisfied (C > 0 and S_low > 0): True
+
+Total elapsed time for N = 24: 997.391 s
+
+================================================================================
+DIAGNOSTIC 3: Cutoff Sensitivity Sweep at N = 24
+================================================================================
+m_cut | dim(A) | dim(C) |             min_eig(C) |             min_eig(S) | All Pivots > 0
+--------------------------------------------------------------------------------------
+    1 |      1 |     24 |      2.93626638149e-37 |      8.47165075526e-43 |           True
+    2 |      2 |     23 |      3.80673620734e-32 |      3.36128921056e-43 |           True
+    3 |      3 |     22 |      2.01262728833e-27 |      2.66688252135e-43 |           True
+    4 |      4 |     21 |      4.26264074324e-23 |      2.54584404536e-43 |           True
+    6 |      6 |     19 |      1.42200886048e-15 |      2.53348896295e-43 |           True
+    8 |      8 |     17 |       1.71880023367e-9 |      2.53348487369e-43 |           True
+   12 |     12 |     13 |      0.000308703913314 |      2.53348484008e-43 |           True
+
+================================================================================
+MULTI-DIMENSION SYNTHESIS TABLE (c = 13, Primary m_cut = 3)
+================================================================================
+  N |       lambda_0(Q_Weil) |           min_eig(C) |         min_eig(S_low) |  C > 0 |  S > 0
+----------------------------------------------------------------------------------------------
+  4 |      8.82740619837e-15 |     0.00115072887501 |      8.86335798527e-15 |   True |   True
+  8 |      6.71093525013e-23 |     2.0123232443e-10 |      6.85829694568e-23 |   True |   True
+ 12 |      1.78247657627e-29 |    6.22865708929e-16 |      1.84573665298e-29 |   True |   True
+ 16 |      7.11843015081e-35 |    1.62088403443e-20 |      7.43094481286e-35 |   True |   True
+ 20 |      1.32323590811e-39 |    1.40867901402e-24 |      1.38858633121e-39 |   True |   True
+ 24 |      2.53348484008e-43 |    2.01262728833e-27 |      2.66688252135e-43 |   True |   True
+================================================================================
+CELL 64 EXECUTION COMPLETE
+================================================================================
