@@ -736,15 +736,15 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
   $$\frac{\mu_0 - \lambda}{D_0^2} \le C_{\mathrm{tun}} < \infty \qquad (N \to \infty).$$
   *Status:* Semiclassical WKB barrier tunneling analysis indicates that both $\mu_0 - \lambda$ and $D_0^2$ are governed by the same boundary barrier flux $e^{-2\mathcal{S}_{\mathrm{WKB}}}$, with numerical agreement within $5.6\%$ at $N = 24$ (Cell 47, Cell 60). We record this relation here as an explicit hypothesis rather than an unconditional finite-$N$ theorem.
 - **Hypothesis H2 (Uniform Non-Tunneling Spectral Separation):** *The excited even and odd eigenvalues lying above the tunneling doublet satisfy uniform polynomial lower bounds:*
-  $$\inf_{j \ge 1}(\mu_j - \lambda) \ge c_1 N^{-\gamma}, \qquad \inf_{k \ge 1}(E_k - \lambda) \ge c_0 N^{-\gamma_e}, \qquad \inf_{k \ge 1}(\mu_{k+1} - E_k) \ge c_2 N^{-\gamma_o},$$
-  *for positive constants $c_0, c_1, c_2 > 0$ and exponents $\gamma, \gamma_e, \gamma_o \ge 0$.*
+  $$\inf_{j \ge 1}(\mu_j - \lambda) \ge c_1 N^{-\gamma}, \qquad \inf_{k \ge 1}(E_k - \lambda) \ge c_E N^{-\gamma_e}, \qquad \inf_{k \ge 1}(\mu_{k+1} - E_k) \ge c_2 N^{-\gamma_o},$$
+  *for positive constants $c_1, c_E, c_2 > 0$ and exponents $\gamma, \gamma_e, \gamma_o \ge 0$.*
   *Status:* These gaps correspond to macroscopic inter-doublet spacings across the bound-state ladder below the barrier top, where numerical spectra (Cell 59, Cell 60) exhibit no exponential tunneling collapse. Uniformity in $k \ge 1$ ensures that the full filtering remainder (8.10.8) is rigorously controlled.
 - **Hypothesis H3 (Exponential Boundary Suppression):** *The Dirichlet ground-state boundary amplitude satisfies exponential decay:*
   $$D_0^2 \le C_0 e^{-\sigma N} \qquad (N \to \infty),$$
   *for positive constants $C_0 > 0$ and $\sigma > 0$.*
   *Status:* Semiclassical WKB barrier penetration and numerical measurements across dimensions $N \in \{1, \dots, 24\}$ (Cell 44, Cell 47, Table 2) strongly support this geometric suppression, with decay rate $\sigma \approx \frac{\pi}{2}\log c$ ($\approx 2.014$ at $c = 13$). In Section 3 and Section 9.1, this geometric boundary extinction is catalogued as an empirical scaling observation / WKB prediction; we isolate it here as an explicit hypothesis required for the decoupling conclusion.
 
-*Under Hypotheses H1, H2, and H3, the odd-sector resolvent moment, first-jet ratio, and boundary-defect metric satisfy:*
+*Under Hypotheses H1 and H2, the odd-sector resolvent moment and first-jet ratio satisfy polynomial bounds; adding Hypothesis H3 yields exponential boundary-defect decoupling:*
 
 1. **Polynomial Bound on the Odd Resolvent Moment $M_1$:**
    *Combining (8.10.2), (8.10.3), Hypothesis H1, and Hypothesis H2, and noting $|b_{00}| \le \|K\| = N$:*
@@ -752,16 +752,21 @@ $$\mathcal{W}[F_N] = \langle d, Q d \rangle = \mathcal{W}_{\mathrm{pole}}[F_N] +
    *with polynomial exponent $\eta \equiv \max(2, 1 + \gamma)$. For $\gamma \in [0, 1)$, the $N^2$ dipole envelope dominates; for $\gamma \ge 1$, the excited odd spectral gap dominates.*
 
 2. **Polynomial Control of the First-Jet Ratio $|D_1/D_0|$:**
-   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{\inf_{k \ge 1}(E_k - \lambda)} \le \frac{3}{c_0} N^{1 + \gamma_e}$. Combining (8.10.7), (8.10.8), and (8.10.9) in the exact decomposition (8.10.6):*
-   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} M_1 + D_0^2 M_2 \right] \le C N^p, \tag{8.10.10}$$
-   *with finite polynomial exponent:*
-   $$p = 1 + \eta + \max(\gamma_e, \gamma_o) = 1 + \max(2, 1 + \gamma) + \max(\gamma_e, \gamma_o) < \infty. \tag{8.10.11}$$
+   *Under Hypothesis H2, the even resolvent norm satisfies $\langle d, R_{\mathrm{even}} d \rangle \le \frac{2N+1}{\inf_{k \ge 1}(E_k - \lambda)} \le \frac{3}{c_E} N^{1 + \gamma_e}$. For the higher odd resolvent moment $M_2 \equiv \sum_{j \ge 0} \frac{a_j^2}{(\mu_j - \lambda)^2}$, the exact doublet cancellation identity (8.10.1) gives identically:*
+   $$D_0^2 \frac{a_0^2}{(\mu_0 - \lambda)^2} = b_{00}^2 \le \|K\|^2 = N^2,$$
+   *which holds for all $N$ independently of $D_0$, while Hypothesis H2 and Bessel's inequality / Parseval's identity bound the excited odd sum unconditionally by:*
+   $$D_0^2 \sum_{j \ge 1} \frac{a_j^2}{(\mu_j - \lambda)^2} \le D_0^2 \frac{1}{\inf_{j \ge 1}(\mu_j - \lambda)^2} \sum_{j \ge 1} a_j^2 \le D_0^2 \frac{2 N \Lambda_*^2}{c_1^2 N^{-2\gamma}} = \mathcal{O}(D_0^2 N^{1 + 2\gamma}).$$
+   *Since $D_0^2 \le 1$ for all $N \ge 1$ (and collapses exponentially under H3), we obtain $D_0^2 M_2 \le N^2 + \mathcal{O}(D_0^2 N^{1 + 2\gamma}) = \mathcal{O}(N^{\max(2, 1 + 2\gamma)})$.*
+   *Combining (8.10.7), (8.10.8), (8.10.9), and the $D_0^2 M_2$ bound in the exact decomposition (8.10.6), the first two terms dominate with exponent:*
+   $$p = 1 + \eta + \max(\gamma_e, \gamma_o) = 1 + \max(2, 1 + \gamma) + \max(\gamma_e, \gamma_o) \ge 3 > 2,$$
+   *yielding under Hypotheses H1 and H2 alone the polynomial control:*
+   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left[ M_1 \langle d, R_{\mathrm{even}} d \rangle + \frac{2N+1}{\inf_{k \ge 1}(\mu_{k+1} - E_k)} M_1 + D_0^2 M_2 \right] \le C N^p. \tag{8.10.10}$$
    *Remark (Non-Sharp Exponent):* No attempt is made here to optimize the polynomial exponent $p$; only the finiteness of a polynomial exponent is required for exponential-over-polynomial boundary decoupling.
 
 3. **Exponential Boundary Decoupling:**
-   *Consequently, under Hypotheses H1, H2, and H3, the boundary-defect metric satisfies:*
-   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C_0 e^{-\sigma N} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \sim e^{-\sigma N} N^{2p} \longrightarrow 0 \tag{8.10.12}$$
-   *exponentially fast as $N \to \infty$. This conditionally establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples exponentially in the continuum limit.*
+   *Consequently, adding Hypothesis H3, the boundary-defect metric satisfies for any scaling sequence with $T \ge 1$:*
+   $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 = D_0^2 \left( 1 + \frac{|D_1/D_0|}{T^2} \right)^2 \le C_0 e^{-\sigma N} \left[ 1 + \frac{C N^p}{T^2} \right]^2 \le C' e^{-\sigma N} (1 + N^p)^2 = \mathcal{O}\big(e^{-\sigma N} N^{2p}\big) \longrightarrow 0 \tag{8.10.12}$$
+   *exponentially fast as $N \to \infty$. This establishes the Polynomial Decoupling Criterion of Section 9.1 and proves that boundary-defect leakage decouples exponentially in the continuum limit under Hypotheses H1–H3.*
 
 ---
 
