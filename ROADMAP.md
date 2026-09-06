@@ -271,7 +271,7 @@ The execution of `cell63.py` across $N \in \{4, 8, 12, 16, 20, 24\}$ at 50-digit
    - As a Gram matrix of Fourier basis functions integrated over the fixed compact interval $[0, r_*]$, $\mathcal{Q}_-^{(N)}$ develops rapidly collapsing singular values:
      $$\sigma_{\min}(\mathcal{Q}_-) = 4.03 \times 10^{-5} \,(N=4), \quad 1.16 \times 10^{-18} \,(N=8), \quad 7.63 \times 10^{-36} \,(N=12),$$
      falling below the 50-digit precision floor ($\approx -3.5 \times 10^{-51}$) for $N \ge 16$.
-   - The effective numerical rank of $\mathcal{Q}_-^{(N)}$ caps strictly at **13** across all $N \ge 12$ (with nullspace dimension growing to 12 at $N = 24$).
+   - At 50-digit precision, the effective numerical rank saturates at **13** for $N \ge 12$, with the remaining directions falling below the numerical resolution threshold (the apparent nullspace reflects finite-precision resolution rather than an exact mathematical kernel).
 2. **Breakdown of Generalized Eigenvalue Whitening at $N \ge 12$:**
    - The standard whitening transformation $\mathcal{Q}_-^{-1/2} \mathcal{Q}_{\mathrm{pos}} \mathcal{Q}_-^{-1/2}$ violently magnifies floating-point noise along the vanishing singular directions of $\mathcal{Q}_-$.
    - The eigenpair residual $\|\mathcal{Q}_{\mathrm{pos}} x_{\min} - \lambda_{\min} \mathcal{Q}_- x_{\min}\|_2$ degrades by 40 orders of magnitude:
@@ -282,11 +282,11 @@ The execution of `cell63.py` across $N \in \{4, 8, 12, 16, 20, 24\}$ at 50-digit
      $$E_{\mathrm{low}} / E_{\mathrm{total}} = 99.59\% \,(N=4), \quad 97.85\% \,(N=8), \quad 97.50\% \,(N=12), \quad 97.82\% \,(N=16), \quad 98.30\% \,(N=20), \quad 98.41\% \,(N=24).$$
    - The coordinates of $x_{\min}$ converge stably to:
      $$x_{\min} \approx (0.59, -0.69, 0.38, -0.13, 0.02, -0.002, 0.0, \dots),$$
-     demonstrating that modes $m \ge 3$ decouple exponentially. The physical challenge to Weil positivity is solidly localized in the 3-mode sector.
+     showing a strongly localized and apparently rapidly decaying high-mode tail. The physical challenge to Weil positivity is empirically localized in the 3-mode sector across tested dimensions.
 4. **Schur Complement High-Mode Decoupling:**
    - In the block partition $\mathcal{Q}_{\mathrm{Weil}} = \begin{pmatrix} A & B \\ B^T & C \end{pmatrix}$, the high-mode block is strictly positive definite ($C \succ 0$) across all dimensions ($\lambda_{\min}(C) = 1.15 \times 10^{-3}$ at $N=4$ down to $2.01 \times 10^{-27}$ at $N=24$).
    - The $3 \times 3$ Schur complement $S_{\mathrm{low}} = A - B C^{-1} B^T$ remains strictly positive definite across all dimensions ($\lambda_{\min}(S_{\mathrm{low}}) = 8.86 \times 10^{-15}$ at $N=4$ down to $5.84 \times 10^{-36}$ at $N=24$).
-   - This establishes that high-mode elimination via Schur complements is mathematically viable and avoids the singular whitening of $\mathcal{Q}_-$.
+   - The numerical results indicate that Schur-complement elimination is a viable and substantially better-conditioned candidate route than generalized-eigenvalue whitening, avoiding the singular inversion of $\mathcal{Q}_-$.
 
 ---
 

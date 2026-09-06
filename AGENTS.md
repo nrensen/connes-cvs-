@@ -47,8 +47,12 @@ The repository maintains a strict architectural and epistemological boundary bet
   - `Conjecture / Hypothesis`: Explicitly designated for unproven theoretical targets (e.g., the Boundary-Defect Decoupling Conjecture).
   - `Empirical Evidence / Scaling Observation`: Findings derived from finite numerical sweeps across discrete dimensions $N$. Numerical power-law fits (e.g., across 5 data points) must **never** be described as "analytical proofs" or "rigorously secured" facts.
   - `Semiclassical / Physical Heuristic`: WKB double-well analogies, barrier-top turning points, and transport models.
-- **Calibrated Language:**
-  Avoid asserting asymptotic convergence when numerical sequences exhibit non-monotonicity or finite-size transients.
+- **Calibrated Language & Anti-Overstatement Constraints:**
+  - *No Premature Asymptotic Laws:* Avoid asserting asymptotic convergence or specific functional laws (e.g. "decays exponentially", "power-law scaling") when numerical sequences exhibit non-monotonicity, finite-size transients, or simply finite sets of rapidly decreasing points without mathematical proof. Use calibrated formulations: "strongly localized and apparently rapidly decaying", "consistent with rapid decay across tested dimensions".
+  - *No Conflation of Numerical Conditioning with Exact Nullspaces:* Never assert that an operator has an exact mathematical nullspace or fixed finite rank based on finite-precision calculations. Always qualify numerical rank by the precision and threshold (e.g., "at 50-digit precision, the effective numerical rank saturates at 13, with remaining directions falling below the numerical resolution threshold").
+  - *No Conflation of Numerical Feasibility with Mathematical Proof:* Never describe numerical definiteness as "establishing mathematical viability" or "proving positivity". Describe it as "indicating candidate viability" or "providing empirical motivation for certification".
+  - *The Epistemic Trinity:* Maintain the strict boundary:
+    $$\text{numerical localization} \neq \text{mathematical reduction} \neq \text{structural explanation}.$$
 
 ---
 
