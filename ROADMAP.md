@@ -342,9 +342,12 @@ Tasks:
                                      v
 ========================================================================================
 STAGE VI: CONTINUUM ASYMPTOTICS & SUBSPACES DENSITY
-Status: PLANNED (Paper 4B)
+Status: ACTIVE ANALYTICAL ADVANCE (Paper 4B Propositions 8.7 & 8.8)
 Tasks:
   1. Prove polynomial bound |D_1/D_0| <= C N^p via sector-decomposed resolvents.
+     - Advance: Exact rank-two commutator identity [K, Q] = \psi d^T - d \psi^T proved (Proposition 8.8).
+     - Advance: D_0-free bound a_j^2 <= 4 N^2 \Lambda_*^4 / ((E_1 - \lambda) [W[F_N] - \lambda(2N+1)]) established.
+     - Next Target: Lower-bound Dirichlet functional W[F_N] and odd-sector resolvent trace.
   2. Establish exponential boundary-defect decoupling D(N) -> 0.
   3. Formulate formal WKB double-well potential and prove density of union_{c, N} H_{c, N}.
 ========================================================================================
@@ -371,6 +374,7 @@ Tasks:
 | **M3** | Analyze coordinates and modal energy of the dangerous vector $x_{\min}$ | Diagnostic Report | **COMPLETED** (Confirmed $98\%$ energy in $\{e_0, e_1, e_2\}$ across all $N$) |
 | **M4** | Formulate certified positivity suite via Schur complement block decoupling | `cell64.py` | High-mode certification $C \succ 0$ and $S_{\mathrm{low}} \succ 0$ |
 | **M5** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation (Stage IV) |
+| **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ and odd resolvent trace | Analytical Derivation | $D_0$-free bound on $M_1$ and first-jet ratio (Stage VI, Prop 8.8) |
 
 ---
 
