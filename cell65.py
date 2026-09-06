@@ -416,11 +416,11 @@ def main():
         n_val = rec['N']
         l0_q = mp.nstr(rec['lam_0_Q'], 10)
         l0_s = mp.nstr(rec['lam_min_S'], 10)
-        shift_pct = f"{rec['rel_diff_pct']:.2f}%"
+        shift_pct = f"{float(rec['rel_diff_pct']):.2f}%"
         sig_max = mp.nstr(rec['sig_max'], 8)
         is_mono = "YES" if rec['min_delta_eval'] >= -mp.mpf('1e-70') else "NO"
         inc_str = mp.nstr(rec['inc_inf'], 8) if not mp.isnan(rec['inc_inf']) else "BASELINE"
-        t_sec = f"{rec['elapsed']:.2f}"
+        t_sec = f"{float(rec['elapsed']):.2f}"
         print(f"{n_val:>4} | {l0_q:>22} | {l0_s:>22} | {shift_pct:>13} | {sig_max:>16} | {is_mono:>12} | {inc_str:>18} | {t_sec:>8}")
 
     print("\nKey Analytical Takeaways:")
