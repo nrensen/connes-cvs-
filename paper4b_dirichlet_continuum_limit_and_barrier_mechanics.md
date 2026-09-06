@@ -957,6 +957,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Roadmap Stage III (Operator Dominance Reconnaissance) | Negative Archimedean Gram matrix $\mathcal{Q}_-$, whitening breakdown & 3-mode sector concentration ($98\%$) | `cell63.py` | `cell63.out` |
 | Roadmap Stage III (High-Precision Schur Positivity) | High-precision numerical verification of $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ via symmetric $LDL^T$ Schur decoupling at 80 dps | `cell64.py` | `cell64.out` |
 | Roadmap Stage V (Effective Hamiltonian & Self-Energy) | Three-mode effective Hamiltonian $S_{\mathrm{low}} = A - \Sigma_{\mathrm{low}}$ & high-mode self-energy sweep at 80 dps | `cell65.py` | `cell65.out` |
+| Roadmap Stage VI (Hypothesis H1–H3 Audit) | Semiclassical flux-matching $\mathcal{R}_{\mathrm{tun}}$, mode-by-mode transmission cancellation & bound ladder | `cell66.py` | `cell66.out` |
 
 ---
 
