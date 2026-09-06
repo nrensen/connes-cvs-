@@ -385,8 +385,9 @@ Tasks:
   1. Formulate the finite-dimensional effective Hamiltonian S_low(N) = A_N - \Sigma_low(N)
      with self-energy \Sigma_low(N) = B_N C_N^{-1} B_N^T.
   2. Prove block definiteness reduction: Q_N > 0 <=> C_k(N) > 0 and S_k(N) > 0 for fixed small k.
-  3. Establish analytical bounds on the Schur self-energy ||B_N C_N^{-1} B_N^T|| and connect
-     its N -> \infty asymptotic behavior to the D_0, D_1 / first-jet resolvent machinery.
+  3. Establish quantitative analytical bounds on the Schur self-energy ||B_N C_N^{-1} B_N^T||
+     and investigate what asymptotic structure the 3x3 Schur complement inherits from the
+     high-mode resolvent C_N^{-1}, connecting to the D_0, D_1 / first-jet machinery.
 ========================================================================================
                                      |
                                      v
@@ -397,8 +398,8 @@ Tasks:
   1. Prove polynomial bound |D_1/D_0| <= C N^p via sector-decomposed resolvents.
      - Advance: Exact rank-two commutator identity [K, Q] = \psi d^T - d \psi^T proved (Proposition 8.8).
      - Advance: D_0-free bound a_j^2 <= 4 N^2 \Lambda_*^4 / ((E_1 - \lambda) [W[F_N] - \lambda(2N+1)]) established (Proposition 8.8).
-     - Advance: Exact linear coercivity W[F_N] = 2\pi(1 + \log(\log c / 2)) N + O(\log N) proved via Archimedean boundary layer (Proposition 8.9).
-     - Next Target: Odd-sector resolvent trace bound Tr[(Q_odd - \lambda I)^{-1}] <= C N^q and even spectral gap E_1 - \lambda.
+     - Advance: Exact linear coercivity W[F_N] = 2\pi(1 + \log(\log c / 2)) N + O(\log N) proved via Archimedean boundary layer and explicit prime quadratic form algebra, yielding M_d^{(1)} >= c_0 N with c_0 = \pi(1 + \log(\log c / 2)) > 0 (Proposition 8.9).
+     - Next Target: Direct polynomial bound on the overlap-weighted odd resolvent moment M_1 = \sum_j a_j^2 / (\mu_j - \lambda) via commutator structure (bypassing the exponentially singular bare trace Tr[(Q_odd - \lambda I)^{-1}] >= (\mu_0 - \lambda)^{-1} ~ 10^{43} at N=24) and even spectral gap E_1 - \lambda >= c_1 N^{-\gamma}.
   2. Establish exponential boundary-defect decoupling D(N) -> 0.
   3. Formulate formal WKB double-well potential and prove density of union_{c, N} H_{c, N}.
 ========================================================================================
@@ -425,8 +426,8 @@ Tasks:
 | **M3** | Analyze coordinates and modal energy of the dangerous vector $x_{\min}$ | Diagnostic Report | **COMPLETED** (Confirmed $98\%$ energy in $\{e_0, e_1, e_2\}$ across all $N$) |
 | **M4** | Formulate high-precision positivity suite via Schur complement block decoupling | `cell64.py` | **COMPLETED** (`cell64.out`: High-precision numerical verification via $LDL^T$ pivots $D_{ii}(C) > 0, D_{ii}(S_{\mathrm{low}}) > 0$ at 80 dps across all $N$; backward error $\le 2.6 \times 10^{-81}$; ground-state scale capture within 5%) |
 | **M5** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation (Stage IV) |
-| **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ and odd resolvent trace | Paper 4B Proposition 8.9 | **COMPLETED** (Closed-form boundary-layer evaluation: $\mathcal{W}[F_N] = 2\pi\left(1 + \log\frac{\log c}{2}\right) N + \mathcal{O}(\log N)$, proving linear coercivity $\mathcal{M}_d^{(1)} \ge c_0 N$) |
-| **M7** | Bound the odd-sector resolvent trace $\operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda I)^{-1}]$ and even spectral gap $E_1 - \lambda$ | Analytical Derivation | Polynomial norm bound on $(Q_{\mathrm{odd}} - \lambda I)^{-1}$ (Stage VI) |
+| **M6** | Lower-bound the Dirichlet kernel Weil functional $\mathcal{W}[F_N] = \langle d, Q d \rangle$ | Paper 4B Proposition 8.9 | **COMPLETED** (Closed-form boundary layer $\mathcal{W}_{\mathrm{arch}} = \mathcal{C}_{\mathbb{R}} N$, $\mathcal{W}_{\mathrm{prime}} = \mathcal{O}(\log N)$, $\mathcal{W}_{\mathrm{pole}} = \mathcal{O}(1)$, proving linear coercivity $\mathcal{M}_d^{(1)} \ge c_0 N$ with $c_0 = \pi(1 + \log\frac{\log c}{2}) > 0$) |
+| **M7** | Bound the overlap-weighted odd resolvent moment $M_1 = \sum_j \frac{a_j^2}{\mu_j - \lambda}$ and even spectral gap $E_1 - \lambda$ | Analytical Derivation (Stage VI) | Direct commutator polynomial bound on $M_1$ (bypassing bare odd trace singularity) and even gap $E_1 - \lambda \ge c_1 N^{-\gamma}$ |
 
 ---
 
