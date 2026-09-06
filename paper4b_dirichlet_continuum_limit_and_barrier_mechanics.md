@@ -830,6 +830,8 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8 (Transition Dipole & Mode 1 Saturation) | Commutator projection $\langle e_1, Kc \rangle$, mode 1 norm saturation & $C_N = \mathcal{O}(1)$ | `cell61.py` | `cell61.out` |
 | Section 8 & 9.1 (Operator Decomposition & Scaling) | Exact decomposition $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, spectral filtering proof, spatial profile & $u_1 \sim N^{-2.6}$ | `cell62.py` | `cell62.out` |
 | Section 9.1 (Jet Defect & Decoupling Mechanics) | Two-jet resolvent envelope, cutoff sweep & first-jet scale $u_1$ audit | `cell58.py` | `cell58.out` |
+| Roadmap Stage III (Operator Dominance Reconnaissance) | Negative Archimedean Gram matrix $\mathcal{Q}_-$, whitening breakdown & 3-mode sector concentration ($98\%$) | `cell63.py` | `cell63.out` |
+| Roadmap Stage III (Certified Schur Positivity) | Certified finite-$N$ positivity $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ via symmetric $LDL^T$ Schur decoupling at 80 dps | `cell64.py` | `cell64.out` |
 
 ---
 
