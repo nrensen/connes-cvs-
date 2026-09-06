@@ -70,23 +70,23 @@ Because the negative interval $[0, r_*]$ is compact and bounded, we have:
 $$\mathcal{Q}_{\mathrm{arch}}^{(-)}(v) = \frac{1}{\pi} \int_0^{r_*} |h_+(r)| \Phi_v(r)^2 \, dr.$$
 From Paper 4 (Theorem 2.1 & Proposition 2.2), the Fourier amplitude $\Phi_v(r)$ admits the exact boundary resolvent representation:
 $$\Phi_v(r) = \frac{2}{\sqrt{L}} \frac{\sin(rL/2)}{r} D\left(-\frac{1}{r^2}\right),$$
-where $D(z) = v_0 + \sum_{m=1}^N \frac{v_m}{1 + z a_m^2}$ is the canonical scalar boundary resolvent.
+where $D(z) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{v_m}{1 + z a_m^2}$ is the canonical scalar boundary resolvent.
 Substituting this into $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ yields the exact formula:
 
 $$\boxed{\mathcal{Q}_{\mathrm{arch}}^{(-)}(v) = \frac{4}{\pi L} \int_0^{r_*} |h_+(r)| \frac{\sin^2(rL/2)}{r^2} D\left(-\frac{1}{r^2}\right)^2 \, dr.}$$
 
-### Algebraic Simplification & Resolvent Pole Geometry
-This identity represents an enormous mathematical simplification:
+### Algebraic Simplification & Resolvent Pole-Zero Geometry
+This identity provides a structured algebraic framework:
 1. **Domain of the Inverted Spectral Variable:** Under the change of variables $z = -1/r^2$, the compact integration domain $r \in [0, r_*]$ is mapped onto the semi-infinite negative ray:
    $$z \in (-\infty, z_*], \qquad z_* = -\frac{1}{r_*^2} \approx -\frac{1}{(6.28984)^2} \approx -0.025277.$$
 2. **Poles of the Boundary Resolvent:** The rational function $D(z)$ has isolated simple poles located on the negative real axis at the inverse squared Fourier frequencies:
    $$z_m = -\frac{1}{a_m^2} = -\frac{L^2}{4\pi^2 m^2}, \qquad m = 1, 2, \dots, N.$$
-3. **Finite Pole Trapping in the Negative Domain:** For our primary benchmark $c = 13$ ($L = \log 13 \approx 2.56495$):
+3. **Intersection with the Negative Domain:** For our primary benchmark $c = 13$ ($L = \log 13 \approx 2.56495$):
    $$z_1 = -\frac{1}{a_1^2} \approx -0.16664 \in (-\infty, z_*],$$
    $$z_2 = -\frac{1}{a_2^2} \approx -0.04166 \in (-\infty, z_*],$$
    $$z_3 = -\frac{1}{a_3^2} \approx -0.01852 > z_* \quad (\text{outside the negative zone!}).$$
-   Only the first two Fourier resolvent poles $(z_1, z_2)$ fall inside the integration window of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$. All higher poles $z_m$ ($m \ge 3$) lie outside the negative integration domain.
-4. **Reduction to Finite Pole Control:** The entire negative Archimedean contribution is therefore algebraically governed by the behavior of $D(z)$ near a finite set of known, isolated resolvent poles $\{z_m\}$. The task of establishing operator dominance is converted from an opaque numerical integral into controlling this finite cluster of rational poles against the positive resolvents and prime distributions.
+   Thus, the transformed negative-frequency interval intersects only the first two resolvent pole locations $(z_1, z_2)$. All higher poles $z_m$ ($m \ge 3$) lie outside this interval.
+4. **Removable Pole-Zero Geometry vs. Singularities:** At the Fourier lattice frequencies $r = a_m$, $D(-1/r^2)$ has a pole, but simultaneously the envelope factor $\sin(rL/2) = \sin(\pi m) = 0$ vanishes. Because the full amplitude $\Phi_v(r)$ is an entire function, these apparent singularities are **completely removable**. The negative Archimedean integral is therefore **not** an integral governed by genuine singularities. Rather, for $c = 13$, the problem is a finite-dimensional **resolvent interpolation problem around two removable pole-zero pairs**. Understanding the algebraic structure of these removable pairs provides a concrete pathway toward bounding the negative Archimedean operator.
 
 ---
 
@@ -218,14 +218,19 @@ Comparing the discrete Fourier frequencies $a_m$ against the zero of $h_+(r)$ ($
 - Mode $m = 3$: $a_3 \approx 7.3488 > r_*$ ($h_+(a_3) \approx +0.421$, **outside negative region**)
 - Modes $m \ge 4$: $a_m \gg r_*$ (strictly positive, $h_+(a_m) \sim \log m$)
 
-### The 3-Mode Dangerous Subspace
-Only the **first three modes** $(v_0, v_1, v_2)$ interact directly with the negative spectral support of $h_+(r)$! For all modes $m \ge 3$, the lattice sampling energy $v_m^2 h_+(a_m) > 0$ is strictly positive.
+### The Three-Mode Sector Hypothesis
+For $c = 13$, the discrete Fourier lattice frequencies satisfy $a_0 = 0 < r_*$, $a_1 < r_*$, and $a_2 < r_*$, whereas $a_3 \approx 7.3488 > r_*$. Thus, the **Fourier lattice samples** $a_0, a_1, a_2$ lie inside the negative region of $h_+(r)$, while $a_m$ for $m \ge 3$ do not.
 
-This induces a block decomposition of the Galerkin space:
+However, the negative Archimedean form:
+$$\mathcal{Q}_{\mathrm{arch}}^{(-)}(v) = \frac{1}{\pi} \int_0^{r_*} |h_+(r)| \Phi_v(r)^2 \, dr$$
+integrates the squared amplitude continuously across the entire interval $r \in [0, r_*]$, rather than sampling strictly at discrete lattice points. Every basis amplitude $\Phi_m(r)$ has non-trivial support throughout $0 < r < r_*$. Consequently, modes $m \ge 3$ can and generally do participate in the negative operator through **off-lattice cross terms**.
+
+The proposed block decomposition:
 $$\mathbb{R}^{N+1} = \mathcal{V}_{\mathrm{low}} \oplus \mathcal{V}_{\mathrm{high}}, \qquad \mathcal{V}_{\mathrm{low}} = \operatorname{span}\{e_0, e_1, e_2\}, \quad \mathcal{V}_{\mathrm{high}} = \operatorname{span}\{e_3, \dots, e_N\},$$
-decomposing the Weil matrix into:
+is therefore a **natural structural and numerical ansatz to investigate**, rather than an established mathematical reduction to a $3 \times 3$ problem:
 $$\mathcal{Q}_{\mathrm{Weil}} = \begin{pmatrix} \mathcal{Q}_{\mathrm{low}} & \mathcal{Q}_{\mathrm{cross}} \\ \mathcal{Q}_{\mathrm{cross}}^T & \mathcal{Q}_{\mathrm{high}} \end{pmatrix}.$$
-Because $\mathcal{Q}_{\mathrm{high}}$ is dominated by positive lattice weights $h_+(a_m) > 0$, Weil positivity reduces to controlling a **$3 \times 3$ low-frequency block** and its cross-coupling via Schur complements!
+
+The lattice sampling suggests a natural three-mode low-frequency sector. The extent to which the negative Archimedean operator is effectively confined to, or dominated by, this sector is an open question to be tested directly by Cell 63a. The generalized eigenvectors of $(\mathcal{Q}_{\mathrm{positive}}, \mathcal{Q}_{\mathrm{arch}}^{(-)})$ will reveal whether the dangerous subspace actually collapses onto $\operatorname{span}\{v_0, v_1, v_2\}$ or requires broader modal participation.
 
 ---
 
@@ -291,22 +296,22 @@ Tasks:
                                      |
                                      v
 ========================================================================================
-STAGE V: 3-MODE REDUCTION AND SCHUR COMPLEMENT BOUNDS
+STAGE V: THREE-MODE SECTOR TESTING AND OPERATOR COUPLING
 Status: PLANNED
 Tasks:
-  1. Project onto the 3-mode dangerous subspace V_low = span{v_0, v_1, v_2}.
-  2. Prove positivity of the 3x3 low-frequency Schur complement.
+  1. Inspect the principal components of the extremal eigenvector x_min from Cell 63a.
+  2. Test the dominance of the 3-mode sector V_low = span{v_0, v_1, v_2} vs off-lattice coupling.
   3. Bound the high-frequency tail via the discrete lattice inequality h_+(a_m) > 0.
 ========================================================================================
                                      |
                                      v
 ========================================================================================
-STAGE VI: SEMICLASSICAL CONTINUUM LIMIT & SUBSPACES DENSITY
+STAGE VI: CONTINUUM ASYMPTOTICS & SUBSPACES DENSITY
 Status: PLANNED (Paper 4B)
 Tasks:
   1. Prove polynomial bound |D_1/D_0| <= C N^p via sector-decomposed resolvents.
   2. Establish exponential boundary-defect decoupling D(N) -> 0.
-  3. Prove strong resolvent convergence and density of union_{c, N} H_{c, N}.
+  3. Formulate formal WKB double-well potential and prove density of union_{c, N} H_{c, N}.
 ========================================================================================
                                      |
                                      v
