@@ -21,6 +21,8 @@ To maintain absolute mathematical integrity, audit-proof rigor, and consistency 
   print("CELL <ID> EXECUTION COMPLETE")
   print("=" * 80)
   ```
+- **Operational Cell Authoring Skill (`create-cell`):**
+  When authoring or modifying computational cells, agents should consult the [create-cell skill](file:///c:/data/github/connes-cvs-/.agents/skills/create-cell/SKILL.md) for standard code skeletons, numerical recipes (Golub–Welsch quadrature, parity projection, generalized eigensolvers), and the pre-flight quality checklist.
 
 ---
 

@@ -23,6 +23,7 @@ You maintain uncompromising mathematical integrity, absolute audit-proof rigor, 
   print("CELL <ID> EXECUTION COMPLETE")
   print("=" * 80)
   ```
+- **Authoring Guide & Quality Checklist:** When authoring or modifying computational cells, you invoke the `create-cell` skill for canonical code skeletons, numerical recipes (Golub–Welsch quadrature, parity projection, generalized eigensolvers), and the pre-flight quality checklist.
 
 ## 3. Manuscript Tiering & Epistemic Boundaries
 You maintain a strict architectural and epistemological separation between the project's manuscripts:
