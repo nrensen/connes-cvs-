@@ -251,7 +251,7 @@ Before attempting formal proofs, we execute a targeted computational reconnaissa
 4. **Generalized Spectral Decomposition:**
    Solve the generalized eigenvalue problem:
    $$\mathcal{Q}_{\mathrm{positive}} x = \lambda \mathcal{Q}_{\mathrm{arch}}^{(-)} x.$$
-   - **Numerical Dominance Test:** If the computed generalized spectrum satisfies $\lambda_{\min} > 1$ with a margin substantially larger than numerical error, this provides strong finite-$N$ numerical evidence for $\mathcal{Q}_{\mathrm{Weil}} \succeq 0$. A rigorous certificate would require certified eigenvalue / interval error bounds (planned as a subsequent Cell 63b).
+   - **Numerical Dominance Test:** If the computed generalized spectrum satisfies $\lambda_{\min} > 1$ with a margin substantially larger than numerical error, this provides strong finite-$N$ numerical evidence for $\mathcal{Q}_{\mathrm{Weil}} \succeq 0$. A rigorous certificate would require certified eigenvalue / interval error bounds (planned as a subsequent Cell 64).
    - **Dangerous State Identification:** The generalized eigenvector $x_{\min}$ corresponding to $\lambda_{\min}$ defines the exact profile of the "most dangerous test vector" challenging Weil positivity.
 5. **Three Core Diagnostic Suites:**
    - **Diagnostic 1 (Spectrum & Effective Rank of $\mathcal{Q}_-$):** Tabulate the full spectrum of $\mathcal{Q}_{\mathrm{arch}}^{(-)}$ to determine its conditioning and effective dimensional rank across $N \in \{4, 8, 12, 16, 20, 24\}$.
@@ -316,7 +316,7 @@ Results:
      identified as ill-posed for N >= 12.
   2. Three-Mode Sector Hypothesis confirmed empirically (98% modal energy in {e0, e1, e2}).
   3. High-mode Schur complement positivity C > 0 and S_low > 0 verified numerically.
-Next Target: Cell 63b (Certified Positivity via Schur Complement Block Decoupling)
+Next Target: Cell 64 (Certified Positivity via Schur Complement Block Decoupling)
 ========================================================================================
                                      |
                                      v
@@ -369,7 +369,7 @@ Tasks:
 | **M1** | Implement the finite-band negative operator and generalized eigenvalue suite | `cell63.py` | **COMPLETED** (`cell63.out`: Gram conditioning & modal localization) |
 | **M2** | Audit the generalized spectrum conditioning across $N \in \{4, 8, 12, 16, 20, 24\}$ | Analytical Review | **COMPLETED** (Diagnosed whitening breakdown at $N \ge 12$; residual loss) |
 | **M3** | Analyze coordinates and modal energy of the dangerous vector $x_{\min}$ | Diagnostic Report | **COMPLETED** (Confirmed $98\%$ energy in $\{e_0, e_1, e_2\}$ across all $N$) |
-| **M4** | Formulate certified positivity suite via Schur complement block decoupling | `cell63b.py` | High-mode certification $C \succ 0$ and $S_{\mathrm{low}} \succ 0$ |
+| **M4** | Formulate certified positivity suite via Schur complement block decoupling | `cell64.py` | High-mode certification $C \succ 0$ and $S_{\mathrm{low}} \succ 0$ |
 | **M5** | Algebraically pair $J(q_n)$ with the pole and prime representations | Paper 4B Section Update | Exact positive block formulation (Stage IV) |
 
 ---
