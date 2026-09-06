@@ -1,0 +1,158 @@
+================================================================================
+CELL 65 — THREE-MODE EFFECTIVE HAMILTONIAN & SELF-ENERGY RENORMALIZATION
+================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 80
+Low-Mode Partition: m_cut = 3 (modes {e_0, e_1, e_2} vs high modes {e_3, ..., e_N})
+
+--------------------------------------------------------------------------------
+DIAGNOSTIC 1: Fixed N-Independent Bare 3x3 Block A
+--------------------------------------------------------------------------------
+Bare 3x3 Matrix A entries (30 decimal digits):
+  [ 0.0421326113869818651010336175781, 0.0601324688772115524800131978691, 0.061929189734590011525832389782 ]
+  [ 0.0601324688772115524800131978691, 0.0858316285321659039291102566581, 0.0884280823642015929442529492844 ]
+  [ 0.061929189734590011525832389782, 0.0884280823642015929442529492844, 0.0912109467225015224315724193218 ]
+
+Bare Eigenvalues alpha_k(A):
+  alpha_0 = 2.770710434405927082863828e-9
+  alpha_1 = 0.00007935069655947644223978479
+  alpha_2 = 0.2190958331743793806135494
+Bare Condition Number kappa(A) = 79075687.7564
+Bare LDL^T Pivots [D_0, D_1, D_2] = ['0.042132611386981865101', '9.418746563554788086e-6', '1.2138485754767579041e-7']
+Bare LDL^T Relative Residual   = 8.182624867e-82
+
+--------------------------------------------------------------------------------
+DIAGNOSTIC 2 & 3: High-Mode Self-Energy Sigma_low(N) & Loewner Monotonicity
+--------------------------------------------------------------------------------
+
+>>> Dimension N = 4 (Full Matrix: 5x5, High Block C: 2x2):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 8.827406198365735349650571e-15
+  Smallest eigenvalue Schur S_low  lambda_0 = 8.863357985268573751012023e-15
+  Relative tracking error (S vs Q)          = 0.407275 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421215144631300754,    0.0601188051216614162,    0.0619213425652104166 ]
+  [    0.0601188051216614162,    0.0858148039454499596,    0.0884184194435569303 ]
+  [    0.0619213425652104166,    0.0884184194435569303,    0.0912053961566199999 ]
+  Self-Energy Eigenvalues sigma_k: ['2.23752892379588505e-82', '0.0000766521936449702322', '0.219065062371555065']
+  Self-Energy Norms: ||Sigma||_F = 0.219065075782, ||Sigma||_inf = 0.241545158165
+  Eigenvalues of S_low = A - Sigma: ['8.863357985268573751012023e-15', '9.866082942274546454071654e-10', '0.00003347108983209888643357344']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77070157104794e-9', '7.93497099511822e-5', '0.219062362084547']
+
+>>> Dimension N = 8 (Full Matrix: 9x9, High Block C: 6x6):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 6.710935250125962103470959e-23
+  Smallest eigenvalue Schur S_low  lambda_0 = 6.858296945683188144620716e-23
+  Relative tracking error (S vs Q)          = 2.19584 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421326113853183207,    0.0601324688753261609,    0.0619291897337617787 ]
+  [    0.0601324688753261609,    0.0858316285300290738,    0.0884280823632628972 ]
+  [    0.0619291897337617787,    0.0884280823632628972,     0.091210946722089148 ]
+  Self-Energy Eigenvalues sigma_k: ['2.77070641160090271e-9', '0.0000793506959400708658', '0.21909583317079006']
+  Self-Energy Norms: ||Sigma||_F = 0.21909584754, ||Sigma||_inf = 0.241568218819
+  Loewner Increment min eig(Delta Sigma) = 8.80293606996224e-15 (Monotonic >= 0: True)
+  Self-Energy Increment ||Sigma(N) - Sigma(N-4)||_inf = 4.01512579498e-5
+  Eigenvalues of S_low = A - Sigma: ['6.858296945683188144620716e-23', '1.626830838970611011076785e-17', '4.212732713650006473149442e-12']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77071043440586e-9', '7.93506965594602e-5', '0.219095833170167']
+
+>>> Dimension N = 12 (Full Matrix: 13x13, High Block C: 10x10):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 1.782476576272269447043514e-29
+  Smallest eigenvalue Schur S_low  lambda_0 = 1.845736652983020787006718e-29
+  Relative tracking error (S vs Q)          = 3.549 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421326113869818603,    0.0601324688772115472,    0.0619291897345900094 ]
+  [    0.0601324688772115472,    0.0858316285321658981,    0.0884280823642015906 ]
+  [    0.0619291897345900094,    0.0884280823642015906,    0.0912109467225015215 ]
+  Self-Energy Eigenvalues sigma_k: ['2.77071043438815376e-9', '0.0000793506965594745094', '0.219095833174379371']
+  Self-Energy Norms: ||Sigma||_F = 0.219095847544, ||Sigma||_inf = 0.241568218821
+  Loewner Increment min eig(Delta Sigma) = 6.67721468300642e-23 (Monotonic >= 0: True)
+  Self-Energy Increment ||Sigma(N) - Sigma(N-4)||_inf = 4.96090396051e-12
+  Eigenvalues of S_low = A - Sigma: ['1.845736652983020787006718e-29', '9.277846866065590559716332e-24', '1.156822524659076050297304e-17']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77071043440593e-9', '7.93506965594764e-5', '0.219095833174379']
+
+>>> Dimension N = 16 (Full Matrix: 17x17, High Block C: 14x14):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 7.118430150813116688753164e-35
+  Smallest eigenvalue Schur S_low  lambda_0 = 7.430944812855824377676278e-35
+  Relative tracking error (S vs Q)          = 4.39022 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421326113869818651,    0.0601324688772115525,    0.0619291897345900115 ]
+  [    0.0601324688772115525,    0.0858316285321659039,    0.0884280823642015929 ]
+  [    0.0619291897345900115,    0.0884280823642015929,    0.0912109467225015224 ]
+  Self-Energy Eigenvalues sigma_k: ['2.77071043440592676e-9', '0.0000793506965594764422', '0.219095833174379381']
+  Self-Energy Norms: ||Sigma||_F = 0.219095847544, ||Sigma||_inf = 0.241568218821
+  Loewner Increment min eig(Delta Sigma) = 1.73248498804644e-29 (Monotonic >= 0: True)
+  Self-Energy Increment ||Sigma(N) - Sigma(N-4)||_inf = 1.34721087657e-17
+  Eigenvalues of S_low = A - Sigma: ['7.430944812855824377676278e-35', '9.290915246368458031186474e-29', '1.738101981737275345539147e-22']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77071043440593e-9', '7.93506965594764e-5', '0.219095833174379']
+
+>>> Dimension N = 20 (Full Matrix: 21x21, High Block C: 18x18):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 1.323235908109911798715256e-39
+  Smallest eigenvalue Schur S_low  lambda_0 = 1.388586331205172944916992e-39
+  Relative tracking error (S vs Q)          = 4.93868 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421326113869818651,    0.0601324688772115525,    0.0619291897345900115 ]
+  [    0.0601324688772115525,    0.0858316285321659039,    0.0884280823642015929 ]
+  [    0.0619291897345900115,    0.0884280823642015929,    0.0912109467225015224 ]
+  Self-Energy Eigenvalues sigma_k: ['2.77071043440592708e-9', '0.0000793506965594764422', '0.219095833174379381']
+  Self-Energy Norms: ||Sigma||_F = 0.219095847544, ||Sigma||_inf = 0.241568218821
+  Loewner Increment min eig(Delta Sigma) = 6.5491979292708e-35 (Monotonic >= 0: True)
+  Self-Energy Increment ||Sigma(N) - Sigma(N-4)||_inf = 2.01269888767e-22
+  Eigenvalues of S_low = A - Sigma: ['1.388586331205172944916992e-39', '3.529916944844982306951587e-33', '1.479195530295319300509437e-26']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77071043440593e-9', '7.93506965594764e-5', '0.219095833174379']
+
+>>> Dimension N = 24 (Full Matrix: 25x25, High Block C: 22x22):
+  Smallest eigenvalue full Q_Weil  lambda_0 = 2.53348484007809227351107e-43
+  Smallest eigenvalue Schur S_low  lambda_0 = 2.666882521345003225990356e-43
+  Relative tracking error (S vs Q)          = 5.26538 %
+
+  Self-Energy Sigma_low(N) Entries:
+  [    0.0421326113869818651,    0.0601324688772115525,    0.0619291897345900115 ]
+  [    0.0601324688772115525,    0.0858316285321659039,    0.0884280823642015929 ]
+  [    0.0619291897345900115,    0.0884280823642015929,    0.0912109467225015224 ]
+  Self-Energy Eigenvalues sigma_k: ['2.77071043440592708e-9', '0.0000793506965594764422', '0.219095833174379381']
+  Self-Energy Norms: ||Sigma||_F = 0.219095847544, ||Sigma||_inf = 0.241568218821
+  Loewner Increment min eig(Delta Sigma) = 8.84728671869993e-40 (Monotonic >= 0: True)
+  Self-Energy Increment ||Sigma(N) - Sigma(N-4)||_inf = 1.70622176768e-26
+  Eigenvalues of S_low = A - Sigma: ['2.666882521345003225990356e-43', '1.275330304525861857232714e-36', '1.125893726454743718642947e-29']
+  Eigenvalue Shifts delta_k(N) = alpha_k - lambda_k: ['2.77071043440593e-9', '7.93506965594764e-5', '0.219095833174379']
+
+--------------------------------------------------------------------------------
+DIAGNOSTIC 4: High-Mode Resolvent Breakdown of Sigma_low at N = 24
+--------------------------------------------------------------------------------
+Modal contributions to Sigma_low(24) from individual high modes m in {3, ..., 24}:
+  Mode m |        ||s_m||_F |      ||s_m||_inf |    Cumul ||Sigma_m||_F |   % of Total ||Sigma||_F
+-----------------------------------------------------------------------------------------------
+       3 |      1.005946306 |      1.156412133 |        1.0059463058811 |               459.13527 %
+       4 |      1.518730864 |      1.771298376 |       0.52018574536816 |               237.42383 %
+       5 |     0.9256111476 |      1.080705238 |       0.41347752870396 |               188.71993 %
+       6 |     0.1017133335 |     0.1172205274 |       0.31267302217281 |               142.71061 %
+       7 |     0.1714413669 |     0.2012449203 |       0.15031109908088 |               68.605179 %
+       8 |    0.08298082219 |    0.09717660406 |        0.2273993402159 |               103.78989 %
+      10 |   0.002403969135 |   0.002817564038 |       0.21957134689721 |               100.21703 %
+      12 |  0.0004453207762 |  0.0005219132792 |       0.21907948146321 |                99.99253 %
+      16 |   1.803948607e-7 |   2.121333171e-7 |       0.21909580726463 |               99.999982 %
+      20 |  8.391500278e-11 |  9.858009841e-11 |       0.21909584754266 |                   100.0 %
+      24 |  4.771107169e-14 |  5.594670514e-14 |       0.21909584754374 |                   100.0 %
+
+Sector Distribution of Self-Energy Coupling Norm:
+  Bound/Well Modes (m = 3, 4, 5)    : sum ||s_m||_F = 3.4502883174
+  Intermediate Barrier (m = 6 ... 11): sum ||s_m||_F = 0.365288112078
+  Scattering Continuum (m >= 12)     : sum ||s_m||_F = 0.000483644988509
+  Ratio Barrier/Bound               = 0.10587176
+  Ratio Scattering/Bound            = 0.00014017524
+
+================================================================================
+SYNTHESIS TABLE: EFFECTIVE HAMILTONIAN RENORMALIZATION ACROSS DIMENSIONS
+================================================================================
+   N |            lambda_0(Q) |      lambda_min(S_low) | Track Shift % |   max eig(Sigma) | Loewner >= 0? | ||Delta Sigma||_inf | Time (s)
+------------------------------------------------------------------------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/src/rh/connes-cvs-/cell65.py", line 441, in <module>
+    main()
+    ~~~~^^
+  File "/data/src/rh/connes-cvs-/cell65.py", line 419, in main
+    shift_pct = f"{rec['rel_diff_pct']:.2f}%"
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to mpf.__format__
