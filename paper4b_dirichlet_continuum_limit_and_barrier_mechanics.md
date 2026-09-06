@@ -882,12 +882,14 @@ These computations demonstrate:
 
 ---
 
-### 8.12 Proposition 8.12 (Exact Coordinate-Resolvent Parseval Identity, Solitary Norm Bound $\|Kc\|^2 \le B_\infty$, and Dipole Origin of Relative Gap Suppression)
+### 8.12 Proposition 8.12 (Exact Coordinate-Resolvent Parseval Identity, Residual Projection Decomposition, and Reduction of Relative Gap Suppression)
 
 The computational data of Cell 67 raises the fundamental analytical question:
 $$\boxed{\textbf{Why is the relative tunneling ratio } R_{\mathrm{gap}}^{\max}(N) = \frac{D_0^2}{\mu_1 - \lambda} \textbf{ so small } (\le 4.39 \times 10^{-7}) \textbf{ across discrete dimensions?}}$$
 
-The following proposition answers this question completely in terms of exact operator identities and the solitary-wave structure of the Galerkin ground state. It proves that the total scaled second moment $D_0^2 M_2$ is identically the squared coordinate norm $\|Kc\|^2$ of the ground state, which is bounded by a finite constant $B_\infty(c) < \infty$ rather than growing like $N^2$. Furthermore, the excited second moment $D_0^2 M_{2,\mathrm{exc}}$ is identically the residual coordinate energy orthogonal to the lowest odd eigenmode $u_0$, explaining the extreme smallness of $R_{\mathrm{gap}}^{\max}(N)$ as the consequence of **$99.9999\%$ nodal collinearity between $Kc$ and $u_0$**.
+The following proposition reduces this question to the coordinate-wavepacket residual and the first-mode transmission factor. It proves that the total scaled second moment $D_0^2 M_2$ is identically the squared coordinate norm $\|Kc\|^2$ of the ground state. Unconditionally, $\|Kc\|^2 \le N^2$, and conditionally upon a uniform solitary-wave estimate, it is bounded by a finite constant $B_\infty(c) < \infty$. Furthermore, the excited second moment $D_0^2 M_{2,\mathrm{exc}}$ is identically the squared projection residual of $Kc$ orthogonal to the lowest odd eigenmode $u_0$:
+$$D_0^2 M_{2,\mathrm{exc}} = \|P_{\perp u_0} Kc\|^2.$$
+This provides a structural explanation for the observed suppression of $R_{\mathrm{gap}}^{\max}(N)$, connecting it to the observed $99.99987\%$ directional alignment between $Kc$ and $u_0$ at $N = 24$.
 
 **Proposition 8.12 (Exact Coordinate Parseval Identity and Dipole Representation of the Relative Gap):**
 *Let $N \ge 2$, $c > 1$, and let $c = (c_{-N}, \dots, c_N)^T$ be the normalized ground-state eigenvector with $Q c = \lambda c$, $D_0 = \langle c, d \rangle$. Let $K = \operatorname{diag}(-N, \dots, N)$ be the coordinate position operator, and let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenvectors of $Q_{\mathrm{odd}}$ with eigenvalues $\mu_0 \le \mu_1 \le \dots \le \mu_{N-1}$.*
@@ -895,15 +897,15 @@ The following proposition answers this question completely in terms of exact ope
 *Then:*
 1. *(Exact Coordinate Parseval Identity): For all $N \ge 1$, the scaled total second resolvent moment satisfies the exact identity:*
    $$D_0^2 M_2 \equiv \sum_{j=0}^{N-1} \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} = \|Kc\|^2 = \sum_{m=1}^N m^2 v_m^2, \tag{8.12.1}$$
-   *where $v = (v_0, \dots, v_N)^T$ is the ground-state vector in the canonical basis ($v_m = \sqrt{2} c_m$ for $m \ge 1$).*
-2. *(Solitary Moment Bound): Because the solitary wave coefficients decay exponentially $|v_m| \le C_{\mathrm{sol}} q^m$ with $q < 1$, the coordinate norm is uniformly bounded by a finite constant independent of $N$:*
-   $$D_0^2 M_2 = \|Kc\|^2 \le \sum_{m=1}^\infty m^2 v_m^2 = B_\infty(c) < \infty. \tag{8.12.2}$$
-   *Consequently, the macroscopic bound $D_0^2 M_2 \le N^2$ used in Proposition 8.10 is unconditionally sharpened to $\mathcal{O}(1)$.*
+   *where $v = (v_0, \dots, v_N)^T$ is the ground-state vector in the canonical basis ($v_m = \sqrt{2} c_m$ for $m \ge 1$). Unconditionally, $\|Kc\|^2 \le \|K\|^2 \|c\|^2 \le N^2$.*
+2. *(Conditional Uniform Solitary Moment Bound): If the solitary wave coefficients satisfy a uniform-in-$N$ exponential bound $|v_{N, m}| \le C_{\mathrm{sol}} q^m$ with $q < 1$, then the coordinate norm is uniformly bounded by a finite constant independent of $N$:*
+   $$D_0^2 M_2 = \|Kc\|^2 \le \sum_{m=1}^\infty m^2 v_m^2 \le \frac{C_{\mathrm{sol}}^2 q^2 (1 + q^2)}{(1 - q^2)^3} \equiv B_\infty(c) < \infty. \tag{8.12.2}$$
+   *Under this uniform decay hypothesis, the macroscopic bound $D_0^2 M_2 \le N^2$ used in Proposition 8.10 is sharpened to $\mathcal{O}(1)$.*
 3. *(Exact Dipole Decomposition): Each term in the second moment is the squared coordinate transition dipole moment:*
    $$b_{0j} \equiv \langle c, K u_j \rangle = - \frac{D_0 a_j}{\mu_j - \lambda} \implies b_{0j}^2 = \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2} \qquad \forall j \in \{0, \dots, N-1\}, \tag{8.12.3}$$
    *so that the excited second moment is identically the squared distance of $Kc$ from the span of $u_0$:*
    $$D_0^2 M_{2,\mathrm{exc}} = \sum_{j=1}^{N-1} b_{0j}^2 = \|Kc\|^2 - |\langle Kc, u_0 \rangle|^2 = \|P_{\perp u_0} Kc\|^2 = \|Kc\|^2 \sin^2 \theta(Kc, u_0). \tag{8.12.4}$$
-4. *(Exact Dipole Representation of the Relative Gap): The first excited relative tunneling ratio evaluates identically to:*
+4. *(Exact Reduction of the Relative Gap): The first excited relative tunneling ratio evaluates identically to:*
    $$\frac{D_0^2}{\mu_1 - \lambda} = \frac{b_{01}^2}{\frac{a_1^2}{\mu_1 - \lambda}} = \frac{|\langle Kc, u_1 \rangle|^2}{\frac{a_1^2}{\mu_1 - \lambda}} \le \frac{\|P_{\perp u_0} Kc\|^2}{\frac{a_1^2}{\mu_1 - \lambda}}. \tag{8.12.5}$$
 
 *Proof.*
@@ -920,8 +922,8 @@ Because $c$ is an even vector ($c_{-m} = c_m$) and $K$ is odd ($K_{mn} = m \delt
 $$(Kc)_{-m} = -m c_{-m} = -m c_m = - (Kc)_m,$$
 which is strictly an odd vector. Thus $P_{\mathrm{odd}} K c = K c$ identically, and by Parseval's identity:
 $$\|P_{\mathrm{odd}} K c\|^2 = \|Kc\|^2 = \sum_{m=-N}^N m^2 c_m^2 = 2 \sum_{m=1}^N m^2 c_m^2 = \sum_{m=1}^N m^2 v_m^2,$$
-proving (8.12.1).
-Because $v_m$ satisfies exponential solitary wave decay $|v_m| \le C_{\mathrm{sol}} q^m$ with $q < 1$, the series $\sum_{m=1}^\infty m^2 v_m^2$ converges to a finite constant $B_\infty(c) < \infty$, proving (8.12.2).
+proving (8.12.1). Unconditionally, $\|Kc\|^2 \le \|K\|^2 \|c\|^2 \le N^2$.
+Conditionally, if $|v_{N, m}| \le C_{\mathrm{sol}} q^m$ uniformly in $N$ with $q < 1$, the geometric series evaluates to $\sum_{m=1}^\infty m^2 q^{2m} = \frac{q^2(1+q^2)}{(1-q^2)^3}$, bounding $\|Kc\|^2 \le B_\infty(c) < \infty$ and proving (8.12.2).
 Isolating $j = 0$ gives $b_{00} = \langle Kc, u_0 \rangle$, and subtracting $b_{00}^2$ from $\|Kc\|^2$ yields (8.12.4).
 Finally, for $j = 1$, dividing $b_{01}^2 = \frac{D_0^2 a_1^2}{(\mu_1 - \lambda)^2}$ by the transmission factor $\frac{a_1^2}{\mu_1 - \lambda} > 0$ yields:
 $$\frac{b_{01}^2}{\frac{a_1^2}{\mu_1 - \lambda}} = \frac{\frac{D_0^2 a_1^2}{(\mu_1 - \lambda)^2}}{\frac{a_1^2}{\mu_1 - \lambda}} = \frac{D_0^2}{\mu_1 - \lambda},$$
@@ -929,27 +931,41 @@ from which (8.12.5) follows immediately since $b_{01}^2 \le \sum_{j=1}^{N-1} b_{
 
 ---
 
-#### Physical Origin of Relative Gap Suppression: Nodal Alignment and Phase Cancellation
-Proposition 8.12 reveals the exact physical mechanism responsible for the extreme smallness of $R_{\mathrm{gap}}^{\max}(N)$:
+#### Structural Interpretation: Coordinate Derivative Wavepacket and Observed Alignment
+Proposition 8.12 reveals the structural mechanism underlying the observed smallness of $R_{\mathrm{gap}}^{\max}(N)$:
 
-1. **Finite Coordinate Energy:** The total second-moment scale $D_0^2 M_2 = \|Kc\|^2$ is not an unbounded polynomial in $N$; it is the finite coordinate variance of a solitary wave, converging to $B_\infty(13) \approx 1.7251$.
-2. **Nodal Collinearity with the Ground Odd Mode:** In continuous physical space, the ground state $c(t)$ is a nodeless, symmetric solitary wave centered on $[0, L]$. Multiplying by $K$ produces $(Kc)(t) \sim t c(t)$, which is an antisymmetric wavepacket with **exactly one zero crossing** at $t = 0$ (and nodeless on $(0, L)$). By Sturm–Liouville / Courant nodal domain theory, the lowest odd eigenstate $u_0(t)$ of $Q_{\mathrm{odd}}$ also has **exactly one zero crossing** at $t = 0$. Because $Kc$ and $u_0$ share the identical nodal domain topology, their directional alignment is almost complete:
+1. **The Physical Coordinate Derivative Wavepacket:** In Fourier series representation, multiplying Fourier coefficients $c_m$ by the index $m$ corresponds in continuous physical space to differentiation with respect to the spatial coordinate:
+   $$c_m \mapsto m c_m \quad \longleftrightarrow \quad \frac{L}{2\pi i} \partial_t c(t).$$
+   Thus, the vector $Kc$ represents the coordinate derivative of the centered, even solitary wave profile $c(t)$. For a symmetric solitary wave peaked at the origin, its spatial derivative $\partial_t c(t)$ is an antisymmetric, odd profile that is single-lobed (nodeless) on $(0, L)$.
+2. **Observed Alignment with the Lowest Odd Mode:** In the discrete Galerkin odd sector, the ground odd eigenstate $u_0$ is numerically observed to be an odd vector with a single sign change across the origin and no internal sign alternations on positive indices. Because $Kc$ and $u_0$ share this single-lobed odd structure, their directional alignment at $N = 24$ is observed to be:
    $$\cos^2 \theta(Kc, u_0) = \frac{|\langle Kc, u_0 \rangle|^2}{\|Kc\|^2} = \frac{1.72506931}{1.72507156} = 0.9999987 \quad \text{at } N = 24.$$
-3. **Phase Cancellation on Excited Modes:** The first excited odd eigenstate $u_1(t)$ possesses **two additional internal nodes** on $(0, L)$. Because $Kc$ is virtually nodeless on $(0, L)$, the transition dipole $b_{01} = \langle Kc, u_1 \rangle$ is an inner product between a nodeless wavepacket and an oscillatory wavepacket, which is exponentially quenched by destructive phase interference across the barrier:
+   Thus, $99.99987\%$ of the coordinate energy of $Kc$ lies along the single direction $u_0$.
+3. **Suppression on Excited Modes via Destructive Phase Interference:** Higher odd eigenvectors $u_j$ ($j \ge 1$) exhibit oscillatory sign structures across index space. Because $Kc$ is a single-lobed derivative profile, the transition dipole matrix element $b_{01} = \langle Kc, u_1 \rangle$ is an inner product between a single-lobed wavepacket and an oscillatory mode, resulting in destructive phase cancellation across the barrier:
    $$b_{01}^2 = |\langle Kc, u_1 \rangle|^2 \le \|P_{\perp u_0} Kc\|^2 = 2.25 \times 10^{-6} \quad \text{at } N = 24.$$
-4. **Separation of the Macroscopic Transmission Factor:** By mode-by-mode transmission cancellation (Cell 66 & Cell 67), the denominator $\frac{a_1^2}{\mu_1 - \lambda} \approx 5.12909 = \Theta(1)$ remains macroscopic. Therefore:
+   This provides empirical evidence for rapid destructive cancellation across the excited odd sector.
+4. **Reduction to the First-Mode Transmission Factor:** By mode-by-mode transmission cancellation (Cell 66 & Cell 67), the denominator $\frac{a_1^2}{\mu_1 - \lambda} \approx 5.12909 = \Theta(1)$ remains macroscopic at $N = 24$. Therefore:
    $$\frac{D_0^2}{\mu_1 - \lambda} = \frac{b_{01}^2}{\frac{a_1^2}{\mu_1 - \lambda}} \approx \frac{2.2526 \times 10^{-6}}{5.1291} \approx 4.3918 \times 10^{-7},$$
-   which precisely matches the computed value $4.3917754 \times 10^{-7}$ to within $0.0001\%$.
+   which precisely matches the computed value $4.3917754 \times 10^{-7}$ from `cell67.out`.
 
 ---
 
-#### The Two Analytical Pathways toward Proving $\mathrm{H2}_{\mathrm{gap}}$
-Identity (8.12.5) establishes two distinct analytical routes to mathematically prove the second-moment bound:
-- **Route A (Uniform Relative-Gap Theorem):** Prove that the residual coordinate energy satisfies $\|P_{\perp u_0} Kc\|^2 \le C N^{q_0}$. Since $\frac{a_1^2}{\mu_1 - \lambda} \ge c_{\mathrm{trans}} > 0$, this directly proves:
-  $$\frac{D_0^2}{\mu_1 - \lambda} \le \frac{C}{c_{\mathrm{trans}}} N^{q_0} \implies \mathrm{H2}_{\mathrm{gap}}.$$
-- **Route B (Weighted Relative-Gap Theorem):** From (8.11.2) and (8.12.4), the overlap-weighted average evaluates directly to:
+#### Analytical Pathways: The Primary Target (Route B) and Uniform Gap Target (Route A)
+Identity (8.12.5) establishes two distinct analytical routes toward rigorous second-moment control:
+
+- **Route B (Primary Target — Weighted Relative-Gap Theorem):**
+  From (8.11.2) and (8.12.4), the overlap-weighted average evaluates directly to:
   $$\rho_2^{\mathrm{exc}} = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}} = \frac{\|P_{\perp u_0} Kc\|^2}{M_1^{\mathrm{exc}}}.$$
-  Because $M_1^{\mathrm{exc}} \ge c_1 > 0$ grows with $N$ ($M_1^{\mathrm{exc}} \approx 93.65$ at $N = 24$), $\rho_2^{\mathrm{exc}} = \frac{2.25 \times 10^{-6}}{93.65} \approx 2.41 \times 10^{-8}$ is **an additional two orders of magnitude smaller** than $R_{\mathrm{gap}}^{\max}$. Bounding $\rho_2^{\mathrm{exc}}$ directly requires only controlling the ratio of the residual coordinate energy to the excited resolvent norm, providing a structurally smoother target than the uniform gap infimum.
+  This expresses second-moment control as the ratio of the coordinate-derivative projection residual to the accumulated excited resolvent mass:
+  $$\boxed{\rho_2^{\mathrm{exc}} = \frac{\text{coordinate residual}}{\text{excited resolvent mass}}}.$$
+  Cell 67 demonstrates an extraordinarily clean separation of scales: at $N = 24$, $\|P_{\perp u_0} Kc\|^2 \approx 2.25 \times 10^{-6}$ while $M_1^{\mathrm{exc}} \approx 93.65$, giving $\rho_2^{\mathrm{exc}} \approx 2.41 \times 10^{-8}$.
+  Route B is the preferred analytical target because it avoids demanding a uniform positive lower bound on the smallest individual excited spectral gap $\mu_1 - \lambda$, transforming the problem into bounding the projection residual $\|P_{\perp u_0} Kc\|^2$ relative to the total resolvent mass.
+
+- **Route A (Uniform Relative-Gap Theorem):**
+  By (8.12.5), $\frac{D_0^2}{\mu_1 - \lambda} \le \frac{\|P_{\perp u_0} Kc\|^2}{\frac{a_1^2}{\mu_1 - \lambda}}$.
+  If the first-mode transmission factor admits a uniform positive lower bound:
+  $$\frac{a_1^2}{\mu_1 - \lambda} \ge c_{\mathrm{trans}} > 0$$
+  (supported numerically by Cell 66 and Cell 67, where $\frac{a_1^2}{\mu_1 - \lambda} \approx 5.13$ at $N = 24$, but remaining an independent analytical bridge to prove), then proving that the residual coordinate energy satisfies $\|P_{\perp u_0} Kc\|^2 \le C N^{q_0}$ directly yields:
+  $$\frac{D_0^2}{\mu_1 - \lambda} \le \frac{C}{c_{\mathrm{trans}}} N^{q_0} \implies \mathrm{H2}_{\mathrm{gap}}.$$
 
 ---
 
