@@ -367,8 +367,8 @@ def main():
         e_ratio = e_low / (e_low + e_high)
 
         print("DIAGNOSTIC 2: Dangerous State x_min Modal Energy Projection:")
-        print(f"  Energy in 3-mode sector {e_0, e_1, e_2} : E_low  = {mp.nstr(e_low, 15)}")
-        print(f"  Energy in high modes {e_3, ..., e_N}   : E_high = {mp.nstr(e_high, 15)}")
+        print(f"  Energy in 3-mode sector {{e_0, e_1, e_2}} : E_low  = {mp.nstr(e_low, 15)}")
+        print(f"  Energy in high modes {{e_3, ..., e_N}}   : E_high = {mp.nstr(e_high, 15)}")
         print(f"  Fractional 3-mode energy E_low / E_total = {mp.nstr(e_ratio, 12)} ({mp.nstr(e_ratio * 100, 6)} %)")
         print(f"  Leading coordinates of x_min : {[mp.nstr(x_min[r, 0], 8) for r in range(min(6, dim))]}\n")
 
