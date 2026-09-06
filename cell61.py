@@ -325,7 +325,9 @@ def main():
 
     print("-" * len(header1))
     print("Finding Part 1:")
-    print("1. Exact Identity Verified: |<e_1, Kc> + (D_0 a_1)/Delta_1| < 10^-50 across all dimensions!")
+    print("1. Exact Identity Verified: The exact identity is verified numerically to the precision")
+    print("   permitted by the conditioning of each finite matrix; the residual grows at the largest N")
+    print("   as expected from the exponentially small spectral gaps.")
     print("2. The Single Tunnelling Scale: Both D_0 and sqrt(Delta_1) collapse by 10 decimal orders")
     print("   (8.05e-11 -> 1.14e-20), while their ratio R_D = D_0 / sqrt(Delta_1) remains strictly")
     print("   bounded in [0.41, 0.64] across the entire range.")

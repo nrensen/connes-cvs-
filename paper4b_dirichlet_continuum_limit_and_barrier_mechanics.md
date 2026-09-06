@@ -20,7 +20,7 @@ This manuscript sets forth the analytical and empirical research programme inves
 3. **Semiclassical WKB Barrier Tunneling Mechanics:** Inverting the ground-state profile defines an effective Schrödinger potential $V_{\mathrm{conf}}(t) - E = T''(t)/T(t)$ whose midpoint well rises steeply toward the boundaries. Semiclassical WKB tunneling action across the barrier $\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ reproduces the observed logarithmic boundary suppression to within $5.3\%$ across 47 orders of magnitude, obeying the universal semiclassical scaling law $\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c$.
 4. **Legendre Multipole Decomposition and Asymptotic Tail Extinction:** Via Bauer's spherical Bessel expansion, $T_{v_N}(t)$ decomposes into Legendre multipoles with alternating signs, producing strictly constructive interference at the midpoint and destructive cancellation at the boundaries. The high-frequency Taylor coefficients $A_k(N)$ extinguish rapidly across all orders ($A_0 \sim 10^{-40}, A_1 \sim 10^{-34}, A_2 \sim 10^{-29}$ at $N = 24$), motivating the conjecture that the continuum resolvent $R_\infty(r) = o(r^{-k})$ decays faster than every inverse power of $r$.
 5. **Tri-Partite Zero-Energy Equilibrium and Finite-$T$ Archimedean Leakage:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates the exact finite-$T$ Archimedean cutoff leakage $\delta_T^{\mathrm{tail}} = \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v) - \lambda_{\min}(24) = 1.668 \times 10^{-43}$, certified free of numerical truncation error and proven in Theorem 5.5 of Paper 4 to be 100% continuous tail leakage from the finite integration cutoff $T = 400$.
-6. **Formal Continuum Wiener–Hopf Scaling, Interlaced Tunneling Ladders, and Operator Resolution of the First Jet:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Below the double-well barrier top, the even and odd spectra form an interlaced ladder of bound tunneling doublets ($E_0 < \mu_1 < E_1 < \dots < \mu_{N/2} < E_{N/2}$). The first coordinate transition dipole moment $\langle e_1, Kc \rangle = -D_0 a_1 / \Delta_1 \approx 1.3134 = \mathcal{O}(1)$ carries $99.9999\%$ of the coordinate norm $\|Kc\|^2$, algebraically explaining the square-root overlap law $|a_1| \approx 2.4\sqrt{\Delta_1}$. The first-jet ratio decomposes into exact operator components $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, where spectral interlacing cancels all high modes $j > k$ in $\langle u_k, K\boldsymbol\psi \rangle = -d_k \sum \frac{a_j^2}{\mu_j - E_k}$, proving why the ratio $\mathcal{T}_{\mathrm{cross}}/\mathcal{T}_{\mathrm{diag}} \to -0.767$ stabilizes and yields $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}] \to 0.2327$. The dual square-root laws ($|d_k| \approx 24.1 \sqrt{\Delta_k}$, $|a_j| \approx 2.24 \sqrt{\Delta_j}$) extinguish small denominators mode by mode, yielding purely polynomial scaling $D_1/D_0 \sim N^{2.6 - 2.8} \implies u_1(N) \sim N^{-2.6}$ and confirming subexponential boundary-defect decoupling.
+6. **Formal Continuum Wiener–Hopf Scaling, Interlaced Tunneling Ladders, and Operator Reformulation of the First Jet:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Below the double-well barrier top, the even and odd spectra form an interlaced ladder of bound tunneling doublets ($E_0 < \mu_1 < E_1 < \dots < \mu_{N/2} < E_{N/2}$). The first coordinate transition dipole moment $\langle e_1, Kc \rangle = -D_0 a_1 / \Delta_1 \approx 1.3134 = \mathcal{O}(1)$ carries $99.9999\%$ of the coordinate norm $\|Kc\|^2$, structurally linking the overlap ratio $C_N = |a_1| / \sqrt{\Delta_1} \approx 2.4$ to the transition dipole moment. The first-jet ratio decomposes into exact operator components $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, revealing an asymptotic spectral filtering mechanism where the ratio appears to stabilize near $\approx -0.77$ with net ratio $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}] \sim 0.23$ across tested dimensions. The square-root overlap scaling ($|d_k| \approx 24.1 \sqrt{\Delta_k}$, $|a_j| \approx 2.24 \sqrt{\Delta_j}$) keeps small denominators bounded mode by mode, supporting the hypothesis that $u_1^{-1} = |D_1/D_0|$ is bounded polynomially ($\sim N^{2.6 - 2.8}$ over the tested range), which would guarantee exponential boundary-defect decoupling in the continuum limit.
 7. **The Analytical Roadmap toward Continuous Weil Positivity:** We formulate the three open mathematical stages required to convert these empirical and asymptotic findings into a complete proof of Weil positivity on the idele class group.
 
 ---
@@ -404,14 +404,14 @@ $$\frac{D_1}{D_0} = \kappa^2 \left[ e^T Q_{\mathrm{even}}^\dagger \big( b + \mat
 
 *Proof.* From the rank-$4$ commutator identity (Theorem 6.1 of Paper 4), $[M^2, Q] u = D_0 b - B_1 e$. Using the exact odd-sector identity $B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}$ (Theorem 6.2 of Paper 4), we have $(Q - \lambda I) M^2 u = -D_0 (b + \mathcal{E}_{\mathrm{arith}} e)$. Projecting onto $u^\perp$ via $Q_{\mathrm{even}}^\dagger$ and contracting with $e^T$ (recalling $e^T M^2 u = -D_1 / \kappa^2$ and $e^T u = D_0$) gives $-D_1 / \kappa^2 = -D_0 [e^T Q_{\mathrm{even}}^\dagger \mathbf{w} - \|Mu\|_2^2] + \mathcal{O}(\lambda D_0)$. Dividing by $-D_0$ yields the result. $\blacksquare$
 
-### Proposition 8.4 (Exact Operator Decomposition, Bound-State Interlacing, and Spectral Filtering)
+### Proposition 8.4 (Exact Operator Decomposition, Bound-State Interlacing, and Spectral Filtering Mechanism)
 *Using the exact algebraic small-denominator cancellation theorem and $K^2$-commutator resolvent representation from Paper 4 (Theorems 7.2 & 7.3), the first-jet ratio admits the exact operator decomposition:*
 
 $$\frac{D_1}{D_0} = \kappa^2 \left[ \mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2 \right], \qquad \mathcal{T}_{\mathrm{diag}} \equiv M_1 \langle d, R_{\mathrm{even}} d \rangle, \quad \mathcal{T}_{\mathrm{cross}} \equiv \langle d, R_{\mathrm{even}} K\boldsymbol\psi \rangle,$$
 
 *where $s_2 = K\boldsymbol\psi + M_1 d \in c^\perp$, $M_1 = \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle$, and $R_{\mathrm{even}} = (Q_{\mathrm{even}} - \lambda I)_{c^\perp}^{-1}$. The apparent singularity $(E_k - \lambda)^{-1}$ cancels identically mode by mode, and the asymptotic first-jet scale is governed by the collective operator structure of the low-energy bound-state ladder.*
 
-*Analytical Resolution of the Bound-State Organization and Operator Mechanism (`cell59.py`–`cell62.py`).*
+*Exact Operator Reformulation and Numerical Scaling Evidence (`cell59.py`–`cell62.py`).*
 1. **The Interlaced Bound-State Tunneling Ladder (Cells 59–60):**
    Below the double-well barrier top ($E_{\mathrm{barrier}} \approx 1.30$, corresponding to mode index $k \le N/2 = 12$ at $N = 24$), the even and odd spectra do not decouple into an isolated ground state plus a uniform scattering continuum. Instead, they form an exquisitely structured ladder of bound tunneling doublets strictly interlacing down to the ground state:
    $$E_0 < \mu_1 < E_1 < \mu_2 < E_2 < \mu_3 < E_3 < \dots < \mu_{N/2} < E_{N/2}.$$
@@ -420,30 +420,27 @@ $$\frac{D_1}{D_0} = \kappa^2 \left[ \mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\
 2. **Transition Dipole Moment and Mode 1 Saturation (Cell 61):**
    Taking matrix elements of the rank-2 commutator $[Q, K] = -\boldsymbol\psi d^T + d\boldsymbol\psi^T$ on the ground state $c$ yields the exact coordinate projection $\langle e_j, K c \rangle = -D_0 \frac{a_j}{\Delta_{\mathrm{odd}, j}}$ (Corollary 6.3.1 of Paper 4). For the lowest odd mode $e_1$, this projection factors into the product of two dimensionless invariants:
    $$|\langle e_1, K c \rangle| = \left(\frac{D_0}{\sqrt{\Delta_{\mathrm{odd}, 1}}}\right) \left(\frac{|a_1|}{\sqrt{\Delta_{\mathrm{odd}, 1}}}\right) \equiv R_D \cdot C_N.$$
-   Computational evaluation demonstrates that $|\langle e_1, K c \rangle| \approx 1.3134 = \mathcal{O}(1)$ is the transition dipole moment of the two-level tunneling doublet. Because $R_D = D_0 / \sqrt{\Delta_1} \in [0.41, 0.64]$ is $\mathcal{O}(1)$ across 20 orders of magnitude, the overlap ratio $C_N \equiv |a_1| / \sqrt{\Delta_1} \approx 2.406$ is **algebraically forced to be $\mathcal{O}(1)$**. Furthermore, mode 1 carries **$99.9999\%$** of the total full-space coordinate norm $\|Kc\|^2 = 1.72507$.
+   Computational evaluation demonstrates that $|\langle e_1, K c \rangle| \approx 1.3134 = \mathcal{O}(1)$ represents the transition dipole moment of the two-level tunneling doublet. Because $R_D = D_0 / \sqrt{\Delta_1} \in [0.41, 0.64]$ is $\mathcal{O}(1)$ across 20 orders of magnitude, the overlap ratio $C_N \equiv |a_1| / \sqrt{\Delta_1} \approx 2.406$ is structurally constrained by the transition dipole moment to remain $\mathcal{O}(1)$ across the entire tested ladder. Furthermore, mode 1 carries **$99.9999\%$** of the total full-space coordinate norm $\|Kc\|^2 = 1.72507$, indicating that the coordinate commutator acts effectively on a two-state tunneling doublet.
 
-3. **Operator Resolvent Balance and Stable Asymptotic Cancellation (Cell 62):**
-   While mode 1 saturates $\|Kc\|^2$, the resolvent sum $\langle d, R_{\mathrm{even}} s_2 \rangle$ is distributed collectively across all $N/2$ bound states below the barrier top. High-precision evaluation confirms the exact decomposition of Theorem 7.3 across dimensions:
+3. **Operator Resolvent Balance and Excited-Sector Cancellation (Cell 62):**
+   In contrast to $\|Kc\|^2$, the resolvent sum $\langle d, R_{\mathrm{even}} s_2 \rangle$ is distributed collectively across the entire $N/2$ bound ladder below the barrier top. High-precision evaluation confirms the exact decomposition of Theorem 7.3 across dimensions:
    - At $N = 24$: $\kappa^2 \mathcal{T}_{\mathrm{diag}} = +2\,234\,013.195$, $\kappa^2 \mathcal{T}_{\mathrm{cross}} = -1\,714\,040.497$, $\kappa^2 D_0^2 M_2 = 10.352$, summing identically to $D_1/D_0 = 519\,962.347$.
-   - The ratio $\mathcal{T}_{\mathrm{cross}} / \mathcal{T}_{\mathrm{diag}}$ stabilizes asymptotically at $\approx -0.767 \approx -3/4$, so that the net first-jet ratio satisfies the universal stable proportion:
-     $$\frac{D_1 / D_0}{\kappa^2 M_1 \langle d, R_{\mathrm{even}} d \rangle} \longrightarrow 0.2327 \approx 0.23 \qquad (N \ge 16).$$
+   - The ratio $\mathcal{T}_{\mathrm{cross}} / \mathcal{T}_{\mathrm{diag}}$ appears to stabilize near $\approx -0.77$ over the tested dimensions. The normalized ratio $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}]$ traces the non-monotone sequence $(0.476, 0.331, 0.242, 0.212, 0.233)$, clustering near $\approx 0.23$ for $N \ge 16$.
 
-4. **Analytical Proof of Spectral Filtering:**
-   The stable cancellation factor $-0.77$ is derived directly from the commutator algebra. Since $\{e_j\}_{j=1}^N$ is a complete orthonormal basis of $\mathcal{H}_{\mathrm{odd}}$, expanding $\boldsymbol\psi = \sum a_j e_j$ and using $\langle e_j, K u_k \rangle = -\frac{a_j d_k}{\mu_j - E_k}$ yields:
-   $$\langle u_k, K\boldsymbol\psi \rangle = \sum_{j=1}^N a_j \langle u_k, K e_j \rangle = - d_k \sum_{j=1}^N \frac{a_j^2}{\mu_j - E_k}.$$
-   Subtracting this from $M_1 d_k = d_k \sum \frac{a_j^2}{\mu_j - \lambda}$ gives the $k$-th mode source coefficient:
-   $$\langle u_k, s_2 \rangle = d_k \sum_{j=1}^N a_j^2 \left( \frac{1}{\mu_j - \lambda} - \frac{1}{\mu_j - E_k} \right).$$
-   Because the eigenvalues strictly interlace ($\mu_1 < E_1 < \mu_2 < E_2 < \dots$) with exponential growth per step, for all high modes $j > k$, $\mu_j \gg E_k$, so $\frac{1}{\mu_j - E_k} \approx \frac{1}{\mu_j - \lambda}$, which **cancels identically** against the high modes in $M_1 d_k$. For low modes $j \le k$, $E_k \gg \mu_j$, so $\frac{1}{\mu_j - E_k} \approx 0$. Hence:
-   $$\langle u_k, s_2 \rangle \approx d_k \sum_{j=1}^k \frac{a_j^2}{\mu_j}.$$
-   For each mode $k$, the driver is truncated from the full sum $M_1 \approx 99.4$ to the low-frequency partial prefix ($5.8$ for $k = 1$, $10.9$ for $k = 2$, averaging $\sim 23$ across active modes), explaining the universal factor $0.23$.
+4. **The Spectral Filtering Identity and Asymptotic Filtering Mechanism:**
+   From the commutator $[Q, K] = -\boldsymbol\psi d^T + d\boldsymbol\psi^T$, expanding $\boldsymbol\psi = \sum a_j e_j$ yields $\langle u_k, K\boldsymbol\psi \rangle = -d_k \sum_{j=1}^N \frac{a_j^2}{\mu_j - E_k}$. Subtracting this from $M_1 d_k = d_k \sum \frac{a_j^2}{\mu_j - \lambda}$ gives the exact mode source coefficient:
+   $$\langle u_k, s_2 \rangle = d_k \sum_{j=1}^N a_j^2 \left( \frac{1}{\mu_j - \lambda} - \frac{1}{\mu_j - E_k} \right) = d_k \sum_{j=1}^N \frac{a_j^2 (E_k - \lambda)}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+   The high-mode cancellation is not an exact vanishing, but an asymptotic suppression: for $j > k$, the difference is governed by $(E_k - \lambda)/\mu_j^2 \ll 1$ due to the rapid growth of the eigenvalues up the ladder. Decomposing the sum into low modes $j \le k$ (where $E_k \gg \mu_j \implies \frac{1}{\mu_j - E_k} \approx 0$) and a high-mode remainder yields:
+   $$\langle u_k, s_2 \rangle = d_k \sum_{j=1}^k \frac{a_j^2}{\mu_j - \lambda} + \mathcal{R}_{\mathrm{filt}}(k), \qquad \mathcal{R}_{\mathrm{filt}}(k) \equiv d_k \sum_{j > k} \frac{a_j^2 (E_k - \lambda)}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+   For each mode $k$, the primary driver is truncated to the low-frequency partial sum ($5.8$ for $k = 1$, $10.9$ for $k = 2$, averaging $\sim 23$ across active modes), providing the structural mechanism for the observed $\approx 0.23$ scale. Controlling the remainder $\mathcal{R}_{\mathrm{filt}}(k)$ analytically presents a concrete pathway to establish spectral filtering as a rigorous theorem.
 
-5. **Dual Square-Root Overlap Laws:**
-   In both sectors, the source overlaps scale strictly with the square root of the energy splitting:
-   $$\frac{d_k^2}{\Delta_{\mathrm{even}, k}} \approx 580 \implies |d_k| \approx 24.1 \sqrt{\Delta_{\mathrm{even}, k}} \quad (k = 1, \dots, 4), \qquad \frac{a_j^2}{\Delta_{\mathrm{odd}, j}} \approx 5.0 \implies |a_j| \approx 2.24 \sqrt{\Delta_{\mathrm{odd}, j}} \quad (j = 1, \dots, 6).$$
-   Both ladders truncate at mode 12 ($N/2$). The $N/2$ bound states account for **$98.0\%$** of $M_1$ and **$99.7\%$** of $\langle d, R_{\mathrm{even}} d \rangle$. The small denominators $\Delta_k$ are algebraically extinguished mode by mode, leaving every summand $\tau_k = -d_k \langle u_k, K^2 c \rangle / D_0$ finite and positive.
+5. **Square-Root-Scale Overlap Scaling:**
+   In both sectors, the source overlaps scale with the square root of the energy splitting:
+   $$d_k \sim \Gamma_{\mathrm{even}} \sqrt{\Delta_{\mathrm{even}, k}}, \qquad a_j \sim \Gamma_{\mathrm{odd}} \sqrt{\Delta_{\mathrm{odd}, j}}.$$
+   Across the bound ladder, $d_k^2 / \Delta_k$ ranges from $\approx 580$ down to $\approx 43$, and $a_j^2 / \Delta_j$ ranges from $\approx 4.4$ to $\approx 16$. Rather than strict constant laws, the fundamental discovery is that these ratios remain bounded within an $\mathcal{O}(10^1 - 10^2)$ envelope across 40 orders of magnitude of gap collapse, extinguishing small denominators mode by mode. Both ladders truncate at mode 12 ($N/2$), with bound states carrying $>98\%$ of $M_1$ and $>99.7\%$ of $\langle d, R_{\mathrm{even}} d \rangle$.
 
 6. **Spatial Profile of the Resolvent State $w_d = R_{\mathrm{even}} d$:**
-   In canonical coordinates $s = m/N$, $w_d(m)$ is localized in the classical turning region $s \in [0, 0.2]$ ($w_d(0)/\|w_d\| \approx 0.40, w_d(3)/\|w_d\| \approx 0.66, w_d(6)/\|w_d\| \approx 0.014$) and decays by 23 orders of magnitude across the interval to $-2 \times 10^{-16}$ at $s = 1.0$, matching the semiclassical barrier turning-point profile.
+   In canonical coordinates $s = m/N$, the normalized solution vector $w_d(m) / \|w_d\|$ is strongly concentrated near the boundary $s \in [0, 0.2]$ ($0.399$ at $s = 0$, $0.655$ at $s = 0.125$, $0.014$ at $s = 0.25$) and collapses by 23 orders of magnitude to $-2 \times 10^{-16}$ at $s = 1.0$. This spatial profile is heuristically interpreted as reflecting the semiclassical barrier turning-point region; establishing an exact continuum boundary-value problem for the limiting profile $W(s)$ remains a promising direction for future analysis.
 
 ### Proposition 8.5 (Empirical Semigroup Profile Squeezing and Shape Invariants)
 *Under the first-jet normalization $u = \theta u_1 = \theta |D_0 / D_1|$, the normalized heat semigroup profile $\Theta_N(\theta) = H_N(\theta u_1) / D_0$ exhibits near-perfect universal collapse across all tested dimensions $N \in \{8, \dots, 24\}$ (matching within $1.5\%$ across 16 decimal orders of magnitude, Cell 53). Over the computed range, the dimensionless shape invariants stabilize:*
@@ -456,19 +453,32 @@ $$1 + \theta \le \Theta_N(\theta) \le 1 + \theta + \frac{1}{2} \beta_N \theta^2 
 
 *which enclose the numerical data to three decimal places, confirming that $u_1 = |D_0/D_1|$ is the genuine physical boundary-layer time scale.*
 
-### Conditional Proposition 8.6 (Asymptotic Bounding Ladder for $u_1$ and $s_N$)
-*Conditional on the uniform scattering gap hypothesis $\inf_N E_{\mathrm{scatt},\min}(N) \ge E_{\mathrm{gap}} > 0$ (empirically supported by Cells 49–50) and uniform $H^1$ Sobolev boundedness $\|T'_v\|_{L^2} = \mathcal{O}(1)$:*
+### Conditional Proposition 8.6 (Sector-Decomposed Bounding Ladder for $u_1$ and $s_N$)
+*Decompose the reduced even resolvent into bound-state and scattering components:*
 
+$$R_{\mathrm{even}} = R_{\mathrm{bound}} + R_{\mathrm{scatt}},$$
+
+*where $R_{\mathrm{bound}} = \sum_{k=1}^{N/2} \frac{u_k u_k^T}{E_k - \lambda}$ acts on the tunneling ladder below the barrier top ($E_k < E_{\mathrm{gap}} \approx 1.30$), and $R_{\mathrm{scatt}}$ acts on the complementary subspace $E \ge E_{\mathrm{gap}}$.*
+
+*Assume:*
+1. *Uniform Scattering Gap:* $\inf_N E_{\mathrm{scatt},\min}(N) \ge E_{\mathrm{gap}} > 0$ (empirically supported by Cells 49–50).
+2. *Polynomial Bound-State Moment Control:* The bound-state coordinate projections satisfy $\sum_{k=1}^{N/2} \left| \frac{d_k \langle u_k, K^2 c \rangle}{D_0} \right| \le C_{\mathrm{bound}} N^p$ for some finite $p < \infty$ (empirically supported by Cell 62).
+3. *Uniform $H^1$ Sobolev Boundedness:* $\|T'_v\|_{L^2} = \mathcal{O}(1)$.
+
+*Then:*
 1. **Upper Bound on First-Jet Ratio:**
-   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 C_{\mathrm{upper}} N^2 \log N.$$
+   $$\left| \frac{D_1}{D_0} \right| \le \kappa^2 \left( C_{\mathrm{scatt}} N^2 \log N + C_{\mathrm{bound}} N^p \right) \le C_{\mathrm{upper}} N^{\max(2, p)} \log N.$$
 2. **Two-Sided Bounds on Cancellation Scale and Decoupling Ratio:**
-   $$\frac{c_1}{N^2 \log N} \le u_1 = \left| \frac{D_0}{D_1} \right| \le \frac{c_2}{N^{1/2}}, \qquad \frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{3/2}.$$
+   $$\frac{c_1}{N^{\max(2, p)} \log N} \le u_1 = \left| \frac{D_0}{D_1} \right| \le \frac{c_2}{N^{1/2}}, \qquad \frac{\kappa^2 c_1}{\log N} \le s_N \le \kappa^2 c_2 N^{\max(2, p) - 1/2}.$$
 3. **Subexponentiality:**
    *Under these conditions, $u_1$ and $s_N$ are strictly subexponential, ruling out any $e^{-\alpha N}$ collapse of the cancellation scale and indicating that $D_0$ and $D_1$ share the same leading exponential WKB barrier decay rate.*
 4. **Spatial Boundary Layer Width:**
-   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N \sqrt{\log N}}$ shrinks only algebraically, fundamentally decoupling from the exponentially suppressed endpoint amplitude $T_N(0) \sim e^{-\mathcal{S}_{\mathrm{WKB}}}$.*
+   *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically, fundamentally decoupling from the exponentially suppressed endpoint amplitude $T_N(0) \sim e^{-\mathcal{S}_{\mathrm{WKB}}}$.*
 
-*Proof.* Applying the Cauchy–Schwarz inequality to the commutator resolvent formula (Proposition 8.3) with $\|e\|_2 = \sqrt{2N+1}$ and $\|\mathbf{w}\|_2 \le C_w N^{3/2} \log N$, bounded resolvent norm $\|(Q_{\mathrm{even}} - \lambda I)^\dagger\|_{\mathrm{scatt}} \le 1/E_{\mathrm{gap}}$ yields $|D_1/D_0| \le \kappa^2 C_{\mathrm{upper}} N^2 \log N$. Lower Sobolev trace bound gives $|D_1/D_0| \ge C_{\mathrm{lower}} N^{1/2}$. Inverting yields the bounds on $u_1$ and $s_N$. $\blacksquare$
+*Proof.* By Theorem 7.3 and Corollary 7.3.1 of Paper 4, $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$. Splitting $R_{\mathrm{even}} = R_{\mathrm{scatt}} + R_{\mathrm{bound}}$:
+For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$, applying the Cauchy–Schwarz inequality with $\|d\|_2 = \sqrt{2N+1}$ and $\|s_2\|_2 \le C_s N^{3/2} \log N$ yields $|\langle d, R_{\mathrm{scatt}} s_2 \rangle| \le C_{\mathrm{scatt}} N^2 \log N$.
+For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 2, this sum is bounded by $C_{\mathrm{bound}} N^p$.
+Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound. The lower bound follows from Sobolev trace embedding. Inverting yields the two-sided bounds on $u_1$ and $s_N$. $\blacksquare$
 
 ---
 
@@ -613,14 +623,19 @@ Auditing this conjecture against the exact algebraic identities established in P
    > **Boundary-Defect Decoupling Conjecture:** Along any admissible double-scaling sequence $(N, L)$ with $T > a_N$,
    > $$\lim_{N, L \to \infty} D_0(N, L)^2 \frac{\log T}{L T} \left( 1 + \frac{1}{T^2 u_1(N, L)} \right)^2 = 0.$$
 
-8. **Resolution of the Power-Law Bridge via Operator Resolvents (Cells 59–62):**
-   The surgical analytical target of bounding $u_1 = |D_0/D_1|$ has been resolved by the operator decomposition of Theorem 7.3 and the computational findings of Cells 59–62. Because the small denominators $\Delta_k$ cancel mode by mode via the dual square-root laws ($d_k \propto \sqrt{\Delta_k}$ and $a_j \propto \sqrt{\Delta_j}$), the ratio $D_1/D_0$ is completely uncoupled from the exponential tunneling decay $e^{-\mathcal{S}_{\mathrm{WKB}}}$. Evaluating the operator resolvent components across $N \in \{8, 12, 16, 20, 24\}$ yields:
-   $$M_1(N) \sim N^{0.6}, \qquad \langle d, R_{\mathrm{even}} d \rangle \sim N^{2.2} \implies \frac{D_1}{D_0} \sim N^{2.6 - 2.8},$$
-   which establishes the polynomial power-law scaling of the first-jet cancellation scale:
-   $$u_1(N) = \left| \frac{D_0}{D_1} \right| \sim N^{-p}, \qquad p \approx 2.6 \pm 0.1.$$
-   Substituting this strictly polynomial scaling into the decoupling metric $\mathcal{D}(N) \equiv D_0^2 [1 + 1/(T^2 u_1)]^2$ yields:
-   $$\mathcal{D}(N) \sim e^{-2\mathcal{S}_{\mathrm{WKB}}} \left[ 1 + \mathcal{O}(N^{2.6}) \right]^2 \sim e^{-\frac{\pi N}{2} \log c} N^{5.2} \longrightarrow 0 \quad \text{exponentially fast!}$$
-   This establishes that the boundary-layer correction $1/(T^2 u_1)$ is strictly algebraic in $N$, and is completely overwhelmed by the exponential WKB barrier suppression $e^{-\frac{\pi N}{2}\log c}$. This rigorously secures the **Boundary-Defect Decoupling Conjecture**, confirming that the finite-$T$ boundary defect decouples in the continuum limit independently of infinite-order $C^\infty$ boundary flatness.
+8. **The Power-Law Bridge and the Polynomial Decoupling Criterion:**
+   The findings of Cells 59–62 and the exact operator decomposition of Theorem 7.3 crystallize the analytical path forward for the research programme. Because the small denominators $\Delta_k$ cancel mode by mode, the first-jet ratio $D_1/D_0$ is algebraically decoupled from the exponential tunneling decay $e^{-\mathcal{S}_{\mathrm{WKB}}}$. 
+
+   Evaluating the operator resolvent components across $N \in \{8, 12, 16, 20, 24\}$ yields empirical scaling trajectories:
+   $$M_1(N) \sim N^{0.6}, \qquad \langle d, R_{\mathrm{even}} d \rangle \sim N^{2.2} \implies \frac{D_1}{D_0} \sim N^{2.6 - 2.8} \implies u_1(N) \sim N^{-2.6 \pm 0.1}.$$
+   However, proving the specific empirical exponent $p \approx 2.6$ is not required for the continuum programme. Rather, the essential analytical requirement is the broader:
+   > **Polynomial Decoupling Criterion:** If there exists some finite exponent $p < \infty$ such that
+   > $$u_1(N)^{-1} = \left| \frac{D_1}{D_0} \right| = \mathcal{O}(N^p) \qquad (N \to \infty),$$
+   > then because the semiclassical WKB boundary suppression is exponential ($D_0^2 \sim e^{-\frac{\pi N}{2}\log c}$), the boundary-defect metric:
+   > $$\mathcal{D}(N) \equiv D_0^2 \left( 1 + \frac{1}{T^2 u_1} \right)^2 \sim e^{-\frac{\pi N}{2}\log c} \left[ 1 + \mathcal{O}(N^p) \right]^2 \sim e^{-\frac{\pi N}{2}\log c} N^{2p} \longrightarrow 0$$
+   > collapses exponentially fast to zero as $N \to \infty$.
+
+   Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. The five-point numerical sequence from Cell 62 provides strong preliminary evidence that $u_1^{-1}$ is polynomial, reducing the asymptotic decoupling challenge to establishing a rigorous polynomial bound on the bound and scattering resolvent sectors.
 
 ---
 
