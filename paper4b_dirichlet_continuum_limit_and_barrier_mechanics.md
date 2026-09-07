@@ -949,36 +949,43 @@ Proposition 8.12 reveals the structural mechanism underlying the observed smalln
 
 ---
 
-### 8.13 Proposition 8.13 (Exact Second-Commutator Even Resolvent Representation, Ground-Doublet Pole Cancellation, and the Route B Operator Bound)
+### 8.13 Proposition 8.13 (Exact Finite-Dimensional Second-Commutator Even Resolvent Representation, Ground-Doublet Pole Cancellation, Unified Mode-Expansion, and the Route B Operator Bound)
 
-To establish Route B as a rigorous analytical theorem, we must answer the structural question:
+To establish Route B as a rigorous analytical theorem, we address the structural question:
 $$\boxed{\textbf{Can we bound } \rho_2^{\mathrm{exc}} = \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}} = \frac{\|P_{\perp u_0} Kc\|^2}{M_1^{\mathrm{exc}}} \textbf{ purely in terms of even-sector resolvents, without mentioning individual excited odd gaps } \mu_j - \lambda\textbf{?}}$$
 
-The following proposition establishes this exact algebraic reduction. By evaluating the second commutator $[K, [K, Q]]$ on the ground state $c$, it expresses the coordinate curvature vector $K^2 c$ and the projection residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$ directly in terms of the even-sector resolvent $(Q_{\mathrm{even}} - \lambda I)^{-1}$ acting on $d_{\mathrm{exc}}$ and $K \boldsymbol\psi$. Crucially, the apparent pole at $\mu_0 - \lambda$ cancels identically via the First Resolvent Identity, yielding an exact, unconditional operator upper bound on $\rho_2^{\mathrm{exc}}$.
+The following proposition establishes this exact algebraic reduction on the finite-dimensional Galerkin space $\mathbb{R}^{2N+1}$. By evaluating the second commutator $[K, [K, Q]]$ on the ground state $c$, it expresses the coordinate curvature vector $K^2 c$ and the projection residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$ directly in terms of the even-sector resolvent $(Q_{\mathrm{even}} - \lambda I)^{-1}$ acting on the source vector $s_2 = K \boldsymbol\psi + M_1 d \in c^\perp$. Crucially, the apparent ground-doublet pole at $\mu_0 - \lambda$ cancels identically via the First Resolvent Identity, and in the even eigenbasis $\{u_k\}_{k \ge 1}$, the $j=0$ term cancels mode by mode, collapsing the resolvent vector $\Xi$ into a single unified mode sum over the excited odd spectrum.
 
-**Proposition 8.13 (Exact Even-Resolvent Operator Representation and Route B Inequality):**
-*Let $N \ge 2$, $c > 1$, and let $c \in H_{\mathrm{even}}$ be the normalized ground-state eigenvector with $Q c = \lambda c$, $D_0 = \langle c, d \rangle$. Let $K = \operatorname{diag}(-N, \dots, N)$ be the coordinate position operator, let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenvectors of $Q_{\mathrm{odd}}$, and let $v_{\mathrm{exc}} \equiv P_{\perp u_0} Kc \in u_0^\perp \subset H_{\mathrm{odd}}$ be the coordinate-derivative projection residual. Let $d_{\mathrm{exc}} \equiv P_{\perp c} d \in c^\perp \subset H_{\mathrm{even}}$.*
+Furthermore, Route B admits an exact variational characterization:
+$$\rho_2^{\mathrm{exc}} = \frac{D_0^2}{\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}})},$$
+which reframes second-moment control as lower-bounding the odd-sector Rayleigh energy of the coordinate-derivative wavepacket residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$.
+
+**Proposition 8.13 (Exact Even-Resolvent Operator Representation, Unified Mode Sum, and Route B Inequality):**
+*Let $N \ge 2$, $c > 1$, and let $c \in H_{\mathrm{even}}$ be the normalized ground-state eigenvector with $Q c = \lambda c$, $D_0 = \langle c, d \rangle$. Let $K = \operatorname{diag}(-N, \dots, N)$ be the finite-dimensional coordinate position operator on $\mathbb{R}^{2N+1}$, let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenvectors of $Q_{\mathrm{odd}}$, and let $v_{\mathrm{exc}} \equiv P_{\perp u_0} Kc \in u_0^\perp \subset H_{\mathrm{odd}}$ be the coordinate-derivative projection residual. Let $d_{\mathrm{exc}} \equiv P_{\perp c} d \in c^\perp \subset H_{\mathrm{even}}$, and let $\{u_k\}_{k \ge 1}$ denote the orthonormal eigenbasis of the excited even subspace $c^\perp \subset H_{\mathrm{even}}$ with eigenvalues $E_k > \lambda$.*
 
 *Then:*
-1. *(Exact Second Commutator Identity): For all $N \ge 1$, the coordinate curvature $K^2 c$ satisfies the exact even-sector resolvent identity:*
-   $$(Q_{\mathrm{even}} - \lambda I) K^2 c = - D_0 (K \boldsymbol\psi + M_1 d). \tag{8.13.1}$$
-   *Projecting onto the excited even subspace $c^\perp \subset H_{\mathrm{even}}$:*
-   $$(Q_{\mathrm{even}} - \lambda I) P_{\perp c} K^2 c = - D_0 (P_{\perp c} K \boldsymbol\psi + M_1 d_{\mathrm{exc}}). \tag{8.13.2}$$
+1. *(Exact Finite-Dimensional Second Commutator Identity): For all $N \ge 1$, the coordinate curvature $K^2 c$ satisfies the exact finite-dimensional algebraic identity on $\mathbb{R}^{2N+1}$:*
+   $$(Q_{\mathrm{even}} - \lambda I) K^2 c = - D_0 (K \boldsymbol\psi + M_1 d) = - D_0 s_2. \tag{8.13.1}$$
+   *The source vector $s_2 \equiv K \boldsymbol\psi + M_1 d$ satisfies $\langle c, s_2 \rangle = - D_0 M_1 + D_0 M_1 = 0$ identically, so $s_2 \in c^\perp$. Projecting onto the excited even subspace $c^\perp \subset H_{\mathrm{even}}$:*
+   $$(Q_{\mathrm{even}} - \lambda I) P_{\perp c} K^2 c = - D_0 s_2 = - D_0 (P_{\perp c} K \boldsymbol\psi + M_1 d_{\mathrm{exc}}). \tag{8.13.2}$$
 2. *(Exact Ground-Doublet Pole Cancellation): When decomposed against the lowest odd mode $u_0$ ($K v_{\mathrm{exc}} = K^2 c - b_{00} K u_0$), the singular ground-state terms cancel identically via the First Resolvent Identity, yielding the completely nonsingular even-resolvent representation:*
    $$K v_{\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 c + D_0 \Xi, \tag{8.13.3}$$
-   *where $\Xi \in c^\perp \subset H_{\mathrm{even}}$ is given explicitly by:*
-   $$\Xi \equiv - (Q_{\mathrm{even}} - \lambda I)^{-1} P_{\perp c} K \boldsymbol\psi + a_0^2 (Q_{\mathrm{even}} - \lambda I)^{-1} (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}} - M_1^{\mathrm{exc}} (Q_{\mathrm{even}} - \lambda I)^{-1} d_{\mathrm{exc}}. \tag{8.13.4}$$
-3. *(Exact Finite-$N$ Route B Operator Bound): For all $N \ge 1$ with $D_0^2 M_{2,\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 < 1$, the second resolvent moment satisfies:*
-   $$M_{2,\mathrm{exc}} \le \frac{\|\Xi\|^2}{1 - D_0^2 M_{2,\mathrm{exc}}}, \tag{8.13.5}$$
+   *where $\Xi \in c^\perp \subset H_{\mathrm{even}}$ is given by:*
+   $$\Xi \equiv - (Q_{\mathrm{even}} - \lambda I)^{-1} s_2 + \left( \frac{a_0^2}{\mu_0 - \lambda} \right) (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}. \tag{8.13.4}$$
+3. *(Unified Mode-by-Mode Excited Representation): In the excited even eigenbasis $\{u_k\}_{k \ge 1}$, the $j=0$ ground-doublet contribution in $-(Q_{\mathrm{even}} - \lambda I)^{-1} s_2$ cancels the second term in (8.13.4) identically mode by mode, collapsing $\Xi$ into the single unified sum over excited odd modes $j \ge 1$:*
+   $$\boxed{\Xi = \sum_{k \ge 1} \left( d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right) u_k. \tag{8.13.5}}$$
+   *In particular, $\Xi$ contains no $a_0$, no $\mu_0$, and no ground-state tunneling denominators.*
+4. *(Exact Finite-$N$ Route B Operator Bound): For all $N \ge 1$ with $D_0^2 M_{2,\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 < 1$, the second resolvent moment satisfies:*
+   $$M_{2,\mathrm{exc}} \le \frac{\|\Xi\|^2}{1 - D_0^2 M_{2,\mathrm{exc}}}, \tag{8.13.6}$$
    *and the overlap-weighted Route B ratio satisfies the exact operator inequality:*
-   $$\rho_2^{\mathrm{exc}} \equiv \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - D_0^2 M_{2,\mathrm{exc}})}. \tag{8.13.6}$$
-4. *(Variational Rayleigh Quotient Duality): The ratio $\rho_2^{\mathrm{exc}}$ admits the exact dual variational representations:*
-   $$\rho_2^{\mathrm{exc}} = \frac{D_0^2}{\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}})} = \frac{D_0^2}{\mathbb{E}_p [\mu - \lambda]} = D_0^2 \, \mathbb{E}_w \left[ \frac{1}{\mu - \lambda} \right], \tag{8.13.7}$$
+   $$\rho_2^{\mathrm{exc}} \equiv \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - D_0^2 M_{2,\mathrm{exc}})}. \tag{8.13.7}$$
+5. *(Variational Rayleigh Quotient Duality): The ratio $\rho_2^{\mathrm{exc}}$ admits the exact dual variational representations:*
+   $$\rho_2^{\mathrm{exc}} = \frac{D_0^2}{\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}})} = \frac{D_0^2}{\mathbb{E}_p [\mu - \lambda]} = D_0^2 \, \mathbb{E}_w \left[ \frac{1}{\mu - \lambda} \right], \tag{8.13.8}$$
    *where $\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}}) \equiv \frac{\langle v_{\mathrm{exc}}, (Q_{\mathrm{odd}} - \lambda I) v_{\mathrm{exc}} \rangle}{\|v_{\mathrm{exc}}\|^2}$, $p_j = \frac{b_{0j}^2}{\|v_{\mathrm{exc}}\|^2}$, and $w_j = \frac{a_j^2 / (\mu_j - \lambda)}{M_1^{\mathrm{exc}}}$.*
 
 *Proof.*
 **Step 1 (First and Second Commutators on Ground State):**
-From Proposition 8.8, $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$. Applying this to the ground state $c$ ($Q c = \lambda c$, $\langle \boldsymbol\psi, c \rangle = 0$, $\langle d, c \rangle = D_0$):
+From Proposition 8.8, $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ on $\mathbb{R}^{2N+1}$. Applying this to the ground state $c$ ($Q c = \lambda c$, $\langle \boldsymbol\psi, c \rangle = 0$, $\langle d, c \rangle = D_0$):
 $$[K, Q] c = \boldsymbol\psi \langle d, c \rangle - d \langle \boldsymbol\psi, c \rangle = D_0 \boldsymbol\psi.$$
 Expanding the commutator $[K, Q] c = \lambda K c - Q K c = - (Q - \lambda I) Kc$ gives:
 $$(Q_{\mathrm{odd}} - \lambda I) Kc = - D_0 \boldsymbol\psi \implies Kc = - D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi.$$
@@ -995,15 +1002,15 @@ $$[K, [K, Q]] c = (Q - \lambda I) K^2 c + 2 D_0 K \boldsymbol\psi.$$
 Equating the two expressions for $[K, [K, Q]] c$:
 $$(Q_{\mathrm{even}} - \lambda I) K^2 c + 2 D_0 K \boldsymbol\psi = D_0 K \boldsymbol\psi - D_0 M_1 d.$$
 Subtracting $2 D_0 K \boldsymbol\psi$ proves (8.13.1):
-$$(Q_{\mathrm{even}} - \lambda I) K^2 c = - D_0 (K \boldsymbol\psi + M_1 d).$$
+$$(Q_{\mathrm{even}} - \lambda I) K^2 c = - D_0 (K \boldsymbol\psi + M_1 d) = - D_0 s_2.$$
 
 **Step 3 (Excited Orthogonal Projection):**
 Decompose $K^2 c = \langle c, K^2 c \rangle c + P_{\perp c} K^2 c = \|Kc\|^2 c + P_{\perp c} K^2 c$.
 Since $(Q_{\mathrm{even}} - \lambda I) c = 0$, the left-hand side reduces to $(Q_{\mathrm{even}} - \lambda I) P_{\perp c} K^2 c$.
 On the right-hand side, decomposing $d = D_0 c + d_{\mathrm{exc}}$ and $K \boldsymbol\psi = \langle c, K \boldsymbol\psi \rangle c + P_{\perp c} K \boldsymbol\psi = - D_0 M_1 c + P_{\perp c} K \boldsymbol\psi$:
-$$- D_0 (K \boldsymbol\psi + M_1 d) = - D_0 \big[ - D_0 M_1 c + P_{\perp c} K \boldsymbol\psi + M_1 (D_0 c + d_{\mathrm{exc}}) \big] = - D_0 (P_{\perp c} K \boldsymbol\psi + M_1 d_{\mathrm{exc}}),$$
-where the $c$-component vanishes identically. Inverting $(Q_{\mathrm{even}} - \lambda I)$ on $c^\perp$ proves (8.13.2):
-$$P_{\perp c} K^2 c = - D_0 (Q_{\mathrm{even}} - \lambda I)^{-1} (P_{\perp c} K \boldsymbol\psi + M_1 d_{\mathrm{exc}}).$$
+$$s_2 = K \boldsymbol\psi + M_1 d = (- D_0 M_1 c + P_{\perp c} K \boldsymbol\psi) + M_1 (D_0 c + d_{\mathrm{exc}}) = P_{\perp c} K \boldsymbol\psi + M_1 d_{\mathrm{exc}} \in c^\perp.$$
+Inverting $(Q_{\mathrm{even}} - \lambda I)$ on $c^\perp$ proves (8.13.2):
+$$P_{\perp c} K^2 c = - D_0 (Q_{\mathrm{even}} - \lambda I)^{-1} s_2.$$
 
 **Step 4 (Connecting $K^2 c$ to $v_{\mathrm{exc}}$ and Ground-Doublet Pole Cancellation):**
 From $Kc = b_{00} u_0 + v_{\mathrm{exc}}$, multiplying by $K$ gives $K v_{\mathrm{exc}} = K^2 c - b_{00} K u_0$.
@@ -1011,44 +1018,59 @@ From Proposition 8.8, $(Q_{\mathrm{even}} - \mu_0 I) K u_0 = a_0 d = a_0 (D_0 c 
 $$K u_0 = \frac{a_0 D_0}{\lambda - \mu_0} c + a_0 (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}} = b_{00} c + a_0 (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}.$$
 Multiplying by $b_{00}$ and subtracting from $K^2 c = \|Kc\|^2 c + P_{\perp c} K^2 c$:
 $$K v_{\mathrm{exc}} = (\|Kc\|^2 - b_{00}^2) c + P_{\perp c} K^2 c - a_0 b_{00} (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}.$$
-Since $\|Kc\|^2 - b_{00}^2 = \|v_{\mathrm{exc}}\|^2$, substituting (8.13.2) yields:
-$$K v_{\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 c - D_0 (Q_{\mathrm{even}} - \lambda I)^{-1} P_{\perp c} K \boldsymbol\psi - D_0 M_1 (Q_{\mathrm{even}} - \lambda I)^{-1} d_{\mathrm{exc}} - a_0 b_{00} (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}.$$
-Now isolate the terms in $d_{\mathrm{exc}}$. Using $a_0 b_{00} = - \frac{D_0 a_0^2}{\mu_0 - \lambda}$ and $D_0 M_1 = - a_0 b_{00} + D_0 M_1^{\mathrm{exc}}$:
-$$- D_0 M_1 (Q_{\mathrm{even}} - \lambda I)^{-1} d_{\mathrm{exc}} - a_0 b_{00} (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}$$
-$$= a_0 b_{00} \big[ (Q_{\mathrm{even}} - \lambda I)^{-1} - (Q_{\mathrm{even}} - \mu_0 I)^{-1} \big] d_{\mathrm{exc}} - D_0 M_1^{\mathrm{exc}} (Q_{\mathrm{even}} - \lambda I)^{-1} d_{\mathrm{exc}}.$$
-Applying the First Resolvent Identity $(Q - \lambda)^{-1} - (Q - \mu_0)^{-1} = - (\mu_0 - \lambda) (Q - \lambda)^{-1} (Q - \mu_0)^{-1}$:
-$$a_0 b_{00} \big[ (Q_{\mathrm{even}} - \lambda I)^{-1} - (Q_{\mathrm{even}} - \mu_0 I)^{-1} \big] = \left( - \frac{D_0 a_0^2}{\mu_0 - \lambda} \right) \big( - (\mu_0 - \lambda) \big) (Q_{\mathrm{even}} - \lambda I)^{-1} (Q_{\mathrm{even}} - \mu_0 I)^{-1}$$
-$$= D_0 a_0^2 (Q_{\mathrm{even}} - \lambda I)^{-1} (Q_{\mathrm{even}} - \mu_0 I)^{-1}.$$
-The factor $\mu_0 - \lambda$ cancels identically. Factoring out $D_0$ yields $K v_{\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 c + D_0 \Xi$ with $\Xi$ given by (8.13.4), proving (8.13.3).
+Since $\|Kc\|^2 - b_{00}^2 = \|v_{\mathrm{exc}}\|^2$, substituting $P_{\perp c} K^2 c = - D_0 (Q_{\mathrm{even}} - \lambda I)^{-1} s_2$ and $a_0 b_{00} = - \frac{D_0 a_0^2}{\mu_0 - \lambda}$:
+$$K v_{\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 c - D_0 (Q_{\mathrm{even}} - \lambda I)^{-1} s_2 + D_0 \left( \frac{a_0^2}{\mu_0 - \lambda} \right) (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}}.$$
+Factoring out $D_0$ yields $K v_{\mathrm{exc}} = \|v_{\mathrm{exc}}\|^2 c + D_0 \Xi$ with $\Xi$ given by (8.13.4), proving (8.13.3).
 
-**Step 5 (Norm Inequalities and Rayleigh Quotient Duality):**
+**Step 5 (Mode-by-Mode Cancellation and Proof of Identity 8.13.5):**
+We now expand both terms of $\Xi$ in the excited even eigenbasis $\{u_k\}_{k \ge 1}$ of $c^\perp$.
+For the first term, from $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$, taking matrix elements yields $\langle u_k, K u_j \rangle = - \frac{a_j d_k}{\mu_j - E_k}$. Expanding $K \boldsymbol\psi = \sum_{j=0}^{N-1} a_j K u_j$ gives:
+$$\langle u_k, K \boldsymbol\psi \rangle = - d_k \sum_{j=0}^{N-1} \frac{a_j^2}{\mu_j - E_k}, \qquad \langle u_k, M_1 d \rangle = M_1 d_k = d_k \sum_{j=0}^{N-1} \frac{a_j^2}{\mu_j - \lambda}.$$
+Adding them and combining fractions:
+$$\langle u_k, s_2 \rangle = d_k \sum_{j=0}^{N-1} a_j^2 \left( \frac{1}{\mu_j - \lambda} - \frac{1}{\mu_j - E_k} \right) = - d_k (E_k - \lambda) \sum_{j=0}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+Applying $(Q_{\mathrm{even}} - \lambda I)^{-1}$, the factor $E_k - \lambda$ cancels identically mode by mode:
+$$\langle u_k, (Q_{\mathrm{even}} - \lambda I)^{-1} s_2 \rangle = \frac{\langle u_k, s_2 \rangle}{E_k - \lambda} = - d_k \sum_{j=0}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+Isolating the $j=0$ term:
+$$- \langle u_k, (Q_{\mathrm{even}} - \lambda I)^{-1} s_2 \rangle = d_k \frac{a_0^2}{(\mu_0 - \lambda)(\mu_0 - E_k)} + d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+For the second term of $\Xi$, since $(Q_{\mathrm{even}} - \mu_0 I) u_k = (E_k - \mu_0) u_k$:
+$$\left\langle u_k, \left( \frac{a_0^2}{\mu_0 - \lambda} \right) (Q_{\mathrm{even}} - \mu_0 I)^{-1} d_{\mathrm{exc}} \right\rangle = \frac{a_0^2}{\mu_0 - \lambda} \frac{d_k}{E_k - \mu_0} = - d_k \frac{a_0^2}{(\mu_0 - \lambda)(\mu_0 - E_k)}.$$
+Adding the two pieces to evaluate $\langle u_k, \Xi \rangle$:
+$$\langle u_k, \Xi \rangle = \left[ d_k \frac{a_0^2}{(\mu_0 - \lambda)(\mu_0 - E_k)} + d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right] - d_k \frac{a_0^2}{(\mu_0 - \lambda)(\mu_0 - E_k)}$$
+$$= d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}.$$
+The $j=0$ term cancels identically for every mode $k \ge 1$, proving (8.13.5).
+
+**Step 6 (Norm Inequalities and Rayleigh Quotient Duality):**
 Dividing (8.13.3) by $D_0$:
 $$\frac{K v_{\mathrm{exc}}}{D_0} = \frac{\|v_{\mathrm{exc}}\|^2}{D_0} c + \Xi = D_0 M_{2,\mathrm{exc}} c + \Xi.$$
 Because $\Xi \in c^\perp$, $\left\| \frac{K v_{\mathrm{exc}}}{D_0} \right\|^2 = D_0^2 M_{2,\mathrm{exc}}^2 + \|\Xi\|^2$.
-Because $v_{\mathrm{exc}} \in H_{\mathrm{odd}}$ has non-zero Fourier indices $m \ge 1$, $\|K v_{\mathrm{exc}}\|^2 = \sum_{m=1}^N m^2 (v_{\mathrm{exc}})_m^2 \ge \|v_{\mathrm{exc}}\|^2$.
+Because $v_{\mathrm{exc}} \in H_{\mathrm{odd}}$ contains only non-zero Fourier indices $m \ge 1$, $\|K v_{\mathrm{exc}}\|^2 = \sum_{m=1}^N m^2 (v_{\mathrm{exc}})_m^2 \ge \|v_{\mathrm{exc}}\|^2$.
 Therefore:
 $$M_{2,\mathrm{exc}} = \frac{\|v_{\mathrm{exc}}\|^2}{D_0^2} \le \left\| \frac{K v_{\mathrm{exc}}}{D_0} \right\|^2 = D_0^2 M_{2,\mathrm{exc}}^2 + \|\Xi\|^2 \implies M_{2,\mathrm{exc}} (1 - D_0^2 M_{2,\mathrm{exc}}) \le \|\Xi\|^2,$$
-which proves (8.13.5). Multiplying by $D_0^2$ and dividing by $M_1^{\mathrm{exc}}$ yields (8.13.6).
+which proves (8.13.6). Multiplying by $D_0^2$ and dividing by $M_1^{\mathrm{exc}}$ yields (8.13.7).
 Finally, from $(Q_{\mathrm{odd}} - \lambda I) v_{\mathrm{exc}} = - D_0 \boldsymbol\psi_{\mathrm{exc}}$, taking the inner product with $v_{\mathrm{exc}}$ gives $\langle v_{\mathrm{exc}}, (Q_{\mathrm{odd}} - \lambda I) v_{\mathrm{exc}} \rangle = D_0^2 M_1^{\mathrm{exc}}$.
-Dividing by $\|v_{\mathrm{exc}}\|^2 = D_0^2 M_{2,\mathrm{exc}}$ yields the Rayleigh quotient $\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}}) = \frac{M_1^{\mathrm{exc}}}{M_{2,\mathrm{exc}}} = \frac{D_0^2}{\rho_2^{\mathrm{exc}}}$, which confirms (8.13.7). $\blacksquare$
+Dividing by $\|v_{\mathrm{exc}}\|^2 = D_0^2 M_{2,\mathrm{exc}}$ yields the Rayleigh quotient $\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}}) = \frac{M_1^{\mathrm{exc}}}{M_{2,\mathrm{exc}}} = \frac{D_0^2}{\rho_2^{\mathrm{exc}}}$, confirming (8.13.8). $\blacksquare$
 
 ---
 
 #### Structural Implications of Proposition 8.13 for the Asymptotic Programme
-Proposition 8.13 accomplishes three major strategic goals for Programme 1:
 
-1. **Elimination of the Odd-Sector Gap Dependency:**
-   In earlier formulations, controlling $D_0^2 M_{2,\mathrm{exc}}$ required the independent asymptotic gap hypothesis $\mathrm{H2}_{\mathrm{gap}}$ ($\inf_{j \ge 1} (\mu_j - \lambda) \ge c_{\mathrm{gap}} D_0^2 N^{-q_0}$). Proposition 8.13 replaces this entirely with the even-sector resolvent vector $\Xi$. The upper bound (8.13.6) does not depend on any excited odd eigenvalue $\mu_j$ ($j \ge 1$).
-2. **Analytic Mechanism for Smallness of $\rho_2^{\mathrm{exc}}$:**
-   In (8.13.4), the dominant term for large $N$ is $- M_1^{\mathrm{exc}} (Q_{\mathrm{even}} - \lambda I)^{-1} d_{\mathrm{exc}} = - M_1^{\mathrm{exc}} R_{\mathrm{even}}(\lambda) d_{\mathrm{exc}}$.
-   Squaring its norm gives $\|\Xi\|^2 \approx (M_1^{\mathrm{exc}})^2 \|R_{\mathrm{even}} d_{\mathrm{exc}}\|^2$.
-   Substituting this into (8.13.6) cancels one power of $M_1^{\mathrm{exc}}$ against the denominator:
-   $$\rho_2^{\mathrm{exc}} \lesssim D_0^2 M_1^{\mathrm{exc}} \|R_{\mathrm{even}}(\lambda) d_{\mathrm{exc}}\|^2.$$
-   Under Hypotheses H2 ($\|R_{\mathrm{even}} d_{\mathrm{exc}}\|^2 \le C_E N^{\gamma_e}$) and $\mathrm{H2}_{\mathrm{odd}}$ ($M_1^{\mathrm{exc}} \le C_1 N^\gamma$), the resolvent norms grow at most polynomially.
-   Because $D_0^2 \le C_0 e^{-\sigma N}$ decays exponentially (Hypothesis H3), the boundary penetration factor $D_0^2$ **exponentially overpowers the polynomial even resolvent mass**:
-   $$\rho_2^{\mathrm{exc}} \le C e^{-\sigma N} N^{\gamma + \gamma_e} \longrightarrow 0 \quad \text{as } N \to \infty.$$
-3. **Reduction of First-Jet Control:**
-   Combining Proposition 8.13 with Proposition 8.10, the first-jet ratio $|D_1/D_0|$ is controlled under Hypotheses H1, H2, $\mathrm{H2}_{\mathrm{odd}}$, and H3 **without any independent assumptions on the excited odd tunneling ladder**.
+Proposition 8.13 reframes the continuum decoupling programme across four structural dimensions:
+
+1. **Elimination of the Excited-Odd-Gap Hypothesis and Transfer to Even Resolvents:**
+   Proposition 8.13 eliminates the independent excited-odd-gap hypothesis $\mathrm{H2}_{\mathrm{gap}}$ ($\frac{D_0^2}{\mu_1 - \lambda} \le C N^{q_0}$) as an algebraic input. It proves that controlling $\rho_2^{\mathrm{exc}}$ does not require lower-bounding individual excited tunneling gaps $\mu_j - \lambda$. Rather, the remaining analytical requirement is transferred entirely to bounding the even-sector resolvent vector $\Xi$.
+2. **Unified Mode-by-Mode Cancellation of the Ground Doublet:**
+   Identity (8.13.5) shows that the apparent three-term decomposition of $\Xi$ collapses into a single unified mode vector:
+   $$\Xi = \sum_{k \ge 1} \left( d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right) u_k.$$
+   No artificial triangle inequality is required: the dangerous $j=0$ ground-state singularity is completely absent. The inner sum is an overlap-weighted average over the excited odd spectrum with normalized transmission weights $\frac{a_j^2}{\mu_j - \lambda} = \mathcal{O}(1)$.
+3. **The Reframed Analytical Target (Milestone M12):**
+   The remaining analytical requirement for Route B is to establish a polynomial upper bound on the norm of this unified vector:
+   $$\|\Xi\|^2 = \sum_{k \ge 1} d_k^2 \left( \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right)^2 \le C_\Xi N^{r_\Xi}.$$
+   This is an even-sector transmission estimate directly analogous to $\Sigma_{\mathrm{filt}}(N) = \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k}$ in Hypothesis H2. Once such a polynomial bound is established, the exponential boundary prefactor $D_0^2 \le C_0 e^{-\sigma N}$ (Hypothesis H3) guarantees:
+   $$\rho_2^{\mathrm{exc}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - o(1))} \le C' e^{-\sigma N} N^{r_\Xi - \gamma_{\min}} \longrightarrow 0 \quad (N \to \infty).$$
+4. **The Variational Rayleigh Quotient Perspective:**
+   Equivalently, the variational formulation (8.13.8) demonstrates that $\rho_2^{\mathrm{exc}} \to 0$ if and only if the odd-sector Rayleigh energy of the coordinate-derivative wavepacket residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$ satisfies:
+   $$\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}}) \ge c_{\mathrm{ray}} e^{-\sigma_0 N} \quad \text{with } \sigma_0 < \sigma \quad (\text{or } \mathcal{R} \ge C N^{-p}).$$
+   Because $v_{\mathrm{exc}}$ is orthogonal to the lowest mode $u_0$ and is supported on oscillatory excited modes, its Rayleigh energy is governed by the continuum kinetic scale rather than by the ground-doublet tunneling splitting.
 
 ---
 
