@@ -161,7 +161,7 @@ def run_cell68() -> None:
         t0 = time.time()
 
         # Build Galerkin operator
-        Q_full = build_galerkin_matrix(N, C_PARAM, L_PARAM, T_PARAM, dps=GROUND_DPS)
+        Q_full = build_galerkin_matrix(c=C_PARAM, N=N, T=T_PARAM, dps=GROUND_DPS)
         lam_0, E, O, evals_e, V_e, evals_o, V_o = solve_parity_eigensystems(Q_full, N)
 
         # Ground state c in R^{N+1}

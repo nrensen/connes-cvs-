@@ -1,0 +1,128 @@
+================================================================================================
+CELL 68 — AUDIT OF THE GLOBAL WEIGHTED RESOLVENT TRACE T_N, DISCRETE
+         COORDINATE KINETIC ENERGIES, AND EXPONENTIAL QUENCHING D_0^2 T_N
+================================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
+
+--- DIMENSION N =  8 (Elapsed: 103.29s) ---
+  Ground scale:      D_0^2                = 6.48094082e-21
+  Excited gap:       mu_1 - lam_0         = 1.38723543e-15
+  Exact K^2 Trace:   sum_j ||Ku_j||^2     = 204.0 (Residual: 1.026e-48)
+  Ground KE:         ||Ku_0||^2           = 3.78181211
+  Excited Mode 1 KE: ||Ku_1||^2           = 8.23338356
+  Excited Mode 2 KE: ||Ku_2||^2           = 11.8509781
+  Bare Trace T_N:    T_spec               = 5.93573421e+15
+  Fourier Trace T_N: T_trace              = 5.93573421e+15
+  Trace Identity:    |T_spec - T_trace|   = 1.204e-35
+  Bound modes (<1):  N_bound              = 6
+  Bound trace:       T_bound              = 5.93573421e+15
+  High-energy trace: T_high               = 14.0227646
+  Scaled Trace:      D_0^2 * T_N          = 3.84691421e-5
+  Scaled Bound:      D_0^2 * T_bound      = 3.84691421e-5
+  Scaled High:       D_0^2 * T_high       = 9.08807078e-20
+  Coord Residual:    S_coord(N)           = 3.84689675e-5
+  Actions:           sigma_0 = 2.90534, sigma_1 = 4.27643, sigma_T = 1.27071
+
+--- DIMENSION N = 12 (Elapsed: 147.61s) ---
+  Ground scale:      D_0^2                = 4.41839913e-27
+  Excited gap:       mu_1 - lam_0         = 1.18648486e-21
+  Exact K^2 Trace:   sum_j ||Ku_j||^2     = 650.0 (Residual: 5.474e-48)
+  Ground KE:         ||Ku_0||^2           = 4.36647185
+  Excited Mode 1 KE: ||Ku_1||^2           = 9.22938815
+  Excited Mode 2 KE: ||Ku_2||^2           = 13.8838263
+  Bare Trace T_N:    T_spec               = 7.77904863e+21
+  Fourier Trace T_N: T_trace              = 7.77904863e+21
+  Trace Identity:    |T_spec - T_trace|   = 2.524e-29
+  Bound modes (<1):  N_bound              = 7
+  Bound trace:       T_bound              = 7.77904863e+21
+  High-energy trace: T_high               = 175.763755
+  Scaled Trace:      D_0^2 * T_N          = 3.43709417e-5
+  Scaled Bound:      D_0^2 * T_bound      = 3.43709417e-5
+  Scaled High:       D_0^2 * T_high       = 7.76594421e-25
+  Coord Residual:    S_coord(N)           = 3.43708462e-5
+  Actions:           sigma_0 = 2.5285, sigma_1 = 4.01527, sigma_T = 0.856525
+
+--- DIMENSION N = 16 (Elapsed: 191.45s) ---
+  Ground scale:      D_0^2                = 3.17795205e-32
+  Excited gap:       mu_1 - lam_0         = 1.27595595e-26
+  Exact K^2 Trace:   sum_j ||Ku_j||^2     = 1496.0 (Residual: 1.642e-47)
+  Ground KE:         ||Ku_0||^2           = 4.67181557
+  Excited Mode 1 KE: ||Ku_1||^2           = 9.75413984
+  Excited Mode 2 KE: ||Ku_2||^2           = 15.780141
+  Bare Trace T_N:    T_spec               = 7.64477985e+26
+  Fourier Trace T_N: T_trace              = 7.64477985e+26
+  Trace Identity:    |T_spec - T_trace|   = 6.617e-24
+  Bound modes (<1):  N_bound              = 9
+  Bound trace:       T_bound              = 7.64477985e+26
+  High-energy trace: T_high               = 341.143755
+  Scaled Trace:      D_0^2 * T_N          = 2.42947438e-5
+  Scaled Bound:      D_0^2 * T_bound      = 2.42947438e-5
+  Scaled High:       D_0^2 * T_high       = 1.0841385e-29
+  Coord Residual:    S_coord(N)           = 2.42947182e-5
+  Actions:           sigma_0 = 2.26645, sigma_1 = 3.72647, sigma_T = 0.664078
+
+--- DIMENSION N = 20 (Elapsed: 246.39s) ---
+  Ground scale:      D_0^2                = 7.02834385e-37
+  Excited gap:       mu_1 - lam_0         = 6.39990962e-31
+  Exact K^2 Trace:   sum_j ||Ku_j||^2     = 2870.0 (Residual: 2.19e-47)
+  Ground KE:         ||Ku_0||^2           = 4.85676763
+  Excited Mode 1 KE: ||Ku_1||^2           = 10.0497396
+  Excited Mode 2 KE: ||Ku_2||^2           = 17.3607287
+  Bare Trace T_N:    T_spec               = 1.57032212e+31
+  Fourier Trace T_N: T_trace              = 1.57032212e+31
+  Trace Identity:    |T_spec - T_trace|   = 2.711e-20
+  Bound modes (<1):  N_bound              = 10
+  Bound trace:       T_bound              = 1.57032212e+31
+  High-energy trace: T_high               = 692.045373
+  Scaled Trace:      D_0^2 * T_N          = 1.10367638e-5
+  Scaled Bound:      D_0^2 * T_bound      = 1.10367638e-5
+  Scaled High:       D_0^2 * T_high       = 4.86393284e-34
+  Coord Residual:    S_coord(N)           = 1.10367591e-5
+  Actions:           sigma_0 = 2.08114, sigma_1 = 3.47619, sigma_T = 0.570714
+
+--- DIMENSION N = 24 (Elapsed: 300.76s) ---
+  Ground scale:      D_0^2                = 1.29495976e-40
+  Excited gap:       mu_1 - lam_0         = 2.94860198e-34
+  Exact K^2 Trace:   sum_j ||Ku_j||^2     = 4900.0 (Residual: 6.569e-47)
+  Ground KE:         ||Ku_0||^2           = 4.96305886
+  Excited Mode 1 KE: ||Ku_1||^2           = 10.2186531
+  Excited Mode 2 KE: ||Ku_2||^2           = 18.2890506
+  Bare Trace T_N:    T_spec               = 3.46562538e+34
+  Fourier Trace T_N: T_trace              = 3.46562538e+34
+  Trace Identity:    |T_spec - T_trace|   = 5.551e-17
+  Bound modes (<1):  N_bound              = 10
+  Bound trace:       T_bound              = 3.46562538e+34
+  High-energy trace: T_high               = 1707.16581
+  Scaled Trace:      D_0^2 * T_N          = 4.48784542e-6
+  Scaled Bound:      D_0^2 * T_bound      = 4.48784542e-6
+  Scaled High:       D_0^2 * T_high       = 2.21071104e-37
+  Coord Residual:    S_coord(N)           = 4.48784443e-6
+  Actions:           sigma_0 = 1.91344, sigma_1 = 3.21694, sigma_T = 0.513089
+
+====================================================================================================================
+SYNTHESIS TABLE 1: EXACT TRACE IDENTITY, COORDINATE KINETIC ENERGIES & BARE TRACE T_N
+====================================================================================================================
+   N |   ||Ku_0||^2 |   ||Ku_1||^2 |   ||Ku_2||^2 |  Tr(K^2) Error |       Bare T_N | Identity Error
+--------------------------------------------------------------------------------------------------------------------
+   8 |      3.78181 |      8.23338 |       11.851 |      1.026e-48 |    5.93573e+15 |      1.204e-35
+  12 |      4.36647 |      9.22939 |      13.8838 |      5.474e-48 |    7.77905e+21 |      2.524e-29
+  16 |      4.67182 |      9.75414 |      15.7801 |      1.642e-47 |    7.64478e+26 |      6.617e-24
+  20 |      4.85677 |      10.0497 |      17.3607 |       2.19e-47 |    1.57032e+31 |      2.711e-20
+  24 |      4.96306 |      10.2187 |      18.2891 |      6.569e-47 |    3.46563e+34 |      5.551e-17
+====================================================================================================================
+
+====================================================================================================================
+SYNTHESIS TABLE 2: SEMICLASSICAL SECTOR PARTITIONING, SCALED TRACE & EXPONENTIAL QUENCHING
+====================================================================================================================
+   N |       T_bound |        T_high |    D_0^2 * T_N |     S_coord(N) |  sigma_0 |  sigma_1 |  sigma_T
+--------------------------------------------------------------------------------------------------------------------
+   8 |   5.93573e+15 |       14.0228 |     3.84691e-5 |      3.8469e-5 |   2.9053 |   4.2764 |   1.2707
+  12 |   7.77905e+21 |       175.764 |     3.43709e-5 |     3.43708e-5 |   2.5285 |   4.0153 |  0.85652
+  16 |   7.64478e+26 |       341.144 |     2.42947e-5 |     2.42947e-5 |   2.2665 |   3.7265 |  0.66408
+  20 |   1.57032e+31 |       692.045 |     1.10368e-5 |     1.10368e-5 |   2.0811 |   3.4762 |  0.57071
+  24 |   3.46563e+34 |       1707.17 |     4.48785e-6 |     4.48784e-6 |   1.9134 |   3.2169 |  0.51309
+====================================================================================================================
+
+================================================================================
+CELL 68 EXECUTION COMPLETE
+================================================================================

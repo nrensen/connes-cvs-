@@ -1,0 +1,113 @@
+================================================================================================
+CELL 69 — AUDIT OF THE EXACT TRANSITION DIPOLE FACTORIZATION R_gap = b_{01}^2 / R_1
+         AND EVEN-RESOLVENT CANCELLATION IN THE FIRST RELATIVE TUNNELING GAP
+================================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
+
+--- DIMENSION N =  8 (Elapsed: 108.21s) ---
+  Tunneling gap:       mu_1 - lam_0         = 1.38723543e-15
+  Odd overlap:         a_1                  = -1.05343439e-7
+  Transmission ratio:  R_1 = a_1^2 / gap_1  = 7.99953627
+  Relative gap:        R_gap                = 4.67183918e-6
+  Transition dipole:   b_{01}               = 0.006113309
+  Dipole commutator:   |b_{01} - b_{comm}|   = 1.092e-37
+  Dipole squared:      b_{01}^2             = 3.7372547e-5
+  Factorized R_gap:    b_{01}^2 / R_1       = 4.67183918e-6
+  Factorization error: |R_gap - b^2/R_1|    = 1.67e-40
+  Excited norm:        ||v_exc||^2          = 3.73759357e-5
+  Mode 1 share:        b_{01}^2 / ||v_exc||^2 = 99.990933%
+  Coordinate KE:       ||K u_1||^2          = 8.23338356
+  Even resolvent term: E_{even, 1}          = 8.23334619
+  Cancellation error:  |||Ku_1||^2 - E - b^2| = 8.199e-37
+
+--- DIMENSION N = 12 (Elapsed: 154.73s) ---
+  Tunneling gap:       mu_1 - lam_0         = 1.18648486e-21
+  Odd overlap:         a_1                  = -9.03771532e-11
+  Transmission ratio:  R_1 = a_1^2 / gap_1  = 6.88422593
+  Relative gap:        R_gap                = 3.72394059e-6
+  Transition dipole:   b_{01}               = 0.00506324485
+  Dipole commutator:   |b_{01} - b_{comm}|   = 2.275e-31
+  Dipole squared:      b_{01}^2             = 2.56364484e-5
+  Factorized R_gap:    b_{01}^2 / R_1       = 3.72394059e-6
+  Factorization error: |R_gap - b^2/R_1|    = 3.346e-34
+  Excited norm:        ||v_exc||^2          = 2.56370911e-5
+  Mode 1 share:        b_{01}^2 / ||v_exc||^2 = 99.997493%
+  Coordinate KE:       ||K u_1||^2          = 9.22938815
+  Even resolvent term: E_{even, 1}          = 9.22936252
+  Cancellation error:  |||Ku_1||^2 - E - b^2| = 9.09e-31
+
+--- DIMENSION N = 16 (Elapsed: 200.80s) ---
+  Tunneling gap:       mu_1 - lam_0         = 1.27595595e-26
+  Odd overlap:         a_1                  = -2.29566282e-13
+  Transmission ratio:  R_1 = a_1^2 / gap_1  = 4.13028976
+  Relative gap:        R_gap                = 2.49064401e-6
+  Transition dipole:   b_{01}               = 0.00320734804
+  Dipole commutator:   |b_{01} - b_{comm}|   = 9.818e-26
+  Dipole squared:      b_{01}^2             = 1.02870815e-5
+  Factorized R_gap:    b_{01}^2 / R_1       = 2.49064401e-6
+  Factorization error: |R_gap - b^2/R_1|    = 1.525e-28
+  Excited norm:        ||v_exc||^2          = 1.02873083e-5
+  Mode 1 share:        b_{01}^2 / ||v_exc||^2 = 99.997795%
+  Coordinate KE:       ||K u_1||^2          = 9.75413984
+  Even resolvent term: E_{even, 1}          = 9.75412955
+  Cancellation error:  |||Ku_1||^2 - E - b^2| = 9.98e-26
+
+--- DIMENSION N = 20 (Elapsed: 256.26s) ---
+  Tunneling gap:       mu_1 - lam_0         = 6.39990962e-31
+  Odd overlap:         a_1                  = -1.58167672e-15
+  Transmission ratio:  R_1 = a_1^2 / gap_1  = 3.90896341
+  Relative gap:        R_gap                = 1.09819423e-6
+  Transition dipole:   b_{01}               = 0.00207190759
+  Dipole commutator:   |b_{01} - b_{comm}|   = 1.783e-22
+  Dipole squared:      b_{01}^2             = 4.29280108e-6
+  Factorized R_gap:    b_{01}^2 / R_1       = 1.09819423e-6
+  Factorization error: |R_gap - b^2/R_1|    = 1.89e-25
+  Excited norm:        ||v_exc||^2          = 4.29284587e-6
+  Mode 1 share:        b_{01}^2 / ||v_exc||^2 = 99.998957%
+  Coordinate KE:       ||K u_1||^2          = 10.0497396
+  Even resolvent term: E_{even, 1}          = 10.0497353
+  Cancellation error:  |||Ku_1||^2 - E - b^2| = 2.128e-20
+
+--- DIMENSION N = 24 (Elapsed: 310.56s) ---
+  Tunneling gap:       mu_1 - lam_0         = 2.94860198e-34
+  Odd overlap:         a_1                  = -3.88891324e-17
+  Transmission ratio:  R_1 = a_1^2 / gap_1  = 5.12909042
+  Relative gap:        R_gap                = 4.3917754e-7
+  Transition dipole:   b_{01}               = 0.00150086019
+  Dipole commutator:   |b_{01} - b_{comm}|   = 1.815e-18
+  Dipole squared:      b_{01}^2             = 2.25258131e-6
+  Factorized R_gap:    b_{01}^2 / R_1       = 4.3917754e-7
+  Factorization error: |R_gap - b^2/R_1|    = 1.062e-21
+  Excited norm:        ||v_exc||^2          = 2.2525915e-6
+  Mode 1 share:        b_{01}^2 / ||v_exc||^2 = 99.999548%
+  Coordinate KE:       ||K u_1||^2          = 10.2186531
+  Even resolvent term: E_{even, 1}          = 10.2186508
+  Cancellation error:  |||Ku_1||^2 - E - b^2| = 7.832e-18
+
+====================================================================================================================
+SYNTHESIS TABLE 1: EXACT RELATIVE GAP FACTORIZATION R_gap = b_{01}^2 / R_1
+====================================================================================================================
+   N |         R_gap |      b_{01}^2 |        R_1 | b_{01}^2 / R_1 |   Fact Error |   Comm Error
+--------------------------------------------------------------------------------------------------------------------
+   8 |    4.67184e-6 |    3.73725e-5 |     7.9995 |     4.67184e-6 |     1.67e-40 |    1.092e-37
+  12 |    3.72394e-6 |    2.56364e-5 |     6.8842 |     3.72394e-6 |    3.346e-34 |    2.275e-31
+  16 |    2.49064e-6 |    1.02871e-5 |     4.1303 |     2.49064e-6 |    1.525e-28 |    9.818e-26
+  20 |    1.09819e-6 |     4.2928e-6 |      3.909 |     1.09819e-6 |     1.89e-25 |    1.783e-22
+  24 |    4.39178e-7 |    2.25258e-6 |     5.1291 |     4.39178e-7 |    1.062e-21 |    1.815e-18
+====================================================================================================================
+
+====================================================================================================================
+SYNTHESIS TABLE 2: EVEN-RESOLVENT CANCELLATION & MODE-1 WAVEPACKET DOMINANCE
+====================================================================================================================
+   N |   ||K u_1||^2 |   E_{even, 1} |      b_{01}^2 |  Cancel Residual |   Mode-1 Share
+--------------------------------------------------------------------------------------------------------------------
+   8 |       8.23338 |       8.23335 |    3.73725e-5 |        8.199e-37 |       99.9909%
+  12 |       9.22939 |       9.22936 |    2.56364e-5 |         9.09e-31 |       99.9975%
+  16 |       9.75414 |       9.75413 |    1.02871e-5 |         9.98e-26 |       99.9978%
+  20 |       10.0497 |       10.0497 |     4.2928e-6 |        2.128e-20 |        99.999%
+  24 |       10.2187 |       10.2187 |    2.25258e-6 |        7.832e-18 |       99.9995%
+====================================================================================================================
+
+================================================================================
+CELL 69 EXECUTION COMPLETE
+================================================================================
