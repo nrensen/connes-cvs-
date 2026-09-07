@@ -1391,12 +1391,11 @@ $$\boxed{\mathcal{T}_N \equiv \operatorname{Tr}_{H_{\mathrm{odd}}}\big[ K^2 R_\l
    - *The above-barrier trace is polynomially bounded:*
      $$\mathcal{T}_{\mathrm{high}}(N) \equiv \sum_{\mu_j \ge V_*} \frac{\|Ku_j\|^2}{\mu_j - \lambda} \le \frac{1}{c_{\mathrm{high}}} \operatorname{Tr}_{H_{\mathrm{odd}}}(K^2) = \frac{1}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right) = \mathcal{O}(N^3).$$
    - *The bound-state trace satisfies:*
-     $$\mathcal{T}_{\mathrm{bound}}(N) \equiv \sum_{j=1}^{N_{\mathrm{bound}}} \frac{\|Ku_j\|^2}{\mu_j - \lambda} \le \frac{1}{\mu_1 - \lambda} \sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2.$$
-   *Multiplying by the ground-state tunneling amplitude $D_0^2 \le C_0 e^{-2\sigma_0 N}$, and assuming Bridges B1 and B2 ($\sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2 \le \mathcal{C}_{\mathrm{bound}} < \infty$), the scaled trace satisfies:*
+     $$\mathcal{T}_{\mathrm{bound}}(N) \equiv \sum_{j=1}^{N_{\mathrm{bound}}} \frac{\|Ku_j\|^2}   Multiplying by the ground-state tunneling amplitude $D_0^2 \le C_0 e^{-2\sigma_0 N}$, and assuming Bridges B1 and B2 ($\sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2 \le \mathcal{C}_{\mathrm{bound}} < \infty$), the scaled trace satisfies:
    $$\boxed{D_0^2 \mathcal{T}_N \le \mathcal{C}_{\mathrm{bound}} R_{\mathrm{gap}}^{\max}(N) + \frac{C_0}{c_{\mathrm{high}}} e^{-2\sigma_0 N} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right).} \tag{8.18.5}$$
-   *Because semiclassical barrier thinning ensures $\sigma_0 > \sigma_1$ with positive action gap $\Delta\sigma \equiv \sigma_0 - \sigma_1 > 0$, the relative tunneling gap decays exponentially:*
+   *Under the semiclassical barrier-thinning hypothesis $\sigma_0 > \sigma_1$ (with action gap $\Delta\sigma \equiv \sigma_0 - \sigma_1 > 0$), the relative tunneling gap decays exponentially:*
    $$R_{\mathrm{gap}}^{\max}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda} = \mathcal{O}\big( e^{-(\sigma_0 + \Delta\sigma) N} \big) \longrightarrow 0 \quad (N \to \infty).$$
-   *Therefore, the physical scaled trace and the coordinate-energy measure are exponentially quenched:*
+   *Therefore, conditional on Bridges B1 and B2 and the barrier-thinning action hierarchy $\sigma_0 > \sigma_1$, the physical scaled trace and the coordinate-energy measure are exponentially quenched:*
    $$\mathcal{S}_{\mathrm{coord}}(N) \le D_0^2 \mathcal{T}_N = \mathcal{O}\big( e^{-(\sigma_0 + \Delta\sigma) N} \big) \longrightarrow 0 \quad (N \to \infty). \tag{8.18.6}$$
 
 ---
@@ -1462,8 +1461,7 @@ establishing (8.18.3).
    $$D_0^2 \mathcal{T}_N \le \frac{D_0^2}{\mu_1 - \lambda} \sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2 + \frac{D_0^2}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right).$$
    Under Bridges B1 and B2, $\sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2 \le \mathcal{C}_{\mathrm{bound}} < \infty$.
    By Hypothesis H3, $D_0^2 \le C_0 e^{-2\sigma_0 N}$.
-   By semiclassical barrier thinning, $\sigma_0 > \sigma_1$ with action gap $\Delta\sigma = \sigma_0 - \sigma_1 > 0$.
-   Therefore:
+   Under the semiclassical barrier-thinning hypothesis $\sigma_0 > \sigma_1$ (action gap $\Delta\sigma = \sigma_0 - \sigma_1 > 0$),
    $$\frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N) \sim e^{-2\sigma_0 N} e^{+\sigma_1 N} = e^{-(\sigma_0 + \Delta\sigma) N} \longrightarrow 0 \quad (N \to \infty).$$
    Since $D_0^2 \mathcal{T}_{\mathrm{high}} = \mathcal{O}(e^{-2\sigma_0 N} N^3) \to 0$ as well, we obtain $D_0^2 \mathcal{T}_N \to 0$ exponentially fast, establishing (8.18.5) and (8.18.6). $\blacksquare$
 
@@ -1475,8 +1473,85 @@ Proposition 8.18 clarifies the exact role of the global weighted resolvent trace
    The continuum decoupling $\mathcal{S}_{\mathrm{coord}}(N) \to 0$ does not require the bare trace $\mathcal{T}_N$ to be polynomial. Instead, it relies on the **barrier-thinning action hierarchy**:
    $$2\sigma_0 > \sigma_1 \iff \sigma_0 + \Delta\sigma > 0.$$
    Because the boundary tunneling amplitude $D_0^2$ decays with double the ground-state barrier action $2\sigma_0 \approx 7.55$, while the first excited gap $\mu_1 - \lambda$ closes with the smaller excited barrier action $\sigma_1 \approx 3.22$, the product $D_0^2 \mathcal{T}_N \sim e^{-4.33 N}$ is exponentially extinguished.
-3. **The Commutator Parity Trace Identity:**
+3. **Retention of Bridges B1 and B2:**
+   The global trace analysis does **not** bypass Bridges B1 and B2; the bound-state localization estimate $\sum_{j=1}^{N_{\mathrm{bound}}} \|Ku_j\|^2 \le \mathcal{C}_{\mathrm{bound}} < \infty$ remains an essential premise in (8.18.5). What Proposition 8.18 establishes is that once B1 and B2 are held, the entire small-denominator challenge collapses strictly to the relative tunneling gap $R_{\mathrm{gap}}^{\max}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda}$.
+4. **The Commutator Parity Trace Identity:**
    The exact identity $\operatorname{Tr}_{H_{\mathrm{odd}}}(K^2 R_{\mathrm{odd}}) - \operatorname{Tr}_{H_{\mathrm{even}}}(K^2 R_{\mathrm{even}}) = \langle R_{\mathrm{odd}}\boldsymbol\psi, K R_{\mathrm{even}} d \rangle$ demonstrates that the difference between the weighted coordinate traces in the two parity sectors collapses to a single rank-two inner product between the odd resolvent vector $w_{\mathrm{odd}}$ and the coordinate-shifted even resolvent vector $K w_{\mathrm{even}}$, providing an exact structural link between the two sectors.
+
+---
+
+### 8.19 Proposition 8.19 (Exact Transition Dipole Factorization of the First Relative Tunneling Gap and Excited Wavepacket Residual)
+
+*The first relative tunneling gap $R_{\mathrm{gap}}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda}$, which controls the bound-state coordinate energy $\mathcal{S}_{\mathrm{bound}}(N)$ and the Route B continuum decoupling limit $\rho_2^{\mathrm{exc}} \to 0$, admits an exact finite-dimensional algebraic factorization in terms of the first coordinate transition dipole $b_{01} \equiv \langle u_0^{\mathrm{even}}, K u_1 \rangle$ and the first excited overlap transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$. Consequently, the relative tunneling gap is identically bounded by the excited coordinate wavepacket residual $\|v_{\mathrm{exc}}\|^2 = \|P_{\perp u_0} K c\|^2$, and is governed by an exact even-sector resolvent cancellation identity.*
+
+**Part I (Exact Dipole Factorization — Unconditional Finite-$N$ Theorem):**
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Galerkin matrix, $u_0^{\mathrm{even}} = c$ the even ground state ($Q_{\mathrm{even}} c = \lambda c$, $\langle d, c \rangle = D_0$), and $u_1$ the first excited odd eigenstate ($Q_{\mathrm{odd}} u_1 = \mu_1 u_1$, $a_1 = \langle \boldsymbol\psi, u_1 \rangle$). Define the coordinate transition dipole:*
+$$b_{01} \equiv \langle u_0^{\mathrm{even}}, K u_1 \rangle = \langle c, K u_1 \rangle.$$
+*For every finite dimension $N \ge 2$ and cutoff $c > 1$:*
+1. *The dipole matrix element satisfies the exact commutator quotient identity:*
+   $$b_{01} = - \frac{D_0 a_1}{\mu_1 - \lambda}. \tag{8.19.1}$$
+2. *Consequently, the first relative tunneling gap factors identically into:*
+   $$\boxed{R_{\mathrm{gap}}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda} = \frac{b_{01}^2}{\mathcal{R}_1}, \qquad \mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}.} \tag{8.19.2}$$
+
+**Part II (Coordinate Wavepacket Residual Upper Enclosure):**
+*Let $v_{\mathrm{exc}} \equiv P_{\perp u_0} K c$ be the excited coordinate wavepacket residual of Proposition 8.12. Then:*
+$$\boxed{b_{01}^2 \le \|v_{\mathrm{exc}}\|^2 \equiv \|P_{\perp u_0} K c\|^2 = D_0^2 M_{2,\mathrm{exc}},} \tag{8.19.3}$$
+*and therefore:*
+$$\boxed{R_{\mathrm{gap}}(N) \le \frac{\|v_{\mathrm{exc}}\|^2}{\mathcal{R}_1} = \frac{\|P_{\perp u_0} K c\|^2}{a_1^2 / (\mu_1 - \lambda)}.} \tag{8.19.4}$$
+
+**Part III (Even-Sector Resolvent Cancellation Identity):**
+*Expanding $K u_1$ in the orthonormal eigenbasis $\{u_k^{\mathrm{even}}\}_{k=0}^N$ of $Q_{\mathrm{even}}$ with eigenvalues $E_0 = \lambda < E_1 < \dots < E_N$ and boundary weights $d_k = \langle u_k^{\mathrm{even}}, d \rangle$:*
+$$\boxed{b_{01}^2 = \|K u_1\|^2 - a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2} = \|K u_1\|^2 - a_1^2 \|(Q_{\mathrm{even}} - \mu_1 I)^{-1} P_{\perp c} d\|^2.} \tag{8.19.5}$$
+
+---
+
+**Proof:**
+
+**Step 1 (Proof of Part I — Exact Dipole Factorization):**
+From Proposition 8.8, the rank-two coordinate commutator is $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$.
+Applying this to the first excited odd eigenstate $u_1 \in H_{\mathrm{odd}}$ ($Q_{\mathrm{odd}} u_1 = \mu_1 u_1$, $\langle d, u_1 \rangle = 0$ by odd parity, and $\langle \boldsymbol\psi, u_1 \rangle = a_1$):
+$$[K, Q] u_1 = \boldsymbol\psi \langle d, u_1 \rangle - d \langle \boldsymbol\psi, u_1 \rangle = - a_1 d.$$
+Expanding the commutator:
+$$[K, Q] u_1 = K Q u_1 - Q K u_1 = \mu_1 K u_1 - Q_{\mathrm{even}} K u_1 = - (Q_{\mathrm{even}} - \mu_1 I) K u_1.$$
+Equating both sides yields the exact operator identity on $H_{\mathrm{even}}$:
+$$(Q_{\mathrm{even}} - \mu_1 I) K u_1 = a_1 d.$$
+Taking the inner product with the even ground state $u_0^{\mathrm{even}} = c$ ($Q_{\mathrm{even}} c = \lambda c$, $\langle d, c \rangle = D_0$):
+$$\langle c, (Q_{\mathrm{even}} - \mu_1 I) K u_1 \rangle = (\lambda - \mu_1) \langle c, K u_1 \rangle = a_1 \langle c, d \rangle = a_1 D_0.$$
+Dividing by $\lambda - \mu_1 = - (\mu_1 - \lambda) \ne 0$ (since $\mu_1 > \mu_0 > \lambda$):
+$$b_{01} \equiv \langle c, K u_1 \rangle = - \frac{D_0 a_1}{\mu_1 - \lambda},$$
+which proves (8.19.1).
+Squaring both sides gives:
+$$b_{01}^2 = \frac{D_0^2 a_1^2}{(\mu_1 - \lambda)^2} = \frac{D_0^2}{\mu_1 - \lambda} \cdot \frac{a_1^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}(N) \cdot \mathcal{R}_1.$$
+Since $a_1 \ne 0$ by strict spectral interlacing (Proposition 8.14), dividing by $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda} > 0$ yields (8.19.2).
+
+**Step 2 (Proof of Part II — Wavepacket Residual Enclosure):**
+From Proposition 8.12, the excited coordinate Parseval sum satisfies:
+$$D_0^2 M_{2,\mathrm{exc}} = \|P_{\perp u_0} K c\|^2 = \sum_{j=1}^{N-1} |\langle u_j, K c \rangle|^2.$$
+Since $K$ is symmetric and interchanges parities, $\langle u_j, K c \rangle = - \langle c, K u_j \rangle = - b_{0j}$.
+Therefore:
+$$\|v_{\mathrm{exc}}\|^2 = \|P_{\perp u_0} K c\|^2 = \sum_{j=1}^{N-1} b_{0j}^2 = b_{01}^2 + \sum_{j=2}^{N-1} b_{0j}^2.$$
+Because all terms $b_{0j}^2 \ge 0$, dropping the higher modes $j \ge 2$ gives $b_{01}^2 \le \|v_{\mathrm{exc}}\|^2$, establishing (8.19.3).
+Substituting this into (8.19.2) establishes (8.19.4).
+
+**Step 3 (Proof of Part III — Even-Sector Resolvent Cancellation Identity):**
+From Step 1, $(Q_{\mathrm{even}} - \mu_1 I) K u_1 = a_1 d$.
+For any excited even eigenvector $u_k^{\mathrm{even}}$ ($k \ge 1$) with eigenvalue $E_k$ and overlap $d_k = \langle u_k^{\mathrm{even}}, d \rangle$:
+$$\langle u_k^{\mathrm{even}}, (Q_{\mathrm{even}} - \mu_1 I) K u_1 \rangle = (E_k - \mu_1) \langle u_k^{\mathrm{even}}, K u_1 \rangle = a_1 d_k \implies \langle u_k^{\mathrm{even}}, K u_1 \rangle = - \frac{a_1 d_k}{\mu_1 - E_k}.$$
+Because $\{u_k^{\mathrm{even}}\}_{k=0}^N$ forms an orthonormal basis of $H_{\mathrm{even}}$, Parseval's identity on $K u_1 \in H_{\mathrm{even}}$ yields:
+$$\|K u_1\|^2 = |\langle u_0^{\mathrm{even}}, K u_1 \rangle|^2 + \sum_{k=1}^N |\langle u_k^{\mathrm{even}}, K u_1 \rangle|^2 = b_{01}^2 + a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.$$
+Subtracting the excited even sum from $\|Ku_1\|^2$ gives (8.19.5), completing the proof. $\blacksquare$
+
+*Discussion and Scientific Epistemics:*
+Proposition 8.19 establishes an exact reduction of the relative tunneling gap:
+1. **The Exact Dipole Architecture:**
+   The relative gap $R_{\mathrm{gap}}(N) = \frac{D_0^2}{\mu_1 - \lambda}$ does not require separate heuristic estimates of $D_0^2$ and $\mu_1 - \lambda$. Identity (8.19.2) shows that $R_{\mathrm{gap}}$ is the ratio of two physical observables: the transition dipole $b_{01}^2$ and the odd transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$.
+   Across all tested dimensions $N \in \{8, \dots, 24\}$, $\mathcal{R}_1 \approx 5.13 = \mathcal{O}(1)$ remains strictly bounded away from zero and infinity (audited in Cell 67 and Cell 69). Thus, $R_{\mathrm{gap}}(N) \to 0$ if and only if the transition dipole $b_{01}^2 \to 0$.
+2. **Dominance of Mode 1 in the Excited Wavepacket:**
+   Because $\|v_{\mathrm{exc}}\|^2 = \sum_{j \ge 1} b_{0j}^2$, the ratio $b_{01}^2 / \|v_{\mathrm{exc}}\|^2$ measures the concentration of the excited coordinate wavepacket $P_{\perp u_0} K c$ in the first excited mode. As shown in Cell 61, mode 1 carries $99.9999\%$ of this residual norm, so $b_{01}^2 \approx \|v_{\mathrm{exc}}\|^2$.
+3. **The Cancellation Mechanism in the Even Sector:**
+   Identity (8.19.5) exposes the precise algebraic mechanism governing $b_{01}^2$:
+   $$b_{01}^2 = \|K u_1\|^2 - a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.$$
+   Both $\|Ku_1\|^2 \approx 4.5$ and the excited even resolvent sum $a_1^2 \sum_{k \ge 1} \frac{d_k^2}{(\mu_1 - E_k)^2} \approx 4.5$ are $\mathcal{O}(1)$ quantities. The smallness of $b_{01}^2 \sim 10^{-6}$ arises from a near-perfect cancellation between the discrete coordinate kinetic energy $\|Ku_1\|^2$ and the even-sector resolvent projection!
 
 ---
 
