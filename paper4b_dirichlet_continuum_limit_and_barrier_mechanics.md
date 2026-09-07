@@ -1224,22 +1224,23 @@ Proposition 8.15 achieves an exact algebraic reduction that removes the independ
 The crude bound $\rho_2^{\mathrm{exc}} \le \frac{N^3}{1 - D_0^2 M_{2,\mathrm{exc}}} R_{\mathrm{gap}}^{\max}(N)$ in (8.15.7) replaces every mode's relative gap $\frac{D_0^2}{\mu_j - \lambda}$ by the worst-case supremum $R_{\mathrm{gap}}^{\max} = \frac{D_0^2}{\mu_1 - \lambda}$ and every coordinate energy by $N^2$. 
 
 To sharpen this bound toward an asymptotic decoupling proof, we investigate the exact weighted coordinate-energy sum:
-$$\mathcal{S}_{\mathrm{coord}}(N) \equiv \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2 = \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \big( \|K u_j\|^2 - b_{0j}^2 \big).$$
+$$\mathcal{S}_{\mathrm{coord}}(N) \equiv \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 = \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \big( \|K u_j\|^2 - b_{0j}^2 \big),$$
+where $u_0^{\mathrm{even}}$ denotes the normalized even ground state ($Q_{\mathrm{even}} u_0^{\mathrm{even}} = \lambda u_0^{\mathrm{even}}$), $P_{\perp u_0^{\mathrm{even}}}$ denotes the orthogonal projection on $H_{\mathrm{even}}$ onto $(u_0^{\mathrm{even}})^\perp$, and $b_{0j} \equiv \langle u_0^{\mathrm{even}}, K u_j \rangle$ (distinguishing the ground state $u_0^{\mathrm{even}}$ from the prime cutoff parameter $c > 1$).
 
 The following proposition establishes the exact trace identity for the total coordinate energy, defines the coordinate-energy spectral measure $d\eta_{\mathrm{coord}}$, and proves that the high-energy (above-barrier) sector decouples exponentially fast under Hypothesis H3 and an $N$-uniform barrier separation, unconditional with respect to relative-gap hypotheses.
 
 **Proposition 8.16 (Coordinate Trace Identity, Spectral Measure, and High-Energy Decoupling):**
-*Let $N \ge 2$, $c > 1$. Let $\{u_j\}_{j=0}^{N-1}$ be the complete orthonormal eigenbasis of the odd subspace $H_{\mathrm{odd}} \subset \mathbb{R}^{2N+1}$.*
+*Let $N \ge 2$, and let $c > 1$ denote the prime cutoff parameter ($L = \log c$). Let $\{u_j\}_{j=0}^{N-1}$ be the complete orthonormal eigenbasis of the odd subspace $H_{\mathrm{odd}} \subset \mathbb{R}^{2N+1}$, and let $u_0^{\mathrm{even}}$ be the normalized even ground state with $Q_{\mathrm{even}} u_0^{\mathrm{even}} = \lambda u_0^{\mathrm{even}}$.*
 
 *Then:*
 1. *(Exact Odd Coordinate Trace Identity): The total coordinate energy across the odd subspace satisfies the exact trace identity:*
    $$\sum_{j=0}^{N-1} \|K u_j\|^2 = \operatorname{Tr}_{H_{\mathrm{odd}}}(K^2) = \sum_{m=1}^N m^2 = \frac{N(N+1)(2N+1)}{6} = \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6}. \tag{8.16.1}$$
    *Consequently, the excited coordinate energy satisfies:*
    $$\sum_{j=1}^{N-1} \|K u_j\|^2 = \frac{N(N+1)(2N+1)}{6} - \|K u_0\|^2 < \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} = \mathcal{O}(N^3). \tag{8.16.2}$$
-2. *(Coordinate-Energy Spectral Measure Representation): Let $d\eta_{\mathrm{coord}}(\mu) \equiv \sum_{j=1}^{N-1} \|P_{\perp c} K u_j\|^2 \delta_{\mu_j}$ denote the excited coordinate-energy spectral measure on $[\mu_1, \infty)$, with finite total mass $\int d\eta_{\mathrm{coord}} = \sum_{j=1}^{N-1} (\|K u_j\|^2 - b_{0j}^2) < \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} = \mathcal{O}(N^3)$. Then $\mathcal{S}_{\mathrm{coord}}(N)$ evaluates identically to the Stieltjes transform of $d\eta_{\mathrm{coord}}$ at the ground energy $\lambda$:*
+2. *(Coordinate-Energy Spectral Measure Representation): Let $d\eta_{\mathrm{coord}}(\mu) \equiv \sum_{j=1}^{N-1} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \delta_{\mu_j}$ denote the excited coordinate-energy spectral measure on $[\mu_1, \infty)$, with finite total mass $\int d\eta_{\mathrm{coord}} = \sum_{j=1}^{N-1} (\|K u_j\|^2 - b_{0j}^2) < \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} = \mathcal{O}(N^3)$. Then $\mathcal{S}_{\mathrm{coord}}(N)$ evaluates identically to the Stieltjes transform of $d\eta_{\mathrm{coord}}$ at the ground energy $\lambda$:*
    $$\mathcal{S}_{\mathrm{coord}}(N) = D_0^2 \int \frac{d\eta_{\mathrm{coord}}(\mu)}{\mu - \lambda} = D_0^2 \, G_{\mathrm{coord}}(\lambda). \tag{8.16.3}$$
 3. *(Exponential Decoupling of High-Energy Modes): Let $V_* > 0$ be a fixed threshold satisfying $V_* > \sup_N \lambda_N$ (corresponding semiclassically to the effective barrier top $V_{\max} \approx 1.3$). Let the discrete finite-$N$ odd spectrum be partitioned into a bound-state sector $\mu_j < V_*$ ($1 \le j \le N_{\mathrm{bound}}$) and a high-energy (above-barrier) sector $\mu_j \ge V_*$ ($j > N_{\mathrm{bound}}$) where $\mu_j - \lambda \ge c_{\mathrm{high}} \equiv V_* - \sup_N \lambda_N > 0$ uniformly for all $N$. Then the high-energy contribution satisfies:*
-   $$\mathcal{S}_{\mathrm{high}}(N) \equiv \sum_{j > N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j > N_{\mathrm{bound}}} \|K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right). \tag{8.16.4}$$
+   $$\mathcal{S}_{\mathrm{high}}(N) \equiv \sum_{j > N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j > N_{\mathrm{bound}}} \|K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right). \tag{8.16.4}$$
    *Under Hypothesis H3 ($D_0^2 \le C_0 e^{-\sigma N}$), this tail decays exponentially fast:*
    $$\mathcal{S}_{\mathrm{high}}(N) \le \frac{C_0}{c_{\mathrm{high}}} e^{-\sigma N} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right) = \mathcal{O}(e^{-\sigma N} N^3) \longrightarrow 0 \quad (N \to \infty). \tag{8.16.5}$$
    *This decoupling is unconditional with respect to relative-gap hypotheses ($\mathrm{H2}_{\mathrm{gap}}$, $\mathrm{H2}_{\mathrm{odd}}$), being conditional strictly on H3 and the assumed uniform above-barrier spectral separation $c_{\mathrm{high}} > 0$. Consequently, the small denominator problem is isolated strictly to the finite bound-state ladder $1 \le j \le N_{\mathrm{bound}}$.*
@@ -1257,56 +1258,65 @@ $$\sum_{j=1}^{N-1} \|K u_j\|^2 = \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} - \
 proving (8.16.2). (Note: because $\|Ku_0\|^2 \le N^2$, one cannot deduce $< N^3/3$ from positivity alone; the clean universally valid bound is $\frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} = \mathcal{O}(N^3)$).
 
 **Step 2 (Proof of Stieltjes Coordinate Measure Representation):**
-Integrating $\frac{1}{\mu - \lambda}$ against the discrete positive measure $d\eta_{\mathrm{coord}}(\mu) = \sum_{j=1}^{N-1} \|P_{\perp c} K u_j\|^2 \delta_{\mu_j}$ gives:
-$$\int \frac{d\eta_{\mathrm{coord}}(\mu)}{\mu - \lambda} = \sum_{j=1}^{N-1} \frac{\|P_{\perp c} K u_j\|^2}{\mu_j - \lambda}.$$
+Integrating $\frac{1}{\mu - \lambda}$ against the discrete positive measure $d\eta_{\mathrm{coord}}(\mu) = \sum_{j=1}^{N-1} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \delta_{\mu_j}$ gives:
+$$\int \frac{d\eta_{\mathrm{coord}}(\mu)}{\mu - \lambda} = \sum_{j=1}^{N-1} \frac{\|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2}{\mu_j - \lambda}.$$
 Multiplying by $D_0^2$ yields (8.16.3). The total mass satisfies $\int d\eta_{\mathrm{coord}} = \sum_{j=1}^{N-1} (\|K u_j\|^2 - b_{0j}^2) \le \sum_{j=1}^{N-1} \|K u_j\|^2 < \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} = \mathcal{O}(N^3)$.
 
 **Step 3 (Proof of High-Energy Decoupling):**
 For modes $j > N_{\mathrm{bound}}$ in the above-barrier sector, $\mu_j \ge V_*$. With $V_* > \sup_N \lambda_N$, the uniform separation $c_{\mathrm{high}} = V_* - \sup_N \lambda_N > 0$ ensures $\mu_j - \lambda \ge c_{\mathrm{high}}$ for all $j > N_{\mathrm{bound}}$ and all $N$.
 Pulling the uniform denominator $\frac{1}{c_{\mathrm{high}}}$ out of the sum:
-$$\sum_{j > N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j > N_{\mathrm{bound}}} \|K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j=1}^{N-1} \|K u_j\|^2 < \frac{D_0^2}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right).$$
+$$\sum_{j > N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j > N_{\mathrm{bound}}} \|K u_j\|^2 \le \frac{D_0^2}{c_{\mathrm{high}}} \sum_{j=1}^{N-1} \|K u_j\|^2 < \frac{D_0^2}{c_{\mathrm{high}}} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right).$$
 Under Hypothesis H3 (exponential boundary suppression $D_0^2 \le C_0 e^{-\sigma N}$), this tail decays as $\mathcal{O}(e^{-\sigma N} N^3) \to 0$ exponentially fast, completing the proof. $\blacksquare$
 
 ---
 
-### 8.17 Proposition 8.17 (Bound-State Ladder Decomposition, Coordinate-Energy Localization, and Operator Trace Enclosure)
+### 8.17 Proposition 8.17 (Exact Operator Trace Identity, Bound-State Spectral Decomposition, and Semiclassical Localization Bridges B1 & B2)
 
-Proposition 8.16 establishes that the high-energy (above-barrier) sector $\mathcal{S}_{\mathrm{high}}(N)$ decouples exponentially fast under H3 and uniform separation $c_{\mathrm{high}} > 0$. Consequently, the entire small-denominator challenge for Route B is isolated strictly to the finite bound-state ladder:
-$$\mathcal{S}_{\mathrm{bound}}(N) \equiv \sum_{j=1}^{N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2.$$
+Proposition 8.16 establishes that the high-energy (above-barrier) sector $\mathcal{S}_{\mathrm{high}}(N)$ decouples exponentially fast under Hypothesis H3 and uniform separation $c_{\mathrm{high}} > 0$. Consequently, the entire small-denominator challenge for Route B is isolated strictly to the finite bound-state ladder:
+$$\mathcal{S}_{\mathrm{bound}}(N) \equiv \sum_{j=1}^{N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2.$$
 
-In Proposition 8.15, the bound on $\rho_2^{\mathrm{exc}}$ incurred a factor of $N^3$, derived from the crude worst-case bounds $\|K u_j\|^2 \le N^2$ and $\sum_{j=1}^{N-1} 1 \le N$. 
-We now prove that this global $N^3$ factor is an artifact of treating bound states as if they carried the maximal high-frequency Fourier momentum $m = N$. 
-By representing $\mathcal{S}_{\mathrm{coord}}$ as an exact operator trace on $H_{\mathrm{odd}}$ and exploiting the wavepacket coordinate localization of the bound states, the $N^3$ factor is completely eliminated from the bound-state sector.
+In Proposition 8.15, the bound on $\rho_2^{\mathrm{exc}}$ incurred an artificial factor of $N^3$, derived from the crude worst-case bounds $\|K u_j\|^2 \le N^2$ and $\sum_{j=1}^{N-1} 1 \le N$, which treated low-energy bound states as if they carried maximal high-frequency Fourier momentum $m = N$. 
+We now formulate the exact operator trace geometry on $H_{\mathrm{odd}}$, prove the rigorous finite-$N$ bound-state enclosure, and explicitly identify the two continuum localization bridges (B1 and B2) required to eliminate the $N^3$ rate penalty in the continuum limit.
 
-**Proposition 8.17 (Bound-State Decomposition, Coordinate Localization, and Operator Trace Enclosure):**
-*Let $N \ge 2$, $c > 1$. Let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenbasis of $Q_{\mathrm{odd}}$ with eigenvalues $\mu_0 < \mu_1 < \dots < \mu_{N-1}$, and let $c$ be the even ground state with $Q_{\mathrm{even}} c = \lambda c$. Let $V_* > \sup_N \lambda_N$ define the above-barrier cutoff, with $N_{\mathrm{bound}} \equiv \max \{ j : \mu_j < V_* \}$.*
+**Proposition 8.17 (Exact Operator Trace Identity, Bound-State Enclosure, and Semiclassical Bridges B1–B2):**
+*Let $N \ge 2$, and let $c > 1$ denote the prime cutoff parameter ($L = \log c$). Let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenbasis of $Q_{\mathrm{odd}}$ with eigenvalues $\mu_0 < \mu_1 < \dots < \mu_{N-1}$, and let $u_0^{\mathrm{even}}$ denote the normalized even ground state with $Q_{\mathrm{even}} u_0^{\mathrm{even}} = \lambda u_0^{\mathrm{even}}$. Let $V_* > \sup_N \lambda_N$ define a fixed above-barrier threshold, with $N_{\mathrm{bound}}(N) \equiv \max \{ j : \mu_j < V_* \}$.*
 
-*Then:*
+**Part I: Exact Finite-$N$ Operator Trace Identities and Spectral Decomposition (Unconditional Theorem)**
+*For every finite dimension $N \ge 2$ and cutoff $c > 1$:*
 1. *(Exact Operator Trace Identity for $\mathcal{S}_{\mathrm{coord}}$): The weighted coordinate-energy sum satisfies the exact operator trace identity on $H_{\mathrm{odd}}$:*
-   $$\mathcal{S}_{\mathrm{coord}}(N) = D_0^2 \operatorname{Tr}_{H_{\mathrm{odd}}}\Big[ (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} K P_{\perp c} K \Big]. \tag{8.17.1}$$
-   *Since $T_{\mathrm{coord}} \equiv K P_{\perp c} K$ satisfies $0 \preceq T_{\mathrm{coord}} \preceq K^2$ on $H_{\mathrm{odd}}$, $\mathcal{S}_{\mathrm{coord}}(N)$ is enclosed by the diagonal Fourier trace:*
-   $$\mathcal{S}_{\mathrm{coord}}(N) \le D_0^2 \operatorname{Tr}_{H_{\mathrm{odd}}}\Big[ (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} K^2 \Big] = D_0^2 \sum_{m=1}^N m^2 \langle v_m, (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} v_m \rangle. \tag{8.17.2}$$
-2. *(Bound-State vs. High-Energy Decomposition): The measure decomposes into two orthogonal spectral projections on $H_{\mathrm{odd}}$, $P_{\mathrm{bound}} \equiv \sum_{j=1}^{N_{\mathrm{bound}}} u_j u_j^T$ and $P_{\mathrm{high}} \equiv \sum_{j > N_{\mathrm{bound}}}^{N-1} u_j u_j^T$:*
+   $$\mathcal{S}_{\mathrm{coord}}(N) = D_0^2 \operatorname{Tr}_{H_{\mathrm{odd}}}\Big[ (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} K P_{\perp u_0^{\mathrm{even}}} K \Big]. \tag{8.17.1}$$
+   *Since $T_{\mathrm{coord}} \equiv K P_{\perp u_0^{\mathrm{even}}} K$ is positive semidefinite and satisfies $0 \preceq T_{\mathrm{coord}} \preceq K^2$ on $H_{\mathrm{odd}}$, $\mathcal{S}_{\mathrm{coord}}(N)$ is enclosed by the diagonal Fourier trace:*
+   $$\mathcal{S}_{\mathrm{coord}}(N) \le D_0^2 \operatorname{Tr}_{H_{\mathrm{odd}}}\Big[ (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} K^2 \Big] = D_0^2 \sum_{m=1}^N m^2 \langle v_m, (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} v_m \rangle, \tag{8.17.2}$$
+   *where $v_m = \frac{1}{\sqrt{2}}(e_m - e_{-m})$ is the canonical odd Fourier basis in which $K^2 = \operatorname{diag}(1^2, 2^2, \dots, N^2)$.*
+2. *(Exact Bound vs. High-Energy Spectral Partitioning): Orthogonal spectral projection on $H_{\mathrm{odd}}$ via $P_{\mathrm{bound}} \equiv \sum_{j=1}^{N_{\mathrm{bound}}} u_j u_j^T$ and $P_{\mathrm{high}} \equiv \sum_{j > N_{\mathrm{bound}}}^{N-1} u_j u_j^T$ decomposes the sum identically:*
    $$\mathcal{S}_{\mathrm{coord}}(N) = \mathcal{S}_{\mathrm{bound}}(N) + \mathcal{S}_{\mathrm{high}}(N), \tag{8.17.3}$$
-   *where $\mathcal{S}_{\mathrm{high}}(N) \le \frac{C_0}{c_{\mathrm{high}}} e^{-\sigma N} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right) = \mathcal{O}(e^{-\sigma N} N^3) \to 0$ exponentially fast under Hypothesis H3.*
-3. *(Bound-State Coordinate-Energy Enclosure): For each bound state $j \in \{1, \dots, N_{\mathrm{bound}}\}$, the relative gap is monotonically ordered: $\frac{D_0^2}{\mu_j - \lambda} \le \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N)$. Consequently:*
-   $$\mathcal{S}_{\mathrm{bound}}(N) \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|P_{\perp c} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|K u_j\|^2. \tag{8.17.4}$$
-   *Under semiclassical bound-state wavepacket localization:*
-   *(i) The bound-state ladder cardinality is finite and uniformly bounded: $N_{\mathrm{bound}} = \mathcal{O}(1)$ as $N \to \infty$.*
-   *(ii) For each bound mode $j \le N_{\mathrm{bound}}$, the modal coordinate kinetic energy satisfies $\|K u_j\|^2 \le \mathcal{C}_j = \mathcal{O}(1)$ as $N \to \infty$ (converging to the $L^2$ norm of the continuous coordinate derivative $\frac{L}{2\pi i} u_j'(t)$).*
-   *Hence, there exists a uniform constant $\mathcal{C}_{\mathrm{bound}} \equiv \sum_{j=1}^{N_{\mathrm{bound}}} \mathcal{C}_j < \infty$ such that:*
+   *where $\mathcal{S}_{\mathrm{high}}(N) \le \frac{C_0}{c_{\mathrm{high}}} e^{-\sigma N} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right) = \mathcal{O}(e^{-\sigma N} N^3) \to 0$ exponentially fast under Hypothesis H3 and uniform separation $c_{\mathrm{high}} = V_* - \sup_N \lambda_N > 0$.*
+3. *(Exact Bound-State Enclosure): For each bound mode $j \in \{1, \dots, N_{\mathrm{bound}}\}$, the relative gaps satisfy $\frac{D_0^2}{\mu_j - \lambda} \le \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N)$, yielding the unconditional finite-$N$ inequality:*
+   $$\mathcal{S}_{\mathrm{bound}}(N) \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}(N)} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}(N)} \|K u_j\|^2. \tag{8.17.4}$$
+
+**Part II: Conditional Continuum Reduction under Semiclassical Bridges B1 & B2**
+*Consider the following two analytical hypotheses on the finite-$N$ Galerkin discretizations:*
+- *(Bridge B1 — Uniform Bound-State Cardinality): The number of discrete odd Galerkin eigenvalues beneath the barrier threshold $V_*$ remains uniformly bounded as $N \to \infty$:*
+  $$\bar{N}_{\mathrm{bound}} \equiv \sup_{N \ge 2} N_{\mathrm{bound}}(N) < \infty. \tag{B1}$$
+- *(Bridge B2 — Uniform Discrete Coordinate Kinetic Energy): For each fixed bound-state index $j \le \bar{N}_{\mathrm{bound}}$, the discrete Galerkin coordinate derivative norm remains uniformly bounded across dimensions:*
+  $$\sup_{N \ge j+1} \|K u_j^{(N)}\|^2 \le \mathcal{C}_j < \infty. \tag{B2}$$
+*Under Bridges B1 and B2:*
+1. *There exists a uniform constant $\mathcal{C}_{\mathrm{bound}} \equiv \sum_{j=1}^{\bar{N}_{\mathrm{bound}}} \mathcal{C}_j < \infty$ such that for all $N$:*
    $$\mathcal{S}_{\mathrm{bound}}(N) \le \mathcal{C}_{\mathrm{bound}} R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}\big( R_{\mathrm{gap}}^{\max}(N) \big). \tag{8.17.5}$$
-4. *(Refined Master Route B Bound): Under H3 and the bound-state localization estimates, the excited second-moment ratio satisfies:*
+2. *(Refined Route B Bound): Under H3, B1, and B2, the excited second-moment ratio satisfies:*
    $$\rho_2^{\mathrm{exc}} \le \frac{1}{1 - D_0^2 M_{2,\mathrm{exc}}} \left[ \mathcal{C}_{\mathrm{bound}} R_{\mathrm{gap}}^{\max}(N) + \frac{C_0}{c_{\mathrm{high}}} e^{-\sigma N} \left( \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \right) \right]. \tag{8.17.6}$$
-   *Consequently, achieving the continuum decoupling limit $\rho_2^{\mathrm{exc}} \to 0$ requires only that the solitary relative gap $R_{\mathrm{gap}}^{\max}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda} \to 0$ (or remains bounded $\mathcal{O}(1)$), completely eliminating the polynomial $N^3$ rate requirement $R_{\mathrm{gap}}^{\max} = \mathcal{O}(N^{-3-\epsilon})$ of Proposition 8.15.*
+   *Consequently, the condition:*
+   $$R_{\mathrm{gap}}^{\max}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda} \longrightarrow 0 \quad (N \to \infty) \tag{8.17.7}$$
+   *is sufficient to establish the continuum decoupling limit $\rho_2^{\mathrm{exc}} \to 0$, completely eliminating the polynomial $N^3$ rate requirement $R_{\mathrm{gap}}^{\max} = \mathcal{O}(N^{-3-\epsilon})$ of Proposition 8.15.*
+   *(Note: Boundedness $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(1)$ guarantees uniform boundedness $\rho_2^{\mathrm{exc}} = \mathcal{O}(1)$, while genuine continuum decoupling $\rho_2^{\mathrm{exc}} \to 0$ requires $R_{\mathrm{gap}}^{\max}(N) \to 0$.)*
 
 *Proof.*
 **Step 1 (Proof of Exact Operator Trace Identity):**
-By definition, $\mathcal{S}_{\mathrm{coord}}(N) = \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2$.
-In $H_{\mathrm{even}}$, the orthogonal projection satisfies $P_{\perp c}^2 = P_{\perp c} = P_{\perp c}^T$, so:
-$$\|P_{\perp c} K u_j\|^2 = \langle P_{\perp c} K u_j, P_{\perp c} K u_j \rangle = \langle K u_j, P_{\perp c} K u_j \rangle = \langle u_j, K P_{\perp c} K u_j \rangle.$$
-Define the operator $T_{\mathrm{coord}} \equiv K P_{\perp c} K$ mapping $H_{\mathrm{odd}} \to H_{\mathrm{odd}}$.
-For any $u \in H_{\mathrm{odd}}$, $\langle u, T_{\mathrm{coord}} u \rangle = \|P_{\perp c} K u\|^2 \ge 0$, and since $P_{\perp c} \preceq I_{\mathrm{even}}$, we have $0 \preceq T_{\mathrm{coord}} \preceq K^2$.
+By definition, $\mathcal{S}_{\mathrm{coord}}(N) = \sum_{j=1}^{N-1} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2$.
+In $H_{\mathrm{even}}$, the orthogonal projection satisfies $P_{\perp u_0^{\mathrm{even}}}^2 = P_{\perp u_0^{\mathrm{even}}} = P_{\perp u_0^{\mathrm{even}}}^T$, so:
+$$\|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 = \langle P_{\perp u_0^{\mathrm{even}}} K u_j, P_{\perp u_0^{\mathrm{even}}} K u_j \rangle = \langle K u_j, P_{\perp u_0^{\mathrm{even}}} K u_j \rangle = \langle u_j, K P_{\perp u_0^{\mathrm{even}}} K u_j \rangle.$$
+Define the operator $T_{\mathrm{coord}} \equiv K P_{\perp u_0^{\mathrm{even}}} K$ mapping $H_{\mathrm{odd}} \to H_{\mathrm{odd}}$.
+For any $u \in H_{\mathrm{odd}}$, $\langle u, T_{\mathrm{coord}} u \rangle = \|P_{\perp u_0^{\mathrm{even}}} K u\|^2 \ge 0$, and since $P_{\perp u_0^{\mathrm{even}}} \preceq I_{\mathrm{even}}$, we have $0 \preceq T_{\mathrm{coord}} \preceq K^2$.
 Because $\{u_j\}_{j=0}^{N-1}$ is an orthonormal eigenbasis of $Q_{\mathrm{odd}}$ with eigenvalues $\mu_j$, the spectral projection onto the excited odd modes is $P_{\perp u_0} = \sum_{j=1}^{N-1} u_j u_j^T$.
 Therefore:
 $$(Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} = \sum_{j=1}^{N-1} \frac{1}{\mu_j - \lambda} u_j u_j^T.$$
@@ -1324,32 +1334,31 @@ Because $P_{\perp u_0} = P_{\mathrm{bound}} + P_{\mathrm{high}}$ with orthogonal
 $$\mathcal{S}_{\mathrm{coord}}(N) = \mathcal{S}_{\mathrm{bound}}(N) + \mathcal{S}_{\mathrm{high}}(N).$$
 The bound on $\mathcal{S}_{\mathrm{high}}(N)$ follows directly from Proposition 8.16 (Step 3), proving (8.17.3).
 
-**Step 3 (Proof of Bound-State Enclosure and $N^3$ Elimination):**
+**Step 3 (Proof of Exact Bound-State Enclosure):**
 Since $\mu_1 < \mu_2 < \dots < \mu_{N_{\mathrm{bound}}}$, we have $\mu_j - \lambda \ge \mu_1 - \lambda > 0$, so $\frac{D_0^2}{\mu_j - \lambda} \le \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N)$ for all $1 \le j \le N_{\mathrm{bound}}$.
 Extracting this supremum:
-$$\mathcal{S}_{\mathrm{bound}}(N) = \sum_{j=1}^{N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp c} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|P_{\perp c} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|K u_j\|^2,$$
-establishing (8.17.4).
-In the continuum limit, the operator $Q$ corresponds to a regular Sturm–Liouville / Schrödinger operator on $[0, L]$ with an effective double-well potential $V_{\mathrm{eff}}(t)$. 
-The bound states $u_j$ with eigenvalues $\mu_j < V_*$ are the discrete localized eigenstates confined beneath the barrier top. 
-By classical Weyl / semiclassical phase-space estimates:
-$$N_{\mathrm{bound}} \approx \frac{1}{\pi} \iint_{\frac{p^2}{2} + V_{\mathrm{eff}}(t) < V_*} dt \, dp = \mathcal{O}(1),$$
-independent of the Galerkin discretization dimension $N$.
-Furthermore, in Fourier space, $K v_m = m v_m$ represents coordinate differentiation $\frac{L}{2\pi i} \partial_t$. For any localized bound state $u_j(t) \in H^1([0, L])$, the coordinate kinetic energy converges to the continuous derivative norm:
-$$\lim_{N \to \infty} \|K u_j\|^2 = \left( \frac{L}{2\pi} \right)^2 \int_0^L |u_j'(t)|^2 dt \equiv \mathcal{C}_j < \infty.$$
-Summing over the finite set of bound modes $j \in \{1, \dots, N_{\mathrm{bound}}\}$ gives $\sum_{j=1}^{N_{\mathrm{bound}}} \|K u_j\|^2 \le \mathcal{C}_{\mathrm{bound}} < \infty$, establishing (8.17.5).
+$$\mathcal{S}_{\mathrm{bound}}(N) = \sum_{j=1}^{N_{\mathrm{bound}}} \frac{D_0^2}{\mu_j - \lambda} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|P_{\perp u_0^{\mathrm{even}}} K u_j\|^2 \le R_{\mathrm{gap}}^{\max}(N) \sum_{j=1}^{N_{\mathrm{bound}}} \|K u_j\|^2,$$
+establishing (8.17.4). This concludes the unconditional proof of Part I.
 
-**Step 4 (Proof of Refined Master Bound):**
-Combining (8.17.3), (8.17.5), and (8.16.5) with the master Route B operator inequality $\rho_2^{\mathrm{exc}} \le \frac{\mathcal{S}_{\mathrm{coord}}(N)}{1 - D_0^2 M_{2,\mathrm{exc}}}$ (from Proposition 8.13 and 8.15) immediately yields (8.17.6), completing the proof. $\blacksquare$
+**Step 4 (Proof of Conditional Reduction under Bridges B1 & B2):**
+Assuming Bridge B1 ($N_{\mathrm{bound}}(N) \le \bar{N}_{\mathrm{bound}} < \infty$) and Bridge B2 ($\sup_N \|K u_j^{(N)}\|^2 \le \mathcal{C}_j < \infty$), summing over $j \in \{1, \dots, N_{\mathrm{bound}}(N)\}$ gives:
+$$\sum_{j=1}^{N_{\mathrm{bound}}(N)} \|K u_j\|^2 \le \sum_{j=1}^{\bar{N}_{\mathrm{bound}}} \mathcal{C}_j \equiv \mathcal{C}_{\mathrm{bound}} < \infty,$$
+uniformly in $N$. Substituting into (8.17.4) proves (8.17.5).
+Combining (8.17.3), (8.17.5), and (8.16.5) with the master Route B operator inequality $\rho_2^{\mathrm{exc}} \le \frac{\mathcal{S}_{\mathrm{coord}}(N)}{1 - D_0^2 M_{2,\mathrm{exc}}}$ (from Propositions 8.13 and 8.15) immediately yields (8.17.6).
+Taking the limit $N \to \infty$ in (8.17.6): since $\mathcal{S}_{\mathrm{high}} \to 0$ exponentially fast, if $R_{\mathrm{gap}}^{\max}(N) \to 0$, then $\rho_2^{\mathrm{exc}} \to 0$, completing the proof. $\blacksquare$
 
 *Discussion and Scientific Epistemics:*
-Proposition 8.17 represents a major analytical sharpening of the continuum decoupling programme:
-1. **The Epistemic Trinity in Action:**
-   - *Exact Finite-$N$ Identity:* The operator trace formula $\mathcal{S}_{\mathrm{coord}} = D_0^2 \operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda)^{-1} P_{\perp u_0} K P_{\perp c} K]$ and the Fourier representation $\sum m^2 [R_{\mathrm{odd},\perp}]_{mm}$ are exact algebraic theorems valid for all $N \ge 2$ and $c > 1$.
-   - *Mathematical Reduction:* The small denominator problem is rigorously reduced from an $N$-dimensional summation to the combination of the high-energy tail $\mathcal{S}_{\mathrm{high}}$ and the bound-state sum $\mathcal{S}_{\mathrm{bound}}$.
-   - *Structural Mechanism:* The suppression of $\mathcal{S}_{\mathrm{bound}}$ does not require the entire spectrum to obey an artificial $N^{-3}$ bound. Instead, physical wavepacket localization ensures that bound states carry $\mathcal{O}(1)$ coordinate kinetic energy, while the above-barrier states carry large coordinate energy but are protected by a uniform positive barrier gap $c_{\mathrm{high}} > 0$.
-2. **Elimination of the $N^3$ Rate Penalty:**
-   In Proposition 8.15, closing the gap required $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(N^{-3-\epsilon})$. Proposition 8.17 shows that because $\|K u_j\|^2 = \mathcal{O}(1)$ for bound states and $N_{\mathrm{bound}} = \mathcal{O}(1)$, the required estimate is relaxed to $R_{\mathrm{gap}}^{\max}(N) \to 0$ (or even $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(1)$).
-   Since Cell 67 verified that $R_{\mathrm{gap}}^{\max}(N)$ decays exponentially ($\Delta \sigma_N^{\mathrm{gap}} \ge 0.610$), this bound-state enclosure provides a direct bridge between numerical evidence and continuum decoupling.
+Proposition 8.17 establishes a rigorous architectural boundary between finite-dimensional exact facts and the remaining continuum programme:
+1. **The Epistemic Separation (Exact Algebra vs. Semiclassical Bridges):**
+   - *Unconditional Exact Theorem (Part I):* The operator trace identity $\mathcal{S}_{\mathrm{coord}} = D_0^2 \operatorname{Tr}[(Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} K P_{\perp u_0^{\mathrm{even}}} K]$, the Fourier trace bound $\le D_0^2 \sum m^2 [R_{\mathrm{odd},\perp}]_{mm}$, and the exact bound-state inequality $\mathcal{S}_{\mathrm{bound}} \le R_{\mathrm{gap}}^{\max} \sum \|Ku_j\|^2$ are mathematically watertight for every finite dimension $N$.
+   - *Active Analytical Bridges (Part II):* The estimates $N_{\mathrm{bound}} = \mathcal{O}(1)$ and $\|Ku_j\|^2 = \mathcal{O}(1)$ are **not** claims derived from finite-$N$ linear algebra. Semiclassical phase-space integration ($N_{\mathrm{bound}} \approx \frac{1}{\pi}\iint dt\,dp$) and continuous $H^1$ Sobolev norms are continuum heuristics that motivate Bridges B1 and B2, but do not prove them for discrete Galerkin matrices. Establishing Bridges B1 and B2 from the discrete operators constitutes the active analytical agenda.
+2. **Sharp Sufficiency Criterion for Continuum Decoupling:**
+   Under Bridges B1 and B2, the required relative-gap rate is relaxed from the severe requirement $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(N^{-3-\epsilon})$ of Proposition 8.15 to the simple convergence $R_{\mathrm{gap}}^{\max}(N) \to 0$. Boundedness $R_{\mathrm{gap}}^{\max}(N) = \mathcal{O}(1)$ guarantees uniform boundedness $\rho_2^{\mathrm{exc}} = \mathcal{O}(1)$, while $R_{\mathrm{gap}}^{\max}(N) \to 0$ delivers full continuum decoupling $\rho_2^{\mathrm{exc}} \to 0$.
+   Since Cell 67 confirmed exponential decay of $R_{\mathrm{gap}}^{\max}(N)$ with decay action $\Delta \sigma_N^{\mathrm{gap}} \ge 0.610$, the bound-state enclosure tightly connects empirical data to the continuum decoupling target.
+3. **The Alternative Global Operator Trace Horizon:**
+   The Fourier-resolvent trace representation (8.17.2):
+   $$\mathcal{S}_{\mathrm{coord}}(N) \le D_0^2 \sum_{m=1}^N m^2 \langle v_m, (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} v_m \rangle = D_0^2 \operatorname{Tr}_{H_{\mathrm{odd}}}\big[ K^2 (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0} \big]$$
+   suggests an alternative, purely operator-theoretic avenue: if one can establish a polynomial trace bound $\operatorname{Tr}[K^2 (Q_{\mathrm{odd}} - \lambda I)^{-1} P_{\perp u_0}] \le C N^p$ directly, then combining with Hypothesis H3 ($D_0^2 \le C_0 e^{-\sigma N}$) would prove $\mathcal{S}_{\mathrm{coord}} \to 0$ globally, bypassing the need for modewise bound-state counting (Bridge B1) and individual eigenvector derivative estimates (Bridge B2) altogether.
 
 ---
 
