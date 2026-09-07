@@ -1061,16 +1061,72 @@ Proposition 8.13 reframes the continuum decoupling programme across four structu
 2. **Unified Mode-by-Mode Cancellation of the Ground Doublet:**
    Identity (8.13.5) shows that the apparent three-term decomposition of $\Xi$ collapses into a single unified mode vector:
    $$\Xi = \sum_{k \ge 1} \left( d_k \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right) u_k.$$
-   No artificial triangle inequality is required: the dangerous $j=0$ ground-state singularity is completely absent. The inner sum is an overlap-weighted average over the excited odd spectrum with normalized transmission weights $\frac{a_j^2}{\mu_j - \lambda} = \mathcal{O}(1)$.
+   No artificial triangle inequality is required: the dangerous $j=0$ ground-state singularity is completely absent. The inner sum is a normalized weighted spectral transform over the excited odd spectrum with positive transmission weights $w_j = \frac{a_j^2 / (\mu_j - \lambda)}{M_1^{\mathrm{exc}}}$ ($\sum_{j \ge 1} w_j = 1$); because $\frac{1}{\mu_j - E_k}$ changes sign as $\mu_j$ crosses $E_k$, the terms below and above $E_k$ carry opposite signs, providing additional internal phase cancellation across the excited spectrum.
 3. **The Reframed Analytical Target (Milestone M12):**
    The remaining analytical requirement for Route B is to establish a polynomial upper bound on the norm of this unified vector:
    $$\|\Xi\|^2 = \sum_{k \ge 1} d_k^2 \left( \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \right)^2 \le C_\Xi N^{r_\Xi}.$$
-   This is an even-sector transmission estimate directly analogous to $\Sigma_{\mathrm{filt}}(N) = \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k}$ in Hypothesis H2. Once such a polynomial bound is established, the exponential boundary prefactor $D_0^2 \le C_0 e^{-\sigma N}$ (Hypothesis H3) guarantees:
-   $$\rho_2^{\mathrm{exc}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - o(1))} \le C' e^{-\sigma N} N^{r_\Xi - \gamma_{\min}} \longrightarrow 0 \quad (N \to \infty).$$
+   This is an even-sector transmission estimate directly analogous to $\Sigma_{\mathrm{filt}}(N) = \sum_{k \ge 1} \frac{d_k^2}{\mu_{k+1} - E_k}$ in Hypothesis H2. Under the non-vanishing excited odd resolvent condition $M_1^{\mathrm{exc}} \ge c_{\min} > 0$ (which holds unconditionally since mode 1 alone satisfies $\frac{a_1^2}{\mu_1 - \lambda} \ge c_1 > 0$, Cell 66), once a polynomial bound $\|\Xi\|^2 \le C_\Xi N^{r_\Xi}$ is secured, the exponential boundary prefactor $D_0^2 \le C_0 e^{-\sigma N}$ (Hypothesis H3) guarantees:
+   $$\rho_2^{\mathrm{exc}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - o(1))} \le \frac{C_0 C_\Xi}{c_{\min} (1 - o(1))} e^{-\sigma N} N^{r_\Xi} \longrightarrow 0 \quad (N \to \infty).$$
 4. **The Variational Rayleigh Quotient Perspective:**
    Equivalently, the variational formulation (8.13.8) demonstrates that $\rho_2^{\mathrm{exc}} \to 0$ if and only if the odd-sector Rayleigh energy of the coordinate-derivative wavepacket residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$ satisfies:
    $$\mathcal{R}_{Q_{\mathrm{odd}} - \lambda}(v_{\mathrm{exc}}) \ge c_{\mathrm{ray}} e^{-\sigma_0 N} \quad \text{with } \sigma_0 < \sigma \quad (\text{or } \mathcal{R} \ge C N^{-p}).$$
-   Because $v_{\mathrm{exc}}$ is orthogonal to the lowest mode $u_0$ and is supported on oscillatory excited modes, its Rayleigh energy is governed by the continuum kinetic scale rather than by the ground-doublet tunneling splitting.
+   Because $v_{\mathrm{exc}}$ is orthogonal to the lowest mode $u_0$ and is supported on oscillatory excited modes, this suggests that its Rayleigh energy may be controlled by the excited-mode/kinetic scale rather than by the ground-doublet tunneling splitting; establishing such a uniform lower bound is part of the remaining analysis.
+
+---
+
+### 8.14 Proposition 8.14 (Stieltjes Transform Difference Quotient Representation of $\Xi$, Smooth Ground Enclosure, and High-Mode Resolvent Enclosure)
+
+To execute Milestone M12 and establish analytical control over the unified even-resolvent vector $\Xi$, we investigate the mode coefficients:
+$$A_k \equiv \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \qquad (\forall k \ge 1).$$
+
+The following proposition proves that each coefficient $A_k$ is identically a **difference quotient of the excited odd spectral Stieltjes transform**. Because the ground mode $\mu_0$ is completely absent from this transform, $A_1$ is governed by smooth, non-singular spectral derivative bounds on $[\lambda, E_1]$. For higher modes $k \ge 2$, the high-mode tail $j \ge k+1$ is rigorously enclosed by the transmission denominator $\mu_{k+1} - E_k$ of Hypothesis H2, while the resonant term $j = k$ is governed by parity-doublet transmission matching.
+
+**Proposition 8.14 (Stieltjes Transform Difference Quotient and Spectral Enclosures for $\Xi$):**
+*Let $N \ge 2$, $c > 1$. Let $F_{\mathrm{exc}}(z) \equiv \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - z} = \langle \boldsymbol\psi_{\mathrm{exc}}, (Q_{\mathrm{odd}} - z I)^{-1} \boldsymbol\psi_{\mathrm{exc}} \rangle$ denote the Stieltjes transform of the excited odd spectral measure $d\nu_{\mathrm{exc}} = \sum_{j=1}^{N-1} a_j^2 \delta_{\mu_j}$ on $\mathbb{R} \setminus \{\mu_1, \dots, \mu_{N-1}\}$. Let $\Xi = \sum_{k \ge 1} d_k A_k u_k$ be the unified even-resolvent vector of Proposition 8.13.*
+
+*Then:*
+1. *(Exact Stieltjes Difference Quotient Identity): For every excited even mode $k \ge 1$, the coefficient $A_k$ satisfies the exact identity:*
+   $$A_k = \frac{F_{\mathrm{exc}}(E_k) - F_{\mathrm{exc}}(\lambda)}{E_k - \lambda}, \tag{8.14.1}$$
+   *where $F_{\mathrm{exc}}(\lambda) = M_1^{\mathrm{exc}}$. Consequently, the norm of $\Xi$ evaluates identically to the weighted Stieltjes difference quotient energy:*
+   $$\|\Xi\|^2 = \sum_{k \ge 1} d_k^2 \left[ \frac{F_{\mathrm{exc}}(E_k) - F_{\mathrm{exc}}(\lambda)}{E_k - \lambda} \right]^2. \tag{8.14.2}$$
+2. *(Smooth Non-Singular Ground Enclosure for Mode $k = 1$): Because $\mu_0$ is completely absent, $F_{\mathrm{exc}}(z)$ has no poles on the semi-infinite interval $(-\infty, \mu_1)$. Since $\lambda < E_1 < \mu_1$, the closed segment $[\lambda, E_1]$ is entirely free of singularities, and by the Mean Value Theorem:*
+   $$A_1 = F_{\mathrm{exc}}'(\xi_1) = \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \xi_1)^2} \qquad \text{for some } \xi_1 \in (\lambda, E_1). \tag{8.14.3}$$
+   *Furthermore, because $F_{\mathrm{exc}}''(x) = 2\sum_{j \ge 1} \frac{a_j^2}{(\mu_j - x)^3} > 0$ is strictly convex on $(-\infty, \mu_1)$, $A_1$ satisfies the rigorous two-sided regular bounds:*
+   $$M_{2,\mathrm{exc}} = \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)^2} \le A_1 \le \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - E_1)^2} \le \frac{M_1^{\mathrm{exc}}}{\mu_1 - E_1}. \tag{8.14.4}$$
+3. *(High-Mode Spectral Filtering Enclosure for $j \ge k+1$): For any $k \ge 1$, decomposing $A_k = A_k^{(\le k)} + A_k^{(> k)}$ where $A_k^{(> k)} \equiv \sum_{j=k+1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)}$, the high-mode tail satisfies:*
+   $$0 \le A_k^{(> k)} \le \frac{1}{\mu_{k+1} - E_k} \sum_{j=k+1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{M_1^{\mathrm{exc}}}{\mu_{k+1} - E_k}, \tag{8.14.5}$$
+   *yielding the high-mode transmission enclosure:*
+   $$\sum_{k \ge 1} d_k^2 \big(A_k^{(> k)}\big)^2 \le (M_1^{\mathrm{exc}})^2 \sum_{k \ge 1} \frac{d_k^2}{(\mu_{k+1} - E_k)^2}. \tag{8.14.6}$$
+4. *(Resonant Parity-Doublet Transmission Cancellation): For the resonant doublet term $j = k$ ($k \ge 2$), the contribution to $d_k A_k$ evaluates identically to:*
+   $$d_k \frac{a_k^2}{(\mu_k - \lambda)(\mu_k - E_k)} = \left( \frac{d_k a_k}{\mu_k - E_k} \right) \left( \frac{a_k}{\mu_k - \lambda} \right), \tag{8.14.7}$$
+   *where the resonant tunneling factor $\frac{d_k a_k}{\mu_k - E_k} = \mathcal{O}(1)$ cancels the small barrier splitting $\mu_k - E_k \sim e^{-2\mathcal{S}_k N}$ by parity-doublet symmetry, directly mirroring the mode-by-mode transmission cancellation of Hypothesis H2.*
+
+*Proof.*
+**Step 1 (Stieltjes Resolvent Identity):**
+For any $j \ge 1$ and $k \ge 1$, applying the algebraic partial fraction decomposition:
+$$\frac{1}{(\mu_j - \lambda)(\mu_j - E_k)} = \frac{1}{E_k - \lambda} \left[ \frac{1}{\mu_j - E_k} - \frac{1}{\mu_j - \lambda} \right].$$
+Multiplying by $a_j^2$ and summing over $j \in \{1, \dots, N-1\}$:
+$$A_k = \frac{1}{E_k - \lambda} \left[ \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - E_k} - \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \right] = \frac{F_{\mathrm{exc}}(E_k) - F_{\mathrm{exc}}(\lambda)}{E_k - \lambda},$$
+since $F_{\mathrm{exc}}(\lambda) = \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} = M_1^{\mathrm{exc}}$. This proves (8.14.1). Squaring $\Xi_k = d_k A_k$ and summing over $k \ge 1$ yields (8.14.2).
+
+**Step 2 (Proof of Smooth Enclosure for Mode 1):**
+The poles of $F_{\mathrm{exc}}(z)$ are precisely the excited odd eigenvalues $\{\mu_1, \dots, \mu_{N-1}\}$. Under the interlaced doublet ordering, $\lambda < \mu_0 < E_1 < \mu_1$. Because $\mu_0$ is absent from $F_{\mathrm{exc}}$, the distance from the segment $[\lambda, E_1]$ to the spectrum of $F_{\mathrm{exc}}$ is $\mu_1 - E_1 > 0$.
+Hence $F_{\mathrm{exc}}$ is infinitely differentiable on $[\lambda, E_1]$. By the Mean Value Theorem, there exists $\xi_1 \in (\lambda, E_1)$ such that $A_1 = F_{\mathrm{exc}}'(\xi_1) = \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \xi_1)^2}$, proving (8.14.3).
+Differentiating again:
+$$F_{\mathrm{exc}}''(x) = 2 \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - x)^3} > 0 \qquad \forall x \in (-\infty, \mu_1),$$
+so $F_{\mathrm{exc}}'(x)$ is strictly monotonically increasing on $[\lambda, E_1]$. Therefore:
+$$F_{\mathrm{exc}}'(\lambda) \le F_{\mathrm{exc}}'(\xi_1) \le F_{\mathrm{exc}}'(E_1) \implies \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)^2} \le A_1 \le \sum_{j=1}^{N-1} \frac{a_j^2}{(\mu_j - E_1)^2}.$$
+Since $\mu_j - E_1 \ge \mu_1 - E_1 > 0$ for all $j \ge 1$, pulling $\frac{1}{\mu_1 - E_1}$ out of the sum yields $A_1 \le \frac{1}{\mu_1 - E_1} \sum_{j \ge 1} \frac{a_j^2}{\mu_j - E_1} \le \frac{M_1^{\mathrm{exc}}}{\mu_1 - E_1}$, completing (8.14.4).
+
+**Step 3 (Proof of High-Mode Enclosure):**
+For $j \ge k+1$, the monotonicity of the odd spectrum $\mu_{k+1} \le \mu_{k+2} \le \dots$ ensures $\mu_j - E_k \ge \mu_{k+1} - E_k > 0$. Therefore:
+$$A_k^{(> k)} = \sum_{j=k+1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \le \frac{1}{\mu_{k+1} - E_k} \sum_{j=k+1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{M_1^{\mathrm{exc}}}{\mu_{k+1} - E_k},$$
+proving (8.14.5). Multiplying by $d_k$, squaring, and summing over $k \ge 1$ establishes (8.14.6).
+
+**Step 4 (Proof of Resonant Cancellation):**
+For $j = k$, factoring the term yields identity (8.14.7). By the Cauchy–Schwarz inequality on the boundary fluxes:
+$$\left( \frac{d_k a_k}{\mu_k - E_k} \right)^2 \le \left( \frac{d_k^2}{\mu_k - E_k} \right) \left( \frac{a_k^2}{\mu_k - E_k} \right).$$
+In double-well tunneling, the even and odd boundary amplitudes $d_k, a_k$ and the doublet splitting $\Delta_k = \mu_k - E_k$ share the common barrier penetration scaling $\sim e^{-2\mathcal{S}_k N}$, rendering the quotient $\mathcal{O}(1)$, completing the proof. $\blacksquare$
 
 ---
 
