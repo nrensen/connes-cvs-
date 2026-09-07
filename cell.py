@@ -12,6 +12,14 @@ from connes_cvs import (
     build_galerkin_matrix,
     compute_ground_state,
 )
+from connes_cvs.operator import (
+    _compute_psi_pair,
+    prime_powers_up_to,
+    HAS_FLINT,
+)
+
+if HAS_FLINT:
+    from flint import ctx as flint_ctx
 
 import hashlib
 import json
@@ -296,6 +304,531 @@ def cache_load(
 
 
 # ============================================================
+# GALERKIN MATRIX CACHE WRAPPER
+# ============================================================
+
+GALERKIN_MATRIX_OPERATOR_VERSION = (
+    "cell.py-galerkin-matrix-v1"
+)
+
+
+def _galerkin_matrix_parameters(
+    c,
+    N,
+    T,
+    dps,
+    flint_bits=None,
+):
+    """
+    Construct the complete identity of a Galerkin matrix calculation.
+
+    `dps` is the generation/certification precision and forms part
+    of the immutable cache identity.
+    """
+    if isinstance(c, float):
+        raise TypeError(
+            "Galerkin matrix c must not be a Python float; "
+            "use an integer, decimal string, or mp.mpf."
+        )
+
+    c_mp = mp.mpf(c)
+
+    if flint_bits is None:
+        flint_bits = int(
+            int(dps) * 3.5
+        )
+
+    return {
+        "operator_version": (
+            GALERKIN_MATRIX_OPERATOR_VERSION
+        ),
+        "c": mp.nstr(
+            c_mp,
+            max(50, int(dps) + 10),
+        ),
+        "N": int(N),
+        "T": int(T),
+        "dps": int(dps),
+        "flint_bits": int(flint_bits),
+    }
+
+
+def _assemble_Q_from_psi(psi_vals, psi_deriv_vals, N):
+    """
+    Assemble the (2N+1) x (2N+1) Galerkin matrix Q from cached
+    basis functional values psi(n) and psi'(n) for n in [0, N].
+
+    Uses the exact parity identities:
+        psi(-n)  = -psi(n)
+        psi'(-n) =  psi'(n)
+    and the difference quotient:
+        Q[m, n] = psi'(n)                   if m == n
+        Q[m, n] = (psi(m) - psi(n))/(m - n) if m != n
+    for indices m, n in [-N, N].
+    """
+    dim = 2 * N + 1
+    Q = mp.matrix(dim, dim)
+
+    full_psi = [mp.mpf(0)] * dim
+    full_psi_d = [mp.mpf(0)] * dim
+
+    for n in range(N + 1):
+        p = psi_vals[n]
+        pd = psi_deriv_vals[n]
+        full_psi[N + n] = p
+        full_psi[N - n] = -p
+        full_psi_d[N + n] = pd
+        full_psi_d[N - n] = pd
+
+    for i in range(dim):
+        m = i - N
+        p_m = full_psi[i]
+        for j in range(i, dim):
+            n = j - N
+            if m == n:
+                val = full_psi_d[j]
+            else:
+                val = (p_m - full_psi[j]) / (m - n)
+            Q[i, j] = val
+            Q[j, i] = val
+
+    return Q
+
+
+def _galerkin_matrix_encode(
+    psi_vals,
+    psi_deriv_vals,
+    N,
+    dps,
+    trace_val,
+    frob_val,
+):
+    """
+    Convert arbitrary-precision Galerkin basis values into a
+    JSON-compatible fragment, retaining guard digits.
+    """
+    digits = int(dps) + 10
+
+    return {
+        "N": int(N),
+        "psi_vals": [
+            mp.nstr(psi_vals[n], digits)
+            for n in range(N + 1)
+        ],
+        "psi_deriv_vals": [
+            mp.nstr(psi_deriv_vals[n], digits)
+            for n in range(N + 1)
+        ],
+        "trace": mp.nstr(trace_val, digits),
+        "frobenius_norm": mp.nstr(frob_val, digits),
+    }
+
+
+def _galerkin_matrix_decode(
+    results,
+    N,
+):
+    """
+    Reconstruct mpmath Galerkin matrix Q and basis values from cached JSON.
+
+    Decoding occurs at caller's current mp.mp.dps.
+    """
+    cached_N = int(results["N"])
+    if cached_N < N:
+        raise ValueError(
+            f"cached Galerkin data has N={cached_N}, expected at least {N}"
+        )
+
+    raw_psi = results["psi_vals"]
+    raw_psi_d = results["psi_deriv_vals"]
+
+    psi_vals = [mp.mpf(raw_psi[n]) for n in range(N + 1)]
+    psi_deriv_vals = [mp.mpf(raw_psi_d[n]) for n in range(N + 1)]
+
+    Q = _assemble_Q_from_psi(psi_vals, psi_deriv_vals, N)
+
+    return Q, psi_vals, psi_deriv_vals
+
+
+def _validate_galerkin_matrix_structure(
+    Q,
+    N,
+    stored_trace=None,
+):
+    """
+    Cheap intrinsic validation of the reconstructed Galerkin matrix Q.
+    Checks dimensions, symmetry, finiteness, realness, and trace checksum.
+    """
+    expected_dim = 2 * N + 1
+
+    if Q.rows != expected_dim or Q.cols != expected_dim:
+        raise ValueError(
+            f"Galerkin matrix dimensions ({Q.rows}, {Q.cols}) "
+            f"do not match expected ({expected_dim}, {expected_dim})"
+        )
+
+    trace = mp.mpf(0)
+    for i in range(expected_dim):
+        diag_val = Q[i, i]
+        if not mp.isfinite(diag_val):
+            raise ValueError(f"diagonal entry Q[{i}, {i}] is not finite")
+        trace += diag_val
+
+        for j in range(i + 1, expected_dim):
+            val_ij = Q[i, j]
+            val_ji = Q[j, i]
+            if not mp.isfinite(val_ij):
+                raise ValueError(f"matrix entry Q[{i}, {j}] is not finite")
+            if val_ij != val_ji:
+                raise ValueError(f"matrix asymmetry detected at ({i}, {j})")
+
+    trace_error = None
+    if stored_trace is not None:
+        expected_trace = mp.mpf(stored_trace)
+        trace_error = abs(trace - expected_trace)
+        tolerance = mp.sqrt(mp.eps) * max(1, abs(expected_trace))
+        if trace_error > tolerance:
+            raise ValueError(
+                f"Galerkin matrix trace validation failed: "
+                f"{mp.nstr(trace_error, 6)} > {mp.nstr(tolerance, 6)}"
+            )
+
+    return {
+        "dimension": expected_dim,
+        "trace": trace,
+        "trace_error": trace_error,
+    }
+
+
+def _find_compatible_psi_cache(
+    c_str,
+    T,
+    dps,
+    flint_bits,
+    target_N,
+):
+    """
+    Search .cell_cache/galerkin_matrix for entries with matching
+    (operator_version, c, T, dps, flint_bits).
+
+    Returns:
+        (best_entry_results, best_N) or (None, -1)
+    """
+    namespace = "galerkin_matrix"
+    cache_dir = _cache_namespace_dir(namespace)
+
+    best_results = None
+    best_N = -1
+
+    for path in cache_dir.glob("*.json"):
+        try:
+            with path.open("r", encoding="utf-8") as f:
+                payload = json.load(f)
+            params = payload.get("parameters", {})
+            if (
+                params.get("operator_version") == GALERKIN_MATRIX_OPERATOR_VERSION
+                and params.get("c") == c_str
+                and params.get("T") == int(T)
+                and params.get("dps") == int(dps)
+                and params.get("flint_bits") == int(flint_bits)
+            ):
+                entry_N = int(params.get("N", -1))
+                if entry_N >= target_N:
+                    return payload.get("results"), entry_N
+                if entry_N > best_N:
+                    best_N = entry_N
+                    best_results = payload.get("results")
+        except Exception:
+            continue
+
+    return best_results, best_N
+
+
+def _generate_galerkin_matrix(
+    c,
+    N,
+    T,
+    dps,
+    flint_bits,
+):
+    """
+    Generate Galerkin matrix data at generation precision, reusing any
+    available points from existing cached entries for the same parameters.
+    """
+    c_mp = mp.mpf(c)
+    L = mp.log(c_mp)
+    prime_data, _ = prime_powers_up_to(int(mp.floor(c_mp)))
+
+    if HAS_FLINT:
+        flint_ctx.prec = flint_bits
+        flint_ctx.threads = 1
+
+    c_str = mp.nstr(c_mp, max(50, int(dps) + 10))
+    existing_results, avail_N = _find_compatible_psi_cache(
+        c_str=c_str,
+        T=T,
+        dps=dps,
+        flint_bits=flint_bits,
+        target_N=N,
+    )
+
+    psi_vals = {}
+    psi_deriv_vals = {}
+    reused_count = 0
+
+    if existing_results is not None and avail_N >= 0:
+        raw_p = existing_results["psi_vals"]
+        raw_pd = existing_results["psi_deriv_vals"]
+        max_take = min(avail_N, N)
+        for n in range(max_take + 1):
+            psi_vals[n] = mp.mpf(raw_p[n])
+            psi_deriv_vals[n] = mp.mpf(raw_pd[n])
+        reused_count = max_take + 1
+
+    start_idx = reused_count
+    quad_start = time.perf_counter()
+
+    for n_idx in range(start_idx, N + 1):
+        psi, psi_d = _compute_psi_pair(n_idx, L, T, dps, prime_data)
+        psi_vals[n_idx] = psi
+        psi_deriv_vals[n_idx] = psi_d
+
+    quad_elapsed = time.perf_counter() - quad_start
+
+    assembly_start = time.perf_counter()
+    Q = _assemble_Q_from_psi(psi_vals, psi_deriv_vals, N)
+    assembly_elapsed = time.perf_counter() - assembly_start
+
+    trace_val = mp.mpf(0)
+    frob_sq = mp.mpf(0)
+    dim = 2 * N + 1
+    for i in range(dim):
+        trace_val += Q[i, i]
+        for j in range(dim):
+            frob_sq += Q[i, j] ** 2
+    frob_val = mp.sqrt(frob_sq)
+
+    encoded = _galerkin_matrix_encode(
+        psi_vals=psi_vals,
+        psi_deriv_vals=psi_deriv_vals,
+        N=N,
+        dps=dps,
+        trace_val=trace_val,
+        frob_val=frob_val,
+    )
+
+    return (
+        encoded,
+        {
+            "quadrature_seconds": quad_elapsed,
+            "assembly_seconds": assembly_elapsed,
+            "reused_points": reused_count,
+            "computed_points": (N + 1) - reused_count,
+            "trace": trace_val,
+            "frobenius_norm": frob_val,
+        },
+    )
+
+
+def get_galerkin_matrix(
+    c,
+    N,
+    T,
+    dps,
+    *,
+    flint_bits=None,
+    verbose=True,
+):
+    """
+    Obtain the truncated Weil Galerkin matrix Q(c, N) through the persistent cache.
+
+    Cache semantics
+    ---------------
+    The cache is always enabled.
+    `dps` is the generation/certification precision and forms part
+    of the immutable cache identity.
+    The caller's current `mp.mp.dps` is the working precision.
+
+    A cache hit:
+        lookup -> decode -> validate -> return Q, metadata
+
+    A cache miss:
+        generate -> write -> fresh lookup -> decode -> validate -> return Q, metadata
+
+    Sub-dimension reuse:
+        If an existing cache entry for the same (c, T, dps) has dimension N' >= N,
+        the matrix Q is assembled instantly from the existing basis points without
+        re-evaluating any quadratures.
+        If N' < N, existing points are reused and only the missing points
+        n in [N' + 1, N] are evaluated.
+
+    Returns
+    -------
+    Q, metadata
+        Q : mpmath.matrix of dimension (2N+1) x (2N+1), symmetric and real.
+        metadata : dict of cache and timing metrics.
+    """
+    working_dps = int(mp.mp.dps)
+    if working_dps <= 0:
+        raise ValueError("current mp.mp.dps must be positive")
+
+    requested_generation_dps = int(dps)
+    if requested_generation_dps <= 0:
+        raise ValueError("dps must be positive")
+
+    if flint_bits is None:
+        flint_bits = int(requested_generation_dps * 3.5)
+
+    namespace = "galerkin_matrix"
+
+    generation_dps = max(requested_generation_dps, working_dps)
+    if generation_dps != requested_generation_dps and verbose:
+        print()
+        print("GALERKIN MATRIX CACHE: GENERATION PRECISION PROMOTED")
+        print(f"  requested dps = {requested_generation_dps}")
+        print(f"  working dps   = {working_dps}")
+        print(f"  generation dps = {generation_dps}")
+
+    parameters = _galerkin_matrix_parameters(
+        c=c,
+        N=N,
+        T=T,
+        dps=generation_dps,
+        flint_bits=flint_bits,
+    )
+
+    lookup_start = time.perf_counter()
+
+    try:
+        results, cache_meta = cache_load(namespace, parameters)
+        lookup_elapsed = time.perf_counter() - lookup_start
+        cache_hit = True
+        generation_metadata = None
+
+        if verbose:
+            print()
+            print("GALERKIN MATRIX CACHE: HIT")
+            print(f"  key            = {cache_meta['cache_key']}")
+            print(f"  N              = {N} (dim = {2*N+1})")
+            print(f"  generation dps = {generation_dps}")
+            print(f"  lookup         = {lookup_elapsed:.6f} s")
+
+    except FileNotFoundError:
+        lookup_elapsed = time.perf_counter() - lookup_start
+        cache_hit = False
+
+        if verbose:
+            print()
+            print("GALERKIN MATRIX CACHE: MISS")
+            print(f"  N              = {N} (dim = {2*N+1})")
+            print(f"  generation dps = {generation_dps}")
+            print(f"  working dps    = {working_dps}")
+
+        caller_dps = mp.mp.dps
+        generation_start = time.perf_counter()
+        mp.mp.dps = generation_dps
+
+        try:
+            generated_results, generation_metadata = _generate_galerkin_matrix(
+                c=c,
+                N=N,
+                T=T,
+                dps=generation_dps,
+                flint_bits=flint_bits,
+            )
+
+            save_start = time.perf_counter()
+            cache_save(
+                namespace,
+                parameters,
+                generated_results,
+                timing={
+                    **{
+                        k: v for k, v in generation_metadata.items()
+                        if k.endswith("_seconds")
+                    },
+                    "generation_dps": generation_dps,
+                    "reused_points": generation_metadata["reused_points"],
+                    "computed_points": generation_metadata["computed_points"],
+                },
+            )
+            save_elapsed = time.perf_counter() - save_start
+            generation_elapsed = time.perf_counter() - generation_start
+
+        finally:
+            mp.mp.dps = caller_dps
+
+        if verbose:
+            print()
+            print("GALERKIN MATRIX CACHE: GENERATED")
+            print(f"  reused points  = {generation_metadata['reused_points']}")
+            print(f"  computed pts   = {generation_metadata['computed_points']}")
+            print(f"  quadrature     = {generation_metadata['quadrature_seconds']:.6f} s")
+            print(f"  assembly       = {generation_metadata['assembly_seconds']:.6f} s")
+            print(f"  save           = {save_elapsed:.6f} s")
+            print(f"  generation     = {generation_elapsed:.6f} s")
+
+        lookup_start = time.perf_counter()
+        results, cache_meta = cache_load(namespace, parameters)
+        second_lookup_elapsed = time.perf_counter() - lookup_start
+
+        cache_meta = dict(cache_meta)
+        cache_meta["initial_cache_miss_seconds"] = lookup_elapsed
+        cache_meta["generation_seconds"] = generation_elapsed
+        cache_meta["save_seconds"] = save_elapsed
+        cache_meta["final_lookup_seconds"] = second_lookup_elapsed
+        cache_meta["cache_hit"] = False
+        cache_meta["generated"] = True
+        cache_meta["reused_points"] = generation_metadata["reused_points"]
+        cache_meta["computed_points"] = generation_metadata["computed_points"]
+
+    decode_start = time.perf_counter()
+    Q, psi_vals, psi_deriv_vals = _galerkin_matrix_decode(results, N)
+    decode_elapsed = time.perf_counter() - decode_start
+
+    validation_start = time.perf_counter()
+    structural = _validate_galerkin_matrix_structure(
+        Q,
+        N,
+        stored_trace=results.get("trace"),
+    )
+    validation_elapsed = time.perf_counter() - validation_start
+
+    cache_meta = dict(cache_meta)
+    cache_meta["generation_dps"] = generation_dps
+    cache_meta["working_dps"] = working_dps
+    cache_meta["decode_seconds"] = decode_elapsed
+    cache_meta["validation_seconds"] = validation_elapsed
+    cache_meta["structural_validation"] = structural
+
+    if cache_hit:
+        cache_meta["total_seconds"] = (
+            lookup_elapsed + decode_elapsed + validation_elapsed
+        )
+    else:
+        cache_meta["total_seconds"] = (
+            cache_meta["initial_cache_miss_seconds"]
+            + cache_meta["generation_seconds"]
+            + cache_meta["save_seconds"]
+            + cache_meta["final_lookup_seconds"]
+            + decode_elapsed
+            + validation_elapsed
+        )
+
+    if verbose:
+        print()
+        print("GALERKIN MATRIX CACHE: RETURN")
+        print(f"  decode         = {decode_elapsed:.6f} s")
+        print(f"  validation     = {validation_elapsed:.6f} s")
+        print(f"  total          = {cache_meta['total_seconds']:.6f} s")
+
+    return Q, cache_meta
+
+
+get_cached_galerkin_matrix = get_galerkin_matrix
+
+
+# ============================================================
 # GROUND-STATE CACHE WRAPPER
 # ============================================================
 
@@ -496,12 +1029,13 @@ def _generate_ground_state(
     """
     Q_start = time.perf_counter()
 
-    Q = build_galerkin_matrix(
+    Q, _ = get_galerkin_matrix(
         c=c,
         N=N,
         T=T,
         dps=dps,
         flint_bits=flint_bits,
+        verbose=False,
     )
 
     Q_build_elapsed = (

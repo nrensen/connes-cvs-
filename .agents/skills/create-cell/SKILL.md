@@ -49,6 +49,7 @@ Every cell script must follow this modular structure:
 import time
 import mpmath as mp
 from connes_cvs import build_galerkin_matrix
+from cell import get_galerkin_matrix
 
 # Canonical precision baseline
 mp.mp.dps = 50
@@ -61,6 +62,22 @@ GROUND_DPS = 50
 # Standard discrete dimension sweep
 N_LIST = [4, 8, 12, 16, 20, 24]
 ```
+
+### 3.1.0 Cache-Accelerated Matrix Retrieval (`cell.py`)
+To avoid redundant, expensive numerical quadratures across sweeps and multiple diagnostic cells, construct the Galerkin matrix via `get_galerkin_matrix` from [`cell.py`](file:///c:/data/github/connes-cvs-/cell.py):
+```python
+# Returns (Q, metadata) with persistent content-addressed JSON caching and sub-dimension reuse
+Q_full, _ = get_galerkin_matrix(
+    c=C_PARAM,
+    N=N,
+    T=T_PARAM,
+    dps=GROUND_DPS,
+    verbose=False,
+)
+```
+- **Persistent Caching:** Cached entries are stored in `.cell_cache/galerkin_matrix/` and load in < 10 ms.
+- **Sub-Dimension Reuse:** If a cached entry for $N' \ge N$ exists for the same parameters, $Q$ is assembled instantly without evaluating any quadratures.
+- **Incremental Evaluation:** When extending a dimension sweep to higher $N$, only missing basis points $n \in [N_{\mathrm{prev}} + 1, N]$ are evaluated.
 
 ### 3.1.1 `mp.mpf` Precision, Literal Construction & String Formatting
 1. **Explicit String Wrapping for Constants:**

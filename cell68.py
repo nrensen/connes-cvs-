@@ -62,6 +62,7 @@ import time
 import mpmath as mp
 
 from connes_cvs import build_galerkin_matrix
+from cell import get_galerkin_matrix
 
 # -----------------------------------------------------------------------------
 # Precision and Parameter Configuration
@@ -160,8 +161,15 @@ def run_cell68() -> None:
     for N in N_LIST:
         t0 = time.time()
 
-        # Build Galerkin operator
-        Q_full = build_galerkin_matrix(c=C_PARAM, N=N, T=T_PARAM, dps=GROUND_DPS)
+        # Build Galerkin operator (cache-accelerated via cell.py)
+        Q_full, _ = get_galerkin_matrix(
+            c=C_PARAM,
+            N=N,
+            T=T_PARAM,
+            dps=GROUND_DPS,
+            verbose=False,
+        )
+
         lam_0, E, O, evals_e, V_e, evals_o, V_o = solve_parity_eigensystems(Q_full, N)
 
         # Ground state c in R^{N+1}
