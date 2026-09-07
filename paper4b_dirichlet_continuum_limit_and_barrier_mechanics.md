@@ -1097,9 +1097,9 @@ The following proposition proves that each coefficient $A_k$ is identically a **
    $$0 \le A_k^{(> k)} \le \frac{1}{\mu_{k+1} - E_k} \sum_{j=k+1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{M_1^{\mathrm{exc}}}{\mu_{k+1} - E_k}, \tag{8.14.5}$$
    *yielding the high-mode transmission enclosure:*
    $$\sum_{k \ge 1} d_k^2 \big(A_k^{(> k)}\big)^2 \le (M_1^{\mathrm{exc}})^2 \sum_{k \ge 1} \frac{d_k^2}{(\mu_{k+1} - E_k)^2}. \tag{8.14.6}$$
-4. *(Resonant Parity-Doublet Transmission Cancellation): For the resonant doublet term $j = k$ ($k \ge 2$), the contribution to $d_k A_k$ evaluates identically to:*
-   $$d_k \frac{a_k^2}{(\mu_k - \lambda)(\mu_k - E_k)} = \left( \frac{d_k a_k}{\mu_k - E_k} \right) \left( \frac{a_k}{\mu_k - \lambda} \right), \tag{8.14.7}$$
-   *where the resonant tunneling factor $\frac{d_k a_k}{\mu_k - E_k} = \mathcal{O}(1)$ cancels the small barrier splitting $\mu_k - E_k \sim e^{-2\mathcal{S}_k N}$ by parity-doublet symmetry, directly mirroring the mode-by-mode transmission cancellation of Hypothesis H2.*
+4. *(Factorization of the Resonant Parity-Doublet Transmission Factor and Candidate Mechanism): For the resonant doublet term $j = k$ ($k \ge 2$), the contribution to $d_k A_k$ factors identically as:*
+   $$d_k \frac{a_k^2}{(\mu_k - \lambda)(\mu_k - E_k)} = \left( \frac{d_k a_k}{\mu_k - E_k} \right) \left( \frac{a_k}{\mu_k - \lambda} \right). \tag{8.14.7}$$
+   *Here $\frac{a_k}{\mu_k - \lambda}$ is the normalized transmission weight, identifying the resonant quotient $\frac{d_k a_k}{\mu_k - E_k}$ as the specific modewise transmission factor requiring analytical control in a mode-by-mode approach. Semiclassically, the even and odd boundary amplitudes $d_k, a_k$ and the doublet splitting $\Delta_k = \mu_k - E_k \sim e^{-2\mathcal{S}_k N}$ share the common barrier penetration action, motivating the candidate physical mechanism for $\left| \frac{d_k a_k}{\mu_k - E_k} \right| \le C$.*
 
 *Proof.*
 **Step 1 (Stieltjes Resolvent Identity):**
@@ -1123,10 +1123,91 @@ For $j \ge k+1$, the monotonicity of the odd spectrum $\mu_{k+1} \le \mu_{k+2} \
 $$A_k^{(> k)} = \sum_{j=k+1}^{N-1} \frac{a_j^2}{(\mu_j - \lambda)(\mu_j - E_k)} \le \frac{1}{\mu_{k+1} - E_k} \sum_{j=k+1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \le \frac{M_1^{\mathrm{exc}}}{\mu_{k+1} - E_k},$$
 proving (8.14.5). Multiplying by $d_k$, squaring, and summing over $k \ge 1$ establishes (8.14.6).
 
-**Step 4 (Proof of Resonant Cancellation):**
-For $j = k$, factoring the term yields identity (8.14.7). By the Cauchy–Schwarz inequality on the boundary fluxes:
+**Step 4 (Candidate Resonant Factorization):**
+For $j = k$, factoring the algebraic expression yields identity (8.14.7) unconditionally. Applying the Cauchy–Schwarz inequality on the boundary fluxes gives:
 $$\left( \frac{d_k a_k}{\mu_k - E_k} \right)^2 \le \left( \frac{d_k^2}{\mu_k - E_k} \right) \left( \frac{a_k^2}{\mu_k - E_k} \right).$$
-In double-well tunneling, the even and odd boundary amplitudes $d_k, a_k$ and the doublet splitting $\Delta_k = \mu_k - E_k$ share the common barrier penetration scaling $\sim e^{-2\mathcal{S}_k N}$, rendering the quotient $\mathcal{O}(1)$, completing the proof. $\blacksquare$
+In double-well tunneling, the boundary amplitudes $d_k, a_k$ and the doublet splitting $\Delta_k = \mu_k - E_k$ share the common barrier penetration action $\sim e^{-2\mathcal{S}_k N}$, providing empirical and physical motivation for the candidate bound $\left| \frac{d_k a_k}{\mu_k - E_k} \right| \le C$, while establishing such a modewise bound analytically remains an open target in a modewise framework. $\blacksquare$
+
+---
+
+### 8.15 Proposition 8.15 (Global Operator Representation of $\Xi$, Even-Resolvent Parseval Identity, and Automatic Resonant Absorption)
+
+To resolve the remaining open challenge of Milestone M12 without demanding a separate modewise bound $\frac{d_k a_k}{\mu_k - E_k} = \mathcal{O}(1)$, we investigate the global operator structure of $\Xi = \sum_{k \ge 1} d_k A_k u_k$. 
+
+The following proposition establishes that $\Xi$ is identically an **even-resolvent operator integral** over the excited odd spectral measure, proves the exact closed-form Parseval evaluation of the even-resolvent norm $a_j^2 \sum_{k=1}^{N-1} \frac{d_k^2}{(\mu_j - E_k)^2} = \|K u_j\|^2 - b_{0j}^2$, and establishes a global quadratic-form bound on $\|\Xi\|^2$ that **automatically absorbs the resonant contribution without isolating individual poles**.
+
+**Proposition 8.15 (Global Operator Representation, Parseval Identity, and Resonant Absorption):**
+*Let $N \ge 2$, $c > 1$. Let $\Xi = \sum_{k \ge 1} d_k A_k u_k \in c^\perp \subset H_{\mathrm{even}}$ be the unified even-resolvent vector of Proposition 8.13, and let $G_{\mathrm{even}}(z) \equiv \langle d_{\mathrm{exc}}, (z I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} \rangle = \sum_{k=1}^{N-1} \frac{d_k^2}{z - E_k}$ denote the even-sector Stieltjes transform on $\mathbb{C} \setminus \{E_1, \dots, E_{N-1}\}$.*
+
+*Then:*
+1. *(Exact Global Operator Representation): As an element of the excited even subspace $c^\perp$, $\Xi$ satisfies the exact operator identity:*
+   $$\Xi = g(Q_{\mathrm{even}}) d_{\mathrm{exc}} = \int \frac{d\nu_{\mathrm{exc}}(\mu)}{\mu - \lambda} (\mu I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} = M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} w_j (\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}, \tag{8.15.1}$$
+   *where $g(x) = \frac{F_{\mathrm{exc}}(x) - F_{\mathrm{exc}}(\lambda)}{x - \lambda}$, and $w_j = \frac{a_j^2/(\mu_j - \lambda)}{M_1^{\mathrm{exc}}} \ge 0$ ($\sum_{j=1}^{N-1} w_j = 1$) are the normalized transmission weights.*
+2. *(Exact Even-Resolvent Parseval Identity): For every excited odd mode $j \in \{1, \dots, N-1\}$, the even resolvent vector $(\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}$ evaluates in coordinate space identically to:*
+   $$(\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} = - \frac{1}{a_j} P_{\perp c} K u_j. \tag{8.15.2}$$
+   *Consequently, the even-resolvent norm evaluates in closed form without any eigenvalue denominators:*
+   $$a_j^2 \sum_{k=1}^{N-1} \frac{d_k^2}{(\mu_j - E_k)^2} = a_j^2 \|(\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}\|^2 = \|P_{\perp c} K u_j\|^2 = \|K u_j\|^2 - b_{0j}^2 \le \|K u_j\|^2 \le N^2. \tag{8.15.3}$$
+3. *(Global Stieltjes Divided-Difference Kernel): The squared norm of $\Xi$ evaluates identically to the double Stieltjes integral:*
+   $$\|\Xi\|^2 = \iint \left[ \frac{G_{\mathrm{even}}(\mu') - G_{\mathrm{even}}(\mu)}{\mu - \mu'} \right] \frac{d\nu_{\mathrm{exc}}(\mu)}{\mu - \lambda} \frac{d\nu_{\mathrm{exc}}(\mu')}{\mu' - \lambda} = \frac{1}{D_0^2} \|P_{\perp c} K v_{\mathrm{exc}}\|^2. \tag{8.15.4}$$
+4. *(Automatic Resonant Absorption and Second-Moment Enclosure): By convexity of the norm, $\|\Xi\|^2$ satisfies the rigorous upper bound:*
+   $$\|\Xi\|^2 \le M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} \frac{\|K u_j\|^2 - b_{0j}^2}{\mu_j - \lambda} \le M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} \frac{\|K u_j\|^2}{\mu_j - \lambda}. \tag{8.15.5}$$
+   *Consequently, the Route B second-moment ratio $\rho_2^{\mathrm{exc}} \equiv \frac{D_0^2 M_{2,\mathrm{exc}}}{M_1^{\mathrm{exc}}}$ satisfies:*
+   $$\rho_2^{\mathrm{exc}} \le \frac{1}{1 - D_0^2 M_{2,\mathrm{exc}}} \sum_{j=1}^{N-1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \big( \|K u_j\|^2 - b_{0j}^2 \big) \le \frac{N^3}{1 - D_0^2 M_{2,\mathrm{exc}}} R_{\mathrm{gap}}^{\max}(N). \tag{8.15.6}$$
+   *This completely eliminates the need for an independent modewise resonant bound $\frac{d_k a_k}{\mu_k - E_k} = \mathcal{O}(1)$, reducing the second-moment bound directly to the relative tunneling gap $R_{\mathrm{gap}}^{\max}(N) = \frac{D_0^2}{\mu_1 - \lambda}$.*
+
+*Proof.*
+**Step 1 (Proof of Global Operator Representation):**
+The set of excited even eigenvectors $\{u_k\}_{k=1}^{N-1}$ forms an orthonormal basis for $c^\perp \subset H_{\mathrm{even}}$ with $Q_{\mathrm{even}} u_k = E_k u_k$.
+By definition of the functional calculus, for any function $g$ regular on $\{E_1, \dots, E_{N-1}\}$:
+$$g(Q_{\mathrm{even}}) d_{\mathrm{exc}} = \sum_{k=1}^{N-1} \langle u_k, d_{\mathrm{exc}} \rangle g(E_k) u_k = \sum_{k=1}^{N-1} d_k g(E_k) u_k.$$
+Setting $g(x) = \frac{F_{\mathrm{exc}}(x) - F_{\mathrm{exc}}(\lambda)}{x - \lambda}$, Proposition 8.14 established $A_k = g(E_k)$. Thus:
+$$\Xi = \sum_{k=1}^{N-1} d_k A_k u_k = g(Q_{\mathrm{even}}) d_{\mathrm{exc}}.$$
+Using the integral representation $g(x) = \int \frac{d\nu_{\mathrm{exc}}(\mu)}{(\mu - \lambda)(\mu - x)}$, we obtain:
+$$g(Q_{\mathrm{even}}) d_{\mathrm{exc}} = \int \frac{d\nu_{\mathrm{exc}}(\mu)}{\mu - \lambda} (\mu I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} = \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} (\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}},$$
+proving (8.15.1).
+
+**Step 2 (Proof of the Even-Resolvent Parseval Identity):**
+From the fundamental commutator identity of Proposition 8.8, for any odd eigenvector $u_j$ ($j \ge 1$):
+$$(Q - \mu_j I) K u_j = a_j d.$$
+Since $u_j \in H_{\mathrm{odd}}$ and $K$ is odd, $K u_j \in H_{\mathrm{even}}$. Expanding $K u_j$ along the orthogonal decomposition $H_{\mathrm{even}} = \mathbb{R} c \oplus c^\perp$:
+$$K u_j = \langle c, K u_j \rangle c + P_{\perp c} K u_j = b_{0j} c + P_{\perp c} K u_j.$$
+Applying $(Q - \mu_j I)$ and noting $(Q - \mu_j I) c = (\lambda - \mu_j) c$ and $d = D_0 c + d_{\mathrm{exc}}$:
+$$(\lambda - \mu_j) b_{0j} c + (Q_{\mathrm{even}} - \mu_j I) P_{\perp c} K u_j = a_j D_0 c + a_j d_{\mathrm{exc}}.$$
+Since $(\lambda - \mu_j) b_{0j} = a_j D_0$ (by Eq. 8.12.1), the $c$-components cancel identically, leaving:
+$$(Q_{\mathrm{even}} - \mu_j I) P_{\perp c} K u_j = a_j d_{\mathrm{exc}} \implies (\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} = - \frac{1}{a_j} P_{\perp c} K u_j,$$
+proving (8.15.2).
+Taking the squared norm of both sides:
+$$\|(\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}\|^2 = \frac{1}{a_j^2} \|P_{\perp c} K u_j\|^2 = \frac{1}{a_j^2} \big( \|K u_j\|^2 - |\langle c, K u_j \rangle|^2 \big) = \frac{\|K u_j\|^2 - b_{0j}^2}{a_j^2}.$$
+On the other hand, expanding the resolvent in the eigenbasis $\{u_k\}_{k=1}^{N-1}$ gives:
+$$\|(\mu_j I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}\|^2 = \sum_{k=1}^{N-1} \frac{\langle u_k, d_{\mathrm{exc}} \rangle^2}{(\mu_j - E_k)^2} = \sum_{k=1}^{N-1} \frac{d_k^2}{(\mu_j - E_k)^2}.$$
+Multiplying by $a_j^2$ establishes the exact closed-form evaluation (8.15.3).
+
+**Step 3 (Proof of the Global Stieltjes Kernel):**
+Taking the inner product of $\Xi$ with itself using representation (8.15.1):
+$$\|\Xi\|^2 = \iint \frac{d\nu_{\mathrm{exc}}(\mu)}{\mu - \lambda} \frac{d\nu_{\mathrm{exc}}(\mu')}{\mu' - \lambda} \langle (\mu I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}}, (\mu' I - Q_{\mathrm{even}})^{-1} d_{\mathrm{exc}} \rangle.$$
+By the first resolvent identity:
+$$(\mu I - Q_{\mathrm{even}})^{-1} (\mu' I - Q_{\mathrm{even}})^{-1} = \frac{1}{\mu - \mu'} \left[ (\mu' I - Q_{\mathrm{even}})^{-1} - (\mu I - Q_{\mathrm{even}})^{-1} \right].$$
+Taking the expectation with $d_{\mathrm{exc}}$ gives $\frac{G_{\mathrm{even}}(\mu') - G_{\mathrm{even}}(\mu)}{\mu - \mu'}$, establishing the double Stieltjes integral in (8.15.4).
+Furthermore, substituting (8.15.2) into (8.15.1) gives:
+$$\Xi = \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \left( - \frac{1}{a_j} P_{\perp c} K u_j \right) = - P_{\perp c} K \left( \sum_{j=1}^{N-1} \frac{a_j}{\mu_j - \lambda} u_j \right).$$
+Since $\sum_{j=1}^{N-1} \frac{a_j}{\mu_j - \lambda} u_j = (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi_{\mathrm{exc}} = - \frac{v_{\mathrm{exc}}}{D_0}$ (by Proposition 8.13), we obtain $\Xi = \frac{1}{D_0} P_{\perp c} K v_{\mathrm{exc}}$, so $\|\Xi\|^2 = \frac{1}{D_0^2} \|P_{\perp c} K v_{\mathrm{exc}}\|^2$, completing (8.15.4).
+
+**Step 4 (Proof of Automatic Resonant Absorption):**
+By definition, $A_k = M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} w_j \frac{1}{\mu_j - E_k}$. By Cauchy–Schwarz (or Jensen's inequality for the convex function $x \mapsto x^2$ with probability weights $w_j \ge 0$, $\sum w_j = 1$):
+$$A_k^2 \le (M_1^{\mathrm{exc}})^2 \sum_{j=1}^{N-1} w_j \frac{1}{(\mu_j - E_k)^2} = M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} \frac{a_j^2}{\mu_j - \lambda} \frac{1}{(\mu_j - E_k)^2}.$$
+Multiplying by $d_k^2$ and summing over $k \in \{1, \dots, N-1\}$:
+$$\|\Xi\|^2 = \sum_{k=1}^{N-1} d_k^2 A_k^2 \le M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} \frac{1}{\mu_j - \lambda} \left[ a_j^2 \sum_{k=1}^{N-1} \frac{d_k^2}{(\mu_j - E_k)^2} \right].$$
+Substituting the exact identity (8.15.3) into the bracketed term gives:
+$$\|\Xi\|^2 \le M_1^{\mathrm{exc}} \sum_{j=1}^{N-1} \frac{\|K u_j\|^2 - b_{0j}^2}{\mu_j - \lambda},$$
+proving (8.15.5). In this upper bound, the summation over $k$ has been evaluated in closed form, completely absorbing the resonant pole!
+Finally, inserting (8.15.5) into the master Route B operator inequality of Proposition 8.13:
+$$\rho_2^{\mathrm{exc}} \le \frac{D_0^2 \|\Xi\|^2}{M_1^{\mathrm{exc}} (1 - D_0^2 M_{2,\mathrm{exc}})} \le \frac{1}{1 - D_0^2 M_{2,\mathrm{exc}}} \sum_{j=1}^{N-1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \big( \|K u_j\|^2 - b_{0j}^2 \big).$$
+Since $\|K u_j\|^2 \le N^2$ and $\frac{D_0^2}{\mu_j - \lambda} \le \frac{D_0^2}{\mu_1 - \lambda} = R_{\mathrm{gap}}^{\max}(N)$, summing over $N-1$ modes gives:
+$$\sum_{j=1}^{N-1} \left( \frac{D_0^2}{\mu_j - \lambda} \right) \|K u_j\|^2 \le N^2 (N-1) R_{\mathrm{gap}}^{\max}(N) \le N^3 R_{\mathrm{gap}}^{\max}(N),$$
+completing the proof. $\blacksquare$
+
+---
+
 
 ---
 
