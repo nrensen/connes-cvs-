@@ -14,30 +14,30 @@ Core Thresholds Sweep: L in [4, 6, 8]
      L = 6: bar{C} = 1.94991 (mode 7) | Tail Dev = 4.89651e-10 | Calib Tele = 1.03423e-9 | Valid = True
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.98s | Delta_2 = 4.8298678e-15
+   Completed N = 12 in 0.99s | Delta_2 = 4.8298678e-15
      L = 4: bar{C} = 871.408 (mode 5) | Tail Dev = 4.46639e-8 | Calib Tele = 0.00010734 | Valid = True
      L = 6: bar{C} = 51.7592 (mode 7) | Tail Dev = 4.66165e-13 | Calib Tele = 5.48104e-11 | Valid = True
      L = 8: bar{C} = 1.32202 (mode 10) | Tail Dev = 5.72309e-16 | Calib Tele = 1.31137e-15 | Valid = True
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 1.84s | Delta_2 = 1.2071033e-19
+   Completed N = 16 in 1.87s | Delta_2 = 1.2071033e-19
      L = 4: bar{C} = 1420.49 (mode 5) | Tail Dev = 7.28827e-9 | Calib Tele = 2.86581e-5 | Valid = True
      L = 6: bar{C} = 347.812 (mode 7) | Tail Dev = 1.26968e-14 | Calib Tele = 1.12682e-11 | Valid = True
      L = 8: bar{C} = 12.3374 (mode 9) | Tail Dev = 1.00239e-18 | Calib Tele = 1.73678e-17 | Valid = True
 
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 3.09s | Delta_2 = 9.8425743e-24
+   Completed N = 20 in 3.16s | Delta_2 = 9.8425743e-24
      L = 4: bar{C} = 2365.24 (mode 5) | Tail Dev = 1.76277e-9 | Calib Tele = 1.22495e-5 | Valid = True
      L = 6: bar{C} = 736.187 (mode 7) | Tail Dev = 4.20852e-16 | Calib Tele = 7.59523e-13 | Valid = True
      L = 8: bar{C} = 73.3595 (mode 9) | Tail Dev = 3.03433e-21 | Calib Tele = 4.2931e-19 | Valid = True
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 4.77s | Delta_2 = 1.3704206e-26
+   Completed N = 24 in 4.83s | Delta_2 = 1.3704206e-26
      L = 4: bar{C} = 3396.32 (mode 5) | Tail Dev = 6.99048e-10 | Calib Tele = 7.39972e-6 | Valid = True
      L = 6: bar{C} = 816.46 (mode 7) | Tail Dev = 7.46398e-17 | Calib Tele = 1.6451e-13 | Valid = True
      L = 8: bar{C} = 176.259 (mode 9) | Tail Dev = 2.08437e-22 | Calib Tele = 8.49515e-20 | Valid = True
 
-All dimensions processed in 11.13s.
+All dimensions processed in 11.30s.
 
 =======================================================================================================================================
 TEST A: Modewise Spectral Expansion Ratio Identity Audit (N = 24, Mode j = 2)
@@ -93,7 +93,8 @@ TEST B: Multi-Dimension Envelope bar{C}_2(N; L) = max_{l > L} C_{2, l} across Di
  24 |  8 |        176.25874 |             9 |        176.25874 |         1.0419 |                     169.17
 -------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test B:
-1. For every dimension N and threshold L, the maximum is achieved at the base of the tail: l^* = L + 1.
+1. In almost all configurations, the maximum is achieved at the base of the tail l^* = L + 1,
+   with the notable exception at N=12, L=8 where peak C occurs at mode 10 (barrier transition).
 2. Multi-dimension stability of bar{C}_2(N; L):
    L = 4: bar{C} stabilizes rapidly as N increases (governed by E_5/E_4 which is local to the well).
    L = 6: bar{C} is substantially smaller (E_7/E_6 << E_5/E_4).
