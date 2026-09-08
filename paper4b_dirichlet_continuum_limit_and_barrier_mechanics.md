@@ -2517,12 +2517,169 @@ N & \alpha_2 & (L_2 / R_2)^2 & \text{Predicted } \alpha_2 (L_2/R_2)^2 & \text{Ac
    $$T_j = \mathcal{K}_j \frac{H(\mu_1)}{H(\mu_j)}.$$
    Because $\mathcal{K}_2 \in [1.44, 1.79]$ and $\mathcal{K}_3 \in [2.16, 3.65]$ remain benign $\Theta(1)$ constants across tested dimensions, geometric separation of $H$ directly suppresses the primary excited modes, but full continuum closure is conditional on uniform bounds $\sup_N \mathcal{K}_j < \infty$.
 
-5. **The Next Analytical Target (Milestone M23):**
-   Having certified the residue formula (8.25.2) to the numerical floor, the remaining analytical challenge is the outer product factor:
-   $$\Pi_j = \prod_{\ell \ne j} \frac{|E_{j+1} - z_\ell^*|}{|E_j - z_\ell^*|} \prod_{\ell \notin \{j, j+1\}} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|}.$$
-   Because $\Pi_2 \approx 0.238$ is $\mathcal{O}(1)$, Milestone M23 and `cell77.py` directly investigate whether $\Pi_j$ can be expressed in terms of characteristic polynomials $P_{\mathrm{even}}'(E)$ and $P_{\mathrm{zero}}'(z^*)$ and proved to remain bounded, reducing the continuum problem to the local coordinates $\zeta_j$ and $R_j/L_j$.
+5. **Multi-Modal Audit of the Outer Stieltjes Factor $\Pi_j$ and Pairwise Cancellation (`cell77.out`):**
+   To investigate the analytical behavior and localization of the outer product factor:
+   $$\Pi_j = \prod_{\ell \ne j} \frac{|E_{j+1} - z_\ell^*|}{|E_j - z_\ell^*|} \prod_{\ell \notin \{j, j+1\}} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|},$$
+   a dedicated 70-digit reconnaissance suite was executed in `cell77.py` (`cell77.out`) across dimensions $N \in \{8, 12, 16, 20, 24\}$ for low bound modes $j \in \{0, 1, 2, 3\}$.
+
+**Table 8.25.5: Multi-Modal Outer Factor $\Pi_j$ Across Bound Modes (Cell 77 Test A)**
+$$\begin{array}{r|c|c|c|c}
+N & \Pi_0 & \Pi_1 & \Pi_2 & \Pi_3 \\ \hline
+8 & 0.255292 & 0.308125 & 0.338426 & 0.316333 \\
+12 & 0.249680 & 0.306868 & 0.285275 & 0.309704 \\
+16 & 0.243995 & 0.268768 & 0.310876 & 0.292063 \\
+20 & 0.208062 & 0.229342 & 0.250873 & 0.320404 \\
+24 & \mathbf{0.154294} & \mathbf{0.184844} & \mathbf{0.238072} & \mathbf{0.286445}
+\end{array}$$
+
+**Table 8.25.6: Pairwise Mode Cancellation Factors $\omega_{2, \ell}$ for Mode $j = 2$ (Cell 77 Test B)**
+$$\begin{array}{r|c|c|c|c}
+N & \omega_{2, 0} \ (\ell = 0) & \omega_{2, 1} \ (\ell = 1) & \omega_{2, 4} \ (\ell = 4) & \max_{|\ell - 2| \ge 2} |\omega_{2, \ell} - 1| \\ \hline
+8 & 1.0 + 1.44 \times 10^{-10} & 1.0000184 & 1.0001639 & 1.639 \times 10^{-4} \\
+12 & 1.0 + 2.43 \times 10^{-11} & 1.0000051 & 1.0000843 & 8.433 \times 10^{-5} \\
+16 & 1.0 + 7.00 \times 10^{-12} & 1.0000039 & 1.0000417 & 4.165 \times 10^{-5} \\
+20 & 1.0 + 1.17 \times 10^{-12} & 1.0000015 & 1.0000278 & 2.782 \times 10^{-5} \\
+24 & 1.0 + \mathbf{2.21 \times 10^{-13}} & 1.0000005 & 1.0000135 & \mathbf{1.351 \times 10^{-5}}
+\end{array}$$
+
+**Table 8.25.7: Characteristic-Polynomial Ratio Identity for Mode $j = 2$ (Cell 77 Test C)**
+$$\begin{array}{r|c|c|c|c}
+N & \left| \frac{P_{\mathrm{zero}}(E_3)}{P_{\mathrm{zero}}(E_2)} \right| & \left| \frac{P_{\mathrm{even}}'(E_2)}{P_{\mathrm{even}}'(E_3)} \right| & \mathrm{RelErr}(\alpha_2^{\mathrm{poly}}) & \mathrm{RelErr}(\Pi_2^{\mathrm{poly}}) \\ \hline
+8 & 5.9720074 \times 10^{11} & 1.1744035 \times 10^{-8} & 4.405 \times 10^{-52} & 1.811 \times 10^{-71} \\
+12 & 4.1836691 \times 10^{12} & 2.8734659 \times 10^{-9} & 3.753 \times 10^{-52} & 1.811 \times 10^{-71} \\
+16 & 5.4929425 \times 10^{13} & 6.1895021 \times 10^{-10} & 4.073 \times 10^{-51} & 0.0 \\
+20 & 7.3953806 \times 10^{13} & 5.0650990 \times 10^{-10} & 4.092 \times 10^{-51} & 1.811 \times 10^{-71} \\
+24 & 7.0879435 \times 10^{14} & 1.2994284 \times 10^{-10} & \mathbf{1.149 \times 10^{-51}} & \mathbf{2.717 \times 10^{-71}}
+\end{array}$$
+
+**Table 8.25.8: Decomposition of the Master Asymmetry Balance for Mode $j = 2$ (Cell 77 Test D)**
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & \zeta_2 & \frac{R_2}{L_2} & \frac{\zeta_2}{R_2 / L_2} & \Pi_2 & \left( \frac{L_2}{R_2} \right)^2 & \frac{H_3}{H_2} & \text{Residual} \\ \hline
+8 & 20724.0 & 77.877 & 266.114 & 0.338426 & 1.64887 \times 10^{-4} & 1.15644 & 5.094 \times 10^{-52} \\
+12 & 42140.5 & 97.794 & 430.913 & 0.285275 & 1.04563 \times 10^{-4} & 1.25702 & 4.718 \times 10^{-52} \\
+16 & 109364.0 & 156.99 & 696.649 & 0.310876 & 4.05771 \times 10^{-5} & 1.37956 & 5.619 \times 10^{-51} \\
+20 & 149312.0 & 159.11 & 938.415 & 0.250873 & 3.95002 \times 10^{-5} & 1.47961 & 6.054 \times 10^{-51} \\
+24 & 386869.0 & 245.52 & \mathbf{1575.74} & \mathbf{0.238072} & 1.65897 \times 10^{-5} & \mathbf{1.52796} & \mathbf{1.755 \times 10^{-51}}
+\end{array}$$
 
 ---
+
+### Analytical Insights and Epistemic Calibration of the Outer Factor $\Pi_j$
+
+1. **Empirical $\mathcal{O}(1)$ Range vs. Asymptotic Boundedness:**
+   Table 8.25.5 demonstrates that the outer factor $\Pi_j$ remains strictly within an $\mathcal{O}(1)$ range across all tested low modes:
+   $$\Pi_j \in [0.154, 0.338] \quad \text{for all } j \in \{0, 1, 2, 3\} \text{ and } N \in \{8, \dots, 24\}.$$
+   However, maintaining strict adherence to `AGENTS.md` epistemic standards, this constitutes **empirical evidence for boundedness over tested dimensions, not an asymptotic bound or proof of a uniform positive lower bound**. In particular, while $\Pi_2 \approx 0.238$ and $\Pi_3 \approx 0.286$ remain remarkably stable, the lower modes $\Pi_0$ ($0.255 \to 0.154$) and $\Pi_1$ ($0.308 \to 0.185$) exhibit downward drift. Establishing an unconditional positive lower bound $\inf_{N, j} \Pi_j(N) > 0$ remains an active analytical target.
+
+2. **Ill-Conditioning of the Raw Zero/Eigenvalue Product Split:**
+   In the naive definition (8.25.3), $\Pi_j = \Pi_j^{\mathrm{zeros}} \cdot \Pi_j^{\mathrm{evals}}$. At $N=24$ for mode $j=2$:
+   $$\Pi_2^{\mathrm{zeros}} = 1.83213 \times 10^9, \qquad \Pi_2^{\mathrm{evals}} = 1.29943 \times 10^{-10} \implies \Pi_2 = 0.238072.$$
+   Likewise at $N=20$, $\Pi_2^{\mathrm{zeros}} = 4.953 \times 10^8$ and $\Pi_2^{\mathrm{evals}} = 5.065 \times 10^{-10}$, yielding $\Pi_2 = 0.25087$. The individual product components diverge and collapse by 10 to 12 decimal orders of magnitude! Consequently, any analytical strategy attempting to bound $\Pi_j^{\mathrm{zeros}}$ and $\Pi_j^{\mathrm{evals}}$ separately is mathematically ill-posed. The true mathematical mechanism is an **intertwined cancellation** between each Stieltjes zero $z_\ell^*$ and its parent even eigenvalue $E_\ell$.
+
+3. **The Pairwise Factor Representation as Canonical Analytical Formulation:**
+   For each remote mode $\ell \notin \{j, j+1\}$, we pair the zero ratio with the corresponding eigenvalue ratio:
+   $$\omega_{j, \ell} \equiv \frac{|E_{j+1} - z_\ell^*|}{|E_j - z_\ell^*|} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|}.$$
+   Table 8.25.6 demonstrates that $\omega_{2, \ell}$ converges to 1 with extreme rapidity as the mode separation increases:
+   $$|\omega_{2, 0} - 1| \sim 2.21 \times 10^{-13}, \quad |\omega_{2, 1} - 1| \sim 5.25 \times 10^{-7}, \quad |\omega_{2, 4} - 1| \sim 1.35 \times 10^{-5}, \quad |\omega_{2, 23} - 1| \sim 7.95 \times 10^{-29} \quad (N=24).$$
+   Hence, the global product $\Pi_j$ is **not** an infinite product of disparate numbers; rather, it decomposes into a local finite correction multiplied by a rapidly convergent remote product.
+
+4. **Characteristic-Polynomial Representation and Adjugate Resolvent:**
+   Table 8.25.7 unconditionally verifies the polynomial quotient identity:
+   $$\alpha_j = \left| \frac{P_{\mathrm{zero}}(E_{j+1})}{P_{\mathrm{zero}}(E_j)} \right| \cdot \left| \frac{P_{\mathrm{even}}'(E_j)}{P_{\mathrm{even}}'(E_{j+1})} \right|$$
+   to backward relative error $\le 4.09 \times 10^{-51}$. Because $P_{\mathrm{zero}}(z) \propto \det(Q_{\mathrm{even}} - z I) G_d(z) = d^T \operatorname{adj}(Q_{\mathrm{even}} - z I) d$, this expresses the boundary-weight ratio directly through the adjugate of the even Galerkin resolvent.
+
+5. **Transparency of the Master Asymmetry Balance:**
+   Writing the master asymmetry balance (Table 8.25.8) as:
+   $$\frac{H_{j+1}(\mu_j)}{H_j(\mu_j)} = \underbrace{\left[ \frac{\zeta_j}{R_j / L_j} \right]}_{1575.74} \times \underbrace{\Pi_j}_{0.23807} \times \underbrace{\left( \frac{L_j}{R_j} \right)}_{0.004073} = \mathbf{1.52796},$$
+   the apparent mystery of the $60.44\% / 39.56\%$ split dissolves: the huge zero-coordinate displacement ($\zeta_2 / (R_2/L_2) \sim 10^3$) is precisely balanced by the tiny geometric gap ratio ($L_2/R_2 \sim 10^{-3}$), modulated by the $\mathcal{O}(1)$ pairwise-convergent outer factor $\Pi_2 \approx 0.238$.
+
+---
+
+### Proposition 8.26: Exact Pairwise Mode Cancellation Identity and Stieltjes Zero Displacement Representation
+
+**Proposition 8.26 (Exact Pairwise Cancellation Formula and Stieltjes Zero Displacement Representation).**
+*Let $Q_{c, N}$ be the finite-rank Galerkin truncation with even spectrum $E_0 < E_1 < \dots < E_N$, odd spectrum $\mu_0 < \dots < \mu_{N-1}$, and Stieltjes zeros $z_j^* \in (E_j, E_{j+1})$. Let $\Delta_j \equiv E_{j+1} - E_j > 0$ denote the local bracket gap.*
+
+*Then:*
+1. *(Exact Pairwise Cancellation Identity): For every bound mode $j$ and every remote mode $\ell \notin \{j, j+1\}$, the pairwise factor:*
+   $$\omega_{j, \ell} \equiv \frac{|E_{j+1} - z_\ell^*|}{|E_j - z_\ell^*|} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|}$$
+   *satisfies the exact finite-$N$ algebraic identity:*
+   $$\boxed{\omega_{j, \ell} - 1 = \frac{\Delta_j (z_\ell^* - E_\ell)}{|E_j - z_\ell^*| |E_{j+1} - E_\ell|}.} \tag{8.26.1}$$
+   *In particular, because $z_\ell^* \in (E_\ell, E_{\ell+1})$, the displacement $\delta_\ell \equiv z_\ell^* - E_\ell > 0$ is strictly positive, and hence $\omega_{j, \ell} > 1$ strictly for all $\ell \notin \{j, j+1\}$.*
+
+2. *(Exact Stieltjes Zero Displacement Representation): For every $\ell \in \{0, \dots, N-1\}$, the endpoint displacement $\delta_\ell = z_\ell^* - E_\ell$ satisfies the exact rational identity:*
+   $$\boxed{\delta_\ell = \frac{d_\ell^2}{\displaystyle \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*}}.} \tag{8.26.2}$$
+
+3. *(Quantitative Remote Localization Bound): For any remote mode $\ell$ separated from the active bracket $[E_j, E_{j+1}]$ by spectral distance $D_{j, \ell} \equiv \operatorname{dist}(E_\ell, [E_j, E_{j+1}])$, the deviation satisfies:*
+   $$\boxed{0 < \omega_{j, \ell} - 1 \le \frac{\Delta_j}{D_{j, \ell}} \cdot \frac{\delta_\ell}{D_{j, \ell}}.} \tag{8.26.3}$$
+
+*Proof.*
+**Step 1 (Derivation of the Exact Pairwise Cancellation Identity):**
+Consider first the case of lower modes $\ell < j$. Here the ordering on the real line is:
+$$E_\ell < z_\ell^* < E_{\ell+1} \le E_j < E_{j+1}.$$
+All distance factors are positive without absolute values:
+$$|E_{j+1} - z_\ell^*| = E_{j+1} - z_\ell^* = (E_j - z_\ell^*) + \Delta_j,$$
+$$|E_j - z_\ell^*| = E_j - z_\ell^*,$$
+$$|E_j - E_\ell| = E_j - E_\ell,$$
+$$|E_{j+1} - E_\ell| = E_{j+1} - E_\ell = (E_j - E_\ell) + \Delta_j.$$
+Forming the pairwise factor $\omega_{j, \ell}$:
+$$\omega_{j, \ell} = \frac{(E_j - z_\ell^*) + \Delta_j}{E_j - z_\ell^*} \cdot \frac{E_j - E_\ell}{(E_j - E_\ell) + \Delta_j}.$$
+Subtracting 1 and putting over a common denominator:
+$$\omega_{j, \ell} - 1 = \frac{\big[ (E_j - z_\ell^*) + \Delta_j \big](E_j - E_\ell) - (E_j - z_\ell^*) \big[ (E_j - E_\ell) + \Delta_j \big]}{(E_j - z_\ell^*)(E_{j+1} - E_\ell)}.$$
+Expanding the numerator:
+$$\big[ (E_j - z_\ell^*)(E_j - E_\ell) + \Delta_j (E_j - E_\ell) \big] - \big[ (E_j - z_\ell^*)(E_j - E_\ell) + \Delta_j (E_j - z_\ell^*) \big]$$
+$$= \Delta_j \big[ (E_j - E_\ell) - (E_j - z_\ell^*) \big] = \Delta_j (z_\ell^* - E_\ell).$$
+Since both $(E_j - z_\ell^*) = |E_j - z_\ell^*|$ and $(E_{j+1} - E_\ell) = |E_{j+1} - E_\ell|$ are positive, this establishes (8.26.1) for $\ell < j$.
+
+Next, consider the case of higher modes $\ell > j+1$. Here the ordering is:
+$$E_j < E_{j+1} \le E_\ell < z_\ell^* < E_{\ell+1}.$$
+The distance factors evaluate to:
+$$|E_{j+1} - z_\ell^*| = z_\ell^* - E_{j+1} = (z_\ell^* - E_j) - \Delta_j,$$
+$$|E_j - z_\ell^*| = z_\ell^* - E_j,$$
+$$|E_j - E_\ell| = E_\ell - E_j = (E_\ell - E_{j+1}) + \Delta_j,$$
+$$|E_{j+1} - E_\ell| = E_\ell - E_{j+1}.$$
+Forming $\omega_{j, \ell} - 1$:
+$$\omega_{j, \ell} - 1 = \frac{\big[ (z_\ell^* - E_j) - \Delta_j \big] \big[ (E_\ell - E_{j+1}) + \Delta_j \big] - (z_\ell^* - E_j)(E_\ell - E_{j+1})}{(z_\ell^* - E_j)(E_\ell - E_{j+1})}.$$
+Expanding the numerator:
+$$(z_\ell^* - E_j)(E_\ell - E_{j+1}) + \Delta_j (z_\ell^* - E_j) - \Delta_j (E_\ell - E_{j+1}) - \Delta_j^2 - (z_\ell^* - E_j)(E_\ell - E_{j+1})$$
+$$= \Delta_j \big[ (z_\ell^* - E_j) - (E_\ell - E_{j+1}) - \Delta_j \big].$$
+Recognizing that $(z_\ell^* - E_j) - \Delta_j = z_\ell^* - (E_j + \Delta_j) = z_\ell^* - E_{j+1}$, the bracket simplifies to:
+$$(z_\ell^* - E_{j+1}) - (E_\ell - E_{j+1}) = z_\ell^* - E_\ell.$$
+Therefore, the numerator is identically $\Delta_j (z_\ell^* - E_\ell)$. Since $(z_\ell^* - E_j) = |E_j - z_\ell^*|$ and $(E_\ell - E_{j+1}) = |E_{j+1} - E_\ell|$, formula (8.26.1) holds identically for $\ell > j+1$.
+
+**Step 2 (Exact Stieltjes Zero Displacement Representation):**
+By definition of the Stieltjes zero, $G_d(z_\ell^*) = 0$. Separating the $\ell$-th pole from the summation:
+$$\frac{d_\ell^2}{E_\ell - z_\ell^*} + \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*} = 0.$$
+Writing $\delta_\ell = z_\ell^* - E_\ell > 0$, the first term is $-\frac{d_\ell^2}{\delta_\ell}$. Rearranging:
+$$\frac{d_\ell^2}{\delta_\ell} = \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*} \implies \delta_\ell = \frac{d_\ell^2}{\displaystyle \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*}},$$
+proving (8.26.2).
+
+**Step 3 (Quantitative Spectral Decay Bound):**
+For $\ell < j$, since $E_\ell < z_\ell^* < E_j < E_{j+1}$, we have $|E_j - z_\ell^*| = E_j - z_\ell^* \ge E_j - E_{\ell+1} \ge D_{j, \ell}$ and $|E_{j+1} - E_\ell| \ge D_{j, \ell}$.
+For $\ell > j+1$, since $E_{j+1} \le E_\ell < z_\ell^*$, we have $|E_j - z_\ell^*| > E_\ell - E_j \ge D_{j, \ell}$ and $|E_{j+1} - E_\ell| = E_\ell - E_{j+1} = D_{j, \ell}$.
+In both cases:
+$$|E_j - z_\ell^*| \ge D_{j, \ell}, \qquad |E_{j+1} - E_\ell| \ge D_{j, \ell}.$$
+Substituting these lower bounds into (8.26.1) yields:
+$$0 < \omega_{j, \ell} - 1 = \frac{\Delta_j \delta_\ell}{|E_j - z_\ell^*| |E_{j+1} - E_\ell|} \le \frac{\Delta_j}{D_{j, \ell}} \cdot \frac{\delta_\ell}{D_{j, \ell}},$$
+establishing (8.26.3). $\blacksquare$
+
+---
+
+### Analytical Significance of Proposition 8.26
+
+Proposition 8.26 completely transforms the analytical strategy for the outer product factor $\Pi_j$:
+1. **Replacement of Speculative Tracking by Exact Geometry:**
+   Previous heuristic descriptions suggested that $\omega_{j, \ell} \to 1$ because $z_\ell^*$ "tracks" $E_\ell$. Proposition 8.26 proves that the cancellation is governed by an exact ratio:
+   $$\omega_{j, \ell} - 1 = \left( \frac{\text{local gap } \Delta_j}{\text{spectral distance } D_{j, \ell}} \right) \times \left( \frac{\text{zero displacement } \delta_\ell}{\text{spectral distance } D_{j, \ell}} \right).$$
+   Remote modes decouple quadratically with spectral distance $D_{j, \ell}^{-2}$, proving that the remote product converges unconditionally whenever the zero displacement $\delta_\ell$ is bounded.
+
+2. **The Missing Link: Stieltjes Displacement and Boundary Weights:**
+   Identity (8.26.2) links the displacement $\delta_\ell$ directly to the boundary-weight ratio:
+   $$\delta_\ell = \frac{d_\ell^2}{\sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*}}.$$
+   Because the denominator is dominated by the nearest poles $k = \ell - 1$ and $k = \ell + 1$, $\delta_\ell$ is directly proportional to the boundary weight $d_\ell^2$ divided by the local spectral measure. This establishes the exact algebraic bridge between eigenvalue spacing, boundary weights, and Stieltjes zero geometry, setting the stage for Milestone M24 (`cell78.py`).
+
+---
+
 
 
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
@@ -2715,7 +2872,8 @@ The calculations reported in this manuscript were performed using Python and the
 | Roadmap Stage VI (Hypothesis H1–H3 Audit) | Semiclassical flux-matching $\mathcal{R}_{\mathrm{tun}}$, mode-by-mode transmission cancellation & bound ladder | `cell66.py` | `cell66.out` |
 | Section 8.24 (Regularized Stieltjes Function & Two-Pole Clustering) | Positive function $H(\mu) = (\mu-\lambda)^2 G_d'(\mu)$, modal ratios $\mathcal{Q}_j$, and bracketing pole shares | `cell73.py`, `cell74.py` | `cell73.out`, `cell74.out` |
 | Section 8.24–8.25 (Exact Stieltjes Residue Product & Asymmetry) | Residue product representation $d_k^2$, scale-invariant bisection audit, normalized residuals & weight ratio factorization | `cell75.py`, `cell76.py` | `cell75.out`, `cell76.out` |
-| Section 8.25 (Stieltjes Outer Product Factor & Polynomial Bounds) | Outer factor $\Pi_j$ representation, pairwise gap localization $\omega_{j, \ell}$, and polynomial bounds | `cell77.py` | `cell77.out` |
+| Section 8.25 (Stieltjes Outer Factor, Pairwise Cancellation & Characteristic Polynomial) | Outer factor $\Pi_j \in [0.15, 0.34]$, pairwise cancellation $\omega_{2, \ell} \to 1$, polynomial quotient & asymmetry balance | `cell77.py` | `cell77.out` |
+| Section 8.25 (Exact Pairwise Deviation $\omega_{j, \ell}-1$ & Stieltjes Displacement $\delta_\ell$) | Exact formulas $\omega_{j, \ell}-1 = \frac{\Delta_j \delta_\ell}{|E_j - z_\ell^*||E_{j+1}-E_\ell|}$ and $\delta_\ell = \frac{d_\ell^2}{\sum \frac{d_k^2}{E_k - z_\ell^*}}$, remote product bounds | `cell78.py` | `cell78.out` |
 
 ---
 
