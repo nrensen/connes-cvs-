@@ -1638,13 +1638,14 @@ Multiplying $b_{01}^2$ by $\frac{\mu_1 - \lambda}{a_1^2} = \frac{1}{\mathcal{R}_
    Therefore, $\|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1} \equiv b_{01}^2$ is an exact Pythagorean decomposition on $H_{\mathrm{even}}$:
    $$\|(Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2 = \|P_c (Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2 + \|P_{\perp c} (Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2.$$
 2. **Why is the Ground-State Projection $b_{01}^2$ Quenched?**
-   Because $K$ is symmetric and interchanges parity sectors:
-   $$b_{01} \equiv \langle c, K u_1 \rangle = - \langle K c, u_1 \rangle.$$
+   Because $K$ is symmetric ($K = K^T$) and interchanges parity sectors:
+   $$b_{01} \equiv \langle c, K u_1 \rangle = \langle K c, u_1 \rangle.$$
+   (The minus sign belongs strictly to the commutator quotient identity $b_{01} = - \frac{D_0 a_1}{\mu_1 - \lambda}$, not to the symmetry of $K$.)
    From Proposition 8.12, the coordinate-derivative wavepacket $Kc$ is overwhelmingly aligned with the odd ground state $u_0$:
    $$Kc = \langle u_0, Kc \rangle u_0 + P_{\perp u_0} Kc, \qquad \frac{|\langle u_0, Kc \rangle|^2}{\|Kc\|^2} > 99.99987\% \quad (N = 24).$$
    Because $u_1 \perp u_0$, the ground-state component vanishes identically: $\langle \langle u_0, Kc \rangle u_0, u_1 \rangle = 0$.
    Therefore:
-   $$\boxed{b_{01} = - \langle P_{\perp u_0} Kc, u_1 \rangle.}$$
+   $$\boxed{b_{01} = \langle P_{\perp u_0} Kc, u_1 \rangle.}$$
    The transition dipole $b_{01}$ is precisely the overlap between the first excited odd mode $u_1$ and the excited wavepacket residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$.
    Because $\|v_{\mathrm{exc}}\|^2 = D_0^2 M_{2,\mathrm{exc}} \sim 2.25 \times 10^{-6}$ is tiny due to the near-perfect alignment of $Kc$ with $u_0$, its projection onto $u_1$ is necessarily bounded by $\|v_{\mathrm{exc}}\|^2$, establishing $b_{01}^2 \le \|v_{\mathrm{exc}}\|^2 \sim 10^{-6}$.
 3. **The Wavepacket Concentration Mechanism:**
@@ -1654,6 +1655,140 @@ Multiplying $b_{01}^2$ by $\frac{\mu_1 - \lambda}{a_1^2} = \frac{1}{\mathcal{R}_
    In `cell69.out`, the transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$ takes the values:
    $$N=8: 8.00, \quad N=12: 6.88, \quad N=16: 4.13, \quad N=20: 3.91, \quad N=24: 5.13.$$
    While these empirical values are consistent with an $\mathcal{O}(1)$ non-zero limit, five data points do not constitute a mathematical proof that $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$. We therefore maintain strict epistemic discipline: $R_{\mathrm{gap}}(N) \to 0$ is guaranteed if $b_{01}^2 \to 0$ provided $\mathcal{R}_1$ does not collapse to zero, and the primary analytical agenda is establishing analytical bounds on the Stieltjes derivative $G_d'(\mu_1)$ and wavepacket alignment.
+5. **Algebraic Anatomy vs. Asymptotic Convergence:**
+   Proposition 8.20 resolves the algebraic nature of $b_{01}^2$ as a positive component of a squared resolvent norm, proving that the numerical subtraction observed in `cell69.out` is an exact Pythagorean decomposition rather than a precarious numerical cancellation. However, this does not by itself prove that $b_{01}^2 \to 0$ asymptotically. Because $b_{01} = \langle P_{\perp u_0} Kc, u_1 \rangle$, the asymptotic agenda is transferred to proving wavepacket alignment $\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \to 0$, which is addressed in Proposition 8.21.
+
+---
+
+### 8.21 Proposition 8.21 (Exact Variational Energy Excess of Coordinate Wavepacket $Kc$, Rayleigh Quotient Gap Enclosure, and Asymptotic Alignment Sandwich)
+
+The algebraic resolution in Proposition 8.20 reduced the transition dipole to the wavepacket overlap $b_{01} = \langle P_{\perp u_0} Kc, u_1 \rangle$, showing that $b_{01}^2 \le \|P_{\perp u_0} Kc\|^2$. Consequently, establishing continuum gap suppression $R_{\mathrm{gap}}(N) \to 0$ does not require resolving individual modal cancellations, but rather proving that the coordinate-derivative wavepacket $Kc$ becomes asymptotically parallel to the odd ground state $u_0$:
+$$\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \longrightarrow 0 \iff \frac{Kc}{\|Kc\|} \longrightarrow \pm u_0.$$
+The following proposition establishes that the energy excess of $Kc$ above the odd ground state $\mu_0$ is an exact finite-dimensional invariant determined directly by the rank-two commutator $[K, Q]$, proving an unconditional two-sided sandwich between the wavepacket misalignment and the relative tunneling gap.
+
+---
+
+**Part I (Exact Energy Expectation and Excess Identity — Unconditional Finite-$N$ Theorem):**
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Galerkin matrix, $K = \operatorname{diag}(-N, \dots, N)$, and $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ the exact rank-two commutator. Let $c \in H_{\mathrm{even}}$ be the even ground state with eigenvalue $\lambda$, boundary amplitude $D_0 = \langle d, c \rangle$, and coordinate wavepacket $Kc \in H_{\mathrm{odd}}$.*
+*For all $N \ge 1$, the quadratic energy expectation of $Kc$ under $Q_{\mathrm{odd}}$ satisfies the exact finite-dimensional identity:*
+$$\boxed{\langle Kc, Q_{\mathrm{odd}} Kc \rangle = \lambda \|Kc\|^2 + D_0^2 M_1,} \tag{8.21.1}$$
+*where $M_1 \equiv \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle = \sum_{j \ge 0} \frac{a_j^2}{\mu_j - \lambda}$.*
+*Consequently, the energy excess of $Kc$ above the odd ground state $\mu_0$ evaluates identically to:*
+$$\boxed{\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2,} \tag{8.21.2}$$
+*where $M_1^{\mathrm{exc}} \equiv \sum_{j \ge 1} \frac{a_j^2}{\mu_j - \lambda}$, with the ground-state pole $j=0$ completely cancelled.*
+
+**Part II (Variational Rayleigh Quotient Enclosure — Unconditional Finite-$N$ Theorem):**
+*Since $u_0$ minimizes the odd Rayleigh quotient ($\mu_0 = \min_{x \in H_{\mathrm{odd}} \setminus \{0\}} \frac{\langle x, Q_{\mathrm{odd}} x \rangle}{\|x\|^2}$), the Rayleigh quotient excess $\mathcal{R}_{Q_{\mathrm{odd}}}(Kc) - \mu_0 \ge 0$ implies:*
+$$(\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \le D_0^2 M_1^{\mathrm{exc}}. \tag{8.21.3}$$
+*Furthermore, decomposing $Kc$ in the orthonormal eigenbasis $\{u_j\}_{j=0}^{N-1}$ of $Q_{\mathrm{odd}}$, the first odd spectral gap $\mu_1 - \mu_0$ yields the sharp lower bound $\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle \ge (\mu_1 - \mu_0) \|P_{\perp u_0} Kc\|^2$, establishing the exact finite-$N$ upper bound:*
+$$\boxed{\|P_{\perp u_0} Kc\|^2 \le \frac{D_0^2 M_1^{\mathrm{exc}}}{\mu_1 - \lambda} = M_1^{\mathrm{exc}} R_{\mathrm{gap}}(N).} \tag{8.21.4}$$
+
+**Part III (The Asymptotic Alignment Sandwich — Unconditional Finite-$N$ Theorem):**
+*Combining the upper bound (8.21.4) with the transition dipole projection $b_{01} = \langle P_{\perp u_0} Kc, u_1 \rangle$ and Proposition 8.19 ($b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N)$) proves that the normalized wavepacket misalignment $\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2}$ is clamped between two exact positive multiples of the relative tunneling gap:*
+$$\boxed{\frac{\mathcal{R}_1}{\|Kc\|^2} R_{\mathrm{gap}}(N) \le \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N).} \tag{8.21.5}$$
+*Consequently, asymptotic wavepacket alignment $\frac{Kc}{\|Kc\|} \to \pm u_0$ is mathematically equivalent to relative tunneling gap suppression $R_{\mathrm{gap}}(N) \to 0$ whenever $\mathcal{R}_1$ and $M_1^{\mathrm{exc}}$ remain bounded away from zero and infinity.*
+
+**Part IV (The Analytical Alignment Hierarchy):**
+*The asymptotic decoupling problem is structured into the following deductive hierarchy:*
+$$\boxed{\begin{aligned}
+&[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T \text{ (exact finite-}N\text{ commutator)} \\
+&\qquad\Downarrow \\
+&\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \text{ (exact energy excess)} \\
+&\qquad\Downarrow \\
+&\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N) \longrightarrow 0 \iff \frac{Kc}{\|Kc\|} \longrightarrow \pm u_0 \text{ (asymptotic alignment)} \\
+&\qquad\Downarrow \\
+&b_{01}^2 = |\langle P_{\perp u_0} Kc, u_1 \rangle|^2 \le \|P_{\perp u_0} Kc\|^2 \longrightarrow 0 \text{ (dipole quenching)} \\
+&\qquad\Downarrow \\
+&R_{\mathrm{gap}}(N) = \frac{b_{01}^2}{\mathcal{R}_1} \longrightarrow 0 \quad (\text{conditional on } \inf_N \mathcal{R}_1(N) > 0).
+\end{aligned}} \tag{8.21.6}$$
+
+---
+
+**Proof:**
+
+**Step 1 (Proof of Part I — Exact Energy Expectation and Excess Identity):**
+Since $c \in H_{\mathrm{even}}$ and $K = \operatorname{diag}(-N, \dots, N)$ is symmetric ($K = K^T$), the quadratic form of $Kc \in H_{\mathrm{odd}}$ under $Q_{\mathrm{odd}}$ is:
+$$\langle Kc, Q_{\mathrm{odd}} Kc \rangle = \langle c, K Q K c \rangle.$$
+From the definition of the commutator $[K, Q] = KQ - QK$, we have $KQ = QK + [K, Q]$.
+Multiplying on the right by $K$ yields $K Q K = Q K^2 + [K, Q] K$.
+Taking the inner product with the even ground state $c$:
+$$\langle c, K Q K c \rangle = \langle c, Q K^2 c \rangle + \langle c, [K, Q] K c \rangle.$$
+Because $Q$ is symmetric and $c$ is an eigenvector with $Q c = \lambda c$:
+$$\langle c, Q K^2 c \rangle = \langle Q c, K^2 c \rangle = \lambda \langle c, K^2 c \rangle = \lambda \|Kc\|^2.$$
+For the second term, we evaluate $[K, Q] Kc$ using the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$:
+$$[K, Q] Kc = \boldsymbol\psi \langle d, Kc \rangle - d \langle \boldsymbol\psi, Kc \rangle.$$
+Since $Kc \in H_{\mathrm{odd}}$ and $d \in H_{\mathrm{even}}$, the boundary overlap vanishes by parity: $\langle d, Kc \rangle = 0$.
+To evaluate $\langle \boldsymbol\psi, Kc \rangle$, we recall from Proposition 8.13 Step 1 that $[K, Q] c = \lambda Kc - Q Kc = - (Q - \lambda I) Kc$, while $[K, Q] c = \boldsymbol\psi \langle d, c \rangle - d \langle \boldsymbol\psi, c \rangle = D_0 \boldsymbol\psi$ (since $\langle \boldsymbol\psi, c \rangle = 0$ by odd parity).
+Thus:
+$$(Q_{\mathrm{odd}} - \lambda I) Kc = - D_0 \boldsymbol\psi \implies Kc = - D_0 (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi,$$
+where $(Q_{\mathrm{odd}} - \lambda I)$ is strictly positive definite and invertible because $\lambda < \mu_0 < \mu_1 \le \dots \le \mu_{N-1}$.
+Therefore:
+$$\langle \boldsymbol\psi, Kc \rangle = - D_0 \langle \boldsymbol\psi, (Q_{\mathrm{odd}} - \lambda I)^{-1} \boldsymbol\psi \rangle = - D_0 M_1,$$
+where $M_1 \equiv \sum_{j=0}^{N-1} \frac{a_j^2}{\mu_j - \lambda}$.
+Substituting this back into the commutator:
+$$[K, Q] Kc = - d (- D_0 M_1) = D_0 M_1 d.$$
+Taking the inner product with $c$:
+$$\langle c, [K, Q] Kc \rangle = \langle c, D_0 M_1 d \rangle = D_0 M_1 \langle c, d \rangle = D_0 M_1 (D_0) = D_0^2 M_1.$$
+Combining the two terms establishes (8.21.1):
+$$\langle Kc, Q_{\mathrm{odd}} Kc \rangle = \lambda \|Kc\|^2 + D_0^2 M_1.$$
+Subtracting $\mu_0 \|Kc\|^2$ gives:
+$$\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = - (\mu_0 - \lambda) \|Kc\|^2 + D_0^2 M_1.$$
+Now decompose $M_1 = \frac{a_0^2}{\mu_0 - \lambda} + M_1^{\mathrm{exc}}$.
+Multiplying by $D_0^2$ and using the exact doublet relation $b_{00} \equiv \langle u_0, Kc \rangle = - \frac{D_0 a_0}{\mu_0 - \lambda} \implies b_{00}^2 = \frac{D_0^2 a_0^2}{(\mu_0 - \lambda)^2}$:
+$$D_0^2 M_1 = (\mu_0 - \lambda) b_{00}^2 + D_0^2 M_1^{\mathrm{exc}}.$$
+Since $\|Kc\|^2 = b_{00}^2 + \|P_{\perp u_0} Kc\|^2$:
+$$- (\mu_0 - \lambda) \|Kc\|^2 + D_0^2 M_1 = - (\mu_0 - \lambda) \big( b_{00}^2 + \|P_{\perp u_0} Kc\|^2 \big) + (\mu_0 - \lambda) b_{00}^2 + D_0^2 M_1^{\mathrm{exc}} = D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2,$$
+proving (8.21.2). $\blacksquare$
+
+**Step 2 (Proof of Part II — Variational Spectral-Gap Enclosure):**
+Because $\mu_0$ is the minimum eigenvalue of $Q_{\mathrm{odd}}$, the operator $(Q_{\mathrm{odd}} - \mu_0 I)$ is positive semi-definite on $H_{\mathrm{odd}}$:
+$$\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle \ge 0.$$
+Substituting (8.21.2) yields immediately:
+$$D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \ge 0 \implies (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \le D_0^2 M_1^{\mathrm{exc}},$$
+which is (8.21.3).
+Next, expanding $Kc$ in the orthonormal eigenbasis $\{u_j\}_{j=0}^{N-1}$ of $Q_{\mathrm{odd}}$:
+$$\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = \sum_{j=0}^{N-1} (\mu_j - \mu_0) |\langle u_j, Kc \rangle|^2 = \sum_{j=1}^{N-1} (\mu_j - \mu_0) |\langle u_j, Kc \rangle|^2.$$
+Since $\mu_j \ge \mu_1$ for all $j \ge 1$:
+$$\sum_{j=1}^{N-1} (\mu_j - \mu_0) |\langle u_j, Kc \rangle|^2 \ge (\mu_1 - \mu_0) \sum_{j=1}^{N-1} |\langle u_j, Kc \rangle|^2 = (\mu_1 - \mu_0) \|P_{\perp u_0} Kc\|^2.$$
+Equating with the upper expression from (8.21.2):
+$$(\mu_1 - \mu_0) \|P_{\perp u_0} Kc\|^2 \le D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2.$$
+Adding $(\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2$ to both sides, and noting that $(\mu_1 - \mu_0) + (\mu_0 - \lambda) = \mu_1 - \lambda$:
+$$(\mu_1 - \lambda) \|P_{\perp u_0} Kc\|^2 \le D_0^2 M_1^{\mathrm{exc}}.$$
+Dividing by $\mu_1 - \lambda$ gives:
+$$\|P_{\perp u_0} Kc\|^2 \le \frac{D_0^2 M_1^{\mathrm{exc}}}{\mu_1 - \lambda} = M_1^{\mathrm{exc}} R_{\mathrm{gap}}(N),$$
+proving (8.21.4). $\blacksquare$
+
+**Step 3 (Proof of Part III — The Alignment Sandwich):**
+Dividing (8.21.4) by $\|Kc\|^2$ yields the upper bound in (8.21.5):
+$$\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N).$$
+For the lower bound, note that $u_1 \in P_{\perp u_0} H_{\mathrm{odd}}$ is a unit vector ($\|u_1\| = 1$).
+By Bessel's inequality on $P_{\perp u_0} H_{\mathrm{odd}}$:
+$$\|P_{\perp u_0} Kc\|^2 = \sum_{j \ge 1} |\langle u_j, Kc \rangle|^2 \ge |\langle u_1, Kc \rangle|^2.$$
+By symmetry of $K$ ($K = K^T$), $\langle u_1, Kc \rangle = \langle c, K u_1 \rangle \equiv b_{01}$.
+Therefore $\|P_{\perp u_0} Kc\|^2 \ge b_{01}^2$.
+From Proposition 8.19 (8.19.2), $b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N)$.
+Therefore:
+$$\|P_{\perp u_0} Kc\|^2 \ge \mathcal{R}_1 R_{\mathrm{gap}}(N).$$
+Dividing by $\|Kc\|^2$ gives:
+$$\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \ge \frac{\mathcal{R}_1}{\|Kc\|^2} R_{\mathrm{gap}}(N),$$
+which establishes the two-sided sandwich (8.21.5). $\blacksquare$
+
+---
+
+*Discussion and Epistemic Synthesis:*
+1. **Tightness of the Alignment Sandwich:**
+   In `cell67.out` and `cell69.out`, the numerical quantities at $N = 24$ are:
+   $$\|Kc\|^2 \approx 1.72507, \qquad \mathcal{R}_1 \approx 5.129, \qquad M_1^{\mathrm{exc}} \approx 93.654, \qquad R_{\mathrm{gap}}(24) \approx 4.39178 \times 10^{-7}.$$
+   The sandwich (8.21.5) evaluates numerically to:
+   $$\frac{5.129}{1.72507} (4.39178 \times 10^{-7}) \le \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{93.654}{1.72507} (4.39178 \times 10^{-7}),$$
+   $$1.3058 \times 10^{-6} \le \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le 2.3842 \times 10^{-5}.$$
+   The actual observed wavepacket misalignment in `cell67.out` is:
+   $$\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} = \frac{2.25259 \times 10^{-6}}{1.72507} \approx 1.30580 \times 10^{-6},$$
+   saturating within $0.0005\%$ of the lower bound! This near-exact saturation occurs because mode 1 carries $99.9995\%$ of the excited residual norm $\|v_{\mathrm{exc}}\|^2$, meaning that $P_{\perp u_0} Kc$ is almost an exact eigenvector proportional to $u_1$.
+2. **Structural Significance for the Continuum Programme:**
+   Proposition 8.21 establishes that the vanishing of the relative tunneling gap $R_{\mathrm{gap}}(N) \to 0$ is mathematically equivalent to the coordinate wavepacket $Kc$ becoming asymptotically parallel to the odd ground state $u_0$.
+   Rather than attempting to calculate the delicate exponential tunneling exponent of bare eigenvalues in WKB theory, the primary analytical agenda is to prove that the even ground state $c$ has vanishing energy excess when transported to the odd sector via the coordinate derivative $K$:
+   $$\lim_{N \to \infty} \frac{\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle}{\|Kc\|^2} = 0.$$
 
 ---
 
