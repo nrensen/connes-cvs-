@@ -1,6 +1,6 @@
 # `data/c100/` - Verification data for the $c = 100$ out-of-sample test (public)
 
-**Contents.** Twelve small JSON files containing the public $c=100$ finite-cell results and analysis inputs. The four-point $N$-sweep supports two Aitken-$\Delta^2$ estimates that approach the Connes 2026 §6.4 heuristic continuum prediction $\approx -530.38$ as the anchor moves from $(100,150,200)$ to $(150,200,250)$ (gaps 6.39 and 3.32 OOM). The consecutive first-difference ratios 0.8373 and 0.8355 are consistent with a local geometric model over these four points; they do not rule out other convergence laws.
+**Contents.** Twelve small JSON files containing the public $c=100$ finite-cell results and analysis inputs. The four-point $N$-sweep supports two Aitken-$\Delta^2$ estimates that approach the prolate comparison scale in Connes 2026 §6.4 $\approx -530.38$ as the anchor moves from $(100,150,200)$ to $(150,200,250)$ (gaps 6.39 and 3.32 OOM). The consecutive first-difference ratios 0.8373 and 0.8355 are consistent with a local geometric model over these four points; they do not rule out other convergence laws.
 
 A minimal verification script is at [`../../examples/c100_aitken_check.py`](../../examples/c100_aitken_check.py); it loads the JSONs in this directory and reproduces both Aitken triples plus the Connes prediction in under a second.
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print(artifact["lambda_even"])
 ```
 
-At $c=100$, $T=800$, the raw finite-$T$ matrix has negative-sign eigenvalues that disappear at larger archimedean cutoff. The published rows therefore follow the empirically distinguished smallest-positive even-sector branch; `compute_ground_state`, which returns the raw minimum, is not the selector for these cells. Full gamma regeneration uses `cell.eigvec_full` after `cell.run()` and `extract_zeros(..., c=100, tol=...)`. It is expensive and should use the tolerance and exact precision configuration stated in each JSON protocol.
+At $c=100$, $T=800$, the raw finite-$T$ matrix has negative-sign eigenvalues whose values and counts rearrange with the archimedean cutoff. No finite cutoff tested removed the entire block; cutoff-free interval certificates establish non-negativity of the tested even-sector blocks. See [ERRATA.md](../../ERRATA.md) for the exact scope. The published rows therefore follow the empirically distinguished smallest-positive even-sector branch; `compute_ground_state`, which returns the raw minimum, is not the selector for these cells. Full gamma regeneration uses `cell.eigvec_full` after `cell.run()` and `extract_zeros(..., c=100, tol=...)`. It is expensive and should use the tolerance and exact precision configuration stated in each JSON protocol.
 
 ## Cross-references (public)
 

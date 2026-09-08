@@ -1,4 +1,4 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · **von Mangoldt measure**
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · **von Mangoldt measure** · [Sine Loewner operator](../4_sine_loewner_bulk_boundary/)
 
 # A matrix-valued von Mangoldt measure in the finite Connes-van Suijlekom path (version 2, corrected)
 
@@ -6,13 +6,15 @@ Akiva Groskin, 2026. Manuscript and full reproducibility package, version 2.
 
 Archived on Zenodo, concept DOI
 [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028), which always
-resolves to the current version. The manuscript is the corrected version 2 of
-2026-07-27; later versions have revised documentation in the reproducibility
-archive only, leaving the manuscript unchanged. For theorem-sensitive use, cite
+resolves to the current version. The mathematical text is the corrected version 2
+of 2026-07-27; later versions revised reproducibility documentation and updated
+two bibliography entries on 2026-08-14, as detailed below. For theorem-sensitive use, cite
 the version DOI of the specific version you consulted, which each Zenodo record
 displays. Companion to the Riemann-zeros paper
 ([arXiv:2605.20224](https://arxiv.org/abs/2605.20224)) and the Guinand-Weil dictionary
-([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)). This paper is not on arXiv.
+([arXiv:2607.02828](https://arxiv.org/abs/2607.02828)). The series also includes
+[*Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*](../4_sine_loewner_bulk_boundary/).
+This von Mangoldt measure paper is not on arXiv.
 
 **Corrections.** Version 2 corrected version 1 substantively, and **version 1 remains publicly
 citable** at [10.5281/zenodo.21242029](https://doi.org/10.5281/zenodo.21242029). Anyone holding

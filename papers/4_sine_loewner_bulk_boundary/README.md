@@ -1,4 +1,4 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md)
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/) · **Sine Loewner operator**
 
 # Bulk trace laws and algebraic boundary interaction for the sine Loewner operator
 
@@ -34,6 +34,11 @@ SHA256SUMS               integrity checks for this GitHub folder
 
 The complete source layout is retained so its relative paths work directly. The
 source ZIP is available from Zenodo; it is not duplicated in this folder.
+
+All three figures are generated from the released TeX source. Two have separate
+TikZ inputs under [`source/figures/`](source/figures/); the boundary-flow figure
+is written directly in [`source/sections/15_gap_flow.tex`](source/sections/15_gap_flow.tex).
+There is no missing third figure file.
 
 ## Build
 

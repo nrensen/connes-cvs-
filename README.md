@@ -24,7 +24,7 @@ This repository hosts the `connes-cvs` package together with four papers by **Ak
 
 | Paper | What it does | Links |
 | :--- | :--- | :--- |
-| [**Riemann zeros at high precision**](https://github.com/akivag613/connes-cvs-/tree/main/papers/1_high_precision_riemann_zeros)<br>_Paper 1 in the series · the numerics_ | **High-Precision Approximation of Riemann Zeros via the Truncated Weil Form.** Builds and diagonalizes the CvS Galerkin matrix at high precision: extracts Riemann zeros to hundreds of matching digits and tests the Connes 2026 §6.4 continuum asymptotic out-of-sample at _c_ = 100. **This is the paper the `connes-cvs` package implements** - its reproducibility package is the package itself (`connes_cvs/`, `data/`, `examples/`, `tests/`); see [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) for the recorded corrections, none of which changes a measured value. | [`papers/1_.../`](https://github.com/akivag613/connes-cvs-/tree/main/papers/1_high_precision_riemann_zeros)<br>[arXiv:2605.20224](https://arxiv.org/abs/2605.20224) (math.NT)<br>Zenodo [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) |
+| [**Riemann zeros at high precision**](https://github.com/akivag613/connes-cvs-/tree/main/papers/1_high_precision_riemann_zeros)<br>_Paper 1 in the series · the numerics_ | **High-Precision Approximation of Riemann Zeros via the Truncated Weil Form.** Builds and diagonalizes the CvS Galerkin matrix at high precision: extracts Riemann zeros to hundreds of matching digits and compares the _c_ = 100 results with the prolate asymptotic discussed in Connes 2026 §6.4. **This is the paper the `connes-cvs` package implements** - its reproducibility package is the package itself (`connes_cvs/`, `data/`, `examples/`, `tests/`); see [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) for the recorded corrections, none of which changes a measured value. | [`papers/1_.../`](https://github.com/akivag613/connes-cvs-/tree/main/papers/1_high_precision_riemann_zeros)<br>[arXiv:2605.20224](https://arxiv.org/abs/2605.20224) (math.NT)<br>Zenodo [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) |
 | [**The finite Guinand-Weil dictionary**](https://github.com/akivag613/connes-cvs-/tree/main/papers/2_guinand_weil_dictionary_tail_order)<br>_Paper 2 in the series · the structure_ | **A finite Guinand-Weil dictionary and archimedean tail order for the truncated Weil quadratic form.** An exact finite Guinand-Weil zero-source dictionary for the truncated Weil form, plus a finite-cutoff archimedean tail-order theorem with a two-sided certification rule. | [`papers/2_.../`](https://github.com/akivag613/connes-cvs-/tree/main/papers/2_guinand_weil_dictionary_tail_order)<br>[arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP)<br>Zenodo [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) |
 | [**The matrix-valued von Mangoldt measure**](https://github.com/akivag613/connes-cvs-/tree/main/papers/3_matrix_von_mangoldt_measure)<br>_Paper 3 in the series · the arithmetic_ | **A matrix-valued von Mangoldt measure in the finite Connes–van Suijlekom path.** The corrected v2 is the version of record. It realizes the prime-power side of the Weil–Guinand explicit formula as an exact, cutoff-free matrix-valued von Mangoldt measure on the finite path and proves finite arithmetic-rigidity and source-to-jet results; its statements are finite-dimensional and make no claim of proving RH. | [`papers/3_.../`](https://github.com/akivag613/connes-cvs-/tree/main/papers/3_matrix_von_mangoldt_measure)<br>Zenodo [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028) |
 | [**The sine Loewner operator**](https://github.com/akivag613/connes-cvs-/tree/main/papers/4_sine_loewner_bulk_boundary)<br>_Paper 4 in the series · bulk and boundary spectra_ | **Bulk trace laws and algebraic boundary interaction for the sine Loewner operator.** Proves uniform trace laws for a continuum operator and its finite matrices, determines half-line boundary flow and algebraic interaction, and certifies a mode with nonzero splitting. The complete paper and its independent verification programs are included. | [`papers/4_.../`](https://github.com/akivag613/connes-cvs-/tree/main/papers/4_sine_loewner_bulk_boundary)<br>Zenodo [concept DOI 10.5281/zenodo.22662221](https://doi.org/10.5281/zenodo.22662221) |
@@ -36,7 +36,7 @@ The series combines high-precision numerical work, finite-dimensional theorems, 
 | Cutoff range | lambda_min span | gamma_1 accuracy | Cross-check |
 | :---: | :---: | :---: | :---: |
 | `c = 13 … 67` | `10⁻⁵⁹ → 10⁻¹⁷³` | up to **167 matching digits** (`c=67, N=100, dps=200`; error `1.478e-168`) | matches CCM 2025 at `c=14` to factor 3 |
-| `c = 100` | `10⁻³³⁴` (`N=250, dps=500`) | **329 matching digits** (`N=250, dps=500`) | two consecutive Aitken-Δ² approaching Connes 2026 §6.4 (≈ −530.4) monotonically; deeper triple within 3.32 OOM, ratios 0.8373 / 0.8355 |
+| `c = 100` | `10⁻³³⁴` (`N=250, dps=500`) | **329 matching digits** (`N=250, dps=500`) | two consecutive Aitken-Δ² estimates approach the prolate comparison scale in Connes 2026 §6.4 (≈ −530.4); deeper triple within 3.32 OOM, ratios 0.8373 / 0.8355 |
 
 </div>
 
@@ -62,21 +62,21 @@ The series combines high-precision numerical work, finite-dimensional theorems, 
 
 ## Headline result
 
-**The Connes 2026 §6.4 heuristic continuum asymptotic, tested out-of-sample at $c = 100$.**
+**A numerical comparison at $c = 100$ with the prolate asymptotic in Connes 2026 §6.4.**
 
-Connes 2026 (arXiv:2602.04022) §6.4 gives a heuristic continuum decay rate
+Connes 2026 (arXiv:2602.04022) §6.4 displays the Fuchs asymptotic for a prolate quantity:
 $$1 - \chi_2(\lambda) \;\sim\; \frac{2^{14}}{3}\,\sqrt{2}\,\pi^{5}\; e^{-4\pi e^{L} + 9L/2}, \qquad L = 2\log\lambda,$$
-for the second angular function $\chi_2$, tracking the smallest eigenvalue of the truncated Weil quadratic form. CCM 2025 §6 reports the comparison through $\lambda \leq 14$ with $N = 120$; the study in this repository evaluates a separate finite-$N$ sequence at the out-of-sample cutoff $c=100$.
+Here $\chi_2$ is a prolate angular eigenvalue. Connes reports numerical similarity between $1-\chi_2$ and the full Weil spectral floor; the displayed asymptotic is for the prolate quantity, and does not establish their asymptotic identity. Its use as a comparison scale for the Weil floor is therefore heuristic. CCM 2025 §6 reports comparisons through $\lambda \leq 14$ with $N = 120$. This study evaluates a separate finite-$N$ sequence at $c=100$; “out-of-sample” refers to this paper's earlier $c\leq67$ fit window, not to the range of all published comparisons.
 
 Using this package at $c = 100$ with $N \in \{100, 150, 200, 250\}$ at $\mathrm{dps} = 500$, two consecutive Aitken-Δ² extrapolations on the overlapping triples give
 $$\log_{10}\bigl|\lambda_\infty^{\mathrm{even}}(c{=}100)\bigr| \;\approx\; -536.76 \;\;\text{and}\;\; -533.70,$$
-approaching the Connes 2026 §6.4 prediction of $\approx -530.38$ monotonically with $N$; the consecutive first-difference ratios `0.8373` and `0.8355` match to two decimal places, evidence for a local geometric model. The deeper-anchored triple sits **3.32 OOM** above the prediction, out of $|x_\infty| \sim 530$ - agreement at the under-1%-of-exponent level on the deeper anchor, out-of-sample (the in-sample fit window was $c \leq 67$ at $N = 100$). Four points do not distinguish this local geometric model from all alternative convergence laws.
+approaching the prolate comparison scale of $\approx -530.38$ monotonically with $N$; the consecutive first-difference ratios `0.8373` and `0.8355` match to two decimal places, evidence for a local geometric model. The deeper-anchored triple sits **3.32 OOM** below that comparison scale, out of $|x_\infty| \sim 530$ - agreement at the under-1%-of-exponent level on the deeper anchor, out-of-sample (the in-sample fit window was $c \leq 67$ at $N = 100$). Four points do not distinguish this local geometric model from all alternative convergence laws.
 
 **Companion observations** (full details in the paper):
 
 - $\gamma_1$ through $\gamma_{10}$ extracted to **307–329 matching digits** at $c = 100$, $N = 250$, $\mathrm{dps} = 500$ (and **219–242** at $N = 150$, $\mathrm{dps} = 1000$).
 - Under the unitary equivalence with CCM 2025 Lemma 5.1, every $\gamma_k$ extraction here is, modulo a hypothesis-status caveat at $c = 100$ documented in the paper, an eigenvalue of the rank-one perturbed scaling operator $D_{\log}^{(\lambda,N)}$ of CCM Theorem 1.1(iii) at $\lambda = \sqrt{c}$.
-- The empirical fit $|\log_{10}\lambda_{\min}(c)| \approx 13.24 \, c^{0.634}$ valid on $c \leq 67$ at $N = 100$ is shown to be a finite-$N$ rate, not the continuum asymptote: the $c = 100$, $N = 200$ datum falsifies the pure-power-law extrapolation by 49 orders of magnitude.
+- The empirical fit $|\log_{10}\lambda_{\min}(c)| \approx 13.24 \, c^{0.634}$ valid on $c \leq 67$ at $N = 100$ is a fixed-$N$ empirical fit: the $c = 100$, $N = 200$ datum falsifies the pure-power-law extrapolation by 49 orders of magnitude.
 
 The accompanying paper is on **arXiv** - [arXiv:2605.20224](https://arxiv.org/abs/2605.20224) (math.NT) - and archived on **Zenodo**, where the concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) always resolves to the latest version. The corrections recorded in [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) change no measured value: the $c=100$ and $L(s,\chi_3)$ negative-sign eigenvalue claims are finite-cutoff artifacts (2026-06-26, in the published manuscript text); the Section 8.2 Paley-Wiener mechanism is withdrawn and Table 14 is measured at $T=400$ (2026-08-12); the $c=67$ matching-digit count is 167 rather than 168 (2026-08-12); two summary digit-increment ranges in Section 6.5 are 93-117 and 181-203 (2026-08-13); and the $c=100$ negative block does not vanish at any finite cutoff tested, though a cutoff-free evaluation still leaves the even sector non-negative (2026-08-14). All are incorporated in the manuscript text that the concept DOI resolves to.
 
@@ -179,11 +179,11 @@ A runnable smoke/extended example is also available at [`examples/basic_compute.
 
 ## The c = 100 verification
 
-The headline analysis is reproducible from the committed data. A minimal verification script that loads the published $N$-sweep and recomputes both Aitken-Δ² anchors and the Connes 2026 §6.4 prediction in under a second is at [`examples/c100_aitken_check.py`](https://github.com/akivag613/connes-cvs-/blob/main/examples/c100_aitken_check.py); the underlying data is in [`data/c100/`](https://github.com/akivag613/connes-cvs-/tree/main/data/c100).
+The headline analysis is reproducible from the committed data. A minimal verification script that loads the published $N$-sweep and recomputes both Aitken-Δ² anchors and the prolate comparison scale in Connes 2026 §6.4 in under a second is at [`examples/c100_aitken_check.py`](https://github.com/akivag613/connes-cvs-/blob/main/examples/c100_aitken_check.py); the underlying data is in [`data/c100/`](https://github.com/akivag613/connes-cvs-/tree/main/data/c100).
 
 > **Data provenance and reproducibility.** The $c = 100$ dataset in [`data/c100/`](https://github.com/akivag613/connes-cvs-/tree/main/data/c100) was generated by a local production runner built on the v0.2.2 mathematical kernels. The historical v0.1.0/v0.2.0 A/B cell at $c = 13$, $N = 80$ agrees in all 80 printed decimal digits; that check does not by itself establish raw arithmetic identity at $c = 100$. Version 0.3.0 separately tests exact entrywise agreement between its classic and runner paths on a small $c = 13$ cell and regression agreement on larger $c = 13$ cells. Claims below are therefore scoped to the recorded artifacts and explicit test cells.
 >
-> To reproduce a tabulated production cell, use `CellConfig(c=100, N=..., T=800, dps=..., flint_bits=4*dps)` and `GalerkinCell(..., ground_state="smallest_positive")`. The explicit `flint_bits` matters: the recorded artifacts used `4*dps`, whereas the package default preserves the historical `int(3.5*dps)` convention. At $c = 100$, $T = 800$, the raw finite-$T$ even-sector matrix contains negative-sign eigenvalues that disappear at larger $T$; [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) identifies them as archimedean-cutoff artifacts. The table follows the empirically distinguished smallest-positive branch. `compute_ground_state` instead returns the raw minimum, so it is not the reproduction selector for these finite-$T$ rows. For the published $c \leq 67$ cells the minimum and smallest-positive selections coincide.
+> To reproduce a tabulated production cell, use `CellConfig(c=100, N=..., T=800, dps=..., flint_bits=4*dps)` and `GalerkinCell(..., ground_state="smallest_positive")`. The explicit `flint_bits` matters: the recorded artifacts used `4*dps`, whereas the package default preserves the historical `int(3.5*dps)` convention. At $c = 100$, $T = 800$, the raw finite-$T$ even-sector matrix contains negative-sign eigenvalues whose values and counts rearrange with $T$. No finite cutoff tested removed the whole block; cutoff-free interval certificates instead establish non-negativity for the tested even-sector blocks. [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) gives the exact scope and identifies the negatives as archimedean-cutoff artifacts. The table follows the empirically distinguished smallest-positive branch. `compute_ground_state` instead returns the raw minimum, so it is not the reproduction selector for these finite-$T$ rows. For the published $c \leq 67$ cells the minimum and smallest-positive selections coincide.
 
 ### N-sweep at c = 100, T = 800
 
@@ -207,13 +207,13 @@ x_inf(100,150,200) ~= -536.76        x_inf(150,200,250) ~= -533.70
 
 The consecutive first-difference ratios $|\Delta_2/\Delta_1| = 0.8373$ and $|\Delta_3/\Delta_2| = 0.8355$ match to two decimal places, evidence for a local geometric model of the convergence sequence (not a 3-point forced fit).
 
-The Connes 2026 §6.4 heuristic prediction at $c = 100$ is
+The prolate asymptotic in Connes 2026 §6.4 gives the comparison scale at $c = 100$:
 ```
 log10( 2^14 * sqrt(2) * pi^5 / 3 ) - (4*pi*100)/ln(10) + (9*log(100))/(2*ln(10))
     ~= 6.37 - 545.75 + 9.00 ~= -530.38
 ```
 
-The two Aitken anchors sit 6.39 OOM and 3.32 OOM above the prediction respectively, out of a magnitude range $|x_\infty| \sim 530$, with the trend monotone in $N$ - agreement at the **under-1%-of-exponent level on the deeper anchor**, out-of-sample (the in-sample fit window was $c \leq 67$ at $N = 100$). Four points do not rule out alternative convergence-model fits; see the paper for the model-sensitivity discussion.
+The two Aitken anchors sit 6.39 OOM and 3.32 OOM below this comparison scale respectively, out of a magnitude range $|x_\infty| \sim 530$, with the trend monotone in $N$ - agreement at the **under-1%-of-exponent level on the deeper anchor**, out-of-sample (the in-sample fit window was $c \leq 67$ at $N = 100$). Four points do not rule out alternative convergence-model fits; see the paper for the model-sensitivity discussion.
 
 ### γ_k extraction at c = 100
 
@@ -225,7 +225,7 @@ The two Aitken anchors sit 6.39 OOM and 3.32 OOM above the prediction respective
 | 4 | 233 | 320 | 9 | 221 | 309 |
 | 5 | 231 | 318 | 10 | 219 | 307 |
 
-The canonical matching-digit count is $\left\lfloor-\log_{10}|\gamma_k^{\text{detected}}-\gamma_k^{\text{exact}}|\right\rfloor$. Thus an error of $1.478\times10^{-168}$ counts as **167** matching digits. The published paper labels that same $c=67$ result “168 digits,” using the exponent/error-decade convention; [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) records the correction to 167, and the numerical error itself is unchanged. The reference is `mpmath.zetazero(k).imag` at `dps=400`. For comparison, CCM 2025 §6 reports $\gamma_1$ matching to approximately 55 digits at $c = 13$, $N = 120$.
+The canonical matching-digit count is $\left\lfloor-\log_{10}|\gamma_k^{\text{detected}}-\gamma_k^{\text{exact}}|\right\rfloor$. Thus an error of $1.478\times10^{-168}$ counts as **167** matching digits. Earlier manuscript versions labelled that same $c=67$ result “168 digits,” using the exponent/error-decade convention; the current manuscript gives 167. [ERRATA.md](https://github.com/akivag613/connes-cvs-/blob/main/ERRATA.md) records the correction to 167, and the numerical error itself is unchanged. The reference is `mpmath.zetazero(k).imag` at `dps=400`. For comparison, CCM 2025 §6 reports $\gamma_1$ matching to approximately 55 digits at $c = 13$, $N = 120$.
 
 ---
 
@@ -282,24 +282,24 @@ c=100  ████████████████████████�
                                                                           log₁₀|γ₁ err|
 ```
 
-Rows $c \leq 67$ use $N = 100$; the $c = 100$ row uses $N = 250$, $\mathrm{dps} = 500$ (headline cell). The $c \leq 67$ rows report the finite-$N = 100$ rate; the continuum asymptote (Connes 2026 §6.4) decays significantly faster, as the $c = 100$ row makes visible.
+Rows $c \leq 67$ use $N = 100$; the $c = 100$ row uses $N = 250$, $\mathrm{dps} = 500$ (headline cell). These are finite-matrix zero-extraction errors. Because both $c$ and $N$ change in the last row, this chart does not isolate a continuum decay law; the prolate comparison above concerns a different quantity, the spectral floor.
 
 ---
 
 ## Validation against published data
 
-Independent cross-checks of this package against published values. The $c = 13$ and $c = 14$ rows compare the **first-zero error** $\lvert\gamma_1 - t_1\rvert$ (which is orders of magnitude larger than $\lambda_{\min}$ itself); the $c = 100$ row compares the **smallest-eigenvalue decay** $\log_{10}\lvert\varepsilon\rvert$ against the Connes 2026 §6.4 heuristic. The two quantities are distinct - do not read the $\sim 10^{-55}$ values as $\lambda_{\min}$.
+Independent cross-checks of this package against published values. The $c = 13$ and $c = 14$ rows compare the **first-zero error** $\lvert\gamma_1 - t_1\rvert$ (which is orders of magnitude larger than $\lambda_{\min}$ itself); the $c = 100$ row compares the **smallest-eigenvalue decay** $\log_{10}\lvert\varepsilon\rvert$ against the prolate comparison scale in Connes 2026 §6.4. The two quantities are distinct - do not read the $\sim 10^{-55}$ values as $\lambda_{\min}$.
 
 | Cutoff | Quantity | Published | This package | Agreement |
 | :---: | :---: | :---: | :---: | :--- |
 | $c = 13$ | $\lvert\gamma_1\text{ err}\rvert$ | `2.6e-55` (Connes 2026 §6) | $\mathbf{2.005 \times 10^{-55}}$ | factor 1.3 |
 | $c = 13$ | $\lvert\gamma_1\text{ err}\rvert$ | `2.44e-55` (CCM 2025 §6, $N=120$, 200-digit) | $\mathbf{2.005 \times 10^{-55}}$ | factor 1.2 |
 | $c = 14$ | $\lvert\gamma_1\text{ err}\rvert$ | `1.07e-60` (CCM 2025 §6) | $\mathbf{3.541 \times 10^{-61}}$ | factor 3 |
-| $c = 100$ | $\log_{10}\lvert\varepsilon\rvert$ | $\approx -530.38$ (Connes 2026 §6.4, heuristic) | two Aitken-Δ² anchors at $\mathbf{-536.76}$ and $\mathbf{-533.70}$ | 3.32 OOM (deeper anchor); under 1% of exponent |
+| $c = 100$ | $\log_{10}\lvert\varepsilon\rvert$ | $\approx -530.38$ (Connes 2026 §6.4, prolate comparison) | two Aitken-Δ² anchors at $\mathbf{-536.76}$ and $\mathbf{-533.70}$ | 3.32 OOM (deeper anchor); under 1% of exponent |
 
 Cells for the "This package" column: the $c = 13$ and $c = 14$ rows are the published sweep cells at $N = 100$, $T = 800$, $\mathrm{dps} = 150$ ([`data/results_15pt_T800.json`](https://github.com/akivag613/connes-cvs-/blob/main/data/results_15pt_T800.json)); the $c = 100$ row is the Aitken-Δ² pair over $N \in \{100, 150, 200, 250\}$ at $T = 800$, $\mathrm{dps} = 500$.
 
-All rows probe the same operator, the truncated Weil minimizer $Q(c)$ in the **trigonometric basis**, but report different quantities, as noted above. The factor-of-1.3 spread at $c = 13$ is consistent with the differing $N$, $T$, precision and normalization conventions; it is not, by itself, a proof of cross-implementation identity.
+Our matrix rows use the truncated Weil form $Q(c)$ in the **trigonometric basis** and report the different quantities identified above. The last row compares its extrapolated floor with a separate prolate quantity; this does not assert operator identity. The factor-of-1.3 spread at $c = 13$ is consistent with the differing $N$, $T$, precision and normalization conventions; it is not, by itself, a proof of cross-implementation identity.
 
 ### Independent verification by third parties
 
@@ -408,7 +408,7 @@ Precision management is explicit. Eigenvalues shrink super-exponentially ($\lamb
 - **Bulk and boundary spectra** ([folder](https://github.com/akivag613/connes-cvs-/tree/main/papers/4_sine_loewner_bulk_boundary)) - Groskin 2026, *Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*. Uniform trace laws, finite-matrix comparison, half-line boundary flow and algebraic splitting, with three interval certificates. Archived on Zenodo, concept DOI [10.5281/zenodo.22662221](https://doi.org/10.5281/zenodo.22662221). Its verification programs are independent of the `connes-cvs` package.
 - **CvS - mathematical foundation** - Connes & van Suijlekom, *Quadratic forms, real zeros and echoes of the spectral action*, [arXiv:2511.23257](https://arxiv.org/abs/2511.23257).
 - **CCM - the rank-one spectral-triple construction whose spectrum this package measures** - Connes, Consani & Moscovici, *Zeta spectral triples*, [arXiv:2511.22755](https://arxiv.org/abs/2511.22755).
-- **Connes 2026 - the §6.4 heuristic asymptotic this work tests at $c = 100$** - *The Riemann Hypothesis: Past, Present and a Letter Through Time*, [arXiv:2602.04022](https://arxiv.org/abs/2602.04022).
+- **Connes 2026 - the §6.4 prolate asymptotic used for the $c = 100$ comparison** - *The Riemann Hypothesis: Past, Present and a Letter Through Time*, [arXiv:2602.04022](https://arxiv.org/abs/2602.04022).
 - **Connes–Consani 2023 - qualitative motivation for the $k_\lambda$ approximation in Connes 2026 §6.6** - *Spectral triples and $\zeta$-cycles*, [arXiv:2106.01715](https://arxiv.org/abs/2106.01715), Enseign. Math. 69.
 
 ---
@@ -441,7 +441,7 @@ If you use this package in academic work, please cite the software and the paper
 }
 ```
 
-The companion notes, [*A finite Guinand-Weil dictionary and archimedean tail order*](https://github.com/akivag613/connes-cvs-/tree/main/papers/2_guinand_weil_dictionary_tail_order) ([DOI](https://doi.org/10.5281/zenodo.21124802)) and [*A matrix-valued von Mangoldt measure*](https://github.com/akivag613/connes-cvs-/tree/main/papers/3_matrix_von_mangoldt_measure) ([DOI](https://doi.org/10.5281/zenodo.21242028)), are separate works with their own DOIs (see [Papers](#papers)); cite them directly if you use their results. [*Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*](https://github.com/akivag613/connes-cvs-/tree/main/papers/4_sine_loewner_bulk_boundary) ([DOI](https://doi.org/10.5281/zenodo.22662221)), likewise has its own [citation](https://github.com/akivag613/connes-cvs-/blob/main/papers/4_sine_loewner_bulk_boundary/CITATION.bib). Its standalone verification programs do not require the `connes-cvs` package. Those paper DOIs are not software identifiers. The software citation metadata is in [CITATION.cff](https://github.com/akivag613/connes-cvs-/blob/main/CITATION.cff).
+The companion notes, [*A finite Guinand-Weil dictionary and archimedean tail order*](https://github.com/akivag613/connes-cvs-/tree/main/papers/2_guinand_weil_dictionary_tail_order) ([DOI](https://doi.org/10.5281/zenodo.21124802)) and [*A matrix-valued von Mangoldt measure*](https://github.com/akivag613/connes-cvs-/tree/main/papers/3_matrix_von_mangoldt_measure) ([DOI](https://doi.org/10.5281/zenodo.21242028)), are separate works with their own DOIs (see [Papers](#papers)); cite them directly if you use their results. [*Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*](https://github.com/akivag613/connes-cvs-/tree/main/papers/4_sine_loewner_bulk_boundary) ([DOI](https://doi.org/10.5281/zenodo.22662221)) likewise has its own [citation](https://github.com/akivag613/connes-cvs-/blob/main/papers/4_sine_loewner_bulk_boundary/CITATION.bib). Its standalone verification programs do not require the `connes-cvs` package. Those paper DOIs are not software identifiers. The software citation metadata is in [CITATION.cff](https://github.com/akivag613/connes-cvs-/blob/main/CITATION.cff).
 
 ---
 

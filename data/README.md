@@ -8,7 +8,7 @@
 | `c100/` | The `c = 100` verification dataset: N-sweep results, gamma-extraction tables, and the Richardson/Aitken extrapolation inputs used by `examples/c100_aitken_check.py`. See `c100/README.md`. |
 | `third_party/` | Contributed third-party reproduction artifacts, preserved verbatim and credited to their authors. Each subdirectory carries its own `README.md` recording provenance, the maintainer comparison against `tests/reference_values.json`, and the artifact's SHA-256, which the test suite pins. Currently: `karl-keysingularity/` (a `connes-cvs` 0.2.2 run of the `c=13, N=100, T=400, dps=80` cell under native Windows). |
 
-**Purpose.** The public-facing numerical record of the accompanying paper and of the `c = 100` verification. Linked from [`../README.md`](../README.md) and cross-validated by the examples and tests. Papers 2 and 3 carry their own reproducibility artifacts inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers), not here.
+**Purpose.** The public-facing numerical record of the Riemann-zeros paper and of the `c = 100` verification. Linked from [`../README.md`](../README.md) and cross-validated by the examples and tests. The other papers carry their own reproducibility material inside their [paper folders on GitHub](https://github.com/akivag613/connes-cvs-/tree/main/papers). The sine Loewner paper's [exact witnesses and verification programs](../papers/4_sine_loewner_bulk_boundary/source/anc/) are included there.
 
 ## Schema of `results_15pt_T800.json`
 

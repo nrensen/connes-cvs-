@@ -1,4 +1,4 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; **Riemann zeros** · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/)
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; **Riemann zeros** · [Guinand-Weil dictionary](../2_guinand_weil_dictionary_tail_order/) · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/) · [Sine Loewner operator](../4_sine_loewner_bulk_boundary/)
 
 <div align="center">
 
@@ -15,10 +15,10 @@
 
 > Builds and diagonalizes the finite Connes–van Suijlekom **Galerkin matrix** at high precision,
 > extracting Riemann zeros to **hundreds of matching digits** and giving an independent
-> out-of-sample test of the Connes 2026 §6.4 continuum asymptotic. Empirical measurements only;
+> numerical comparison with the prolate asymptotic discussed in Connes 2026 §6.4. Empirical measurements only;
 > no claim regarding the Riemann Hypothesis.
 
-Part of the [`connes-cvs` series](../../README.md#papers): **Riemann zeros - the numerics** · [**Guinand-Weil dictionary** - the structure](../2_guinand_weil_dictionary_tail_order/) · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224) (math.NT); archived on Zenodo, concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) (resolves to the latest version).
+Part of the [`connes-cvs` series](../../README.md#papers): **Riemann zeros - the numerics** · [**Guinand-Weil dictionary** - the structure](../2_guinand_weil_dictionary_tail_order/) · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/) · [**Sine Loewner operator** - bulk and boundary spectra](../4_sine_loewner_bulk_boundary/). Published on arXiv, [arXiv:2605.20224](https://arxiv.org/abs/2605.20224) (math.NT); archived on Zenodo, concept DOI [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) (resolves to the latest version).
 
 ## About this folder
 
@@ -26,9 +26,10 @@ Part of the [`connes-cvs` series](../../README.md#papers): **Riemann zeros - the
 carrying every recorded correction in its text. It is byte-identical to the manuscript in the
 Zenodo deposit that the concept DOI
 [10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514) resolves to.
-Unlike the two companion notes - self-contained theorem notes whose code lives beside them - **this paper's
-reproducibility package is the `connes-cvs` package itself**, which is the whole repository. So
-this folder holds the paper; the code and data live at the repository root:
+**This paper's reproducibility package is the `connes-cvs` package**, together with
+the reference data, examples and tests at the repository root. The other papers
+keep their reproducibility material in their own folders. This folder holds the
+Riemann-zeros manuscript:
 
 | Artifact | Location |
 | :--- | :--- |
@@ -37,7 +38,7 @@ this folder holds the paper; the code and data live at the repository root:
 | Runnable examples (incl. the Aitken-Δ² check) | [`../../examples/`](../../examples/) |
 | Regression tests against the committed `c = 13` references | [`../../tests/`](../../tests/) |
 | Performance A/B benchmarks | [`../../benchmarks/`](../../benchmarks/) |
-| Errata (four entries; see below) | [`../../ERRATA.md`](../../ERRATA.md) |
+| Recorded errata (see below) | [`../../ERRATA.md`](../../ERRATA.md) |
 
 The [repository root README](../../README.md) documents the headline result, installation,
 quick start, the `c = 100` verification, and how it works.
@@ -47,8 +48,11 @@ quick start, the `c = 100` verification, and how it works.
 Builds and diagonalizes the finite Connes-van Suijlekom Galerkin matrix of the truncated Weil
 quadratic form at high precision. It computes the smallest-positive eigenvalue across a
 15-cutoff sweep and at `c = 100`, extracts the first ten Riemann zeros to hundreds of matching
-digits, and gives an independent out-of-sample numerical test of the Connes 2026 §6.4 continuum
-asymptotic. It reports empirical measurements only; it makes no claim regarding the Riemann
+digits, and gives a numerical comparison with the prolate asymptotic discussed in
+Connes 2026 §6.4. That source reports numerical similarity between the full Weil
+floor and the prolate quantity; their asymptotic identity is not established by
+that comparison. The `c = 100` study is outside this paper's earlier `c <= 67` fit
+window. It reports empirical measurements only; it makes no claim regarding the Riemann
 Hypothesis. See [`../../ERRATA.md`](../../ERRATA.md) for the recorded corrections, none of
 which changes a measured value: the 2026-06-26 finite-cutoff sign correction; the withdrawal of
 the Section 8.2 Paley-Wiener mechanism (Table 14 is measured at `T = 400`, not `T = 800`); the
