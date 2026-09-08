@@ -1819,9 +1819,10 @@ $$\varepsilon_N \equiv \frac{\sum_{j=2}^{N-1} b_{0j}^2}{b_{01}^2} \tag{8.22.1}$$
 *evaluates identically to the ratio of excited resolvent sums in which the global boundary-layer scaling factor $D_0^2$ cancels identically:*
 $$\boxed{\varepsilon_N = \sum_{j=2}^{N-1} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.} \tag{8.22.2}$$
 
-**Part II (Measure-Theoretic Formulation of First-Mode Concentration):**
-*Let $d\nu_v(\mu) \equiv \sum_{j \ge 1} b_{0j}^2 \delta_{\mu_j}$ be the discrete spectral measure of the excited coordinate wavepacket $v_{\mathrm{exc}}$ on $[\mu_1, \infty)$. The vanishing of the relative tail ratio $\varepsilon_N \to 0$ as $N \to \infty$ is mathematically equivalent to the weak concentration of the normalized excited spectral measure onto the first excited state:*
-$$\boxed{\frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2} \rightharpoonup \delta_{\mu_1} \quad (N \to \infty).} \tag{8.22.3}$$
+**Part II (Finite-$N$ Quantitative Concentration on the Moving First-Mode Dirac Mass):**
+*Let $d\bar\nu_N(\mu) \equiv \frac{d\nu_v(\mu)}{\|v_{\mathrm{exc}}\|^2} = \frac{1}{\|v_{\mathrm{exc}}\|^2} \sum_{j=1}^{N-1} b_{0j}^2 \delta_{\mu_j}$ be the normalized discrete spectral measure of the excited coordinate wavepacket $v_{\mathrm{exc}}$ on $[\mu_1, \infty)$. For every bounded continuous test function $f \in C_b([\mu_1, \infty))$, the finite-$N$ expectation satisfies the quantitative concentration estimate:*
+$$\boxed{\left| \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_N(\mu) - f(\mu_1^{(N)}) \right| \le 3 \|f\|_\infty \varepsilon_N.} \tag{8.22.3}$$
+*Consequently, the condition $\varepsilon_N \to 0$ implies that the normalized excited spectral measure becomes asymptotically concentrated on the first excited eigenvalue in the sense of a moving Dirac mass $\delta_{\mu_1^{(N)}}$. If additionally $\mu_1^{(N)} \to \mu_\infty$, standard weak-$*$ convergence $d\bar\nu_N \rightharpoonup \delta_{\mu_\infty}$ follows.*
 
 **Part III (Exact Asymptotic Residual Equivalence — Unconditional Theorem):**
 *The total excited coordinate wavepacket norm $\|v_{\mathrm{exc}}\|^2 = \|P_{\perp u_0} Kc\|^2 = D_0^2 M_{2,\mathrm{exc}}$ satisfies the exact finite-$N$ relation:*
@@ -1831,11 +1832,15 @@ $$\|P_{\perp u_0} Kc\|^2 \sim b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N) \quad
 
 **Part IV (Two-Sector Tail Partition and Semiclassical Spectral Filtering):**
 *Partitioning the tail sum $\varepsilon_N = \varepsilon_N^{\mathrm{bound}} + \varepsilon_N^{\mathrm{high}}$ at the uniform above-barrier separation threshold $V_* > \sup_N \lambda_N$ ($c_{\mathrm{high}} \equiv V_* - \sup_N \lambda_N > 0$):*
-1. *The high-energy (above-barrier) sector $j > N_{\mathrm{bound}}$ decouples exponentially fast:*
-   $$\varepsilon_N^{\mathrm{high}} \equiv \sum_{j > N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \le \frac{(\mu_1 - \lambda)^2}{c_{\mathrm{high}}^2 a_1^2} \sum_{j > N_{\mathrm{bound}}} a_j^2 = \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \|P_{\mathrm{high}} d\|^2 = \mathcal{O}(e^{-\sigma_1 N} N) \longrightarrow 0.$$
-2. *For the bound-state sector $2 \le j \le N_{\mathrm{bound}}$, the ratio is governed by the squared spectral gap ratio:*
+1. *Unconditional High-Energy Enclosure:*
+   $$\varepsilon_N^{\mathrm{high}} \equiv \sum_{j > N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1(N)} \|P_{\mathrm{high}} d\|^2 \le \frac{\mathcal{C}_{\mathbb{R}} N}{c_{\mathrm{high}}^2} \frac{\mu_1 - \lambda}{\mathcal{R}_1(N)}.$$
+2. *Conditional High-Energy Decoupling:*
+   *If the first excited transmission ratio remains bounded away from zero ($\inf_N \mathcal{R}_1(N) \ge c_1 > 0$) and the first tunneling gap decays exponentially ($\mu_1 - \lambda = \mathcal{O}(e^{-\sigma_1 N})$), then the above-barrier tail decouples exponentially fast:*
+   $$\boxed{\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \longrightarrow 0 \quad (N \to \infty).}$$
+3. *Bound-State Tail and Open Overlap Problem:*
+   *For the finite bound-state ladder $2 \le j \le N_{\mathrm{bound}}$, the tail evaluates to:*
    $$\varepsilon_N^{\mathrm{bound}} \equiv \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.$$
-   *Because $\mu_j - \lambda > \mu_1 - \lambda$ for all $j \ge 2$, the spectral denominator provides an automatic suppression factor $\left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 < 1$.*
+   *Because $\mu_j - \lambda > \mu_1 - \lambda$ for all $j \ge 2$, the spectral factor $\left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$ provides automatic suppression. However, establishing $\varepsilon_N^{\mathrm{bound}} \to 0$ requires controlling the overlap ratios $a_j^2 / a_1^2$, which is not completed by Part IV and forms the subject of Proposition 8.23.*
 
 **Part V (The Reoriented Analytical Hierarchy):**
 *The continuum reduction of Route B is structured into the following deductive chain:*
@@ -1868,14 +1873,12 @@ Because the boundary-layer factor $D_0^2 > 0$ is a strictly positive scalar inde
 $$\varepsilon_N = \sum_{j=2}^{N-1} \frac{\frac{a_j^2}{(\mu_j - \lambda)^2}}{\frac{a_1^2}{(\mu_1 - \lambda)^2}} = \sum_{j=2}^{N-1} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.$$
 This establishes (8.22.2) unconditionally for all finite dimensions $N \ge 2$.
 
-**2. Proof of Part II (Weak Measure Concentration):**
-Let $f \in C_b([\mu_1, \infty))$ be an arbitrary continuous and bounded test function on the excited spectrum. The expectation of $f$ under the normalized excited spectral measure $d\bar\nu_v \equiv \frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2}$ evaluates to:
-$$\int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) = \frac{\sum_{j=1}^{N-1} f(\mu_j) b_{0j}^2}{\sum_{j=1}^{N-1} b_{0j}^2} = \frac{f(\mu_1) b_{01}^2 + \sum_{j=2}^{N-1} f(\mu_j) b_{0j}^2}{b_{01}^2 (1 + \varepsilon_N)} = \frac{f(\mu_1) + \sum_{j=2}^{N-1} f(\mu_j) \frac{b_{0j}^2}{b_{01}^2}}{1 + \varepsilon_N}.$$
-Subtracting $f(\mu_1)$ yields:
-$$\left| \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) - f(\mu_1) \right| = \left| \frac{\sum_{j=2}^{N-1} (f(\mu_j) - f(\mu_1)) \frac{b_{0j}^2}{b_{01}^2} - \varepsilon_N f(\mu_1)}{1 + \varepsilon_N} \right| \le \frac{2 \|f\|_\infty \varepsilon_N + \|f\|_\infty \varepsilon_N}{1 + \varepsilon_N} \le 3 \|f\|_\infty \varepsilon_N.$$
-Therefore, $\varepsilon_N \to 0$ as $N \to \infty$ implies that for every test function $f \in C_b$:
-$$\lim_{N \to \infty} \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) = \lim_{N \to \infty} f(\mu_1),$$
-which is the precise definition of weak convergence $\frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2} \rightharpoonup \delta_{\mu_1}$.
+**2. Proof of Part II (Quantitative Finite-$N$ Concentration on Moving Dirac Mass):**
+Let $f \in C_b([\mu_1, \infty))$ be an arbitrary continuous and bounded test function on the excited spectrum. The expectation of $f$ under the normalized excited spectral measure $d\bar\nu_N \equiv \frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2}$ evaluates to:
+$$\int_{\mu_1}^\infty f(\mu) \, d\bar\nu_N(\mu) = \frac{\sum_{j=1}^{N-1} f(\mu_j) b_{0j}^2}{\sum_{j=1}^{N-1} b_{0j}^2} = \frac{f(\mu_1^{(N)}) b_{01}^2 + \sum_{j=2}^{N-1} f(\mu_j) b_{0j}^2}{b_{01}^2 (1 + \varepsilon_N)} = \frac{f(\mu_1^{(N)}) + \sum_{j=2}^{N-1} f(\mu_j) \frac{b_{0j}^2}{b_{01}^2}}{1 + \varepsilon_N}.$$
+Subtracting $f(\mu_1^{(N)})$ yields:
+$$\left| \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_N(\mu) - f(\mu_1^{(N)}) \right| = \left| \frac{\sum_{j=2}^{N-1} (f(\mu_j) - f(\mu_1^{(N)})) \frac{b_{0j}^2}{b_{01}^2} - \varepsilon_N f(\mu_1^{(N)})}{1 + \varepsilon_N} \right| \le \frac{2 \|f\|_\infty \varepsilon_N + \|f\|_\infty \varepsilon_N}{1 + \varepsilon_N} \le 3 \|f\|_\infty \varepsilon_N.$$
+This establishes the quantitative finite-$N$ estimate (8.22.3). Whenever $\varepsilon_N \to 0$ as $N \to \infty$, the right-hand side vanishes for every bounded test function, demonstrating asymptotic concentration on the moving Dirac mass $\delta_{\mu_1^{(N)}}$. If additionally the sequence of eigenvalues converges $\mu_1^{(N)} \to \mu_\infty$, then by continuity $f(\mu_1^{(N)}) \to f(\mu_\infty)$, yielding standard weak-$*$ convergence $d\bar\nu_N \rightharpoonup \delta_{\mu_\infty}$.
 
 **3. Proof of Part III (Exact Asymptotic Residual Equivalence):**
 By definition of the orthogonal projection $v_{\mathrm{exc}} = P_{\perp u_0} Kc = \sum_{j=1}^{N-1} b_{0j} u_j$, Parseval's identity yields:
@@ -1889,8 +1892,8 @@ $$\varepsilon_N = \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \fr
 For the high-energy above-barrier modes $j > N_{\mathrm{bound}}$, $\mu_j - \lambda \ge c_{\mathrm{high}} > 0$. Therefore:
 $$\varepsilon_N^{\mathrm{high}} \le \frac{(\mu_1 - \lambda)^2}{c_{\mathrm{high}}^2 a_1^2} \sum_{j > N_{\mathrm{bound}}} a_j^2.$$
 Recalling that $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$, this simplifies to:
-$$\varepsilon_N^{\mathrm{high}} \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \sum_{j > N_{\mathrm{bound}}} a_j^2 \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \|d\|^2.$$
-Since $\|d\|^2 \le \mathcal{C}_{\mathbb{R}} N = \mathcal{O}(N)$, $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$, and $\mu_1 - \lambda \sim e^{-\sigma_1 N}$, the above-barrier sector decouples exponentially fast:
+$$\varepsilon_N^{\mathrm{high}} \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1(N)} \sum_{j > N_{\mathrm{bound}}} a_j^2 \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1(N)} \|d\|^2.$$
+Since $\|d\|^2 \le \mathcal{C}_{\mathbb{R}} N = \mathcal{O}(N)$, assuming $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$ and the exponential tunneling gap scaling $\mu_1 - \lambda = \mathcal{O}(e^{-\sigma_1 N})$, the above-barrier sector decouples exponentially fast:
 $$\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \longrightarrow 0 \quad (N \to \infty).$$
 For the bound-state sector $2 \le j \le N_{\mathrm{bound}}$, since the eigenvalues are strictly ordered $\mu_1 < \mu_2 < \dots < \mu_{N_{\mathrm{bound}}}$, the spectral factor satisfies:
 $$\left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 < 1 \qquad (\forall j \ge 2).$$
@@ -1905,19 +1908,101 @@ This completes the proof. $\blacksquare$
    In contrast, Proposition 8.22 demonstrates that the relative tail ratio:
    $$\varepsilon_N \equiv \frac{\sum_{j \ge 2} b_{0j}^2}{b_{01}^2} = \sum_{j \ge 2} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$$
    is completely independent of $D_0^2$. The boundary-layer amplitude cancels identically from every term.
-2. **Numerical Verification Across Discrete Dimensions:**
-   From `cell69.out`, we can compute the exact finite-$N$ values of $\varepsilon_N$:
+2. **Epistemic Calibration on High-Energy Decoupling vs. Bound Ladder:**
+   Part IV establishes high-energy decoupling $\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \to 0$ **conditionally** upon two hypotheses: $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$ (first-mode transmission lower bound) and $\mu_1 - \lambda = \mathcal{O}(e^{-\sigma_1 N})$ (exponential tunneling gap decay). While supported strongly by numerical sweeps across $N \in \{8, \dots, 24\}$, these remain analytical hypotheses.
+   Crucially, Part IV does **not** claim that $\varepsilon_N \to 0$ is proven. The finite bound-state ladder:
+   $$\varepsilon_N^{\mathrm{bound}} = \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$$
+   remains open, because the spectral suppression factor $(\frac{\mu_1 - \lambda}{\mu_j - \lambda})^2 < 1$ must be shown to dominate the overlap ratio $a_j^2 / a_1^2$.
+3. **Numerical Verification Across Discrete Dimensions:**
+   From `cell69.out`, we compute the exact finite-$N$ values of $\varepsilon_N$:
    - $N = 8$: $\|v_{\mathrm{exc}}\|^2 \approx 3.73759 \times 10^{-5}$, $b_{01}^2 \approx 3.73725 \times 10^{-5} \implies \varepsilon_8 \approx 9.07 \times 10^{-5}$.
    - $N = 12$: $\|v_{\mathrm{exc}}\|^2 \approx 2.56371 \times 10^{-5}$, $b_{01}^2 \approx 2.56364 \times 10^{-5} \implies \varepsilon_{12} \approx 2.51 \times 10^{-5}$.
    - $N = 16$: $\|v_{\mathrm{exc}}\|^2 \approx 1.02873 \times 10^{-5}$, $b_{01}^2 \approx 1.02871 \times 10^{-5} \implies \varepsilon_{16} \approx 2.20 \times 10^{-5}$.
    - $N = 20$: $\|v_{\mathrm{exc}}\|^2 \approx 4.29285 \times 10^{-6}$, $b_{01}^2 \approx 4.29280 \times 10^{-6} \implies \varepsilon_{20} \approx 1.04 \times 10^{-5}$.
    - $N = 24$: $\|v_{\mathrm{exc}}\|^2 \approx 2.25259 \times 10^{-6}$, $b_{01}^2 \approx 2.25258 \times 10^{-6} \implies \varepsilon_{24} \approx 4.52 \times 10^{-6}$.
-   The tail ratio is not only tiny ($< 5 \times 10^{-6}$ at $N=24$), but decays monotonically across all tested dimensions.
-3. **Spectral Filtering Mechanism:**
-   The bound $\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \to 0$ proves that all above-barrier modes are completely quenched by the tunneling gap $\mu_1 - \lambda$.
-   For the remaining bound states $2 \le j \le N_{\mathrm{bound}}$, if mode $j$ is not in an exponentially narrow doublet with an even mode (or if its gap $\mu_j - \lambda$ is significantly larger than $\mu_1 - \lambda$), the squared gap ratio $(\frac{\mu_1 - \lambda}{\mu_j - \lambda})^2$ provides powerful suppression, ensuring that $\varepsilon_N \to 0$ without requiring WKB wavepacket transport models.
+   The tail ratio is tiny ($< 5 \times 10^{-6}$ at $N=24$) and decays monotonically, confirming that $> 99.9995\%$ of the wavepacket residual norm concentrates in the first excited mode.
 
 ---
+
+## 8.23 Proposition 8.23: Exact Stieltjes Derivative Architecture for Overlap Ratios and Three-Factor Bound-State Tail Factorization
+
+Having isolated the remaining continuum wavepacket obstruction to the bound-state tail $\varepsilon_N^{\mathrm{bound}} = \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} (\frac{\mu_1 - \lambda}{\mu_j - \lambda})^2$, we now establish an exact finite-$N$ representation for the overlap ratios $a_j^2 / a_1^2$. Rather than treating $a_j \equiv \langle \boldsymbol\psi, u_j \rangle$ as arbitrary projections, we deploy the even-resolvent representation of odd coordinate derivatives from Proposition 8.20.
+
+### Proposition 8.23 (Stieltjes Derivative Factorization of Overlap Ratios)
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Connes–van Suijlekom Galerkin operator with cutoff parameter $c > 1$ ($L = \log c$). Let $\{ (E_k, u_k^{\mathrm{even}}) \}_{k=0}^N$ and $\{ (\mu_j, u_j^{\mathrm{odd}}) \}_{j=0}^{N-1}$ denote the even and odd eigensystems, with even ground state $u_0^{\mathrm{even}} \equiv c$, $E_0 = \lambda$, boundary overlaps $d_k \equiv \langle d, u_k^{\mathrm{even}} \rangle$, and odd source overlaps $a_j \equiv \langle \boldsymbol\psi, u_j^{\mathrm{odd}} \rangle$. Let $G_d(z) \equiv \sum_{k=0}^N \frac{d_k^2}{E_k - z}$ be the Stieltjes transform of the boundary measure on $H_{\mathrm{even}}$, with Stieltjes derivative:*
+$$G_d'(z) \equiv \sum_{k=0}^N \frac{d_k^2}{(E_k - z)^2}.$$
+
+**Part I (Exact Stieltjes Derivative Overlap Representation — Unconditional Theorem):**
+*For every excited odd mode $j \ge 1$, strict parity interlacing ensures that $\mu_j \notin \sigma(Q_{\mathrm{even}})$. The squared overlap $a_j^2$ satisfies the exact finite-$N$ identity:*
+$$\boxed{a_j^2 = \frac{\|K u_j\|^2}{G_d'(\mu_j)} = \frac{\|K u_j\|^2}{\sum_{k=0}^N \frac{d_k^2}{(\mu_j - E_k)^2}}.} \tag{8.23.1}$$
+
+**Part II (Exact Factorization of Overlap Ratios — Unconditional Theorem):**
+*For every pair of excited odd modes $j, 1 \ge 1$, the overlap ratio $a_j^2 / a_1^2$ factors identically into the coordinate kinetic energy ratio and the inverse Stieltjes derivative ratio:*
+$$\boxed{\frac{a_j^2}{a_1^2} = \left( \frac{\|K u_j\|^2}{\|K u_1\|^2} \right) \left( \frac{G_d'(\mu_1)}{G_d'(\mu_j)} \right).} \tag{8.23.2}$$
+*In particular, this expression is completely independent of the boundary-layer amplitude $D_0$.*
+
+**Part III (Three-Factor Modewise Tail Decomposition — Unconditional Theorem):**
+*Every individual modewise term $T_j \equiv b_{0j}^2 / b_{01}^2$ in the excited wavepacket tail ratio factors identically into three positive components:*
+$$\boxed{T_j = \mathcal{K}_j \cdot \mathcal{G}_j \cdot \mathcal{S}_j,} \tag{8.23.3}$$
+*where:*
+1. *$\mathcal{K}_j \equiv \frac{\|K u_j\|^2}{\|K u_1\|^2}$ is the coordinate kinetic energy ratio,*
+2. *$\mathcal{G}_j \equiv \frac{G_d'(\mu_1)}{G_d'(\mu_j)}$ is the inverse Stieltjes derivative ratio,*
+3. *$\mathcal{S}_j \equiv \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$ is the squared spectral gap suppression factor.*
+
+**Part IV (Polynomial Overlap Growth Sufficiency):**
+*If for each bound mode $j \in \{2, \dots, N_{\mathrm{bound}}\}$ the overlap ratio satisfies at most polynomial growth:*
+$$\frac{a_j^2}{a_1^2} \le \mathcal{C}_j N^p \qquad (p \ge 0),$$
+*and the tunneling gap ratio decays exponentially: $\frac{\mu_1 - \lambda}{\mu_j - \lambda} = \mathcal{O}(e^{-\Delta\sigma_j N})$ with $\Delta\sigma_j > 0$, then each bound-state tail term is exponentially quenched:*
+$$T_j = \mathcal{O}(N^p e^{-2\Delta\sigma_j N}) \longrightarrow 0 \quad (N \to \infty),$$
+*establishing $\varepsilon_N^{\mathrm{bound}} \to 0$.*
+
+---
+
+### Proof of Proposition 8.23
+
+**1. Proof of Part I (Exact Stieltjes Derivative Overlap Representation):**
+By Proposition 8.20, for any excited odd mode $u_j$ ($j \ge 1$), the coordinate derivative vector $K u_j \in H_{\mathrm{even}}$ satisfies the exact resolvent equation:
+$$K u_j = a_j (Q_{\mathrm{even}} - \mu_j I)^{-1} d.$$
+Expanding this vector in the orthonormal even eigenbasis $\{u_k^{\mathrm{even}}\}_{k=0}^N$:
+$$K u_j = a_j \sum_{k=0}^N \frac{\langle d, u_k^{\mathrm{even}} \rangle}{E_k - \mu_j} u_k^{\mathrm{even}} = a_j \sum_{k=0}^N \frac{d_k}{E_k - \mu_j} u_k^{\mathrm{even}}.$$
+Taking the $\ell^2$-norm squared on $H_{\mathrm{even}}$ via Parseval's identity:
+$$\|K u_j\|^2 = a_j^2 \sum_{k=0}^N \frac{d_k^2}{(E_k - \mu_j)^2} = a_j^2 \sum_{k=0}^N \frac{d_k^2}{(\mu_j - E_k)^2} = a_j^2 G_d'(\mu_j).$$
+Because strict parity interlacing ensures that $\mu_j \ne E_k$ for all $k \in \{0, \dots, N\}$, the denominator terms $(\mu_j - E_k)^2$ are strictly positive and finite. Furthermore, $d_0 = D_0 \ne 0$ guarantees that $G_d'(\mu_j) \ge \frac{D_0^2}{(\mu_j - \lambda)^2} > 0$. Dividing by $G_d'(\mu_j)$ yields (8.23.1).
+
+**2. Proof of Part II (Exact Factorization of Overlap Ratios):**
+Applying (8.23.1) to mode $j$ and to mode 1:
+$$a_j^2 = \frac{\|K u_j\|^2}{G_d'(\mu_j)}, \qquad a_1^2 = \frac{\|K u_1\|^2}{G_d'(\mu_1)}.$$
+Since $a_1 \ne 0$ (from strict parity interlacing $\mu_0 < E_1 < \mu_1 < E_2$), taking the ratio gives:
+$$\frac{a_j^2}{a_1^2} = \frac{\frac{\|K u_j\|^2}{G_d'(\mu_j)}}{\frac{\|K u_1\|^2}{G_d'(\mu_1)}} = \left( \frac{\|K u_j\|^2}{\|K u_1\|^2} \right) \left( \frac{G_d'(\mu_1)}{G_d'(\mu_j)} \right),$$
+establishing (8.23.2) unconditionally for all $N \ge 2$.
+
+**3. Proof of Part III (Three-Factor Modewise Tail Decomposition):**
+By Proposition 8.22, the modewise tail term is defined as:
+$$T_j \equiv \frac{b_{0j}^2}{b_{01}^2} = \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.$$
+Substituting the exact factorization (8.23.2) for $a_j^2 / a_1^2$:
+$$T_j = \left( \frac{\|K u_j\|^2}{\|K u_1\|^2} \right) \left( \frac{G_d'(\mu_1)}{G_d'(\mu_j)} \right) \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 = \mathcal{K}_j \cdot \mathcal{G}_j \cdot \mathcal{S}_j.$$
+This proves (8.23.3).
+
+**4. Proof of Part IV (Polynomial Overlap Growth Sufficiency):**
+If $\frac{a_j^2}{a_1^2} \le \mathcal{C}_j N^p$ and $\frac{\mu_1 - \lambda}{\mu_j - \lambda} \le C_{\mathrm{gap}, j} e^{-\Delta\sigma_j N}$ with $\Delta\sigma_j > 0$, then:
+$$T_j = \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \le \mathcal{C}_j N^p \cdot C_{\mathrm{gap}, j}^2 e^{-2\Delta\sigma_j N} = \mathcal{O}(N^p e^{-2\Delta\sigma_j N}).$$
+Since $2\Delta\sigma_j > 0$, the exponential decay $e^{-2\Delta\sigma_j N}$ dominates any fixed polynomial growth $N^p$, so $T_j \to 0$ as $N \to \infty$. Summing over the finite bound-state ladder $j \in \{2, \dots, N_{\mathrm{bound}}\}$ (with uniform cardinality $\bar{N}_{\mathrm{bound}} < \infty$ by Bridge B1) yields $\varepsilon_N^{\mathrm{bound}} \to 0$. $\blacksquare$
+
+---
+
+### Analytical Commentary on Proposition 8.23
+
+1. **Conversion of the Bound-State Obstruction to Spectral Ratios:**
+   Proposition 8.23 converts the open question of bound-state tail control into two concrete, highly structured spectral questions:
+   - *Coordinate Kinetic Energy Ratio $\mathcal{K}_j = \|K u_j\|^2 / \|K u_1\|^2$:* In Cell 68, the discrete coordinate kinetic energies $\|K u_j\|^2$ were audited across $N \in \{8, \dots, 24\}$ and verified to be strictly $\mathcal{O}(1)$ for bound states (e.g., $\|K u_1\|^2 \approx 9.75$, $\|K u_2\|^2 \approx 15.78$ at $N=16$). Thus $\mathcal{K}_j = \Theta(1)$.
+   - *Stieltjes Derivative Ratio $\mathcal{G}_j = G_d'(\mu_1) / G_d'(\mu_j)$:* Both $G_d'(\mu_1)$ and $G_d'(\mu_j)$ are positive Stieltjes derivatives of the boundary measure $d$. Evaluating their ratio reveals whether $G_d'(\mu_j)$ is comparable to, or larger than, $G_d'(\mu_1)$.
+2. **Zero Boundary-Layer Dependence:**
+   Neither the kinetic energy ratio $\mathcal{K}_j$ nor the Stieltjes derivative ratio $\mathcal{G}_j$ involves $D_0$. The dangerous scale $D_0^2 \sim e^{-2\sigma_0 N}$ remains completely absent from the bound-state analysis.
+3. **The Spectral Filtering Asymmetry:**
+   Because $\mu_1 - \lambda \sim e^{-\sigma_1 N}$ decays with action $\sigma_1 \approx 3.22$, whereas for $j \ge 2$, $\mu_j - \lambda$ corresponds to higher bound states (whose tunneling gaps are either significantly wider or macroscopically $\mathcal{O}(1)$), the spectral ratio $\mathcal{S}_j = (\frac{\mu_1 - \lambda}{\mu_j - \lambda})^2$ provides an exponential suppression factor $e^{-2\Delta\sigma_j N}$. Consequently, the overlap ratio $a_j^2 / a_1^2$ can tolerate any polynomial growth $N^p$ without defeating first-mode concentration.
+
+---
+
 
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
 
