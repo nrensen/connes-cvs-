@@ -4,7 +4,7 @@ CELL 69 — AUDIT OF THE EXACT TRANSITION DIPOLE FACTORIZATION R_gap = b_{01}^2 
 ================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
 
---- DIMENSION N =  8 (Elapsed: 108.21s) ---
+--- DIMENSION N =  8 (Elapsed: 106.99s) ---
   Tunneling gap:       mu_1 - lam_0         = 1.38723543e-15
   Odd overlap:         a_1                  = -1.05343439e-7
   Transmission ratio:  R_1 = a_1^2 / gap_1  = 7.99953627
@@ -20,7 +20,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
   Even resolvent term: E_{even, 1}          = 8.23334619
   Cancellation error:  |||Ku_1||^2 - E - b^2| = 8.199e-37
 
---- DIMENSION N = 12 (Elapsed: 154.73s) ---
+--- DIMENSION N = 12 (Elapsed: 46.66s) ---
   Tunneling gap:       mu_1 - lam_0         = 1.18648486e-21
   Odd overlap:         a_1                  = -9.03771532e-11
   Transmission ratio:  R_1 = a_1^2 / gap_1  = 6.88422593
@@ -36,7 +36,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
   Even resolvent term: E_{even, 1}          = 9.22936252
   Cancellation error:  |||Ku_1||^2 - E - b^2| = 9.09e-31
 
---- DIMENSION N = 16 (Elapsed: 200.80s) ---
+--- DIMENSION N = 16 (Elapsed: 45.71s) ---
   Tunneling gap:       mu_1 - lam_0         = 1.27595595e-26
   Odd overlap:         a_1                  = -2.29566282e-13
   Transmission ratio:  R_1 = a_1^2 / gap_1  = 4.13028976
@@ -52,7 +52,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
   Even resolvent term: E_{even, 1}          = 9.75412955
   Cancellation error:  |||Ku_1||^2 - E - b^2| = 9.98e-26
 
---- DIMENSION N = 20 (Elapsed: 256.26s) ---
+--- DIMENSION N = 20 (Elapsed: 57.18s) ---
   Tunneling gap:       mu_1 - lam_0         = 6.39990962e-31
   Odd overlap:         a_1                  = -1.58167672e-15
   Transmission ratio:  R_1 = a_1^2 / gap_1  = 3.90896341
@@ -68,7 +68,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
   Even resolvent term: E_{even, 1}          = 10.0497353
   Cancellation error:  |||Ku_1||^2 - E - b^2| = 2.128e-20
 
---- DIMENSION N = 24 (Elapsed: 310.56s) ---
+--- DIMENSION N = 24 (Elapsed: 57.83s) ---
   Tunneling gap:       mu_1 - lam_0         = 2.94860198e-34
   Odd overlap:         a_1                  = -3.88891324e-17
   Transmission ratio:  R_1 = a_1^2 / gap_1  = 5.12909042

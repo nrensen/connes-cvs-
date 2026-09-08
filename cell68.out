@@ -4,7 +4,7 @@ CELL 68 — AUDIT OF THE GLOBAL WEIGHTED RESOLVENT TRACE T_N, DISCRETE
 ================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 103.29s) ---
+--- DIMENSION N =  8 (Elapsed: 105.35s) ---
   Ground scale:      D_0^2                = 6.48094082e-21
   Excited gap:       mu_1 - lam_0         = 1.38723543e-15
   Exact K^2 Trace:   sum_j ||Ku_j||^2     = 204.0 (Residual: 1.026e-48)
@@ -23,7 +23,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Coord Residual:    S_coord(N)           = 3.84689675e-5
   Actions:           sigma_0 = 2.90534, sigma_1 = 4.27643, sigma_T = 1.27071
 
---- DIMENSION N = 12 (Elapsed: 147.61s) ---
+--- DIMENSION N = 12 (Elapsed: 46.07s) ---
   Ground scale:      D_0^2                = 4.41839913e-27
   Excited gap:       mu_1 - lam_0         = 1.18648486e-21
   Exact K^2 Trace:   sum_j ||Ku_j||^2     = 650.0 (Residual: 5.474e-48)
@@ -42,7 +42,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Coord Residual:    S_coord(N)           = 3.43708462e-5
   Actions:           sigma_0 = 2.5285, sigma_1 = 4.01527, sigma_T = 0.856525
 
---- DIMENSION N = 16 (Elapsed: 191.45s) ---
+--- DIMENSION N = 16 (Elapsed: 45.16s) ---
   Ground scale:      D_0^2                = 3.17795205e-32
   Excited gap:       mu_1 - lam_0         = 1.27595595e-26
   Exact K^2 Trace:   sum_j ||Ku_j||^2     = 1496.0 (Residual: 1.642e-47)
@@ -61,7 +61,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Coord Residual:    S_coord(N)           = 2.42947182e-5
   Actions:           sigma_0 = 2.26645, sigma_1 = 3.72647, sigma_T = 0.664078
 
---- DIMENSION N = 20 (Elapsed: 246.39s) ---
+--- DIMENSION N = 20 (Elapsed: 56.44s) ---
   Ground scale:      D_0^2                = 7.02834385e-37
   Excited gap:       mu_1 - lam_0         = 6.39990962e-31
   Exact K^2 Trace:   sum_j ||Ku_j||^2     = 2870.0 (Residual: 2.19e-47)
@@ -80,7 +80,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Coord Residual:    S_coord(N)           = 1.10367591e-5
   Actions:           sigma_0 = 2.08114, sigma_1 = 3.47619, sigma_T = 0.570714
 
---- DIMENSION N = 24 (Elapsed: 300.76s) ---
+--- DIMENSION N = 24 (Elapsed: 56.51s) ---
   Ground scale:      D_0^2                = 1.29495976e-40
   Excited gap:       mu_1 - lam_0         = 2.94860198e-34
   Exact K^2 Trace:   sum_j ||Ku_j||^2     = 4900.0 (Residual: 6.569e-47)
