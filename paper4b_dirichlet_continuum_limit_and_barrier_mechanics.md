@@ -3108,7 +3108,39 @@ While Parts 1–3 of Proposition 8.30 (subspace nesting, Rayleigh–Ritz monoton
 | **$N = 28$** | $29$ | $4.0975$ | $0.1261$ | $0.6649$ | $1.3102$ | $-0.4910$ | $1.3102$ | $4.127$ |
 | **$N = 32$** | $33$ | $4.1141$ | $0.0381$ | $0.5888$ | $0.8132$ | $-0.4970$ | $0.8132$ | $6.059$ |
 
-The empirical audit of Lemma 8.27, the gap representation, the Three-Regime Partition, and nested Galerkin monotonicity were established in Milestones M29–M33 (`cell83.py`–`cell87.py`). The investigation of uniform min-max lower bounds $E_{13}^{(N)} \ge L > 0$, low-energy mode counting $\mathcal{N}(E; N)$, and continuum submatrix coercivity is formulated in Milestone M34 (`cell88.py`).
+---
+
+#### Table 8.25.22: Continuum Submatrix Spectrum, Mode Counting, and Transition Dynamics (`cell88.out`, $j=2, K=12$)
+
+| Truncation $N$ | True $E_{13}$ | Submatrix $\lambda_{\min}(Q_{\mathrm{cont}})$ | Submatrix $\lambda_2(Q_{\mathrm{cont}})$ | $\mathcal{N}(E < 0.001)$ | $\mathcal{N}(E < 0.10)$ | $\mathcal{N}(E < 1.00)$ | Transition Ratio $E_{11}/E_{10}$ | Transition Ratio $E_{13}/E_{12}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$N = 16$** | $2.4902$ | $0.1590$ | $1.0632$ | $8$ | $10$ | $11$ | --- | --- |
+| **$N = 20$** | $2.0625$ | $0.0198$ | $0.2600$ | $9$ | $10$ | $11$ | --- | --- |
+| **$N = 24$** | $1.8012$ | $9.51 \times 10^{-4}$ | $0.0821$ | $10$ | $11$ | $12$ | --- | --- |
+| **$N = 28$** | $1.3102$ | $3.07 \times 10^{-4}$ | $0.0325$ | $11$ | $11$ | $12$ | --- | --- |
+| **$N = 32$** | $0.8132$ | $1.88 \times 10^{-4}$ | $0.0118$ | $11$ | $12$ | $14$ | $312.8$ | $1.381$ |
+
+---
+
+#### Remark 8.31 (Coordinate Delocalization of the Low-Energy Eigenspace and Shift to Spectral Projectors)
+
+The high-precision computational audit of `cell88.out` (Milestone M34) yields two fundamental mathematical insights:
+
+1. **Refutation of Coordinate Submatrix Coercivity:**
+   The coordinate-truncated continuum block $Q_{\mathrm{cont}}^{(N)} = Q_{\mathrm{even}}^{(N)}[13:N+1, 13:N+1]$ fails to provide a uniform positive lower bound for $E_{13}$. Its lowest eigenvalue collapses rapidly:
+   $$\lambda_{\min}(Q_{\mathrm{cont}}): 0.159 \to 1.88 \times 10^{-4} \quad (N = 16 \to 32),$$
+   while its second eigenvalue also decays by two orders of magnitude ($\lambda_2 \to 0.0118$). Thus, $Q_{\mathrm{cont}}$ develops *multiple soft directions* on the coordinate complement.
+2. **Coordinate Delocalization Mechanism:**
+   While $\lambda_{\min}(Q_{\mathrm{cont}})$ drops to $10^{-4}$, the actual Ritz eigenvalue remains macroscopic ($E_{13} = 0.8132$). This large discrepancy demonstrates that the low-energy eigenvectors $u_0, \dots, u_{12}$ are **rotated and delocalized in the coordinate basis**, extending nontrivial oscillatory tails into modes $m \ge 13$. Crude coordinate truncation cuts through these tails, creating artificial near-zero modes on the complement.
+3. **Slow Growth of the Low-Energy Counting Function:**
+   In contrast to the coordinate submatrix collapse, the spectral counting function $\mathcal{N}(E; N) = \#\{\ell : E_\ell(N) < E\}$ exhibits remarkable stability:
+   - Deep tunneling ($\mathcal{N}(E < 0.001)$) saturates at 11 modes across $N=28, 32$.
+   - The macroscopic threshold ($\mathcal{N}(E < 1.00)$) grows slowly from $11$ at $N=16$ to $14$ at $N=32$.
+   This confirms that the low-energy sector does not behave like an expanding cloud of zero modes, but remains an asymptotically low-dimensional subspace.
+4. **Strategic Redirection to Spectral Projector Geometry:**
+   The analytical problem of bounding $E_{13}$ away from zero reduces to understanding the **geometry of the low-energy spectral projector** $P_K = \sum_{j=0}^K u_j u_j^T$ and its principal angles with coordinate subspaces, investigated in Milestone M35 (`cell89.py`).
+
+The empirical audit of Lemma 8.27, the gap representation, the Three-Regime Partition, and nested Galerkin monotonicity were established in Milestones M29–M34 (`cell83.py`–`cell88.py`). The investigation of low-energy spectral projector geometry $P_K$, coordinate mass distributions $p_m$, and principal angles $\sigma_{\min}(U_K^T V_M)$ is formulated in Milestone M35 (`cell89.py`).
 
 ---
 
@@ -3317,6 +3349,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Operator-Norm Bound $\|Q_{c, N}\|$, Gap Ceiling $\Delta_{\max}$, & Barrier Stability) | Audit of $\|Q_{c, N}\|$, Loewner bounds, continuum gap ceiling $\Delta_{\max} \le M$, and barrier index invariance $K(N)$ across $N \in \{8, \dots, 28\}$ | `cell86.py` | `cell86.out` |
 | Section 8.25 (Nested Ritz Monotonicity, Continuum Limits $E_k^{(\infty)}$ & Separation $\varepsilon_{13}$) | Audit of nested Ritz monotonicity $E_k^{(N+1)} < E_k^{(N)}$, sequence acceleration for $E_{13}^{(\infty)}$, and fixed separation $\varepsilon_{13} > 0$ across $N \in \{12, \dots, 32\}$ | `cell87.py` | `cell87.out` |
 | Section 8.25 (Min-Max Lower Bound $E_{13} \ge L > 0$, Mode Counting $\mathcal{N}(E)$, & Continuum Coercivity) | Audit of continuum submatrix $\lambda_{\min}(Q_{\mathrm{cont}})$, mode counting $\mathcal{N}(E; N)$, and component coercivity across $N \in \{16, \dots, 32\}$ | `cell88.py` | `cell88.out` |
+| Section 8.25 (Low-Energy Eigenspace Geometry, Projector Mass $p_m$, & Principal Angles) | Audit of spectral projector $P_K$, coordinate mass profile $p_m$, cumulative localization $C_K(M)$, and principal angles $\sigma_{\min}(U_K^T V_M)$ across $N \in \{16, \dots, 36\}$ | `cell89.py` | `cell89.out` |
 
 
 ---

@@ -250,11 +250,11 @@ def run_cell88() -> None:
 
     print("-" * 135)
     print("Key Diagnostic Summary for Test A:")
-    print("1. Cauchy Interlacing Certification: lambda_{min}(Q_{cont}^{(N)}) <= E_{13}^{(N)} holds unconditionally")
-    print("   across all tested dimensions without a single violation.")
-    print("2. Principal Submatrix Lower Bound Profile:")
-    print("   lambda_{min}(Q_{cont}) tracks the downward movement of the continuum base, providing an exact variational floor.")
-    print("3. Positivity: lambda_{min}(Q_{cont}^{(N)}) > 0 holds strictly for every finite N.")
+    print("1. Cauchy Interlacing: lambda_{min}(Q_{cont}^{(N)}) <= E_{13}^{(N)} holds unconditionally across tested dimensions.")
+    print("2. Coordinate Coercivity Collapse: lambda_{min}(Q_{cont}) drops sharply: 0.159 -> 0.0198 -> 9.51e-4 -> 3.07e-4 -> 1.88e-4.")
+    print("3. Large Subspace Mismatch: While lambda_{min}(Q_{cont}) collapses to ~ 1.88e-4, the true eigenvalue remains macroscopic (E_{13} = 0.813).")
+    print("4. Conclusion: Coordinate principal submatrix truncation fails to provide a coercive continuum floor because the low-energy")
+    print("   eigenspace is rotated and delocalized in the coordinate basis, developing soft directions on the complement.")
 
     # =========================================================================
     # TEST B: Low-Energy Mode Counting Function N(E; N)
@@ -277,11 +277,11 @@ def run_cell88() -> None:
 
     print("-" * 135)
     print("Key Diagnostic Summary for Test B:")
-    print("1. Deep Tunneling Sector (E < 0.001): Fixed cardinality of ~ 10-11 modes across all dimensions.")
-    print("2. Barrier Transition Sector (E < 0.50): Number of modes below 0.50 slowly grows: N(0.50) = 11 (N=20), 12 (N=28), 12 (N=32).")
+    print("1. Deep Tunneling Sector (E < 0.001): Cardinality slowly stabilizes: 8 -> 9 -> 10 -> 11 -> 11 modes.")
+    print("2. Barrier Transition Sector (E < 0.10): Cardinality is 10 -> 10 -> 11 -> 11 -> 12 modes.")
     print("3. Macroscopic Continuum Sector (E < 1.00): N(1.00) = 11 (N=16), 11 (N=20), 12 (N=24), 12 (N=28), 14 (N=32).")
-    print("4. Conclusion: The low-energy sector below E = 1.0 has cardinality bounded by ~ 14 at N = 32, demonstrating that")
-    print("   the low-energy spectrum is concentrated on a small, finite-dimensional subspace.")
+    print("4. Conclusion: The observed low-energy counting function is growing slowly over N <= 32, providing strong empirical")
+    print("   evidence for a finite-dimensional limiting low-energy sector, though not yet a formal proof.")
 
     # =========================================================================
     # TEST C: Deflated Subspace Min-Max Lower Bounds
@@ -306,7 +306,7 @@ def run_cell88() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test C:")
     print("1. Submatrix interlacing: lambda_1(Q_{cont}) <= E_{13} and lambda_2(Q_{cont}) <= E_{14} hold throughout.")
-    print("2. The submatrix spectrum provides an intrinsically coordinate-based lower bound system for the continuum spectrum.")
+    print("2. The submatrix spectrum reveals that multiple soft directions (lambda_2 collapses to 0.0118) develop in Q_{cont}.")
 
     # =========================================================================
     # TEST D: Modal Energy Decomposition across the Transition (N = 32)
@@ -338,14 +338,14 @@ def run_cell88() -> None:
 
     print("-" * 135)
     print("Key Diagnostic Summary for Test D:")
-    print("1. Transition Dynamics at N = 32:")
-    print("   - Mode 10: E_{10} = 2.1e-5 (Tunneling floor)")
-    print("   - Mode 11: E_{11} = 0.0381 (Jump ratio E_{11}/E_{10} ~ 1800)")
-    print("   - Mode 12: E_{12} = 0.5888 (Ratio E_{12}/E_{11} ~ 15.4)")
-    print("   - Mode 13: E_{13} = 0.8132 (Ratio E_{13}/E_{12} ~ 1.38)")
-    print("   - Mode 14: E_{14} = 1.0543 (Ratio E_{14}/E_{13} ~ 1.30)")
-    print("2. The ratio E_{l+1}/E_l drops precipitously from ~ 1800 at the barrier edge to ~ 1.38 at mode 13,")
-    print("   confirming that mode 13 has entered the regular, slow-growth continuum band.")
+    print("1. Transition Dynamics at N = 32 (Actual Computed Values):")
+    print("   - Mode 10: E_{10} = 1.237e-4 (Tunneling floor)")
+    print("   - Mode 11: E_{11} = 0.03869 (Jump ratio E_{11}/E_{10} ~ 313)")
+    print("   - Mode 12: E_{12} = 0.58886 (Ratio E_{12}/E_{11} ~ 15.2)")
+    print("   - Mode 13: E_{13} = 0.81323 (Ratio E_{13}/E_{12} ~ 1.38)")
+    print("   - Mode 14: E_{14} = 1.31739 (Ratio E_{14}/E_{13} ~ 1.62)")
+    print("2. The consecutive ratio E_{l+1}/E_l drops precipitously from ~ 313 at the barrier edge to ~ 1.38 at mode 13,")
+    print("   confirming that mode 13 marks the onset of the regular, slow-growth macroscopic continuum band.")
 
     print("\n" + "=" * 80)
     print("CELL 88 EXECUTION COMPLETE")
