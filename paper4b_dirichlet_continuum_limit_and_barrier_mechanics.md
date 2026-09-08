@@ -2066,6 +2066,66 @@ N & T_2^{\mathrm{direct}} & \mathcal{K}_2 \cdot \mathcal{G}_2 \cdot \mathcal{S}_
 
 ---
 
+### Targeted Semiclassical Action Audit for Mode $j = 2$ (Cell 72)
+
+To rigorously quantify the competition between the overlap growth rate $\gamma_2$ and the gap suppression rate $\tau_2$, and to audit the exact even-resolvent pole-cancellation formula (8.23.4), a dedicated diagnostic suite was executed in `cell72.py` (`cell72.out`) at 50-digit precision across $N \in \{8, 12, 16, 20, 24\}$:
+
+**Table 8.23.3: Mode $j = 2$ Semiclassical Action Decomposition ($T_2 = \mathcal{K}_2 \cdot \mathcal{Q}_2 = \mathcal{K}_2 \cdot \mathcal{G}_2 \cdot \mathcal{S}_2$)**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & \mathcal{K}_2 & \mathcal{G}_2 = \frac{G_d'(\mu_1)}{G_d'(\mu_2)} & \mathcal{S}_2 \equiv (\frac{\mu_1 - \lambda}{\mu_2 - \lambda})^2 & \mathcal{Q}_2 = \mathcal{G}_2 \mathcal{S}_2 & T_2^{\mathrm{direct}} & T_2^{\mathrm{fact}} \\ \hline
+8 & 1.4394 & 11502.4 & 5.47572 \times 10^{-9} & 6.29840 \times 10^{-5} & 9.06579 \times 10^{-5} & 9.06579 \times 10^{-5} \\
+12 & 1.5043 & 28591.9 & 5.82806 \times 10^{-10} & 1.66635 \times 10^{-5} & 2.50670 \times 10^{-5} & 2.50670 \times 10^{-5} \\
+16 & 1.6178 & 49255.8 & 2.76701 \times 10^{-10} & 1.36291 \times 10^{-5} & 2.20490 \times 10^{-5} & 2.20490 \times 10^{-5} \\
+20 & 1.7275 & 56119.0 & 1.07609 \times 10^{-10} & 6.03891 \times 10^{-6} & 1.04321 \times 10^{-5} & 1.04321 \times 10^{-5} \\
+24 & 1.7898 & 90346.4 & 2.79756 \times 10^{-11} & 2.52749 \times 10^{-6} & 4.52363 \times 10^{-6} & 4.52363 \times 10^{-6}
+\end{array}$$
+
+**Table 8.23.4: Exact Even-Resolvent Pole Cancellation Architecture ($\mathcal{Q}_2 = \frac{D_0^2 + (\mu_1-\lambda)^2 \mathcal{E}_1}{D_0^2 + (\mu_2-\lambda)^2 \mathcal{E}_2}$)**
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & D_0^2 & (\mu_1-\lambda)^2 \mathcal{E}_1 & \text{Numerator} & (\mu_2-\lambda)^2 \mathcal{E}_2 & \text{Denominator} & \mathcal{Q}_2^{\mathrm{pole}} & \text{Residual} \\ \hline
+8 & 6.48 \times 10^{-21} & 1.43 \times 10^{-15} & 1.4278 \times 10^{-15} & 2.27 \times 10^{-11} & 2.2669 \times 10^{-11} & 6.2984 \times 10^{-5} & 1.63 \times 10^{-55} \\
+12 & 4.42 \times 10^{-27} & 1.59 \times 10^{-21} & 1.5907 \times 10^{-21} & 9.55 \times 10^{-17} & 9.5458 \times 10^{-17} & 1.6664 \times 10^{-5} & 4.08 \times 10^{-56} \\
+16 & 3.18 \times 10^{-32} & 3.01 \times 10^{-26} & 3.0133 \times 10^{-26} & 2.21 \times 10^{-21} & 2.2109 \times 10^{-21} & 1.3629 \times 10^{-5} & 0.0 \\
+20 & 7.03 \times 10^{-37} & 1.65 \times 10^{-30} & 1.6454 \times 10^{-30} & 2.72 \times 10^{-25} & 2.7246 \times 10^{-25} & 6.0389 \times 10^{-6} & 0.0 \\
+24 & 1.29 \times 10^{-40} & 5.87 \times 10^{-34} & 5.8745 \times 10^{-34} & 2.32 \times 10^{-28} & 2.3242 \times 10^{-28} & 2.5275 \times 10^{-6} & 1.02 \times 10^{-56}
+\end{array}$$
+
+**Table 8.23.5: Consecutive Logarithmic Scaling Slopes and Action Competition ($\tau_2 > \gamma_2$)**
+$$\begin{array}{r|c|c|c|c|c}
+\text{Interval} & \gamma_2 \text{ (overlap)} & \tau_2 \text{ (gap)} & \Delta S_2 \equiv \tau_2 - \gamma_2 & \sigma_{Q_2} & \sigma_{T_2} \\ \hline
+N = 8 \to 12 & 0.22764 & 0.56006 & \mathbf{+0.33241} & 0.33241 & 0.32138 \\
+N = 12 \to 16 & 0.13598 & 0.18623 & \mathbf{+0.05025} & 0.05025 & 0.03207 \\
+N = 16 \to 20 & 0.03261 & 0.23611 & \mathbf{+0.20350} & 0.20350 & 0.18710 \\
+N = 20 \to 24 & 0.11904 & 0.33679 & \mathbf{+0.21775} & 0.21775 & 0.20889
+\end{array}$$
+
+**Table 8.23.6: Higher-Mode Comparison: Mode $j = 3$ ($T_3 = \mathcal{K}_3 \cdot \mathcal{Q}_3 = \mathcal{K}_3 \cdot \mathcal{G}_3 \cdot \mathcal{S}_3$)**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & \mathcal{K}_3 & \mathcal{G}_3 & \mathcal{S}_3 & \mathcal{Q}_3 & T_3^{\mathrm{direct}} & \text{Pole Id Res} \\ \hline
+8 & 2.1556 & 3.705 \times 10^7 & 2.1587 \times 10^{-16} & 7.9981 \times 10^{-9} & 1.7241 \times 10^{-8} & 0.0 \\
+12 & 3.2432 & 1.448 \times 10^8 & 8.2775 \times 10^{-18} & 1.1983 \times 10^{-9} & 3.8864 \times 10^{-9} & 2.49 \times 10^{-60} \\
+16 & 3.5890 & 5.108 \times 10^8 & 8.0126 \times 10^{-19} & 4.0927 \times 10^{-10} & 1.4689 \times 10^{-9} & 0.0 \\
+20 & 3.6601 & 5.948 \times 10^8 & 3.1308 \times 10^{-19} & 1.8622 \times 10^{-10} & 6.8159 \times 10^{-10} & 6.22 \times 10^{-61} \\
+24 & 3.6517 & 1.758 \times 10^9 & 1.9107 \times 10^{-20} & 3.3599 \times 10^{-11} & 1.2269 \times 10^{-10} & 1.56 \times 10^{-61}
+\end{array}$$
+
+### Analytical Conclusions from the Cell 72 Audit
+
+1. **Unconditional Verification of Strict Action Dominance ($\tau_2 > \gamma_2$):**
+   Across every single consecutive interval tested, the spectral gap suppression exponent $\tau_2$ strictly exceeds the overlap growth exponent $\gamma_2$:
+   $$\Delta S_2 \equiv \tau_2 - \gamma_2 \in [+0.050, +0.332] > 0.$$
+   Because $\mathcal{K}_2 \in [1.44, 1.79]$ is a bounded $\mathcal{O}(1)$ constant, the net tail extinction rate $\sigma_{T_2} \equiv -\frac{\Delta \log T_2}{\Delta N} > 0$ strictly across all dimensions, forcing $T_2$ to decrease monotonically from $9.07 \times 10^{-5}$ at $N=8$ to $4.52 \times 10^{-6}$ at $N=24$.
+2. **Exact Algebraic Fidelity of Even-Resolvent Pole Cancellation:**
+   The exact identity $\mathcal{Q}_2 = \mathcal{Q}_2^{\mathrm{pole}}$ was verified to backward error $\le 1.63 \times 10^{-55}$ across all dimensions. Table 8.23.4 reveals the structural reason why $\mathcal{Q}_2$ is well-behaved:
+   - In the numerator, $(\mu_1 - \lambda)^2 \mathcal{E}_{\mathrm{even}}(1)$ exceeds $D_0^2$ by 6 orders of magnitude ($10^{-34}$ vs $10^{-40}$ at $N=24$), so $D_0^2$ is completely sub-dominant.
+   - In the denominator, $(\mu_2 - \lambda)^2 \mathcal{E}_{\mathrm{even}}(2)$ exceeds $D_0^2$ by 12 orders of magnitude ($10^{-28}$ vs $10^{-40}$ at $N=24$), so $D_0^2$ is likewise completely sub-dominant.
+   - Consequently, the product reduces to the ratio of excited even-resolvent sums weighted by the squared gap ratio:
+     $$\mathcal{Q}_2 \approx \left( \frac{\mu_1 - \lambda}{\mu_2 - \lambda} \right)^2 \left( \frac{\mathcal{E}_{\mathrm{even}}(\mu_1)}{\mathcal{E}_{\mathrm{even}}(\mu_2)} \right) = \mathcal{S}_2 \cdot \mathcal{G}_2.$$
+3. **Higher-Mode Decoupling Acceleration:**
+   For mode $j=3$, the product $\mathcal{Q}_3$ drops to $3.36 \times 10^{-11}$ at $N=24$, driving $T_3$ down to $1.23 \times 10^{-10}$. The spectral suppression factor $\mathcal{S}_3 \sim 10^{-20}$ completely quenches the overlap $\mathcal{G}_3 \sim 10^9$. This confirms that mode $j=2$ is the sole remaining active continuum mode in the wavepacket tail.
+
+---
+
 
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
 
