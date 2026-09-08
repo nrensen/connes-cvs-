@@ -2152,6 +2152,12 @@ $$\boxed{T_j = \mathcal{K}_j \frac{H(\mu_1)}{H(\mu_j)}.} \tag{8.24.3}$$
 $$H(\mu_j) \ge d_k^2 \left( \frac{\mu_j - \lambda}{E_k - \mu_j} \right)^2.$$
 *In particular, let $k_{\mathrm{near}}(j) \in \{1, \dots, N\}$ denote the even index that minimizes the spectral distance $|E_k - \mu_j|$ to the odd mode $\mu_j$. Then:*
 $$\boxed{H(\mu_j) \ge d_{k_{\mathrm{near}}}^2 \left( \frac{\mu_j - \lambda}{E_{k_{\mathrm{near}}} - \mu_j} \right)^2.} \tag{8.24.4}$$
+*While (8.24.4) provides a rigorous, unconditional positive lower bound, it captures only $\approx 40\%$ of $H(\mu_2)$ across the tested dimensions and is not a sharp single-pole asymptotic law.*
+
+**Part IV (Local Two-Pole Clustering Architecture — Empirical Law & Analytical Target):**
+*Across the tested discrete dimensions, the regularized Stieltjes function $H(\mu_j)$ is overwhelmingly concentrated in the adjacent interlaced even bracket $E_j < \mu_j < E_{j+1}$ ($j \ge 1$), forming an exact two-pole cluster:*
+$$\boxed{H(\mu_j) \approx H_j(\mu_j) + H_{j+1}(\mu_j) = d_j^2 \left( \frac{\mu_j - \lambda}{\mu_j - E_j} \right)^2 + d_{j+1}^2 \left( \frac{\mu_j - \lambda}{E_{j+1} - \mu_j} \right)^2.} \tag{8.24.5}$$
+*For mode $j=2$, the bracketing pair $\{E_2, E_3\}$ accounts for $99.9973\%$ of $H(\mu_2)$ at $N=24$ (with the higher pole $E_3$ contributing $60.44\%$ and the nearer lower pole $E_2$ contributing $39.56\%$, while all other poles combined contribute less than $6.3 \times 10^{-33}$). Similarly, for mode $j=3$, the bracketing pair $\{E_3, E_4\}$ accounts for $99.996\%$ of $H(\mu_3)$.*
 
 ---
 
@@ -2173,7 +2179,11 @@ Substituting into $T_j = \mathcal{K}_j \mathcal{Q}_j$ gives (8.24.3). This compl
 **3. Proof of Part III (Nearest-Pole Interlacing Lower Bound):**
 Since $D_0^2 > 0$ and $d_k^2 (\frac{\mu_j - \lambda}{E_k - \mu_j})^2 \ge 0$ for all $k$, dropping all terms except $k = k_{\mathrm{near}}$ yields the unconditional lower bound:
 $$H(\mu_j) > d_{k_{\mathrm{near}}}^2 \left( \frac{\mu_j - \lambda}{E_{k_{\mathrm{near}}} - \mu_j} \right)^2.$$
-$\blacksquare$
+
+**4. Proof of Part IV (Two-Pole Cluster Enclosure):**
+Retaining the two non-negative terms $k = j$ and $k = j+1$ yields the exact lower bound:
+$$H(\mu_j) \ge H_j(\mu_j) + H_{j+1}(\mu_j) = d_j^2 \left( \frac{\mu_j - \lambda}{\mu_j - E_j} \right)^2 + d_{j+1}^2 \left( \frac{\mu_j - \lambda}{E_{j+1} - \mu_j} \right)^2.$$
+The assertion that the residual $\sum_{k \notin \{j, j+1\}} H_k(\mu_j) = o(H(\mu_j))$ accounts for $< 0.003\%$ of the sum is verified empirically across all tested dimensions in Cell 73. $\blacksquare$
 
 ---
 
@@ -2186,16 +2196,87 @@ $\blacksquare$
    At $N=24$, $H(\mu_1) = 5.8745 \times 10^{-34}$ and $H(\mu_2) = 2.3242 \times 10^{-28}$, directly yielding $\mathcal{Q}_2 = 2.5275 \times 10^{-6}$.
 
 2. **The Wavepacket Extinction Programme via $H(\mu)$:**
-   Proving tail extinction $T_j \to 0$ in the continuum limit now reduces to a single, mathematically clean spectral question:
-   $$\frac{H(\mu_1)}{H(\mu_j)} \longrightarrow 0 \qquad (j \ge 2) \quad \Longleftrightarrow \quad \frac{H(\mu_2)}{H(\mu_1)} \longrightarrow \infty.$$
-   Because $\mu_1$ is exponentially close to $\lambda$ ($\mu_1 - \lambda \sim 10^{-17}$ at $N=24$), the ground-state factor $(\mu_1 - \lambda)^2$ severely suppresses all excited pole terms $k \ge 1$ in $H(\mu_1)$, leaving $H(\mu_1)$ tightly controlled. Conversely, for mode $j=2$, the tunneling gap $(\mu_2 - \lambda)^2 \sim 10^{-11}$ is dramatically larger, while the denominator $(E_k - \mu_2)^2$ experiences resonant amplification from the nearest interlaced even eigenvalues $E_1$ and $E_2$.
+   For the primary excited tail mode $j=2$, tail extinction reduces cleanly to inverse $H$-growth:
+   $$\boxed{\mathcal{Q}_2 \longrightarrow 0 \quad \Longleftrightarrow \quad \frac{H(\mu_2)}{H(\mu_1)} \longrightarrow \infty.}$$
+   Because mode $j=2$ carries $99.997\%$ of the wavepacket tail $\sum_{j \ge 2} T_j$, establishing $H(\mu_2)/H(\mu_1) \to \infty$ quenches the dominant tail obstruction. To establish full bound-state wavepacket tail extinction $\sum_{j \ge 2} T_j \to 0$ in the continuum limit, two additional conditions are required:
+   - *Uniform Higher-Mode Growth:* $\forall j \ge 2$, $\frac{H(\mu_j)}{H(\mu_1)} \to \infty$ with sufficient rate to ensure $\sum_{j \ge 2} \frac{H(\mu_1)}{H(\mu_j)} < \infty$.
+   - *Bounded Coordinate Kinetic Ratios:* $\mathcal{K}_j \equiv \frac{\|K u_j\|^2}{\|K u_1\|^2} = \Theta(1)$, which is benign numerically ($\mathcal{K}_2 \in [1.44, 1.79]$, $\mathcal{K}_3 \in [2.16, 3.65]$).
 
-3. **Empirical Motivation for the `cell73.py` Diagnostic Audit:**
-   To turn the lower bound (8.24.4) into an analytical asymptotic proof, one must determine:
-   - Which even poles $k \in \{1, \dots, N\}$ dominate the sum $H(\mu_j)$.
-   - How the boundary weights $d_k^2$ scale with $N$ across the spectrum.
-   - The exact scaling of the interlacing distance $|E_{k_{\mathrm{near}}} - \mu_j|$.
-   This term-by-term pole audit is executed in `cell73.py`.
+3. **Discovery of the Two-Pole Bracketing Architecture:**
+   Cell 73 audited the term-by-term pole distribution $H_k(\mu_2)$ across $k \in \{0, \dots, N\}$. Rather than single-pole dominance, the data revealed a striking **two-pole bracketing phenomenon**:
+   - The spectral interlacing order $E_0 < \mu_0 < E_1 < \mu_1 < E_2 < \mu_2 < E_3 < \mu_3 < \dots$ brackets $\mu_2$ strictly between $E_2$ and $E_3$:
+     $$E_2 < \mu_2 < E_3.$$
+   - The left neighbour $E_2$ is the nearest pole ($k_{\mathrm{near}} = 2$), contributing $39.56\%$ of $H(\mu_2)$.
+   - The right neighbour $E_3$ is the dominant pole ($k_{\mathrm{dom}} = 3$), contributing $60.44\%$ of $H(\mu_2)$, because boundary weight growth $d_3^2 \gg d_2^2$ outweighs the larger distance $(E_3 - \mu_2)^2$.
+   - Together, the bracketing pair $\{E_2, E_3\}$ accounts for **$99.9973\%$** of $H(\mu_2)$ at $N=24$, with all other poles contributing only $6.3 \times 10^{-33}$.
+   - The same bracketing governs $\mu_3 \in (E_3, E_4)$, where $\{E_3, E_4\}$ accounts for **$99.996\%$** of $H(\mu_3)$.
+
+---
+
+### Numerical Audit Across Discrete Dimensions (Cell 73)
+
+The regularized Stieltjes function $H(\mu)$, the exact modal ratio $\mathcal{Q}_j = H(\mu_1)/H(\mu_j)$, and the term-by-term pole distribution were audited at 50-digit precision in `cell73.py` (`cell73.out`):
+
+**Table 8.24.1: Positive Regularized Stieltjes Function $H(\mu)$ and Exact Modal Ratios**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & H(\mu_1) & H(\mu_2) & \mathcal{Q}_2 = \frac{H(\mu_1)}{H(\mu_2)} & R_{21} \equiv \frac{H(\mu_2)}{H(\mu_1)} & \mathcal{Q}_3 = \frac{H(\mu_1)}{H(\mu_3)} & \text{Max Id Res} \\ \hline
+8 & 1.42779 \times 10^{-15} & 2.26691 \times 10^{-11} & 6.29840 \times 10^{-5} & 15877.1 & 7.99810 \times 10^{-9} & 3.23 \times 10^{-39} \\
+12 & 1.59067 \times 10^{-21} & 9.54582 \times 10^{-17} & 1.66635 \times 10^{-5} & 60011.3 & 1.19833 \times 10^{-9} & 2.33 \times 10^{-33} \\
+16 & 3.01331 \times 10^{-26} & 2.21094 \times 10^{-21} & 1.36291 \times 10^{-5} & 73372.4 & 4.09273 \times 10^{-10} & 1.35 \times 10^{-27} \\
+20 & 1.64538 \times 10^{-30} & 2.72464 \times 10^{-25} & 6.03891 \times 10^{-6} & 165592.7 & 1.86220 \times 10^{-10} & 1.89 \times 10^{-24} \\
+24 & 5.87448 \times 10^{-34} & 2.32423 \times 10^{-28} & 2.52749 \times 10^{-6} & 395649.1 & 3.35987 \times 10^{-11} & 1.09 \times 10^{-20}
+\end{array}$$
+
+**Table 8.24.2: Term-by-Term Pole Decomposition of $H(\mu_2)$**
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & H_0 = D_0^2 & H_1 \text{ (pole 1)} & H_2 \text{ (pole 2)} & H_3 \text{ (pole 3)} & H_4 \text{ (pole 4)} & H_{\ge 5} & H_{\mathrm{total}}(\mu_2) \\ \hline
+8 & 6.48 \times 10^{-21} & 6.18 \times 10^{-16} & 1.051 \times 10^{-11} & 1.215 \times 10^{-11} & 3.80 \times 10^{-15} & 1.88 \times 10^{-17} & 2.2669 \times 10^{-11} \\
+12 & 4.42 \times 10^{-27} & 6.99 \times 10^{-22} & 4.229 \times 10^{-17} & 5.316 \times 10^{-17} & 1.10 \times 10^{-20} & 4.02 \times 10^{-24} & 9.5458 \times 10^{-17} \\
+16 & 3.18 \times 10^{-32} & 1.33 \times 10^{-26} & 9.291 \times 10^{-22} & 1.282 \times 10^{-21} & 1.17 \times 10^{-25} & 1.45 \times 10^{-29} & 2.2109 \times 10^{-21} \\
+20 & 7.03 \times 10^{-37} & 7.27 \times 10^{-31} & 1.099 \times 10^{-25} & 1.626 \times 10^{-25} & 1.33 \times 10^{-29} & 5.74 \times 10^{-34} & 2.7246 \times 10^{-25} \\
+24 & 1.29 \times 10^{-40} & 2.60 \times 10^{-34} & 9.194 \times 10^{-29} & 1.405 \times 10^{-28} & 6.03 \times 10^{-33} & 2.22 \times 10^{-37} & 2.3242 \times 10^{-28}
+\end{array}$$
+
+**Table 8.24.3: Pole Shares (%), Dominance, and Nearest-Pole Bound for Mode $j = 2$**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & k_{\mathrm{dom}} & \text{Share}_{\mathrm{dom}}(\%) & k_{\mathrm{near}} & |E_{\mathrm{near}} - \mu_2| & H_{k_{\mathrm{near}}} & \text{Bound Ratio } \frac{H(\mu_2)}{H_{k_{\mathrm{near}}}} \\ \hline
+8 & 3 & 53.62\% & 2 & 1.8588 \times 10^{-11} & 1.0510 \times 10^{-11} & 2.1569 \\
+12 & 3 & 55.69\% & 2 & 4.8888 \times 10^{-17} & 4.2289 \times 10^{-17} & 2.2573 \\
+16 & 3 & 57.97\% & 2 & 7.6406 \times 10^{-22} & 9.2908 \times 10^{-22} & 2.3797 \\
+20 & 3 & 59.67\% & 2 & 6.1473 \times 10^{-26} & 1.0988 \times 10^{-25} & 2.4797 \\
+24 & 3 & 60.44\% & 2 & 5.5591 \times 10^{-29} & 9.1939 \times 10^{-29} & 2.5280
+\end{array}$$
+
+**Table 8.24.4: Comparative Pole Architecture for Mode $j = 3$**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & k_{\mathrm{dom}} & \text{Share}_{\mathrm{dom}}(\%) & k_{\mathrm{near}} & |E_{\mathrm{near}} - \mu_3| & H_{k_{\mathrm{near}}} & \text{Bound Ratio } \frac{H(\mu_3)}{H_{k_{\mathrm{near}}}} \\ \hline
+8 & 4 & 57.84\% & 3 & 9.2951 \times 10^{-8} & 7.4774 \times 10^{-8} & 2.3874 \\
+12 & 4 & 61.18\% & 3 & 4.0756 \times 10^{-13} & 5.1503 \times 10^{-13} & 2.5773 \\
+16 & 4 & 56.69\% & 3 & 1.4134 \times 10^{-17} & 3.1878 \times 10^{-17} & 2.3096 \\
+20 & 4 & 52.94\% & 3 & 1.1340 \times 10^{-21} & 4.1575 \times 10^{-21} & 2.1252 \\
+24 & 4 & 51.21\% & 3 & 2.1195 \times 10^{-24} & 8.5297 \times 10^{-24} & 2.0498
+\end{array}$$
+
+**Table 8.24.5: Consecutive Logarithmic Growth Rates for Inverse Ratios $R_{j1} = H(\mu_j)/H(\mu_1)$**
+$$\begin{array}{r|c|c|c|c|c}
+\text{Interval} & \Delta N & R_{21}(\text{start}) & R_{21}(\text{end}) & \sigma_{H_{21}} & \sigma_{H_{31}} \\ \hline
+N = 8 \to 12 & 4 & 15877.1 & 60011.3 & 0.33241 & 0.47457 \\
+N = 12 \to 16 & 4 & 60011.3 & 73372.4 & 0.05025 & 0.26858 \\
+N = 16 \to 20 & 4 & 73372.4 & 165592.7 & 0.20350 & 0.19686 \\
+N = 20 \to 24 & 4 & 165592.7 & 395649.1 & 0.21775 & 0.42811
+\end{array}$$
+
+### Analytical Conclusions from the Cell 73 Audit
+
+1. **Unconditional Numerical Fidelity of $H(\mu)$:**
+   The direct spectral summation $D_0^2 + \sum_{k=1}^N d_k^2 (\frac{\mu - \lambda}{E_k - \mu})^2$ and the regularized Stieltjes derivative $(\mu - \lambda)^2 G_d'(\mu)$ agree to backward error $\le 2.06 \times 10^{-84}$. The scale-free modal identity $\mathcal{Q}_j = H(\mu_1)/H(\mu_j)$ and tail identity $T_j = \mathcal{K}_j \mathcal{Q}_j$ were confirmed to $< 1.1 \times 10^{-20}$ across all dimensions.
+2. **Empirical Refutation of Single-Pole Dominance:**
+   While the nearest-pole lower bound (8.24.4) is mathematically rigorous, Table 8.24.3 shows that the nearest pole $E_2$ captures only $39.56\%$ of $H(\mu_2)$ at $N=24$. The dominant contribution comes from the adjacent higher pole $E_3$ ($60.44\%$).
+3. **Emergence of the Two-Pole Bracketing Law:**
+   The adjacent pair $\{E_2, E_3\}$ captures $99.9973\%$ of $H(\mu_2)$, while $\{E_3, E_4\}$ captures $99.996\%$ of $H(\mu_3)$. The entire function $H(\mu_j)$ is therefore tightly enclosed by the two interlaced even poles bracketing $\mu_j$:
+   $$H(\mu_j) \approx d_j^2 \left( \frac{\mu_j - \lambda}{\mu_j - E_j} \right)^2 + d_{j+1}^2 \left( \frac{\mu_j - \lambda}{E_{j+1} - \mu_j} \right)^2.$$
+4. **Modewise Separation and Semiclassical Growth:**
+   The inverse filtering ratio $R_{21}(N) \equiv H(\mu_2)/H(\mu_1)$ grows monotonically from $1.59 \times 10^4$ to $3.96 \times 10^5$, forcing $\mathcal{Q}_2$ down to $2.53 \times 10^{-6}$. For mode $j=3$, $R_{31}$ reaches $2.98 \times 10^{10}$, driving $\mathcal{Q}_3$ down to $3.36 \times 10^{-11}$. The rate of separation accelerates further up the ladder, isolating the analytical objective strictly to the local two-pole architecture of mode $j=2$ (`cell74.py`, Milestone M21).
 
 ---
 
