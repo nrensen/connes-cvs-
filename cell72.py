@@ -107,90 +107,35 @@ def solve_parity_eigensystems(
     list[mp.mpf], mp.matrix
 ]:
     """Compute even and odd spectra and eigenvectors."""
-    E_basis, O_basis = full_parity_basis(N)
+    E, O = full_parity_basis(N)
 
-    # Project full Galerkin matrix onto parity subspaces
-    Q_even = E_basis.T * Q_full * E_basis
-    Q_odd = O_basis.T * Q_full * O_basis
-
-    # Symmetrize to eliminate any numerical asymmetry
+    Q_even = E.T * Q_full * E
     Q_even = mp.mpf('0.5') * (Q_even + Q_even.T)
+
+    Q_odd = O.T * Q_full * O
     Q_odd = mp.mpf('0.5') * (Q_odd + Q_odd.T)
 
-    # Even eigensystem
-    E_vals_raw, E_vecs_raw = mp.eigsy(Q_even)
-    even_pairs = sorted(zip([mp.mpf(x) for x in E_vals_raw], range(N + 1)), key=lambda p: p[0])
-    even_evals = [p[0] for p in even_pairs]
-    even_evecs = mp.matrix(N + 1, N + 1)
-    for new_col, (_, old_col) in enumerate(even_pairs):
-        for row in range(N + 1):
-            even_evecs[row, new_col] = E_vecs_raw[row, old_col]
+    evals_e, V_e = mp.eigsy(Q_even)
+    evals_o, V_o = mp.eigsy(Q_odd)
 
-    # Odd eigensystem
-    O_vals_raw, O_vecs_raw = mp.eigsy(Q_odd)
-    odd_pairs = sorted(zip([mp.mpf(x) for x in O_vals_raw], range(N)), key=lambda p: p[0])
-    odd_evals = [p[0] for p in odd_pairs]
-    odd_evecs = mp.matrix(N, N)
-    for new_col, (_, old_col) in enumerate(odd_pairs):
-        for row in range(N):
-            odd_evecs[row, new_col] = O_vecs_raw[row, old_col]
+    # Sort even
+    idx_e = sorted(range(N + 1), key=lambda i: evals_e[i])
+    sorted_evals_e = [evals_e[i] for i in idx_e]
+    sorted_V_e = mp.matrix(N + 1, N + 1)
+    for col_idx, orig_col in enumerate(idx_e):
+        for row_idx in range(N + 1):
+            sorted_V_e[row_idx, col_idx] = V_e[row_idx, orig_col]
 
-    # Ground state and eigenvalue
-    lam_0 = even_evals[0]
-    c_even = mp.matrix(N + 1, 1)
-    for row in range(N + 1):
-        c_even[row, 0] = even_evecs[row, 0]
+    # Sort odd
+    idx_o = sorted(range(N), key=lambda i: evals_o[i])
+    sorted_evals_o = [evals_o[i] for i in idx_o]
+    sorted_V_o = mp.matrix(N, N)
+    for col_idx, orig_col in enumerate(idx_o):
+        for row_idx in range(N):
+            sorted_V_o[row_idx, col_idx] = V_o[row_idx, orig_col]
 
-    # Full ground state vector in R^{2N+1}
-    c_full = E_basis * c_even
-    if c_full[N, 0] < 0:
-        c_full = -c_full
-        c_even = -c_even
-        for row in range(N + 1):
-            even_evecs[row, 0] = -even_evecs[row, 0]
-
-    return lam_0, c_full, Q_even, even_evals, even_evecs, odd_evals, odd_evecs
-
-
-def compute_coordinate_derivative_norms(
-    odd_evecs: mp.matrix, N: int
-) -> list[mp.mpf]:
-    """
-    Compute discrete coordinate kinetic energy ||K u_j||^2 for each odd mode.
-    In the odd basis e_{m-1}^O = (e_m - e_{-m})/sqrt(2), K is diagonal:
-    K e_{m-1}^O = m e_{m-1}^O.
-    Thus ||K u_j||^2 = sum_{m=1}^N m^2 (u_{j, m-1})^2.
-    """
-    ke_norms = []
-    for j in range(N):
-        norm_sq = mp.mpf(0)
-        for m in range(1, N + 1):
-            coord_val = odd_evecs[m - 1, j]
-            norm_sq += (mp.mpf(m) ** 2) * (coord_val ** 2)
-        ke_norms.append(norm_sq)
-    return ke_norms
-
-
-def compute_stieltjes_derivatives(
-    even_evals: list[mp.mpf],
-    d_coeffs: list[mp.mpf],
-    mu_val: mp.mpf,
-    N: int
-) -> tuple[mp.mpf, mp.mpf]:
-    """
-    Compute full Stieltjes derivative:
-        G_d'(mu) = sum_{k=0}^N d_k^2 / (mu - E_k)^2
-    and excited even-resolvent sum (k >= 1):
-        E_even(mu) = sum_{k=1}^N d_k^2 / (mu - E_k)^2.
-    """
-    gp_full = mp.mpf(0)
-    e_even = mp.mpf(0)
-    for k in range(N + 1):
-        term = (d_coeffs[k] ** 2) / ((mu_val - even_evals[k]) ** 2)
-        gp_full += term
-        if k >= 1:
-            e_even += term
-    return gp_full, e_even
+    lam_0 = sorted_evals_e[0]
+    return lam_0, E, O, sorted_evals_e, sorted_V_e, sorted_evals_o, sorted_V_o
 
 
 # -----------------------------------------------------------------------------
@@ -211,55 +156,76 @@ def run_cell72() -> None:
         t0 = time.time()
 
         # Retrieve cached Galerkin matrix
-        Q_full = get_galerkin_matrix(C_PARAM, L_PARAM, N, T_PARAM, GROUND_DPS)
+        Q_full, _ = get_galerkin_matrix(
+            c=C_PARAM,
+            N=N,
+            T=T_PARAM,
+            dps=GROUND_DPS,
+            verbose=False,
+        )
 
         # Solve parity eigensystems
-        lam_0, c_full, Q_even, even_evals, even_evecs, odd_evals, odd_evecs = solve_parity_eigensystems(Q_full, N)
+        lam_0, E, O, evals_e, V_e, evals_o, V_o = solve_parity_eigensystems(Q_full, N)
 
-        # Dirichlet constant vector d = (1, ..., 1)^T in R^{2N+1}
-        dim = 2 * N + 1
-        d_full = mp.matrix([mp.mpf(1)] * dim)
-        E_basis, O_basis = full_parity_basis(N)
-        d_even = E_basis.T * d_full
+        # Ground state c in R^{N+1}
+        c_even = V_e[:, 0]
 
-        # Even boundary overlaps d_k = <d, u_k^{even}>
-        d_coeffs = []
-        for k in range(N + 1):
-            u_k = even_evecs[:, k]
-            val = mp.mpf(0)
-            for row in range(N + 1):
-                val += d_even[row, 0] * u_k[row, 0]
-            d_coeffs.append(val)
+        # Boundary vector d in R^{N+1}: d_even = (1, sqrt(2), ..., sqrt(2))^T
+        d_even = mp.matrix(N + 1, 1)
+        d_even[0, 0] = mp.mpf(1)
+        for m in range(1, N + 1):
+            d_even[m, 0] = mp.sqrt(2)
 
-        D_0 = d_coeffs[0]
+        D_0 = sum(d_even[m, 0] * c_even[m, 0] for m in range(N + 1))
         D_0_sq = D_0 ** 2
 
-        # Odd source overlaps a_j = <psi, u_j>
-        e_0 = mp.matrix(dim, 1)
-        e_0[N, 0] = mp.mpf(1)
-        Q_e0 = Q_full * e_0
-        psi_full = mp.matrix(dim, 1)
-        for idx in range(dim):
-            m = idx - N
-            psi_full[idx, 0] = mp.mpf(m) * Q_e0[idx, 0]
-        psi_odd = O_basis.T * psi_full
+        # Boundary overlaps in even sector: d_k = <u_k^{even}, d>
+        d_k_list: list[mp.mpf] = []
+        for k in range(N + 1):
+            d_val = sum(d_even[m, 0] * V_e[m, k] for m in range(N + 1))
+            d_k_list.append(d_val)
 
-        a_coeffs = []
+        # Source vector psi = K Q e_0 on R^{2N+1}, mapped to H_odd via O
+        # psi_full[N + m] = m * Q_full[N + m, N], psi_full[N - m] = -m * Q_full[N - m, N]
+        # In odd basis: psi_odd[m-1] = sqrt(2) * m * Q_full[N + m, N]
+        psi_odd = mp.matrix(N, 1)
+        for m in range(1, N + 1):
+            psi_odd[m - 1, 0] = mp.sqrt(2) * m * Q_full[N + m, N]
+
+        # Mode overlaps in odd sector: a_j = <psi, u_j>
+        a_j_list: list[mp.mpf] = []
         for j in range(N):
-            u_j = odd_evecs[:, j]
-            val = mp.mpf(0)
-            for row in range(N):
-                val += psi_odd[row, 0] * u_j[row, 0]
-            a_coeffs.append(val)
+            a_val = sum(psi_odd[m - 1, 0] * V_o[m - 1, j] for m in range(1, N + 1))
+            a_j_list.append(a_val)
 
-        # Coordinate kinetic energy norms
-        ke_norms = compute_coordinate_derivative_norms(odd_evecs, N)
+        # Coordinate transition dipoles b_{0j} = <c, K u_j>
+        b_0j_list: list[mp.mpf] = []
+        for j in range(N):
+            b_j = sum(c_even[m, 0] * m * V_o[m - 1, j] for m in range(1, N + 1))
+            b_0j_list.append(b_j)
+
+        # Coordinate kinetic energies: ||K u_j||^2 = sum_{m=1}^N m^2 (u_{j, m-1})^2
+        ke_list: list[mp.mpf] = []
+        for j in range(N):
+            ke_val = sum((m ** 2) * (V_o[m - 1, j] ** 2) for m in range(1, N + 1))
+            ke_list.append(ke_val)
+
+        # Stieltjes derivatives and excited even-resolvent sums
+        g_prime_list: list[mp.mpf] = []
+        e_even_list: list[mp.mpf] = []
+        for j in range(N):
+            mu_j = evals_o[j]
+            gp = sum((d_k_list[k] ** 2) / ((mu_j - evals_e[k]) ** 2) for k in range(N + 1))
+            g_prime_list.append(gp)
+            e_ev = sum((d_k_list[k] ** 2) / ((mu_j - evals_e[k]) ** 2) for k in range(1, N + 1))
+            e_even_list.append(e_ev)
 
         # Mode 1 reference values
-        gap_1 = odd_evals[1] - lam_0
-        ke_1 = ke_norms[1]
-        gp_1, e_even_1 = compute_stieltjes_derivatives(even_evals, d_coeffs, odd_evals[1], N)
-        b_01 = a_coeffs[1] * D_0 / gap_1
+        gap_1 = evals_o[1] - lam_0
+        ke_1 = ke_list[1]
+        gp_1 = g_prime_list[1]
+        e_even_1 = e_even_list[1]
+        b_01 = b_0j_list[1]
         b_01_sq = b_01 ** 2
 
         # Numerator of pole cancellation identity
@@ -271,10 +237,11 @@ def run_cell72() -> None:
             if j >= N:
                 continue
 
-            gap_j = odd_evals[j] - lam_0
-            ke_j = ke_norms[j]
-            gp_j, e_even_j = compute_stieltjes_derivatives(even_evals, d_coeffs, odd_evals[j], N)
-            b_0j = a_coeffs[j] * D_0 / gap_j
+            gap_j = evals_o[j] - lam_0
+            ke_j = ke_list[j]
+            gp_j = g_prime_list[j]
+            e_even_j = e_even_list[j]
+            b_0j = b_0j_list[j]
             b_0j_sq = b_0j ** 2
 
             # Direct tail ratio
