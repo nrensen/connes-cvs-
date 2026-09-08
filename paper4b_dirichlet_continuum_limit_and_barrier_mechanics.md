@@ -2732,19 +2732,19 @@ N & S_2 \text{ Total} & \text{Right Neighbor } (k=3) \text{ Share} & \text{Left 
 
 ---
 
-### Corollary 8.26.1: The One-Sided Stieltjes Displacement Bound and Closed Remote Estimate
+### Corollary 8.26.1: Ground-Interval Displacement Bound and Conditional Closed Remote Estimate
 
-The dominance of positive terms in $S_\ell$ yields a remarkable algebraic feedback loop that eliminates the unknown Stieltjes displacement $\delta_\ell$ in favor of the boundary-weight amplification ratio $\alpha_\ell \equiv d_{\ell+1}^2 / d_\ell^2$:
+The dominance of positive terms in $S_\ell$ provides the algebraic mechanism connecting the unknown Stieltjes displacement $\delta_\ell$ to the boundary-weight amplification ratio $\alpha_\ell \equiv d_{\ell+1}^2 / d_\ell^2$:
 
-**Corollary 8.26.1 (The One-Sided Displacement Bound and Closed Remote Estimate).**
+**Corollary 8.26.1 (Ground-Interval Displacement Bound and Conditional Closed Remote Estimate).**
 *Under the conditions of Proposition 8.26:*
 1. *(Unconditional Ground-Interval Bound): For $\ell = 0$, all terms in the Stieltjes displacement sum are strictly positive, yielding unconditionally:*
    $$\boxed{\delta_0 < \frac{\Delta_0}{\alpha_0}, \qquad \alpha_0 \equiv \frac{d_1^2}{d_0^2}, \quad \Delta_0 \equiv E_1 - E_0.}$$
-2. *(General Bound Under Positive Dominance): For any mode $\ell \ge 1$ where the negative sum $N_\ell \equiv \sum_{k < \ell} \frac{d_k^2}{z_\ell^* - E_k}$ satisfies $N_\ell < P_\ell \equiv \sum_{k > \ell} \frac{d_k^2}{E_k - z_\ell^*}$:*
-   $$\boxed{\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell \left( 1 - \frac{N_\ell}{P_\ell} \right)}.} \tag{8.26.4}$$
-   *Since $N_\ell / P_\ell \le 10^{-6}$ across tested bound modes, $\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell}$ holds to extraordinary accuracy.*
-3. *(Closed Remote Mode Cancellation Bound): Substituting (8.26.4) into the pairwise deviation identity yields:*
-   $$\boxed{0 < \omega_{j, \ell} - 1 < \frac{\Delta_j \Delta_\ell}{\alpha_\ell \, |E_j - z_\ell^*| |E_{j+1} - E_\ell|} \le \frac{\Delta_j \Delta_\ell}{\alpha_\ell D_{j, \ell}^2}.} \tag{8.26.5}$$
+2. *(Rigorous Bound Under Positive Dominance): For any mode $\ell \ge 1$ where the negative sum $N_\ell \equiv \sum_{k < \ell} \frac{d_k^2}{z_\ell^* - E_k}$ satisfies $\varepsilon_\ell \equiv \frac{N_\ell}{P_\ell} < 1$ (with $P_\ell \equiv \sum_{k > \ell} \frac{d_k^2}{E_k - z_\ell^*}$):*
+   $$\boxed{\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell)}.} \tag{8.26.4}$$
+   *Empirical Strengthening across Low Modes:* In computational testing (Cell 79), the stronger inequality $\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell}$ is observed to hold across tested low modes $\ell \in \{0, 1, 2, 3\}$ (with ratio $\mathcal{R}_\delta(\ell) \equiv \delta_\ell / (\Delta_\ell / \alpha_\ell) \in [0.15, 0.29]$ at $N=24$). However, this stronger inequality is an empirical property of low-mode level spacings rather than an unconditional mathematical deduction from $P_\ell > d_{\ell+1}^2 / \Delta_\ell$, because the factor $(1 - \varepsilon_\ell)^{-1} > 1$ acts in the opposite direction.
+3. *(Conditional Closed Remote Mode Cancellation Bound): Substituting (8.26.4) into the exact pairwise deviation identity (8.26.1) yields the rigorous closed bound:*
+   $$\boxed{0 < \omega_{j, \ell} - 1 < \frac{\Delta_j \Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell) \, |E_j - z_\ell^*| |E_{j+1} - E_\ell|} \le \frac{\Delta_j \Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell) D_{j, \ell}^2}.} \tag{8.26.5}$$
 
 *Proof.*
 For $\ell = 0$, $E_k > E_1 > z_0^*$ for all $k \ge 1$. Thus every term in $S_0 = \sum_{k=1}^N \frac{d_k^2}{E_k - z_0^*}$ is strictly positive. Retaining the first term $k = 1$:
@@ -2753,21 +2753,54 @@ Therefore:
 $$\delta_0 = \frac{d_0^2}{S_0} < \frac{d_0^2}{d_1^2 / \Delta_0} = \frac{\Delta_0}{d_1^2 / d_0^2} = \frac{\Delta_0}{\alpha_0},$$
 proving Part 1 unconditionally.
 
-For $\ell \ge 1$, decompose $S_\ell = P_\ell - N_\ell = P_\ell (1 - N_\ell / P_\ell)$. Since the single term $k = \ell + 1$ in $P_\ell$ satisfies:
-$$P_\ell > \frac{d_{\ell+1}^2}{E_{\ell+1} - z_\ell^*} > \frac{d_{\ell+1}^2}{\Delta_\ell},$$
-we have:
-$$S_\ell > \frac{d_{\ell+1}^2}{\Delta_\ell} \left( 1 - \frac{N_\ell}{P_\ell} \right).$$
+For $\ell \ge 1$, decompose $S_\ell = P_\ell - N_\ell = P_\ell (1 - \varepsilon_\ell)$ where $\varepsilon_\ell = N_\ell / P_\ell < 1$. Retaining the single term $k = \ell + 1$ in $P_\ell$:
+$$P_\ell > \frac{d_{\ell+1}^2}{E_{\ell+1} - z_\ell^*} > \frac{d_{\ell+1}^2}{\Delta_\ell} \implies S_\ell > \frac{d_{\ell+1}^2}{\Delta_\ell} (1 - \varepsilon_\ell).$$
 Inverting and multiplying by $d_\ell^2$:
-$$\delta_\ell = \frac{d_\ell^2}{S_\ell} < \frac{d_\ell^2}{\frac{d_{\ell+1}^2}{\Delta_\ell} (1 - N_\ell / P_\ell)} = \frac{\Delta_\ell}{\alpha_\ell (1 - N_\ell / P_\ell)},$$
-proving Part 2. Substituting $\delta_\ell$ into (8.26.1) yields (8.26.5). $\blacksquare$
+$$\delta_\ell = \frac{d_\ell^2}{S_\ell} < \frac{d_\ell^2}{\frac{d_{\ell+1}^2}{\Delta_\ell} (1 - \varepsilon_\ell)} = \frac{\Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell)},$$
+proving Part 2. Substituting $\delta_\ell$ into (8.26.1) immediately yields (8.26.5). $\blacksquare$
 
 ---
 
-### The Self-Consistent Algebraic Feedback Loop
+### Empirical Validation and Scope Diagnostic (Cell 79 Audit)
 
-Corollary 8.26.1 reveals the underlying mathematical mechanism of the Stieltjes outer product factor:
-$$\boxed{\alpha_\ell \gg 1 \quad \Longrightarrow \quad \delta_\ell < \frac{\Delta_\ell}{\alpha_\ell} \ll 1 \quad \Longrightarrow \quad \omega_{j, \ell} - 1 < \frac{\Delta_j \Delta_\ell}{\alpha_\ell D_{j, \ell}^2} \ll 1 \quad \Longrightarrow \quad \Pi_j = \mathcal{O}(1).}$$
-Large boundary-weight amplification ($\alpha_\ell \sim 10^5$) automatically pulls the Stieltjes zero toward the left endpoint ($\delta_\ell \sim 10^{-32}$), which in turn quenches the remote mode deviation ($\omega_{j, \ell} - 1 \sim 10^{-13}$ to $10^{-5}$), ensuring that the remote product converges rapidly to 1. This establishes an exact algebraic bridge connecting boundary-layer amplification to remote spectral decoupling, formulating the core analytical target for Milestone M25 (`cell79.py`).
+The execution of Cell 79 at 70 decimal digits across $N \in \{8, 12, 16, 20, 24\}$ rigorously audited the components of Corollary 8.26.1, exposing both the power and the precise algebraic scope of the estimate:
+
+**Table 8.25.13: Ratio $\mathcal{R}_\delta(\ell) = \delta_\ell / (\Delta_\ell / \alpha_\ell)$ and Sign Dominance (Cell 79 Tests A & B)**
+$$\begin{array}{r|c|c|c|c|c|c}
+N & \mathcal{R}_\delta(0) & \mathcal{R}_\delta(1) & \mathcal{R}_\delta(2) & \mathcal{R}_\delta(3) & N_2 / P_2 & N_3 / P_3 \\ \hline
+8  & 0.2553 & 0.3081 & 0.3384 & 0.3163 & 1.84 \times 10^{-5} & 4.21 \times 10^{-5} \\
+12 & 0.2497 & 0.3069 & 0.2853 & 0.3097 & 5.12 \times 10^{-6} & 1.83 \times 10^{-5} \\
+16 & 0.2440 & 0.2688 & 0.3109 & 0.2921 & 3.87 \times 10^{-6} & 1.15 \times 10^{-5} \\
+20 & 0.2081 & 0.2293 & 0.2509 & 0.3204 & 1.53 \times 10^{-6} & 5.72 \times 10^{-6} \\
+24 & \mathbf{0.1543} & \mathbf{0.1848} & \mathbf{0.2381} & \mathbf{0.2864} & \mathbf{5.25 \times 10^{-7}} & \mathbf{2.58 \times 10^{-6}}
+\end{array}$$
+
+1. **Unconditional Ground Bound and Low-Mode Empirical Dominance:**
+   - For the ground mode $\ell = 0$, $\mathcal{R}_\delta(0) = 0.1543 < 1$ at $N=24$, confirming the unconditional Part 1 bound with a safety margin of $6.5\times$.
+   - For low modes $\ell \in \{1, 2, 3\}$, $\mathcal{R}_\delta(\ell) \in [0.15, 0.34] < 1$ across all tested dimensions, confirming that the stronger inequality holds empirically.
+   - For low modes, negative-pole suppression is extraordinary: $N_2 / P_2 = 5.25 \times 10^{-7}$ and $N_3 / P_3 = 2.58 \times 10^{-6}$ at $N=24$.
+
+2. **Upper-Edge Diagnostic: Failure of the Bare Bound without $(1 - \varepsilon_\ell)^{-1}$:**
+   In Test C of Cell 79, auditing the bare candidate bound $\eta_{2, \ell} = \frac{\Delta_2 \Delta_\ell}{\alpha_\ell D_{2, \ell}^2}$ (omitting $(1 - \varepsilon_\ell)^{-1}$) across remote modes revealed that the bare bound **fails** at the top edge of the spectrum:
+   - At $N = 16, \ell = 15$: $\omega_{2, 15} - 1 = 3.89263 \times 10^{-21}$, whereas $\eta_{2, 15} = 3.71126 \times 10^{-21}$ (violating the upper bound; reported `NO`).
+   - At $N = 24, \ell = 23$: $\omega_{2, 23} - 1 = 7.94688 \times 10^{-29}$, whereas $\eta_{2, 23} = 2.64421 \times 10^{-29}$ (violating the upper bound; reported `NO`).
+   
+   *Algebraic Explanation:* Test B only audited $\ell \in \{1, 2, 3\}$, where $\varepsilon_\ell \ll 10^{-5}$. At the upper edge $\ell = N - 1$, the boundary weight ratio $\alpha_{N-1} = d_N^2 / d_{N-1}^2$ and the negative-to-positive ratio $\varepsilon_{N-1} = N_{N-1} / P_{N-1}$ do not necessarily follow the low-mode hierarchy. Omitting $(1 - \varepsilon_\ell)^{-1}$ invalidated the bound at the upper boundary. Including the factor $(1 - \varepsilon_\ell)^{-1}$ restores mathematical consistency.
+
+3. **Empirical Stability of the Aggregate Remote Product (Test D):**
+   Despite the edge-mode failure of the termwise bound without $(1 - \varepsilon_\ell)^{-1}$, the aggregate ratio:
+   $$\frac{\sum_{|\ell - 2| \ge 2} \eta_{2, \ell}}{\log \Pi_{2, \mathrm{remote}}} = 3.15 \,(N=8), \quad 4.02 \,(N=12), \quad 3.94 \,(N=16), \quad 4.33 \,(N=20), \quad 4.38 \,(N=24)$$
+   remains remarkably stable in $[3.1, 4.4]$ across the entire tested range. This confirms that the remote product is governed by a stable aggregate decay law, formulated as an empirical diagnostic.
+
+---
+
+### The Conditional Algebraic Feedback Chain
+
+The mathematical progression established by Proposition 8.26 and Corollary 8.26.1 takes the calibrated conditional form:
+$$\boxed{\alpha_\ell \gg 1 \quad+\quad \varepsilon_\ell \le \varepsilon_* < 1 \quad \Longrightarrow \quad \delta_\ell < \frac{\Delta_\ell}{\alpha_\ell (1 - \varepsilon_*)} \quad \Longrightarrow \quad \omega_{j, \ell} - 1 < \frac{\Delta_j \Delta_\ell}{\alpha_\ell (1 - \varepsilon_*) D_{j, \ell}^2} \quad \Longrightarrow \quad \Pi_j = \mathcal{O}(1).}$$
+Rather than attempting to prove the stronger bound $\delta_\ell < \Delta_\ell / \alpha_\ell$ directly, the canonical analytical target is establishing a **uniform upper bound on the sign ratio**:
+$$\varepsilon_\ell \equiv \frac{N_\ell}{P_\ell} \le \varepsilon_* < 1$$
+across the entire spectrum $\ell \in \{1, \dots, N-1\}$. If this sign ratio is controlled by geometric decay in the boundary-weight ladder ($d_k^2 / d_\ell^2 \le C q^{\ell - k}$ for $k < \ell$), the remote outer product factor $\Pi_j = \mathcal{O}(1)$ is rigorously and unconditionally secured. This constitutes the investigative focus of Milestone M26 (`cell80.py`).
 
 ---
 
@@ -2966,7 +2999,9 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.24–8.25 (Exact Stieltjes Residue Product & Asymmetry) | Residue product representation $d_k^2$, scale-invariant bisection audit, normalized residuals & weight ratio factorization | `cell75.py`, `cell76.py` | `cell75.out`, `cell76.out` |
 | Section 8.25 (Stieltjes Outer Factor, Pairwise Cancellation & Characteristic Polynomial) | Outer factor $\Pi_j \in [0.15, 0.34]$, pairwise cancellation $\omega_{2, \ell} \to 1$, polynomial quotient & asymmetry balance | `cell77.py` | `cell77.out` |
 | Section 8.25 (Exact Pairwise Deviation $\omega_{j, \ell}-1$ & Stieltjes Displacement $\delta_\ell$) | Exact formulas $\omega_{j, \ell}-1 = \frac{\Delta_j \delta_\ell}{|E_j - z_\ell^*||E_{j+1}-E_\ell|}$ and $\delta_\ell = \frac{d_\ell^2}{\sum \frac{d_k^2}{E_k - z_\ell^*}}$, remote product bounds | `cell78.py` | `cell78.out` |
-| Section 8.25 (One-Sided Displacement Bound $\delta_\ell < \Delta_\ell / \alpha_\ell$ & Closed Remote Bound) | Numerical verification of $\delta_\ell < \Delta_\ell / \alpha_\ell$, positive term dominance $N_\ell \ll P_\ell$, and closed remote bound | `cell79.py` | `cell79.out` |
+| Section 8.25 (One-Sided Displacement Bound & Scope Diagnostic) | Certification of $\delta_0 < \Delta_0/\alpha_0$, low-mode ratio $\mathcal{R}_\delta \in [0.15, 0.29]$, and upper-edge failure of bare bound | `cell79.py` | `cell79.out` |
+| Section 8.25 (Sign Ratio $\varepsilon_\ell = N_\ell/P_\ell$ & Weight Ladder) | Spectral-wide audit of sign ratio $\varepsilon_\ell$, upper-edge mode forensics, corrected closed bound & weight ladder decay | `cell80.py` | `cell80.out` |
+
 
 ---
 
