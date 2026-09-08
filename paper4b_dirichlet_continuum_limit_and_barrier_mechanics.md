@@ -2963,33 +2963,62 @@ which proves the lemma unconditionally for all $N$ and all $\ell \ge j+2$. $\bla
 
 ---
 
-### Proposition 8.28 (Universal Parameter-Free Tail Reduction, Spectral Expansion Identity, and Conditional Telescoping)
+### Proposition 8.28 (Universal Parameter-Free Tail Reduction, Gap Representation, and Three-Regime Continuum Enclosure)
 
 Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+2$ be any fixed core cutoff.
 
 1. **Exact Parameter-Free Spectral Tail Reduction (Rigorous Theorem):**
    The infinite asymptotic tail of the remote product satisfies the unconditional finite-$N$ bound:
-   $$\boxed{S_{j, \mathrm{tail}}(N; L) \equiv \sum_{\ell = L+1}^{N-1} (\omega_{j, \ell} - 1) < \Delta_j \sum_{\ell = L+1}^{N-1} \frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}.}$$
+   $$\boxed{S_{j, \mathrm{tail}}(N; L) \equiv \sum_{\ell = L+1}^{N-1} (\omega_{j, \ell} - 1) < \Delta_j \sum_{\ell = L+1}^{N-1} \frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})} \equiv \mathcal{S}_{\mathrm{inter}}(N; L).}$$
    In particular, this tail bound is completely parameter-free and independent of boundary weights $d_\ell^2$, ladder ratios $\alpha_\ell$, sign ratios $\varepsilon_\ell$, and cumulative spectral mass bounds.
 
-2. **Exact Spectral Expansion Ratio Identity:**
+2. **Exact Spectral Expansion Ratio & Gap Representation (Rigorous Theorem):**
    Let $\mathcal{T}_{\mathrm{tele}}(\ell)$ denote the canonical discrete telescoping summand:
    $$\mathcal{T}_{\mathrm{tele}}(\ell) \equiv \Delta_j \left( \frac{1}{E_\ell - E_{j+1}} - \frac{1}{E_{\ell+1} - E_{j+1}} \right) = \frac{\Delta_j \Delta_\ell}{(E_\ell - E_{j+1})(E_{\ell+1} - E_{j+1})}.$$
-   Then each interlacing tail summand $\eta_{\mathrm{inter}}(j, \ell) \equiv \frac{\Delta_j \Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}$ decomposes into the exact product:
+   Then each interlacing tail summand decomposes into the exact product:
    $$\eta_{\mathrm{inter}}(j, \ell) = C_{j, \ell} \mathcal{T}_{\mathrm{tele}}(\ell), \qquad \text{where} \quad C_{j, \ell} \equiv \frac{E_{\ell+1} - E_{j+1}}{E_\ell - E_j}.$$
-   *Epistemic Note on Telescoping Comparison:* Since $E_{\ell+1} > E_\ell$ and $E_{j+1} > E_j$, the spectral expansion ratio satisfies $C_{j, \ell} > 1$. Consequently, $\mathcal{T}_{\mathrm{tele}}(\ell) < \eta_{\mathrm{inter}}(j, \ell)$, meaning that the bare telescoping sum $\sum \mathcal{T}_{\mathrm{tele}}(\ell)$ is a **comparison quantity**, not an upper envelope for the interlacing tail bound.
+   Equivalently, writing the numerator as $(E_\ell - E_j) + (\Delta_\ell - \Delta_j)$ yields the **Exact Gap Representation**:
+   $$\boxed{C_{j, \ell} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}.}$$
+   *Epistemic Correction on Telescoping Comparison:* The condition $C_{j, \ell} > 1$ holds if and only if $\Delta_\ell > \Delta_j$. It is not an automatic consequence of monotonic eigenvalue ordering $E_{\ell+1} > E_\ell$. For ground/low modes such as $j=2$, $\Delta_2$ is exponentially quenched by the WKB double-well barrier ($\Delta_2 \approx 1.37 \times 10^{-26}$ at $N=24$), ensuring that $\Delta_\ell > \Delta_2$ and $C_{2, \ell} > 1$ hold empirically for all tested remote modes $\ell \ge 4$. Consequently, bare $\mathcal{T}_{\mathrm{tele}}(\ell) < \eta_{\mathrm{inter}}(j, \ell)$ acts as a **comparison quantity**, not an upper envelope.
 
-3. **Conditional Telescoping Tail Bound (Hypothesis $\mathrm{H}_{\mathrm{spec}}$):**
-   Suppose there exists a uniform constant $\bar{C}_j(L) < \infty$ such that the spectral expansion ratio is bounded across all truncation dimensions $N$ and all tail modes $\ell \ge L+1$:
-   $$\mathbf{Hypothesis\ H_{\mathrm{spec}}:} \qquad \sup_{N > L} \sup_{\ell \ge L+1} \frac{E_{\ell+1} - E_{j+1}}{E_\ell - E_j} \le \bar{C}_j(L) < \infty.$$
-   Then the universal tail bound telescopes into the explicit closed-form upper bound:
-   $$S_{j, \mathrm{tail}}(N; L) < \bar{C}_j(L) \Delta_j \sum_{\ell = L+1}^{N-1} \mathcal{T}_{\mathrm{tele}}(\ell) = \bar{C}_j(L) \Delta_j \left( \frac{1}{E_{L+1} - E_{j+1}} - \frac{1}{E_N - E_{j+1}} \right) < \frac{\bar{C}_j(L) \Delta_j}{E_{L+1} - E_{j+1}} < \infty.$$
-   Under Hypothesis $\mathrm{H}_{\mathrm{spec}}$, the remote product satisfies the uniform bound $\sup_N \Pi_{j, \mathrm{remote}}(N) < \infty$.
+3. **The Three-Regime Spectral Architecture:**
+   The discrete Galerkin spectrum does not follow a single continuous ODE / Weyl law ($E_\ell \asymp \ell^2$). Rather, the spectrum naturally partitions at an effective barrier-top cutoff index $K$ ($K \approx 11$ or $12$ for $c=13$):
+   $$S_{j, \mathrm{tail}}(N; j+1) = \sum_{\ell = j+2}^K (\omega_{j, \ell} - 1) + \sum_{\ell = K+1}^{N-1} (\omega_{j, \ell} - 1).$$
+   - *Finite Tunneling Core ($\ell \in \{j+2, \dots, K\}$):* Beneath the barrier top, eigenvalues are exponentially small and grow by massive factors mode-by-mode ($E_5/E_4 \approx 3396$, $E_8/E_7 \approx 512$). In this regime, $\Delta_\ell / (E_\ell - E_j) \approx E_{\ell+1}/E_\ell$ is large, driving $C_{2, \ell}$ up to $\sim 2.165 \times 10^4$ at the base $\ell=4$. Because this core contains only finitely many modes ($K - j - 1$ terms), its contribution is controlled mode-by-mode.
+   - *Barrier-Top Transition ($\ell \approx 10-11$):* Eigenvalues jump rapidly ($E_{10} \approx 0.0050 \to E_{11} \approx 0.397 \to E_{12} \approx 1.306$), and $C_{2, \ell}$ collapses from $79.1$ at $\ell=10$ down to $3.29$ at $\ell=11$ and $1.38$ at $\ell=12$.
+   - *Semiclassical Continuum Tail ($\ell \ge K+1$):* Above the barrier top, eigenvalues are macroscopic ($E_{K+1} = \mathcal{O}(1)$) and consecutive gaps are bounded ($\Delta_\ell \le \Delta_* < \infty$).
 
-4. **Epistemic Classification of the Galerkin Spectrum:**
-   The discrete Galerkin eigenvalues $E_\ell$ of the Connes–CvS matrix $Q_{c, N}$ do **not** follow a conventional elliptic Weyl law $E_\ell \asymp \ell^2$. As audited in Cell 83 at $N=24$, the spectrum forms an exponentially compressed tunneling doublet ladder beneath the effective barrier top ($E_4 \approx 2.90 \times 10^{-22}$ to $E_{10} \approx 0.0050$), transitioning to $\mathcal{O}(1)$ modes above the barrier top ($E_{12} \approx 1.306 \to E_{23} \approx 3.660$), with $E_{23}/23^2 \approx 0.00692$. Analytical tail bounds must therefore be established directly from the discrete matrix structure and spectral-ratio bounds (Hypothesis $\mathrm{H}_{\mathrm{spec}}$), rather than by importing unproven continuum Sturm–Liouville / Weyl asymptotics.
+4. **Continuum Gap Enclosure (Hypothesis $\mathrm{H}_{\mathrm{cont}}$):**
+   In the continuum tail $\ell > K$, the gap representation yields:
+   $$C_{j, \ell} - 1 = \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j} \le \frac{\Delta_* - \Delta_j}{E_{K+1} - E_j} = \mathcal{O}(1).$$
+   Suppose there exists a uniform continuum constant $C_{\mathrm{cont}}(K) < \infty$ such that:
+   $$\mathbf{Hypothesis\ H_{\mathrm{cont}}:} \qquad \sup_{N > K} \sup_{\ell > K} C_{j, \ell} \le C_{\mathrm{cont}}(K) < \infty.$$
+   Then the continuum tail telescopes into the explicit, closed-form continuum upper bound:
+   $$S_{j, \mathrm{cont}}(N; K) \equiv \sum_{\ell = K+1}^{N-1} (\omega_{j, \ell} - 1) < C_{\mathrm{cont}}(K) \Delta_j \sum_{\ell = K+1}^{N-1} \mathcal{T}_{\mathrm{tele}}(\ell) < \frac{C_{\mathrm{cont}}(K) \Delta_j}{E_{K+1} - E_{j+1}} < \infty.$$
+   Under Hypothesis $\mathrm{H}_{\mathrm{cont}}$, the remote product satisfies the uniform bound $\sup_N \Pi_{j, \mathrm{remote}}(N) < \infty$.
 
-The empirical audit of Lemma 8.27 and the non-Weyl structure of the Galerkin spectrum were established in Milestone M29 (`cell83.py`). The investigation of the spectral expansion ratio $C_{j, \ell}$ and Hypothesis $\mathrm{H}_{\mathrm{spec}}$ is formulated in Milestone M30 (`cell84.py`).
+---
+
+#### Table 8.25.18: Modewise Spectral Expansion Ratios, Peak Modes, and Barrier-Top Forensics (`cell84.out`, $j=2$)
+
+| Truncation $N$ | Threshold $L$ / Mode $\ell$ | Actual Tail Dev $\sum \mathrm{dev}$ | Interlacing Sum $\mathcal{S}_{\mathrm{inter}}$ | Ratio Envelope $\bar{C}_2(N; L)$ | Peak Mode $\ell^*$ | Calibrated Bound $\mathcal{S}_{\mathrm{tele}}^{\mathrm{calib}}$ | Continuum $C_{2, \ell}$ Profile |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$N = 8$** | $L=4$ | $1.186 \times 10^{-6}$ | $6.824 \times 10^{-4}$ | $270.6$ | $\ell^* = 5$ | $6.847 \times 10^{-4}$ | $C_{2, 7} \approx 1.950$ |
+| **$N = 8$** | $L=6$ | $4.897 \times 10^{-10}$ | $1.034 \times 10^{-9}$ | $1.950$ | $\ell^* = 7$ | $1.034 \times 10^{-9}$ | Edge mode |
+| **$N = 12$** | $L=4$ | $4.466 \times 10^{-8}$ | $1.072 \times 10^{-4}$ | $871.4$ | $\ell^* = 5$ | $1.073 \times 10^{-4}$ | $C_{2, 11} \approx 1.181$ |
+| **$N = 12$** | $L=6$ | $4.662 \times 10^{-13}$ | $5.398 \times 10^{-11}$ | $51.76$ | $\ell^* = 7$ | $5.481 \times 10^{-11}$ | Transition mode |
+| **$N = 12$** | $L=8$ | $5.723 \times 10^{-16}$ | $1.233 \times 10^{-15}$ | $1.322$ | **$\ell^* = 10$** | $1.311 \times 10^{-15}$ | Peak at mode 10! |
+| **$N = 16$** | $L=4$ | $7.288 \times 10^{-9}$ | $2.864 \times 10^{-5}$ | $1420.5$ | $\ell^* = 5$ | $2.866 \times 10^{-5}$ | $C_{2, 15} \approx 1.195$ |
+| **$N = 16$** | $L=6$ | $1.270 \times 10^{-14}$ | $1.124 \times 10^{-11}$ | $347.8$ | $\ell^* = 7$ | $1.127 \times 10^{-11}$ | $C_{2, 11} \approx 3.29$ |
+| **$N = 16$** | $L=8$ | $1.002 \times 10^{-18}$ | $1.651 \times 10^{-17}$ | $12.34$ | $\ell^* = 9$ | $1.737 \times 10^{-17}$ | Transition |
+| **$N = 20$** | $L=4$ | $1.763 \times 10^{-9}$ | $1.225 \times 10^{-5}$ | $2365.2$ | $\ell^* = 5$ | $1.225 \times 10^{-5}$ | $C_{2, 19} \approx 1.072$ |
+| **$N = 20$** | $L=6$ | $4.209 \times 10^{-16}$ | $7.588 \times 10^{-13}$ | $736.2$ | $\ell^* = 7$ | $7.595 \times 10^{-13}$ | Tunneling |
+| **$N = 20$** | $L=8$ | $3.034 \times 10^{-21}$ | $4.244 \times 10^{-19}$ | $73.36$ | $\ell^* = 9$ | $4.293 \times 10^{-19}$ | Transition |
+| **$N = 24$** | $L=4$ | $6.990 \times 10^{-10}$ | $7.400 \times 10^{-6}$ | $3396.3$ | $\ell^* = 5$ | $7.400 \times 10^{-6}$ | $C_{2, 4} \approx 21652.9$ |
+| **$N = 24$** | $L=6$ | $7.464 \times 10^{-17}$ | $1.644 \times 10^{-13}$ | $816.5$ | $\ell^* = 7$ | $1.645 \times 10^{-13}$ | $C_{2, 12} \approx 1.379$ |
+| **$N = 24$** | $L=8$ | $2.084 \times 10^{-22}$ | $8.468 \times 10^{-20}$ | $176.3$ | $\ell^* = 9$ | $8.495 \times 10^{-20}$ | $C_{2, \ge 13} \in [1.035, 1.133]$ |
+
+The empirical audit of Lemma 8.27, the gap representation, and the calibrated telescoping enclosure were established in Milestone M29 (`cell83.py`) and Milestone M30 (`cell84.py`). The investigation of the Three-Regime Partition, the continuum gap enclosure $C_{\mathrm{cont}}(K)$, and kinetic-barrier decomposition is formulated in Milestone M31 (`cell85.py`).
 
 ---
 
@@ -3194,6 +3223,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Finite-Core + Tail Architecture & Cumulative Spectral Mass) | Core-tail partition ($L \in \{4, 6, 8\}$), direct displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative mass $M(k)$ | `cell82.py` | `cell82.out` |
 | Section 8.25 (Universal Interlacing Tail Bound & Telescoping Comparison) | Lemma 8.27 interlacing bound audit, non-Weyl tunneling ladder, and comparison quantity $\mathcal{T}_{\mathrm{tele}}$ | `cell83.py` | `cell83.out` |
 | Section 8.25 (Spectral Expansion Ratio $C_{j, \ell}$ & Calibrated Telescoping) | Audit of spectral ratio $C_{j, \ell} = \frac{E_{\ell+1}-E_{j+1}}{E_\ell-E_j}$, calibrated bound $\mathcal{S}_{\mathrm{tele}}^{\mathrm{calib}}$, and matrix monotonicity | `cell84.py` | `cell84.out` |
+| Section 8.25 (Three-Regime Partition & Continuum Gap Enclosure) | Three-regime partition ($K \in \{10, 11, 12, 14\}$), gap quotient $\frac{\Delta_\ell-\Delta_j}{E_\ell-E_j}$, continuum bound $C_{\mathrm{cont}}(K)$, and kinetic-barrier decomposition | `cell85.py` | `cell85.out` |
 
 
 ---

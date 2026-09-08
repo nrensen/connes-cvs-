@@ -19,7 +19,11 @@ THE SPECTRAL EXPANSION RATIO IDENTITY:
 --------------------------------------
 Dividing eta_{inter}(j, l) by T_{tele}(l) yields the exact algebraic identity:
     eta_{inter}(j, l) / T_{tele}(l) = (E_{l+1} - E_{j+1}) / (E_l - E_j) =: C_{j, l}.
-Because E_{l+1} > E_l and E_{j+1} > E_j, C_{j, l} > 1 strictly.
+Equivalently, in terms of consecutive gaps:
+    C_{j, l} = 1 + [ Delta_l - Delta_j ] / [ E_l - E_j ],
+which implies C_{j, l} > 1 if and only if Delta_l > Delta_j.
+For low mode j = 2, Delta_2 is exponentially small (~ 1.37e-26 at N=24), so Delta_l > Delta_2
+and C_{2, l} > 1 hold empirically across all tested remote modes.
 Consequently, bare T_{tele}(l) is smaller than eta_{inter}(j, l), and the closed
 telescoping upper bound on the interlacing sum requires the spectral envelope:
     S_{inter}(N; L) <= bar{C}_j(N; L) * S_{tele}(N; L) <= bar{C}_j(N; L) * [ Delta_j / (E_{L+1} - E_{j+1}) ],
@@ -497,7 +501,8 @@ def run_cell84() -> None:
 
     print("-" * 115)
     print("Key Diagnostic Summary for Test B:")
-    print("1. For every dimension N and threshold L, the maximum is achieved at the base of the tail: l^* = L + 1.")
+    print("1. In almost all configurations, the maximum is achieved at the base of the tail l^* = L + 1,")
+    print("   with the notable exception at N=12, L=8 where peak C occurs at mode 10 (barrier transition).")
     print("2. Multi-dimension stability of bar{C}_2(N; L):")
     print("   L = 4: bar{C} stabilizes rapidly as N increases (governed by E_5/E_4 which is local to the well).")
     print("   L = 6: bar{C} is substantially smaller (E_7/E_6 << E_5/E_4).")
