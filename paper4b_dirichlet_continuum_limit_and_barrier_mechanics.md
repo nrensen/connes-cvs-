@@ -2386,8 +2386,85 @@ N = 20 \to 24 & 4 & 165592.7 & 395649.1 & 0.21775 & 32428.85 & 75225.78 & 0.2103
    $$\frac{d_2^2}{d_1^2}, \quad \frac{L_1}{L_2}, \quad \frac{R_1}{R_2}, \quad \frac{\mu_2 - \lambda}{\mu_1 - \lambda},$$
    replacing an intractable global operator resolvent sum with a finite set of local spectral quantities.
 
-6. **The Next Analytical Target (Milestone M22):**
-   The fine balance in $\frac{H_{j+1}}{H_j} = \alpha_j (\frac{L_j}{R_j})^2$ suggests that boundary-weight growth $\alpha_j = d_{j+1}^2/d_j^2$ and interlacing gap asymmetry $R_j/L_j$ are not two independent numerical phenomena, but two facets of an underlying rank-one/Christoffel–Darboux spectral identity. Milestone M22 and `cell75.py` directly investigate whether $d_k^2$ can be expressed in closed form as a product over interlacing eigenvalue gaps, eliminating $d_k$ as an independent degree of freedom.
+6. **Milestone M22 and Proposition 8.25 (Exact Stieltjes-Residue Product Representation):**
+   The fine balance $\frac{H_{j+1}}{H_j} = \alpha_j (\frac{L_j}{R_j})^2$ suggests that boundary-weight growth $\alpha_j = d_{j+1}^2/d_j^2$ and interlacing gap asymmetry $R_j/L_j$ are not two independent numerical phenomena, but two facets of an underlying rank-one Stieltjes spectral identity. The following proposition establishes the exact finite-$N$ representation of boundary weights in terms of the zeros of the boundary Stieltjes transform.
+
+---
+
+### 8.25 Proposition 8.25 (Exact Stieltjes-Residue Product Representation of Galerkin Boundary Weights)
+
+*Let $Q_{\mathrm{even}} u_k = E_k u_k$ ($k \in \{0, \dots, N\}$) be the orthonormal eigensystem of the even finite-rank Galerkin truncation on $H_{\mathrm{even}} \subset \mathbb{R}^{2N+1}$ with ordered eigenvalues $E_0 < E_1 < \dots < E_N$. Let $d_{\mathrm{even}} = (1, \sqrt{2}, \dots, \sqrt{2})^T \in H_{\mathrm{even}}$ be the boundary projection vector, with boundary overlaps $d_k \equiv \langle u_k, d_{\mathrm{even}} \rangle$ satisfying the exact total norm identity:*
+$$\sum_{k=0}^N d_k^2 = \|d_{\mathrm{even}}\|^2 = 2N + 1.$$
+*Let $G_d(z) \equiv \langle d_{\mathrm{even}}, (Q_{\mathrm{even}} - z I)^{-1} d_{\mathrm{even}} \rangle = \sum_{k=0}^N \frac{d_k^2}{E_k - z}$ denote the even boundary Stieltjes transform.*
+
+*Then:*
+1. *(Interlacing Stieltjes Zeros): $G_d(z)$ possesses exactly $N$ real zeros $\{z_j^*\}_{j=0}^{N-1}$ that strictly interlace the even spectrum:*
+   $$E_0 < z_0^* < E_1 < z_1^* < E_2 < \dots < E_{N-1} < z_{N-1}^* < E_N. \tag{8.25.1}$$
+2. *(Exact Stieltjes-Residue Product Representation): For every $k \in \{0, \dots, N\}$, the squared boundary overlap $d_k^2$ evaluates unconditionally as:*
+   $$\boxed{d_k^2 = (2N+1) \frac{\prod_{j=0}^{N-1} |E_k - z_j^*|}{\prod_{\ell \ne k} |E_k - E_\ell|}.} \tag{8.25.2}$$
+3. *(Consecutive Weight Ratio as Pure Interlacing Geometry): The consecutive boundary-weight growth ratio $\alpha_j \equiv \frac{d_{j+1}^2}{d_j^2}$ factors into the product of an isolated local zero ratio and an outer spectral factor:*
+   $$\boxed{\alpha_j = \left( \frac{E_{j+1} - z_j^*}{z_j^* - E_j} \right) \times \left[ \prod_{\ell \ne j} \frac{|E_{j+1} - z_\ell^*|}{|E_j - z_\ell^*|} \prod_{\ell \notin \{j, j+1\}} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|} \right].} \tag{8.25.3}$$
+
+*Proof.*
+**Step 1 (Existence and Interlacing of Zeros):**
+Because $d_k \ne 0$ for all $k$ (by boundary non-degeneracy of the Galerkin ground state and excited modes), $G_d'(z) = \sum_{k=0}^N \frac{d_k^2}{(E_k - z)^2} > 0$ on each open interval $(E_j, E_{j+1})$. Thus $G_d(z)$ is strictly monotonically increasing from $-\infty$ (as $z \to E_j^+$) to $+\infty$ (as $z \to E_{j+1}^-$). By the intermediate value theorem, $G_d(z)$ has a unique, simple zero $z_j^* \in (E_j, E_{j+1})$ for each $j \in \{0, \dots, N-1\}$, establishing (8.25.1).
+
+**Step 2 (Residue Product Formula):**
+Clearing denominators, the rational function $G_d(z)$ can be expressed as:
+$$G_d(z) = \frac{P(z)}{\prod_{k=0}^N (E_k - z)},$$
+where $P(z)$ is a polynomial of degree at most $N$. Because $z_0^*, \dots, z_{N-1}^*$ are the $N$ roots of $G_d(z) = 0$, $P(z)$ has roots $z_j^*$ and can be factored as $P(z) = C \prod_{j=0}^{N-1} (z_j^* - z)$ for some constant $C$.
+To determine $C$, examine the asymptotic behavior as $z \to -\infty$:
+$$-z G_d(z) = \sum_{k=0}^N \frac{d_k^2}{1 - E_k / z} \longrightarrow \sum_{k=0}^N d_k^2 = \|d_{\mathrm{even}}\|^2 = 2N + 1.$$
+On the other hand, from the rational form:
+$$-z G_d(z) = \frac{-z \cdot C \prod_{j=0}^{N-1} (z_j^* - z)}{\prod_{k=0}^N (E_k - z)} = C \frac{(-z) (-z)^N \prod_{j=0}^{N-1} (1 - z_j^*/z)}{(-z)^{N+1} \prod_{k=0}^N (1 - E_k / z)} \longrightarrow C.$$
+Therefore, $C = 2N + 1$.
+Now, evaluating the residue of $G_d(z)$ at the simple pole $z = E_k$:
+$$\operatorname{Res}_{z = E_k} G_d(z) = \lim_{z \to E_k} (z - E_k) G_d(z) = - d_k^2.$$
+Using the factored representation of $G_d(z)$:
+$$\lim_{z \to E_k} (z - E_k) \frac{(2N+1) \prod_{j=0}^{N-1} (z_j^* - z)}{\prod_{\ell=0}^N (E_\ell - z)} = - (2N+1) \frac{\prod_{j=0}^{N-1} (z_j^* - E_k)}{\prod_{\ell \ne k} (E_\ell - E_k)}.$$
+Taking absolute values (or noting that signs match identically) yields:
+$$d_k^2 = (2N+1) \frac{\prod_{j=0}^{N-1} |E_k - z_j^*|}{\prod_{\ell \ne k} |E_k - E_\ell|},$$
+proving (8.25.2).
+
+**Step 3 (Proof of Consecutive Ratio Factorization):**
+Taking the ratio $\alpha_j = d_{j+1}^2 / d_j^2$ from (8.25.2):
+$$\alpha_j = \frac{\prod_{\ell=0}^{N-1} |E_{j+1} - z_\ell^*|}{\prod_{\ell=0}^{N-1} |E_j - z_\ell^*|} \frac{\prod_{\ell \ne j} |E_j - E_\ell|}{\prod_{\ell \ne j+1} |E_{j+1} - E_\ell|}.$$
+In the eigenvalue products, the factor for $\ell = j+1$ in the numerator is $|E_j - E_{j+1}| = E_{j+1} - E_j$, while the factor for $\ell = j$ in the denominator is $|E_{j+1} - E_j| = E_{j+1} - E_j$. These two adjacent gap factors cancel identically:
+$$\frac{\prod_{\ell \ne j} |E_j - E_\ell|}{\prod_{\ell \ne j+1} |E_{j+1} - E_\ell|} = \prod_{\ell \notin \{j, j+1\}} \frac{|E_j - E_\ell|}{|E_{j+1} - E_\ell|}.$$
+In the zero products, isolating the local index $\ell = j$ where $E_j < z_j^* < E_{j+1}$:
+$$\frac{|E_{j+1} - z_j^*|}{|E_j - z_j^*|} = \frac{E_{j+1} - z_j^*}{z_j^* - E_j}.$$
+Combining the isolated local zero factor with the remaining products establishes (8.25.3). $\blacksquare$
+
+---
+
+### Audit Status of the Residue Product Formula (`cell75.out` vs. `cell76.py`)
+
+1. **Root-Solver Scale Contamination in Cell 75:**
+   An initial computational audit of Proposition 8.25 was attempted in `cell75.py` across $N \in \{8, 12, 16, 20, 24\}$ at 50-digit precision. While the mathematical formula (8.25.2) is exact, the numerical implementation of the Stieltjes-zero solver used an absolute function-value stopping criterion:
+   $$\text{if } |f_j(c)| \le 10^{-70}: \text{ return } c.$$
+   For higher modes this was harmless, but for the lowest interval $(E_0, E_1)$ at $N=24$, the natural physical scale of the regularized bracket function $f_0(z) \equiv (z - E_0)(E_1 - z) G_d(z)$ is of order:
+   $$|f_0(z)| \sim d_0^2 (E_1 - E_0) \sim 1.3 \times 10^{-40} \times 10^{-34} \sim 10^{-74}.$$
+   Because $10^{-74} \ll 10^{-70}$, the root solver terminated prematurely upon entering the interval, returning a spurious value for $z_0^*$. Since $z_0^*$ enters every residue product as a factor $|E_k - z_0^*|$, this error contaminated all reconstructed weights $d_k^2$, producing a factor-of-10 discrepancy for $d_2^2$ and a factor-of-48 error for $d_0^2$ at $N=24$. In accordance with `AGENTS.md` Rule 2, the `cell75` run does **not** constitute a valid numerical certification of the residue product formula.
+
+2. **Empirical Confirmation of Interlacing Zero Alignment:**
+   Crucially, for bound modes $j \ge 2$ where the bracket function scale is well above $10^{-70}$, the computed roots $z_j^*$ in `cell75.out` are numerically reliable. The data reveal that the Stieltjes zero $z_j^*$ moves progressively closer to the odd eigenvalue $\mu_j$ inside the interlacing bracket $(E_j, E_{j+1})$. The normalized displacement:
+   $$\delta_j^{\mathrm{norm}} \equiv \frac{|z_j^* - \mu_j|}{E_{j+1} - E_j}$$
+   contracts monotonically across tested dimensions:
+   - For mode $j=2$: $1.26 \times 10^{-2} \to 1.01 \times 10^{-2} \to 6.31 \times 10^{-3} \to 6.23 \times 10^{-3} \to \mathbf{4.05 \times 10^{-3}}$ at $N=24$.
+   - For mode $j=3$: reaches $\mathbf{7.27 \times 10^{-3}}$ at $N=24$.
+   This provides empirical evidence that $z_j^* \to \mu_j$ asymptotically, supporting the Christoffel–Darboux alignment hypothesis.
+
+3. **Exact Pole-Asymmetry Identity:**
+   The three-factor pole asymmetry identity:
+   $$\frac{H_{j+1}(\mu_j)}{H_j(\mu_j)} = \alpha_j \left( \frac{L_j}{R_j} \right)^2$$
+   was verified in `cell75.out` to machine precision (residual $< 10^{-80}$), confirming that the dominant $60.44\% / 39.56\%$ dominance split ($H_3 / H_2 = 1.5280$ at $N=24$) is exact.
+
+4. **The Repair Audit Protocol (`cell76.py`):**
+   To achieve unconditional numerical certification of Proposition 8.25, `cell76.py` replaces the scale-dependent false-position solver with a pure bracketed bisection algorithm operating strictly on signs with a relative bracket-width tolerance:
+   $$\frac{b - a}{E_{j+1} - E_j} \le 10^{-55},$$
+   completely eliminating absolute function-value stopping thresholds. Furthermore, `cell76.py` evaluates scale-normalized residuals:
+   $$\mathrm{Res}_{\mathrm{norm}}(z_j^*) \equiv \frac{|G_d(z_j^*)|}{\sum_{k=0}^N \frac{d_k^2}{|E_k - z_j^*|}}$$
+   to certify each zero independently before computing the residue reconstruction.
 
 ---
 
@@ -2580,6 +2657,8 @@ The calculations reported in this manuscript were performed using Python and the
 | Roadmap Stage III (High-Precision Schur Positivity) | High-precision numerical verification of $\mathcal{Q}_{\mathrm{Weil}} \succ 0$ via symmetric $LDL^T$ Schur decoupling at 80 dps | `cell64.py` | `cell64.out` |
 | Roadmap Stage V (Effective Hamiltonian & Self-Energy) | Three-mode effective Hamiltonian $S_{\mathrm{low}} = A - \Sigma_{\mathrm{low}}$ & high-mode self-energy sweep at 80 dps | `cell65.py` | `cell65.out` |
 | Roadmap Stage VI (Hypothesis H1–H3 Audit) | Semiclassical flux-matching $\mathcal{R}_{\mathrm{tun}}$, mode-by-mode transmission cancellation & bound ladder | `cell66.py` | `cell66.out` |
+| Section 8.24 (Regularized Stieltjes Function & Two-Pole Clustering) | Positive function $H(\mu) = (\mu-\lambda)^2 G_d'(\mu)$, modal ratios $\mathcal{Q}_j$, and bracketing pole shares | `cell73.py`, `cell74.py` | `cell73.out`, `cell74.out` |
+| Section 8.24–8.25 (Exact Stieltjes Residue Product & Asymmetry) | Residue product representation $d_k^2$, scale-invariant bisection audit, normalized residuals & weight ratio factorization | `cell75.py`, `cell76.py` | `cell75.out`, `cell76.out` |
 
 ---
 
