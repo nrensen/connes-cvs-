@@ -9,16 +9,16 @@ Barrier Cutoffs Sweep: K in [6, 10, 11, 12, 14]
 =============================================================================================================================
 
 >>> Processing Dimension N = 8 ...
-   Completed N = 8 in 0.48s | Delta_2 = 1.4661614e-9
+   Completed N = 8 in 0.45s | Delta_2 = 1.4661614e-9
      K = 6: C_cont = 1.94991 (peak 7) | Cont Dev = 4.89651e-10 | Calib Bound = 1.03423e-9 | Share = 0.0002668%
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 1.00s | Delta_2 = 4.8298678e-15
+   Completed N = 12 in 0.99s | Delta_2 = 4.8298678e-15
      K = 6: C_cont = 51.7592 (peak 7) | Cont Dev = 4.66165e-13 | Calib Bound = 5.48104e-11 | Share = 5.209e-7%
      K = 10: C_cont = 1.18114 (peak 11) | Cont Dev = 1.21466e-16 | Calib Bound = 3.17627e-16 | Share = 1.357e-10%
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 1.87s | Delta_2 = 1.2071033e-19
+   Completed N = 16 in 1.86s | Delta_2 = 1.2071033e-19
      K = 6: C_cont = 347.812 (peak 7) | Cont Dev = 1.26968e-14 | Calib Bound = 1.12682e-11 | Share = 2.789e-8%
      K = 10: C_cont = 1.19493 (peak 15) | Cont Dev = 1.21674e-20 | Calib Bound = 2.94699e-20 | Share = 2.672e-14%
      K = 11: C_cont = 1.19493 (peak 15) | Cont Dev = 1.01227e-20 | Calib Bound = 2.29131e-20 | Share = 2.223e-14%
@@ -41,7 +41,7 @@ Barrier Cutoffs Sweep: K in [6, 10, 11, 12, 14]
      K = 12: C_cont = 1.13259 (peak 21) | Cont Dev = 1.70855e-27 | Calib Bound = 4.54693e-27 | Share = 1.217e-20%
      K = 14: C_cont = 1.13259 (peak 21) | Cont Dev = 1.57871e-27 | Calib Bound = 3.48626e-27 | Share = 1.125e-20%
 
-All dimensions processed in 11.32s.
+All dimensions processed in 11.29s.
 
 =======================================================================================================================================
 TEST A: Exact Gap Quotient Audit & Monotonicity (N = 24, Mode j = 2)
@@ -84,7 +84,7 @@ Continuum Bound: S_{cont}(N; K) < S_{cont}^{calib}(N; K) = C_{cont}(N; K) * [ De
 ---------------------------------------------------------------------------------------------------------------------------------------
   8 |  6 |     0.000165105 |     4.89651e-10 |         1.94991 |         7 |      1.03423e-9 |      2.112 |    0.0002668% |   VERIFIED
  12 |  6 |      8.43754e-5 |     4.66165e-13 |         51.7592 |         7 |     5.48104e-11 |      117.6 |     5.209e-7% |   VERIFIED
- 12 | 10 |      8.43754e-5 |     1.21466e-16 |         1.18114 |        11 |     3.17627e-16 |      2.615 |    1.357e-10% |     FAILED
+ 12 | 10 |      8.43754e-5 |     1.21466e-16 |         1.18114 |        11 |     3.17627e-16 |      2.615 |    1.357e-10% |   VERIFIED
  16 |  6 |      4.16604e-5 |     1.26968e-14 |         347.812 |         7 |     1.12682e-11 |      887.5 |     2.789e-8% |   VERIFIED
  16 | 10 |      4.16604e-5 |     1.21674e-20 |         1.19493 |        15 |     2.94699e-20 |      2.422 |    2.672e-14% |   VERIFIED
  16 | 11 |      4.16604e-5 |     1.01227e-20 |         1.19493 |        15 |     2.29131e-20 |      2.264 |    2.223e-14% |   VERIFIED
@@ -106,8 +106,8 @@ Key Diagnostic Summary for Test B:
    At K = 11: C_{cont} <= 1.379 across all N in {16, 20, 24}.
    At K = 12: C_{cont} <= 1.133 across all N in {16, 20, 24}.
    At K = 14: C_{cont} <= 1.133 across all N in {16, 20, 24}.
-2. The continuum tail deviation S_{cont}(N; K) is super-exponentially small:
-   At N = 24: K=10 gives 2.15e-26 | K=11 gives 2.29e-27 | K=12 gives 1.14e-27 (share < 1e-20%).
+2. The continuum tail deviation S_{cont}(N; K) decreases extremely rapidly over tested dimensions:
+   At N = 24: K=10 gives 2.46e-26 | K=11 gives 3.67e-27 | K=12 gives 1.71e-27 (share < 1e-19%).
 3. The calibrated continuum bound rigorously encloses S_{cont} with uniform O(1) slack ratio.
 
 =============================================================================================================================
@@ -168,10 +168,10 @@ Decomposition: Q_{even} = diag(Q) + V_{offdiag}  |  D_m = Q_{even}[m, m], R_m = 
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test D:
 1. Tunneling Ladder (m <= 9): Diagonal elements D_m and eigenvalues E_m are exponentially small.
-2. Continuum Regime (m >= 12): Diagonal elements D_m grow steadily from 1.34 up to 3.78.
-3. Coupling Ratio Decay: R_m / D_m drops from large values below barrier to ~ 0.15 - 0.40 in continuum.
-4. This structural matrix property ensures that the continuum spectrum is governed by the diagonal kinetic
-   growth, strictly bounding the gap sequence Delta_l and guaranteeing C_{cont}(K) = O(1) uniformly.
+2. Continuum Regime (m >= 12): Diagonal elements D_m oscillate in [1.00, 3.48], not growing monotonically.
+3. Off-diagonal coupling: Gershgorin radii R_m / D_m remain in [0.5, 3.2], indicating non-perturbative coupling.
+4. While diagonal entries do not provide a perturbative Gershgorin gap bound, the continuum spectrum
+   exhibits macroscopic separation from the origin, motivating direct operator-norm bounds for H_cont.
 
 ================================================================================
 CELL 85 EXECUTION COMPLETE
