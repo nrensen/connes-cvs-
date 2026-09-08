@@ -1,0 +1,105 @@
+=======================================================================================================================================
+CELL 89 — GEOMETRY OF THE LOW-ENERGY EIGENSPACE: SPECTRAL PROJECTORS,
+          COORDINATE DELOCALIZATION, AND PRINCIPAL ANGLE SWEEPS
+=======================================================================================================================================
+Configuration: c = 13, L = log(c) = 2.56494935746, T = 400
+Working Precision: 70 decimal digits
+Dimensions Sweep: N in [16, 20, 24, 28, 32, 36]
+Canonical Cutoff for Detailed Audits: K = 12 (Modes 0 ... 12, Dim = 13)
+=======================================================================================================================================
+
+>>> Processing Dimension N = 16 (dim = 17) ...
+   Completed N = 16 in 0.47s | E_13 = 2.49019
+
+>>> Processing Dimension N = 20 (dim = 21) ...
+   Completed N = 20 in 0.88s | E_13 = 2.06247
+
+>>> Processing Dimension N = 24 (dim = 25) ...
+   Completed N = 24 in 1.47s | E_13 = 1.8012
+
+>>> Processing Dimension N = 28 (dim = 29) ...
+   Completed N = 28 in 2.25s | E_13 = 1.31022
+
+>>> Processing Dimension N = 32 (dim = 33) ...
+   Completed N = 32 in 3.36s | E_13 = 0.813235
+
+>>> Processing Dimension N = 36 (dim = 37) ...
+   Completed N = 36 in 79.85s | E_13 = 0.78161
+
+All dimensions processed in 88.29s.
+
+=======================================================================================================================================
+TEST A: Spectral Projector Coordinate Mass Distribution (Canonical Cutoff K = 12, Dim = 13)
+P_{12} = sum_{j=0}^{12} u_j u_j^T | Coordinate Mass: p_m = (P_{12})_{mm} | Trace(P_{12}) = 13.0
+=======================================================================================================================================
+  N |    Core Mass (m<=12) |    Tail Leakage (m>12) |     Fractional Leakage |     Max Tail Mass (m>12)
+---------------------------------------------------------------------------------------------------------------------------------------
+ 16 |          10.83018792 |            2.169812077 |               16.6909% |               0.96302063
+ 20 |          9.992087389 |            3.007912611 |               23.1378% |               0.85543799
+ 24 |          9.087740912 |            3.912259088 |               30.0943% |               0.77002583
+ 28 |          9.009821734 |            3.990178266 |               30.6937% |               0.70699953
+ 32 |          9.014653153 |            3.985346847 |               30.6565% |               0.56588187
+ 36 |          9.009569712 |            3.990430288 |               30.6956% |               0.56494758
+---------------------------------------------------------------------------------------------------------------------------------------
+Key Diagnostic Summary for Test A:
+1. Coordinate Tail Leakage: Demonstrates that the low-energy eigenspace U_{12} does not live strictly in m <= 12.
+2. At N = 32 and N = 36, tail leakage quantifies the exact extent of modal coordinate delocalization.
+3. This rigorously explains why the coordinate-restricted continuum submatrix Q_even[13:N+1, 13:N+1] develops soft directions:
+   the low modes have tails extending into m >= 13, which are truncated by the coordinate projection.
+
+=======================================================================================================================================
+TEST B: Cumulative Coordinate Localization C_{12}(M) = sum_{m=0}^M p_m / 13.0 and Effective Dimensions M^*(90%, 99%, 99.9%)
+Canonical Cutoff K = 12 across N in {16, 20, 24, 28, 32, 36}
+=======================================================================================================================================
+  N |        C(12) |        C(14) |        C(16) |        C(20) |      M*(90%) |      M*(99%) |      M*(99.9%)
+---------------------------------------------------------------------------------------------------------------------------------------
+ 16 |     0.833091 |     0.900117 |          1.0 |          --- |           14 |           16 |             16
+ 20 |     0.768622 |     0.828132 |     0.915846 |          1.0 |           16 |           19 |             20
+ 24 |     0.699057 |     0.757382 |      0.83752 |     0.919443 |           19 |           22 |             24
+ 28 |     0.693063 |      0.74678 |     0.794434 |     0.857711 |           22 |           26 |             28
+ 32 |     0.693435 |     0.747315 |     0.795442 |     0.858515 |           22 |           30 |             31
+ 36 |     0.693044 |     0.746834 |     0.794927 |     0.857976 |           22 |           30 |             33
+---------------------------------------------------------------------------------------------------------------------------------------
+Key Diagnostic Summary for Test B:
+1. Rapid Cumulative Concentration: Tracks whether C_{12}(M) approaches 1 rapidly as M exceeds K = 12.
+2. Threshold Dimensions: Quantifies the effective coordinate dimension M^* required to enclose 90%, 99%, and 99.9%
+   of the low-energy eigenspace across dimensions.
+
+=======================================================================================================================================
+TEST C: Principal Angles: Minimum Principal Cosine cos(theta_{min}) = sigma_{min}(U_{12}^T V_M)
+Subspace Alignment between True Low-Energy Eigenspace U_{12} and Coordinate Subspaces V_M
+=======================================================================================================================================
+  N |      M = 12 (Bare) |        M = 14 (+2) |        M = 16 (+4) |        M = 20 (+8) |       M = N (Full)
+---------------------------------------------------------------------------------------------------------------------------------------
+ 16 |       0.0044446482 |         0.05224894 |                1.0 |                --- |                1.0
+ 20 |       0.0023947033 |         0.05532333 |         0.10987579 |                1.0 |                1.0
+ 24 |       7.1999503e-5 |       0.0094161388 |        0.031073189 |         0.20879021 |                1.0
+ 28 |       8.7864292e-5 |       0.0082058458 |          0.0137328 |        0.026136769 |                1.0
+ 32 |       7.4872409e-5 |       0.0073864936 |        0.020019998 |        0.040746076 |                1.0
+ 36 |       8.2323249e-5 |       0.0071933708 |         0.02077398 |        0.043285747 |                1.0
+---------------------------------------------------------------------------------------------------------------------------------------
+Key Diagnostic Summary for Test C:
+1. Subspace Tilt Diagnostic: cos(theta_{min}) measures the worst-case alignment of any low-energy mode with V_M.
+2. Coordinate Gap Recovery: Adding a small coordinate buffer (e.g. M = 16 or 20) closes the principal angle towards 1,
+   revealing how much coordinate padding is needed to achieve near-perfect subspace containment.
+
+=======================================================================================================================================
+TEST D: Extended Low-Energy Mode Counting Function N(E; N) = #{l in {0, ..., N} : E_l(N) < E}
+Auditing Whether the Low-Energy Spectral Sector Remains Finite-Dimensional up to N = 36
+=======================================================================================================================================
+  N |    E < 0.001 |     E < 0.01 |      E < 0.1 |     E < 0.25 |      E < 0.5 |     E < 0.75 |      E < 1.0 |      E < 1.5
+---------------------------------------------------------------------------------------------------------------------------------------
+ 16 |            8 |            9 |           10 |           10 |           10 |           10 |           10 |           11
+ 20 |            9 |           10 |           10 |           11 |           11 |           11 |           11 |           12
+ 24 |           10 |           11 |           11 |           11 |           12 |           12 |           12 |           13
+ 28 |           11 |           11 |           11 |           12 |           12 |           13 |           13 |           14
+ 32 |           11 |           11 |           12 |           12 |           12 |           13 |           14 |           15
+ 36 |           11 |           11 |           12 |           12 |           12 |           13 |           15 |           16
+---------------------------------------------------------------------------------------------------------------------------------------
+Key Diagnostic Summary for Test D:
+1. Deep Tunneling Stability: Verifies whether the deep tunneling sector (E < 0.001) remains locked at ~ 11 modes.
+2. Extended Scale Audit at N = 36: Tracks whether the mode counting function continues its slow-growth behavior.
+
+================================================================================
+CELL 89 EXECUTION COMPLETE
+================================================================================

@@ -9,21 +9,21 @@ Continuum Base Index: Mode 13 (Cutoff K = 12)
 =======================================================================================================================================
 
 >>> Processing Dimension N = 16 (dim = 17) ...
-   Completed N = 16 in 0.46s | E_13 = 2.490185 | lambda_min(Q_cont) = 0.15916813
+   Completed N = 16 in 0.47s | E_13 = 2.490185 | lambda_min(Q_cont) = 0.15916813
 
 >>> Processing Dimension N = 20 (dim = 21) ...
    Completed N = 20 in 0.92s | E_13 = 2.0624737 | lambda_min(Q_cont) = 0.01984558
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.61s | E_13 = 1.8012007 | lambda_min(Q_cont) = 0.00095063809
+   Completed N = 24 in 1.64s | E_13 = 1.8012007 | lambda_min(Q_cont) = 0.00095063809
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.62s | E_13 = 1.3102186 | lambda_min(Q_cont) = 0.00030696054
+   Completed N = 28 in 2.71s | E_13 = 1.3102186 | lambda_min(Q_cont) = 0.00030696054
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 4.05s | E_13 = 0.81323492 | lambda_min(Q_cont) = 0.00018822476
+   Completed N = 32 in 4.14s | E_13 = 0.81323492 | lambda_min(Q_cont) = 0.00018822476
 
-All dimensions processed in 9.66s.
+All dimensions processed in 9.88s.
 
 =======================================================================================================================================
 TEST A: Continuum Principal Submatrix Spectrum & Variational Lower Bound on E_{13}^{(N)}
@@ -38,11 +38,11 @@ Submatrix Q_{cont}^{(N)} = Q_{even}^{(N)}[13:N+1, 13:N+1] | Cauchy Interlacing: 
  32 |          20 |        0.00018822476 |         0.81323492 |           0.81304669 |    CERTIFIED (lmin <= E13)
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test A:
-1. Cauchy Interlacing Certification: lambda_{min}(Q_{cont}^{(N)}) <= E_{13}^{(N)} holds unconditionally
-   across all tested dimensions without a single violation.
-2. Principal Submatrix Lower Bound Profile:
-   lambda_{min}(Q_{cont}) tracks the downward movement of the continuum base, providing an exact variational floor.
-3. Positivity: lambda_{min}(Q_{cont}^{(N)}) > 0 holds strictly for every finite N.
+1. Cauchy Interlacing: lambda_{min}(Q_{cont}^{(N)}) <= E_{13}^{(N)} holds unconditionally across tested dimensions.
+2. Coordinate Coercivity Collapse: lambda_{min}(Q_{cont}) drops sharply: 0.159 -> 0.0198 -> 9.51e-4 -> 3.07e-4 -> 1.88e-4.
+3. Large Subspace Mismatch: While lambda_{min}(Q_{cont}) collapses to ~ 1.88e-4, the true eigenvalue remains macroscopic (E_{13} = 0.813).
+4. Conclusion: Coordinate principal submatrix truncation fails to provide a coercive continuum floor because the low-energy
+   eigenspace is rotated and delocalized in the coordinate basis, developing soft directions on the complement.
 
 =======================================================================================================================================
 TEST B: Low-Energy Mode Counting Function N(E; N) = #{l in {0, ..., N} : E_l(N) < E}
@@ -57,11 +57,11 @@ Auditing Whether the Low-Energy Spectral Sector Remains Finite-Dimensional as N 
  32 |           11 |           11 |           12 |           12 |           12 |           13 |           14 |           15
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test B:
-1. Deep Tunneling Sector (E < 0.001): Fixed cardinality of ~ 10-11 modes across all dimensions.
-2. Barrier Transition Sector (E < 0.50): Number of modes below 0.50 slowly grows: N(0.50) = 11 (N=20), 12 (N=28), 12 (N=32).
+1. Deep Tunneling Sector (E < 0.001): Cardinality slowly stabilizes: 8 -> 9 -> 10 -> 11 -> 11 modes.
+2. Barrier Transition Sector (E < 0.10): Cardinality is 10 -> 10 -> 11 -> 11 -> 12 modes.
 3. Macroscopic Continuum Sector (E < 1.00): N(1.00) = 11 (N=16), 11 (N=20), 12 (N=24), 12 (N=28), 14 (N=32).
-4. Conclusion: The low-energy sector below E = 1.0 has cardinality bounded by ~ 14 at N = 32, demonstrating that
-   the low-energy spectrum is concentrated on a small, finite-dimensional subspace.
+4. Conclusion: The observed low-energy counting function is growing slowly over N <= 32, providing strong empirical
+   evidence for a finite-dimensional limiting low-energy sector, though not yet a formal proof.
 
 =======================================================================================================================================
 TEST C: Deflated Subspace Min-Max Bounds: Orthogonal Complement Infimum
@@ -77,7 +77,7 @@ Comparison between True E_{13}^{(N)}, Submatrix lambda_{min}(Q_{cont}), and Seco
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test C:
 1. Submatrix interlacing: lambda_1(Q_{cont}) <= E_{13} and lambda_2(Q_{cont}) <= E_{14} hold throughout.
-2. The submatrix spectrum provides an intrinsically coordinate-based lower bound system for the continuum spectrum.
+2. The submatrix spectrum reveals that multiple soft directions (lambda_2 collapses to 0.0118) develop in Q_{cont}.
 
 =======================================================================================================================================
 TEST D: Modal Energy Form Decomposition across the Transition (N = 32)
@@ -95,14 +95,14 @@ Tracking Consecutive Mode Ratios E_{l+1} / E_l and Gaps Delta_l across Modes l i
       16 |            1.96521 |          0.0157633 |            1.00802 |      Upper Continuum Band
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test D:
-1. Transition Dynamics at N = 32:
-   - Mode 10: E_{10} = 2.1e-5 (Tunneling floor)
-   - Mode 11: E_{11} = 0.0381 (Jump ratio E_{11}/E_{10} ~ 1800)
-   - Mode 12: E_{12} = 0.5888 (Ratio E_{12}/E_{11} ~ 15.4)
-   - Mode 13: E_{13} = 0.8132 (Ratio E_{13}/E_{12} ~ 1.38)
-   - Mode 14: E_{14} = 1.0543 (Ratio E_{14}/E_{13} ~ 1.30)
-2. The ratio E_{l+1}/E_l drops precipitously from ~ 1800 at the barrier edge to ~ 1.38 at mode 13,
-   confirming that mode 13 has entered the regular, slow-growth continuum band.
+1. Transition Dynamics at N = 32 (Actual Computed Values):
+   - Mode 10: E_{10} = 1.237e-4 (Tunneling floor)
+   - Mode 11: E_{11} = 0.03869 (Jump ratio E_{11}/E_{10} ~ 313)
+   - Mode 12: E_{12} = 0.58886 (Ratio E_{12}/E_{11} ~ 15.2)
+   - Mode 13: E_{13} = 0.81323 (Ratio E_{13}/E_{12} ~ 1.38)
+   - Mode 14: E_{14} = 1.31739 (Ratio E_{14}/E_{13} ~ 1.62)
+2. The consecutive ratio E_{l+1}/E_l drops precipitously from ~ 313 at the barrier edge to ~ 1.38 at mode 13,
+   confirming that mode 13 marks the onset of the regular, slow-growth macroscopic continuum band.
 
 ================================================================================
 CELL 88 EXECUTION COMPLETE
