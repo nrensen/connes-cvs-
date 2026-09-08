@@ -12,24 +12,24 @@ Subspace Cutoffs K in [8, 9, 10, 11, 12, 13, 14, 15] (Subspace Dimensions 9 ... 
    Completed N = 16 in 0.45s | E_13 = 2.49019
 
 >>> Processing Dimension N = 20 (dim = 21) ...
-   Completed N = 20 in 0.86s | E_13 = 2.06247
+   Completed N = 20 in 0.85s | E_13 = 2.06247
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.42s | E_13 = 1.8012
+   Completed N = 24 in 1.41s | E_13 = 1.8012
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.24s | E_13 = 1.31022
+   Completed N = 28 in 2.23s | E_13 = 1.31022
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 3.31s | E_13 = 0.813235
+   Completed N = 32 in 3.34s | E_13 = 0.813235
 
 >>> Processing Dimension N = 36 (dim = 37) ...
-   Completed N = 36 in 4.79s | E_13 = 0.78161
+   Completed N = 36 in 4.75s | E_13 = 0.78161
 
 >>> Processing Dimension N = 40 (dim = 41) ...
-   Completed N = 40 in 82.12s | E_13 = 0.726113
+   Completed N = 40 in 6.53s | E_13 = 0.726113
 
-All dimensions processed in 95.20s.
+All dimensions processed in 19.56s.
 
 =======================================================================================================================================
 TEST A: Nested-N Spectral Subspace Overlap: Minimum Principal Cosine sigma_{min}((U_K^{(N)})^T U_K^{(N+4)})
@@ -72,7 +72,8 @@ Delta P_K = P_K^{(N+4)} - tilde{P}_K^{(N)} in R^{(N+5) x (N+5)} across Canonical
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test B:
 1. Cauchy Convergence Rate: ||Delta P_K|| measures the absolute distance between embedded spectral projectors.
-2. Geometric Stabilization: Rapid decay of ||Delta P_K|| demonstrates that the spectral subspace converges in Hilbert space.
+2. Geometric Stabilization: The observed projector differences decrease rapidly over the computed sequence,
+   providing numerical evidence consistent with convergence of the corresponding spectral subspaces.
 
 =======================================================================================================================================
 TEST C: Transition Cluster Energy Tracking: Ritz Energies E_j^{(N)} for Modes j in {7, ..., 16}
@@ -99,7 +100,8 @@ Step Decrements Delta E_j = E_j^{(N)} - E_j^{(N-4)} across the Dimension Steps:
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test C:
 1. Downward Deceleration Audit: Confirms whether the deceleration observed at N = 36 continues into N = 40.
-2. Mode 13 Plateau: Quantifies the stability of the continuum base candidate E_{13}.
+2. Mode 13 Drift & Mode 12 Stabilization: Quantifies the ongoing drift of E_{13} (0.7816 -> 0.7261)
+   in contrast to the emerging stability of E_{12} (0.5858 -> 0.5724).
 
 =======================================================================================================================================
 TEST D: Extended Low-Energy Mode Counting Function N(E; N) = #{l in {0, ..., N} : E_l(N) < E}
