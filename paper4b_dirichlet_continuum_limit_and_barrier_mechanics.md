@@ -1974,9 +1974,9 @@ $$\boxed{T_j = \mathcal{K}_j \cdot \mathcal{G}_j \cdot \mathcal{S}_j,} \tag{8.23
 $$\boxed{T_j = \mathcal{K}_j \cdot \mathcal{Q}_j, \qquad \mathcal{Q}_j \equiv \mathcal{G}_j \cdot \mathcal{S}_j = \frac{D_0^2 + (\mu_1 - \lambda)^2 \mathcal{E}_{\mathrm{even}}(\mu_1)}{D_0^2 + (\mu_j - \lambda)^2 \mathcal{E}_{\mathrm{even}}(\mu_j)},} \tag{8.23.4}$$
 *where $\mathcal{E}_{\mathrm{even}}(\mu) \equiv \sum_{k=1}^N \frac{d_k^2}{(\mu - E_k)^2}$ is the excited even-resolvent sum. Consequently:*
 1. *Formal Polynomial Criterion: If for mode $j \ge 2$, the overlap ratio satisfies polynomial growth $\frac{a_j^2}{a_1^2} \le \mathcal{C}_j N^p$, then exponential tunneling gap suppression $\frac{\mu_1 - \lambda}{\mu_j - \lambda} = \mathcal{O}(e^{-\Delta\sigma_j N})$ ensures $T_j = \mathcal{O}(N^p e^{-2\Delta\sigma_j N}) \to 0$.*
-2. *Semiclassical Action Competition Criterion: If the Stieltjes derivative ratio grows exponentially as $\mathcal{G}_j(N) = \mathcal{O}(e^{\gamma_j N})$ with growth rate $\gamma_j > 0$, while the squared tunneling gap ratio decays exponentially as $\mathcal{S}_j(N) = \mathcal{O}(e^{-\tau_j N})$ with decay rate $\tau_j > 0$, then tail extinction $T_j \to 0$ holds if and only if the spectral gap suppression rate strictly dominates the overlap growth rate:*
-$$\boxed{\tau_j > \gamma_j \quad \Longleftrightarrow \quad \Delta S_j \equiv \tau_j - \gamma_j > 0,} \tag{8.23.5}$$
-*yielding exponential tail quenching $T_j = \mathcal{O}(e^{-(\tau_j - \gamma_j) N}) \to 0$.*
+2. *Semiclassical Action Competition Criterion: If the Stieltjes derivative ratio grows exponentially as $\mathcal{G}_j(N) = \mathcal{O}(e^{\gamma_j N})$ with growth rate $\gamma_j > 0$, while the squared tunneling gap ratio decays exponentially as $\mathcal{S}_j(N) = \mathcal{O}(e^{-\tau_j N})$ with decay rate $\tau_j > 0$, then strict action dominance:*
+$$\boxed{\tau_j > \gamma_j \quad \Longleftrightarrow \quad \Delta S_j \equiv \tau_j - \gamma_j > 0} \tag{8.23.5}$$
+*is sufficient for exponential tail extinction $T_j = \mathcal{O}(e^{-(\tau_j - \gamma_j) N}) \to 0$ (and, under the existence of the two logarithmic rates, necessary away from the critical case $\tau_j = \gamma_j$).*
 
 ---
 
@@ -2011,7 +2011,7 @@ $$G_d'(\mu) = \frac{D_0^2}{(\mu - \lambda)^2} + \mathcal{E}_{\mathrm{even}}(\mu)
 Multiplying by $(\mu - \lambda)^2$ eliminates the ground-state denominator identically:
 $$G_d'(\mu)(\mu - \lambda)^2 = D_0^2 + (\mu - \lambda)^2 \mathcal{E}_{\mathrm{even}}(\mu).$$
 Applying this identity to $\mu_1$ in the numerator and $\mu_j$ in the denominator of $\mathcal{Q}_j \equiv \mathcal{G}_j \mathcal{S}_j = \frac{G_d'(\mu_1)(\mu_1 - \lambda)^2}{G_d'(\mu_j)(\mu_j - \lambda)^2}$ yields the exact pole-cancellation formula (8.23.4).
-Under the asymptotic scalings $\mathcal{G}_j = \mathcal{O}(e^{\gamma_j N})$ and $\mathcal{S}_j = \mathcal{O}(e^{-\tau_j N})$, substituting into $T_j = \mathcal{K}_j \mathcal{G}_j \mathcal{S}_j$ with $\mathcal{K}_j = \Theta(1)$ gives $T_j = \mathcal{O}(e^{-(\tau_j - \gamma_j) N})$, which vanishes as $N \to \infty$ if and only if $\tau_j > \gamma_j$. $\blacksquare$
+Under the asymptotic scalings $\mathcal{G}_j = \mathcal{O}(e^{\gamma_j N})$ and $\mathcal{S}_j = \mathcal{O}(e^{-\tau_j N})$ with $\mathcal{K}_j = \Theta(1)$, substituting into $T_j = \mathcal{K}_j \mathcal{G}_j \mathcal{S}_j$ gives $T_j = \mathcal{O}(e^{-(\tau_j - \gamma_j) N})$, which vanishes exponentially as $N \to \infty$ whenever $\tau_j > \gamma_j$. Under the existence of strict exponential rates with $\mathcal{K}_j = \Theta(1)$, $\tau_j > \gamma_j$ is necessary away from the critical case $\tau_j = \gamma_j$. $\blacksquare$
 
 ---
 
@@ -2111,10 +2111,10 @@ N & \mathcal{K}_3 & \mathcal{G}_3 & \mathcal{S}_3 & \mathcal{Q}_3 & T_3^{\mathrm
 
 ### Analytical Conclusions from the Cell 72 Audit
 
-1. **Unconditional Verification of Strict Action Dominance ($\tau_2 > \gamma_2$):**
-   Across every single consecutive interval tested, the spectral gap suppression exponent $\tau_2$ strictly exceeds the overlap growth exponent $\gamma_2$:
+1. **Empirical Verification of Strict Action Dominance Across Tested Dimensions ($\tau_2 > \gamma_2$):**
+   Across every consecutive dimension interval tested ($N \in \{8, 12, 16, 20, 24\}$), the discrete spectral gap suppression exponent $\tau_2$ strictly exceeds the overlap growth exponent $\gamma_2$:
    $$\Delta S_2 \equiv \tau_2 - \gamma_2 \in [+0.050, +0.332] > 0.$$
-   Because $\mathcal{K}_2 \in [1.44, 1.79]$ is a bounded $\mathcal{O}(1)$ constant, the net tail extinction rate $\sigma_{T_2} \equiv -\frac{\Delta \log T_2}{\Delta N} > 0$ strictly across all dimensions, forcing $T_2$ to decrease monotonically from $9.07 \times 10^{-5}$ at $N=8$ to $4.52 \times 10^{-6}$ at $N=24$.
+   Because $\mathcal{K}_2 \in [1.44, 1.79]$ remains a bounded $\mathcal{O}(1)$ constant, the empirical tail extinction slope $\sigma_{T_2} \equiv -\frac{\Delta \log T_2}{\Delta N} > 0$ is strictly positive across all tested intervals, driving $T_2$ down monotonically from $9.07 \times 10^{-5}$ at $N=8$ to $4.52 \times 10^{-6}$ at $N=24$. While the variation in consecutive slopes ($\Delta S_2$ fluctuating between $0.050$ and $0.332$) reflects discrete finite-size transients rather than an infinite-dimensional asymptotic constant, the persistent positivity $\Delta S_2 > 0$ provides strong empirical confirmation of strict action dominance across the tested dimensions.
 2. **Exact Algebraic Fidelity of Even-Resolvent Pole Cancellation:**
    The exact identity $\mathcal{Q}_2 = \mathcal{Q}_2^{\mathrm{pole}}$ was verified to backward error $\le 1.63 \times 10^{-55}$ across all dimensions. Table 8.23.4 reveals the structural reason why $\mathcal{Q}_2$ is well-behaved:
    - In the numerator, $(\mu_1 - \lambda)^2 \mathcal{E}_{\mathrm{even}}(1)$ exceeds $D_0^2$ by 6 orders of magnitude ($10^{-34}$ vs $10^{-40}$ at $N=24$), so $D_0^2$ is completely sub-dominant.
@@ -2123,6 +2123,79 @@ N & \mathcal{K}_3 & \mathcal{G}_3 & \mathcal{S}_3 & \mathcal{Q}_3 & T_3^{\mathrm
      $$\mathcal{Q}_2 \approx \left( \frac{\mu_1 - \lambda}{\mu_2 - \lambda} \right)^2 \left( \frac{\mathcal{E}_{\mathrm{even}}(\mu_1)}{\mathcal{E}_{\mathrm{even}}(\mu_2)} \right) = \mathcal{S}_2 \cdot \mathcal{G}_2.$$
 3. **Higher-Mode Decoupling Acceleration:**
    For mode $j=3$, the product $\mathcal{Q}_3$ drops to $3.36 \times 10^{-11}$ at $N=24$, driving $T_3$ down to $1.23 \times 10^{-10}$. The spectral suppression factor $\mathcal{S}_3 \sim 10^{-20}$ completely quenches the overlap $\mathcal{G}_3 \sim 10^9$. This confirms that mode $j=2$ is the sole remaining active continuum mode in the wavepacket tail.
+
+---
+
+## 8.24 Proposition 8.24: Positive Regularized Stieltjes Function $H(\mu) \equiv (\mu - \lambda)^2 G_d'(\mu)$, Exact Modal Ratio $\mathcal{Q}_j = H(\mu_1)/H(\mu_j)$, and Interlacing Pole Architecture
+
+While the three-factor decomposition $T_j = \mathcal{K}_j \mathcal{G}_j \mathcal{S}_j$ separates the coordinate kinetic ratio $\mathcal{K}_j = \Theta(1)$ from the overlap growth $\mathcal{G}_j \sim 10^5$ and tunneling gap suppression $\mathcal{S}_j \sim 10^{-11}$, tracking the competition between $\mathcal{G}_j$ and $\mathcal{S}_j$ requires balancing two wildly disparate numerical scales. 
+
+Proposition 8.24 unifies these opposing factors into a single positive, rational scalar function $H(\mu) \equiv (\mu - \lambda)^2 G_d'(\mu)$. This eliminates both intermediate scales simultaneously, casting the bound-state wavepacket tail extinction strictly as the growth of $H(\mu)$ between $\mu_1$ and $\mu_j$.
+
+### Proposition 8.24 (Positive Regularized Stieltjes Representation and Exact Modal Ratio)
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Connes–van Suijlekom Galerkin operator with cutoff parameter $c > 1$ ($L = \log c$). Let $\{ (E_k, u_k^{\mathrm{even}}) \}_{k=0}^N$ and $\{ (\mu_j, u_j^{\mathrm{odd}}) \}_{j=0}^{N-1}$ denote the even and odd eigensystems, with even ground state $u_0^{\mathrm{even}} \equiv c$, $E_0 = \lambda$, boundary overlaps $d_k \equiv \langle d, u_k^{\mathrm{even}} \rangle$, and boundary-layer amplitude $d_0 = D_0 \ne 0$.*
+
+**Part I (Positive Regularized Stieltjes Function — Unconditional Definition):**
+*For any $\mu \in \mathbb{R} \setminus \{E_1, \dots, E_N\}$, define the regularized Stieltjes function:*
+$$\boxed{H(\mu) \equiv (\mu - \lambda)^2 G_d'(\mu) = D_0^2 + \sum_{k=1}^N d_k^2 \left( \frac{\mu - \lambda}{E_k - \mu} \right)^2.} \tag{8.24.1}$$
+*The function $H(\mu)$ is manifestly positive and finite for all $\mu \notin \{E_1, \dots, E_N\}$. At the even ground state $\mu = \lambda$, $H(\lambda) = D_0^2$.*
+
+**Part II (Exact Modal Ratio Representation — Unconditional Theorem):**
+*For every excited odd mode $j \ge 1$, the combined overlap-spectral factor $\mathcal{Q}_j \equiv \mathcal{G}_j \mathcal{S}_j$ satisfies the exact finite-$N$ identity:*
+$$\boxed{\mathcal{Q}_j = \frac{H(\mu_1)}{H(\mu_j)},} \tag{8.24.2}$$
+*and the excited wavepacket tail ratio satisfies:*
+$$\boxed{T_j = \mathcal{K}_j \frac{H(\mu_1)}{H(\mu_j)}.} \tag{8.24.3}$$
+*In particular, the large dynamic scales $\mathcal{G}_j \sim 10^5$ and $\mathcal{S}_j \sim 10^{-11}$ are completely absent: the wavepacket tail is determined entirely by the scalar values of $H(\mu)$ evaluated at the odd eigenvalues $\mu_1$ and $\mu_j$.*
+
+**Part III (Nearest-Pole Interlacing Lower Bound — Unconditional Theorem):**
+*Because all terms in the sum (8.24.1) are non-negative, for every $j \ge 1$ and every $k \in \{1, \dots, N\}$:*
+$$H(\mu_j) \ge d_k^2 \left( \frac{\mu_j - \lambda}{E_k - \mu_j} \right)^2.$$
+*In particular, let $k_{\mathrm{near}}(j) \in \{1, \dots, N\}$ denote the even index that minimizes the spectral distance $|E_k - \mu_j|$ to the odd mode $\mu_j$. Then:*
+$$\boxed{H(\mu_j) \ge d_{k_{\mathrm{near}}}^2 \left( \frac{\mu_j - \lambda}{E_{k_{\mathrm{near}}} - \mu_j} \right)^2.} \tag{8.24.4}$$
+
+---
+
+### Proof of Proposition 8.24
+
+**1. Proof of Part I (Positive Regularized Stieltjes Representation):**
+By definition, the Stieltjes derivative of the boundary measure $d$ on $H_{\mathrm{even}}$ is:
+$$G_d'(\mu) = \sum_{k=0}^N \frac{d_k^2}{(E_k - \mu)^2} = \frac{d_0^2}{(\lambda - \mu)^2} + \sum_{k=1}^N \frac{d_k^2}{(E_k - \mu)^2}.$$
+Since $d_0 = \langle d, c \rangle = D_0$, multiplying by $(\mu - \lambda)^2$ yields:
+$$H(\mu) \equiv (\mu - \lambda)^2 G_d'(\mu) = D_0^2 + \sum_{k=1}^N d_k^2 \frac{(\mu - \lambda)^2}{(E_k - \mu)^2} = D_0^2 + \sum_{k=1}^N d_k^2 \left( \frac{\mu - \lambda}{E_k - \mu} \right)^2.$$
+Because every term in this finite sum is a squared real quantity, and $D_0^2 > 0$ for all $N \ge 1$, $H(\mu) > 0$ strictly for all $\mu \notin \{E_1, \dots, E_N\}$.
+
+**2. Proof of Part II (Exact Modal Ratio Representation):**
+By Proposition 8.23 Part III, $\mathcal{G}_j \equiv \frac{G_d'(\mu_1)}{G_d'(\mu_j)}$ and $\mathcal{S}_j \equiv \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$.
+Multiplying these two ratios:
+$$\mathcal{Q}_j \equiv \mathcal{G}_j \mathcal{S}_j = \left( \frac{G_d'(\mu_1)}{G_d'(\mu_j)} \right) \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 = \frac{(\mu_1 - \lambda)^2 G_d'(\mu_1)}{(\mu_j - \lambda)^2 G_d'(\mu_j)} = \frac{H(\mu_1)}{H(\mu_j)}.$$
+Substituting into $T_j = \mathcal{K}_j \mathcal{Q}_j$ gives (8.24.3). This completes the proof of Part II.
+
+**3. Proof of Part III (Nearest-Pole Interlacing Lower Bound):**
+Since $D_0^2 > 0$ and $d_k^2 (\frac{\mu_j - \lambda}{E_k - \mu_j})^2 \ge 0$ for all $k$, dropping all terms except $k = k_{\mathrm{near}}$ yields the unconditional lower bound:
+$$H(\mu_j) > d_{k_{\mathrm{near}}}^2 \left( \frac{\mu_j - \lambda}{E_{k_{\mathrm{near}}} - \mu_j} \right)^2.$$
+$\blacksquare$
+
+---
+
+### Analytical Commentary on Proposition 8.24
+
+1. **Elimination of Artificial Semiclassical Scales:**
+   In Proposition 8.23, the tail ratio $T_j$ was interpreted through the competition between overlap growth $\mathcal{G}_2 \sim 10^5$ and spectral suppression $\mathcal{S}_2 \sim 10^{-11}$. While physically intuitive from a WKB tunneling perspective, this framing creates large intermediate dynamic ranges. 
+   Proposition 8.24 shows that $\mathcal{G}_j$ and $\mathcal{S}_j$ are simply two representations of the same underlying rational function $H(\mu)$:
+   $$\mathcal{Q}_j = \frac{H(\mu_1)}{H(\mu_j)}.$$
+   At $N=24$, $H(\mu_1) = 5.8745 \times 10^{-34}$ and $H(\mu_2) = 2.3242 \times 10^{-28}$, directly yielding $\mathcal{Q}_2 = 2.5275 \times 10^{-6}$.
+
+2. **The Wavepacket Extinction Programme via $H(\mu)$:**
+   Proving tail extinction $T_j \to 0$ in the continuum limit now reduces to a single, mathematically clean spectral question:
+   $$\frac{H(\mu_1)}{H(\mu_j)} \longrightarrow 0 \qquad (j \ge 2) \quad \Longleftrightarrow \quad \frac{H(\mu_2)}{H(\mu_1)} \longrightarrow \infty.$$
+   Because $\mu_1$ is exponentially close to $\lambda$ ($\mu_1 - \lambda \sim 10^{-17}$ at $N=24$), the ground-state factor $(\mu_1 - \lambda)^2$ severely suppresses all excited pole terms $k \ge 1$ in $H(\mu_1)$, leaving $H(\mu_1)$ tightly controlled. Conversely, for mode $j=2$, the tunneling gap $(\mu_2 - \lambda)^2 \sim 10^{-11}$ is dramatically larger, while the denominator $(E_k - \mu_2)^2$ experiences resonant amplification from the nearest interlaced even eigenvalues $E_1$ and $E_2$.
+
+3. **Empirical Motivation for the `cell73.py` Diagnostic Audit:**
+   To turn the lower bound (8.24.4) into an analytical asymptotic proof, one must determine:
+   - Which even poles $k \in \{1, \dots, N\}$ dominate the sum $H(\mu_j)$.
+   - How the boundary weights $d_k^2$ scale with $N$ across the spectrum.
+   - The exact scaling of the interlacing distance $|E_{k_{\mathrm{near}}} - \mu_j|$.
+   This term-by-term pole audit is executed in `cell73.py`.
 
 ---
 
