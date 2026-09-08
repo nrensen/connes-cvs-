@@ -269,9 +269,9 @@ def run_cell89() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test A:")
     print("1. Coordinate Tail Leakage: Demonstrates that the low-energy eigenspace U_{12} does not live strictly in m <= 12.")
-    print("2. At N = 32 and N = 36, tail leakage quantifies the exact extent of modal coordinate delocalization.")
-    print("3. This rigorously explains why the coordinate-restricted continuum submatrix Q_even[13:N+1, 13:N+1] develops soft directions:")
-    print("   the low modes have tails extending into m >= 13, which are truncated by the coordinate projection.")
+    print("2. At N = 32 and N = 36, tail leakage quantifies the exact extent of modal coordinate delocalization (~ 30.7%).")
+    print("3. The low-energy eigenspace has substantial mass (~ 30.7%) in the coordinates retained by the continuum block,")
+    print("   which is strongly consistent with the emergence of soft directions, though a full causal theorem requires further spectral analysis.")
 
     # =========================================================================
     # TEST B: Cumulative Coordinate Localization C_K(M) & Effective Dimension
