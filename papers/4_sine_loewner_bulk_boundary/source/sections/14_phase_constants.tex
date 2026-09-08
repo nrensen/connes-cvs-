@@ -1,0 +1,518 @@
+\section{Fixed-phase constant terms}\label{v11:sec:phase-constants}
+Use the global exchange and full-fiber gauge of
+Sections~\ref{sec:crosswindow} and~\ref{app:general-trace}, with scalar
+star entries $c=c_\theta$, $s=s_\theta$. The block Toeplitz constant
+\cite[Theorem~2.3 and Corollary~2.4]{BasorEhrhardtVirtanen2024}
+combines with trace-norm \emph{convergence} of the physical boundary
+corrections; boundedness alone does not give a constant term.
+
+For $|z|<1$ put
+\[
+ \beta(z)=\varkappa\bigl(x\mapsto\log(1-zx)\bigr).
+\]
+The scalar logarithm and every determinant logarithm in this section are
+analytic determinations equal to zero at $z=0$.
+
+\begin{theorem}[Fixed-phase determinant and band-local trace constants]
+\label{v11:thm:phase-constant}\label{v11:cor:band-constant}
+For real $r,\phi$ there is a holomorphic function
+$\mathfrak D(z;r,\phi)$ on $|z|<1$, with $\mathfrak D(0;r,\phi)=0$, such that
+\begin{equation}\label{v11:eq:phase-det}
+ \log\det(I-z\mathcal K_{n+r,\phi})
+ =2(n+r)\log(1-z^2)+\beta(z)\log(n+r)
+       +\mathfrak D(z;r,\phi)+o(1)
+\end{equation}
+as the integer $n$ tends to infinity.  The error is locally uniform in
+$z$ and uniform for $(r,\phi)$ in a compact set.
+For every real Lipschitz $f$ on $[-1,1]$ with $f(0)=0$ and $C^2$
+restrictions to $[-1,-g]$ and $[g,1]$, where $g=2^{-1/2}$, there is a
+continuous function $\mathfrak C_f(r,\phi)$ such that
+\begin{equation}\label{v11:eq:phase-smooth}
+ \operatorname{tr}f(\mathcal K_{n+r,\phi})
+ =2(n+r)[f(1)+f(-1)]+\varkappa(f)\log(n+r)
+       +\mathfrak C_f(r,\phi)+o(1),
+\end{equation}
+uniformly on compact sets of $(r,\phi)$. In particular, for every $p\ge1$,
+\begin{equation}\label{v11:eq:schatten-constant}
+ \|\mathcal K_{n+r,\phi}\|_p^p
+ =4(n+r)+\varkappa_p\log(n+r)+\mathfrak C_p(r,\phi)+o(1).
+\end{equation}
+The determinant constant is specified by
+\eqref{v11:eq:phase-constant-product}.
+\end{theorem}
+
+The diagonal identity
+$\tr\mathcal K_{n+r,\phi}=2\pi^{-1}\sin(2\pi r)\cos\phi$
+and locally uniform differentiation give
+\begin{equation}\label{v11:eq:phase-first}
+ \partial_z\mathfrak D(0;r,\phi)
+ =-\frac2\pi\sin(2\pi r)\cos\phi.
+\end{equation}
+The second derivative is
+\begin{equation}\label{v11:eq:phase-second}
+ \partial_z^2\mathfrak D(0;r,\phi)=\frac2{\pi^2}
+ [\log(4\pi)+1+\gamma_E+(\log2)\cos(4\pi r)\cos(2\phi)],
+\end{equation}
+where $\gamma_E$ is Euler's constant. Here is a direct check retaining
+both phases. Write $s(u)=\sin(\pi u)/(\pi u)$ and let $C_\tau$ be
+its compression to $(-\tau,\tau)$. Product-to-sum and the variables
+$u=X-Y$, $v=X+Y$ give
+\[
+ \tr\mathcal K_{\tau,\phi}^2
+ =2\tr C_\tau^2+\frac{2\cos(2\phi)}{\pi^3}
+   \int_0^{2\tau}\frac{\sin^2(\pi u)\sin(4\pi\tau-2\pi u)}{u^2}du.
+\]
+Since $\int_\mathbb R s^2=1$,
+\[
+ 2\tau-\tr C_\tau^2
+ =4\tau\int_{2\tau}^\infty s(u)^2du+
+       \frac2{\pi^2}\int_0^{2\tau}\frac{\sin^2(\pi u)}u du
+ =\frac{1+\gamma_E+\log(4\pi\tau)}{\pi^2}+O(\tau^{-1}).
+\]
+The last equality follows by one integration by parts in the tail and
+$\int_0^x(1-\cos t)dt/t=\gamma_E+\log x-\operatorname{Ci}(x)$,
+where $\operatorname{Ci}(x)=-\int_x^\infty\cos t\,dt/t=O(x^{-1})$.
+Extending the oscillatory integral to infinity costs $O(\tau^{-1})$.
+The resulting cosine integral is zero, whereas
+\[
+ \int_0^\infty\frac{\sin^2(\pi u)\sin(2\pi u)}{u^2}du
+ =\pi\int_0^\infty\frac{\cos(2\pi u)-\cos(4\pi u)}u du
+ =\pi\log2.
+\]
+For the cosine integral use
+$\sin^2(\pi u)\cos(2\pi u)=\tfrac12(\cos(2\pi u)-1)
+-\tfrac14(\cos(4\pi u)-1)$ and
+$\int_0^\infty(1-\cos au)du/u^2=\pi a/2$.
+The sine identity follows by integration by parts and the damped
+Frullani integral. Thus the quadratic trace is
+$4\tau-2\pi^{-2}[\log(4\pi\tau)+1+\gamma_E+
+(\log2)\cos(4\pi\tau)\cos(2\phi)]+O(\tau^{-1})$.
+Twice differentiating the locally uniform limit
+\eqref{v11:eq:phase-det} proves \eqref{v11:eq:phase-second}.
+
+\subsection{Localization of the gauge correction}
+
+Identify the physical space with
+$\mathscr X=\ell^2(\mathbb Z;\mathscr H)$, where $\mathscr H=L^2(0,1)$,
+and retain the symbols of Section~\ref{app:general-trace}.  Write
+\[
+ \mathscr B=\mathcal L(\sigma),\qquad
+ \mathscr U=\mathcal L(V),\qquad
+ \mathscr C=\mathscr U^*\mathscr B\mathscr U=\mathcal L(a).
+\]
+Thus $\mathscr B,\mathscr C$ are self-adjoint contractions and
+$\mathscr U$ is unitary.  All three commute with the bilateral cell shift
+$\mathsf S$, defined by $(\mathsf Sx)_j=x_{j-1}$.
+Let $\Pi_+$ select the cells $j\ge0$, put $\Pi_-=I-\Pi_+$, and set
+$R_m=\mathsf S^m\Pi_-\mathsf S^{-m}$.  The projection onto the cells
+$0,\ldots,m-1$ satisfies
+\begin{equation}\label{v11:eq:projection-split}
+ P_m=\Pi_++R_m-I.
+\end{equation}
+
+Lemma~\ref{rev5:lem:seam} also gives $[\Pi_\pm,\mathscr U]\in\mathfrak S_1$
+and the same for $\mathscr U^*$: each half-line has one inverse-square
+Hankel corner and a Fourier remainder summable with weight $|k|$.
+
+\begin{lemma}[Two boundary corrections]\label{v11:lem:gauge-localization}
+For an orthogonal projection $E$ put
+\[
+ D(E)=\mathscr U^*E\mathscr B E\mathscr U-E\mathscr C E,
+ \qquad D_+=D(\Pi_+),\quad D_-=D(\Pi_-).
+\]
+Then $D_+,D_-$ are trace class and
+\begin{equation}\label{v11:eq:gauge-localization}
+ \|D(P_m)-D_+-\mathsf S^mD_-\mathsf S^{-m}\|_1\longrightarrow0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The exact identity
+\begin{equation}\label{v11:eq:D-identity}
+ D(E)=\mathscr U^*E\mathscr B[E,\mathscr U]
+             +[\mathscr U^*,E]\mathscr B\mathscr U E
+\end{equation}
+first proves the trace-class assertion.  Insert
+\eqref{v11:eq:projection-split} in its two commutators and subtract the
+identities for $\Pi_+$ and $R_m$.  The difference consists of exactly
+\begin{align*}
+ &\mathscr U^*(P_m-\Pi_+)\mathscr B[\Pi_+,\mathscr U],&
+ &\mathscr U^*(P_m-R_m)\mathscr B[R_m,\mathscr U],\\
+ &[\mathscr U^*,\Pi_+]\mathscr B\mathscr U(P_m-\Pi_+),&
+ &[\mathscr U^*,R_m]\mathscr B\mathscr U(P_m-R_m).
+\end{align*}
+The first and third contain the strongly null projection
+$P_m-\Pi_+=-\mathsf S^m\Pi_+\mathsf S^{-m}$. After translation by
+$\mathsf S^{-m}$, the others contain $-\mathsf S^{-m}\Pi_-\mathsf S^m$.
+Finite-rank approximation gives $\|X_mT\|_1\to0$ for fixed
+$T\in\mathfrak S_1$ and uniformly bounded strongly null $X_m$;
+it also gives $\|TX_m\|_1\to0$ when $X_m^*\to0$ strongly.
+Applied to the fixed commutators, this proves all four limits.
+\end{proof}
+
+Set
+\[
+ \mathscr A_m=\mathscr U^*P_m\mathscr B P_m\mathscr U,
+ \quad\mathscr C_m=P_m\mathscr C P_m,
+ \quad\mathscr A_\pm=\mathscr U^*\Pi_\pm\mathscr B\Pi_\pm\mathscr U,
+ \quad\mathscr C_\pm=\Pi_\pm\mathscr C\Pi_\pm.
+\]
+These are self-adjoint contractions; the finite compressions and
+$D_\pm=\mathscr A_\pm-\mathscr C_\pm$ are trace class. Define
+\begin{equation}\label{v11:eq:gauge-det-factors}
+ e_\pm(z)=\det\bigl[I-zD_\pm(I-z\mathscr C_\pm)^{-1}\bigr],
+ \qquad |z|<1.
+\end{equation}
+These determinants are holomorphic and nonzero, because their operators
+equal $(I-z\mathscr A_\pm)(I-z\mathscr C_\pm)^{-1}$.
+
+\begin{lemma}[Relative determinant convergence]\label{v11:lem:gauge-det}
+Locally uniformly on $|z|<1$,
+\begin{equation}\label{v11:eq:gauge-det-limit}
+ \frac{\det(I-z\mathscr A_m)}{\det(I-z\mathscr C_m)}
+       \longrightarrow e_+(z)e_-(z).
+\end{equation}
+The normalized analytic logarithms converge locally uniformly as well.
+\end{lemma}
+\begin{proof}
+Let $X_\pm(z)=D_\pm(I-z\mathscr C_\pm)^{-1}$.
+At each fixed boundary the reference resolvents and their adjoints
+converge strongly, uniformly for $|z|\le\rho<1$, by the Neumann series
+and its uniformly bounded tail. Lemma~\ref{v11:lem:gauge-localization}
+and trace-class multiplication give
+\[
+ \left\|D(P_m)(I-z\mathscr C_m)^{-1}
+       -X_+(z)-\mathsf S^mX_-(z)\mathsf S^{-m}\right\|_1\to0
+\]
+uniformly on each such disk.
+
+Weakly null shifts and finite-rank approximation give
+$\|T\mathsf S^mW\|_1\to0$ for trace-class $T,W$, uniformly on
+trace-norm compact families by finite nets.
+Consequently
+\[
+ (I-zX_+)(I-z\mathsf S^mX_-\mathsf S^{-m})
+ =I-zX_+-z\mathsf S^mX_-\mathsf S^{-m}+o_{\mathfrak S_1}(1)
+\]
+uniformly on smaller disks.  Multiplicativity and trace-norm continuity
+of the Fredholm determinant prove the limit, using the exact identity
+\[
+ I-z\mathscr A_m
+ =\bigl[I-zD(P_m)(I-z\mathscr C_m)^{-1}\bigr](I-z\mathscr C_m).
+\]
+The nonzero limits equal one at zero; Cauchy differentiation and
+integration of logarithmic derivatives give the normalized-log limit.
+\end{proof}
+
+\subsection{The model constant and fractional endpoints}
+
+On $E=\operatorname{span}\{e_{-1},e_0,e_1\}$ put
+$M_z(\theta)=I_E-za(\theta)$.  For real $|z|<1$, both $M_z$ and
+$M_z^{-1}$ are uniformly positive definite.  Their half-line Toeplitz
+operators are therefore invertible.  The symbol is piecewise smooth with
+one jump, so Theorem~2.1 and Corollary~2.4 of
+\cite{BasorEhrhardtVirtanen2024} apply.  In their notation,
+\[
+ L(z)=\frac1{2\pi i}
+       \log[(I-zX_{1,0})^{-1}(I-zX_{0,-1})]
+\]
+has trace zero and its eigenvalues have real parts in $(-1/2,1/2)$.
+Since $\det M_z\equiv1-z^2$, the cited result gives
+\begin{equation}\label{v11:eq:model-strong}
+ \det T_m(M_z)=(1-z^2)^m m^{\beta(z)}E_a(z)(1+o(1)),
+ \qquad E_a(z)>0
+\end{equation}
+for real $|z|<1$.  Here $\beta(z)=-\operatorname{tr}L(z)^2$.
+Its equality with the trace coefficient follows also by comparing
+\eqref{v11:eq:model-strong}, Lemma~\ref{v11:lem:gauge-det}, and the
+already established bounded-remainder law on the real interval.
+
+The model constant has a specified Fredholm expression.  Let $T$ denote
+the semi-infinite block Toeplitz operator, let $G_B$ be the Barnes
+$G$-function, and set
+\[
+ u_z(\theta)=\exp\{i(2\pi\theta-\pi)L(z)\},\qquad0<\theta<1.
+\]
+If $\ell_1(z),\ell_2(z),\ell_3(z)$ are the unordered eigenvalues of
+$L(z)$, the single-jump case of \cite[eq.~(2.11)]{BasorEhrhardtVirtanen2024}
+reads
+\begin{equation}\label{v11:eq:model-constant}
+ E_a(z)=\prod_{j=1}^3G_B(1+\ell_j(z))G_B(1-\ell_j(z))
+ \det\bigl[T(M_z)T(u_z)^{-1}T(u_z^{-1})^{-1}T(M_z^{-1})\bigr].
+\end{equation}
+The ordered product is identity plus trace class by that theorem; no
+commutation of its factors is used.  The jump orientation agrees because
+$u_z(0+)^{-1}u_z(1-)=M_z(0+)^{-1}M_z(1-)$.
+The inverses of the single-jump factors follow from
+\cite[Proposition~3.11]{BasorEhrhardtVirtanen2024}.
+
+The cited applicability holds also for complex $|z|<1$.  Indeed
+$\operatorname{Re}M_z\ge(1-|z|)I$ and
+$\operatorname{Re}M_z^{-1}\ge(1-|z|)(1+|z|)^{-2}I$, so both required
+Toeplitz operators are invertible by coercivity.  The endpoint ratio has
+no negative real eigenvalue: otherwise a convex combination of its two
+endpoint matrices would be singular, although that combination is
+$I-z[(1-t)X_{1,0}+tX_{0,-1}]$.  Its principal matrix logarithm is thus
+analytic, has trace zero by continuation from zero, and has the required
+eigenvalue strip.
+
+No parameter-uniform remainder is being inferred from the cited theorem.
+For $|z|\le\rho<1$, the first two $x$ derivatives of $\log(1-zx)$ are
+bounded by $\rho/(1-\rho)$ and $\rho^2/(1-\rho)^2$.  Apply the existing
+uniform trace bound to its real and imaginary parts.  The normalized
+physical logarithms are locally bounded holomorphic functions.  Their
+convergence for real $z$, already supplied by
+\eqref{v11:eq:model-strong} and Lemma~\ref{v11:lem:gauge-det}, extends
+locally uniformly to the disk by Vitali's theorem.  This also gives the
+normalized holomorphic determination of $\log E_a$.
+Since $\mathcal K_n$ has $m=2n$ complete cells, its constant is
+\begin{equation}\label{v11:eq:integer-constant}
+ \mathfrak D_0(z)=\log E_a(z)+\beta(z)\log2
+                   +\log e_+(z)+\log e_-(z).
+\end{equation}
+
+On the physical space let $L_b=P_{(b,\infty)}$ and
+$H_b=P_{(-\infty,b)}$.  The two differences
+\[
+ F_b^L=L_b\mathcal G L_b-L_0\mathcal G L_0,
+ \qquad F_b^R=H_b\mathcal G H_b-H_0\mathcal G H_0
+\]
+are trace class by Lemma~\ref{rev5:lem:strips}.  Define
+\begin{align}
+ d_L(z;b)&=\det\bigl[(I-zL_b\mathcal G L_b)
+                             (I-zL_0\mathcal G L_0)^{-1}\bigr],\nonumber\\
+ d_R(z;b)&=\det\bigl[(I-zH_b\mathcal G H_b)
+                             (I-zH_0\mathcal G H_0)^{-1}\bigr].
+ \label{v11:eq:endpoint-factors}
+\end{align}
+Each product is identity plus trace class and invertible for $|z|<1$.
+
+For fixed $l,h$ let $E_m=P_{(l,m+h)}$ and $P_m=P_{(0,m)}$ in physical
+coordinates.  Then
+\begin{equation}\label{v11:eq:strip-localization}
+ \|E_m\mathcal G E_m-P_m\mathcal G P_m
+             -F_l^L-\mathsf S^mF_h^R\mathsf S^{-m}\|_1\to0.
+\end{equation}
+To check every term, set $\delta=L_l-L_0$ and
+$\epsilon_m=\mathsf S^m(H_h-H_0)\mathsf S^{-m}$.
+The identity $E_m=P_m+\delta+\epsilon_m$ holds once the interval is
+nonempty.  After expanding and subtracting the two half-line
+corrections, the remainder is
+\begin{align*}
+ &\delta\mathcal G(P_m-L_0)+(P_m-L_0)\mathcal G\delta\\
+ &\quad+\epsilon_m\mathcal G(P_m-\mathsf S^mH_0\mathsf S^{-m})
+       +(P_m-\mathsf S^mH_0\mathsf S^{-m})\mathcal G\epsilon_m\\
+ &\quad+\delta\mathcal G\epsilon_m+\epsilon_m\mathcal G\delta.
+\end{align*}
+The first pair contains the escaping projection $-P_{(m,\infty)}$
+and fixed trace-class strip products. Translating the second pair gives
+the same argument at minus infinity. The last pair vanishes since
+$\epsilon_m\to0$ strongly and $\delta\mathcal G,\mathcal G\delta$
+are trace class. This proves \eqref{v11:eq:strip-localization}.
+The proof of Lemma~\ref{v11:lem:gauge-det}, now with these boundary
+corrections and the physical baseline resolvents, yields
+\begin{equation}\label{v11:eq:endpoint-det-limit}
+ \frac{\det(I-zE_m\mathcal G E_m)}{\det(I-zP_m\mathcal G P_m)}
+       \longrightarrow d_L(z;l)d_R(z;h)
+\end{equation}
+locally uniformly in the disk.
+
+For $a_0=\phi/(2\pi)$, dilation and integer translation identify
+$\mathcal K_{n+r,\phi}$ with the compression to
+$(a_0-r,2n+a_0+r)$.  Equations~\eqref{v11:eq:integer-constant}
+and~\eqref{v11:eq:endpoint-det-limit} therefore specify the full constant:
+\begin{equation}\label{v11:eq:phase-constant-product}
+ \mathfrak D(z;r,\phi)=\mathfrak D_0(z)
+     +\log d_L(z;\phi/(2\pi)-r)+\log d_R(z;\phi/(2\pi)+r)
+     -2r\log(1-z^2).
+\end{equation}
+Replacing $\log n$ by $\log(n+r)$ costs $o(1)$, uniformly for bounded $r$.
+
+The fixed-strip bound gives a length-independent trace-norm endpoint
+modulus. For self-adjoint trace-class contractions, telescoping powers
+in the logarithm series gives
+\[
+ |\log\det(I-zA)-\log\det(I-zB)|
+       \le\frac\rho{1-\rho}\|A-B\|_1,
+ \qquad |z|\le\rho<1.
+\]
+The limiting half-line factors are continuous in their endpoints in
+trace norm.  Finite nets in a compact endpoint set upgrade the proved
+convergence to uniform convergence there.
+
+\begin{proof}[The $C^2$ trace case of Theorem~\ref{v11:thm:phase-constant}]
+The determinant assertion has just been proved.  Differentiate its
+locally uniform analytic limit at zero, using
+\[
+ \log\det(I-z\mathcal K)
+       =-\sum_{k\ge1}\frac{z^k}{k}\operatorname{tr}\mathcal K^k.
+\]
+This proves convergence of the normalized trace remainder for every
+polynomial vanishing at zero.  For $f\in C^2$, approximate $f''$
+uniformly by polynomials and integrate twice with the exact values
+$f(0)=0$ and $f'(0)$.  The approximants converge in $C^2$.
+The uniform trace-remainder estimate of
+Theorem~\ref{T10:conj:law} and Proposition~\ref{v6:prop:allphase}
+makes their limiting constants Cauchy and transfers the limit to $f$,
+uniformly on compact parameter sets.  It also proves continuity of the
+limiting function.
+\end{proof}
+
+Uniqueness of the limit and the exact phase symmetries give
+\begin{align*}
+ \mathfrak D(z;r+1,\phi)&=\mathfrak D(z;r,\phi),&
+ \mathfrak D(z;r,\phi+2\pi)&=\mathfrak D(z;r,\phi),\\
+ \mathfrak D(z;r,-\phi)&=\mathfrak D(z;r,\phi),&
+ \mathfrak D(z;r,\phi+\pi)&=\mathfrak D(-z;r,\phi).
+\end{align*}
+No elementary evaluation of the full Fredholm product, quantitative
+rate for its remainder, or boundary value on a spectral cut is asserted.
+
+\subsection{Lipschitz relative traces and Schatten constant terms}
+\label{v11:sec:lip-constants}
+
+The exact model gap permits a stronger conclusion than global $C^2$
+regularity.  The needed relative-trace argument uses uniform finite-rank
+approximation of the boundary corrections; it does not use an
+operator-Lipschitz assertion.
+
+\begin{lemma}[Finite-rank tightness of relative traces]
+\label{v11:lem:lip-tightness}
+Let $A_m,B_m$ be self-adjoint trace-class contractions.  Suppose
+$\sup_m\|A_m-B_m\|_1<\infty$, and suppose that for every $\epsilon>0$
+there are self-adjoint finite-rank operators $H_m$ such that, for all
+sufficiently large $m$,
+\[
+ \operatorname{rank}H_m\le r_\epsilon,\qquad
+ \|A_m-B_m-H_m\|_1\le\epsilon,
+\]
+where $r_\epsilon$ is independent of $m$.
+If $\operatorname{tr}p(A_m)-\operatorname{tr}p(B_m)$ converges for every
+polynomial $p$ with $p(0)=0$, then it converges for every real Lipschitz
+$f$ on $[-1,1]$ with $f(0)=0$.
+\end{lemma}
+\begin{proof}
+For a self-adjoint trace-class operator $A$, define the signed counting
+function, with an immaterial value at zero, by
+\[
+ N_A(t)=\begin{cases}
+ \#\{\lambda_j(A)>t\},&t>0,\\
+ -\#\{\lambda_j(A)<t\},&t<0.
+ \end{cases}
+\]
+It is integrable with $\int|N_A|=\|A\|_1$.  Absolute continuity of a
+Lipschitz function and absolute summability of its scalar trace give
+\begin{equation}\label{v11:eq:counting-trace}
+ \operatorname{tr}f(A)=\int f'(t)N_A(t)\,dt.
+\end{equation}
+For $\xi_{A,B}=N_A-N_B$, two elementary bounds are
+\begin{equation}\label{v11:eq:counting-shift-bounds}
+ \int|\xi_{A,B}|\le\|A-B\|_1,
+ \qquad
+ |\xi_{A,B}(t)|\le\operatorname{rank}(A-B)\quad(t\ne0)
+\end{equation}
+when the rank is finite. Intersect a spectral subspace with
+$\ker(A-B)$ and apply the variational characterization above a positive
+threshold (or below a negative one) for the rank bound. For the integral
+bound, decompose a finite-matrix difference into signed rank-one terms.
+A positive increment has nonnegative counting difference by monotonicity,
+with integral equal to its trace by \eqref{v11:eq:counting-trace}; reverse
+negative increments and telescope. For trace-class operators, truncate
+the two spectral expansions separately. Counts converge at every nonzero
+threshold outside the two countable spectra; Fatou proves the bound.
+
+Put $C_m=B_m+H_m$.  Its spectrum may extend outside $[-1,1]$, which
+does not affect the estimates on that interval.  The exact identity
+$\xi_{A_m,B_m}=\xi_{A_m,C_m}+\xi_{C_m,B_m}$ and
+\eqref{v11:eq:counting-shift-bounds} imply, for bounded integrable $h$
+supported in $[-1,1]$,
+\begin{equation}\label{v11:eq:uniform-count-tightness}
+ \left|\int h\xi_{A_m,B_m}\right|
+ \le\epsilon\|h\|_\infty+r_\epsilon\|h\|_{L^1(-1,1)}.
+\end{equation}
+Uniform polynomial approximation of derivatives and
+Lemma~\ref{rev5:lem:trace-lip} first extend convergence to $C^1$ tests.
+For an $L$-Lipschitz $f$, mollify its zero-extended derivative and
+integrate from zero. Then $f_\delta(0)=0$, $\|f_\delta'\|_\infty\le L$
+and $\|f'-f_\delta'\|_1\to0$. Equations~\eqref{v11:eq:counting-trace}
+and~\eqref{v11:eq:uniform-count-tightness} bound the relative-trace error by
+\[
+ 2L\epsilon+r_\epsilon\|f'-f_\delta'\|_1.
+\]
+Choose $\epsilon$ first and then $\delta$. The bound is uniform for
+large $m$, so convergence of the smooth relative traces makes the
+original sequence Cauchy.
+\end{proof}
+
+Both comparisons in the preceding subsection satisfy this lemma.
+Approximate $D_+,D_-$ by self-adjoint finite-rank $H_+,H_-$.
+The sum $H_++\mathsf S^mH_-\mathsf S^{-m}$ has uniformly bounded rank
+and approximates the gauge correction in trace norm. The same argument
+applies to $F_l^L,F_h^R$. Polynomial relative traces converge by
+locally uniform determinant differentiation, so the lemma supplies both
+Lipschitz limits. These are limits of finite relative traces; no trace
+of an infinite difference $f(A_\pm)-f(B_\pm)$ is assumed.
+
+\begin{proof}[Band-local completion of Theorem~\ref{v11:thm:phase-constant}]
+Choose $F\in C^2([-1,1])$ agreeing with $f$ on the two closed bands and
+with $F(0)=0$.  For example, fill the central interval with the unique
+polynomial of degree at most six matching the value and first two
+derivatives at each of $-g,g$ and the value zero at zero.  These are the
+seven Hermite conditions at nodes of multiplicities $3,1,3$.
+Then $q=f-F$ is Lipschitz and vanishes at zero and on the two bands.
+
+Lemma~\ref{v11:lem:model-gap} gives
+exactly $m$ model eigenvalues in each band, and all other eigenvalues
+are zero.  Thus $\operatorname{tr}q(T_m(a))=0$ exactly.  The Lipschitz
+gauge comparison just established implies convergence of
+$\operatorname{tr}q(\mathcal K_n)$.  Both its bulk and logarithmic
+coefficients vanish, since the coefficient functional samples only the
+two bands and their endpoints.  Add this limit to the global $C^2$
+constant already proved for $F$.
+
+The Lipschitz endpoint comparison gives the result for fixed $r,\phi$,
+with bulk adjustment $2r[f(1)+f(-1)]$ and a vanishing change in the
+logarithm.  The fixed-strip modulus and the scalar trace perturbation
+bound give compact-parameter uniformity by finite nets.  Finally,
+$|x|^p$ is Lipschitz for $p\ge1$ and is $C^2$ on both closed bands,
+which proves \eqref{v11:eq:schatten-constant}.
+\end{proof}
+
+The band $C^2$ assumption in this theorem is stronger than the band
+$C^{1,1}$ assumption sufficient for a bounded remainder in
+Theorem~\ref{v7:thm:band-regularity}.  No convergent constant for that
+entire larger class is inferred here.
+
+
+\subsection{A phase constant for shrinking finite sampling scale}
+Use the matrix of \eqref{eq:2.1} and the dimension-independent Lipschitz
+comparison of Theorem~\ref{v11:thm:direct-transfer}, with
+$\Gamma_\varepsilon=16\sqrt{2/\pi}\,\varepsilon/
+[(1-2\varepsilon)\sqrt{1-4\varepsilon^2}]$.
+
+\begin{corollary}[A third term for shrinking finite scale]
+\label{v11:cor:finite-phase-constant}
+Let $\varepsilon_N\to0$ and
+$\tau_N=(2N+1)\varepsilon_N/2\to\infty$.  For every $f$ satisfying
+Theorem~\ref{v11:cor:band-constant},
+\begin{equation}\label{v11:eq:finite-phase-constant}
+ \tr f(A_N(\varepsilon_N))
+ =(2N+1)\varepsilon_N[f(1)+f(-1)]
+  +\varkappa(f)\log\tau_N
+  +\mathfrak C_f(\{\tau_N\},0)+o(1).
+\end{equation}
+Here $\{\tau_N\}$ is the fractional part, and the constant profile is
+continuous and periodic.  This includes every Schatten power $p\ge1$,
+with no condition on $(2N+1)\varepsilon_N^3$.
+\end{corollary}
+\begin{proof}
+The direct Lipschitz comparison has error at most
+$\Gamma_{\varepsilon_N}\operatorname{Lip}(f)=o(1)$.
+Apply the phase law uniformly for $r\in[0,1]$ with
+$n=\lfloor\tau_N\rfloor$ and $r=\{\tau_N\}$.
+Periodicity follows from uniqueness under replacing $(n,r)$ by
+$(n-1,r+1)$.  Thus convergence of the fractional parts is not required.
+\end{proof}
+
+For fixed $\varepsilon>0$ the comparison supplies a bounded remainder;
+it does not identify a finite-matrix constant term in that regime.
+

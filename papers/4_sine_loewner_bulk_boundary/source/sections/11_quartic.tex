@@ -1,0 +1,236 @@
+\section{An independent fourth-moment bound}\label{qshort:sec}
+\begin{theorem}\label{T8:thm:quartic}
+For every $\tau\ge2$,
+\begin{equation}\label{qshort:quartic}
+\left|\tr(\mathcal K_\tau^2-\mathcal K_\tau^4)
+       -\frac4{3\pi^2}\log\tau\right|\le32.
+\end{equation}
+\end{theorem}
+\begin{proof}
+This proof uses the exact quadratic formula, but not the general trace law.
+Let $P$ multiply by $\mathbf1_{[-1,1]}$ and let $\mathcal G_\tau$
+be the whole-line operator with kernel $K_\tau$.
+Its square is the Fourier projection onto $(-\tau,\tau)$.
+Put $C=P\mathcal G_\tau^2P=C_{2\tau}$ and
+$W=C-\mathcal K_\tau^2=P\mathcal G_\tau(1-P)\mathcal G_\tau P$,
+so $0\le W\le C\le I$. For $k_z(x)=K_\tau(z,x)$,
+\[
+|k_z(x)|\le\min(2\tau,2/(\pi|z-x|)),\qquad
+\int_{|z|>1}\|k_z\|^2dz\le32\tau/\pi.
+\]
+Thus $W=\int_{|z|>1}|k_z\rangle\langle k_z|dz$ converges in trace norm;
+Cauchy--Schwarz justifies products and the double integrals below.
+Reflection gives
+\begin{equation}\label{qshort:reduction}
+\tr(CW)=2\int_0^\infty\langle k_{1+u},Ck_{1+u}\rangle du,\qquad
+\tr W^2=2T_s+2T_o,
+\end{equation}
+where $T_s=\iint|\langle k_{1+u},k_{1+v}\rangle|^2du\,dv$
+and $T_o=\iint|\langle k_{1+u},k_{-1-v}\rangle|^2du\,dv$ on $(0,\infty)^2$.
+Write
+$A_u=\sin(2\pi\tau(1+u))$, $\sigma(s)=\sin(2\pi\tau(1-s))$,
+$g_u(x)=1/[\pi(1+u-x)]$. Direct integration gives
+\begin{equation}\label{qshort:layer}
+\begin{gathered}
+k_{1+u}(1-s)=\frac{A_u-\sigma(s)}{\pi(u+s)},\quad
+\|g_u\|^2=\frac2{\pi^2u(2+u)},\\
+\|k_{1+u}\|^2\le\min\left\{\frac{8\tau}\pi,
+                            \frac8{\pi^2u(2+u)}\right\}.
+\end{gathered}
+\end{equation}
+We repeatedly use
+\begin{equation}\label{qshort:bonnet}
+\left|\int_a^b w(t)e^{i\lambda t}dt\right|
+\le2w(a)/|\lambda|\qquad(w\ge0\text{ nonincreasing},\ \lambda\ne0),
+\end{equation}
+which follows by integrating against the oscillatory primitive and
+using the total variation $w(a)-w(b)$.
+
+\emph{The mixed trace ($\tau\ge1$).}
+Extend $g_u$ by zero. Integration by parts gives
+$|\widehat g_u(\xi)|\le1/(\pi^2u|\xi|)$ and
+$\int_{|\xi|\ge b}|\widehat g_u|^2\le2/(\pi^4u^2b)$.
+Each one-sided tail is half this bound because $|\widehat g_u|^2$
+is even. If $G_0=\widehat g_u$, $G_\pm=\widehat g_u(\cdot\pm\tau)$,
+then $\widehat k_{1+u}=A_uG_0+iG_+/2-iG_-/2$.
+On $[-\tau,\tau]$ the diagonal squared terms differ from
+$(A_u^2+1/4)\|g_u\|^2$ by at most
+$(2A_u^2+1/4)/(\pi^4u^2\tau)$.
+Split the $G_0,G_\pm$ pairs at $\mp\tau/2$ and the $G_+,G_-$ pair
+at zero; on each piece one factor lies in the indicated Fourier tail.
+Cauchy--Schwarz gives, for the first two pairs,
+$4|A_u|\|g_u\|/(\pi^2u\sqrt\tau)$ each, and for the last pair,
+including its coefficient, $\sqrt2\|g_u\|/(\pi^2u\sqrt\tau)$.
+Consequently
+\begin{equation}\label{qshort:band}
+\left|\langle k_{1+u},Ck_{1+u}\rangle
+ -(A_u^2+1/4)\|g_u\|^2\right|
+\le\frac9{4\pi^4u^2\tau}+
+       \frac{8+\sqrt2}{\pi^3u^{3/2}\sqrt\tau}.
+\end{equation}
+Split \eqref{qshort:reduction} at $\tau^{-1}$ and $1$.
+The two exterior integrals before reflection are bounded by
+$8/\pi$ and $4\log3/\pi^2$ using \eqref{qshort:layer}.
+On the middle interval the integrated error in \eqref{qshort:band}
+is at most $9/(4\pi^4)+2(8+\sqrt2)/\pi^3$.
+The main term equals
+\[
+\frac3{2\pi^2}\int_{1/\tau}^1\frac{du}{u(2+u)}
+-\frac1{\pi^2}\int_{1/\tau}^1
+ \frac{\cos(4\pi\tau(1+u))}{u(2+u)}du.
+\]
+The first integral is
+$\frac12\log\tau+\frac12\log((2+\tau^{-1})/3)$;
+the oscillatory integral has modulus at most $1/(4\pi)$ by
+\eqref{qshort:bonnet}. Including reflection proves
+\begin{equation}\label{qshort:cross-ledger}
+\begin{split}
+\left|\tr(CW)-\frac3{2\pi^2}\log\tau\right|
+\le E_C:=2\Bigl[&\frac8\pi+\frac{4\log3}{\pi^2}
++\frac9{4\pi^4}+\frac{2(8+\sqrt2)}{\pi^3}
+\\&+\frac3{4\pi^2}\log\frac32+\frac1{4\pi^3}\Bigr]<7.33.
+\end{split}
+\end{equation}
+
+\emph{The squared boundary operator.}
+Put $a=\tau^{-1}$, $\Omega=[a,1]^2$.
+The operator $W_R=\int_0^\infty|k_{1+v}\rangle\langle k_{1+v}|dv$
+satisfies $W_R\le I$; hence integrating a row of $T_s$ gives at most
+$\|k_{1+u}\|^2$. A union bound on the four strips outside $\Omega$
+and \eqref{qshort:layer} give
+\begin{equation}\label{qshort:cut}
+0\le T_s-\iint_\Omega|\langle k_{1+u},k_{1+v}\rangle|^2
+\le C_{\rm cut}:=16/\pi+8\log3/\pi^2.
+\end{equation}
+Define the continuous diagonal extensions
+$\ell(u,v)=(\log u-\log v)/(u-v)
+=\int_0^\infty[(u+s)(v+s)]^{-1}ds$ and
+$m(u,v)=\int_0^2[(u+s)(v+s)]^{-1}ds$.
+Then $0\le\ell-m\le1/2$, $\ell\le(uv)^{-1/2}$, and
+$0\le\ell^2-m^2\le\ell$; the bound on $\ell$ follows from
+$2\sinh y\ge2y$ with $y=\frac12|\log(u/v)|$.
+Expanding \eqref{qshort:layer} gives
+\[
+\pi^2\langle k_{1+u},k_{1+v}\rangle=qm-\delta,\qquad q=A_uA_v+1/2,
+\]
+where
+$\delta=(A_u+A_v)\int_0^2\sigma(s)/[(u+s)(v+s)]\,ds
++\frac12\int_0^2\cos(4\pi\tau(1-s))/[(u+s)(v+s)]\,ds$.
+Equation~\eqref{qshort:bonnet} gives
+$|\delta|\le9/(4\pi\tau uv)=:\Delta$.
+Since $|q|\le3/2$,
+$|(qm-\delta)^2-q^2m^2|\le3m\Delta+\Delta^2$.
+Integrate using $\int_a^1u^{-3/2}du\le2\sqrt\tau$ and
+$\int_a^1u^{-2}du\le\tau$, then replace $m^2$ by $\ell^2$:
+\begin{equation}\label{qshort:pair-error}
+\left|\pi^4\iint_\Omega|\langle k_{1+u},k_{1+v}\rangle|^2
+-\iint_\Omega q^2\ell^2\right|
+\le C_1:=27/\pi+81/(16\pi^2)+9.
+\end{equation}
+The final $9$ uses $(9/4)\iint_{[0,1]^2}(uv)^{-1/2}=9$.
+
+For $\Psi(t)=(\log t)^2/(1-t)^2$, $\Psi(1)=1$, one has
+\[
+\Psi(1/t)=t^2\Psi(t),\quad
+\int_0^1\Psi=\int_1^\infty\Psi=\pi^2/3,\quad
+\int_1^\infty\Psi(t)\log t\,dt=6\zeta(3).
+\]
+Expand $(1-t)^{-2}$ on $(0,1)$ and integrate
+$t^{n-1}(-\log t)^j$ to obtain $j!/n^{j+1}$; positivity
+justifies the series, and reciprocity gives the upper-half integrals.
+For $L(u)=\int_a^1\ell(u,v)^2dv$,
+$L(a)=\tau\int_1^\tau\Psi\le\pi^2\tau/3$ and $L$ decreases.
+Applying \eqref{qshort:bonnet} at fixed $v$ therefore bounds
+every integral of $\cos(\lambda u+\phi(v))\ell^2$ over $\Omega$
+by $2\pi^2\tau/(3|\lambda|)$.
+Product-to-sum expands $q^2-1/2$ into
+\[
+-\tfrac14(c_u+c_v)
++\tfrac18\cos(4\pi\tau(u-v))
++\tfrac18\cos(4\pi\tau(2+u+v))
++\tfrac12\cos(2\pi\tau(u-v))
+-\tfrac12\cos(2\pi\tau(2+u+v)),
+\]
+where $c_u=\cos(4\pi\tau(1+u))$.
+The absolute coefficients at frequencies $4\pi\tau$ and $2\pi\tau$
+sum to $3/4$ and $1$. Thus
+$|\iint_\Omega(q^2-1/2)\ell^2|\le C_2:=11\pi/24$,
+including difference phases, whose derivative in $u$ is nonzero.
+The substitution $v=ut$ gives, with
+\[
+E_1=\int_a^1\frac{du}{u}\int_{1/u}^{\infty}\Psi(t)\,dt,
+\qquad
+E_2=\int_a^1\frac{du}{u}\int_0^{a/u}\Psi(t)\,dt,
+\]
+\[
+\iint_\Omega\ell^2=\frac{2\pi^2}3\log\tau-E_1-E_2,\qquad
+0\le E_1,E_2\le6\zeta(3).
+\]
+For the upper tail interchange the integrals to obtain the bound
+$\int_1^\infty y^{-1}\int_y^\infty\Psi(t)\,dt\,dy
+=\int_1^\infty\Psi(t)\log t\,dt$; the lower tail has the same
+bound by reciprocity after $u=y/\tau$.
+Combining gives a local squared-pair error at most
+$C_1+C_2+6\zeta(3)$ after multiplication by $\pi^4$.
+
+For opposite endpoints partial fractions give
+\[
+|\langle k_{1+u},k_{-1-v}\rangle|
+\le\frac4{\pi^2}
+\frac{\log(1+2/u)+\log(1+2/v)}{2+u+v}.
+\]
+Squaring and integrating first in $v$ gives
+$T_o\le128\zeta(3)/\pi^4$:
+the remaining integral
+$\int_0^\infty\log^2(1+2/u)/(2+u)\,du=2\zeta(3)$
+follows by $t=u/(u+2)$ and the geometric series.
+Together with \eqref{qshort:cut}, this proves
+\begin{equation}\label{qshort:hs-ledger}
+\left|\tr W^2-\frac2{3\pi^2}\log\tau\right|
+\le E_W:=2\left[C_{\rm cut}+
+\frac{C_1+C_2+6\zeta(3)}{\pi^4}\right]
++\frac{256\zeta(3)}{\pi^4}<15.676 .
+\end{equation}
+
+Finally cyclicity and $\mathcal K_\tau^2=C-W$ give
+$\tr(\mathcal K_\tau^2-\mathcal K_\tau^4)
+=D_R-D_J+2\tr(CW)-\tr W^2$.
+The exact quadratic estimates for $\tau\ge2$ give
+\begin{align*}
+\left|D_R-\pi^{-2}\log\tau\right|
+&\le\frac{\log(8\pi)+1+\gamma}{\pi^2}+\frac1{4\pi^3}<0.4946,\\
+\left|D_J-2\pi^{-2}\log\tau\right|
+&\le\frac2{\pi^2}[\log(4\pi)+1+\gamma+\log2]+\frac2{\pi^3}<1.0375.
+\end{align*}
+The logarithmic coefficients combine as $1-2+3-2/3=4/3$,
+and the errors sum to
+$0.4946+1.0375+2(7.33)+15.676=31.8681<32$.
+\end{proof}
+
+\begin{corollary}[Interior windows and small eigenvalues]
+\label{prop:rev:quadratic-count}\label{T11:prop:count}
+For $0<a\le b<1$, put
+$m_j=\min\{a^j(1-a^j),b^j(1-b^j)\}$, $j=1,2$.
+For $\tau\ge2$,
+\begin{equation}\label{T11:eq:count}
+\#\{k:a\le|\lambda_k(\mathcal K_\tau)|\le b\}
+\le\min\left\{\frac{4\tau-\tr\mathcal K_\tau^2}{m_1},
+\frac{4(3\pi^2)^{-1}\log\tau+32}{m_2}\right\}.
+\end{equation}
+The first bound holds for every $\tau>0$.
+For $0<\beta<1$, either $X=\mathcal K_\tau$, $s=4\tau$, or
+$X=A_N$, $s=2d\varepsilon$, also satisfies
+$\sum_{|\lambda_k(X)|\le\beta}\lambda_k(X)^2
+\le\beta(s-\tr X^2)/(1-\beta)$.
+\end{corollary}
+\begin{proof}
+$\tr|X|\le s$ gives
+$\sum|\lambda|(1-|\lambda|)\le s-\tr X^2$.
+The other nonnegative sum is
+$\sum\lambda^2(1-\lambda^2)=\tr(X^2-X^4)$.
+Their minima on the window are $m_1,m_2$; discard all other terms.
+For the small-eigenvalue bound use
+$r^2\le\beta r(1-r)/(1-\beta)$ when $r\le\beta$.
+\end{proof}
+
+

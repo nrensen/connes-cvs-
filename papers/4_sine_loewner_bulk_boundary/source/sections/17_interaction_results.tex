@@ -1,0 +1,105 @@
+\section{The leading interaction of the two boundaries}
+\label{v13:sec:boundary-interaction}
+
+We evaluate the full interaction, including the complementary-space
+correction, which has the same order as the direct coupling. The
+reduction is analogous to Feshbach--Schur
+\cite[Theorem~1.2 and equations~(1.15)--(1.16)]{DussonSigalStamm2021};
+the physical sine-Loewner modes determine its explicit coefficient.
+
+Fix a real $\alpha\in(-g,0)\cup(0,g)$, and write
+\begin{equation}\label{v13:eq:interaction-parameters}
+ a=\sqrt{1-2\alpha^2},\qquad
+ \beta=\pi^{-1}\arctan a,\qquad \nu=\tfrac12+\beta,\qquad
+ \gamma=2\beta,\qquad
+ c_\alpha=-\frac{\pi a(1+a^2)}{\alpha}.
+\end{equation}
+For a normalized left boundary eigenfunction $\psi_L$ on $(l,\infty)$,
+define its physical tail amplitude by
+\begin{equation}\label{v13:eq:physical-amplitude}
+ \eta_L=\lim_{T\to\infty}T^\nu
+                 \int_T^{T+1}\psi_L(l+x)\,dx
+ =\frac{\Gamma(\nu)}{(2\pi)^\nu}
+       \left(e^{-i\pi\nu/2}v_1+e^{i\pi\nu/2}v_4\right),
+\end{equation}
+where $v$ is the endpoint vector in
+Theorem~\ref{v12:thm:boundary-tail}, scaled so that its physical
+eigenfunction has norm one on the half-line.  The limit follows from
+\eqref{v12:eq:physical-tail}: integration over one unit interval
+removes the two nonzero leading carrier frequencies.  For a normalized
+right boundary eigenfunction $\psi_R$ on $(-\infty,h)$, define
+$\eta_R$ by the same limit with $\psi_R(h-x)$ in the integrand.
+The amplitudes may vanish; their phase follows the eigenfunction's phase.
+The same amplitude is determined in modulus by the normalized physical
+tail mass:
+\[
+ \lim_{T\to\infty}T^\gamma\int_T^\infty
+       |\psi_L(l+x)|^2\,dx=\frac{|\eta_L|^2}{\alpha^2\gamma}.
+\]
+Indeed the tail direction in the proof has squared norm $\alpha^{-2}$;
+the nonmatching carriers integrate to a lower order. The right analogue
+holds with $\psi_R(h-x)$.
+
+\begin{theorem}[Closed leading boundary interaction]
+\label{v13:thm:leading-interaction}
+Fix $l,h$, and suppose that $\alpha$ is an isolated eigenvalue of one
+or both half-line operators in Theorem~\ref{v11:thm:gap-limits}.
+Their individual eigenvalues are simple by
+Theorem~\ref{boundary:thm:one-cell-flow}.  Set
+\[
+ T_m=P_{(l,m+h)}\mathcal G P_{(l,m+h)},\qquad L=m+h-l,
+ \qquad m\longrightarrow\infty\quad(m\in\mathbb Z).
+\]
+If $\alpha$ belongs to both boundary spectra, let $\mu_1\le\mu_2$
+be the eigenvalues of the Hermitian matrix
+\begin{equation}\label{v13:eq:closed-interaction-matrix}
+ \mathsf M_\alpha=c_\alpha
+ \begin{pmatrix}0&\overline{\eta_L}\eta_R\\
+                 \overline{\eta_R}\eta_L&0\end{pmatrix}.
+\end{equation}
+The two finite-interval eigenvalues converging to $\alpha$, in
+increasing order within the cluster, satisfy
+\begin{equation}\label{v13:eq:leading-cluster-law}
+ \lambda_j(T_m)=\alpha+L^{-\gamma}\mu_j+o(L^{-\gamma}),
+ \qquad j=1,2.
+\end{equation}
+If $\alpha$ belongs to only one boundary spectrum, its single
+eigenvalue satisfies $\lambda(T_m)=\alpha+o(L^{-\gamma})$.
+All parameters are fixed; no uniformity as $\alpha$ approaches zero
+or a band edge is asserted.
+\end{theorem}
+
+The two-boundary case implies $l+h\in\mathbb Z$.
+Indeed reflection identifies the right operator at $h$ with the left
+operator at $-h$, and Theorem~\ref{boundary:thm:one-cell-flow}
+assigns a fixed nonzero gap level to a unique boundary phase modulo one.
+Conversely, this congruence makes the two half-line operators unitarily
+equivalent. Centered intervals satisfy the congruence automatically.
+
+\begin{corollary}[Centered parity splitting]
+\label{v13:cor:leading-parity-splitting}
+Let $\alpha$ be an isolated eigenvalue of $L_{-r}\mathcal G L_{-r}$,
+with normalized eigenfunction of amplitude $\eta$ in
+\eqref{v13:eq:physical-amplitude}.  For the centered operator
+$\mathcal K_{n+r}$, put $L=2(n+r)$.  Its unique even and odd
+eigenvalues converging to $\alpha$ satisfy
+\begin{align}
+ \lambda_{\rm even}
+   &=\alpha+c_\alpha|\eta|^2L^{-\gamma}+o(L^{-\gamma}),\nonumber\\
+ \lambda_{\rm odd}
+   &=\alpha-c_\alpha|\eta|^2L^{-\gamma}+o(L^{-\gamma}).
+ \label{v13:eq:closed-parity-law}
+\end{align}
+Their midpoint is $\alpha+o(L^{-\gamma})$.  If $\eta\ne0$, their
+splitting has the nonzero leading magnitude
+$2|c_\alpha||\eta|^2L^{-\gamma}$, and eventually
+$|\lambda_{\rm even}|<|\lambda_{\rm odd}|$.
+If $\eta=0$, both shifts are $o(L^{-\gamma})$; strict ordering is
+not inferred.  In fact both shifts are $O(L^{-1+\delta})$ for every
+fixed $\delta>0$ in this case.
+\end{corollary}
+
+Section~\ref{v13:app:boundary-interaction} proves the full correction
+and evaluates its scalar integral. Theorem~\ref{boundary:thm:certified-residue:rr}
+certifies $\eta\ne0$ for the phase-zero mode.
+

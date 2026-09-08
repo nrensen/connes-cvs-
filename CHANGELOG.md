@@ -5,6 +5,23 @@ All notable changes to `connes-cvs` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Sine Loewner operator - first publication] - 2026-09-08
+
+Added Paper 4, *Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*,
+with its complete 88-page manuscript, three figures and all 64 released source files.
+Zenodo version DOI [10.5281/zenodo.22662222](https://doi.org/10.5281/zenodo.22662222);
+concept DOI [10.5281/zenodo.22662221](https://doi.org/10.5281/zenodo.22662221).
+
+- The paper proves uniform trace laws, a dimension-independent finite-matrix comparison,
+  half-line boundary flow and algebraic splitting, with three interval certificates.
+- Its own verification programs and exact witnesses are included under
+  `papers/4_sine_loewner_bulk_boundary/source/anc/`; they do not depend on `connes-cvs`.
+- Updated the paper index, citation guidance and license scope, and made the release
+  manifest tests explicitly exclude every `papers/` member from both package archives.
+- This is a paper and repository update, not a software release. The package remains
+  version 0.3.1; its implementation, distribution allowlists and root software citation
+  are unchanged. No new PyPI distribution accompanies this update.
+
 ## [0.3.1] - 2026-08-14
 
 Documentation and metadata only. **No code path, numerical value, or public API changes**, and the c=13 bit-identity regression gate is unaffected.

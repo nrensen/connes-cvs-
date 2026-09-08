@@ -1,0 +1,117 @@
+\section{Resolvent and determinant coefficients}
+\begin{proposition}[The resolvent]\label{T10:prop:resolvent}
+For real $z$ with $|z|>1$,
+\begin{equation}\label{T10:eq:resolvent}
+ \varkappa\Bigl(\frac\lambda{\lambda-z}\Bigr)
+ =\frac{4z^2}{\pi^2(z^2-1)\sqrt{2z^2-1}}
+   \operatorname{artanh}\frac1{\sqrt{2z^2-1}} .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Since $\varkappa$ annihilates constants,
+$\varkappa(\lambda/(\lambda-z))=z\varkappa(1/(\lambda-z))$.
+Set $B=2z^2-1>1$ and $v=2\lambda^2-1$ in
+\eqref{T10:eq:density}. Then
+$\pi^2\varpi(\lambda)\,d\lambda=dv/[(1-v)\sqrt v]$ and
+\[
+ \frac1{\lambda-z}+\frac1{-\lambda-z}-\frac1{1-z}-\frac1{-1-z}
+ =\frac{4z(1-v)}{(B-v)(B-1)}.
+\]
+The endpoint factor cancels, so
+\[
+ \pi^2\varkappa\Bigl(\frac1{\lambda-z}\Bigr)
+ =\frac{4z}{B-1}\int_0^1\frac{dv}{(B-v)\sqrt v}
+ =\frac{8z}{(B-1)\sqrt B}\operatorname{artanh}(B^{-1/2}).
+\]
+Multiply by $z$ and use $B-1=2(z^2-1)$.
+\end{proof}
+
+Since $\mathcal K_\tau(\mathcal K_\tau-z)^{-1}$ is trace class for $|z|>1$ by
+Proposition~\ref{prop:traces}, \eqref{T10:eq:resolvent} specializes
+Theorem~\ref{T10:conj:law} to a resolvent trace formula: for each fixed real
+$z$ with $|z|>1$ the theorem gives
+$\operatorname{tr}[\mathcal K_\tau(\mathcal K_\tau-z)^{-1}]
+=4\tau(1-z^2)^{-1}+\varkappa(\lambda/(\lambda-z))\log\tau+O(1)$.  Expanding
+\eqref{T10:eq:resolvent} at $z=\infty$ returns
+$2\pi^{-2}z^{-2}+O(z^{-4})$, consistent with
+$\pi^2\varkappa(\lambda^2)=-2$; the two branch points at $|z|=2^{-1/2}$ and
+$|z|=1$ are the two edges of the support of $\varpi$.
+
+\begin{corollary}[A Fredholm determinant law]\label{v7:cor:determinant}
+For real $|z|<1$ and the phase-shifted operator $\mathcal K_{\tau,\phi}$,
+with kernel $[\sin(2\pi\tau x+\phi)-\sin(2\pi\tau y+\phi)]/[\pi(x-y)]$ and
+treated in Proposition~\ref{v6:prop:allphase}, as $\tau\to\infty$,
+\begin{equation}\label{v7:eq:determinant}
+ \log\det(I-z\mathcal K_{\tau,\phi})
+ =2\tau\log(1-z^2)
+ +\frac2{\pi^2}\operatorname{artanh}^2
+       \!\left(\frac{z}{\sqrt{2-z^2}}\right)\log\tau+O_z(1).
+\end{equation}
+The remainder is uniform in $\phi$ and locally uniform in $z\in(-1,1)$.
+\end{corollary}
+\begin{proof}
+For $f_z(x)=\log(1-zx)$, all factors $1-z\lambda_j$ are positive and
+$\sum_j|f_z(\lambda_j)|<\infty$.  Thus the real Fredholm logarithm is
+$\tr f_z(\mathcal K_{\tau,\phi})$.  The test vanishes at zero and its
+first two derivatives are uniformly bounded when $z$ ranges over a
+compact subinterval of $(-1,1)$. Let $\beta(z)=\varkappa(f_z)$.
+For $z\ne0$, differentiation of the convergent coefficient integral
+and Proposition~\ref{T10:prop:resolvent} give
+\[
+ \beta'(z)=z^{-1}\varkappa\!\left(\frac{x}{x-1/z}\right)
+ =\frac{4\operatorname{artanh}(z/\sqrt{2-z^2})}
+ {\pi^2(1-z^2)\sqrt{2-z^2}}.
+\]
+This is the derivative of
+$2\pi^{-2}\operatorname{artanh}^2(z/\sqrt{2-z^2})$.
+Both functions vanish at zero, so integration identifies the coefficient;
+the uniform phase trace law proves \eqref{v7:eq:determinant}.
+\end{proof}
+
+\begin{remark}[The square and a comparison]\label{rem:det-square}
+For $z\in\mathbb C\setminus(( -\infty,-1]\cup[1,\infty))$, define
+$\log\det(I-z\mathcal K_{\tau,\phi})$ as the holomorphic logarithm
+normalized to zero at $z=0$, equivalently the absolutely convergent sum
+$\sum_j\operatorname{Log}(1-z\lambda_j)$, where $\lambda_j$ are the eigenvalues of $\mathcal K_{\tau,\phi}$ and
+$\operatorname{Log}$ is the scalar principal logarithm.  Applying the uniform phase trace law
+to the real and imaginary parts of this scalar test extends
+Corollary~\ref{v7:cor:determinant} to that domain.
+Likewise, for $w\in\mathbb C\setminus(-\infty,-1]$, put
+$\log\det(I+w\mathcal K_{\tau,\phi}^2)
+=\sum_j\operatorname{Log}(1+w\lambda_j^2)$.  Then
+\begin{equation}\label{eq:det-square}
+ \log\det(I+w\mathcal K_{\tau,\phi}^2)
+ =4\tau\operatorname{Log}(1+w)
+  -\frac4{\pi^2}\arcsin^2\!\Bigl(\tfrac12\sqrt{\tfrac{2w}{1+w}}\Bigr)\log\tau
+  +O_w(1).
+\end{equation}
+The squared inverse-sine expression denotes its analytic continuation
+from $w>0$ throughout the stated slit plane, with value zero at $w=0$.
+For $w>0$, add the two logarithms at $z=\pm i\sqrt w$ and use
+$\operatorname{artanh}(iy)=i\arctan y$ and
+$\arctan\sqrt{w/(2+w)}=\arcsin\bigl(\tfrac12\sqrt{2w/(1+w)}\bigr)$.
+Analytic continuation of the coefficient integral then gives the formula
+on the slit plane; the trace-law error bound applies directly at each $w$
+and is uniform in $\phi$.  At $w=1$ the coefficient is $-\tfrac19$, so
+$\log\det(I+\mathcal K_{\tau,\phi}^2)=4\tau\log2-\tfrac19\log\tau+O(1)$.
+
+For comparison, Gebert and K\"uttler's generalized Hilbert matrix has
+entries $(H_N^\delta)_{jk}=\sin((1+\delta)\pi)/[\pi(j+k+1+\delta)]$,
+$0\le j,k<N$.  For $\delta<-1/2$ outside the negative integers and
+half-integers, their Corollary~1.3 gives
+$\log\det(I-(H_N^\delta)^2)=-\delta^2\log N+O_\delta(1)$
+\cite{GebertKuettler2026}.  This is an analogous determinant law for a
+different signed family; their critical half-integers have a weaker
+remainder, as specified in their Remark~1.4.
+\end{remark}
+
+These formulas give bounded remainders. Theorem~\ref{v11:thm:phase-constant} proves their convergence along fixed phases by localizing the physical boundary corrections.  For the unsquared determinant with real $|z|<1$, the three-dimensional model
+symbol $a(\theta)$ of Section~\ref{app:general-trace} has a coefficient of
+$\log\tau$ equal to the exponent $-\operatorname{tr}\mathfrak L^2$,
+$\mathfrak L=(2\pi i)^{-1}\log[(I-zX_{1,0})^{-1}(I-zX_{0,-1})]$, of the block
+Fisher--Hartwig asymptotics \cite[Corollary~2.4]{BasorEhrhardtVirtanen2024},
+which give a convergent constant term for the block Toeplitz truncation of
+$I-za$ itself.
+
+

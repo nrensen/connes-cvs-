@@ -1,0 +1,53 @@
+\section{Uniform phase stability}
+\begin{proposition}[Uniform phase law and exact pairing]\label{v6:prop:allphase}\label{prop:T5b:symmetries}
+For $\phi\in\mathbb R$, let $\mathcal K_{\tau,\phi}$ have kernel
+\[
+ \frac{\sin(2\pi\tau x+\phi)-\sin(2\pi\tau y+\phi)}{\pi(x-y)}.
+\]
+For every real Lipschitz $f$ with $f(0)=0$ and every $\tau>0$,
+\[
+ |\tr f(\mathcal K_{\tau,\phi})-\tr f(\mathcal K_\tau)|
+ \le4b(1/2)\operatorname{Lip}(f),
+\]
+where $b$ is defined in \eqref{rev5:eq:strip-function}.
+Consequently Theorem~\ref{T10:conj:law} holds uniformly in $\phi$,
+with the same $\varkappa(f)$ and remainder constant
+$C_{\mathrm{tr}}+4b(1/2)$.  Moreover
+\begin{equation}\label{v6:eq:phasesym}
+ \begin{gathered}
+ \mathcal R\mathcal K_{\tau,\phi}\mathcal R=\mathcal K_{\tau,-\phi},\qquad
+ \mathcal K_{\tau,\phi+\pi}=-\mathcal K_{\tau,\phi},\qquad
+ \mathcal K_{\tau,\phi+2\pi}=\mathcal K_{\tau,\phi},\\
+ \tr\mathcal K_{\tau,\phi}=\frac2\pi\sin(2\pi\tau)\cos\phi.
+ \end{gathered}
+\end{equation}
+At $\phi=\pi/2\pmod\pi$ its spectrum has exact $\pm$ pairing with
+multiplicity, and every odd Lipschitz test has zero trace.  Each eigenvector
+for a nonzero eigenvalue has even and odd parts of equal norm.
+\end{proposition}
+\begin{proof}
+The operator is unitarily equivalent to the compression of $\mathcal G$
+to $(-\tau,\tau)+\phi/(2\pi)$.  Reduce $\phi$ modulo $2\pi$ so that
+$|\phi/(2\pi)|\le1/2$, and apply Lemmas~\ref{rev5:lem:strips}
+and~\ref{rev5:lem:trace-lip}.  The trace law follows since
+$\operatorname{Lip}(f)\le\|f'\|_\infty$.
+Reflection and phase shifts in the kernel give the first three identities;
+integration of its diagonal gives the fourth.  At the indicated phases,
+reflection anticommutes with the operator and therefore pairs eigenvalues
+of opposite signs.  It exchanges the signs, rather than defining commuting
+parity sectors there.  If $\mathcal K_{\tau,\phi}u=\lambda u$ with
+$\lambda\ne0$, then $u$ and $\mathcal Ru$ belong to distinct eigenspaces
+and are orthogonal.  Thus the two reflection components of $u$ have
+squared norm $\|u\|^2/2$.
+\end{proof}
+At the centered phase $\phi=0$, neither parity spectrum is sign-symmetric,
+for any $\tau>0$.  Indeed its trace in \eqref{eq:2.8} is nonzero because
+$\Si(t)>|\sin t|$ for $t>0$.  On $(0,\pi]$, differentiate
+$\Si(t)-\sin t$ and use $\sin t-t\cos t>0$.
+On $[\pi,2\pi]$, use monotonicity and
+$\Si(2\pi)\ge\pi/2-1/\pi>1$; for $t\ge2\pi$ the same inequality
+follows from $|\Si(t)-\pi/2|\le2/t$.
+A sign-symmetric trace-class spectrum would have zero trace.
+The full centered spectrum is also asymmetric whenever $\sin(2\pi\tau)\ne0$.
+
+

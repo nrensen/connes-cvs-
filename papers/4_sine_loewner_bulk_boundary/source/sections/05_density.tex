@@ -1,0 +1,416 @@
+\section{The logarithmic density and spectral counts}\label{v6:sec:density}
+\begin{proposition}[Density and even moments]\label{T10:prop:density}
+For H\"older $f$,
+\begin{equation}\label{T10:eq:density}
+ \varkappa(f)=\int_{1/\sqrt2}^1
+ [f(x)+f(-x)-f(1)-f(-1)]\varpi(x)\,dx,
+ \quad
+ \varpi(x)=\frac{2x}{\pi^2(1-x^2)\sqrt{2x^2-1}}.
+\end{equation}
+For integers $m\ge1$,
+\begin{equation}\label{T10:eq:moments}
+ \pi^2\varkappa(x^{2m})=
+ \sum_{j=1}^m \binom{m}{j}(-2)^j\frac{(j-1)!^2}{(2j-1)!},
+ \qquad \varkappa(x^{2m+1})=0.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The two halves of the $t$ integral in \eqref{T10:eq:kappa} coincide.
+On either half substitute $x=\sqrt{1-2t(1-t)}$ to obtain the density.
+Its singularity at $1/\sqrt2$ is integrable; at $1$ the endpoint
+subtraction supplies the H\"older factor.  For the moments expand
+$(1-2t(1-t))^m-1$ and integrate each term using
+$B(j,j)=(j-1)!^2/(2j-1)!$.  Odd tests cancel identically.
+\end{proof}
+Thus the coefficients for $x^2,x^4,x^6$ are respectively
+$-2,-10/3,-64/15$ in units of $\pi^{-2}$.  In particular
+Theorem~\ref{T10:conj:law}, applied to the $C^2$ test $f(x)=x^2-x^4$, for
+which $f(0)=0$ and $f(1)+f(-1)=0$, gives
+\begin{equation}\label{short:eq:quartic}
+ \operatorname{tr}(\mathcal K_\tau^2-\mathcal K_\tau^4)
+ =\frac4{3\pi^2}\log\tau+O(1).
+\end{equation}
+The gap comes from the jump, not from the physical spectrum. The two
+one-sided exchanges interpolate as
+\[
+ M_t=(1-t)X_{0,-1}+tX_{1,0}
+ =\begin{pmatrix}0&1-t&0\\1-t&0&t\\0&t&0\end{pmatrix},
+ \qquad\operatorname{spec}M_t=\{0,\pm r_t\}.
+\]
+Thus the jump trace is $f(r_t)+f(-r_t)-f(1)-f(-1)$, giving
+\eqref{T10:eq:kappa} in the Widom normalization \cite{Widom1982}.
+In contrast, the gauge symbol $a(\theta)$ in
+Section~\ref{app:general-trace} has values $0,\pm1$ at every $\theta$.
+The classical prolate interpolation traverses $[0,1]$; here the moving
+values stay in the two outer bands. The subtraction at $\pm1$ is essential
+because $\varpi$ has infinite mass there.
+
+\subsection{Band-local regularity and the trace norm}
+\label{v7:sec:regularity}
+
+Put $g=2^{-1/2}$ and retain $C_V,C_*,B_1,B_2$ and the strip constant
+$b(\cdot)$ of \eqref{rev5:eq:strip-function} from
+Section~\ref{app:general-trace}.  Define
+\[
+ A_{\rm band}=2C_V+4b(1/2)+2+\frac{2\log(5/2)}{\pi^2}
+                 +\sqrt2(C_*+B_1+B_2).
+\]
+Here $C^{1,1}$ means continuously differentiable with Lipschitz derivative,
+using one-sided derivatives at an interval's endpoints.
+Trace asymptotics for test functions with finitely many H\"older
+singularities are treated in \cite{LeschkeSobolevSpitzer2017,Sobolev2017}
+and \cite[Theorem~4.22]{BollmannMueller2024}, with remainders of lower
+order than the logarithmic term.  The hypothesis below is of a different
+kind: beyond a global Lipschitz bound, no regularity is imposed inside the
+central gap, which the exact gap of the model makes possible.
+
+\begin{theorem}[Regularity only on the model bands]
+\label{v7:thm:band-regularity}
+Let $f:[-1,1]\to\mathbb R$ be $L$-Lipschitz, with $f(0)=0$.
+Suppose its restrictions to $[-1,-g]$ and $[g,1]$ are $C^{1,1}$,
+and let $M$ be the larger Lipschitz constant of their derivatives.
+Then, for $\tau\ge2$,
+\[
+ \left|\tr f(\mathcal K_\tau)
+       -2\tau[f(1)+f(-1)]-\varkappa(f)\log\tau\right|
+ \le A_{\rm band}L+B_2M.
+\]
+For the phase-shifted operator $\mathcal K_{\tau,\phi}$ of
+Proposition~\ref{v6:prop:allphase}, the same estimate holds uniformly in $\phi$
+with $A_{\rm band}$ replaced by $A_{\rm band}+4b(1/2)$.
+\end{theorem}
+\begin{proof}
+In the scalar model write $C=T_n(c)$ and $S=T_n(s)$.
+Since $c+s\ge1$, $C+S\ge I$ and
+$H_n=C^2+S^2=[(C+S)^2+(C-S)^2]/2\ge I/2$.
+Thus $D_n(u)+D_n(v)=I-H_n$ and $D_n(v_0)$ have spectra in $[0,1/2]$,
+the latter by \eqref{rev5:eq:half-bound}. The star consequently has
+exactly $n$ eigenvalues of each sign, all of magnitude at least $g$.
+For $h$ of \eqref{rev5:eq:h}, restricted to $0\le x\le1/2$, put
+$r=\sqrt{1-x}$. Then
+\[
+ h'=\frac{f'(-r)-f'(r)}{2r},\qquad
+ h''=\frac{f''(r)+f''(-r)}{4r^2}
+       -\frac{f'(r)-f'(-r)}{4r^3}\quad\text{a.e.}
+\]
+Hence $h\in C^{1,1}$, $h(0)=0$,
+$\operatorname{Lip}(h)\le\sqrt2L$ and
+$\operatorname{Lip}(h')\le M+\sqrt2L$; integrate the a.e. bound on $h''$
+to obtain the last assertion. Scalar Taylor remainder is therefore
+bounded by $(M+\sqrt2L)|x-y|^2/2$, so the spectral-measure proof of
+Lemma~\ref{rev5:lem:compression} applies to $h$.
+Extend it affinely from $1/2$ to $1$, preserving its Lipschitz bound;
+all second-derivative estimates and spectral evaluations remain in
+$[0,1/2]$. Signed singular-value pairing gives exactly
+\[
+ \tr f(T_n(a))=n[f(1)+f(-1)]+\tr h(D_n(u)+D_n(v)).
+\]
+Equations~\eqref{rev5:eq:star-transfer},
+\eqref{rev5:eq:star-defect-error} and \eqref{rev5:eq:model-trace}
+now bound the error at $n=2q$ by
+$2C_VL+(C_*+B_1)\sqrt2L+B_2(M+\sqrt2L)$.
+Integer transfer, bulk adjustment and \eqref{rev5:eq:kappa-bound} add
+$[4b(1/2)+2+2\pi^{-2}\log(5/2)]L$, giving $A_{\rm band}$.
+The phase comparison adds $4b(1/2)L$.
+\end{proof}
+
+\begin{corollary}[Schatten norms and a sharp coefficient bound]\label{cor:schatten}\label{v7:cor:trace-norm}
+For $p\ge1$ put
+\[
+ \varkappa_p=\varkappa(|x|^p)
+ =\frac1{\pi^2}\int_0^1\frac{r_t^{\,p}-1}{t(1-t)}\,dt<0 .
+\]
+Then $\|\mathcal K_\tau\|_p^p=4\tau+\varkappa_p\log\tau+O_p(1)$ as
+$\tau\to\infty$, and $p\mapsto\varkappa_p$ is strictly decreasing and convex.
+For $p=1$ the remainder has modulus at most $A_{\rm band}$ for $\tau\ge2$.
+The coefficients at $p=1$ and $p=3$ are
+\begin{align*}
+ \varkappa_1&=-\frac2{\pi^2}\bigl[\sqrt2\log(1+\sqrt2)-\log2\bigr]
+   =-0.112122\ldots,\\
+ \varkappa_3&=-\frac2{\pi^2}\Bigl[\tfrac12-\log2
+      +\tfrac5{2\sqrt2}\log(1+\sqrt2)\Bigr]=-0.276589\ldots,
+\end{align*}
+and $\varkappa_{2m}$ is given by \eqref{T10:eq:moments}.  Moreover, for every
+Lipschitz $f$,
+\begin{equation}\label{eq:kappa-sharp}
+ |\varkappa(f)|\le|\varkappa_1|\operatorname{Lip}(f),
+\end{equation}
+with equality for $f(x)=|x|$.  This sharpens the crude bound
+\eqref{rev5:eq:kappa-bound} by the factor $2/(\pi^2|\varkappa_1|)=1.8073$.
+\end{corollary}
+\begin{proof}
+For $p\ge1$ the function $|x|^p$ is Lipschitz on $[-1,1]$ and smooth away from
+the origin, so Theorem~\ref{v7:thm:band-regularity} applies and gives the
+expansion with $f(1)+f(-1)=2$.  The displayed integral is
+\eqref{T10:eq:kappa} for an even $f$.  Since $r_t<1$ off the endpoints,
+$p\mapsto r_t^{\,p}$ is strictly decreasing and convex, and these properties
+pass through the positive weight $[t(1-t)]^{-1}$.  For $p=1$, $L=1$ and $M=0$ in the band-local theorem.
+Rationalizing $r_t-1$ in \eqref{T10:eq:kappa} and setting $u=2t-1$, the
+integrand being even in $u$, gives
+\[
+ \varkappa(|x|)=-\frac2{\pi^2}
+       \int_0^1\frac{du}{1+\sqrt{(1+u^2)/2}}.
+\]
+For $u=\sinh v$ and $V=\log(1+\sqrt2)$ the integral equals
+$\sqrt2\,V-2\int_0^V(\sqrt2+\cosh v)^{-1}\,dv$.
+Substitution $z=\tanh(v/2)$ evaluates the last integral as
+$2\operatorname{artanh}((\sqrt2-1)^2)=\tfrac12\log2$.
+
+For $p=3$ the same substitution
+$u=2t-1$, with $r=\sqrt{(1+u^2)/2}$ and
+$r^3-1=(r-1)(1+r+r^2)$, gives
+\[
+ \varkappa_3=-\frac2{\pi^2}\int_0^1\frac{1+r+r^2}{1+r}\,du,
+\]
+which is the stated closed form, since $(1+r+r^2)/(1+r)=r+(1+r)^{-1}$ and
+$\int_0^1r\,du=\tfrac12+\log(1+\sqrt2)/(2\sqrt2)$.
+For \eqref{eq:kappa-sharp} bound each of $|f(\pm r_t)-f(\pm1)|$ by
+$\operatorname{Lip}(f)(1-r_t)$ in \eqref{T10:eq:kappa} and compare with the
+same integral for $|x|$, which realizes both bounds with equality.
+\end{proof}
+
+The explicit logarithmic coefficients proved in this paper are collected in
+Table~\ref{tab:coefficients}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\hline
+statistic & test $f$ & bulk & $\varkappa(f)$\\
+\hline
+trace norm & $|x|$ & $4\tau$ & $-0.112122$\\
+squared Hilbert--Schmidt norm & $x^2$ & $4\tau$ & $-2/\pi^2=-0.202642$\\
+Schatten $\|\cdot\|_3^3$ & $|x|^3$ & $4\tau$ & $-0.276589$\\
+Schatten $\|\cdot\|_4^4$ & $x^4$ & $4\tau$ & $-10/(3\pi^2)=-0.337737$\\
+quartic defect & $x^2-x^4$ & $0$ & $4/(3\pi^2)=+0.135094$\\
+$\log\det(I+\mathcal K_{\tau,\phi}^2)$ & $\log(1+x^2)$ & $4\tau\log2$ & $-1/9$\\
+\hline
+\end{tabular}
+\caption{Bulk and logarithmic coefficients of Theorem~\ref{T10:conj:law}.
+Every entry is exact; decimals truncate the closed forms of
+Corollary~\ref{cor:schatten},
+Proposition~\ref{T10:prop:density} and Remark~\ref{rem:det-square}.  The
+last row concerns the phase-shifted operator $\mathcal K_{\tau,\phi}$ of
+Proposition~\ref{v6:prop:allphase}, for which the same law holds uniformly
+in $\phi$.}
+\label{tab:coefficients}
+\end{table}
+
+\subsection{Gap counts and transition quantiles}\label{v7:sec:quantiles}
+Let $\mu_j^\pm(\tau)$ be the positive eigenvalues and the magnitudes of
+negative eigenvalues, respectively, in nonincreasing order with multiplicity.
+Both lists are infinite. They include both reflection sectors.
+Set $N_\pm(a;\tau)=\#\{j:\mu_j^\pm(\tau)>a\}$ and $C_0=2C_V+4b(1/2)$.
+\begin{proposition}[Gap mass and the count plateau]
+\label{v7:prop:gap-mass}\label{v7:prop:count-plateau}
+For $w_g(x)=\min\{|x|,(g-|x|)_+\}$ and $\tau\ge2$,
+\[
+ \sum_jw_g(\lambda_j(\mathcal K_\tau))\le C_0,\qquad
+ \sum_{|\lambda_j|\le a}|\lambda_j|
+ \le C_0\max\{1,a/(g-a)\}\quad(0<a<g).
+\]
+For either sign and $0<a<g$,
+\begin{equation}\label{v7:eq:count-plateau}
+ 2\tau-1-\frac{C_0}{g-a}\le N_\pm(a;\tau)
+                 \le2\tau+1+\frac{C_0}{a}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+For a nearest integer $q$ to $\tau$ put $n=2q$ and $M_n=T_n(a(\cdot))$.
+The star has $n$ eigenvalues of each sign in the outer bands and all others
+zero. Equations~\eqref{rev5:eq:integer-transfer} and
+\eqref{rev5:eq:star-transfer} give
+$|\tr F(\mathcal K_\tau)-\tr F(M_n)|\le C_0\operatorname{Lip}(F)$
+for every real Lipschitz $F$ with $F(0)=0$.
+Apply this first to the nonnegative 1-Lipschitz function $w_g$, which
+vanishes on the star spectrum. The second mass bound follows from
+$w_g(x)\ge\min\{1,(g-a)/a\}|x|$ for $|x|\le a$.
+For positive counts the ramps
+$F_a^+(x)=\min\{1,x_+/a\}$ and
+$F_a^-(x)=\min\{1,(x-a)_+/(g-a)\}$ bracket $\mathbf1_{(a,1]}$,
+have Lipschitz constants $1/a,1/(g-a)$, and both have star trace $n$.
+Reflection gives the negative count; $|n-2\tau|\le1$ finishes the proof.
+\end{proof}
+
+\begin{theorem}[Cumulative transition law]\label{v7:thm:cumulative-count}
+For $g<a<1$ put
+\begin{equation}\label{v7:eq:J}
+ J(a)=\int_g^a\varpi(x)\,dx
+ =\frac2{\pi^2}\operatorname{artanh}\sqrt{2a^2-1}.
+\end{equation}
+As $\tau\to\infty$, each sign satisfies
+\begin{equation}\label{v7:eq:cumulative-count}
+ N_\pm(a;\tau)=2\tau-J(a)\log\tau
+                    +O((\log\tau)^{2/3}),
+\end{equation}
+uniformly for $a$ in every fixed compact subset of $(g,1)$.
+\end{theorem}
+\begin{proof}
+Fix $[a_0,a_1]\subset(g,1)$ and
+$\delta_0=\min\{(a_0-g)/2,(1-a_1)/2,1\}$.
+The quintic step $S(t)=10t^3-15t^4+6t^5$ on $[0,1]$, continued by zero
+and one, is nondecreasing and $C^2$, with derivative bounds $15/8,15$.
+For $0<\delta\le\delta_0$ the functions
+$F^-_{a,\delta}=S((x-a)/\delta)$ and
+$F^+_{a,\delta}=S((x-a+\delta)/\delta)$ bracket $\mathbf1_{(a,1]}$.
+Their endpoint values are $0,1$, they vanish at zero, and
+$\|(F^\pm)'\|_\infty+\|(F^\pm)''\|_\infty\le135/(8\delta^2)$.
+With $M=\max_{[a_0-\delta_0,a_1+\delta_0]}\varpi$, the density gives
+$|\varkappa(F^\pm_{a,\delta})+J(a)|\le M\delta$.
+The trace theorem therefore implies
+\[
+ |N_+(a;\tau)-2\tau+J(a)\log\tau|
+ \le M\delta\log\tau+135C_{\rm tr}/(8\delta^2).
+\]
+Choose $\delta=\min\{\delta_0,(\log\tau)^{-1/3}\}$.
+Reflection gives the other sign and integration of $\varpi$ gives $J$.
+\end{proof}
+
+\begin{corollary}[Signed transition quantiles]\label{v7:cor:quantiles}
+Fix $\nu\ne0$ and put
+$j_\tau=\lfloor2\tau-\nu\log\tau\rfloor$, which is positive for large $\tau$.
+For $\nu>0$,
+\begin{equation}\label{v7:eq:quantile}
+ \mu_{j_\tau}^{\pm}(\tau)=\lambda(\nu)+O_\nu((\log\tau)^{-1/3}),
+ \qquad
+ \lambda(\nu)=\sqrt{\frac{1+\tanh^2(\pi^2\nu/2)}2}.
+\end{equation}
+For $\nu<0$, one has
+$\mu_{j_\tau}^{\pm}(\tau)=O_\nu((\log\tau)^{-1})$.
+\end{corollary}
+\begin{proof}
+For $\nu>0$, $a_\nu=\lambda(\nu)$ uniquely solves $J(a_\nu)=\nu$.
+On a compact neighborhood, $J'=\varpi$ is bounded below by a positive
+constant and the counting error is uniform. Writing $L=\log\tau$,
+a sufficiently large fixed $D_\nu$ therefore gives
+\[
+ N_\pm(a_\nu+D_\nu L^{-1/3};\tau)<j_\tau
+ \le N_\pm(a_\nu-D_\nu L^{-1/3};\tau).
+\]
+Strict-count inversion gives the asserted error, including threshold
+multiplicities; the floor costs less than one.
+For $\nu<0$ put $c=|\nu|$, $a=2(C_0+1)/(cL)$.
+Eventually $a<g$, $cL\ge4$, and the plateau gives
+$N_\pm(a;\tau)\le2\tau+1+cL/2\le2\tau+cL-1<j_\tau$.
+Thus $\mu_{j_\tau}^\pm\le a$.
+\end{proof}
+No conclusion for the central index $\nu=0$, or for separate reflection
+sectors, is asserted by these quantile estimates.
+
+The profile is a fold of the classical Landau--Widom logistic law
+\cite{LandauWidom1980}: for $0<t<1/2$,
+$J(r_t)=\pi^{-2}\log((1-t)/t)$ and
+$\lambda(\nu)=r_{(1+e^{\pi^2\nu})^{-1}}$.
+This follows from $\sqrt{2r_t^2-1}=|1-2t|$. The result is the stated
+counting and quantile error for both signed physical lists, which need
+not themselves be sign-symmetric.
+
+\begin{corollary}[Gap counts and signed transition counts]
+\label{rev5:cor:counts}
+Eigenvalues below are counted with multiplicity.  For fixed
+$0<a\le b<1/\sqrt2$,
+\begin{equation}\label{rev5:eq:gap-count}
+ \#\{j:a\le|\lambda_j(\mathcal K_\tau)|\le b\}
+ \le\frac{C_0}{\min\{a,1/\sqrt2-b\}}\qquad(\tau\ge2).
+\end{equation}
+For fixed $1/\sqrt2<a<b<1$, each sign separately satisfies
+\begin{equation}\label{rev5:eq:band-count}
+ \#\{j:\lambda_j(\mathcal K_\tau)\in[a,b]\}
+ =I_{a,b}\log\tau+O_{a,b}((\log\tau)^{2/3}),
+\end{equation}
+and the same formula holds for $[-b,-a]$, where
+$I_{a,b}=\int_a^b\varpi(x)\,dx$ and $\varpi$ is given in
+Proposition~\ref{T10:prop:density}.  With $v(x)=\sqrt{2x^2-1}$,
+\begin{equation}\label{T11:eq:kappaclosed}
+ I_{a,b}=\varkappa(\mathbf1_{[a,b]})
+ =\frac1{\pi^2}\log
+   \frac{(1+v(b))(1-v(a))}{(1-v(b))(1+v(a))},\qquad
+ I_{0.72,\,0.995}=0.4967058\ldots .
+\end{equation}
+Here the indicator notation denotes the convergent density integral;
+the trace theorem is applied only to smooth comparison functions.
+\end{corollary}
+
+\begin{proof}
+On $a\le|x|\le b$ the weight of Proposition~\ref{v7:prop:gap-mass}
+is at least $\min\{a,1/\sqrt2-b\}$, proving the gap count.
+
+For the transition interval, put $L=\log\tau$ and
+$\delta=L^{-1/3}$. For sufficiently large $\tau$, all thresholds below
+lie in a fixed compact subset of $(1/\sqrt2,1)$. The strict counts obey
+\[
+ N_+(a;\tau)-N_+(b;\tau)
+ \le\#\{j:\lambda_j\in[a,b]\}
+ \le N_+(a-\delta;\tau)-N_+(b;\tau).
+\]
+Theorem~\ref{v7:thm:cumulative-count}, uniform on that compact set,
+and $J'=\varpi$ bound both sides by
+$[J(b)-J(a)]L+O(L^{2/3})$, since
+$[J(a)-J(a-\delta)]L=O(\delta L)$.
+The same argument for $N_-$ proves the negative interval formula.
+This bracketing also covers arbitrary multiplicity at both endpoints.
+Finally,
+$d[\log((1+v(x))/(1-v(x)))]/dx=\pi^2\varpi(x)$
+proves \eqref{T11:eq:kappaclosed}.
+\end{proof}
+
+These results concern fixed compact windows.  They do not assert an empty
+gap, bounded counts on the whole punctured gap, an $O(1)$ remainder for
+sharp transition counts, or uniformity when the endpoints approach
+$0$, $1/\sqrt2$ or $1$.  The density integral diverges as $b\uparrow1$.
+The exponent $2/3$ comes from this $C^2$ smoothing estimate; no optimality
+is claimed.
+
+
+\subsection{The regularity obstruction}\label{sec:open}
+\begin{proposition}[Obstruction to an all-H\"older bounded remainder]
+\label{T10:prop:holder-obstruction}
+For every $0<\alpha<1$ and every closed interval
+$I=[a,b]\subset(1/\sqrt2,1)$ with $a<b$, there is a real
+$f\in C^{0,\alpha}([-1,1])$ supported in $I$ for which
+\[
+ \sup_{n\ge2}\left|
+ \operatorname{tr}f(\mathcal K_n)-\varkappa(f)\log n\right|=\infty.
+\]
+Consequently \eqref{T10:eq:law} cannot hold with an $O_f(1)$ remainder for
+every H\"older test function vanishing at zero.
+\end{proposition}
+
+\begin{proof}
+Let $X$ be the Banach space of real $C^{0,\alpha}$ functions supported
+in $I$, with norm $\|f\|_\infty+[f]_\alpha$. On $X$,
+$\varkappa(f)=\int_I\varpi f$, where $\min_I\varpi>0$.
+The functionals
+$L_n(f)=\sum_jf(\lambda_j(\mathcal K_n))-(\log n)\int_I\varpi f$
+are continuous: compactness leaves finitely many eigenvalues in $I$.
+Their number $m_n$ is $O(\log n)$ by Corollary~\ref{rev5:cor:counts}.
+Let $Z_n$ contain those eigenvalues and the endpoints of $I$, and set
+$f_n(x)=\operatorname{dist}(x,Z_n)^\alpha$ on $I$, zero elsewhere.
+Since distance is 1-Lipschitz and $|r^\alpha-s^\alpha|\le|r-s|^\alpha$,
+including across the endpoints, $\|f_n\|_X\le1+(b-a)^\alpha$.
+Its spectral sum vanishes. The successive gap lengths $\ell_i$ have sum
+$b-a$ and number at most $m_n+1$, so exact integration and convexity give
+\[
+ \int_I\varpi f_n\ge
+ \frac{\min_I\varpi}{2^\alpha(1+\alpha)}\sum_i\ell_i^{1+\alpha}
+ \ge\frac{\min_I\varpi(b-a)^{1+\alpha}}
+ {2^\alpha(1+\alpha)(m_n+1)^\alpha}.
+\]
+Thus $\|L_n\|\ge c(\log n)^{1-\alpha}\to\infty$.
+Uniform boundedness supplies one fixed $f\in X$ with unbounded remainder.
+\end{proof}
+
+This obstruction concerns the combination of the entire H\"older class and
+an $O_f(1)$ remainder.  It is compatible with the $C^2$ theorem, its band-local extension, and with the
+functional \eqref{T10:eq:kappa}, which is defined on the larger class.
+The obstruction lies inside an outer transition band, where
+Theorem~\ref{v7:thm:band-regularity} still imposes derivative regularity.
+The counting results use admissible smooth or Lipschitz comparison functions.
+
+The remainder cannot be replaced by $c(f)+o(1)$ as $\tau\to\infty$ through
+real values: already for $f(x)=x^2$ it contains the term
+$-2\pi^{-2}(\log2)\cos(4\pi\tau)$ of Theorem~\ref{thm:hs-exact}, which does
+not converge.  Along the integer ladder $\tau=n$ of
+Proposition~\ref{T10:prop:holder-obstruction} that term is the constant
+$-2\pi^{-2}\log2$.
+
