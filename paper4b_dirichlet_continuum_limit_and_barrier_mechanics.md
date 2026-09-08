@@ -1544,14 +1544,116 @@ Subtracting the excited even sum from $\|Ku_1\|^2$ gives (8.19.5), completing th
 *Discussion and Scientific Epistemics:*
 Proposition 8.19 establishes an exact reduction of the relative tunneling gap:
 1. **The Exact Dipole Architecture:**
-   The relative gap $R_{\mathrm{gap}}(N) = \frac{D_0^2}{\mu_1 - \lambda}$ does not require separate heuristic estimates of $D_0^2$ and $\mu_1 - \lambda$. Identity (8.19.2) shows that $R_{\mathrm{gap}}$ is the ratio of two physical observables: the transition dipole $b_{01}^2$ and the odd transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$.
-   Across all tested dimensions $N \in \{8, \dots, 24\}$, $\mathcal{R}_1 \approx 5.13 = \mathcal{O}(1)$ remains strictly bounded away from zero and infinity (audited in Cell 67 and Cell 69). Thus, $R_{\mathrm{gap}}(N) \to 0$ if and only if the transition dipole $b_{01}^2 \to 0$.
+   The relative gap $R_{\mathrm{gap}}(N) = \frac{D_0^2}{\mu_1 - \lambda}$ does not require separate heuristic estimates of $D_0^2$ and $\mu_1 - \lambda$. Identity (8.19.2) shows that $R_{\mathrm{gap}}$ factors identically into the transition dipole $b_{01}^2$ and the odd transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$.
+   The exact factorization reduces control of $R_{\mathrm{gap}}$ to joint control of $b_{01}^2$ and $\mathcal{R}_1$. If $\mathcal{R}_1$ remains bounded above and below away from zero, then $R_{\mathrm{gap}}(N) \to 0 \iff b_{01}^2 \to 0$. Across all tested dimensions $N \in \{8, \dots, 24\}$, $\mathcal{R}_1 \in [3.91, 8.00]$ remains strictly $\mathcal{O}(1)$ (`cell69.out`), but this uniform lower bound is an empirical observation across tested dimensions, not an assumed theorem.
 2. **Dominance of Mode 1 in the Excited Wavepacket:**
-   Because $\|v_{\mathrm{exc}}\|^2 = \sum_{j \ge 1} b_{0j}^2$, the ratio $b_{01}^2 / \|v_{\mathrm{exc}}\|^2$ measures the concentration of the excited coordinate wavepacket $P_{\perp u_0} K c$ in the first excited mode. As shown in Cell 61, mode 1 carries $99.9999\%$ of this residual norm, so $b_{01}^2 \approx \|v_{\mathrm{exc}}\|^2$.
+   Because $\|v_{\mathrm{exc}}\|^2 = \sum_{j \ge 1} b_{0j}^2$, the ratio $b_{01}^2 / \|v_{\mathrm{exc}}\|^2$ measures the concentration of the excited coordinate wavepacket $P_{\perp u_0} K c$ in the first excited mode. As shown in `cell69.out`, mode 1 carries $99.9909\%$ at $N=8$ rising monotonically to $99.9995\%$ at $N=24$ of this residual norm, so $b_{01}^2 \approx \|v_{\mathrm{exc}}\|^2$.
 3. **The Cancellation Mechanism in the Even Sector:**
    Identity (8.19.5) exposes the precise algebraic mechanism governing $b_{01}^2$:
-   $$b_{01}^2 = \|K u_1\|^2 - a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.$$
-   Both $\|Ku_1\|^2 \approx 4.5$ and the excited even resolvent sum $a_1^2 \sum_{k \ge 1} \frac{d_k^2}{(\mu_1 - E_k)^2} \approx 4.5$ are $\mathcal{O}(1)$ quantities. The smallness of $b_{01}^2 \sim 10^{-6}$ arises from a near-perfect cancellation between the discrete coordinate kinetic energy $\|Ku_1\|^2$ and the even-sector resolvent projection!
+   $$b_{01}^2 = \|K u_1\|^2 - a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2} \equiv \|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1}.$$
+   At $N=24$, $\|Ku_1\|^2 = 10.2186531$ and the excited even resolvent sum $\mathcal{E}_{\mathrm{even}, 1} = 10.2186508$ are both $\mathcal{O}(10)$ quantities, while their difference is $b_{01}^2 = 2.25258 \times 10^{-6}$ (`cell69.out`). The cancellation residual independently agrees at $10^{-18}$ level in 50-digit precision. The analytical origin of this cancellation is resolved in Proposition 8.20 below.
+
+---
+
+### 8.20 Proposition 8.20: Exact Even-Resolvent Representation of $K u_1$, Stieltjes Derivative Architecture, and Algebraic Resolution of the Dipole Cancellation
+
+*The transition dipole cancellation $b_{01}^2 = \|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1}$ observed in Proposition 8.19 admits an exact operator-theoretic explanation: $K u_1$ is proportional to the even resolvent of the boundary vector $d$ evaluated at the odd eigenvalue $\mu_1$, its norm squared $\|Ku_1\|^2$ is the exact derivative of the even Stieltjes transform $G_d'(\mu_1)$, and subtracting the excited even sum $\mathcal{E}_{\mathrm{even}, 1}$ is the exact algebraic projector isolating the ground-state pole.*
+
+**Part I (Exact Resolvent Representation — Unconditional Finite-$N$ Identity):**
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Galerkin matrix, $u_0^{\mathrm{even}} = c$ the even ground state ($Q_{\mathrm{even}} c = \lambda c$, $\langle d, c \rangle = D_0$), and $u_1$ the first excited odd eigenstate ($Q_{\mathrm{odd}} u_1 = \mu_1 u_1$, $a_1 = \langle \boldsymbol\psi, u_1 \rangle \ne 0$).*
+*Because $\mu_1 \notin \sigma(Q_{\mathrm{even}})$ by strict spectral interlacing ($E_1 < \mu_1 < E_2$), the shifted operator $(Q_{\mathrm{even}} - \mu_1 I)$ is unconditionally invertible on $H_{\mathrm{even}}$, and the coordinate derivative $K u_1 \in H_{\mathrm{even}}$ admits the exact, closed-form resolvent representation:*
+$$\boxed{K u_1 = a_1 (Q_{\mathrm{even}} - \mu_1 I)^{-1} d. \tag{8.20.1}}$$
+
+**Part II (Exact Stieltjes Derivative Identity):**
+*Let $G_d(z) \equiv \langle d, (Q_{\mathrm{even}} - z I)^{-1} d \rangle = \sum_{k=0}^N \frac{d_k^2}{E_k - z}$ be the even-sector Stieltjes transform generated by the boundary vector $d \in H_{\mathrm{even}}$.*
+*The discrete coordinate kinetic energy $\|Ku_1\|^2$ is identically given by the first derivative of the even Stieltjes transform evaluated at the odd eigenvalue $z = \mu_1$:*
+$$\boxed{\|Ku_1\|^2 = a_1^2 \|(Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2 = a_1^2 G_d'(\mu_1) = a_1^2 \sum_{k=0}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.} \tag{8.20.2}$$
+
+**Part III (Algebraic Resolution of the Dipole Cancellation):**
+*The cancellation identity (8.19.5):*
+$$b_{01}^2 = \|Ku_1\|^2 - a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}$$
+*is an exact algebraic projector isolating the $k=0$ ground-state residue from the even Stieltjes derivative:*
+$$\boxed{b_{01}^2 = a_1^2 \frac{d_0^2}{(\mu_1 - E_0)^2} = \frac{a_1^2 D_0^2}{(\mu_1 - \lambda)^2}.} \tag{8.20.3}$$
+*The subtraction $\|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1}$ does not represent an asymptotic or approximate cancellation, but an exact algebraic identity: subtracting the excited even spectral sum $\mathcal{E}_{\mathrm{even}, 1} = a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}$ from the total norm squared $\|Ku_1\|^2$ removes precisely the $k \ge 1$ terms of the Parseval sum, leaving identically the single $k=0$ pole.*
+
+**Part IV (Excited Doublet Partner Decomposition):**
+*Decomposing the excited sum $\mathcal{E}_{\mathrm{even}, 1}$ separates the resonant first excited parity doublet $(E_1, \mu_1)$ from the higher spectrum $k \ge 2$:*
+$$\boxed{\mathcal{E}_{\mathrm{even}, 1} = \frac{a_1^2 d_1^2}{(\mu_1 - E_1)^2} + a_1^2 \sum_{k=2}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.} \tag{8.20.4}$$
+*Consequently, the first relative tunneling gap $R_{\mathrm{gap}}(N) \equiv \frac{D_0^2}{\mu_1 - \lambda}$ satisfies the exact positive resolvent representation:*
+$$\boxed{R_{\mathrm{gap}}(N) = \frac{\mu_1 - \lambda}{a_1^2} \left[ a_1^2 G_d'(\mu_1) - \mathcal{E}_{\mathrm{even}, 1} \right] = \frac{b_{01}^2}{\mathcal{R}_1}.} \tag{8.20.5}$$
+
+---
+
+**Proof:**
+
+**Step 1 (Proof of Part I — Exact Resolvent Representation):**
+From Proposition 8.19 Step 1, the rank-two commutator $[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T$ applied to $u_1 \in H_{\mathrm{odd}}$ establishes the operator identity on $H_{\mathrm{even}}$:
+$$(Q_{\mathrm{even}} - \mu_1 I) K u_1 = a_1 d.$$
+By the strict spectral interlacing theorem for rank-one parity perturbations (Proposition 8.8 and Proposition 8.14), the eigenvalues of $Q_{\mathrm{even}}$ and $Q_{\mathrm{odd}}$ strictly interlace:
+$$E_0 = \lambda < \mu_0 < E_1 < \mu_1 < E_2 < \dots < E_N.$$
+In particular, $\mu_1 \in (E_1, E_2)$, so $\mu_1 \notin \sigma(Q_{\mathrm{even}})$.
+Thus $(Q_{\mathrm{even}} - \mu_1 I)$ is a non-singular, invertible symmetric matrix on the $(N+1)$-dimensional subspace $H_{\mathrm{even}}$.
+Multiplying both sides by $(Q_{\mathrm{even}} - \mu_1 I)^{-1}$ yields:
+$$K u_1 = a_1 (Q_{\mathrm{even}} - \mu_1 I)^{-1} d,$$
+which is (8.20.1).
+
+**Step 2 (Proof of Part II — Stieltjes Derivative Identity):**
+Taking the Euclidean norm squared of $K u_1 \in H_{\mathrm{even}}$:
+$$\|Ku_1\|^2 = a_1^2 \langle (Q_{\mathrm{even}} - \mu_1 I)^{-1} d, (Q_{\mathrm{even}} - \mu_1 I)^{-1} d \rangle = a_1^2 \langle d, (Q_{\mathrm{even}} - \mu_1 I)^{-2} d \rangle.$$
+Expanding in the orthonormal eigenbasis $\{u_k^{\mathrm{even}}\}_{k=0}^N$ of $Q_{\mathrm{even}}$ with eigenvalues $E_k$ and weights $d_k = \langle u_k^{\mathrm{even}}, d \rangle$:
+$$\langle d, (Q_{\mathrm{even}} - \mu_1 I)^{-2} d \rangle = \sum_{k=0}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.$$
+On the other hand, the Stieltjes transform of the even boundary measure $d\nu_d(E) = \sum_{k=0}^N d_k^2 \delta_{E_k}$ is:
+$$G_d(z) = \langle d, (Q_{\mathrm{even}} - z I)^{-1} d \rangle = \sum_{k=0}^N \frac{d_k^2}{E_k - z}.$$
+Differentiating with respect to $z$:
+$$G_d'(z) = \sum_{k=0}^N \frac{d_k^2}{(E_k - z)^2}.$$
+Evaluating at $z = \mu_1$ gives $G_d'(\mu_1) = \sum_{k=0}^N \frac{d_k^2}{(\mu_1 - E_k)^2}$, proving (8.20.2).
+
+**Step 3 (Proof of Part III — Resolution of the Dipole Cancellation):**
+The sum in (8.20.2) runs over $k = 0, 1, \dots, N$.
+Splitting the $k=0$ term from the remaining terms $k \ge 1$:
+$$\sum_{k=0}^N \frac{d_k^2}{(\mu_1 - E_k)^2} = \frac{d_0^2}{(\mu_1 - E_0)^2} + \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}.$$
+For $k=0$, $u_0^{\mathrm{even}} = c$ is the even ground state, so $E_0 = \lambda$ and $d_0 = \langle c, d \rangle = D_0$.
+Therefore, the $k=0$ contribution multiplied by $a_1^2$ is:
+$$a_1^2 \frac{d_0^2}{(\mu_1 - E_0)^2} = \frac{a_1^2 D_0^2}{(\mu_1 - \lambda)^2} = \left( - \frac{D_0 a_1}{\mu_1 - \lambda} \right)^2 = b_{01}^2,$$
+where the last equality is the exact commutator quotient identity (8.19.1).
+Multiplying the remaining terms by $a_1^2$ gives precisely $\mathcal{E}_{\mathrm{even}, 1} \equiv a_1^2 \sum_{k=1}^N \frac{d_k^2}{(\mu_1 - E_k)^2}$.
+Therefore:
+$$\|Ku_1\|^2 = a_1^2 G_d'(\mu_1) = b_{01}^2 + \mathcal{E}_{\mathrm{even}, 1} \implies b_{01}^2 = \|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1},$$
+proving that identity (8.19.5) is an exact algebraic decomposition separating the ground-state pole from the excited spectrum. $\blacksquare$
+
+**Step 4 (Proof of Part IV — Doublet Partner Decomposition):**
+Separating the $k=1$ summand from the $k \ge 2$ terms in $\mathcal{E}_{\mathrm{even}, 1}$ is an immediate algebraic partitioning, yielding (8.20.4).
+Multiplying $b_{01}^2$ by $\frac{\mu_1 - \lambda}{a_1^2} = \frac{1}{\mathcal{R}_1}$ yields (8.20.5). $\blacksquare$
+
+---
+
+*Discussion and Epistemic Synthesis:*
+1. **The Algebraic Anatomy of the Cancellation:**
+   In `cell69.out`, the numerical calculation observed:
+   $$\|Ku_1\|^2 \approx 10.2186531, \qquad \mathcal{E}_{\mathrm{even}, 1} \approx 10.2186508, \qquad b_{01}^2 \approx 2.25258 \times 10^{-6} \quad (N = 24).$$
+   Proposition 8.20 proves that this is not an accidental numerical near-cancellation between two unrelated dynamical quantities. Rather:
+   - $\|Ku_1\|^2 = a_1^2 G_d'(\mu_1)$ is the total norm squared of the resolvent vector $a_1 (Q_{\mathrm{even}} - \mu_1 I)^{-1} d$.
+   - $\mathcal{E}_{\mathrm{even}, 1}$ is the projection of this resolvent vector onto the orthogonal complement of the ground state $P_{\perp c} H_{\mathrm{even}}$.
+   - $b_{01}^2$ is the projection of this resolvent vector onto the one-dimensional ground state subspace $\mathbb{R} c$.
+   Therefore, $\|Ku_1\|^2 - \mathcal{E}_{\mathrm{even}, 1} \equiv b_{01}^2$ is an exact Pythagorean decomposition on $H_{\mathrm{even}}$:
+   $$\|(Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2 = \|P_c (Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2 + \|P_{\perp c} (Q_{\mathrm{even}} - \mu_1 I)^{-1} d\|^2.$$
+2. **Why is the Ground-State Projection $b_{01}^2$ Quenched?**
+   Because $K$ is symmetric and interchanges parity sectors:
+   $$b_{01} \equiv \langle c, K u_1 \rangle = - \langle K c, u_1 \rangle.$$
+   From Proposition 8.12, the coordinate-derivative wavepacket $Kc$ is overwhelmingly aligned with the odd ground state $u_0$:
+   $$Kc = \langle u_0, Kc \rangle u_0 + P_{\perp u_0} Kc, \qquad \frac{|\langle u_0, Kc \rangle|^2}{\|Kc\|^2} > 99.99987\% \quad (N = 24).$$
+   Because $u_1 \perp u_0$, the ground-state component vanishes identically: $\langle \langle u_0, Kc \rangle u_0, u_1 \rangle = 0$.
+   Therefore:
+   $$\boxed{b_{01} = - \langle P_{\perp u_0} Kc, u_1 \rangle.}$$
+   The transition dipole $b_{01}$ is precisely the overlap between the first excited odd mode $u_1$ and the excited wavepacket residual $v_{\mathrm{exc}} = P_{\perp u_0} Kc$.
+   Because $\|v_{\mathrm{exc}}\|^2 = D_0^2 M_{2,\mathrm{exc}} \sim 2.25 \times 10^{-6}$ is tiny due to the near-perfect alignment of $Kc$ with $u_0$, its projection onto $u_1$ is necessarily bounded by $\|v_{\mathrm{exc}}\|^2$, establishing $b_{01}^2 \le \|v_{\mathrm{exc}}\|^2 \sim 10^{-6}$.
+3. **The Wavepacket Concentration Mechanism:**
+   In `cell69.out`, mode 1 carries $99.9995\%$ of the total excited wavepacket norm $\|v_{\mathrm{exc}}\|^2 = \sum_{j \ge 1} b_{0j}^2$.
+   Proposition 8.20 explains this concentration: $u_1$ is the lowest excited bound state, lying at the lowest kinetic energy above $u_0$, so that the spatial residual $P_{\perp u_0} Kc$ is almost purely dipolar, projecting almost exclusively onto the first excited nodal mode $u_1$.
+4. **Epistemic Hygiene on $\mathcal{R}_1$:**
+   In `cell69.out`, the transmission ratio $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$ takes the values:
+   $$N=8: 8.00, \quad N=12: 6.88, \quad N=16: 4.13, \quad N=20: 3.91, \quad N=24: 5.13.$$
+   While these empirical values are consistent with an $\mathcal{O}(1)$ non-zero limit, five data points do not constitute a mathematical proof that $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$. We therefore maintain strict epistemic discipline: $R_{\mathrm{gap}}(N) \to 0$ is guaranteed if $b_{01}^2 \to 0$ provided $\mathcal{R}_1$ does not collapse to zero, and the primary analytical agenda is establishing analytical bounds on the Stieltjes derivative $G_d'(\mu_1)$ and wavepacket alignment.
 
 ---
 
