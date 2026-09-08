@@ -37,18 +37,18 @@ THE FOUR INVESTIGATIVE TESTS OF CELL 87:
 
 - Test B: Sequence Acceleration & Continuum Ritz Limits E_k^{(infty)}
           Track transition modes k in {10, 11, 12, 13, 14} across N in {12, 16, 20, 24, 28, 32}.
-          Compute Aitken Delta^2 sequence extrapolation for E_k^{(infty)}.
-          Audit whether E_{13}(N) saturates to a strictly positive limit E_{13}^{(infty)} > 0.
+          Audit the downward momentum of E_{13}(N) (reaching 0.813 at N=32).
+          Test whether Aitken Delta^2 sequence extrapolation is valid or unphysical for discrete Ritz spectra.
 
 - Test C: Fixed-Index Spectral Separation & Continuum Enclosure Bound
           Evaluate varepsilon_{13}(N) = E_{13}^{(N)} - E_2^{(N)} and the resulting
           continuum envelope C_{cont}(12; N) = 1 + ||Q_{even}^{(N)}|| / varepsilon_{13}(N).
-          Verify that C_{cont}(12; N) remains stable in [3.0, 5.5] across all dimensions.
+          Audit finite-N envelope growth across N in {16, 20, 24, 28, 32}.
 
 - Test D: Component Operator Norms & Explicit Quadratic Form Bounds
           Evaluate component operator norms ||Q_{prime}||, ||Q_{pole}||, ||Q_{arch}||
-          at high dimension (N = 28, 32) to establish an explicit, grounded bound
-          M(c, T) for the Weil quadratic form without unelaborated Peller assumptions.
+          at high dimension (N = 28, 32) to investigate empirical bounds M(c, T)
+          for the Weil quadratic form without unelaborated Peller assumptions.
 
 OUTPUT CONSTRAINTS:
 -------------------
@@ -289,11 +289,13 @@ def run_cell87() -> None:
 
     print("-" * 135)
     print("Key Diagnostic Summary for Test B:")
-    print("1. Tunneling Ladder Modes (k = 10, 11): Eigenvalues collapse towards zero: E_{10} ~ 1e-4 -> 0, E_{11} ~ 0.03 -> 0.")
-    print("2. Transition Mode (k = 12): E_{12} decreases from 2.17 -> 1.96 -> 1.31 -> 0.66 -> 0.30, approaching barrier bottom.")
-    print("3. Continuum Base Mode (k = 13): E_{13} exhibits strong deceleration, stabilizing at a macroscopic floor:")
-    print("   E_{13}: 2.49 -> 2.06 -> 1.80 -> 1.31 -> 0.98, with Aitken limit E_{13}^{(\\infty)} ~ 0.70 - 0.85 > 0.")
-    print("4. This provides strong empirical certification that E_{13}^{(\\infty)} > 0 strictly holds in the continuum limit.")
+    print("1. Tunneling Ladder Modes (k = 10, 11): Eigenvalues collapse towards zero: E_{10} ~ 6.9e-4 -> 2.1e-5, E_{11} ~ 0.126 -> 0.038.")
+    print("2. Transition Mode (k = 12): E_{12} decreases from 2.17 -> 1.96 -> 1.31 -> 0.66 -> 0.589, maintaining downward momentum.")
+    print("3. Continuum Base Mode (k = 13): E_{13} continues downward drift (2.49 -> 2.06 -> 1.80 -> 1.31 -> 0.813), with decrements ~ 0.49.")
+    print("4. Refutation of Aitken Extrapolation: Aitken yields E_{13}^{(infty)} ~ 41.97 from a sequence bounded above by 2.49, proving")
+    print("   that geometric sequence acceleration is non-shape-preserving and invalid for discrete Ritz spectra.")
+    print("5. Epistemic Status: Existence of Ritz limit E_{13}^{(infty)} = inf_N E_{13}^{(N)} >= 0 is mathematically proven, but strict")
+    print("   positivity E_{13}^{(infty)} > 0 cannot be deduced from numerical extrapolation and requires an analytical min-max lower bound.")
 
     # =========================================================================
     # TEST C: Fixed-Index Spectral Separation & Continuum Enclosure Bound
@@ -320,11 +322,10 @@ def run_cell87() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test C:")
     print("1. Ground Mode E_2 vanishes exponentially: E_2 ~ 1.37e-26 at N=24, dropping below machine resolution.")
-    print("2. Fixed-index separation varepsilon_{13}(N) = E_{13}(N) - E_2(N) is dominated entirely by E_{13}(N) >= 0.98.")
-    print("3. Continuum envelope C_{cont}(12; N) remains uniformly bounded in [2.3, 5.2] across all tested dimensions:")
-    print("   N=16: C_{cont}=2.33 | N=20: C_{cont}=2.75 | N=24: C_{cont}=3.12 | N=28: C_{cont}=4.13 | N=32: C_{cont}=5.18.")
-    print("4. Closed continuum bound S_{cont}^{inf}(12) remains extremely small (~ 10^{-26} - 10^{-27}), rigorously enclosing")
-    print("   the infinite continuum tail across all dimensions.")
+    print("2. Fixed-index separation varepsilon_{13}(N) = E_{13}(N) - E_2(N) is dominated entirely by E_{13}(N) = 0.813 at N=32.")
+    print("3. Continuum envelope C_{cont}(12; N) grows with dimension: 2.33 (N=16) -> 2.75 -> 3.12 -> 4.13 -> 6.06 (N=32).")
+    print("4. Status: The finite-N calibrated bound rigorously encloses the tail for each tested dimension, but uniform")
+    print("   closure across all dimensions remains conditional on establishing an N-independent lower bound E_{13}^{(infty)} > 0.")
 
     # =========================================================================
     # TEST D: Component Operator Norms & Explicit Quadratic Form Bounds
@@ -355,9 +356,9 @@ def run_cell87() -> None:
 
     print("-" * 125)
     print("Key Diagnostic Summary for Test D:")
-    print("1. The operator norm ||Q_{even}|| is directly bounded by 1.5 * max_m D_m without relying on Peller's theorem.")
-    print("2. Because the generating function psi(x) is smooth on the compact domain [-T, T] with bounded derivative,")
-    print("   the quadratic form Q_c is bounded on L^2([0, log c]), rigorously ensuring ||Q_{even}^{(N)}|| <= M(c, T) < infinity.")
+    print("1. Empirical Ceiling: The operator norm ||Q_{even}|| is empirically bounded by 1.5 * max_m D_m across tested N in {28, 32}.")
+    print("2. Grounded Quadratic Form Bound: Because the continuous Weil quadratic form Q_c is bounded on L^2([0, log c]),")
+    print("   an analytical constant M(c, T) < infinity exists uniformly in N, though the sharp constant M requires formal proof.")
 
     print("\n" + "=" * 80)
     print("CELL 87 EXECUTION COMPLETE")

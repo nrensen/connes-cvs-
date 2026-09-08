@@ -3050,7 +3050,7 @@ Let $N \ge 2$, let $c > 1$ and $T \ge 1$ be fixed parameters, and let $Q_{c, N}$
 
 ---
 
-### Proposition 8.30 (Nested Galerkin Min-Max Monotonicity and Fixed-Index Spectral Separation)
+### Proposition 8.30 (Nested Galerkin Min-Max Monotonicity and Existence of Fixed-Index Ritz Limits)
 
 Let $V_N = \operatorname{span}\{e_k\}_{k=-N}^N \subset L^2([0, L])$ denote the Fourier Galerkin subspaces, and let $E_k^{(N)}$ denote the $k$-th ordered eigenvalue of $Q_{\mathrm{even}}^{(N)}$.
 
@@ -3058,19 +3058,29 @@ Let $V_N = \operatorname{span}\{e_k\}_{k=-N}^N \subset L^2([0, L])$ denote the F
    The Galerkin subspaces are strictly nested:
    $$V_N \subset V_{N+1} \qquad (\forall N \ge 1).$$
 
-2. **Poincaré Min-Max Monotonicity:**
+2. **Poincaré Min-Max Monotonicity (Rigorous Theorem):**
    By the Courant–Fischer–Weyl min-max principle for Rayleigh–Ritz projections of a bounded self-adjoint operator on nested subspaces, every eigenvalue sequence is **monotonically non-increasing** in $N$:
    $$\boxed{E_k^{(N+1)} \le E_k^{(N)} \qquad (\forall N \ge 1, \; \forall k \in \{0, \dots, N\}).}$$
-   Consequently, the downward drift of transition energies observed across finite dimensions (e.g. $E_{11}: 1.98 \to 0.13$, $E_{12}: 2.17 \to 0.66$, $E_{13}: 2.49 \to 1.31$) is an exact mathematical property of Galerkin projections, not a numerical artifact.
+   Consequently, the downward drift of transition energies observed across finite dimensions (e.g. $E_{11}: 1.98 \to 0.038$, $E_{12}: 2.17 \to 0.589$, $E_{13}: 2.49 \to 0.813$) is an exact mathematical property of Galerkin projections, not a numerical artifact.
 
-3. **Existence of Continuum Ritz Limits:**
+3. **Existence of Continuum Ritz Limits (Rigorous Theorem):**
    Because each sequence $(E_k^{(N)})_{N \ge k}$ is monotonically non-increasing and bounded below by zero ($E_k^{(N)} \ge 0$), the continuum Ritz limits exist unconditionally:
-   $$\boxed{E_k^{(\infty)} \equiv \lim_{N \to \infty} E_k^{(N)} \ge 0 \qquad (\forall k \ge 0).}$$
+   $$\boxed{E_k^{(\infty)} \equiv \lim_{N \to \infty} E_k^{(N)} = \inf_{N \ge k} E_k^{(N)} \ge 0 \qquad (\forall k \ge 0).}$$
 
-4. **Closure of Continuum Tail Control via Fixed-Index Separation:**
-   Fix the canonical barrier cutoff $K = 12$ (so mode 13 is the base of the continuum). Because the ground eigenvalue vanishes exponentially ($E_2^{(N)} \to 0$), the required separation condition $\inf_N (E_{13}(N) - E_2(N)) \ge \varepsilon_{13} > 0$ reduces entirely to the single statement:
-   $$\boxed{E_{13}^{(\infty)} = \lim_{N \to \infty} E_{13}^{(N)} > 0.}$$
-   If $E_{13}^{(\infty)} > 0$, then setting $\varepsilon_{13} \equiv E_{13}^{(\infty)}$, Hypothesis $\mathrm{H}_{\mathrm{cont}}$ is unconditionally certified with $C_{\mathrm{cont}}(12) \le 1 + M(c, T) / E_{13}^{(\infty)} < \infty$, completing the analytical tail bound.
+4. **Reduction of Continuum Tail Control to Fixed-Index Ritz Separation:**
+   Fix the canonical barrier cutoff $K = 12$ (so mode 13 is the base of the continuum).
+   Because $E_2^{(N)} \to 0$ exponentially as $N \to \infty$, if the continuum Ritz limit of the base continuum mode is strictly positive:
+   $$\boxed{E_{13}^{(\infty)} \equiv \lim_{N \to \infty} E_{13}^{(N)} = \eta > 0,}$$
+   then there exists a finite index $N_0$ such that $E_2^{(N)} \le \eta / 2$ for all $N \ge N_0$.
+   Because $E_{13}^{(N)} \ge E_{13}^{(\infty)} = \eta$, this guarantees the uniform lower separation:
+   $$\boxed{\inf_{N \ge N_0} \big( E_{13}^{(N)} - E_2^{(N)} \big) \ge \eta - \frac{\eta}{2} = \frac{1}{2} E_{13}^{(\infty)} > 0.}$$
+   Because $E_{13}^{(N)} - E_2^{(N)} > 0$ strictly for each of the finitely many $N < N_0$ by positive definiteness, the lower bound $\inf_{N \ge 1} (E_{13}(N) - E_2(N)) \ge \varepsilon_{13} > 0$ holds unconditionally across all dimensions. Combined with the operator-norm gap ceiling $\Delta_\ell \le M(c, T)$ (Proposition 8.29), this unconditionally certifies Hypothesis $\mathrm{H}_{\mathrm{cont}}$ with $C_{\mathrm{cont}}(12) \le 1 + \frac{2 M(c, T)}{E_{13}^{(\infty)}} < \infty$.
+
+---
+
+#### Remark 8.30.1 (Epistemic Status of Fixed-Index Separation and Min-Max Lower Bounds)
+
+While Parts 1–3 of Proposition 8.30 (subspace nesting, Rayleigh–Ritz monotonicity $E_k^{(N+1)} \le E_k^{(N)}$, and existence of the limit $E_k^{(\infty)} = \inf_{N \ge k} E_k^{(N)} \ge 0$) are exact mathematical theorems, **the strict positivity $E_{13}^{(\infty)} > 0$ remains an active analytical target / hypothesis**. Numerical sweeps in `cell87.out` demonstrate that $E_{13}(N)$ decreases from $2.490$ at $N=16$ down to $0.813$ at $N=32$, with decrements $\sim 0.49$. Non-shape-preserving geometric extrapolators (such as Aitken $\Delta^2$) produce unphysical divergent values and must be rejected. Proving $E_{13}^{(\infty)} > 0$ requires establishing an $N$-independent min-max lower bound $E_{13}^{(N)} \ge L > 0$ via the Courant–Fischer–Weyl principle (showing that $Q_{\mathrm{even}}$ has at most 13 eigenvalues below $L$), which is investigated in Milestone M34 (`cell88.py`).
 
 ---
 
@@ -3085,7 +3095,20 @@ Let $V_N = \operatorname{span}\{e_k\}_{k=-N}^N \subset L^2([0, L])$ denote the F
 | **$N = 24$** | $25$ | $3.8134$ | $1.940$ | $0.3973$ | $0.3966$ | $1.306$ | $1.801$ | $1.801$ |
 | **$N = 28$** | $29$ | $4.0975$ | $2.067$ | $0.4335$ | $0.1261$ | $0.6649$ | $1.310$ | $1.310$ |
 
-The empirical audit of Lemma 8.27, the gap representation, the Three-Regime Partition, and the operator-norm reduction were established in Milestones M29–M32 (`cell83.py`–`cell86.py`). The investigation of nested Galerkin min-max monotonicity, continuum Ritz limits $E_k^{(\infty)}$, and fixed-index spectral separation $E_{13}^{(\infty)} > 0$ is formulated in Milestone M33 (`cell87.py`).
+---
+
+#### Table 8.25.21: Nested Galerkin Ritz Monotonicity and Continuum Base Mode Drift (`cell87.out`, $j=2, K=12$)
+
+| Truncation $N$ | Basis Dim $N+1$ | Operator Norm $\|Q_{\mathrm{even}}^{(N)}\|$ | Mode 11 $E_{11}$ | Mode 12 $E_{12}$ | Continuum Base $E_{13}$ | Monotonic Decrement $\Delta E_{13}$ | Separation $\varepsilon_{13}(N)$ | Finite-$N$ Envelope $C_{\mathrm{cont}}(12; N)$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$N = 12$** | $13$ | $3.2533$ | $1.9750$ | $2.1702$ | --- | --- | --- | --- |
+| **$N = 16$** | $17$ | $3.3121$ | $1.9750$ | $2.1702$ | $2.4902$ | --- | $2.4902$ | $2.330$ |
+| **$N = 20$** | $21$ | $3.6133$ | $1.1994$ | $1.9601$ | $2.0625$ | $-0.4277$ | $2.0625$ | $2.752$ |
+| **$N = 24$** | $25$ | $3.8134$ | $0.3966$ | $1.3060$ | $1.8012$ | $-0.2613$ | $1.8012$ | $3.117$ |
+| **$N = 28$** | $29$ | $4.0975$ | $0.1261$ | $0.6649$ | $1.3102$ | $-0.4910$ | $1.3102$ | $4.127$ |
+| **$N = 32$** | $33$ | $4.1141$ | $0.0381$ | $0.5888$ | $0.8132$ | $-0.4970$ | $0.8132$ | $6.059$ |
+
+The empirical audit of Lemma 8.27, the gap representation, the Three-Regime Partition, and nested Galerkin monotonicity were established in Milestones M29–M33 (`cell83.py`–`cell87.py`). The investigation of uniform min-max lower bounds $E_{13}^{(N)} \ge L > 0$, low-energy mode counting $\mathcal{N}(E; N)$, and continuum submatrix coercivity is formulated in Milestone M34 (`cell88.py`).
 
 ---
 
@@ -3293,6 +3316,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Three-Regime Partition & Continuum Gap Enclosure) | Three-regime partition ($K \in \{10, 11, 12, 14\}$), gap quotient $\frac{\Delta_\ell-\Delta_j}{E_\ell-E_j}$, continuum bound $C_{\mathrm{cont}}(K)$, and kinetic-barrier decomposition | `cell85.py` | `cell85.out` |
 | Section 8.25 (Operator-Norm Bound $\|Q_{c, N}\|$, Gap Ceiling $\Delta_{\max}$, & Barrier Stability) | Audit of $\|Q_{c, N}\|$, Loewner bounds, continuum gap ceiling $\Delta_{\max} \le M$, and barrier index invariance $K(N)$ across $N \in \{8, \dots, 28\}$ | `cell86.py` | `cell86.out` |
 | Section 8.25 (Nested Ritz Monotonicity, Continuum Limits $E_k^{(\infty)}$ & Separation $\varepsilon_{13}$) | Audit of nested Ritz monotonicity $E_k^{(N+1)} < E_k^{(N)}$, sequence acceleration for $E_{13}^{(\infty)}$, and fixed separation $\varepsilon_{13} > 0$ across $N \in \{12, \dots, 32\}$ | `cell87.py` | `cell87.out` |
+| Section 8.25 (Min-Max Lower Bound $E_{13} \ge L > 0$, Mode Counting $\mathcal{N}(E)$, & Continuum Coercivity) | Audit of continuum submatrix $\lambda_{\min}(Q_{\mathrm{cont}})$, mode counting $\mathcal{N}(E; N)$, and component coercivity across $N \in \{16, \dots, 32\}$ | `cell88.py` | `cell88.out` |
 
 
 ---
