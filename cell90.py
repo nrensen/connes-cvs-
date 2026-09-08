@@ -318,7 +318,8 @@ def run_cell90() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test B:")
     print("1. Cauchy Convergence Rate: ||Delta P_K|| measures the absolute distance between embedded spectral projectors.")
-    print("2. Geometric Stabilization: Rapid decay of ||Delta P_K|| demonstrates that the spectral subspace converges in Hilbert space.")
+    print("2. Geometric Stabilization: The observed projector differences decrease rapidly over the computed sequence,")
+    print("   providing numerical evidence consistent with convergence of the corresponding spectral subspaces.")
 
     # =========================================================================
     # TEST C: Transition Cluster Energy Tracking E_j^{(N)} for j in {7, ..., 16}
@@ -367,7 +368,8 @@ def run_cell90() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test C:")
     print("1. Downward Deceleration Audit: Confirms whether the deceleration observed at N = 36 continues into N = 40.")
-    print("2. Mode 13 Plateau: Quantifies the stability of the continuum base candidate E_{13}.")
+    print("2. Mode 13 Drift & Mode 12 Stabilization: Quantifies the ongoing drift of E_{13} (0.7816 -> 0.7261)")
+    print("   in contrast to the emerging stability of E_{12} (0.5858 -> 0.5724).")
 
     # =========================================================================
     # TEST D: Extended Low-Energy Mode Counting Function N(E; N) up to N = 40

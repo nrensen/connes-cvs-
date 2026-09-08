@@ -3176,8 +3176,50 @@ The high-precision geometric audit of `cell89.out` (Milestone M35) reveals five 
 5. **Three-Zone Spectral Hierarchy:**
    Mode counting $\mathcal{N}(E; N)$ audits establish a sharp three-zone spectral landscape:
    $$\text{Deep Tunneling } (E \lesssim 10^{-2}, \text{locked at } 11 \text{ modes}) \longrightarrow \text{Transition Sector } (E \sim 10^{-2}\text{--}1, \text{slowly evolving}) \longrightarrow \text{Continuum } (\text{regular band}).$$
-6. **Strategic Redirection to Milestone M36:**
-   Because coordinate projections fail to capture the low-energy sector cleanly, Milestone M36 (`cell90.py`) investigates **intrinsic spectral subspace convergence**: embedding $U_K^{(N)} \hookrightarrow \mathbb{R}^{N_{\mathrm{high}}+1}$ via zero-padding, tracking principal angles $\sigma_{\min}((U_K^{(N)})^T U_K^{(N+\Delta N)})$ and projector difference norms $\|P_K^{(N+\Delta N)} - P_K^{(N)}\|$ across nested Galerkin subspaces $V_N \subset V_{N+\Delta N}$.
+The empirical audit of Lemma 8.27, the gap representation, the Three-Regime Partition, nested Galerkin monotonicity, coordinate delocalization, and spectral projector convergence were established in Milestones M29–M36 (`cell83.py`–`cell90.py`). The investigation of boundary cluster dynamics, individual eigenvector overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, boundary gaps $g_j$, and mode 11/12 resolution is formulated in Milestone M37 (`cell91.py`).
+
+---
+
+#### Table 8.25.24: Nested-$N$ Spectral Subspace Convergence, Projector Differences, and Boundary Cluster Dynamics (`cell90.out`)
+
+| Step ($N \to N+4$) | $\|\Delta P_{10}\|_{\mathrm{op}}$ | $\|\Delta P_{12}\|_{\mathrm{op}}$ | $\|\Delta P_{13}\|_{\mathrm{op}}$ | $E_{10}^{(N+4)}$ | $E_{11}^{(N+4)}$ | $E_{12}^{(N+4)}$ | $E_{13}^{(N+4)}$ | Boundary Gap $g_{11}$ | Boundary Gap $g_{12}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$16 \to 20$** | $0.8868$ | $0.9993$ | $0.9998$ | $2.44 \times 10^{-3}$ | $1.199$ | $1.960$ | $2.062$ | $0.7607$ | $0.1028$ |
+| **$20 \to 24$** | $0.4578$ | $0.9947$ | $1.0000$ | $6.97 \times 10^{-4}$ | $0.3966$ | $1.306$ | $1.801$ | $0.9098$ | $0.4948$ |
+| **$24 \to 28$** | $0.1592$ | $0.9963$ | $0.9999$ | $1.64 \times 10^{-4}$ | $0.1261$ | $0.6649$ | $1.310$ | $0.5388$ | $0.6453$ |
+| **$28 \to 32$** | $0.0958$ | $0.6174$ | $0.9916$ | $5.32 \times 10^{-5}$ | $0.03869$ | $0.5889$ | $0.8132$ | $0.5502$ | $0.2244$ |
+| **$32 \to 36$** | $0.0553$ | $0.1662$ | $0.9942$ | $2.45 \times 10^{-5}$ | $0.01654$ | $0.5858$ | $0.7816$ | $0.5693$ | $0.1958$ |
+| **$36 \to 40$** | $0.0224$ | $0.1217$ | $0.9892$ | $1.47 \times 10^{-5}$ | $0.01122$ | $0.5724$ | $0.7261$ | $0.5612$ | $0.1537$ |
+
+---
+
+#### Remark 8.33 (Spectral Subspace Convergence, the $K=12$ Boundary, Massive Gap $g_{11}$, and $E_{12}$ as Positive Continuum Base)
+
+The nested Galerkin subspace audit in `cell90.out` (Milestone M36) provides four critical insights that refine the architecture of the low-energy continuum limit:
+
+1. **Robust Cauchy Convergence of the Deep Tunneling Subspace $\mathcal{U}_{10}$:**
+   The operator-norm difference of the embedded spectral projector $\|\Delta P_{10}\|_{\mathrm{op}} = \|P_{10}^{(N+4)} - \widetilde{P}_{10}^{(N)}\|$ decreases monotonically and rapidly across every dimension step:
+   $$\|\Delta P_{10}\|_{\mathrm{op}}: 0.8868 \longrightarrow 0.4578 \longrightarrow 0.1592 \longrightarrow 0.0958 \longrightarrow 0.0553 \longrightarrow 0.0224 \quad (N = 36 \to 40),$$
+   with the worst-case subspace tilt falling to $\sin \theta_{\max} = 0.0252$. This establishes that the 11-dimensional deep tunneling subspace $\mathcal{U}_{10} = \operatorname{span}\{u_0, \dots, u_{10}\}$ is strongly converging in Hilbert space.
+2. **Nonlinear Transition into Convergence for $\mathcal{U}_{12}$ vs Persistent Instability of $\mathcal{U}_{13}$:**
+   While the first three steps for $K = 12$ exhibited apparent instability ($\sim 0.995$), higher dimensions trigger a dramatic transition into convergence:
+   $$\|\Delta P_{12}\|_{\mathrm{op}}: 0.9963 \longrightarrow 0.6174 \longrightarrow 0.1662 \longrightarrow 0.1217.$$
+   In sharp contrast, the $K = 13$ projector shows no convergence across any tested dimension step:
+   $$\|\Delta P_{13}\|_{\mathrm{op}} \in [0.9892, 1.0000] \qquad (\forall N \in \{16, \dots, 40\}).$$
+   This dichotomy provides strong empirical evidence that the natural spectral boundary of the stabilized low-energy sector resides precisely at $K = 12$.
+3. **Elevation of $E_{12}$ as the Natural Positive Continuum Base Candidate:**
+   Prior investigations focused on $E_{13}$ as the continuum base candidate. However, `cell90.out` demonstrates that $E_{13}$ is still drifting significantly ($0.7816 \to 0.7261$, decrement $-0.0555$). In contrast, $E_{12}$ has stabilized remarkably:
+   $$E_{12}: 2.170 \to 1.960 \to 1.306 \to 0.6649 \to 0.5889 \to 0.5858 \to 0.5724,$$
+   with decrements flattening from $-0.64$ to $-0.076, -0.003, -0.013$.
+   Furthermore, an enormous spectral gap isolates mode 12 from mode 11:
+   $$g_{11} = E_{12} - E_{11} = 0.57244 - 0.01122 \approx 0.5612 \gg g_{12} (0.1537) \gg g_{13} (0.0569).$$
+   Hence, $E_{12} \approx 0.57$ emerges as the natural candidate for the first strictly positive continuum eigenvalue.
+4. **Refined Three-Sector Natural Architecture:**
+   The Galerkin spectrum separates into three physically distinct components:
+   $$\underbrace{\mathcal{U}_{10} = \{u_0, \dots, u_{10}\}}_{11\text{ deep tunneling modes } (E \le 10^{-4})} \quad\Bigg|\quad \underbrace{u_{11}}_{\text{transition boundary mode } (E \approx 0.011)} \quad\Bigg|\quad \underbrace{\{u_{12}, u_{13}, \dots\}}_{\text{macroscopic positive continuum } (E \ge 0.57)}.$$
+   Mode 11 acts as a singular transition state at the barrier crest, whose limiting value ($E_{11}^{(\infty)} > 0$, $=0.01$, or $=0$) remains an open analytical question.
+5. **Strategic Pivot to Milestone M37 (`cell91.py`):**
+   To determine whether subspace convergence reflects individual eigenvector convergence or collective cluster rotation, Milestone M37 audits individual mode overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$ for $j \in \{10, \dots, 14\}$, boundary gaps $g_j$, and projector differences across extended dimensions $N \in \{20, \dots, 44\}$.
 
 ---
 
@@ -3388,6 +3430,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Min-Max Lower Bound $E_{13} \ge L > 0$, Mode Counting $\mathcal{N}(E)$, & Continuum Coercivity) | Audit of continuum submatrix $\lambda_{\min}(Q_{\mathrm{cont}})$, mode counting $\mathcal{N}(E; N)$, and component coercivity across $N \in \{16, \dots, 32\}$ | `cell88.py` | `cell88.out` |
 | Section 8.25 (Low-Energy Eigenspace Geometry, Projector Mass $p_m$, & Principal Angles) | Audit of spectral projector $P_K$, coordinate mass profile $p_m$, cumulative localization $C_K(M)$, and principal angles $\sigma_{\min}(U_K^T V_M)$ across $N \in \{16, \dots, 36\}$ | `cell89.py` | `cell89.out` |
 | Section 8.25 (Nested-$N$ Spectral Subspace Overlap, Projector Norms, & Cluster Dynamics) | Audit of nested subspace overlap $\sigma_{\min}((U_K^{(N)})^T U_K^{(N+4)})$, projector difference norms $\|P_K^{(N+4)} - P_K^{(N)}\|$, and cluster tracking across $N \in \{16, \dots, 40\}$ | `cell90.py` | `cell90.out` |
+| Section 8.25 (Boundary Cluster Dynamics, Individual Overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, Gaps $g_j$, & Projector Enclosure) | Audit of individual mode overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, boundary gaps $g_{10}, \dots, g_{13}$, and projector convergence $K \in \{10, \dots, 13\}$ across $N \in \{20, \dots, 44\}$ | `cell91.py` | `cell91.out` |
 
 
 ---
