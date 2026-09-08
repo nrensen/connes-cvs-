@@ -212,6 +212,31 @@ def evaluate_mode_quantities(
       - discrete telescoping summand T_{tele}(l)
       - interlacing ratios and slack factors
     """
+    if l in (j, j + 1):
+        # Local mode: omega_{j, l} is not part of the remote product
+        E_l = evals_e[l]
+        E_lp1 = evals_e[l + 1]
+        z_l = zeros_z[l]
+        delta_l = z_l - E_l
+        Delta_l = E_lp1 - E_l
+        return {
+            'j': j,
+            'l': l,
+            'E_l': E_l,
+            'Delta_l': Delta_l,
+            'z_l': z_l,
+            'delta_l': delta_l,
+            'ratio_delta_Delta': delta_l / Delta_l if Delta_l > 0 else mp.mpf(0),
+            'ratio_dist': mp.mpf(0),
+            'omega_direct': mp.mpf(1),
+            'dev_direct': mp.mpf(0),
+            'term_displacement': mp.mpf(0),
+            'eta_inter': mp.mpf(0),
+            'term_tele': mp.mpf(0),
+            'slack': mp.mpf(0),
+            'ratio_inter_tele': mp.mpf(0),
+        }
+
     E_j = evals_e[j]
     E_jp1 = evals_e[j + 1]
     Delta_j = E_jp1 - E_j
@@ -341,16 +366,16 @@ def run_cell83() -> None:
         Delta_2 = E_3 - E_2
 
         # Evaluate all remote modes l in {0, ..., N-1} \ {2, 3}
+        remote_modes = [l_idx for l_idx in range(N) if l_idx not in (j_focus, j_focus + 1)]
         mode_records: dict[int, dict] = {}
-        for l_idx in range(N):
+        for l_idx in remote_modes:
             rec = evaluate_mode_quantities(j_focus, l_idx, evals_e, zeros_z)
             mode_records[l_idx] = rec
 
         # Total remote deviation: sum_{l notin {2, 3}} (omega_{2, l} - 1)
         total_remote_dev = sum(
             mode_records[l_idx]['dev_direct']
-            for l_idx in range(N)
-            if l_idx not in (j_focus, j_focus + 1)
+            for l_idx in remote_modes
         )
 
         # Core and tail sums across thresholds L in {4, 6, 8}
