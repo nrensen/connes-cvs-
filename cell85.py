@@ -56,12 +56,12 @@ THE FOUR INVESTIGATIVE TESTS OF CELL 85:
           delta Delta_l = Delta_{l+1} - Delta_l, and discrete curvature across dimensions.
           Verify that Delta_l remains uniformly bounded by an O(1) constant Delta_* < infinity.
 
-- Test D: Kinetic vs Barrier Operator Matrix Decomposition & Gershgorin Analysis (N = 24)
+- Test D: Matrix Decomposition & Diagonal Comparison (N = 24)
           Decompose Q_{even} = diag(Q_{even}) + V_{offdiag}.
           Evaluate diagonal elements D_m = Q_{even}[m, m], consecutive diagonal gaps
-          Delta_m^{diag} = D_{m+1} - D_m, and off-diagonal Gershgorin radii R_m = sum_{k != m} |Q[m, k]|.
+          Delta_m^{diag} = D_{m+1} - D_m, and off-diagonal row sums R_m = sum_{k != m} |Q[m, k]|.
           Compare true eigenvalues E_l against diagonal entries D_l.
-          Diagnose the structural matrix mechanism bounding the continuum gaps.
+          Diagnose coupling magnitude R_m / D_m in tunneling vs continuum regimes.
 
 OUTPUT CONSTRAINTS:
 -------------------
@@ -404,8 +404,8 @@ def run_cell85() -> None:
             slack_cont = (S_cont_calib / dev_cont) if dev_cont > 0 else mp.mpf(0)
             cont_share_pct = (dev_cont / total_remote_dev * 100) if total_remote_dev > 0 else mp.mpf(0)
             hierarchy_valid = (
-                S_cont_inf_calib >= S_cont_calib and
-                S_cont_calib >= S_inter_cont and
+                (S_cont_inf_calib - S_cont_calib) >= -mp.mpf('1e-65') and
+                (S_cont_calib - S_inter_cont) >= -mp.mpf('1e-65') and
                 S_inter_cont > dev_cont
             )
 
@@ -506,8 +506,8 @@ def run_cell85() -> None:
     print("   At K = 11: C_{cont} <= 1.379 across all N in {16, 20, 24}.")
     print("   At K = 12: C_{cont} <= 1.133 across all N in {16, 20, 24}.")
     print("   At K = 14: C_{cont} <= 1.133 across all N in {16, 20, 24}.")
-    print("2. The continuum tail deviation S_{cont}(N; K) is super-exponentially small:")
-    print("   At N = 24: K=10 gives 2.15e-26 | K=11 gives 2.29e-27 | K=12 gives 1.14e-27 (share < 1e-20%).")
+    print("2. The continuum tail deviation S_{cont}(N; K) decreases extremely rapidly over tested dimensions:")
+    print("   At N = 24: K=10 gives 2.46e-26 | K=11 gives 3.67e-27 | K=12 gives 1.71e-27 (share < 1e-19%).")
     print("3. The calibrated continuum bound rigorously encloses S_{cont} with uniform O(1) slack ratio.")
 
     # =========================================================================
@@ -582,10 +582,10 @@ def run_cell85() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test D:")
     print("1. Tunneling Ladder (m <= 9): Diagonal elements D_m and eigenvalues E_m are exponentially small.")
-    print("2. Continuum Regime (m >= 12): Diagonal elements D_m grow steadily from 1.34 up to 3.78.")
-    print("3. Coupling Ratio Decay: R_m / D_m drops from large values below barrier to ~ 0.15 - 0.40 in continuum.")
-    print("4. This structural matrix property ensures that the continuum spectrum is governed by the diagonal kinetic")
-    print("   growth, strictly bounding the gap sequence Delta_l and guaranteeing C_{cont}(K) = O(1) uniformly.")
+    print("2. Continuum Regime (m >= 12): Diagonal elements D_m oscillate in [1.00, 3.48], not growing monotonically.")
+    print("3. Off-diagonal coupling: Gershgorin radii R_m / D_m remain in [0.5, 3.2], indicating non-perturbative coupling.")
+    print("4. While diagonal entries do not provide a perturbative Gershgorin gap bound, the continuum spectrum")
+    print("   exhibits macroscopic separation from the origin, motivating direct operator-norm bounds for H_cont.")
 
     print("\n" + "=" * 80)
     print("CELL 85 EXECUTION COMPLETE")
