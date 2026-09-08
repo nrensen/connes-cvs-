@@ -1686,21 +1686,21 @@ $$\boxed{\|P_{\perp u_0} Kc\|^2 \le \frac{D_0^2 M_1^{\mathrm{exc}}}{\mu_1 - \lam
 **Part III (The Asymptotic Alignment Sandwich — Unconditional Finite-$N$ Theorem):**
 *Combining the upper bound (8.21.4) with the transition dipole projection $b_{01} = \langle P_{\perp u_0} Kc, u_1 \rangle$ and Proposition 8.19 ($b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N)$) proves that the normalized wavepacket misalignment $\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2}$ is clamped between two exact positive multiples of the relative tunneling gap:*
 $$\boxed{\frac{\mathcal{R}_1}{\|Kc\|^2} R_{\mathrm{gap}}(N) \le \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N).} \tag{8.21.5}$$
-*Consequently, asymptotic wavepacket alignment $\frac{Kc}{\|Kc\|} \to \pm u_0$ is mathematically equivalent to relative tunneling gap suppression $R_{\mathrm{gap}}(N) \to 0$ whenever $\mathcal{R}_1$ and $M_1^{\mathrm{exc}}$ remain bounded away from zero and infinity.*
+*Consequently, relative tunneling gap suppression $R_{\mathrm{gap}}(N) \to 0$ guarantees asymptotic wavepacket alignment $\frac{Kc}{\|Kc\|} \to \pm u_0$ provided the prefactor $M_1^{\mathrm{exc}} / \|Kc\|^2$ does not grow too rapidly (which holds under Hypothesis H2$_{\mathrm{odd}}$ and solitary coordinate bounds). Conversely, asymptotic alignment $\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \to 0$ implies relative gap suppression $R_{\mathrm{gap}}(N) \to 0$ conditional on the lower coefficient remaining bounded away from zero ($\inf_N \mathcal{R}_1(N) \ge c_1 > 0$ and $\sup_N \|Kc\|^2 < \infty$).*
 
-**Part IV (The Analytical Alignment Hierarchy):**
-*The asymptotic decoupling problem is structured into the following deductive hierarchy:*
+**Part IV (The Analytical Hierarchy and the Moment Problem):**
+*The algebraic structure connecting the coordinate commutator to the wavepacket energy and residual is organized into the following hierarchy:*
 $$\boxed{\begin{aligned}
 &[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T \text{ (exact finite-}N\text{ commutator)} \\
 &\qquad\Downarrow \\
-&\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \text{ (exact energy excess)} \\
+&E_{\mathrm{exc}} \equiv \langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = D_0^2 M_1^{\mathrm{exc}} - (\mu_0 - \lambda) \|P_{\perp u_0} Kc\|^2 \text{ (exact first moment } \int (\mu - \mu_0) d\nu_v \text{)} \\
 &\qquad\Downarrow \\
-&\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N) \longrightarrow 0 \iff \frac{Kc}{\|Kc\|} \longrightarrow \pm u_0 \text{ (asymptotic alignment)} \\
+&\frac{\mathcal{R}_1}{\|Kc\|^2} R_{\mathrm{gap}}(N) \le \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \le \frac{M_1^{\mathrm{exc}}}{\|Kc\|^2} R_{\mathrm{gap}}(N) \text{ (exact finite-}N\text{ sandwich)} \\
 &\qquad\Downarrow \\
-&b_{01}^2 = |\langle P_{\perp u_0} Kc, u_1 \rangle|^2 \le \|P_{\perp u_0} Kc\|^2 \longrightarrow 0 \text{ (dipole quenching)} \\
-&\qquad\Downarrow \\
-&R_{\mathrm{gap}}(N) = \frac{b_{01}^2}{\mathcal{R}_1} \longrightarrow 0 \quad (\text{conditional on } \inf_N \mathcal{R}_1(N) > 0).
+&R_{\mathrm{gap}}(N) \to 0 \implies \frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \to 0 \iff \frac{Kc}{\|Kc\|} \to \pm u_0 \quad (\text{conditional on prefactor control}), \\
+&\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} \to 0 \implies R_{\mathrm{gap}}(N) \to 0 \quad (\text{conditional on } \inf_N \mathcal{R}_1(N) > 0).
 \end{aligned}} \tag{8.21.6}$$
+*Crucially, because the spectral gap $\mu_1 - \mu_0 \sim e^{-\sigma_1 N} \to 0$ closes exponentially, the smallness of the energy excess $E_{\mathrm{exc}} \to 0$ is a consequence of the closing gap and does not by itself imply that the zeroth moment $\|P_{\perp u_0} Kc\|^2 = \int d\nu_v$ vanishes.*
 
 ---
 
@@ -1785,10 +1785,26 @@ which establishes the two-sided sandwich (8.21.5). $\blacksquare$
    The actual observed wavepacket misalignment in `cell67.out` is:
    $$\frac{\|P_{\perp u_0} Kc\|^2}{\|Kc\|^2} = \frac{2.25259 \times 10^{-6}}{1.72507} \approx 1.30580 \times 10^{-6},$$
    saturating within $0.0005\%$ of the lower bound! This near-exact saturation occurs because mode 1 carries $99.9995\%$ of the excited residual norm $\|v_{\mathrm{exc}}\|^2$, meaning that $P_{\perp u_0} Kc$ is almost an exact eigenvector proportional to $u_1$.
-2. **Structural Significance for the Continuum Programme:**
-   Proposition 8.21 establishes that the vanishing of the relative tunneling gap $R_{\mathrm{gap}}(N) \to 0$ is mathematically equivalent to the coordinate wavepacket $Kc$ becoming asymptotically parallel to the odd ground state $u_0$.
-   Rather than attempting to calculate the delicate exponential tunneling exponent of bare eigenvalues in WKB theory, the primary analytical agenda is to prove that the even ground state $c$ has vanishing energy excess when transported to the odd sector via the coordinate derivative $K$:
-   $$\lim_{N \to \infty} \frac{\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle}{\|Kc\|^2} = 0.$$
+2. **The Spectral Moment Obstruction (First Moment vs. Zeroth Moment):**
+   A natural temptation would be to propose that proving $\langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle \to 0$ is sufficient to establish wavepacket alignment and relative gap suppression. However, this is a conceptual trap.
+   Defining the spectral measure of the excited coordinate wavepacket $v_{\mathrm{exc}} \equiv P_{\perp u_0} Kc$:
+   $$d\nu_v(\mu) \equiv \sum_{j \ge 1} b_{0j}^2 \delta_{\mu_j},$$
+   we observe that:
+   $$\|v_{\mathrm{exc}}\|^2 = \int d\nu_v(\mu) = \sum_{j \ge 1} b_{0j}^2 = D_0^2 M_{2,\mathrm{exc}} \quad (\text{zeroth moment}),$$
+   $$E_{\mathrm{exc}} \equiv \langle Kc, (Q_{\mathrm{odd}} - \mu_0 I) Kc \rangle = \int (\mu - \mu_0) d\nu_v(\mu) = \sum_{j \ge 1} (\mu_j - \mu_0) b_{0j}^2 \quad (\text{first moment}).$$
+   Under standard hypotheses (H2$_{\mathrm{odd}}$ and H3), the energy excess $E_{\mathrm{exc}} \le D_0^2 M_1^{\mathrm{exc}} \le C N^\gamma e^{-\sigma N} \to 0$ vanishes automatically. But this does **not** imply that $\|v_{\mathrm{exc}}\|^2 \to 0$, because the spectral gap closes exponentially fast:
+   $$\mu_1 - \mu_0 \sim e^{-\sigma_1 N} \longrightarrow 0.$$
+   The dominant contribution to the energy excess is $E_{\mathrm{exc}} \approx (\mu_1 - \mu_0) b_{01}^2$. Thus $E_{\mathrm{exc}}$ is tiny primarily because the spectral gap is exponentially small, not because the wavepacket residual $b_{01}^2$ vanishes.
+   This is the standard obstruction in variational spectral theory: when the spectral gap closes, a first-moment estimate $\int (\mu - \mu_0) d\nu_v \to 0$ cannot control the zeroth moment $\int d\nu_v$.
+3. **The Reoriented Continuum Target — Zeroth-Moment Control:**
+   Proposition 8.21 clarifies that the real, unresolved mathematical object governing Route B remains:
+   $$\boxed{\|P_{\perp u_0} Kc\|^2 = D_0^2 M_{2,\mathrm{exc}} \longrightarrow 0.}$$
+   The central analytical problem is to upgrade control from the first moment $E_{\mathrm{exc}}$ to the zeroth moment $\|v_{\mathrm{exc}}\|^2$. Specifically:
+   *Can we obtain a zeroth-moment bound on the excited coordinate wavepacket from the exact commutator structure, without dividing by the exponentially collapsing first spectral gap?*
+4. **Spectral Concentration as the Structural Bridge:**
+   In `cell69.out`, the first excited mode carries $99.9995\%$ of the total excited residual norm $\|v_{\mathrm{exc}}\|^2$:
+   $$\frac{b_{01}^2}{\|v_{\mathrm{exc}}\|^2} \longrightarrow 1.$$
+   If an analytical bound can be established showing that $\frac{\sum_{j \ge 2} b_{0j}^2}{\sum_{j \ge 1} b_{0j}^2} \to 0$, then $\|v_{\mathrm{exc}}\|^2 = b_{01}^2 (1 + o(1))$. Combining this with the exact resolvent representation of Proposition 8.20 ($Ku_1 = a_1 (Q_{\mathrm{even}} - \mu_1 I)^{-1} d$) connects the zeroth-moment problem directly to the even-sector Stieltjes derivative $G_d'(\mu_1)$, providing a structured operator path forward.
 
 ---
 
