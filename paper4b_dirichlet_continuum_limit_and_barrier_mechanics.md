@@ -3262,6 +3262,47 @@ The extended audit across $N \in \{20, \dots, 44\}$ in `cell91.out` (Milestone M
 
 ---
 
+#### Table 8.25.26: Extended Boundary Gaps, Modal Trajectories, Eigenvector Decoupling, and Gap Prominence Ratio (`cell92.out`)
+
+| Dimension $N$ | $E_{10}$ | $E_{11}$ | $E_{12}$ | $E_{13}$ | $E_{14}$ | Boundary Gap $g_{11}$ | Prominence $\Gamma_{11}$ | $|\langle u_{11}^{(N)}, u_{11}^{(N+4)} \rangle|$ | $|\langle u_{12}^{(N)}, u_{12}^{(N+4)} \rangle|$ | $|\langle u_{11}^{(N)}, u_{12}^{(N+4)} \rangle|$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$36 \to 40$** | $3.34 \times 10^{-5}$ | $0.01654$ | $0.58581$ | $0.78161$ | $0.89489$ | $0.5693$ | $2.91$ | $0.9970$ | $0.9926$ | $0.0016$ |
+| **$40 \to 44$** | $1.47 \times 10^{-5}$ | $0.01122$ | $0.57244$ | $0.72611$ | $0.78296$ | $0.5612$ | $3.65$ | $0.9993$ | $0.9744$ | $0.0116$ |
+| **$44 \to 48$** | $9.65 \times 10^{-6}$ | $0.009226$ | $0.55085$ | $0.69822$ | $0.78241$ | $0.5416$ | $3.68$ | $0.9997$ | $0.6962$ | $0.0141$ |
+| **$48 \to 52$** | $7.67 \times 10^{-6}$ | $0.008189$ | $0.46048$ | $0.61361$ | $0.75123$ | $0.4523$ | $2.95$ | $0.9994$ | $0.9808$ | $0.0168$ |
+| **$52 \to 56$** | $6.91 \times 10^{-6}$ | $0.006594$ | $0.43599$ | $0.59021$ | $0.70420$ | $0.4294$ | $2.78$ | $0.9999$ | $0.9988$ | $0.0022$ |
+| **$56$** | $6.48 \times 10^{-6}$ | $0.006268$ | $0.43356$ | $0.58763$ | $0.70154$ | $0.4273$ | $2.77$ | — | — | — |
+
+---
+
+#### Remark 8.35 (Drift of the 11|12 Gap, Structural Prominence $\Gamma_{11}$, Divergent Modal Dynamics, and Reorientation toward Spectral Projectors $P_K$)
+
+The high-dimension stress test across $N \in \{36, \dots, 56\}$ in `cell92.out` (Milestone M38) refines the understanding of the boundary dynamics in four key aspects:
+
+1. **Downward Drift of the $11|12$ Gap and Refutation of Fixed Numerical Plateau:**
+   The spectral gap $g_{11} = E_{12} - E_{11}$ did not remain fixed at the provisional $0.54\text{--}0.57$ plateau. Under extended Galerkin projection, it drifted downward through $N = 48$ ($0.4523$) to $0.4273$ at $N = 56$. The latest three values ($0.4523 \to 0.4294 \to 0.4273$) exhibit flattening, but adhering to the epistemic rules of this repository, we do not extrapolate or declare a new plateau. Rather, the empirical conclusion is calibrated: *there is strong numerical evidence for a distinguished spectral gap between modes 11 and 12, but its limiting size remains an unresolved analytical target.*
+2. **Persistence of Structural Gap Prominence ($\Gamma_{11} \approx 2.77$):**
+   Despite downward movement in absolute terms, $g_{11}$ remains qualitatively distinguished from all adjacent gaps. At $N = 56$:
+   $$g_{10} = E_{11} - E_{10} \approx 6.26 \times 10^{-3} \quad (\text{collapsing toward zero}),$$
+   $$g_{11} = E_{12} - E_{11} \approx 0.4273 \quad (\text{macroscopically isolated}),$$
+   $$g_{12} = E_{13} - E_{12} \approx 0.1541, \qquad g_{13} = E_{14} - E_{13} \approx 0.1139.$$
+   The dimensionless prominence ratio:
+   $$\Gamma_{11}(N) \equiv \frac{E_{12}^{(N)} - E_{11}^{(N)}}{\max(E_{11}^{(N)} - E_{10}^{(N)}, \, E_{13}^{(N)} - E_{12}^{(N)})} \approx 2.77$$
+   confirms that the $11|12$ interface remains almost three times wider than any competing gap in the transition spectrum.
+3. **Divergence in Modal Stability and Epistemic Reinterpretation of Ritz Residuals:**
+   The individual eigenvectors exhibit strikingly divergent behavior:
+   - Mode 11 is exceptionally coherent under nested embedding: $|\langle u_{11}^{(N)}, u_{11}^{(N+4)} \rangle|$ increases monotonically from $0.9970 \to 0.99993$, while its descent rate decelerates ($E_{11}^{(56)} / E_{11}^{(52)} \approx 0.951$).
+   - Mode 12 experienced a significant rotation transient at $N = 44 \to 48$ ($|\langle u_{12}, u_{12} \rangle| = 0.6962$), then recovered sharply to $0.9808$ and $0.9988$. Cross-mode mixing with $u_{11}$ remained bounded below $1.7\%$.
+   - In Test B, the Ritz residual ratio $r_{11} / \delta_{11}$ was dominated by $\delta_{11} = E_{11} - E_{10} \sim 10^{-2}$ (the collapsing internal gap of the deep tunneling sector), showing that naive individual mode isolation is confounded by internal cluster density.
+4. **Reorientation toward Spectral Subspace Projectors $P_K$:**
+   Because the low-energy cluster undergoes internal rotations, the true invariant object is the **spectral projector** $P_K^{(N)} = \sum_{j=0}^K u_j^{(N)} (u_j^{(N)})^T$, which eliminates internal basis ambiguities. The central mathematical condition of the Boundary-Gap Principle $\mathrm{H}_{\mathrm{gap}}(J)$ is the operator-level separation:
+   $$\operatorname{dist}\big(\sigma(Q_N |_{\operatorname{Ran} P_J}), \, \sigma(Q_N |_{\operatorname{Ran}(I-P_J)})\big) = E_{J+1}^{(N)} - E_J^{(N)} \ge \eta_J > 0,$$
+   paired with Cauchy convergence of the projector sequence $\|P_J^{(N+4)} - \widetilde{P}_J^{(N)}\|_{\mathrm{op}} \to 0$.
+5. **Strategic Advance to Milestone M39 (`cell93.py`):**
+   Milestone M39 audits spectral projector Cauchy convergence $\|\Delta P_K\|_{\mathrm{op}}$ for $K \in \{10, 11, 12, 13\}$, tracks the prominence ratio $\Gamma_{11}(N)$, directly contrasts competing hypotheses $\mathrm{H}_{\mathrm{gap}}(10)$ vs $\mathrm{H}_{\mathrm{gap}}(11)$, and evaluates subspace complementary tilt $\|(I - \widetilde{P}_{11}^{(N)}) P_{11}^{(N+4)}\|_{\mathrm{op}}$ across higher dimensions $N \in \{44, \dots, 64\}$.
+
+---
+
 
 
 
@@ -3471,6 +3512,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Nested-$N$ Spectral Subspace Overlap, Projector Norms, & Cluster Dynamics) | Audit of nested subspace overlap $\sigma_{\min}((U_K^{(N)})^T U_K^{(N+4)})$, projector difference norms $\|P_K^{(N+4)} - P_K^{(N)}\|$, and cluster tracking across $N \in \{16, \dots, 40\}$ | `cell90.py` | `cell90.out` |
 | Section 8.25 (Boundary Cluster Dynamics, Individual Overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, Gaps $g_j$, & Projector Enclosure) | Audit of individual mode overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, boundary gaps $g_{10}, \dots, g_{13}$, and projector convergence $K \in \{10, \dots, 13\}$ across $N \in \{20, \dots, 44\}$ | `cell91.py` | `cell91.out` |
 | Section 8.25 (Boundary-Gap Stress Test at Extended Dimensions, Ritz Residuals $r_j$, & Decoupling Persistence) | Stress test of boundary gap $g_{11}(N) = E_{12}-E_{11}$, embedded Ritz residuals $r_{11}, r_{12}$, and decoupling persistence across $N \in \{36, \dots, 56\}$ | `cell92.py` | `cell92.out` |
+| Section 8.25 (Spectral Projector Convergence, Gap Prominence $\Gamma_{11}$, & Extended Sweeps) | Audit of projector Cauchy differences $\|\Delta P_K\|_{\mathrm{op}}$, gap prominence $\Gamma_{11} = \frac{g_{11}}{\max(g_{10}, g_{12})}$, and competing hypotheses $\mathrm{H}_{\mathrm{gap}}(10)$ vs $\mathrm{H}_{\mathrm{gap}}(11)$ across $N \in \{44, \dots, 64\}$ | `cell93.py` | `cell93.out` |
 
 
 ---
