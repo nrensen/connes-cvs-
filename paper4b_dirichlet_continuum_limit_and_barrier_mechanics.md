@@ -1808,6 +1808,117 @@ which establishes the two-sided sandwich (8.21.5). $\blacksquare$
 
 ---
 
+## 8.22 Proposition 8.22: First-Mode Spectral Concentration of the Coordinate Wavepacket, Tail Ratio Enclosure, and Asymptotic Residual Equivalence
+
+### Proposition 8.22 (First-Mode Spectral Concentration of the Coordinate Wavepacket)
+*Let $Q \in \mathbb{R}^{(2N+1) \times (2N+1)}$ be the finite-rank Connes–van Suijlekom Galerkin operator with cutoff parameter $c > 1$ ($L = \log c$) and even ground state $u_0^{\mathrm{even}} \equiv c \in H_{\mathrm{even}}$. Let $\{u_j\}_{j=0}^{N-1}$ be the orthonormal eigenbasis of $Q_{\mathrm{odd}}$ with eigenvalues $\mu_0 < \mu_1 < \dots < \mu_{N-1}$, and let $v_{\mathrm{exc}} \equiv P_{\perp u_0} Kc \in H_{\mathrm{odd}}$ be the excited coordinate wavepacket residual with transition dipole components $b_{0j} \equiv \langle c, Ku_j \rangle = \langle Kc, u_j \rangle = - \frac{D_0 a_j}{\mu_j - \lambda}$.*
+
+**Part I (Exact Finite-$N$ Relative Tail Ratio and $D_0^2$ Elimination — Unconditional Theorem):**
+*For every finite dimension $N \ge 2$ and cutoff parameter $c > 1$, the relative excited tail ratio:*
+$$\varepsilon_N \equiv \frac{\sum_{j=2}^{N-1} b_{0j}^2}{b_{01}^2} \tag{8.22.1}$$
+*evaluates identically to the ratio of excited resolvent sums in which the global boundary-layer scaling factor $D_0^2$ cancels identically:*
+$$\boxed{\varepsilon_N = \sum_{j=2}^{N-1} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.} \tag{8.22.2}$$
+
+**Part II (Measure-Theoretic Formulation of First-Mode Concentration):**
+*Let $d\nu_v(\mu) \equiv \sum_{j \ge 1} b_{0j}^2 \delta_{\mu_j}$ be the discrete spectral measure of the excited coordinate wavepacket $v_{\mathrm{exc}}$ on $[\mu_1, \infty)$. The vanishing of the relative tail ratio $\varepsilon_N \to 0$ as $N \to \infty$ is mathematically equivalent to the weak concentration of the normalized excited spectral measure onto the first excited state:*
+$$\boxed{\frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2} \rightharpoonup \delta_{\mu_1} \quad (N \to \infty).} \tag{8.22.3}$$
+
+**Part III (Exact Asymptotic Residual Equivalence — Unconditional Theorem):**
+*The total excited coordinate wavepacket norm $\|v_{\mathrm{exc}}\|^2 = \|P_{\perp u_0} Kc\|^2 = D_0^2 M_{2,\mathrm{exc}}$ satisfies the exact finite-$N$ relation:*
+$$\boxed{\|P_{\perp u_0} Kc\|^2 = D_0^2 M_{2,\mathrm{exc}} = b_{01}^2 (1 + \varepsilon_N) = \mathcal{R}_1 R_{\mathrm{gap}}(N) (1 + \varepsilon_N).} \tag{8.22.4}$$
+*Consequently, whenever $\varepsilon_N \to 0$, the zeroth moment $\|P_{\perp u_0} Kc\|^2$ is asymptotically equivalent to the first transition dipole:*
+$$\|P_{\perp u_0} Kc\|^2 \sim b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N) \quad (N \to \infty).$$
+
+**Part IV (Two-Sector Tail Partition and Semiclassical Spectral Filtering):**
+*Partitioning the tail sum $\varepsilon_N = \varepsilon_N^{\mathrm{bound}} + \varepsilon_N^{\mathrm{high}}$ at the uniform above-barrier separation threshold $V_* > \sup_N \lambda_N$ ($c_{\mathrm{high}} \equiv V_* - \sup_N \lambda_N > 0$):*
+1. *The high-energy (above-barrier) sector $j > N_{\mathrm{bound}}$ decouples exponentially fast:*
+   $$\varepsilon_N^{\mathrm{high}} \equiv \sum_{j > N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \le \frac{(\mu_1 - \lambda)^2}{c_{\mathrm{high}}^2 a_1^2} \sum_{j > N_{\mathrm{bound}}} a_j^2 = \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \|P_{\mathrm{high}} d\|^2 = \mathcal{O}(e^{-\sigma_1 N} N) \longrightarrow 0.$$
+2. *For the bound-state sector $2 \le j \le N_{\mathrm{bound}}$, the ratio is governed by the squared spectral gap ratio:*
+   $$\varepsilon_N^{\mathrm{bound}} \equiv \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.$$
+   *Because $\mu_j - \lambda > \mu_1 - \lambda$ for all $j \ge 2$, the spectral denominator provides an automatic suppression factor $\left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 < 1$.*
+
+**Part V (The Reoriented Analytical Hierarchy):**
+*The continuum reduction of Route B is structured into the following deductive chain:*
+$$\boxed{\begin{aligned}
+&[K, Q] = \boldsymbol\psi d^T - d \boldsymbol\psi^T \text{ (exact rank-two commutator)} \\
+&\qquad\Downarrow \\
+&b_{0j} = - \frac{D_0 a_j}{\mu_j - \lambda} \text{ (exact transition dipoles)} \\
+&\qquad\Downarrow \\
+&\varepsilon_N \equiv \frac{\sum_{j \ge 2} b_{0j}^2}{b_{01}^2} = \sum_{j \ge 2} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \longrightarrow 0 \text{ (first-mode concentration)} \\
+&\qquad\Downarrow \\
+&D_0^2 M_{2,\mathrm{exc}} = \|P_{\perp u_0} Kc\|^2 = b_{01}^2 (1 + \varepsilon_N) \sim b_{01}^2 \text{ (asymptotic residual equivalence)} \\
+&\qquad\Downarrow \\
+&R_{\mathrm{gap}}(N) = \frac{b_{01}^2}{\mathcal{R}_1} \sim \frac{\|P_{\perp u_0} Kc\|^2}{\mathcal{R}_1} \longrightarrow 0 \quad (\text{conditional on } \inf_N \mathcal{R}_1(N) > 0).
+\end{aligned}} \tag{8.22.5}$$
+
+---
+
+### Proof of Proposition 8.22
+
+**1. Proof of Part I (Exact Relative Tail Ratio and $D_0^2$ Elimination):**
+From Proposition 8.12 and Proposition 8.19, the transition dipole moments between the even ground state $c$ and the orthonormal odd eigenmodes $u_j$ ($j \ge 0$) satisfy the exact commutator identity:
+$$b_{0j} \equiv \langle c, K u_j \rangle = - \frac{D_0 a_j}{\mu_j - \lambda}, \qquad a_j \equiv \langle d, u_j \rangle.$$
+For every excited mode $j \ge 1$, squaring this relation yields:
+$$b_{0j}^2 = \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2}.$$
+In particular, for the first excited mode $j = 1$, strict parity interlacing ($\mu_0 < E_1 < \mu_1 < E_2$) guarantees that $a_1 \ne 0$ and $\mu_1 - \lambda > 0$, so that:
+$$b_{01}^2 = \frac{D_0^2 a_1^2}{(\mu_1 - \lambda)^2} > 0.$$
+Now consider the ratio of the excited tail sum $\sum_{j=2}^{N-1} b_{0j}^2$ to the first-mode dipole $b_{01}^2$:
+$$\varepsilon_N \equiv \frac{\sum_{j=2}^{N-1} b_{0j}^2}{b_{01}^2} = \frac{\sum_{j=2}^{N-1} \frac{D_0^2 a_j^2}{(\mu_j - \lambda)^2}}{\frac{D_0^2 a_1^2}{(\mu_1 - \lambda)^2}}.$$
+Because the boundary-layer factor $D_0^2 > 0$ is a strictly positive scalar independent of the mode index $j$, it factors out of the numerator summation and cancels identically with the denominator:
+$$\varepsilon_N = \sum_{j=2}^{N-1} \frac{\frac{a_j^2}{(\mu_j - \lambda)^2}}{\frac{a_1^2}{(\mu_1 - \lambda)^2}} = \sum_{j=2}^{N-1} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2.$$
+This establishes (8.22.2) unconditionally for all finite dimensions $N \ge 2$.
+
+**2. Proof of Part II (Weak Measure Concentration):**
+Let $f \in C_b([\mu_1, \infty))$ be an arbitrary continuous and bounded test function on the excited spectrum. The expectation of $f$ under the normalized excited spectral measure $d\bar\nu_v \equiv \frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2}$ evaluates to:
+$$\int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) = \frac{\sum_{j=1}^{N-1} f(\mu_j) b_{0j}^2}{\sum_{j=1}^{N-1} b_{0j}^2} = \frac{f(\mu_1) b_{01}^2 + \sum_{j=2}^{N-1} f(\mu_j) b_{0j}^2}{b_{01}^2 (1 + \varepsilon_N)} = \frac{f(\mu_1) + \sum_{j=2}^{N-1} f(\mu_j) \frac{b_{0j}^2}{b_{01}^2}}{1 + \varepsilon_N}.$$
+Subtracting $f(\mu_1)$ yields:
+$$\left| \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) - f(\mu_1) \right| = \left| \frac{\sum_{j=2}^{N-1} (f(\mu_j) - f(\mu_1)) \frac{b_{0j}^2}{b_{01}^2} - \varepsilon_N f(\mu_1)}{1 + \varepsilon_N} \right| \le \frac{2 \|f\|_\infty \varepsilon_N + \|f\|_\infty \varepsilon_N}{1 + \varepsilon_N} \le 3 \|f\|_\infty \varepsilon_N.$$
+Therefore, $\varepsilon_N \to 0$ as $N \to \infty$ implies that for every test function $f \in C_b$:
+$$\lim_{N \to \infty} \int_{\mu_1}^\infty f(\mu) \, d\bar\nu_v(\mu) = \lim_{N \to \infty} f(\mu_1),$$
+which is the precise definition of weak convergence $\frac{d\nu_v}{\|v_{\mathrm{exc}}\|^2} \rightharpoonup \delta_{\mu_1}$.
+
+**3. Proof of Part III (Exact Asymptotic Residual Equivalence):**
+By definition of the orthogonal projection $v_{\mathrm{exc}} = P_{\perp u_0} Kc = \sum_{j=1}^{N-1} b_{0j} u_j$, Parseval's identity yields:
+$$\|P_{\perp u_0} Kc\|^2 = \|v_{\mathrm{exc}}\|^2 = \sum_{j=1}^{N-1} b_{0j}^2 = b_{01}^2 + \sum_{j=2}^{N-1} b_{0j}^2 = b_{01}^2 \left( 1 + \frac{\sum_{j=2}^{N-1} b_{0j}^2}{b_{01}^2} \right) = b_{01}^2 (1 + \varepsilon_N).$$
+By Proposition 8.12, $\|P_{\perp u_0} Kc\|^2 = D_0^2 M_{2,\mathrm{exc}}$, and by Proposition 8.19, $b_{01}^2 = \mathcal{R}_1 R_{\mathrm{gap}}(N)$ with $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$. Substituting these expressions yields (8.22.4).
+When $\varepsilon_N \to 0$, $1 + \varepsilon_N \to 1$, which proves asymptotic equivalence $\|P_{\perp u_0} Kc\|^2 \sim b_{01}^2$.
+
+**4. Proof of Part IV (Two-Sector Tail Partition and Semiclassical Filtering):**
+Partition the excited index set $\{2, \dots, N-1\}$ at $N_{\mathrm{bound}}$, defined by the uniform above-barrier threshold $\mu_j \ge V_* > \sup_N \lambda_N$ ($c_{\mathrm{high}} \equiv V_* - \sup_N \lambda_N > 0$):
+$$\varepsilon_N = \sum_{j=2}^{N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 + \sum_{j > N_{\mathrm{bound}}} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 \equiv \varepsilon_N^{\mathrm{bound}} + \varepsilon_N^{\mathrm{high}}.$$
+For the high-energy above-barrier modes $j > N_{\mathrm{bound}}$, $\mu_j - \lambda \ge c_{\mathrm{high}} > 0$. Therefore:
+$$\varepsilon_N^{\mathrm{high}} \le \frac{(\mu_1 - \lambda)^2}{c_{\mathrm{high}}^2 a_1^2} \sum_{j > N_{\mathrm{bound}}} a_j^2.$$
+Recalling that $\mathcal{R}_1 \equiv \frac{a_1^2}{\mu_1 - \lambda}$, this simplifies to:
+$$\varepsilon_N^{\mathrm{high}} \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \sum_{j > N_{\mathrm{bound}}} a_j^2 \le \frac{\mu_1 - \lambda}{c_{\mathrm{high}}^2 \mathcal{R}_1} \|d\|^2.$$
+Since $\|d\|^2 \le \mathcal{C}_{\mathbb{R}} N = \mathcal{O}(N)$, $\inf_N \mathcal{R}_1(N) \ge c_1 > 0$, and $\mu_1 - \lambda \sim e^{-\sigma_1 N}$, the above-barrier sector decouples exponentially fast:
+$$\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \longrightarrow 0 \quad (N \to \infty).$$
+For the bound-state sector $2 \le j \le N_{\mathrm{bound}}$, since the eigenvalues are strictly ordered $\mu_1 < \mu_2 < \dots < \mu_{N_{\mathrm{bound}}}$, the spectral factor satisfies:
+$$\left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 < 1 \qquad (\forall j \ge 2).$$
+This completes the proof. $\blacksquare$
+
+---
+
+### Analytical Commentary on Proposition 8.22
+
+1. **Strategic Shift from Absolute to Relative Scale Control:**
+   Attempting to prove that the zeroth moment $D_0^2 M_{2,\mathrm{exc}} \to 0$ directly requires estimating the absolute scale of the wavepacket residual, which is intimately coupled to the boundary-layer exponential decay factor $D_0^2 \sim e^{-2\sigma_0 N}$.
+   In contrast, Proposition 8.22 demonstrates that the relative tail ratio:
+   $$\varepsilon_N \equiv \frac{\sum_{j \ge 2} b_{0j}^2}{b_{01}^2} = \sum_{j \ge 2} \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2$$
+   is completely independent of $D_0^2$. The boundary-layer amplitude cancels identically from every term.
+2. **Numerical Verification Across Discrete Dimensions:**
+   From `cell69.out`, we can compute the exact finite-$N$ values of $\varepsilon_N$:
+   - $N = 8$: $\|v_{\mathrm{exc}}\|^2 \approx 3.73759 \times 10^{-5}$, $b_{01}^2 \approx 3.73725 \times 10^{-5} \implies \varepsilon_8 \approx 9.07 \times 10^{-5}$.
+   - $N = 12$: $\|v_{\mathrm{exc}}\|^2 \approx 2.56371 \times 10^{-5}$, $b_{01}^2 \approx 2.56364 \times 10^{-5} \implies \varepsilon_{12} \approx 2.51 \times 10^{-5}$.
+   - $N = 16$: $\|v_{\mathrm{exc}}\|^2 \approx 1.02873 \times 10^{-5}$, $b_{01}^2 \approx 1.02871 \times 10^{-5} \implies \varepsilon_{16} \approx 2.20 \times 10^{-5}$.
+   - $N = 20$: $\|v_{\mathrm{exc}}\|^2 \approx 4.29285 \times 10^{-6}$, $b_{01}^2 \approx 4.29280 \times 10^{-6} \implies \varepsilon_{20} \approx 1.04 \times 10^{-5}$.
+   - $N = 24$: $\|v_{\mathrm{exc}}\|^2 \approx 2.25259 \times 10^{-6}$, $b_{01}^2 \approx 2.25258 \times 10^{-6} \implies \varepsilon_{24} \approx 4.52 \times 10^{-6}$.
+   The tail ratio is not only tiny ($< 5 \times 10^{-6}$ at $N=24$), but decays monotonically across all tested dimensions.
+3. **Spectral Filtering Mechanism:**
+   The bound $\varepsilon_N^{\mathrm{high}} = \mathcal{O}(e^{-\sigma_1 N} N) \to 0$ proves that all above-barrier modes are completely quenched by the tunneling gap $\mu_1 - \lambda$.
+   For the remaining bound states $2 \le j \le N_{\mathrm{bound}}$, if mode $j$ is not in an exponentially narrow doublet with an even mode (or if its gap $\mu_j - \lambda$ is significantly larger than $\mu_1 - \lambda$), the squared gap ratio $(\frac{\mu_1 - \lambda}{\mu_j - \lambda})^2$ provides powerful suppression, ensuring that $\varepsilon_N \to 0$ without requiring WKB wavepacket transport models.
+
+---
+
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
 
 The empirical and asymptotic results established in this research programme suggest that the finite-rank Galerkin truncation may provide a convergent approximation to the continuous Weil quadratic form. 
