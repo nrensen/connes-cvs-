@@ -9,24 +9,24 @@ Canonical Cutoff for Detailed Audits: K = 12 (Modes 0 ... 12, Dim = 13)
 =======================================================================================================================================
 
 >>> Processing Dimension N = 16 (dim = 17) ...
-   Completed N = 16 in 0.47s | E_13 = 2.49019
+   Completed N = 16 in 0.46s | E_13 = 2.49019
 
 >>> Processing Dimension N = 20 (dim = 21) ...
-   Completed N = 20 in 0.88s | E_13 = 2.06247
+   Completed N = 20 in 0.85s | E_13 = 2.06247
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.47s | E_13 = 1.8012
+   Completed N = 24 in 1.43s | E_13 = 1.8012
 
 >>> Processing Dimension N = 28 (dim = 29) ...
    Completed N = 28 in 2.25s | E_13 = 1.31022
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 3.36s | E_13 = 0.813235
+   Completed N = 32 in 3.33s | E_13 = 0.813235
 
 >>> Processing Dimension N = 36 (dim = 37) ...
-   Completed N = 36 in 79.85s | E_13 = 0.78161
+   Completed N = 36 in 4.73s | E_13 = 0.78161
 
-All dimensions processed in 88.29s.
+All dimensions processed in 13.05s.
 
 =======================================================================================================================================
 TEST A: Spectral Projector Coordinate Mass Distribution (Canonical Cutoff K = 12, Dim = 13)
@@ -43,9 +43,9 @@ P_{12} = sum_{j=0}^{12} u_j u_j^T | Coordinate Mass: p_m = (P_{12})_{mm} | Trace
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test A:
 1. Coordinate Tail Leakage: Demonstrates that the low-energy eigenspace U_{12} does not live strictly in m <= 12.
-2. At N = 32 and N = 36, tail leakage quantifies the exact extent of modal coordinate delocalization.
-3. This rigorously explains why the coordinate-restricted continuum submatrix Q_even[13:N+1, 13:N+1] develops soft directions:
-   the low modes have tails extending into m >= 13, which are truncated by the coordinate projection.
+2. At N = 32 and N = 36, tail leakage quantifies the exact extent of modal coordinate delocalization (~ 30.7%).
+3. The low-energy eigenspace has substantial mass (~ 30.7%) in the coordinates retained by the continuum block,
+   which is strongly consistent with the emergence of soft directions, though a full causal theorem requires further spectral analysis.
 
 =======================================================================================================================================
 TEST B: Cumulative Coordinate Localization C_{12}(M) = sum_{m=0}^M p_m / 13.0 and Effective Dimensions M^*(90%, 99%, 99.9%)
