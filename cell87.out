@@ -11,7 +11,7 @@ Canonical Barrier Cutoff: K = 12 (Continuum Base Mode = 13)
 =============================================================================================================================
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.20s | ||Q_even|| = 3.2533296 | E_13 = N/A
+   Completed N = 12 in 0.21s | ||Q_even|| = 3.2533296 | E_13 = N/A
 
 >>> Processing Dimension N = 16 ...
    Completed N = 16 in 0.45s | ||Q_even|| = 3.3120468 | E_13 = 2.490185
@@ -20,15 +20,15 @@ Canonical Barrier Cutoff: K = 12 (Continuum Base Mode = 13)
    Completed N = 20 in 0.84s | ||Q_even|| = 3.6126764 | E_13 = 2.0624737
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 1.39s | ||Q_even|| = 3.8133554 | E_13 = 1.8012007
+   Completed N = 24 in 1.42s | ||Q_even|| = 3.8133554 | E_13 = 1.8012007
 
 >>> Processing Dimension N = 28 ...
-   Completed N = 28 in 2.20s | ||Q_even|| = 4.097518 | E_13 = 1.3102186
+   Completed N = 28 in 2.27s | ||Q_even|| = 4.097518 | E_13 = 1.3102186
 
 >>> Processing Dimension N = 32 ...
-   Completed N = 32 in 78.52s | ||Q_even|| = 4.1140706 | E_13 = 0.81323492
+   Completed N = 32 in 3.34s | ||Q_even|| = 4.1140706 | E_13 = 0.81323492
 
-All dimensions processed in 83.62s.
+All dimensions processed in 8.53s.
 
 =============================================================================================================================
 TEST A: Strict Nested Galerkin Monotonicity Audit: E_k^{(N_2)} <= E_k^{(N_1)} (Poincare Separation Theorem)
@@ -62,11 +62,13 @@ Tracking Downward Monotonic Sequences and Aitken Extrapolation from N in {24, 28
  14 |        2.75323 |        2.45959 |        1.97886 |        1.73542 |        1.31739 |               2.318298 | > 0 (Saturates ~ 2.32)
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test B:
-1. Tunneling Ladder Modes (k = 10, 11): Eigenvalues collapse towards zero: E_{10} ~ 1e-4 -> 0, E_{11} ~ 0.03 -> 0.
-2. Transition Mode (k = 12): E_{12} decreases from 2.17 -> 1.96 -> 1.31 -> 0.66 -> 0.30, approaching barrier bottom.
-3. Continuum Base Mode (k = 13): E_{13} exhibits strong deceleration, stabilizing at a macroscopic floor:
-   E_{13}: 2.49 -> 2.06 -> 1.80 -> 1.31 -> 0.98, with Aitken limit E_{13}^{(\infty)} ~ 0.70 - 0.85 > 0.
-4. This provides strong empirical certification that E_{13}^{(\infty)} > 0 strictly holds in the continuum limit.
+1. Tunneling Ladder Modes (k = 10, 11): Eigenvalues collapse towards zero: E_{10} ~ 6.9e-4 -> 2.1e-5, E_{11} ~ 0.126 -> 0.038.
+2. Transition Mode (k = 12): E_{12} decreases from 2.17 -> 1.96 -> 1.31 -> 0.66 -> 0.589, maintaining downward momentum.
+3. Continuum Base Mode (k = 13): E_{13} continues downward drift (2.49 -> 2.06 -> 1.80 -> 1.31 -> 0.813), with decrements ~ 0.49.
+4. Refutation of Aitken Extrapolation: Aitken yields E_{13}^{(infty)} ~ 41.97 from a sequence bounded above by 2.49, proving
+   that geometric sequence acceleration is non-shape-preserving and invalid for discrete Ritz spectra.
+5. Epistemic Status: Existence of Ritz limit E_{13}^{(infty)} = inf_N E_{13}^{(N)} >= 0 is mathematically proven, but strict
+   positivity E_{13}^{(infty)} > 0 cannot be deduced from numerical extrapolation and requires an analytical min-max lower bound.
 
 =======================================================================================================================================
 TEST C: Fixed-Index Spectral Separation varepsilon_{13}(N) = E_{13}(N) - E_2(N) and Continuum Enclosure Bound
@@ -82,11 +84,10 @@ Canonical Cutoff K = 12 | Formula: C_{cont}(12; N) = 1 + ||Q_{even}^{(N)}|| / va
 ---------------------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test C:
 1. Ground Mode E_2 vanishes exponentially: E_2 ~ 1.37e-26 at N=24, dropping below machine resolution.
-2. Fixed-index separation varepsilon_{13}(N) = E_{13}(N) - E_2(N) is dominated entirely by E_{13}(N) >= 0.98.
-3. Continuum envelope C_{cont}(12; N) remains uniformly bounded in [2.3, 5.2] across all tested dimensions:
-   N=16: C_{cont}=2.33 | N=20: C_{cont}=2.75 | N=24: C_{cont}=3.12 | N=28: C_{cont}=4.13 | N=32: C_{cont}=5.18.
-4. Closed continuum bound S_{cont}^{inf}(12) remains extremely small (~ 10^{-26} - 10^{-27}), rigorously enclosing
-   the infinite continuum tail across all dimensions.
+2. Fixed-index separation varepsilon_{13}(N) = E_{13}(N) - E_2(N) is dominated entirely by E_{13}(N) = 0.813 at N=32.
+3. Continuum envelope C_{cont}(12; N) grows with dimension: 2.33 (N=16) -> 2.75 -> 3.12 -> 4.13 -> 6.06 (N=32).
+4. Status: The finite-N calibrated bound rigorously encloses the tail for each tested dimension, but uniform
+   closure across all dimensions remains conditional on establishing an N-independent lower bound E_{13}^{(infty)} > 0.
 
 =============================================================================================================================
 TEST D: Component Operator Norms & Grounded Weil Quadratic Form Bounds (N = 28, 32)
@@ -98,9 +99,9 @@ Evaluating ||Q_{prime}||, ||Q_{pole}||, ||Q_{arch}|| and Component Bound M(c, T)
           32 |          4.11407 |          3.93792 |           1.0447 |                5.90689 | SATISFIED (||Q|| < M)
 -----------------------------------------------------------------------------------------------------------------------------
 Key Diagnostic Summary for Test D:
-1. The operator norm ||Q_{even}|| is directly bounded by 1.5 * max_m D_m without relying on Peller's theorem.
-2. Because the generating function psi(x) is smooth on the compact domain [-T, T] with bounded derivative,
-   the quadratic form Q_c is bounded on L^2([0, log c]), rigorously ensuring ||Q_{even}^{(N)}|| <= M(c, T) < infinity.
+1. Empirical Ceiling: The operator norm ||Q_{even}|| is empirically bounded by 1.5 * max_m D_m across tested N in {28, 32}.
+2. Grounded Quadratic Form Bound: Because the continuous Weil quadratic form Q_c is bounded on L^2([0, log c]),
+   an analytical constant M(c, T) < infinity exists uniformly in N, though the sharp constant M requires formal proof.
 
 ================================================================================
 CELL 87 EXECUTION COMPLETE
