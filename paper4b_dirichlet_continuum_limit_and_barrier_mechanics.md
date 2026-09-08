@@ -2905,16 +2905,91 @@ $$S_{j, \mathrm{core}}(N; L) \equiv \sum_{\substack{\ell \le L \\ \ell \notin \{
 Because the finite core contains only $\mathcal{O}(1)$ terms, proving $S_j(N) = \mathcal{O}(1)$ reduces entirely to proving a uniform bound on the tail:
 $$\sup_{N > L} S_{j, \mathrm{tail}}(N; L) < \infty.$$
 
-#### 2. Elimination of Local Ratios $\alpha_\ell$ and $\varepsilon_\ell$ via Cumulative Lower Spectral Mass
-The quantities $\alpha_\ell = d_{\ell+1}^2 / d_\ell^2$ and $\varepsilon_\ell = N_\ell / P_\ell$ were introduced to bound $\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell)}$ by keeping only the nearest positive neighbour ($P_\ell > d_{\ell+1}^2 / \Delta_\ell$). For tail modes $\ell > L$, this local nearest-neighbour reduction is unnecessarily crude and unstable.
+#### 2. Direct Displacement Tail and the Stieltjes Interlacing Discovery (Cell 82 Audit)
 
-Recall the exact pairwise deviation identity (Proposition 8.26):
-$$\omega_{j, \ell} - 1 = \frac{\Delta_j \delta_\ell}{|E_j - z_\ell^*| |E_{j+1} - E_\ell|}, \qquad \delta_\ell = \frac{d_\ell^2}{S_\ell}, \quad S_\ell = \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*}.$$
-For $\ell > L$, all low-energy poles $k \le L$ lie far to the left of $z_\ell^* \in (E_\ell, E_{\ell+1})$. Rather than attempting to control individual local ratios $d_\ell^2 / d_{\ell+1}^2$, the denominator $S_\ell = P_\ell - N_\ell$ can be bounded below using the **Cumulative Lower Spectral Mass**:
-$$M(k) \equiv \sum_{m \le k} d_m^2.$$
-Because the cumulative mass of low-energy modes is macroscopic, collective spectral summation provides a stable, global lower bound on $S_\ell$, eliminating the need to tame pointwise boundary-weight non-monotonicity.
+The execution of Cell 82 at 70 decimal digits across $N \in \{8, 12, 16, 20, 24\}$ audited the core-tail partition across thresholds $L \in \{4, 6, 8\}$, tested the exact displacement tail, and probed the denominator structure $S_\ell = P_\ell - N_\ell$:
 
-The quantitative audit of the finite-core threshold $L$, the exact displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative lower spectral mass bounds is formulated in Milestone M28 (`cell82.py`).
+**Table 8.25.16: Direct Displacement Tail vs Bound Tail, Numerical Agreement, and Core-Tail Shares (Cell 82)**
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & L & \text{Exact } \mathcal{T}_{2, \mathrm{tail}} & \text{Bound } S_{\mathrm{tail}} & \text{Slack Ratio} & |\mathcal{T}_{\mathrm{tail}} - \text{dev}| \text{ Error} & \text{Tail Share } \% & \delta_{N-1} / \Delta_{N-1} \\ \hline
+8  & 4 & 1.18625 \times 10^{-6}  & 1.58654 \times 10^{-6}  & 1.337 & < 10^{-71} & 0.6463\% & 0.1656 \\
+8  & 6 & 4.89651 \times 10^{-10} & 3.50731 \times 10^{-9}  & 7.163 & < 10^{-71} & 0.00027\% & 0.1656 \\
+12 & 4 & 4.46639 \times 10^{-8}  & 1.16847 \times 10^{-7}  & 2.616 & < 10^{-70} & 0.0499\% & 0.5891 \\
+12 & 6 & 4.66165 \times 10^{-13} & 6.15211 \times 10^{-13} & 1.320 & < 10^{-70} & 5.21 \times 10^{-7}\% & 0.5891 \\
+16 & 4 & 7.28827 \times 10^{-9}  & 2.31639 \times 10^{-8}  & 3.178 & < 10^{-70} & 0.0160\% & 0.4965 \\
+16 & 6 & 1.26968 \times 10^{-14} & 2.90187 \times 10^{-14} & 2.286 & < 10^{-70} & 2.79 \times 10^{-8}\% & 0.4965 \\
+20 & 4 & 1.76277 \times 10^{-9}  & 5.04811 \times 10^{-9}  & 2.864 & < 10^{-71} & 0.0060\% & 0.9993 \\
+20 & 6 & 4.20852 \times 10^{-16} & 1.10417 \times 10^{-15} & 2.624 & < 10^{-71} & 1.43 \times 10^{-9}\% & 0.9993 \\
+24 & 4 & \mathbf{6.99048 \times 10^{-10}} & \mathbf{1.97286 \times 10^{-9}}  & \mathbf{2.822} & \mathbf{< 10^{-70}} & \mathbf{0.004979\%} & 0.5175 \\
+24 & 6 & \mathbf{7.46398 \times 10^{-17}} & \mathbf{1.98218 \times 10^{-16}} & \mathbf{2.656} & \mathbf{< 10^{-70}} & \mathbf{5.32 \times 10^{-10}\%} & 0.5175 \\
+24 & 8 & \mathbf{2.08437 \times 10^{-22}} & \mathbf{3.53056 \times 10^{-22}} & \mathbf{1.694} & \mathbf{< 10^{-70}} & \mathbf{1.49 \times 10^{-15}\%} & 0.5175
+\end{array}$$
+
+1. **Exactness and Super-Exponential Tail Collapse:**
+   - The direct displacement tail:
+     $$\mathcal{T}_{2, \mathrm{tail}}(N; L) \equiv \sum_{\ell > L} \frac{\Delta_2 \delta_\ell}{|E_2 - z_\ell^*| |E_3 - E_\ell|}$$
+     matches the exact tail deviation $\sum_{\ell > L} (\omega_{2, \ell} - 1)$ to better than $10^{-70}$ relative precision across all tested dimensions and core thresholds.
+   - For fixed core threshold $L=4$, the tail accounts for only $0.004979\%$ of the remote deviation at $N=24$, collapsing by over three orders of magnitude from $N=8$ ($1.19 \times 10^{-6} \to 6.99 \times 10^{-10}$).
+   - Extending the core cutoff to $L=6$ or $L=8$ suppresses the tail to $7.46 \times 10^{-17}$ and $2.08 \times 10^{-22}$, demonstrating that the tail beyond a small fixed index is completely negligible.
+
+2. **Resolution of the Denominator Paradox:**
+   In Test C, evaluating $S_\ell = P_\ell - N_\ell$ showed that near the upper edge ($\ell \ge 20$), $N_\ell$ approaches $P_\ell$, causing $\delta_{20}/\Delta_{20} = 0.9993$. This refutes the idea that cumulative lower mass alone provides an $\mathcal{O}(1)$ lower bound on $S_\ell$ near the upper edge. However, because each tail term is multiplied by $(E_\ell - E_2)^{-1} (E_\ell - E_3)^{-1}$, these upper-edge modes are crushed by macroscopic spectral distance ($\sim 10^{-28}$) regardless of $S_\ell$.
+
+3. **The Universal Interlacing Discovery:**
+   Crucially, Test C revealed that across the entire spectrum:
+   $$\frac{\delta_\ell}{\Delta_\ell} < 1 \qquad (\forall \ell \in \{0, \dots, N-1\}).$$
+   This is not an empirical accident: by definition, $\delta_\ell \equiv z_\ell^* - E_\ell$ and $\Delta_\ell \equiv E_{\ell+1} - E_\ell$. The inequality $\delta_\ell < \Delta_\ell$ is strictly equivalent to $z_\ell^* < E_{\ell+1}$, which is **nothing other than standard Stieltjes interlacing** $E_\ell < z_\ell^* < E_{\ell+1}$!
+
+---
+
+### Lemma 8.27 (Universal Interlacing Tail Bound)
+
+Let $N \ge 2$, let $j \in \{0, \dots, N-2\}$ be any fixed mode, and let $\ell \in \{j+2, \dots, N-1\}$. Then the exact pairwise factor deviation satisfies the unconditional parameter-free bound:
+$$\boxed{0 < \omega_{j, \ell} - 1 < \frac{\Delta_j \Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}.}$$
+
+*Proof.*
+By Proposition 8.26, the pairwise factor deviation satisfies the exact algebraic identity:
+$$\omega_{j, \ell} - 1 = \frac{\Delta_j (z_\ell^* - E_\ell)}{|E_j - z_\ell^*| |E_{j+1} - E_\ell|}.$$
+Since $\ell \ge j+2$, the spectral points are strictly ordered:
+$$E_j < E_{j+1} \le E_{\ell-1} < E_\ell < z_\ell^* < E_{\ell+1}.$$
+Consequently:
+1. $z_\ell^* > E_\ell \implies |E_j - z_\ell^*| = z_\ell^* - E_j > E_\ell - E_j > 0$.
+2. $E_\ell > E_{j+1} \implies |E_{j+1} - E_\ell| = E_\ell - E_{j+1} > 0$.
+3. By Stieltjes interlacing, the zero $z_\ell^*$ lies strictly within the open interval $(E_\ell, E_{\ell+1})$, which immediately gives:
+   $$\delta_\ell \equiv z_\ell^* - E_\ell < E_{\ell+1} - E_\ell = \Delta_\ell.$$
+Substituting these three inequalities directly into the exact identity yields:
+$$0 < \omega_{j, \ell} - 1 = \frac{\Delta_j \delta_\ell}{(z_\ell^* - E_j)(E_\ell - E_{j+1})} < \frac{\Delta_j \Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})},$$
+which proves the lemma unconditionally for all $N$ and all $\ell \ge j+2$. $\blacksquare$
+
+---
+
+### Proposition 8.28 (Universal Spectral Summability and Telescoping Tail Bound)
+
+Let $j \ge 0$ be a fixed low mode and let $L \ge j+2$ be any fixed core cutoff. 
+
+1. **Universal Spectral Tail Enclosure:**
+   The infinite asymptotic tail of the remote product is bounded unconditionally by:
+   $$\boxed{S_{j, \mathrm{tail}}(N; L) \equiv \sum_{\ell = L+1}^{N-1} (\omega_{j, \ell} - 1) < \Delta_j \sum_{\ell = L+1}^{N-1} \frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}.}$$
+   In particular, the tail bound is completely independent of boundary weights $d_\ell^2$, ladder ratios $\alpha_\ell$, sign ratios $\varepsilon_\ell$, and cumulative spectral mass bounds.
+
+2. **Weyl Summability:**
+   Under standard Weyl eigenvalue asymptotics for discrete Sturm–Liouville / Galerkin operators on compact intervals ($E_\ell \ge c_1 \ell^2 - c_2$ and $\Delta_\ell \le c_3 \ell + c_4$ for positive constants $c_1, c_3 > 0$):
+   $$\frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})} \le \frac{C_j}{\ell^3} \qquad (\ell \ge L+1),$$
+   whence the tail is uniformly summable and decays quadratically in the core threshold:
+   $$\sup_N S_{j, \mathrm{tail}}(N; L) \le C_j \sum_{\ell = L+1}^\infty \frac{1}{\ell^3} \le \frac{C_j'}{L^2} < \infty.$$
+
+3. **Discrete Telescoping Structure:**
+   The spectral tail summand admits a near-telescoping comparison with:
+   $$\mathcal{T}_{\mathrm{tele}}(\ell) \equiv \frac{\Delta_\ell}{(E_\ell - E_{j+1})(E_{\ell+1} - E_{j+1})} = \frac{1}{E_\ell - E_{j+1}} - \frac{1}{E_{\ell+1} - E_{j+1}},$$
+   yielding the explicit closed-form telescoping sum:
+   $$\sum_{\ell = L+1}^{N-1} \mathcal{T}_{\mathrm{tele}}(\ell) = \frac{1}{E_{L+1} - E_{j+1}} - \frac{1}{E_N - E_{j+1}} < \frac{1}{E_{L+1} - E_{j+1}} = \mathcal{O}(L^{-2}).$$
+
+4. **Outer Product Finiteness:**
+   Combining the finite core sum with the universal tail bound establishes:
+   $$\Pi_{j, \mathrm{remote}} \le \exp\left( \sum_{\substack{\ell \le L \\ \ell \notin \{j, j+1\}}} (\omega_{j, \ell} - 1) + \frac{C_j' \Delta_j}{L^2} \right) = \mathcal{O}(1),$$
+   concluding the reduction of the remote product bound strictly to even Galerkin eigenvalue asymptotics.
+
+The empirical audit of Lemma 8.27, the telescoping comparison, and eigenvalue asymptotics is formulated in Milestone M29 (`cell83.py`).
 
 ---
 
@@ -3117,6 +3192,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Sign Ratio $\varepsilon_\ell = N_\ell/P_\ell$ & Weight Ladder) | Spectral-wide audit of sign ratio $\varepsilon_\ell$, upper-edge mode forensics, corrected closed bound & weight ladder decay | `cell80.py` | `cell80.out` |
 | Section 8.25 (Tri-Partite Spectral Decomposition & Remote Sum $S_j(N)$) | Tri-partite spectral audit (low/bulk/edge), weighted remote sum $S_j(N)$ vs $\log \Pi_j$, 4-factor balance & scaling | `cell81.py` | `cell81.out` |
 | Section 8.25 (Finite-Core + Tail Architecture & Cumulative Spectral Mass) | Core-tail partition ($L \in \{4, 6, 8\}$), direct displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative mass $M(k)$ | `cell82.py` | `cell82.out` |
+| Section 8.25 (Universal Interlacing Tail Bound & Telescoping Comparison) | Lemma 8.27 interlacing bound audit, telescoping upper bounds & eigenvalue growth $E_\ell \approx c_1 \ell^2$ | `cell83.py` | `cell83.out` |
 
 
 ---
