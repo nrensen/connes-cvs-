@@ -2852,7 +2852,69 @@ Since $\log \Pi_{j, \mathrm{remote}} = \sum_{\ell \notin \{j, j+1\}} \log \omega
 $$\boxed{S_j(N) \equiv \sum_{\ell \notin \{j, j+1\}} B_{j, \ell}(N), \qquad B_{j, \ell}(N) \equiv \frac{\Delta_j \Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell) |E_j - z_\ell^*| |E_{j+1} - E_\ell|},}$$
 the problem of proving $\Pi_{j, \mathrm{remote}} = \mathcal{O}(1)$ reduces unconditionally to proving the boundedness of $S_j(N)$:
 $$S_j(N) = S_{\mathrm{low}}(N) + S_{\mathrm{bulk}}(N) + S_{\mathrm{edge}}(N) = \mathcal{O}(1) \quad \Longrightarrow \quad \Pi_{j, \mathrm{remote}} = \mathcal{O}(1).$$
-The quantitative balance between the four competing factors in $B_{j, \ell}$—namely boundary weight $\alpha_\ell$, sign inflation $(1 - \varepsilon_\ell)^{-1}$, spectral gap product $\Delta_j \Delta_\ell$, and distance denominator $D_{j, \ell}^2$—is audited in Milestone M27 (`cell81.py`).
+The quantitative balance between the four competing factors in $B_{j, \ell}$—namely boundary weight $\alpha_\ell$, sign inflation $(1 - \varepsilon_\ell)^{-1}$, spectral gap product $\Delta_j \Delta_\ell$, and distance denominator $D_{j, \ell}^2$—was audited in Milestone M27 (`cell81.py`).
+
+---
+
+### Empirical Audit of the Weighted Remote Sum and Overwhelming Low-Mode Dominance (Cell 81 Audit)
+
+The execution of Cell 81 at 70 decimal digits across $N \in \{8, 12, 16, 20, 24\}$ rigorously audited the weighted remote sum $S_2(N)$, its three-zone decomposition, and the four-factor suppression mechanism:
+
+**Table 8.25.15: Weighted Remote Sum $S_2(N)$, Deviations, and Three-Zone Decomposition (Cell 81)**
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & S_2(N) & \sum (\omega_{2, \ell}-1) & \Pi_{2, \mathrm{remote}} & \text{Slack Ratio} & S_{2, \mathrm{low}} \text{ (Share)} & S_{2, \mathrm{bulk}} \text{ (Share)} & S_{2, \mathrm{edge}} \text{ (Share)} \\ \hline
+8  & 4.1195 \times 10^{-4} & 1.8354 \times 10^{-4} & 1.0001835 & 2.244 & 4.1036 \times 10^{-4} \;(99.61\%) & 1.5739 \times 10^{-6} \;(0.382\%) & 1.2639 \times 10^{-8} \;(0.003\%) \\
+12 & 2.4956 \times 10^{-4} & 8.9500 \times 10^{-5} & 1.0000895 & 2.788 & 2.4944 \times 10^{-4} \;(99.95\%) & 1.1685 \times 10^{-7} \;(0.047\%) & 1.7195 \times 10^{-15} \;(10^{-9}\%) \\
+16 & 1.2976 \times 10^{-4} & 4.5530 \times 10^{-5} & 1.0000455 & 2.850 & 1.2974 \times 10^{-4} \;(99.98\%) & 2.3164 \times 10^{-8} \;(0.018\%) & 7.9497 \times 10^{-21} \;(10^{-14}\%) \\
+20 & 8.8423 \times 10^{-5} & 2.9350 \times 10^{-5} & 1.0000293 & 3.013 & 8.8418 \times 10^{-5} \;(99.99\%) & 5.0481 \times 10^{-9} \;(0.006\%) & 2.7075 \times 10^{-23} \;(10^{-16}\%) \\
+24 & \mathbf{4.4969 \times 10^{-5}} & \mathbf{1.4039 \times 10^{-5}} & \mathbf{1.0000140} & \mathbf{3.203} & \mathbf{4.4967 \times 10^{-5} \;(100.0\%)} & \mathbf{1.9729 \times 10^{-9} \;(0.004\%)} & \mathbf{6.4753 \times 10^{-27} \;(10^{-20}\%)}
+\end{array}$$
+
+1. **Monotonic Decrease and Termwise Validity:**
+   - The weighted remote sum $S_2(N)$ decreases monotonically from $4.1195 \times 10^{-4}$ down to $4.4969 \times 10^{-5}$, while the actual remote product converges rapidly toward unity ($\Pi_{2, \mathrm{remote}} = 1 + 1.40 \times 10^{-5}$ at $N=24$).
+   - The bound $B_{2, \ell} > \omega_{2, \ell} - 1$ is confirmed valid term-by-term across **every tested remote mode** in all dimensions.
+   - The aggregate slack ratio $S_2(N) / \sum(\omega - 1)$ remains well-conditioned across all dimensions, drifting modestly from $2.24$ to $3.20$.
+
+2. **Overwhelming Low-Mode Concentration:**
+   - In Test B, the three low remote modes immediately adjacent to the excluded two-pole interval ($\ell \in \{0, 1, 4\}$ for $j=2$) account for **$99.9956\%$** of the entire sum $S_2(N)$ at $N=24$.
+   - The bulk modes $\ell \in \{5, \dots, 21\}$ contribute merely $0.0044\%$, while the upper-edge modes $\ell \in \{22, 23\}$ contribute a vanishing $1.44 \times 10^{-20}\%$.
+   - This provides definitive empirical evidence that the remote correction is overwhelmingly localized to the immediate neighborhood of the local two-pole sector.
+
+3. **Four-Factor Physical Insights (Test C):**
+   Deconstructing $B_{2, \ell} = \Delta_2 \Delta_\ell \cdot \alpha_\ell^{-1} \cdot (1 - \varepsilon_\ell)^{-1} \cdot D_{2, \ell}^{-2}$ at $N=24$ reveals three qualitatively distinct physical regimes:
+   - *Low Mode ($\ell=1$):* $\alpha_1^{-1} = 2.84 \times 10^{-6}$ is tiny, but the geometric distance factor $D_{2, 1}^{-2} \approx 4.67 \times 10^{56}$ is enormous; the tiny gap product $\Delta_2 \Delta_1 \approx 2.14 \times 10^{-57}$ balances $D^{-2}$, yielding $B_{2, 1} = 2.84 \times 10^{-6}$. Suppression reflects an exact multi-scale balance rather than a single dominant factor.
+   - *Bulk Mode ($\ell=12$):* The weight ratio $\alpha_{12}^{-1} = 56.67$ is *amplifying* and $(1 - \varepsilon_{12})^{-1} = 2.127$, yet $D_{2, 12}^{-2} = 0.4765$ and $\Delta_2 \Delta_{12} = 6.78 \times 10^{-27}$ completely quench the term ($B_{2, 12} = 3.89 \times 10^{-25}$). Hence, bulk modes require no boundary-weight suppression hierarchy whatsoever.
+   - *Upper Edge ($\ell=23$):* Macroscopic distance suppresses the term to $B_{2, 23} = 1.65 \times 10^{-28}$, proving that upper-edge sign inflation is physically decoupled from low-$j$ dynamics.
+
+4. **Epistemic Calibration:**
+   While $S_2(N)$ decreases monotonically across tested dimensions, finite sweeps across discrete dimensions do not constitute an analytical proof of asymptotic decay or specific power-law laws. These data provide strong empirical evidence that the weighted remote correction is strongly localized and decreases under truncation, formulating the analytical target for continuum proofs.
+
+---
+
+### Architectural Shift: The Finite-Core + Tail Architecture and Cumulative Lower Spectral Mass
+
+The findings of Cell 81 establish that while the three-zone decomposition served as an effective diagnostic, attempting to prove three disparate asymptotic theorems across moving zone boundaries ("low", "bulk", "edge") introduces artificial boundaries into the continuum analysis.
+
+Instead, the data motivate a unified **Finite-Core + Tail Architecture**:
+
+#### 1. Canonical Core-Tail Partition
+For any fixed low mode $j$, fix a small spectral cutoff $L \ge j+2$ (for example, $L \in \{4, 6\}$). The remote sum partitions cleanly into a finite low-energy core and an infinite tail:
+$$\boxed{S_j(N) = S_{j, \mathrm{core}}(N; L) + S_{j, \mathrm{tail}}(N; L),}$$
+where:
+$$S_{j, \mathrm{core}}(N; L) \equiv \sum_{\substack{\ell \le L \\ \ell \notin \{j, j+1\}}} B_{j, \ell}, \qquad S_{j, \mathrm{tail}}(N; L) \equiv \sum_{\ell > L} B_{j, \ell}.$$
+Because the finite core contains only $\mathcal{O}(1)$ terms, proving $S_j(N) = \mathcal{O}(1)$ reduces entirely to proving a uniform bound on the tail:
+$$\sup_{N > L} S_{j, \mathrm{tail}}(N; L) < \infty.$$
+
+#### 2. Elimination of Local Ratios $\alpha_\ell$ and $\varepsilon_\ell$ via Cumulative Lower Spectral Mass
+The quantities $\alpha_\ell = d_{\ell+1}^2 / d_\ell^2$ and $\varepsilon_\ell = N_\ell / P_\ell$ were introduced to bound $\delta_\ell < \frac{\Delta_\ell}{\alpha_\ell (1 - \varepsilon_\ell)}$ by keeping only the nearest positive neighbour ($P_\ell > d_{\ell+1}^2 / \Delta_\ell$). For tail modes $\ell > L$, this local nearest-neighbour reduction is unnecessarily crude and unstable.
+
+Recall the exact pairwise deviation identity (Proposition 8.26):
+$$\omega_{j, \ell} - 1 = \frac{\Delta_j \delta_\ell}{|E_j - z_\ell^*| |E_{j+1} - E_\ell|}, \qquad \delta_\ell = \frac{d_\ell^2}{S_\ell}, \quad S_\ell = \sum_{k \ne \ell} \frac{d_k^2}{E_k - z_\ell^*}.$$
+For $\ell > L$, all low-energy poles $k \le L$ lie far to the left of $z_\ell^* \in (E_\ell, E_{\ell+1})$. Rather than attempting to control individual local ratios $d_\ell^2 / d_{\ell+1}^2$, the denominator $S_\ell = P_\ell - N_\ell$ can be bounded below using the **Cumulative Lower Spectral Mass**:
+$$M(k) \equiv \sum_{m \le k} d_m^2.$$
+Because the cumulative mass of low-energy modes is macroscopic, collective spectral summation provides a stable, global lower bound on $S_\ell$, eliminating the need to tame pointwise boundary-weight non-monotonicity.
+
+The quantitative audit of the finite-core threshold $L$, the exact displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative lower spectral mass bounds is formulated in Milestone M28 (`cell82.py`).
 
 ---
 
@@ -3054,6 +3116,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (One-Sided Displacement Bound & Scope Diagnostic) | Certification of $\delta_0 < \Delta_0/\alpha_0$, low-mode ratio $\mathcal{R}_\delta \in [0.15, 0.29]$, and upper-edge failure of bare bound | `cell79.py` | `cell79.out` |
 | Section 8.25 (Sign Ratio $\varepsilon_\ell = N_\ell/P_\ell$ & Weight Ladder) | Spectral-wide audit of sign ratio $\varepsilon_\ell$, upper-edge mode forensics, corrected closed bound & weight ladder decay | `cell80.py` | `cell80.out` |
 | Section 8.25 (Tri-Partite Spectral Decomposition & Remote Sum $S_j(N)$) | Tri-partite spectral audit (low/bulk/edge), weighted remote sum $S_j(N)$ vs $\log \Pi_j$, 4-factor balance & scaling | `cell81.py` | `cell81.out` |
+| Section 8.25 (Finite-Core + Tail Architecture & Cumulative Spectral Mass) | Core-tail partition ($L \in \{4, 6, 8\}$), direct displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative mass $M(k)$ | `cell82.py` | `cell82.out` |
 
 
 ---
