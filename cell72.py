@@ -281,6 +281,11 @@ def run_cell72() -> None:
                 "Q_j": Q_j,
                 "Q_j_pole": Q_j_pole,
                 "T_j_fact": T_j_fact,
+                f"K_{j}": K_j,
+                f"G_{j}": G_j,
+                f"S_{j}": S_j,
+                f"Q_{j}": Q_j,
+                f"Q_{j}_pole": Q_j_pole,
                 "pole_id_res": pole_id_res,
                 "tail_id_res": tail_id_res,
                 "den_term_D0": den_term_D0,
@@ -312,11 +317,11 @@ def run_cell72() -> None:
 
         if 2 in mode_records:
             m2 = mode_records[2]
-            print(f"  Mode 2 kinetic ratio:   K_2 = ||Ku_2||^2 / ||Ku_1||^2 = {mp.nstr(m2['K_2'], 6)}")
-            print(f"  Mode 2 Stieltjes ratio: G_2 = G'(1) / G'(2)           = {mp.nstr(m2['G_2'], 6)}")
-            print(f"  Mode 2 gap ratio:       S_2 = ((mu_1-lam)/(mu_2-lam))^2= {mp.nstr(m2['S_2'], 6)}")
-            print(f"  Mode 2 product:         Q_2 = G_2 * S_2               = {mp.nstr(m2['Q_2'], 6)}")
-            print(f"  Mode 2 pole formula:    Q_2^{{pole}}                   = {mp.nstr(m2['Q_2_pole'], 6)}")
+            print(f"  Mode 2 kinetic ratio:   K_2 = ||Ku_2||^2 / ||Ku_1||^2 = {mp.nstr(m2['K_j'], 6)}")
+            print(f"  Mode 2 Stieltjes ratio: G_2 = G'(1) / G'(2)           = {mp.nstr(m2['G_j'], 6)}")
+            print(f"  Mode 2 gap ratio:       S_2 = ((mu_1-lam)/(mu_2-lam))^2= {mp.nstr(m2['S_j'], 6)}")
+            print(f"  Mode 2 product:         Q_2 = G_2 * S_2               = {mp.nstr(m2['Q_j'], 6)}")
+            print(f"  Mode 2 pole formula:    Q_2^{{pole}}                   = {mp.nstr(m2['Q_j_pole'], 6)}")
             print(f"  Pole id residual:       |Q_2 - Q_2^{{pole}}|           = {mp.nstr(m2['pole_id_res'], 4)}")
             print(f"  Mode 2 tail ratio:      T_2 = b_{{02}}^2 / b_{{01}}^2   = {mp.nstr(m2['T_j_direct'], 6)}")
             print(f"  Denom D_0^2 term:       D_0^2                         = {mp.nstr(m2['den_term_D0'], 4)}")
@@ -343,10 +348,10 @@ def run_cell72() -> None:
             m = rec["modes"][2]
             row = (
                 f"{rec['N']:3d} | "
-                f"{mp.nstr(m['K_2'], 5):>8} | "
-                f"{mp.nstr(m['G_2'], 6):>20} | "
-                f"{mp.nstr(m['S_2'], 6):>16} | "
-                f"{mp.nstr(m['Q_2'], 6):>16} | "
+                f"{mp.nstr(m['K_j'], 5):>8} | "
+                f"{mp.nstr(m['G_j'], 6):>20} | "
+                f"{mp.nstr(m['S_j'], 6):>16} | "
+                f"{mp.nstr(m['Q_j'], 6):>16} | "
                 f"{mp.nstr(m['T_j_direct'], 6):>14} | "
                 f"{mp.nstr(m['T_j_fact'], 6):>14}"
             )
@@ -403,10 +408,10 @@ def run_cell72() -> None:
             mA = rA["modes"][2]
             mB = rB["modes"][2]
 
-            gamma_2 = (mp.log(mB["G_2"]) - mp.log(mA["G_2"])) / dN
-            tau_2 = -(mp.log(mB["S_2"]) - mp.log(mA["S_2"])) / dN
+            gamma_2 = (mp.log(mB["G_j"]) - mp.log(mA["G_j"])) / dN
+            tau_2 = -(mp.log(mB["S_j"]) - mp.log(mA["S_j"])) / dN
             delta_S2 = tau_2 - gamma_2
-            sigma_Q2 = -(mp.log(mB["Q_2"]) - mp.log(mA["Q_2"])) / dN
+            sigma_Q2 = -(mp.log(mB["Q_j"]) - mp.log(mA["Q_j"])) / dN
             sigma_T2 = -(mp.log(mB["T_j_direct"]) - mp.log(mA["T_j_direct"])) / dN
 
             interval_str = f"N={NA}->{NB}"
@@ -438,10 +443,10 @@ def run_cell72() -> None:
             m = rec["modes"][3]
             row = (
                 f"{rec['N']:3d} | "
-                f"{mp.nstr(m['K_3'], 5):>8} | "
-                f"{mp.nstr(m['G_3'], 5):>14} | "
-                f"{mp.nstr(m['S_3'], 5):>16} | "
-                f"{mp.nstr(m['Q_3'], 5):>16} | "
+                f"{mp.nstr(m['K_j'], 5):>8} | "
+                f"{mp.nstr(m['G_j'], 5):>14} | "
+                f"{mp.nstr(m['S_j'], 5):>16} | "
+                f"{mp.nstr(m['Q_j'], 5):>16} | "
                 f"{mp.nstr(m['T_j_direct'], 5):>14} | "
                 f"{mp.nstr(m['pole_id_res'], 4):>11}"
             )
