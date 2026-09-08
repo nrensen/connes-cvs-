@@ -522,7 +522,8 @@ def run_cell77() -> None:
     print("=" * 105)
     print("SYNTHESIS TABLE 3: CHARACTERISTIC-POLYNOMIAL RATIO IDENTITY FOR MODE j = 2 (TEST C)")
     print("=" * 105)
-    print(f"{'N':>3s} | {'|P_zero(E3)/P_zero(E2)|':>25s} | {'|P_even'(E2)/P_even'(E3)|':>25s} | {'RelErr(alpha)':>16s} | {'RelErr(Pi)':>16s}")
+    col_even_prime = "|P_even'(E2)/P_even'(E3)|"
+    print(f"{'N':>3s} | {'|P_zero(E3)/P_zero(E2)|':>25s} | {col_even_prime:>25s} | {'RelErr(alpha)':>16s} | {'RelErr(Pi)':>16s}")
     print("-" * 105)
     for rec in synthesis_table3_records:
         print(f"{rec['N']:3d} | {mp.nstr(rec['ratio_p_zero'], 8):>25s} | {mp.nstr(rec['ratio_p_even_prime'], 8):>25s} | {mp.nstr(rec['err_poly_alpha'], 4):>16s} | {mp.nstr(rec['err_poly_pi'], 4):>16s}")
