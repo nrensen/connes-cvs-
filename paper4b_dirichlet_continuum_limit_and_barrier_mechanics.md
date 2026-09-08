@@ -2963,33 +2963,33 @@ which proves the lemma unconditionally for all $N$ and all $\ell \ge j+2$. $\bla
 
 ---
 
-### Proposition 8.28 (Universal Spectral Summability and Telescoping Tail Bound)
+### Proposition 8.28 (Universal Parameter-Free Tail Reduction, Spectral Expansion Identity, and Conditional Telescoping)
 
-Let $j \ge 0$ be a fixed low mode and let $L \ge j+2$ be any fixed core cutoff. 
+Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+2$ be any fixed core cutoff.
 
-1. **Universal Spectral Tail Enclosure:**
-   The infinite asymptotic tail of the remote product is bounded unconditionally by:
+1. **Exact Parameter-Free Spectral Tail Reduction (Rigorous Theorem):**
+   The infinite asymptotic tail of the remote product satisfies the unconditional finite-$N$ bound:
    $$\boxed{S_{j, \mathrm{tail}}(N; L) \equiv \sum_{\ell = L+1}^{N-1} (\omega_{j, \ell} - 1) < \Delta_j \sum_{\ell = L+1}^{N-1} \frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}.}$$
-   In particular, the tail bound is completely independent of boundary weights $d_\ell^2$, ladder ratios $\alpha_\ell$, sign ratios $\varepsilon_\ell$, and cumulative spectral mass bounds.
+   In particular, this tail bound is completely parameter-free and independent of boundary weights $d_\ell^2$, ladder ratios $\alpha_\ell$, sign ratios $\varepsilon_\ell$, and cumulative spectral mass bounds.
 
-2. **Weyl Summability:**
-   Under standard Weyl eigenvalue asymptotics for discrete Sturm–Liouville / Galerkin operators on compact intervals ($E_\ell \ge c_1 \ell^2 - c_2$ and $\Delta_\ell \le c_3 \ell + c_4$ for positive constants $c_1, c_3 > 0$):
-   $$\frac{\Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})} \le \frac{C_j}{\ell^3} \qquad (\ell \ge L+1),$$
-   whence the tail is uniformly summable and decays quadratically in the core threshold:
-   $$\sup_N S_{j, \mathrm{tail}}(N; L) \le C_j \sum_{\ell = L+1}^\infty \frac{1}{\ell^3} \le \frac{C_j'}{L^2} < \infty.$$
+2. **Exact Spectral Expansion Ratio Identity:**
+   Let $\mathcal{T}_{\mathrm{tele}}(\ell)$ denote the canonical discrete telescoping summand:
+   $$\mathcal{T}_{\mathrm{tele}}(\ell) \equiv \Delta_j \left( \frac{1}{E_\ell - E_{j+1}} - \frac{1}{E_{\ell+1} - E_{j+1}} \right) = \frac{\Delta_j \Delta_\ell}{(E_\ell - E_{j+1})(E_{\ell+1} - E_{j+1})}.$$
+   Then each interlacing tail summand $\eta_{\mathrm{inter}}(j, \ell) \equiv \frac{\Delta_j \Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})}$ decomposes into the exact product:
+   $$\eta_{\mathrm{inter}}(j, \ell) = C_{j, \ell} \mathcal{T}_{\mathrm{tele}}(\ell), \qquad \text{where} \quad C_{j, \ell} \equiv \frac{E_{\ell+1} - E_{j+1}}{E_\ell - E_j}.$$
+   *Epistemic Note on Telescoping Comparison:* Since $E_{\ell+1} > E_\ell$ and $E_{j+1} > E_j$, the spectral expansion ratio satisfies $C_{j, \ell} > 1$. Consequently, $\mathcal{T}_{\mathrm{tele}}(\ell) < \eta_{\mathrm{inter}}(j, \ell)$, meaning that the bare telescoping sum $\sum \mathcal{T}_{\mathrm{tele}}(\ell)$ is a **comparison quantity**, not an upper envelope for the interlacing tail bound.
 
-3. **Discrete Telescoping Structure:**
-   The spectral tail summand admits a near-telescoping comparison with:
-   $$\mathcal{T}_{\mathrm{tele}}(\ell) \equiv \frac{\Delta_\ell}{(E_\ell - E_{j+1})(E_{\ell+1} - E_{j+1})} = \frac{1}{E_\ell - E_{j+1}} - \frac{1}{E_{\ell+1} - E_{j+1}},$$
-   yielding the explicit closed-form telescoping sum:
-   $$\sum_{\ell = L+1}^{N-1} \mathcal{T}_{\mathrm{tele}}(\ell) = \frac{1}{E_{L+1} - E_{j+1}} - \frac{1}{E_N - E_{j+1}} < \frac{1}{E_{L+1} - E_{j+1}} = \mathcal{O}(L^{-2}).$$
+3. **Conditional Telescoping Tail Bound (Hypothesis $\mathrm{H}_{\mathrm{spec}}$):**
+   Suppose there exists a uniform constant $\bar{C}_j(L) < \infty$ such that the spectral expansion ratio is bounded across all truncation dimensions $N$ and all tail modes $\ell \ge L+1$:
+   $$\mathbf{Hypothesis\ H_{\mathrm{spec}}:} \qquad \sup_{N > L} \sup_{\ell \ge L+1} \frac{E_{\ell+1} - E_{j+1}}{E_\ell - E_j} \le \bar{C}_j(L) < \infty.$$
+   Then the universal tail bound telescopes into the explicit closed-form upper bound:
+   $$S_{j, \mathrm{tail}}(N; L) < \bar{C}_j(L) \Delta_j \sum_{\ell = L+1}^{N-1} \mathcal{T}_{\mathrm{tele}}(\ell) = \bar{C}_j(L) \Delta_j \left( \frac{1}{E_{L+1} - E_{j+1}} - \frac{1}{E_N - E_{j+1}} \right) < \frac{\bar{C}_j(L) \Delta_j}{E_{L+1} - E_{j+1}} < \infty.$$
+   Under Hypothesis $\mathrm{H}_{\mathrm{spec}}$, the remote product satisfies the uniform bound $\sup_N \Pi_{j, \mathrm{remote}}(N) < \infty$.
 
-4. **Outer Product Finiteness:**
-   Combining the finite core sum with the universal tail bound establishes:
-   $$\Pi_{j, \mathrm{remote}} \le \exp\left( \sum_{\substack{\ell \le L \\ \ell \notin \{j, j+1\}}} (\omega_{j, \ell} - 1) + \frac{C_j' \Delta_j}{L^2} \right) = \mathcal{O}(1),$$
-   concluding the reduction of the remote product bound strictly to even Galerkin eigenvalue asymptotics.
+4. **Epistemic Classification of the Galerkin Spectrum:**
+   The discrete Galerkin eigenvalues $E_\ell$ of the Connes–CvS matrix $Q_{c, N}$ do **not** follow a conventional elliptic Weyl law $E_\ell \asymp \ell^2$. As audited in Cell 83 at $N=24$, the spectrum forms an exponentially compressed tunneling doublet ladder beneath the effective barrier top ($E_4 \approx 2.90 \times 10^{-22}$ to $E_{10} \approx 0.0050$), transitioning to $\mathcal{O}(1)$ modes above the barrier top ($E_{12} \approx 1.306 \to E_{23} \approx 3.660$), with $E_{23}/23^2 \approx 0.00692$. Analytical tail bounds must therefore be established directly from the discrete matrix structure and spectral-ratio bounds (Hypothesis $\mathrm{H}_{\mathrm{spec}}$), rather than by importing unproven continuum Sturm–Liouville / Weyl asymptotics.
 
-The empirical audit of Lemma 8.27, the telescoping comparison, and eigenvalue asymptotics is formulated in Milestone M29 (`cell83.py`).
+The empirical audit of Lemma 8.27 and the non-Weyl structure of the Galerkin spectrum were established in Milestone M29 (`cell83.py`). The investigation of the spectral expansion ratio $C_{j, \ell}$ and Hypothesis $\mathrm{H}_{\mathrm{spec}}$ is formulated in Milestone M30 (`cell84.py`).
 
 ---
 
@@ -3192,7 +3192,8 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Sign Ratio $\varepsilon_\ell = N_\ell/P_\ell$ & Weight Ladder) | Spectral-wide audit of sign ratio $\varepsilon_\ell$, upper-edge mode forensics, corrected closed bound & weight ladder decay | `cell80.py` | `cell80.out` |
 | Section 8.25 (Tri-Partite Spectral Decomposition & Remote Sum $S_j(N)$) | Tri-partite spectral audit (low/bulk/edge), weighted remote sum $S_j(N)$ vs $\log \Pi_j$, 4-factor balance & scaling | `cell81.py` | `cell81.out` |
 | Section 8.25 (Finite-Core + Tail Architecture & Cumulative Spectral Mass) | Core-tail partition ($L \in \{4, 6, 8\}$), direct displacement tail $\mathcal{T}_{j, \mathrm{tail}}$, and cumulative mass $M(k)$ | `cell82.py` | `cell82.out` |
-| Section 8.25 (Universal Interlacing Tail Bound & Telescoping Comparison) | Lemma 8.27 interlacing bound audit, telescoping upper bounds & eigenvalue growth $E_\ell \approx c_1 \ell^2$ | `cell83.py` | `cell83.out` |
+| Section 8.25 (Universal Interlacing Tail Bound & Telescoping Comparison) | Lemma 8.27 interlacing bound audit, non-Weyl tunneling ladder, and comparison quantity $\mathcal{T}_{\mathrm{tele}}$ | `cell83.py` | `cell83.out` |
+| Section 8.25 (Spectral Expansion Ratio $C_{j, \ell}$ & Calibrated Telescoping) | Audit of spectral ratio $C_{j, \ell} = \frac{E_{\ell+1}-E_{j+1}}{E_\ell-E_j}$, calibrated bound $\mathcal{S}_{\mathrm{tele}}^{\mathrm{calib}}$, and matrix monotonicity | `cell84.py` | `cell84.out` |
 
 
 ---
