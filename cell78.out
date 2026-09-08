@@ -1,0 +1,188 @@
+=========================================================================================================
+CELL 78 — EXACT PAIRWISE CANCELLATION IDENTITY FOR omega_{j, l} - 1,
+         STIELTJES ZERO DISPLACEMENT FORMULA, AND REMOTE LOCALIZATION BOUNDS
+=========================================================================================================
+Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
+
+--- DIMENSION N =  8 (Elapsed: 0.48s) ---
+  [Test A] Exact Identity for omega_{2, l} - 1 Across Remote Modes:
+     l | l - j |   omega - 1 (Direct) |  omega - 1 (Formula) |      Rel Err
+    ----------------------------------------------------------------------
+     0 |    -2 |        1.4390044e-10 |        1.4390044e-10 |    4.367e-62
+     1 |    -1 |           1.84337e-5 |           1.84337e-5 |    3.789e-67
+     4 |     2 |        0.00016391967 |        0.00016391967 |    3.983e-68
+     5 |     3 |         1.1795261e-6 |         1.1795261e-6 |    2.562e-66
+    ... |   ... |                  ... |                  ... |          ...
+     7 |     5 |        4.8965072e-10 |        4.8965072e-10 |    2.851e-62
+  [Test B] Stieltjes Zero Displacement Formula delta_l Across Bound Intervals:
+     l |    delta_l (Bisection) |      delta_l (Formula) |      Rel Err
+    -----------------------------------------------------------------
+     0 |          2.2863621e-23 |          2.2863621e-23 |    1.152e-50
+     1 |          2.9286269e-18 |          2.9286269e-18 |    1.156e-51
+     2 |           7.074348e-14 |           7.074348e-14 |      5.4e-52
+     3 |          7.4980084e-10 |          7.4980084e-10 |    1.504e-52
+  [Test C] Quantitative Remote Upper Bound & Tail Product for Mode j = 2:
+    Remote Tail Product Pi_{2, remote}       = 1.000165106
+    Remote Tail Deviation |Pi_{remote} - 1| = 0.000165106
+    Max Bound Slack (Bound / Actual)          = 9230.0
+  [Test D] Denominator S_2 = sum_{k != 2} d_k^2 / (E_k - z_2^*):
+    S_2 Total          = 146.06033
+    Left Neighbor k=1  = -0.0026926182 (Share: 0.001843%)
+    Right Neighbor k=3 = 49.430563 (Share: 33.84%)
+    Remote Poles       = 96.632463
+
+--- DIMENSION N = 12 (Elapsed: 1.02s) ---
+  [Test A] Exact Identity for omega_{2, l} - 1 Across Remote Modes:
+     l | l - j |   omega - 1 (Direct) |  omega - 1 (Formula) |      Rel Err
+    ----------------------------------------------------------------------
+     0 |    -2 |        2.4310658e-11 |        2.4310658e-11 |    6.387e-61
+     1 |    -1 |         5.1250179e-6 |         5.1250179e-6 |    1.455e-66
+     4 |     2 |         8.4330715e-5 |         8.4330715e-5 |    8.207e-68
+     5 |     3 |         4.4609546e-8 |         4.4609546e-8 |    3.609e-64
+    ... |   ... |                  ... |                  ... |          ...
+    11 |     9 |        1.2146648e-16 |        1.2146648e-16 |    5.352e-56
+  [Test B] Stieltjes Zero Displacement Formula delta_l Across Bound Intervals:
+     l |    delta_l (Bisection) |      delta_l (Formula) |      Rel Err
+    -----------------------------------------------------------------
+     0 |          6.2939851e-30 |          6.2939851e-30 |    5.206e-51
+     1 |          1.3268306e-24 |          1.3268306e-24 |    2.549e-51
+     2 |          1.1461066e-19 |          1.1461066e-19 |    5.538e-52
+     3 |          1.9275483e-15 |          1.9275483e-15 |    2.497e-52
+  [Test C] Quantitative Remote Upper Bound & Tail Product for Mode j = 2:
+    Remote Tail Product Pi_{2, remote}       = 1.000084375
+    Remote Tail Deviation |Pi_{remote} - 1| = 8.43754e-5
+    Max Bound Slack (Bound / Actual)          = 1.866e+4
+  [Test D] Denominator S_2 = sum_{k != 2} d_k^2 / (E_k - z_2^*):
+    S_2 Total          = 365.09993
+    Left Neighbor k=1  = -0.0018712124 (Share: 0.0005125%)
+    Right Neighbor k=3 = 104.15382 (Share: 28.53%)
+    Remote Poles       = 260.94797
+
+--- DIMENSION N = 16 (Elapsed: 1.94s) ---
+  [Test A] Exact Identity for omega_{2, l} - 1 Across Remote Modes:
+     l | l - j |   omega - 1 (Direct) |  omega - 1 (Formula) |      Rel Err
+    ----------------------------------------------------------------------
+     0 |    -2 |        7.0046556e-12 |        7.0046556e-12 |    1.772e-60
+     1 |    -1 |         3.8698217e-6 |         3.8698217e-6 |    4.782e-67
+     4 |     2 |         4.1653066e-5 |         4.1653066e-5 |    2.304e-67
+     5 |     3 |         7.2837914e-9 |         7.2837914e-9 |    2.202e-63
+    ... |   ... |                  ... |                  ... |          ...
+    15 |    13 |        3.8926302e-21 |        3.8926302e-21 |    2.433e-51
+  [Test B] Stieltjes Zero Displacement Formula delta_l Across Bound Intervals:
+     l |    delta_l (Bisection) |      delta_l (Formula) |      Rel Err
+    -----------------------------------------------------------------
+     0 |          2.1035475e-35 |          2.1035475e-35 |    1.537e-50
+     1 |          1.1621163e-29 |          1.1621163e-29 |    5.446e-51
+     2 |          1.1037402e-24 |          1.1037402e-24 |    3.856e-51
+     3 |          5.4450957e-20 |          5.4450957e-20 |    3.153e-52
+  [Test C] Quantitative Remote Upper Bound & Tail Product for Mode j = 2:
+    Remote Tail Product Pi_{2, remote}       = 1.00004166
+    Remote Tail Deviation |Pi_{remote} - 1| = 4.16604e-5
+    Max Bound Slack (Bound / Actual)          = 4.02e+4
+  [Test D] Denominator S_2 = sum_{k != 2} d_k^2 / (E_k - z_2^*):
+    S_2 Total          = 835.17965
+    Left Neighbor k=1  = -0.0032320498 (Share: 0.000387%)
+    Right Neighbor k=3 = 259.63728 (Share: 31.09%)
+    Remote Poles       = 575.5456
+
+--- DIMENSION N = 20 (Elapsed: 3.45s) ---
+  [Test A] Exact Identity for omega_{2, l} - 1 Across Remote Modes:
+     l | l - j |   omega - 1 (Direct) |  omega - 1 (Formula) |      Rel Err
+    ----------------------------------------------------------------------
+     0 |    -2 |        1.1701379e-12 |        1.1701379e-12 |    2.608e-59
+     1 |    -1 |         1.5273882e-6 |         1.5273882e-6 |    1.808e-65
+     4 |     2 |          2.782057e-5 |          2.782057e-5 |    4.408e-67
+     5 |     3 |         1.7620061e-9 |         1.7620061e-9 |    7.738e-63
+    ... |   ... |                  ... |                  ... |          ...
+    19 |    17 |        1.9541402e-25 |        1.9541402e-25 |    3.092e-47
+  [Test B] Stieltjes Zero Displacement Formula delta_l Across Bound Intervals:
+     l |    delta_l (Bisection) |      delta_l (Formula) |      Rel Err
+    -----------------------------------------------------------------
+     0 |          2.5920398e-40 |          2.5920398e-40 |    1.349e-50
+     1 |          3.3833808e-34 |          3.3833808e-34 |    5.504e-51
+     2 |          6.5918984e-29 |          6.5918984e-29 |    3.151e-51
+     3 |          3.2960148e-24 |          3.2960148e-24 |    1.255e-51
+  [Test C] Quantitative Remote Upper Bound & Tail Product for Mode j = 2:
+    Remote Tail Product Pi_{2, remote}       = 1.000027822
+    Remote Tail Deviation |Pi_{remote} - 1| = 2.78223e-5
+    Max Bound Slack (Bound / Actual)          = 4.443e+4
+  [Test D] Denominator S_2 = sum_{k != 2} d_k^2 / (E_k - z_2^*):
+    S_2 Total          = 1654.8832
+    Left Neighbor k=1  = -0.0025276913 (Share: 0.0001527%)
+    Right Neighbor k=3 = 415.1648 (Share: 25.09%)
+    Remote Poles       = 1239.721
+
+--- DIMENSION N = 24 (Elapsed: 5.06s) ---
+  [Test A] Exact Identity for omega_{2, l} - 1 Across Remote Modes:
+     l | l - j |   omega - 1 (Direct) |  omega - 1 (Formula) |      Rel Err
+    ----------------------------------------------------------------------
+     0 |    -2 |        2.2141916e-13 |        2.2141916e-13 |    1.257e-58
+     1 |    -1 |         5.2506208e-7 |         5.2506208e-7 |    5.788e-66
+     4 |     2 |         1.3513344e-5 |         1.3513344e-5 |    5.654e-67
+     5 |     3 |        6.9882099e-10 |        6.9882099e-10 |    2.248e-62
+    ... |   ... |                  ... |                  ... |          ...
+    23 |    21 |        7.9468848e-29 |        7.9468848e-29 |     9.48e-44
+  [Test B] Stieltjes Zero Displacement Formula delta_l Across Bound Intervals:
+     l |    delta_l (Bisection) |      delta_l (Formula) |      Rel Err
+    -----------------------------------------------------------------
+     0 |          3.4589599e-44 |          3.4589599e-44 |    2.013e-49
+     1 |          8.2023729e-38 |          8.2023729e-38 |    4.994e-50
+     2 |          3.5423262e-32 |          3.5423262e-32 |    2.518e-51
+     3 |          4.2819379e-27 |          4.2819379e-27 |    1.797e-51
+  [Test C] Quantitative Remote Upper Bound & Tail Product for Mode j = 2:
+    Remote Tail Product Pi_{2, remote}       = 1.000013514
+    Remote Tail Deviation |Pi_{remote} - 1| = 1.3514e-5
+    Max Bound Slack (Bound / Actual)          = 8.773e+4
+  [Test D] Denominator S_2 = sum_{k != 2} d_k^2 / (E_k - z_2^*):
+    S_2 Total          = 2580.9059
+    Left Neighbor k=1  = -0.0013551475 (Share: 5.251e-5%)
+    Right Neighbor k=3 = 614.44153 (Share: 23.81%)
+    Remote Poles       = 1966.4657
+
+=========================================================================================================
+SYNTHESIS TABLE 1: EXACT PAIRWISE CANCELLATION FORMULA AUDIT (TEST A)
+=========================================================================================================
+  N |    omega_{2,0} - 1 |    omega_{2,1} - 1 |    omega_{2,4} - 1 |    Max Rel Err
+---------------------------------------------------------------------------------------------------------
+  8 |          1.439e-10 |         1.84337e-5 |         0.00016392 |      4.367e-62
+ 12 |        2.43107e-11 |         5.12502e-6 |         8.43307e-5 |      5.352e-56
+ 16 |        7.00466e-12 |         3.86982e-6 |         4.16531e-5 |      2.126e-49
+ 20 |        1.17014e-12 |         1.52739e-6 |         2.78206e-5 |      1.212e-46
+ 24 |        2.21419e-13 |         5.25062e-7 |         1.35133e-5 |      4.977e-43
+
+=========================================================================================================
+SYNTHESIS TABLE 2: STIELTJES DISPLACEMENT FORMULA delta_l = z_l^* - E_l (TEST B)
+=========================================================================================================
+  N |            delta_0 |            delta_1 |            delta_2 |    Max Rel Err
+---------------------------------------------------------------------------------------------------------
+  8 |        2.28636e-23 |        2.92863e-18 |        7.07435e-14 |      1.152e-50
+ 12 |        6.29399e-30 |        1.32683e-24 |        1.14611e-19 |      5.206e-51
+ 16 |        2.10355e-35 |        1.16212e-29 |        1.10374e-24 |      1.537e-50
+ 20 |        2.59204e-40 |        3.38338e-34 |         6.5919e-29 |      1.349e-50
+ 24 |        3.45896e-44 |        8.20237e-38 |        3.54233e-32 |      2.013e-49
+
+=========================================================================================================
+SYNTHESIS TABLE 3: REMOTE TAIL PRODUCT CONVERGENCE FOR MODE j = 2 (TEST C)
+=========================================================================================================
+  N |         Pi_{2, remote} |    |Pi_{remote} - 1| |   Max Slack (Bound/Actual)
+---------------------------------------------------------------------------------------------------------
+  8 |            1.000165106 |          0.000165106 |                     9230.0
+ 12 |            1.000084375 |           8.43754e-5 |                   1.866e+4
+ 16 |             1.00004166 |           4.16604e-5 |                    4.02e+4
+ 20 |            1.000027822 |           2.78223e-5 |                   4.443e+4
+ 24 |            1.000013514 |            1.3514e-5 |                   8.773e+4
+
+=========================================================================================================
+SYNTHESIS TABLE 4: DENOMINATOR DECOMPOSITION FOR MODE l = 2 (TEST D)
+=========================================================================================================
+  N |          S_2 Total |    Right (k=3) Share (%) |     Left (k=1) Share (%)
+---------------------------------------------------------------------------------------------------------
+  8 |             146.06 |                    33.84 |                 0.001843
+ 12 |              365.1 |                    28.53 |                0.0005125
+ 16 |             835.18 |                    31.09 |                 0.000387
+ 20 |            1654.88 |                    25.09 |                0.0001527
+ 24 |            2580.91 |                    23.81 |                 5.251e-5
+
+================================================================================
+CELL 78 EXECUTION COMPLETE
+================================================================================

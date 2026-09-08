@@ -35,7 +35,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     Pi_2   = 0.33842565,  (L_2 / R_2)^2 = 0.00016488694
     Asymmetry H_3 / H_2: Predicted = 1.1564422, Actual = 1.1564422, Residual = 5.094e-52
 
---- DIMENSION N = 12 (Elapsed: 0.99s) ---
+--- DIMENSION N = 12 (Elapsed: 1.01s) ---
   [Test A] Outer Stieltjes Factor Pi_j Across Bound Modes:
      j |        alpha_j |         zeta_j |           Pi_j |       Pi_zeros |       Pi_evals
     -------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     Pi_2   = 0.28527484,  (L_2 / R_2)^2 = 0.00010456331
     Asymmetry H_3 / H_2: Predicted = 1.2570215, Actual = 1.2570215, Residual = 4.718e-52
 
---- DIMENSION N = 16 (Elapsed: 1.85s) ---
+--- DIMENSION N = 16 (Elapsed: 1.90s) ---
   [Test A] Outer Stieltjes Factor Pi_j Across Bound Modes:
      j |        alpha_j |         zeta_j |           Pi_j |       Pi_zeros |       Pi_evals
     -------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     Pi_2   = 0.31087597,  (L_2 / R_2)^2 = 4.0577072e-5
     Asymmetry H_3 / H_2: Predicted = 1.3795628, Actual = 1.3795628, Residual = 5.619e-51
 
---- DIMENSION N = 20 (Elapsed: 3.14s) ---
+--- DIMENSION N = 20 (Elapsed: 3.31s) ---
   [Test A] Outer Stieltjes Factor Pi_j Across Bound Modes:
      j |        alpha_j |         zeta_j |           Pi_j |       Pi_zeros |       Pi_evals
     -------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     Pi_2   = 0.25087257,  (L_2 / R_2)^2 = 3.9500228e-5
     Asymmetry H_3 / H_2: Predicted = 1.4796127, Actual = 1.4796127, Residual = 6.054e-51
 
---- DIMENSION N = 24 (Elapsed: 4.79s) ---
+--- DIMENSION N = 24 (Elapsed: 5.24s) ---
   [Test A] Outer Stieltjes Factor Pi_j Across Bound Modes:
      j |        alpha_j |         zeta_j |           Pi_j |       Pi_zeros |       Pi_evals
     -------------------------------------------------------------------------------------
