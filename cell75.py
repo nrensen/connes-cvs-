@@ -334,12 +334,12 @@ def run_cell75() -> None:
         elapsed = time.time() - t0
 
         print(f"--- DIMENSION N = {N:2d} (Elapsed: {elapsed:.2f}s) ---")
-        print(f"  Total Norm ||d||^2:  Exact = {norm_expected}, Computed = {norm_d_sq:.10f}, Residual = {norm_err:.2e}")
-        print(f"  Exact Residue Max Rel Err:  {max(rel_err_exact):.2e}  (Certified across k = 0..{N})")
-        print(f"  Mode 2 Stieltjes Zero Alignment:  |z_2^* - mu_2| / (E_3 - E_2) = {local_balance[2]['align_gap']:.6e}")
-        print(f"  Mode 2 Pole Asymmetry:  H_3/H_2 direct = {local_balance[2]['direct_asym']:.6f}, calc = {local_balance[2]['calc_asym']:.6f}, res = {local_balance[2]['asym_res']:.2e}")
-        print(f"  Mode 2 Three-Factor Balance: alpha_2 = {local_balance[2]['alpha_j']:.2f}, (L_2/R_2)^2 = {(1/local_balance[2]['R_over_L'])**2:.4e} -> {local_balance[2]['direct_asym']:.4f}")
-        print(f"  Odd-Spectrum Surrogate Discrepancy: d_2^2 / d_2^{{2,odd}} = {ratio_odd[2]:.6f}, d_3^2 / d_3^{{2,odd}} = {ratio_odd[3]:.6f}")
+        print(f"  Total Norm ||d||^2:  Exact = {int(norm_expected)}, Computed = {float(norm_d_sq):.10f}, Residual = {float(norm_err):.2e}")
+        print(f"  Exact Residue Max Rel Err:  {float(max(rel_err_exact)):.2e}  (Certified across k = 0..{N})")
+        print(f"  Mode 2 Stieltjes Zero Alignment:  |z_2^* - mu_2| / (E_3 - E_2) = {float(local_balance[2]['align_gap']):.6e}")
+        print(f"  Mode 2 Pole Asymmetry:  H_3/H_2 direct = {float(local_balance[2]['direct_asym']):.6f}, calc = {float(local_balance[2]['calc_asym']):.6f}, res = {float(local_balance[2]['asym_res']):.2e}")
+        print(f"  Mode 2 Three-Factor Balance: alpha_2 = {float(local_balance[2]['alpha_j']):.2f}, (L_2/R_2)^2 = {float((1/local_balance[2]['R_over_L'])**2):.4e} -> {float(local_balance[2]['direct_asym']):.4f}")
+        print(f"  Odd-Spectrum Surrogate Discrepancy: d_2^2 / d_2^{{2,odd}} = {float(ratio_odd[2]):.6f}, d_3^2 / d_3^{{2,odd}} = {float(ratio_odd[3]):.6f}")
         print()
 
         synthesis_records.append({
