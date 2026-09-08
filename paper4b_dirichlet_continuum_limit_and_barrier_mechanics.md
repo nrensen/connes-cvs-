@@ -3300,6 +3300,11 @@ The high-dimension stress test across $N \in \{36, \dots, 56\}$ in `cell92.out` 
    paired with Cauchy convergence of the projector sequence $\|P_J^{(N+4)} - \widetilde{P}_J^{(N)}\|_{\mathrm{op}} \to 0$.
 5. **Strategic Advance to Milestone M39 (`cell93.py`):**
    Milestone M39 audits spectral projector Cauchy convergence $\|\Delta P_K\|_{\mathrm{op}}$ for $K \in \{10, 11, 12, 13\}$, tracks the prominence ratio $\Gamma_{11}(N)$, directly contrasts competing hypotheses $\mathrm{H}_{\mathrm{gap}}(10)$ vs $\mathrm{H}_{\mathrm{gap}}(11)$, and evaluates subspace complementary tilt $\|(I - \widetilde{P}_{11}^{(N)}) P_{11}^{(N+4)}\|_{\mathrm{op}}$ across higher dimensions $N \in \{44, \dots, 64\}$.
+6. **High-Throughput Large-$N$ Stress Test across Extended Dimensions (Milestone M40, `cell94.py`):**
+   To resolve whether the boundary gap $g_{11}$ and the low-energy projector $P_{11}$ survive into the large-$N$ regime ($N$ in the hundreds), Milestone M40 deploys a high-throughput overnight stress test across $N \in \{64, 80, 96, 112, \dots, 256\}$ with uniform dimension steps $\Delta N = 16$. This experiment tracks:
+   - Boundary gaps $g_{10}, g_{11}, g_{12}, g_{13}$ and prominence ratio $\Gamma_{11}(N) = g_{11} / \max(g_{10}, g_{12})$ as a descriptive stress-test metric.
+   - Projector Cauchy increments $\|\Delta P_K\|_{\mathrm{op}}$ for $K \in \{10, 11, 12\}$ over uniform dimension intervals.
+   - Descriptive local logarithmic slopes $s_{11}(N_1, N_2) = -\frac{\log[g_{11}(N_2)/g_{11}(N_1)]}{\log(N_2/N_1)}$ and $s_{E11}(N_1, N_2)$ (without curve fitting) to distinguish between three core asymptotic possibilities: a genuine positive limiting plateau (Scenario A), slow power-law drift (Scenario B), or pre-asymptotic collapse (Scenario C).
 
 ---
 
@@ -3513,6 +3518,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Boundary Cluster Dynamics, Individual Overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, Gaps $g_j$, & Projector Enclosure) | Audit of individual mode overlaps $|\langle u_j^{(N)}, u_j^{(N+4)} \rangle|$, boundary gaps $g_{10}, \dots, g_{13}$, and projector convergence $K \in \{10, \dots, 13\}$ across $N \in \{20, \dots, 44\}$ | `cell91.py` | `cell91.out` |
 | Section 8.25 (Boundary-Gap Stress Test at Extended Dimensions, Ritz Residuals $r_j$, & Decoupling Persistence) | Stress test of boundary gap $g_{11}(N) = E_{12}-E_{11}$, embedded Ritz residuals $r_{11}, r_{12}$, and decoupling persistence across $N \in \{36, \dots, 56\}$ | `cell92.py` | `cell92.out` |
 | Section 8.25 (Spectral Projector Convergence, Gap Prominence $\Gamma_{11}$, & Extended Sweeps) | Audit of projector Cauchy differences $\|\Delta P_K\|_{\mathrm{op}}$, gap prominence $\Gamma_{11} = \frac{g_{11}}{\max(g_{10}, g_{12})}$, and competing hypotheses $\mathrm{H}_{\mathrm{gap}}(10)$ vs $\mathrm{H}_{\mathrm{gap}}(11)$ across $N \in \{44, \dots, 64\}$ | `cell93.py` | `cell93.out` |
+| Section 8.25 (High-Throughput Large-$N$ Boundary Gap & Projector Convergence Stress Test) | Overnight stress test of boundary gaps $g_{10} \dots g_{13}$, prominence ratio $\Gamma_{11}$, descriptive logarithmic slopes $s_{11}, s_{E11}$, and projector Cauchy convergence across $N \in \{64, \dots, 256\}$ | `cell94.py` | `cell94.out` |
 
 
 ---
