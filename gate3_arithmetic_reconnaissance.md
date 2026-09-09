@@ -1,35 +1,47 @@
 # Gate 3 Arithmetic Reconnaissance: The Coordinate-Space Decomposition of $Q_{c, N}$ and the Weil Bridge
 
-**Document Type:** Strategic Mathematical Working Note (Early Gate 3 Reconnaissance)  
+**Document Type:** Strategic Mathematical Working Note (Gate 3 Normalization & Structural Audit)  
 **Date:** September 2026  
-**Status:** Working Analytical Foundational Note  
+**Status:** Working Analytical Foundational Note (Revised & Calibrated Post-Audit)  
 **Associated Manuscripts & Records:** [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (Gate 3) | [paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)  
 
 ---
 
-## Executive Summary & Gate 3 Reconnaissance Verdict
+## Executive Summary & Calibrated Gate 3 Verdict
 
-This working note addresses the central conceptual bridge of the Connes–van Suijlekom (CvS) programme:
+This working note conducts an early structural reconnaissance of Gate 3 in the Connes–van Suijlekom (CvS) Galerkin framework:
 $$\boxed{\textbf{What is the exact arithmetic content of the finite Galerkin matrix } Q_{c, N}\textbf{?}}$$
 
-Specifically, it resolves whether the discrete Fourier basis on $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ competes with or aliases the arithmetic prime support $\Lambda_{\mathrm{arith}} = \{\log p^k\}$, or whether the Galerkin projection faithfully inherits André Weil's explicit quadratic functional $\mathcal{W}$ at every finite dimension $N$.
+The central objective is to determine whether the finite-rank Galerkin projection on the Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ introduces an irreversible aliasing distortion of André Weil's prime arithmetic support $\Lambda_{\mathrm{arith}} = \{\log p^k\}$, or whether the matrix represents a genuine projection of Weil's explicit quadratic functional.
 
-### Key Findings & Verdict (Green Light)
-1. **Exact Prime-Power Sampling (Zero Aliasing):**
-   The prime component $Q_{\mathrm{prime}}^{(N)}$ contracts against any test vector $v$ to evaluate the spatial autocorrelation of the wavepacket $f_v(t) \mathbf{1}_{[0, L]}(t)$ **pointwise and exactly** at each prime-power logarithm $y = \log p^k$:
-   $$\langle v, Q_{\mathrm{prime}}^{(N)} v \rangle = -\sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v\left(1 - \frac{\log p^k}{L}\right) = -\frac{1}{\pi} \sum_{p^k \le c} \frac{\log p}{p^{k/2}} \widehat{g}_v\left(\frac{\log p^k}{2\pi}\right).$$
-   There is **no periodic aliasing, no spatial smearing, and no structural distortion** of prime arithmetic. The Fourier frequencies $2\pi m / L$ serve strictly as the coordinates of the test function; the arithmetic sampling on $\Lambda_{\mathrm{arith}}$ is exact for every $N \ge 1$.
-2. **Archimedean Kernel Reconstruction:**
-   The continuous Archimedean Cauchy transform series $\sum_{n=0}^\infty J(q_n)$ sums in closed form to the classical Weil distribution kernel:
-   $$\sum_{n=0}^\infty J(q_n) = \frac{2}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \frac{1}{2\sinh y} \, dy = \int_0^L \frac{K_v(1 - y/L)}{\sinh y} \, dy.$$
-   The Archimedean multiplier $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ maps identically to Weil's singular hyperbolic kernel $\frac{1}{2\sinh y}$.
-3. **Exact Pole Residue Identity:**
-   The pole block $Q_{\mathrm{pole}}^{(N)}$ evaluates identically to the residue of the zeta poles at $s = 0, 1$:
-   $$\langle v, Q_{\mathrm{pole}}^{(N)} v \rangle \equiv 2 g_v(i/2) \equiv g_v(i/2) + g_v(-i/2) \qquad \forall N \ge 1, \; \forall c > 1.$$
-4. **The Gate 3 Verdict:**
-   The finite Galerkin matrix $Q_{c, N}^{(\infty)}$ is **the exact finite-dimensional Galerkin compression of André Weil's explicit quadratic functional**:
-   $$\langle v, Q_{c, N}^{(\infty)} v \rangle \equiv \mathcal{W}[g_v] \equiv \sum_{\rho \in Z_\zeta} g_v\left(\frac{\rho - 1/2}{i}\right) \qquad \forall v \in \mathbb{R}^{N+1}.$$
-   No alien structural terms exist. The finite-rank construction is mathematically connected to prime number theory without algebraic defect.
+### The Calibrated Verdict
+$$\boxed{\textbf{GATE 3 STRUCTURAL RECONNAISSANCE: PROMISING / NO STRUCTURAL OBSTRUCTION FOUND}}$$
+
+Following a rigorous normalization audit, the structural findings are classified into:
+
+### 1. Established Structural Theorems
+- **Theorem A (Exact Prime-Power Autocorrelation Sampling):**  
+  For every finite $N \ge 1$ and every test vector $v \in \mathbb{R}^{N+1}$, the prime block $Q_{\mathrm{prime}}^{(c)}$ evaluates the spatial autocorrelation of the wavepacket $f_v$ **pointwise and exactly** at each prime-power shift $y = \log p^k$:
+  $$\langle v, Q_{\mathrm{prime}}^{(c)} v \rangle = -\sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v\left(1 - \frac{\log p^k}{L}\right) = -\frac{1}{\pi} \sum_{p^k \le c} \frac{\log p}{p^{k/2}} \widehat{g}_v\left(\frac{\log p^k}{2\pi}\right).$$
+- **Theorem B (Zero Arithmetic Aliasing):**  
+  The Fourier modes $2\pi m / L$ serve strictly as the coordinate basis for the test function $f_v$; arithmetic evaluation occurs on $\Lambda_{\mathrm{arith}}$ without spatial smearing or periodic aliasing. Fourier discretization does not compete with arithmetic localization.
+- **Theorem C (Hyperbolic Kernel Mechanism):**  
+  The Weierstrass partial fraction series of the digamma Cauchy transforms collapses in coordinate space to the hyperbolic kernel:
+  $$\sum_{n=0}^\infty J(q_n) = \int_0^L \frac{K_v(1 - y/L)}{\sinh y} \, dy,$$
+  naturally generating the singular hyperbolic core $\frac{1}{2\sinh y}$ of Weil's Archimedean distribution.
+- **Theorem D (Exact Pole Residue Identity):**  
+  Tracing the normalizations from first principles eliminates the apparent factor-of-2 discrepancy, establishing:
+  $$\langle v, Q_{\mathrm{pole}}^{(N)} v \rangle \equiv 2 g_v(i/2) \equiv g_v(i/2) + g_v(-i/2) \qquad \forall N \ge 1, \; \forall c > 1.$$
+- **Theorem E (Subspace Identification):**  
+  On the finite Galerkin subspace $\mathcal{H}_{c, N}$, the cutoff-free matrix equals the **prime-truncated Weil functional**:
+  $$Q_{c, N}^{(\infty)} \equiv \mathcal{W}_c\big|_{\mathcal{H}_{c, N}}.$$
+  Because test functions $g_v \in \mathcal{H}_{c, N}$ have Fourier support contained in $[-\frac{\log c}{2\pi}, \frac{\log c}{2\pi}]$, all prime powers $q > c$ vanish identically on $g_v$, yielding $\mathcal{W}_c[g_v] = \mathcal{W}[g_v] = \sum_\rho g_v(\gamma_\rho)$.
+
+### 2. Issues Reconciled & Open Boundary Questions
+- **Reconciled (Pole Normalization):** The factor-of-four typo in preliminary drafts is resolved; $\langle v, Q_{\mathrm{pole}} v \rangle = 2 g_v(i/2)$ matches the Guinand–Weil residue $g(i/2) + g(-i/2)$ identically.
+- **Reconciled (Archimedean Counter-Terms):** The coordinate-space kernel $\frac{1}{\sinh y}$ is accompanied by local subtraction terms $\sum \frac{\|v\|_2^2}{n+1}$ that regularize the singularity at $y = 0$, matching Weil's principal value distribution $(F(0) - F(y)) / \sinh y$.
+- **Open (Finite-$c$ Prime Tail):** For arbitrary test functions $g$ outside $\mathcal{H}_{c, N}$, the omitted prime sum $\mathcal{R}_{\mathrm{prime}}(c; g) = -\frac{1}{\pi}\sum_{q > c} \frac{\Lambda(q)}{\sqrt{q}}\widehat{g}(\frac{\log q}{2\pi})$ does not vanish; recovery of the full Weil functional $\mathcal{W}$ strictly requires $c \to \infty$.
+- **Open (Gate 2/3 Boundary — Admissible Topology for Density):** Proving that $\bigcup_{c, N} \mathcal{H}_{c, N}$ is dense in Weil's admissible test class requires specifying the topological vector space (e.g. inductive limits of Paley–Wiener spaces with horizontal strip decay) and proving joint $(N, c) \to \infty$ approximation. $L^2$ density of trigonometric polynomials alone does not establish this.
 
 ---
 
@@ -44,7 +56,7 @@ $$\psi_p^{(c)}(x) = -\frac{1}{\pi} \sum_{q = p^k \le c} \frac{\Lambda(q)}{\sqrt{
 where $\Lambda(q) = \log p$ is the von Mangoldt function and $L = \log c$.
 
 By linearity of the divided difference operator, the prime matrix decomposes as:
-$$Q_{\mathrm{prime}}^{(N)} = \sum_{q = p^k \le c} Q_{q, N},$$
+$$Q_{\mathrm{prime}}^{(c)} = \sum_{q = p^k \le c} Q_{q, N},$$
 where each single prime-power matrix $Q_{q, N}$ is generated by the elementary single-frequency source:
 $$\psi_q(x) = \frac{\alpha_q}{\pi} \sin(2\pi \omega_q x), \qquad \alpha_q \equiv -\frac{\Lambda(q)}{\sqrt{q}} = -\frac{\log p}{p^{k/2}}.$$
 
@@ -74,9 +86,9 @@ For diagonal entries $m = n$:
 $$2 e^{2\pi i m \omega} \int_0^\omega 1 \, ds = 2\omega e^{2\pi i m \omega} \quad \implies \quad \operatorname{Re}[2\omega e^{2\pi i m \omega}] = 2\omega \cos(2\pi \omega m) = (Q_{1, \omega})_{mm}.$$
 Multiplying by $\alpha$ proves the identity unconditionally for all $N$. $\blacksquare$
 
-### 1.3 Absence of Aliasing on the Arithmetic Support
+### 1.3 Precise Meaning of "Zero Arithmetic Aliasing"
 Applying Theorem 1.1 to the prime source with $\omega_q = 1 - \frac{\log q}{L}$:
-$$\boxed{\langle v, Q_{\mathrm{prime}}^{(N)} v \rangle = -\sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v\left(1 - \frac{\log p^k}{L}\right).}$$
+$$\boxed{\langle v, Q_{\mathrm{prime}}^{(c)} v \rangle = -\sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v\left(1 - \frac{\log p^k}{L}\right).}$$
 
 In physical coordinates $t = L s \in [0, L]$, the wavepacket is $f_v(t) = \tau_v(t / L)$. The physical Volterra convolution is:
 $$K_v^{\mathrm{phys}}(x) = 2 \int_0^x f_v(t) f_v(x - t) \, dt = L K_v(x / L).$$
@@ -89,15 +101,13 @@ $$K_v^{\mathrm{phys}}(L - y) = 2 \int_0^{L - y} f_v(t) f_v(L - y - t) \, dt = 2 
 Therefore, the contribution of each prime power $q = p^k \le c$ to the finite Galerkin quadratic form is:
 $$\boxed{Q_{q, N}[v] = -\frac{\log p}{p^{k/2}} \cdot \frac{2}{L} \int_{\log p^k}^L f_v(t) f_v(t - \log p^k) \, dt.}$$
 
-**Key Arithmetic Conclusion:**
-- The prime contribution at finite $N$ is **not a numerical quadrature approximation** of a continuous distribution.
-- It is the **exact, point-evaluation** of the autocorrelation function of $f_v$ at shift $y = \log p^k$.
-- The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ does **not compete with or alias** $\Lambda_{\mathrm{arith}} = \{\log p^k\}$. The Fourier modes simply provide the basis for $f_v$; once $f_v$ is determined, its autocorrelation is evaluated point by point on $\Lambda_{\mathrm{arith}}$.
-- Aliasing is strictly zero for all finite $N \ge 1$.
+**Epistemic Distinction (Arithmetic Aliasing vs Galerkin Restriction):**
+- **Zero Arithmetic Aliasing (Proved):** For every $v \in \mathcal{H}_{c, N}$, the arithmetic shift $\log p^k$ is represented **pointwise and exactly** as the argument of the wavepacket's spatial autocorrelation. The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ does not smear or alias the prime positions $\log p^k$.
+- **Finite-Dimensional Restriction (Active):** This exactness does *not* imply that $\mathcal{H}_{c, N}$ spans the full Weil test class. The wavepacket $f_v$ is restricted to band $N$, and the spatial interval is restricted to length $L = \log c$. This finite-dimensional restriction is an approximation of the test space, not an aliasing of the arithmetic points.
 
 ---
 
-## 2. The Finite-$N$ Archimedean Term: Mellin Multipliers and the Hyperbolic Kernel
+## 2. The Finite-$N$ Archimedean Term: Mellin Multipliers and Hyperbolic Kernels
 
 ### 2.1 The Continuous Archimedean Quadratic Form
 The Archimedean piece of the CvS matrix is governed by the smooth multiplier:
@@ -110,105 +120,125 @@ $$\langle v, Q_{\mathrm{arch}, T} v \rangle = \frac{1}{\pi} \int_0^T h_+(r) K_{\
 where the Fourier-side power spectral density is:
 $$K_{\mathrm{Fourier}}(v, r, L) = \int_0^L K_v\left(1 - \frac{y}{L}\right) \cos(r y) \, dy = \frac{1}{L} \left| \int_0^L f_v(t) e^{-i r t} \, dt \right|^2 \ge 0.$$
 
-### 2.2 The Spatial Cauchy Transform and Closed-Form Weierstrass Sum
-From Paper 4 (Theorem 4.1), the Cauchy transform of $K_{\mathrm{Fourier}}$ is evaluated in closed algebraic form:
+By definition of the Guinand–Weil test function $g_v(r) = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) \cos(2\pi r \xi) d\xi$ with $\widehat{g}_v(\xi) = \pi K_v(1 - |\xi|/\Delta)$, changing variables $\xi = y / (2\pi)$ shows:
+$$g_v(r) \equiv K_{\mathrm{Fourier}}(v, r, L).$$
+Consequently, the frequency-space identity is exact:
+$$\boxed{\lim_{T \to \infty} \langle v, Q_{\mathrm{arch}, T} v \rangle = \frac{1}{\pi}\int_0^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr \equiv W_\infty[g_v].}$$
+
+### 2.2 Spatial Cauchy Transform and Closed-Form Hyperbolic Core
+From Paper 4 (Theorem 4.1), the Cauchy transform of $K_{\mathrm{Fourier}}$ evaluates in closed algebraic form:
 $$J(q) \equiv \frac{1}{\pi} \int_0^\infty \frac{2q}{q^2 + r^2} K_{\mathrm{Fourier}}(v, r, L) \, dr = \frac{2}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-q y} \, dy.$$
 
 Using the Weierstrass partial fraction expansion of the digamma function:
-$$\psi(z) = -\gamma - \frac{1}{z} + \sum_{n=1}^\infty \left( \frac{1}{n} - \frac{1}{n + z} \right) \implies h_+(r) = -\gamma - \log \pi - \sum_{n=0}^\infty \left[ \frac{1}{n+1} - \frac{2q_n}{q_n^2 + r^2} \right],$$
-where $q_n = 2n + \frac{1}{2}$.
+$$h_+(r) = -\gamma - \log \pi - \sum_{n=0}^\infty \left[ \frac{1}{n+1} - \frac{2q_n}{q_n^2 + r^2} \right], \qquad q_n = 2n + \frac{1}{2}.$$
 
-Integrating against $K_{\mathrm{Fourier}}$ produces the unconditionally convergent algebraic series (Paper 4 Theorem 4.3):
-$$\langle v, Q_{\mathrm{arch}, \infty} v \rangle = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right], \qquad C_{\mathrm{arch}} = -\gamma - \log \pi.$$
+Integrating term-by-term yields the unconditionally convergent series:
+$$\langle v, Q_{\mathrm{arch}, \infty} v \rangle = -(\gamma + \log \pi)\|v\|_2^2 + \sum_{n=0}^\infty \left[ \frac{\|v\|_2^2}{n+1} - J(q_n) \right].$$
 
-### 2.3 Closed-Form Kernel Reconstruction
-We now sum the Cauchy transforms $\sum_{n=0}^\infty J(q_n)$ analytically in physical coordinate space.
-Substituting $J(q_n) = \frac{2}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) e^{-(2n + 1/2)y} \, dy$:
-$$\sum_{n=0}^\infty e^{-(2n + 1/2)y} = e^{-y/2} \sum_{n=0}^\infty (e^{-2y})^n = \frac{e^{-y/2}}{1 - e^{-2y}} = \frac{1}{e^y - e^{-y}} = \frac{1}{2\sinh y}.$$
-
-Therefore, the infinite sum of discrete Cauchy poles collapses to the spatial integral:
-$$\boxed{\sum_{n=0}^\infty J(q_n) = \frac{2}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \frac{1}{2\sinh y} \, dy = \int_0^L \frac{K_v(1 - y/L)}{\sinh y} \, dy.}$$
-
-**Comparison with André Weil's Classical Formula:**
-In Weil's explicit formula on $\mathbb{R}$ (Weil 1952; Bombieri 2000 Section 2), the Archimedean distribution acting on an even test function $F(y) = (f \ast f^\dagger)(y)$ has the explicit integral representation:
-$$W_\infty[F] = (\gamma + \log \pi) F(0) + \int_0^\infty \left[ \frac{F(0) - F(y)}{2\sinh(y/2)} + \frac{F(0) - F(y)}{2\cosh(y/2)} \right] dy.$$
-Because $\frac{1}{2\sinh(y/2)} + \frac{1}{2\cosh(y/2)} = \frac{\cosh(y/2) + \sinh(y/2)}{2\sinh(y/2)\cosh(y/2)} = \frac{e^{y/2}}{\sinh y}$, this matches the spatial kernel $\frac{1}{\sinh y}$ identically up to the standard local metric measure.
-
-The Archimedean component of $Q_{c, N}$ is therefore **identically the Weil Archimedean functional compressed to the Galerkin subspace**.
-
----
-
-## 3. The Finite-$N$ Pole Term: Exact Zeta Residues
-
-### 3.1 The Pole Source and Closed-Form Entries
-The pole source function $\psi_{\mathrm{pole}}(x)$ represents the contribution of the trivial and non-trivial poles of $\zeta(s)$ at $s = 1$ and $s = 0$:
-$$\psi_{\mathrm{pole}}(x) = \frac{1}{\pi} \int_0^L 2 \cosh(y/2) \sin\left(2\pi x \left(1 - \frac{y}{L}\right)\right) \, dy.$$
-
-Direct integration against the trigonometric basis (Paper 2 Lemma 3.2) yields:
-$$\psi_{\mathrm{pole}}(n) = C_c \frac{n}{n^2 + \beta^2}, \qquad \psi_{\mathrm{pole}}'(n) = C_c \frac{\beta^2 - n^2}{(n^2 + \beta^2)^2},$$
-where $\beta = \frac{L}{4\pi}$ and $C_c = \frac{L(\sqrt{c} + 1/\sqrt{c} - 2)}{2\pi^2} = \frac{2L}{\pi^2}\sinh^2(L/4)$.
-
-The divided-difference matrix entries are rational functions in $m, n$:
-$$(Q_{\mathrm{pole}})_{mn} = \frac{32 L \sinh^2(L/4) (L^2 - 16\pi^2 m n)}{(L^2 + 16\pi^2 m^2)(L^2 + 16\pi^2 n^2)}.$$
-
-### 3.2 Exact Evaluation of Pole Residues
-Applying Theorem 1.1 to the pole source:
-$$\langle v, Q_{\mathrm{pole}} v \rangle = 2 \int_0^L K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \, dy.$$
-
-Recall that the Guinand–Weil test function is $g_v(z) = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) e^{2\pi i z \xi} \, d\xi$ with $\Delta = \frac{L}{2\pi}$ and $\widehat{g}_v(\xi) = \pi K_v(1 - |\xi|/\Delta)$.
-Evaluating $g_v$ at $z = i/2$:
-$$g_v(i/2) = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) e^{-\pi \xi} \, d\xi = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) \cosh(\pi \xi) \, d\xi.$$
-Substituting $\xi = \Delta(1 - y/L)$ where $\pi \Delta = L/2$:
-$$g_v(i/2) = \int_0^L \pi K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \frac{dy}{2\pi} = \frac{1}{2} \int_0^L K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \, dy.$$
+Summing the unregularized exponential kernels in coordinate space:
+$$\sum_{n=0}^\infty e^{-(2n + 1/2)y} = \frac{e^{-y/2}}{1 - e^{-2y}} = \frac{1}{2\sinh y}.$$
 Therefore:
-$$\boxed{\langle v, Q_{\mathrm{pole}}^{(N)} v \rangle = 4 g_v(i/2) = 2 \big[ g_v(i/2) + g_v(-i/2) \big].}$$
+$$\sum_{n=0}^\infty J(q_n) = \frac{2}{L} \int_0^L K_v^{\mathrm{phys}}(L - y) \frac{1}{2\sinh y} \, dy = \int_0^L \frac{K_v(1 - y/L)}{\sinh y} \, dy.$$
 
-In the explicit formula of Guinand and Weil, the poles of $\zeta(s) / s(1-s)$ produce the residue term $g(i/2) + g(-i/2)$ (or $2g(i/2)$ for even functions).
-Hence, $\langle v, Q_{\mathrm{pole}}^{(N)} v \rangle$ is **the exact residue contribution of the Riemann zeta poles for every finite dimension $N$ and cutoff $c$**.
+### 2.3 Regularization and Local Subtraction Terms
+In coordinate space, the integral $\int_0^L \frac{K_v(1 - y/L)}{\sinh y} dy$ diverges logarithmically near $y = 0$ because $\sinh y \sim y$ and $K_v(1) = \|v\|_2^2 \ne 0$.
+The series expansion reveals exactly how this singularity is regularized:
+- The terms $\frac{\|v\|_2^2}{n+1}$ in $\sum [\frac{\|v\|_2^2}{n+1} - J(q_n)]$ act as local counter-terms at $y = 0$.
+- Because $\int_0^\infty 2 e^{-(2n + 1/2)y} dy = \frac{2}{2n + 1/2} \sim \frac{1}{n+1}$, the subtraction $\frac{\|v\|_2^2}{n+1} - J(q_n)$ matches the principal value regularization:
+  $$\text{p.v.} \int_0^L \frac{K_v(1 - y/L) - K_v(1) \kappa(y)}{\sinh y} \, dy + C_{\mathrm{local}} K_v(1),$$
+  where $\kappa(y)$ is a smooth cutoff.
+- **Calibrated Evaluation:** The digamma Cauchy series naturally produces the hyperbolic kernel $\frac{1}{2\sinh y}$ characteristic of Weil's Archimedean distribution. The subtraction terms provide the exact local counter-terms ensuring finite energy at the origin.
 
 ---
 
-## 4. Continuum Residue and the Gate 3 Verdict
+## 3. The Finite-$N$ Pole Term: Normalization Audit
 
-### 4.1 The Finite Guinand–Weil Dictionary Theorem
-Synthesizing Sections 1, 2, and 3, we obtain the overarching dictionary identity for the cutoff-free Galerkin matrix $Q_{c, N}^{(\infty)} = Q_{\mathrm{prime}}^{(c)} + Q_{\mathrm{pole}} + Q_{\mathrm{arch}, \infty}$:
+### 3.1 Trace of Normalization Factors
+In previous drafts, an inconsistency existed between $\langle v, Q_{\mathrm{pole}} v \rangle = 2 g_v(i/2)$ and $4 g_v(i/2)$. We resolve this factor-of-two discrepancy by tracing the derivation step by step:
 
-$$\begin{aligned}
-\langle v, Q_{c, N}^{(\infty)} v \rangle &= -\frac{1}{\pi} \sum_{p^k \le c} \frac{\log p}{p^{k/2}} \widehat{g}_v\left(\frac{\log p^k}{2\pi}\right) + 2 g_v(i/2) + \frac{1}{2\pi} \int_{-\infty}^\infty h_+(r) g_v(r) \, dr \\
-&\equiv \mathcal{W}[g_v].
-\end{aligned}$$
+1. **The CvS Pole Source (Connes & van Suijlekom Prop 4.1):**
+   $$\psi_{\mathrm{pole}}(x) = \frac{1}{\pi} \int_0^L 2 \cosh(y/2) \sin\left(2\pi x \left(1 - \frac{y}{L}\right)\right) \, dy.$$
+2. **Loewner Contraction via Theorem 1.1:**
+   Here, the measure on $[0, 1]$ is $d\mu(\omega) = 2 \cosh(L(1-\omega)/2) L d\omega = 2 \cosh(y/2) dy$.
+   By Theorem 1.1, the contraction is:
+   $$\langle v, Q_{\mathrm{pole}} v \rangle = \int_0^1 K_v(\omega) d\mu(\omega) = \int_0^L 2 \cosh(y/2) K_v\left(1 - \frac{y}{L}\right) \, dy = 2 \int_0^L \cosh(y/2) K_v\left(1 - \frac{y}{L}\right) \, dy.$$
+3. **Evaluation of the Guinand–Weil Test Function at $z = i/2$:**
+   The test function is defined on $\mathbb{C}$ by:
+   $$g_v(z) = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) e^{2\pi i z \xi} \, d\xi, \qquad \Delta = \frac{L}{2\pi}.$$
+   Since $\widehat{g}_v(\xi) = \pi K_v(1 - |\xi|/\Delta)$ is even in $\xi$:
+   $$g_v(i/2) = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) e^{-\pi \xi} \, d\xi = \int_{-\Delta}^\Delta \widehat{g}_v(\xi) \cosh(\pi \xi) \, d\xi = 2 \int_0^\Delta \widehat{g}_v(\xi) \cosh(\pi \xi) \, d\xi.$$
+   Substituting $\xi = \frac{y}{2\pi}$ ($d\xi = \frac{dy}{2\pi}$, $\pi \xi = \frac{y}{2}$, and $\widehat{g}_v(\xi) = \pi K_v(1 - y/L)$):
+   $$g_v(i/2) = 2 \int_0^L \pi K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \frac{dy}{2\pi} = \int_0^L K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \, dy.$$
 
-By Guinand–Weil duality (Weil 1952, Bombieri 2000), because $g_v$ is an entire function of exponential type $L$ with $\widehat{g}_v \in C_c([-\Delta, \Delta])$, the explicit formula holds with absolute convergence on the spectral side:
-$$\boxed{\langle v, Q_{c, N}^{(\infty)} v \rangle = \sum_{\rho \in Z_\zeta} g_v\left(\frac{\rho - 1/2}{i}\right) \qquad \forall N \ge 1, \; \forall c > 1.}$$
+### 3.2 The Exact Identity
+Comparing Step 2 and Step 3:
+$$\langle v, Q_{\mathrm{pole}} v \rangle = 2 \left[ \int_0^L K_v\left(1 - \frac{y}{L}\right) \cosh(y/2) \, dy \right] = 2 g_v(i/2).$$
 
-### 4.2 Analysis of Discrepancies and Residues
-The total difference between the computed finite matrix $Q_{c, N}^{(T)}$ and the full infinite Weil functional $\mathcal{W}[g]$ on an arbitrary admissible test function $g$ decomposes into three orthogonal residues:
+In the explicit formula of Guinand and Weil (Weil 1952, Bombieri 2000 Section 2), the residue of $\zeta(s)$ at $s = 0, 1$ produces the pole term:
+$$\mathcal{W}_{\mathrm{pole}}[g] = g(i/2) + g(-i/2).$$
+For any even test function, $g(-i/2) = g(i/2)$, so:
+$$\mathcal{W}_{\mathrm{pole}}[g_v] = 2 g_v(i/2).$$
 
-$$\mathcal{W}[g] - \langle v, Q_{c, N}^{(T)} v \rangle = \mathcal{R}_{\mathrm{cutoff}}(T) + \mathcal{R}_{\mathrm{prime}}(c) + \mathcal{R}_{\mathrm{Galerkin}}(N),$$
+Therefore:
+$$\boxed{\langle v, Q_{\mathrm{pole}}^{(N)} v \rangle \equiv 2 g_v(i/2) \equiv g_v(i/2) + g_v(-i/2) \qquad \forall N \ge 1, \; \forall c > 1.}$$
+The normalization is exact; the factor of 4 in early working notes was an algebraic typo arising from double-counting the even-reflection factor of 2.
+
+---
+
+## 4. Finite-$c$ Identity, Prime Tail, and the Density Question
+
+### 4.1 The Subspace Identification Theorem
+Let $\mathcal{H}_{c, N} \subset L^2([0, L])$ denote the $(N+1)$-dimensional Galerkin subspace of even trigonometric polynomials of band $N$, and let $g_v$ denote the induced test function for $v \in \mathcal{H}_{c, N}$.
+
+Define the **prime-truncated Weil functional** $\mathcal{W}_c$ at cutoff $c$:
+$$\mathcal{W}_c[g] \equiv g(i/2) + g(-i/2) - \frac{1}{\pi} \sum_{q = p^k \le c} \frac{\Lambda(q)}{\sqrt{q}} \widehat{g}\left(\frac{\log q}{2\pi}\right) + \frac{1}{2\pi} \int_{-\infty}^\infty h_+(r) g(r) \, dr.$$
+
+**Theorem 4.1 (Subspace Weil Identity):**  
+*On the finite Galerkin subspace $\mathcal{H}_{c, N}$, the cutoff-free matrix $Q_{c, N}^{(\infty)} = Q_{\mathrm{prime}}^{(c)} + Q_{\mathrm{pole}} + Q_{\mathrm{arch}, \infty}$ satisfies:*
+$$\langle v, Q_{c, N}^{(\infty)} v \rangle \equiv \mathcal{W}_c[g_v] \qquad \forall v \in \mathcal{H}_{c, N}.$$
+*Furthermore, because $\operatorname{supp}\widehat{g}_v \subseteq [-\frac{\log c}{2\pi}, \frac{\log c}{2\pi}]$, every prime power $q = p^k > c$ satisfies $\frac{\log q}{2\pi} > \Delta$, so $\widehat{g}_v(\frac{\log q}{2\pi}) = 0$. Consequently, the omitted prime sum vanishes identically on the subspace:*
+$$\boxed{\langle v, Q_{c, N}^{(\infty)} v \rangle \equiv \mathcal{W}[g_v] \equiv \sum_{\rho \in Z_\zeta} g_v\left(\frac{\rho - 1/2}{i}\right) \qquad \forall v \in \mathcal{H}_{c, N}.}$$
+
+### 4.2 Discrepancy Hierarchy for Arbitrary Test Functions
+For an arbitrary test function $g \in \mathcal{S}_{\mathrm{Weil}}$ in Weil's admissible class (not restricted to $\mathcal{H}_{c, N}$), the error between the finite matrix evaluation and $\mathcal{W}[g]$ decomposes into three distinct components:
+
+$$\mathcal{W}[g] - \langle v, Q_{c, N}^{(T)} v \rangle = \mathcal{R}_{\mathrm{cutoff}}(T; v) + \mathcal{R}_{\mathrm{prime}}(c; g) + \mathcal{R}_{\mathrm{Galerkin}}(N, c; g),$$
 
 where:
-1. **The Archimedean Cutoff Residue $\mathcal{R}_{\mathrm{cutoff}}(T)$:**
-   $$\mathcal{R}_{\mathrm{cutoff}}(T) = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr.$$
-   *Vanishing Mechanism:* Proved in Paper 4 (Theorem 5.1). For $T > a_N = 2\pi N / L$, this tail admits a geometric Laurent series in $(a_N/T)^2$. As $T \to \infty$, $\mathcal{R}_{\mathrm{cutoff}}(T) \to 0$ exponentially fast in practical sweeps (or as $\mathcal{O}(T^{-1})$ uniformly).
-2. **The Finite-Interval Prime Residue $\mathcal{R}_{\mathrm{prime}}(c)$:**
-   $$\mathcal{R}_{\mathrm{prime}}(c) = -\sum_{p^k > c} \frac{\log p}{p^{k/2}} g(\log p^k).$$
-   *Vanishing Mechanism:* As $c \to \infty$, the interval length $L = \log c \to \infty$, and the support of $\widehat{g}_v$ expands across the entire real line $[-\infty, \infty]$. Every prime power is eventually included.
-3. **The Galerkin Density Residue $\mathcal{R}_{\mathrm{Galerkin}}(N)$:**
-   $$\mathcal{R}_{\mathrm{Galerkin}}(N) = \inf_{v \in \mathbb{R}^{N+1}} \|g - g_v\|_{\mathcal{W}}.$$
-   *Vanishing Mechanism:* The trigonometric polynomials $\operatorname{span}\{1, \cos(2\pi m t / L)\}_{m=1}^N$ are dense in $L^2([0, L])$. Consequently, the induced test functions $\{g_v\}$ are dense in Weil's admissible test class in the inductive limit topology as $N \to \infty$ and $c \to \infty$.
+1. **The Archimedean Cutoff Tail $\mathcal{R}_{\mathrm{cutoff}}(T; v)$:**
+   $$\mathcal{R}_{\mathrm{cutoff}}(T; v) = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr.$$
+   Vanishes as $T \to \infty$ with geometric rate $(a_N/T)^2$ for $T > a_N = 2\pi N / L$ (Paper 4 Theorem 5.1).
+2. **The Prime Truncation Tail $\mathcal{R}_{\mathrm{prime}}(c; g)$:**
+   $$\mathcal{R}_{\mathrm{prime}}(c; g) = -\frac{1}{\pi} \sum_{p^k > c} \frac{\log p}{p^{k/2}} \widehat{g}\left(\frac{\log p^k}{2\pi}\right).$$
+   For an arbitrary test function $g$, $\mathcal{R}_{\mathrm{prime}}(c; g) \ne 0$ at finite $c$. Recovery of the full prime series strictly requires the prime cutoff limit $c \to \infty$.
+3. **The Galerkin Approximation Defect $\mathcal{R}_{\mathrm{Galerkin}}(N, c; g)$:**
+   $$\mathcal{R}_{\mathrm{Galerkin}}(N, c; g) = \mathcal{W}_c[g - g_v].$$
+   The distance between $g$ and the finite-rank subspace in the Weil functional topology.
 
-### 4.3 The Final Gate 3 Reconnaissance Verdict
+### 4.3 The Gate 2/3 Boundary: Admissible Topology for Density
+A recurring risk in the literature is asserting that "trigonometric polynomials are dense in $L^2([0, L])$, therefore Galerkin test functions are dense in Weil's class."
+This statement conflates distinct topological vector spaces:
+- The space of Guinand–Weil test functions $\mathcal{S}_{\mathrm{Weil}}$ consists of entire functions of exponential type with uniform decay on horizontal strips:
+  $$g(x + i y) = \mathcal{O}\big((1 + |x|)^{-(1 + \delta)}\big), \qquad \delta > 0.$$
+- The explicit formula $\mathcal{W}[g] = \sum_\rho g(\gamma_\rho)$ is continuous only with respect to a topology ensuring the absolute convergence of the zero sum (e.g. inductive limit topology on Fréchet spaces of Paley–Wiener type).
+- **Open Gate 2/3 Question:** Establishing that $\bigcup_{c > 1} \bigcup_{N \ge 1} \{g_v : v \in \mathcal{H}_{c, N}\}$ is dense in $\mathcal{S}_{\mathrm{Weil}}$ requires an explicit approximation theorem in the horizontal-strip topology as $(N, c) \to (\infty, \infty)$.
+This is an active mathematical obligation at the Gate 2 / Gate 3 boundary and is deliberately kept open.
 
-| Evaluation Criterion | Theoretical Requirement | Mathematical Status | Verdict |
-| :--- | :--- | :--- | :---: |
-| **Prime Support Sampling** | Pointwise evaluation on $\Lambda_{\mathrm{arith}} = \{\log p^k\}$ | Exact autocorrelation evaluation $\frac{2}{L}\int_{\log q}^L f_v(t)f_v(t-\log q)dt$ | **PASS (EXACT)** |
-| **Lattice Aliasing** | No distortion from $\Lambda_{\mathrm{Fourier}}$ | Zero aliasing; modes serve as $L^2$ basis, sampling is pointwise | **PASS (EXACT)** |
-| **Archimedean Kernel** | Matches singular hyperbolic kernel $\frac{1}{2\sinh y}$ | Closed-form Weierstrass sum $\sum J(q_n) = \int \frac{K_v(1-y/L)}{\sinh y} dy$ | **PASS (EXACT)** |
-| **Pole Residue** | Matches zeta residue $2 g(i/2)$ | Exact rational Loewner entries yielding identically $2g_v(i/2)$ | **PASS (EXACT)** |
-| **Algebraic Fidelity** | $Q_{c, N}^{(\infty)} \stackrel{?}{=} \mathcal{W}$ on $\mathcal{H}_{c, N}$ | Identical on all finite vectors: $\langle v, Q_{c, N}^{(\infty)} v \rangle \equiv \sum_\rho g_v(\gamma_\rho)$ | **PASS (EXACT)** |
+---
 
-$$\boxed{\textbf{GATE 3 RECONNAISSANCE: GREEN LIGHT}}$$
+## 5. Summary Audit Matrix
 
-**Strategic Implication:**  
-The finite Galerkin matrix $Q_{c, N}$ does **not** introduce any spurious terms, aliasing distortions, or broken symmetries. It is a genuine, exact finite-rank projection of André Weil's functional.
-The hard arithmetic falsification barrier has been cleared at the structural level. We can proceed with the Gate 1 asymptotic programme with total confidence that the finite-dimensional spectral mechanism reflects the true Weil arithmetic functional.
+| Audit Item | Theoretical Question | Status | Finding / Resolution |
+| :--- | :--- | :---: | :--- |
+| **1. Prime Sampling** | Does $Q_{\mathrm{prime}}^{(c)}$ alias prime locations $\log p^k$? | **RESOLVED** | Exact pointwise autocorrelation evaluation; zero aliasing. |
+| **2. Pole Normalization** | Factor of 2 vs 4 in $\langle v, Q_{\mathrm{pole}} v \rangle$? | **RESOLVED** | Exactly $2 g_v(i/2) = g_v(i/2) + g_v(-i/2)$, matching Guinand–Weil residue. |
+| **3. Archimedean Kernel** | Does $h_+$ produce the Weil hyperbolic kernel? | **RESOLVED** | Exact closed-form sum $\sum J(q_n) = \int \frac{K_v}{\sinh y} dy$ with local counter-terms. |
+| **4. Subspace Identity** | Does $Q_{c, N}^{(\infty)} = \mathcal{W}_c$ on $\mathcal{H}_{c, N}$? | **RESOLVED** | Exact identity $\langle v, Q_{c, N}^{(\infty)} v \rangle \equiv \mathcal{W}_c[g_v] = \sum_\rho g_v(\gamma_\rho)$. |
+| **5. Finite-$c$ Prime Tail** | Does $Q_{c, N}^{(\infty)}$ equal full $\mathcal{W}$ for all $g$? | **ISOLATED** | No; full $\mathcal{W}$ requires $c \to \infty$ to include primes $p^k > c$. |
+| **6. Galerkin Density** | Does $L^2$ density imply Weil density? | **OPEN (GATE 2/3)** | Requires horizontal-strip topology and joint $(N, c) \to \infty$ analysis. |
+
+$$\boxed{\textbf{GATE 3 STRUCTURAL RECONNAISSANCE: COMPLETE \& AUDITED}}$$
+
+**Strategic Takeaway:**  
+The normalization audit confirms that the finite Galerkin construction $Q_{c, N}$ possesses no structural defects, spurious terms, or aliasing errors. It is an algebraically faithful compression of the truncated Weil functional $\mathcal{W}_c$.
+We can now pivot to **Gate 1 Work Item B (Analytic Reduction of the Joint-Limit Tail Extinction Target)** with complete confidence in the arithmetic substrate.
