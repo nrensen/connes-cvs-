@@ -128,9 +128,11 @@ $$\boxed{\lim_{T \to \infty} \langle v, Q_{\mathrm{arch}, T} v \rangle = \frac{1
 
 ### 2.2 The Archimedean Normalization Lemma (Exact Coordinate-Space Derivation)
 
-We now prove that the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v)$ reconstructs André Weil's regularized Archimedean distribution in coordinate space **all the way through, with exact local constants and coun**Theorem 2.1 (Archimedean Normalization & Regularity Lemma):**  
+We now prove that the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v)$ reconstructs André Weil's regularized Archimedean distribution in coordinate space **all the way through, with exact local constants and counter-terms**.
+
+**Theorem 2.1 (Archimedean Normalization & Regularity Lemma):**  
 *Let $F(y) \equiv K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$ denote the positive-lag autocorrelation kernel of the wavepacket $f_v(t) \mathbf{1}_{[0, L]}(t)$, with $F(0) = K_v(1) = 2 \|v\|_2^2$ and $F(L) = K_v(0) = 0$.*  
-*Because $f_v$ is a finite trigonometric polynomial, $F(y)$ is smooth on $[0, L]$ with $F(0) - F(y) = \mathcal{O}(y)$ as $y \downarrow 0$, and is compactly supported on $[0, L]$ (hence piecewise $C^1$ on $[0, \infty)$ with $F(y) \equiv 0$ for $y \ge L$).*  
+*Because $f_v$ is a finite trigonometric polynomial, the restriction $F|_{[0, L]}$ is smooth with $F(0) - F(y) = \mathcal{O}(y)$ as $y \downarrow 0$. Its zero extension $F(y) \equiv 0$ for $y > L$ is continuous on $[0, \infty)$ and piecewise smooth with a derivative discontinuity at $y = L$.*  
 *Consequently, its one-sided cosine transform $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$ satisfies:*
 $$g_v(r) = \mathcal{O}(r^{-2}) \quad (|r| \to \infty),$$
 *rendering the product $h_+(r) g_v(r) = \mathcal{O}(r^{-2}\log |r|)$ absolutely integrable in $L^1(\mathbb{R})$.*  
@@ -174,7 +176,7 @@ We justify the interchange of integration without requiring Schwartz regularity:
    Subtracting gives $\frac{1}{2\pi}\int_{-\infty}^\infty g_v(r)(1 - \cos(ry)) \, dr = \frac{1}{2}[F(0) - F(y)]$. The right-hand side is therefore $\int_\varepsilon^R \frac{F(0) - F(y)}{2\sinh y} \, dy$.  
    Taking $\varepsilon \downarrow 0$ and $R \to \infty$:
    - On the right-hand side, since $\frac{F(0) - F(y)}{2\sinh y} \in L^1(0, \infty)$, the integral converges to $\int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy$.
-   - On the left-hand side, the inner integral is non-negative and bounded by $h_+(r) - h_+(0) \ge 0$. Since $|g_v(r)| [h_+(r) - h_+(0)] \in L^1(\mathbb{R})$, the dominated convergence theorem justifies passing the limit under the $r$-integral:
+   - On the left-hand side, the integrand is dominated in absolute value by $|g_v(r)| \int_\varepsilon^R \frac{1 - \cos(ry)}{\sinh y} \, dy \le |g_v(r)| [h_+(r) - h_+(0)]$. Since $|g_v(r)| [h_+(r) - h_+(0)] \in L^1(\mathbb{R})$, the Lebesgue dominated convergence theorem justifies passing the limit under the $r$-integral:
      $$\lim_{\substack{\varepsilon \downarrow 0 \\ R \to \infty}} \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \left[ \int_\varepsilon^R \frac{1 - \cos(ry)}{\sinh y} \, dy \right] dr = \frac{1}{2\pi} \int_{-\infty}^\infty [h_+(r) - h_+(0)] g_v(r) \, dr.$$
    This proves the interchange identity rigorously:
    $$\frac{1}{2\pi} \int_{-\infty}^\infty [h_+(r) - h_+(0)] g_v(r) \, dr = \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
