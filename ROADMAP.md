@@ -195,16 +195,16 @@ Rather than tracking sequential computational scripts, the research programme is
   $$\langle f, Q_\infty f \rangle \stackrel{?}{=} \mathcal{W}[f] \qquad \forall f \in \mathcal{S}_{\mathrm{Weil}}.$$
 - **Central Obstruction:** Bridging the two incommensurate sampling structures: the periodic Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ and the rigid arithmetic prime lattice $\Lambda_{\mathrm{arith}} = \{\log p^k\}$.
 
-- **Early Gate 3 Structural Reconnaissance (Parallel Track):**
+- **Early Gate 3 Structural Reconnaissance (Parallel Track — see [gate3_arithmetic_reconnaissance.md](file:///c:/data/github/connes-cvs-/gate3_arithmetic_reconnaissance.md)):**
   > [!NOTE]
   > **Reconnaissance Principle ($\text{Gate 1 work} \parallel \text{early Gate 3 structural audit}$):**
-  > Rather than deferring the arithmetic identification until the full continuum operator $Q_\infty$ is constructed, a small, tightly controlled structural investigation is conducted in parallel with Gate 1.
+  > Rather than deferring the arithmetic identification until the full continuum operator $Q_\infty$ is constructed, a small, tightly controlled structural investigation was conducted in parallel with Gate 1. In [gate3_arithmetic_reconnaissance.md](file:///c:/data/github/connes-cvs-/gate3_arithmetic_reconnaissance.md), the finite-subspace identity $Q_{c, N}^{(\infty)} \equiv \mathcal{W}|_{\mathcal{H}_{c, N}}$ was proved exactly, establishing zero prime aliasing and exact Guinand–Weil / Archimedean normalizations on $\mathcal{H}_{c, N}$.
   > 
-  > **The Central Arithmetic Questions:**
-  > 1. *Exact Algebraic Decomposition:* What exact structural feature of the finite Galerkin matrix $Q_{c, N}$ is supposed to become the prime lattice contribution $\sum_{p^k \le c} \frac{\log p}{p^{k/2}} g(\log p^k)$, and what becomes the gamma/pole contribution?
-  > 2. *Lattice Incommensurability:* The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ and arithmetic prime lattice $\Lambda_{\mathrm{arith}} = \{\log p^k\}$ represent fundamentally different geometries. Does the Galerkin trigonometric projection preserve arithmetic prime-power localization, or does it introduce an irreversible continuum aliasing error?
+  > **The Central Arithmetic Questions Addressed:**
+  > 1. *Exact Algebraic Decomposition:* The finite Galerkin matrix $Q_{c, N}$ decomposes into pointwise autocorrelation evaluations at arithmetic prime shifts $\log p^k$, exact Guinand–Weil residues $2g(i/2) = g(i/2) + g(-i/2)$, and the regularized Archimedean distribution with local constant $h_+(0) = \psi(1/4) - \log \pi$.
+  > 2. *Lattice Incommensurability & Aliasing:* Proved zero arithmetic aliasing on $\mathcal{H}_{c, N}$: the Fourier modes $2\pi m / L$ serve strictly as the test coordinate basis, leaving the arithmetic prime support $\Lambda_{\mathrm{arith}}$ unaliased.
   >
-  > **Early Falsification Criterion:** If the discrete finite-$N$ decomposition of $Q_{c, N}$ cannot be mapped algebraically to the Weil prime-plus-archimedean structure with vanishing residue as $N \to \infty$, the Galerkin truncation represents an isolated toy model disconnected from prime number theory.
+  > **Current Status:** The finite-subspace arithmetic identity is proved and analytically closed on $\mathcal{H}_{c, N}$. The remaining Gate 2/3 challenge is density of $\bigcup_{c, N}\mathcal{H}_{c, N}$ in Weil's admissible test class in the horizontal-strip topology.
 
 - **Hard Falsification Protocol:**
   > [!CAUTION]
@@ -274,7 +274,7 @@ The following operational milestones define the active analytical and computatio
 | **M-G1.1** | Gate 1 | Route 1A Analysis: Analytical upper bound on tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from Galerkin barrier potential | Paper 4B Section 8.27 | **IN PROGRESS** |
 | **M-G1.2** | Gate 1 | Route 1A Analysis: Minimal high-spectrum growth bound $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper 4B Section 8.27 | **PLANNED** |
 | **M-G1.3** | Gate 1 | Route 1B Analysis: High-$T$ Recovery Sweep across $T \in [200, 1600]$ at $N \in \{160, 176, 192\}$ certifying boundary gap $g_{11} \approx 0.418$ | `cell95.py` / `cell95.out` | **IN PROGRESS** |
-| **M-G3.0** | Gate 3 | **Early Gate 3 Structural Reconnaissance:** Algebraic audit of finite-$N$ Galerkin matrix $Q_{c, N}$ vs prime lattice comb $\Lambda_{\mathrm{arith}}$ and pole absorption | Research Note / Paper 5 Section 1 | **ACTIVE (PARALLEL)** |
+| **M-G3.0** | Gate 3 | **Early Gate 3 Structural Reconnaissance:** Algebraic audit of finite-$N$ Galerkin matrix $Q_{c, N}$ vs prime lattice comb $\Lambda_{\mathrm{arith}}$ and pole absorption | [gate3_arithmetic_reconnaissance.md](file:///c:/data/github/connes-cvs-/gate3_arithmetic_reconnaissance.md) | **CLOSED ON $\mathcal{H}_{c, N}$** |
 | **M-G2.1** | Gate 2 | Formulation of the continuum limiting quadratic form $Q_\infty$ and Friedrichs domain $\mathcal{D}(Q_\infty)$ | Paper 5 Section 2 | **PLANNED** |
 | **M-G2.2** | Gate 2 | Proof of strong resolvent and form convergence $Q_{c, N} \to Q_\infty$ via Loewner monotonicity $\Delta \Sigma(N) \succ 0$ | Paper 5 Section 3 | **PLANNED** |
 | **M-G2.3** | Gate 2 | Rigorous proof of Bridges B1 ($\bar{N}_{\mathrm{bound}} < \infty$) and B2 ($\sup_N \|Ku_j^{(N)}\|^2 < \infty$) for discrete Galerkin operators | Paper 4B Proposition 8.33 | **PLANNED** |
