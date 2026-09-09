@@ -2,7 +2,7 @@
 
 **Document Type:** Strategic Mathematical Working Note (Gate 3 Normalization & Structural Audit)  
 **Date:** September 2026  
-**Status:** Working Analytical Foundational Note (Fully Audited & Mathematically Closed on $\mathcal{H}_{c, N}$)  
+**Status:** Working Analytical Foundational Note (Finite-Subspace Identity Proved Exactly on $\mathcal{H}_{c, N}$; Continuum Extension Open)  
 **Associated Manuscripts & Records:** [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (Gate 3) | [paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)  
 
 ---
@@ -15,7 +15,8 @@ $$\boxed{\textbf{What is the exact arithmetic content of the finite Galerkin mat
 Specifically, it resolves whether the finite-rank Galerkin projection on the Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ introduces an irreversible aliasing distortion of André Weil's prime arithmetic support $\Lambda_{\mathrm{arith}} = \{\log p^k\}$, or whether the matrix represents a genuine projection of Weil's explicit quadratic functional.
 
 ### The Calibrated Verdict
-$$\boxed{\textbf{GATE 3 STRUCTURAL RECONNAISSANCE: PROVED \& CLOSED ON } \mathcal{H}_{c, N}}$$
+$$\boxed{\textbf{GATE 3 FINITE-SUBSPACE IDENTITY: PROVED EXACTLY ON } \mathcal{H}_{c, N}}$$
+$$\boxed{\textbf{GATE 2/3 DENSITY AND CONTINUUM EXTENSION: OPEN}}$$
 
 Following complete derivations of all three components (prime, pole, and Archimedean), the structural findings are classified into:
 
@@ -158,12 +159,17 @@ $$\boxed{h_+(r) \equiv h_+(0) + \int_0^\infty \frac{1 - \cos(ry)}{\sinh y} \, dy
 
 **Step 2: Transfer to Coordinate Space.**  
 Multiplying by $g_v(r)$ and integrating $\frac{1}{2\pi} \int_{-\infty}^\infty dr$:
-$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = h_+(0) \left( \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \, dr \right) + \frac{1}{2\pi}\int_{-\infty}^\infty \left[ \int_0^\infty \frac{1 - \cos(ry)}{\sinh y} \, dy \right] g_v(r) \, dr.$$
-For the first term: by Fourier inversion, $\frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) dr = F(0)$. Since $F(0) = K_v(1) = 2\int_0^1 \tau_v(s)^2 ds = 2 \|v\|_2^2$, this term equals $h_+(0) \|v\|_2^2 = \frac{1}{2} h_+(0) F(0)$.  
-For the second term: interchanging integrals via Fubini's theorem:
-$$\int_0^\infty \frac{1}{\sinh y} \left[ \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr \right] dy = \int_0^\infty \frac{F(0) - F(y)}{\sinh y} \, \frac{1}{2} \, dy = \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
+$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = h_+(0) \left( \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \, dr \right) + \int_0^\infty \frac{1}{\sinh y} \left[ \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr \right] dy.$$
+Because $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$ is the one-sided cosine transform of $F(y) = K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$, the inverse cosine transform yields:
+$$\frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \, dr = \frac{1}{2} F(0), \qquad \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \cos(ry) \, dr = \frac{1}{2} F(y).$$
+Since $F(0) = K_v(1) = 2\int_0^1 \tau_v(s)^2 \, ds = 2 \|v\|_2^2$, the first term evaluates to:
+$$h_+(0) \left( \frac{1}{2} F(0) \right) = h_+(0) \|v\|_2^2.$$
+For the second term, subtracting the cosine inversion gives:
+$$\frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr = \frac{1}{2} [F(0) - F(y)].$$
+Interchanging the $r$- and $y$-integrals via Fubini's theorem (as $g_v \in \mathcal{S}(\mathbb{R})$ has rapid decay) yields:
+$$\int_0^\infty \frac{1}{\sinh y} \left[ \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr \right] dy = \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
 Adding the two terms yields:
-$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = \frac{1}{2} h_+(0) F(0) + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
+$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = \frac{1}{2} h_+(0) F(0) + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy = h_+(0) \|v\|_2^2 + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
 
 **Step 3: Interval Splitting and Tail Evaluation.**  
 Since $f_v(t)$ is supported on $[0, L]$, its autocorrelation $F(y) = K_v(1 - y/L)$ is identically zero for $y \ge L$. Splitting the integral into $[0, L]$ and $[L, \infty)$:
@@ -267,7 +273,8 @@ This is an active mathematical obligation at the Gate 2 / Gate 3 boundary and is
 | **5. Finite-$c$ Prime Tail** | Does $Q_{c, N}^{(\infty)}$ equal full $\mathcal{W}$ for all $g$? | **ISOLATED** | No; full $\mathcal{W}$ requires $c \to \infty$ to include primes $p^k > c$. |
 | **6. Galerkin Density** | Does $L^2$ density imply Weil density? | **OPEN (GATE 2/3)** | Requires horizontal-strip topology and joint $(N, c) \to \infty$ analysis. |
 
-$$\boxed{\textbf{GATE 3 STRUCTURAL RECONNAISSANCE: PROVED \& RIGOROUSLY CLOSED ON } \mathcal{H}_{c, N}}$$
+$$\boxed{\textbf{GATE 3 FINITE-SUBSPACE IDENTITY: PROVED EXACTLY ON } \mathcal{H}_{c, N}}$$
+$$\boxed{\textbf{GATE 2/3 DENSITY AND CONTINUUM EXTENSION: OPEN}}$$
 
 **Strategic Takeaway:**  
 No structural obstruction has been found; every term of $Q_{c, N}^{(\infty)}$ on the Galerkin subspace $\mathcal{H}_{c, N}$ matches André Weil's explicit quadratic functional identically, with exact normalizations and regularizations.
