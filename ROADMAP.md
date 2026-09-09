@@ -25,23 +25,30 @@ $$h_+(r) = \operatorname{Re}\psi\left(\frac{1}{4} + \frac{i r}{2}\right) - \log 
 is **strictly negative** on a bounded low-frequency interval $[0, r_*]$ with $r_* \approx 6.28984$ ($h_+(0) \approx -5.37218$). The Archimedean form $\mathcal{Q}_{\mathrm{arch}}$ is therefore intrinsically a signed quadratic form.
 
 > ### Current Position Statement
-> The finite-dimensional construction has produced strong numerical evidence for a bound-state/continuum mechanism in which the tail of the Stieltjes product is controlled by exponentially small tunneling splittings. Recent analysis has shown that the relevant sufficient condition for tail extinction is the product $\Delta_j(N) R_{\mathrm{spec}}(N, L) \to 0$, rather than the previously emphasized spectral-growth condition alone. The immediate objective is therefore to establish a rigorous asymptotic tunneling estimate and the weakest accompanying spectral bound needed for tail extinction.
+> The near-term programme is defined by a single mathematical target: proving the sufficient joint-limit estimate for asymptotic tail extinction,
+> $$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \quad \Longrightarrow \quad \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.$$
+> Gate 1 does not require proving a particular spectral growth law; individual growth models ($p < 2$, WKB exponential barrier penetration, polynomial bounds, coordinate transmission cancellation) are strictly **candidate analytical routes toward this core proposition**, not standalone objectives.
+> In parallel, a controlled **early Gate 3 structural reconnaissance** is initiated to audit the algebraic fidelity of $Q_{c, N} \stackrel{?}{\longleftrightarrow} \mathcal{W}$ and the reconciliation between the Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ and prime arithmetic lattice $\Lambda_{\mathrm{arith}} = \{\log p^k\}$.
 
 ---
 
-## 2. The Two Time Horizons & Explicit Chain of Obligations
+## 2. The Strategic Structure: Near-Term Dual Tracks & The Unbroken Chain
 
-To maintain absolute mathematical integrity and prevent confusing computational progress with analytical proof, the research programme is bifurcated into two distinct, coupled time horizons:
+To maintain absolute mathematical integrity and prevent confusing computational progress with analytical proof, the near-term programme executes two tightly coordinated parallel tracks leading into the continuum chain of obligations:
 
 ```
 +----------------------------------------------------------------------------------------------------+
-| NEAR-TERM MATHEMATICAL HORIZON: ASYMPTOTIC TAIL ENCLOSURE                                          |
+| NEAR-TERM DUAL TRACKS (PARALLEL EXECUTION)                                                         |
 |                                                                                                    |
+| Track A (Gate 1 Core): Asymptotic Tail Enclosure                                                  |
 |            lim   limsup  Delta_j(N) R_spec(N, L) = 0   ===>   Pi_{j, tail}(N, L) ---> 1            |
 |           L->oo   N->oo                                                                            |
+|                                                                                                    |
+| Track B (Early Gate 3): Arithmetic Structural Reconnaissance                                       |
+|            Q_{c, N}  <--?-->  W[g]    |    Lambda_Fourier {2pi m/L}  <--?-->  Lambda_arith {log p^k}|
 +----------------------------------------------------------------------------------------------------+
                                                   |
-                                                  | (Passage to Continuum Operator)
+                                                  | (Passage to Continuum Operator & Full Gate 3)
                                                   v
 +----------------------------------------------------------------------------------------------------+
 | LONG-TERM MATHEMATICAL HORIZON: CONTINUUM WEIL POSITIVITY & RH                                     |
@@ -57,7 +64,7 @@ $$\boxed{\textbf{Finite Galerkin Matrix } \mathcal{Q}_{c, N} \;\xrightarrow{\tex
 
 1. **Finite Galerkin Matrix ($\mathcal{Q}_{c, N} \succ 0$):** High-precision verification via $LDL^T$ Schur complement decoupling (verified at 80 dps across tested dimensions in `cell64.py`) and exact finite-$N$ identities.
 2. **Continuum Operator ($\mathcal{Q}_\infty$):** Rigorous definition of the limiting operator/form $Q_\infty = \lim_{N \to \infty} Q_{c, N}$, its self-adjoint domain, boundary condition specification, and preservation of low-energy bound states.
-3. **The Weil Bridge ($\mathcal{Q}_\infty \stackrel{?}{=} \mathcal{W}$):** Proving that the continuum quadratic form coincides identically with André Weil's explicit quadratic functional on the idele class group. **This is a hard arithmetic falsification gate.**
+3. **The Weil Bridge ($\mathcal{Q}_\infty \stackrel{?}{=} \mathcal{W}$):** Proving that the continuum quadratic form coincides identically with André Weil's explicit quadratic functional on the idele class group. **This is a hard arithmetic falsification gate.** Early reconnaissance ($\text{Gate 1 work} \parallel \text{early Gate 3 structural audit}$) verifies algebraic viability before full continuum construction.
 4. **The Weil Criterion ($\mathcal{W}[g] \ge 0 \implies \mathrm{RH}$):** Proving density of the Galerkin test class in Weil's admissible class and deducing the Riemann Hypothesis via Weil (1952).
 
 ---
@@ -144,16 +151,30 @@ Rather than tracking sequential computational scripts, the research programme is
 
 ---
 
-### Gate 1: Finite-$N$ Spectral Mechanism & Asymptotic Tail Extinction (ACTIVE)
+### Gate 1: Finite-$N$ Spectral Mechanism & Asymptotic Tail Extinction (ACTIVE GATE)
 
-- **Mathematical Target:** Prove that the remote Stieltjes product converges to unity in the joint limit:
-  $$\lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.$$
-- **Central Obstruction:** Transitioning from finite-$N$ numerical certification (where $\mathcal{E}_2^{\mathrm{op}} \le 3.06 \times 10^{-26}$ at $N=24$) to an unconditional analytical bound on the product $\Delta_j(N) R_{\mathrm{spec}}(N, L)$.
-- **Concrete Sub-Objectives:**
-  1. **Objective 1.1 (Tunneling Splitting Exponent):** Establish an analytical upper bound on the bound-state tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ with $\sigma_j > 0$ derived from the discrete Galerkin potential barrier.
-  2. **Objective 1.2 (Minimal High-Spectrum Growth Control):** Establish the weakest possible upper bound on the relative high-spectrum growth $R_{\mathrm{spec}}(N, L) = \frac{E_N}{(E_{L+1}-E_j)(E_{L+1}-E_{j+1})} = o(e^{\sigma_j N})$, ensuring that any growth in $E_N$ is overwhelmed by tunneling damping.
-  3. **Objective 1.3 (Continuum Ritz Gap Lower Bound):** Prove that the boundary gap separating the tunneling sector from the continuum remains strictly positive in the Ritz limit: $\inf_{N} (E_{L+1}^{(N)} - E_{j+1}^{(N)}) \ge g_* > 0$ for $L \ge 11$ (empirically $g_{11} \approx 0.418$).
-  4. **Objective 1.4 (Asymmetric Two-Pole Balance Invariance):** Prove that the coordinate balance $\alpha_j (L_j/R_j)^2 = \Theta(1)$ remains bounded away from zero and infinity as $N \to \infty$, securing modal ratio control $\mathcal{Q}_j = \mathcal{O}(1)$.
+- **Central Mathematical Proposition (Gate 1 Target):**
+  Prove that the remote Stieltjes product converges to unity in the joint limit:
+  $$\boxed{\lim_{L \to \infty} \limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{exact}}(N, L) = 0 \quad \Longrightarrow \quad \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.}$$
+  Via the operator-norm enclosure (Paper 4B Lemma 8.28), a sufficient condition for this proposition is:
+  $$\boxed{\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.}$$
+  *Gate 1 does not require proving a particular spectral growth law or enforcing a specific exponent. All asymptotic models ($p < 2$, WKB tunneling, polynomial gap bounds, coordinate wavepacket transmission cancellation) are candidate routes toward this proposition, not standalone objectives.*
+
+- **Central Obstruction:** Transitioning from discrete finite-$N$ numerical certification (where $\mathcal{E}_2^{\mathrm{op}} \le 3.06 \times 10^{-26}$ at $N=24$) to an unconditional analytical proof that $\Delta_j(N) R_{\mathrm{spec}}(N, L) \to 0$.
+
+- **Competing Analytical Routes & Component Estimates:**
+  1. **Route 1A (Exponential Tunneling Splitting with Soft Growth — Dominant Route):**
+     - *Mechanics:* Establish an analytical bound on bound-state tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ with $\sigma_j > 0$ derived from the discrete Galerkin potential barrier, coupled with any soft/polynomial bound on the upper spectrum $R_{\mathrm{spec}}(N, L) = o(e^{-\sigma_j N})^{-1} = o(e^{\sigma_j N})$.
+     - *Status:* Empirically confirmed ($\Delta_2 \sim 10^{-26}$ at $N=24$), analytical WKB barrier modeling active in Paper 4B Section 8.27.
+  2. **Route 1B (Fixed Cutoff $T$ Uniform Loewner Boundedness):**
+     - *Mechanics:* Under a fixed Archimedean cutoff $T$, Loewner divided-difference smoothness ensures $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ uniformly in $N$. The spectrum cannot escape to infinity ($R_{\mathrm{spec}}$ bounded). Tail extinction follows unconditionally once the continuum Ritz base stabilizes: $\inf_N (E_{L+1}^{(N)} - E_{j+1}^{(N)}) \ge g_* > 0$.
+     - *Status:* High-$T$ recovery sweeps (`cell95.py`) ongoing to certify $g_{11} \approx 0.418$.
+  3. **Route 1C (Coordinate Wavepacket Transmission Cancellation):**
+     - *Mechanics:* Bounding the excitation residual $\|P_{\perp u_0} Kc\|^2$ and demonstrating that mode-by-mode destructive phase interference quenches oscillatory transmission across the barrier top.
+     - *Status:* Exact Pythagorean decomposition established in Paper 4; reduces the problem to dipole excitation residual and mode transmission factors.
+  4. **Route 1D (Direct Operator-Theoretic / Resolvent Bypass):**
+     - *Mechanics:* Bypassing mode-by-mode product estimates entirely via direct trace-class resolvent convergence or relative compactness of the perturbation $(Q_{\mathrm{even}}^{(N)} - \mu)^{-1} - (Q_{\mathrm{even}}^{(\infty)} - \mu)^{-1}$.
+     - *Status:* Candidate analytical formulation under investigation for Paper 5.
 
 ---
 
@@ -173,11 +194,24 @@ Rather than tracking sequential computational scripts, the research programme is
 - **Mathematical Target:** Prove that the continuum quadratic form evaluates identically to André Weil's explicit quadratic functional:
   $$\langle f, Q_\infty f \rangle \stackrel{?}{=} \mathcal{W}[f] \qquad \forall f \in \mathcal{S}_{\mathrm{Weil}}.$$
 - **Central Obstruction:** Bridging the two incommensurate sampling structures: the periodic Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ and the rigid arithmetic prime lattice $\Lambda_{\mathrm{arith}} = \{\log p^k\}$.
+
+- **Early Gate 3 Structural Reconnaissance (Parallel Track):**
+  > [!NOTE]
+  > **Reconnaissance Principle ($\text{Gate 1 work} \parallel \text{early Gate 3 structural audit}$):**
+  > Rather than deferring the arithmetic identification until the full continuum operator $Q_\infty$ is constructed, a small, tightly controlled structural investigation is conducted in parallel with Gate 1.
+  > 
+  > **The Central Arithmetic Questions:**
+  > 1. *Exact Algebraic Decomposition:* What exact structural feature of the finite Galerkin matrix $Q_{c, N}$ is supposed to become the prime lattice contribution $\sum_{p^k \le c} \frac{\log p}{p^{k/2}} g(\log p^k)$, and what becomes the gamma/pole contribution?
+  > 2. *Lattice Incommensurability:* The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ and arithmetic prime lattice $\Lambda_{\mathrm{arith}} = \{\log p^k\}$ represent fundamentally different geometries. Does the Galerkin trigonometric projection preserve arithmetic prime-power localization, or does it introduce an irreversible continuum aliasing error?
+  >
+  > **Early Falsification Criterion:** If the discrete finite-$N$ decomposition of $Q_{c, N}$ cannot be mapped algebraically to the Weil prime-plus-archimedean structure with vanishing residue as $N \to \infty$, the Galerkin truncation represents an isolated toy model disconnected from prime number theory.
+
 - **Hard Falsification Protocol:**
   > [!CAUTION]
   > **Arithmetic Falsification Protocol:** If the continuum quadratic form $Q_\infty$ fails to match André Weil's explicit functional $\mathcal{W}$ on the idele class group, the finite-rank Galerkin construction represents an isolated toy model and cannot prove the Riemann Hypothesis.
   > If falsification occurs at Gate 3, the research programme must **immediately halt**, record the exact algebraic discrepancy, and pivot to reformulating the Galerkin discretization. Extending numerical sweeps past a failed arithmetic gate is strictly prohibited.
-- **Concrete Sub-Objectives:**
+
+- **Concrete Long-Term Sub-Objectives:**
   1. **Objective 3.1 (DLMF Physical-Space Transfer):** Evaluate the Binet/Gauss integral representation of $h_+(r)$ pulled back into coordinate space against the prime Dirac comb $-\frac{1}{L}\sum_{p^k \le c} \frac{\log p}{p^{k/2}} \delta(y - \log p^k)$.
   2. **Objective 3.2 (Pole Absorption Proof):** Rigorously prove that the discrete Weierstrass resolvent sequence $-\sum_{n=0}^\infty J(q_n)$ pairs with and absorbs the zeta pole functional $\mathcal{Q}_{\mathrm{pole}}$ identically in the continuum limit.
 
@@ -206,7 +240,7 @@ Rather than tracking sequential computational scripts, the research programme is
 
 ---
 
-## 5. Operational Principles for Computational Cells
+## 5. Operational Principles for Computational Cells & Strategic Governance
 
 To maintain repository standards and prevent `ROADMAP.md` from degenerating into a cell log:
 
@@ -222,6 +256,11 @@ To maintain repository standards and prevent `ROADMAP.md` from degenerating into
    - [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md): Records every cell chronologically, detailing hypotheses, methods, raw outputs, established results, and refuted conjectures.
    - [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md): Defines active mathematical gates, analytical obstructions, and the strategic chain of obligations.
    - [paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md) & [paper4b.md](file:///c:/data/github/connes-cvs-/paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md): Capture vetted, permanent mathematics with strict epistemic labeling.
+4. **Roadmap Update Granularity & Strategic Lifecycle:**
+   `ROADMAP.md` operates at the level of gates and propositions, not computational steps or routes. `ROADMAP.md` should **rarely change after a cell succeeds**. It changes when our **belief about the research strategy** changes:
+   - *No Roadmap Update:* "Cell 98 confirms exponential tunneling to $N=32$" is a historical computational datum logged in `cell_history_map.md`.
+   - *Justified Roadmap Update:* "An analytical proof of the tunneling bound is completed, resolving the high-spectrum growth obstruction and closing Gate 1" represents a change in strategic state that justifies a roadmap update.
+   - Routes can change rapidly as analytical ideas evolve; gates and target propositions change only when our fundamental mathematical understanding changes.
 
 ---
 
@@ -231,10 +270,11 @@ The following operational milestones define the active analytical and computatio
 
 | Milestone | Target Gate | Mathematical Objective | Target Artifact / Script | Status |
 | :---: | :---: | :--- | :--- | :---: |
-| **M-G1.1** | Gate 1 | Analytical upper bound on bound-state tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from the Galerkin barrier potential | Paper 4B Section 8.27 | **ACTIVE** |
-| **M-G1.2** | Gate 1 | Minimal high-spectrum growth control $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper 4B Section 8.27 & `cell98.py` | **PLANNED** |
-| **M-G1.3** | Gate 1 | Proof of joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1$ via operator-norm telescoping | Paper 4B Proposition 8.32 | **PLANNED** |
-| **M-G1.4** | Gate 1 | Complete High-$T$ Recovery Sweep across $T \in [200, 1600]$ at $N \in \{160, 176, 192\}$ certifying boundary gap $g_{11} \approx 0.418$ | `cell95.py` / `cell95.out` | **IN PROGRESS** |
+| **M-G1.0** | Gate 1 | **Central Target Proposition 1.0:** Prove joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \Pi_{j, \mathrm{tail}} \to 1$ | Paper 4B Proposition 8.32 | **ACTIVE** |
+| **M-G1.1** | Gate 1 | Route 1A Analysis: Analytical upper bound on tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from Galerkin barrier potential | Paper 4B Section 8.27 | **IN PROGRESS** |
+| **M-G1.2** | Gate 1 | Route 1A Analysis: Minimal high-spectrum growth bound $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper 4B Section 8.27 | **PLANNED** |
+| **M-G1.3** | Gate 1 | Route 1B Analysis: High-$T$ Recovery Sweep across $T \in [200, 1600]$ at $N \in \{160, 176, 192\}$ certifying boundary gap $g_{11} \approx 0.418$ | `cell95.py` / `cell95.out` | **IN PROGRESS** |
+| **M-G3.0** | Gate 3 | **Early Gate 3 Structural Reconnaissance:** Algebraic audit of finite-$N$ Galerkin matrix $Q_{c, N}$ vs prime lattice comb $\Lambda_{\mathrm{arith}}$ and pole absorption | Research Note / Paper 5 Section 1 | **ACTIVE (PARALLEL)** |
 | **M-G2.1** | Gate 2 | Formulation of the continuum limiting quadratic form $Q_\infty$ and Friedrichs domain $\mathcal{D}(Q_\infty)$ | Paper 5 Section 2 | **PLANNED** |
 | **M-G2.2** | Gate 2 | Proof of strong resolvent and form convergence $Q_{c, N} \to Q_\infty$ via Loewner monotonicity $\Delta \Sigma(N) \succ 0$ | Paper 5 Section 3 | **PLANNED** |
 | **M-G2.3** | Gate 2 | Rigorous proof of Bridges B1 ($\bar{N}_{\mathrm{bound}} < \infty$) and B2 ($\sup_N \|Ku_j^{(N)}\|^2 < \infty$) for discrete Galerkin operators | Paper 4B Proposition 8.33 | **PLANNED** |

@@ -74,9 +74,9 @@ The repository maintains a strict architectural and epistemological boundary bet
 
 - **The Five Mathematical Gates:**
   All research work is organized around five strictly sequenced gates:
-  - *Gate 1 (Active):* Finite-$N$ Spectral Mechanism & Asymptotic Tail Extinction ($\lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1$).
+  - *Gate 1 (Active):* Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction ($\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1$). All specific growth formulations ($p < 2$, WKB tunneling, polynomial bounds, coordinate transmission cancellation) are strictly candidate analytical routes toward this core proposition, not standalone objectives.
   - *Gate 2:* Continuum Limiting Operator & Quadratic Form ($Q_N \to Q_\infty$, domain, boundary conditions, bound-state preservation).
-  - *Gate 3 (Hard Falsification Gate):* Arithmetic Reconnection & The Weil Bridge ($Q_\infty \stackrel{?}{=} \mathcal{W}$ on the idele class group).
+  - *Gate 3 (Hard Falsification Gate):* Arithmetic Reconnection & The Weil Bridge ($Q_\infty \stackrel{?}{=} \mathcal{W}$ on the idele class group). A small, controlled early Gate 3 structural reconnaissance is conducted in parallel with Gate 1 ($\text{Gate 1 work} \parallel \text{early Gate 3 structural audit}$) to test the algebraic fidelity of $Q_{c, N} \stackrel{?}{\leftrightarrow} \mathcal{W}$ and the reconciliation of $\Lambda_{\mathrm{Fourier}}$ and $\Lambda_{\mathrm{arith}}$.
   - *Gate 4:* Positivity Equivalence ($Q_\infty \succeq 0 \iff \mathcal{W}[g] \ge 0$).
   - *Gate 5:* Invocation of the Weil Criterion & The Riemann Hypothesis ($\bigcup \mathcal{H}_{c, N}$ dense $\implies \mathrm{RH}$).
 
@@ -107,6 +107,8 @@ The repository maintains a strict architectural and epistemological boundary bet
   Never conflate finite-dimensional matrix positivity with the density theorem needed for the Riemann Hypothesis.
 - **Roadmap Traceability Principle:**
   Every computational script, analytical investigation, diagnostic suite, and manuscript revision must trace back directly to an active gate or milestone defined in `ROADMAP.md`. Uncharted excursions and speculative side-tracks are strictly prohibited.
+- **Roadmap Update Granularity (Gates and Propositions, Not Cells):**
+  `ROADMAP.md` operates at the level of gates and target propositions, not computational steps or routes. `ROADMAP.md` should **rarely change after a cell succeeds**. It changes when our **belief about the research strategy** changes (e.g., an analytical proof is completed, an obstruction is eliminated, a route is superseded, or an arithmetic gate is falsified). Routine numerical logs belong in `cell_history_map.md`, never in `ROADMAP.md`.
 - **Living Document Governance (Update the Roadmap First):**
   The roadmap is a living, working document, not a rigid straitjacket. When computational evidence or analytical discoveries suggest that a pivot, refinement, or change of direction is warranted:
   1. *Pause and articulate the rationale:* Clearly state why the course needs to evolve.
