@@ -206,8 +206,10 @@ def cache_save(
         payload["timing"] = timing
 
     # Atomic write. The temporary file is in the same directory so
-    # filesystem rename semantics remain atomic.
-    temporary = path.with_suffix(".tmp")
+    # filesystem rename semantics remain atomic. Use a unique filename
+    # per PID and timestamp to avoid race conditions during concurrent runs.
+    import os
+    temporary = path.with_suffix(f".tmp.{os.getpid()}_{time.time_ns()}")
 
     with temporary.open(
         "w",
