@@ -69,7 +69,7 @@ GROUND_DPS = 50
 
 # High-throughput large-N sequence with uniform step Delta N = 16
 # Extensible to [..., 288, 320, 384] if compute budget permits.
-N_LIST = [64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256]
+N_LIST = [64, 80, 96, 112, 128, 144, 160, 176, 192]
 BOUNDARY_MODES = [10, 11, 12, 13, 14]
 PROJECTOR_CUTOFFS = [10, 11, 12]
 
