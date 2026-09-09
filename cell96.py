@@ -278,7 +278,13 @@ def run_cell96() -> None:
     for N in N_LIST:
         t0 = time.time()
         print(f">>> Processing Dimension N = {N} ...")
-        Q_full = get_galerkin_matrix(c=C_PARAM, N=N, T=T_PARAM, dps=mp.mp.dps)
+        Q_full, _ = get_galerkin_matrix(
+            c=C_PARAM,
+            N=N,
+            T=T_PARAM,
+            dps=GROUND_DPS,
+            verbose=False,
+        )
         lam_0, E, O, evals_e, V_e, evals_o, V_o = solve_parity_eigensystems(Q_full, N)
 
         # Boundary vector d_even = (1, sqrt(2), ..., sqrt(2))^T
