@@ -255,11 +255,14 @@ def cache_load(
     if not path.exists():
         raise FileNotFoundError(path)
 
-    with path.open(
-        "r",
-        encoding="utf-8",
-    ) as f:
-        payload = json.load(f)
+    try:
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as f:
+            payload = json.load(f)
+    except (SystemError, Exception):
+        raise FileNotFoundError(path)
 
     # Validate the cache record itself rather than trusting the
     # filename.
@@ -520,7 +523,12 @@ def _find_compatible_psi_cache(
     best_results = None
     best_N = -1
 
-    for path in cache_dir.glob("*.json"):
+    try:
+        cache_paths = list(cache_dir.glob("*.json"))
+    except (SystemError, Exception):
+        cache_paths = []
+
+    for path in cache_paths:
         try:
             with path.open("r", encoding="utf-8") as f:
                 payload = json.load(f)
@@ -538,7 +546,7 @@ def _find_compatible_psi_cache(
                 if entry_N > best_N:
                     best_N = entry_N
                     best_results = payload.get("results")
-        except Exception:
+        except (SystemError, Exception):
             continue
 
     return best_results, best_N

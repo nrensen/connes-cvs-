@@ -133,6 +133,8 @@ def run_cell95() -> None:
     print("          (T in {200, 400, 600, 800, 1000, 1200, 1600} at N in {160, 176, 192})")
     print("=" * 140)
     print(f"Configuration: c = {C_PARAM}, L = log(c) = {mp.nstr(L_PARAM, 12)}")
+    import connes_cvs.operator as _op
+    print(f"Diagnostics: mpmath Backend = {getattr(mp.libmp, 'BACKEND', 'unknown')} | HAS_FLINT = {_op.HAS_FLINT}")
     print(f"Working Precision: {mp.mp.dps} decimal digits (generation dps = {GROUND_DPS})")
     print(f"Archimedean Cutoff Sweep: T in {T_LIST}")
     print(f"Target Dimensions: N in {N_LIST}")
