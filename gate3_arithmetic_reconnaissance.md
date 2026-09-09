@@ -22,7 +22,7 @@ Following complete derivations of all three components (prime, pole, and Archime
 
 ### 1. Established Structural Theorems
 - **Theorem A (Exact Prime-Power Autocorrelation Sampling):**  
-  For every finite $N \ge 1$ and every test vector $v \in \mathbb{R}^{N+1}$, the prime block $Q_{\mathrm{prime}}^{(c)}$ evaluates the spatial autocorrelation of the wavepacket $f_v$ **pointwise and exactly** at each prime-power shift $y = \log p^k$:
+  For every finite $N \ge 1$ and every test vector $v \in \mathbb{R}^{N+1}$, the prime block $Q_{\mathrm{prime}}^{(c)}$ evaluates the positive-lag spatial autocorrelation of the wavepacket $f_v$ **pointwise and exactly** at each prime-power shift $y = \log p^k$:
   $$\langle v, Q_{\mathrm{prime}}^{(c)} v \rangle = -\sum_{p^k \le c} \frac{\log p}{p^{k/2}} K_v\left(1 - \frac{\log p^k}{L}\right) = -\frac{1}{\pi} \sum_{p^k \le c} \frac{\log p}{p^{k/2}} \widehat{g}_v\left(\frac{\log p^k}{2\pi}\right).$$
 - **Theorem B (Zero Arithmetic Aliasing):**  
   The Fourier modes $2\pi m / L$ serve strictly as the coordinate basis for the test function $f_v$; arithmetic evaluation occurs on $\Lambda_{\mathrm{arith}}$ without spatial smearing or periodic aliasing. Fourier discretization does not compete with arithmetic localization.
@@ -96,14 +96,14 @@ $$K_v^{\mathrm{phys}}(x) = 2 \int_0^x f_v(t) f_v(x - t) \, dt = L K_v(x / L).$$
 Evaluating at $x = L(1 - \omega_q) = L - \log p^k$:
 $$K_v\left(1 - \frac{\log p^k}{L}\right) = \frac{1}{L} K_v^{\mathrm{phys}}(L - \log p^k).$$
 
-Because $f_v$ is even and $L$-periodic, $f_v(L - t) = f_v(t)$. Substituting $s = L - t$ transforms the reflected convolution into the **spatial autocorrelation function**:
+Because $f_v$ is even and $L$-periodic, $f_v(L - t) = f_v(t)$. Substituting $s = L - t$ transforms the reflected convolution into the **positive-lag spatial autocorrelation function**:
 $$K_v^{\mathrm{phys}}(L - y) = 2 \int_0^{L - y} f_v(t) f_v(L - y - t) \, dt = 2 \int_y^L f_v(s) f_v(s - y) \, ds \equiv 2 (f_v \ast f_v^\dagger)(y).$$
 
 Therefore, the contribution of each prime power $q = p^k \le c$ to the finite Galerkin quadratic form is:
 $$\boxed{Q_{q, N}[v] = -\frac{\log p}{p^{k/2}} \cdot \frac{2}{L} \int_{\log p^k}^L f_v(t) f_v(t - \log p^k) \, dt.}$$
 
 **Epistemic Distinction (Arithmetic Aliasing vs Galerkin Restriction):**
-- **Zero Arithmetic Aliasing (Proved):** For every $v \in \mathcal{H}_{c, N}$, the arithmetic shift $\log p^k$ is represented **pointwise and exactly** as the argument of the wavepacket's spatial autocorrelation. The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ does not smear or alias the prime positions $\log p^k$.
+- **Zero Arithmetic Aliasing (Proved):** For every $v \in \mathcal{H}_{c, N}$, the arithmetic shift $\log p^k$ is represented **pointwise and exactly** as the argument of the wavepacket's positive-lag spatial autocorrelation. The discrete Fourier lattice $\Lambda_{\mathrm{Fourier}} = \{2\pi m / L\}$ does not smear or alias the prime positions $\log p^k$.
 - **Finite-Dimensional Restriction (Active):** This exactness does *not* imply that $\mathcal{H}_{c, N}$ spans the full Weil test class. The wavepacket $f_v$ is restricted to band $N$, and the spatial interval is restricted to length $L = \log c$. This finite-dimensional restriction is an approximation of the test space, not an aliasing of the arithmetic points.
 
 ---
@@ -128,10 +128,12 @@ $$\boxed{\lim_{T \to \infty} \langle v, Q_{\mathrm{arch}, T} v \rangle = \frac{1
 
 ### 2.2 The Archimedean Normalization Lemma (Exact Coordinate-Space Derivation)
 
-We now prove that the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v)$ reconstructs André Weil's regularized Archimedean distribution in coordinate space **all the way through, with exact local constants and counter-terms**.
-
-**Theorem 2.1 (Archimedean Normalization Lemma):**  
-*Let $F(y) \equiv K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$ denote the spatial autocorrelation of the wavepacket $f_v(t) \mathbf{1}_{[0, L]}(t)$, with $F(0) = K_v(1) = 2 \|v\|_2^2$.*  
+We now prove that the continuous Archimedean quadratic form $\mathcal{Q}_{\mathrm{arch}}(v)$ reconstructs André Weil's regularized Archimedean distribution in coordinate space **all the way through, with exact local constants and coun**Theorem 2.1 (Archimedean Normalization & Regularity Lemma):**  
+*Let $F(y) \equiv K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$ denote the positive-lag autocorrelation kernel of the wavepacket $f_v(t) \mathbf{1}_{[0, L]}(t)$, with $F(0) = K_v(1) = 2 \|v\|_2^2$ and $F(L) = K_v(0) = 0$.*  
+*Because $f_v$ is a finite trigonometric polynomial, $F(y)$ is smooth on $[0, L]$ with $F(0) - F(y) = \mathcal{O}(y)$ as $y \downarrow 0$, and is compactly supported on $[0, L]$ (hence piecewise $C^1$ on $[0, \infty)$ with $F(y) \equiv 0$ for $y \ge L$).*  
+*Consequently, its one-sided cosine transform $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$ satisfies:*
+$$g_v(r) = \mathcal{O}(r^{-2}) \quad (|r| \to \infty),$$
+*rendering the product $h_+(r) g_v(r) = \mathcal{O}(r^{-2}\log |r|)$ absolutely integrable in $L^1(\mathbb{R})$.*  
 *Then the cutoff-free Archimedean quadratic form satisfies the exact algebraic identity:*
 $$\boxed{\langle v, Q_{\mathrm{arch}, \infty} v \rangle \equiv \frac{1}{2\pi} \int_{-\infty}^\infty h_+(r) g_v(r) \, dr \equiv \frac{1}{2} h_+(0) F(0) + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy,}$$
 *where:*
@@ -157,22 +159,30 @@ $$h_+(r) - h_+(0) = 2 \int_0^\infty \frac{1 - \cos(ry)}{2\sinh y} \, dy = \int_0
 This establishes the exact multiplier representation:
 $$\boxed{h_+(r) \equiv h_+(0) + \int_0^\infty \frac{1 - \cos(ry)}{\sinh y} \, dy.}$$
 
-**Step 2: Transfer to Coordinate Space.**  
-Multiplying by $g_v(r)$ and integrating $\frac{1}{2\pi} \int_{-\infty}^\infty dr$:
-$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = h_+(0) \left( \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \, dr \right) + \int_0^\infty \frac{1}{\sinh y} \left[ \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr \right] dy.$$
-Because $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$ is the one-sided cosine transform of $F(y) = K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$, the inverse cosine transform yields:
-$$\frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \, dr = \frac{1}{2} F(0), \qquad \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \cos(ry) \, dr = \frac{1}{2} F(y).$$
-Since $F(0) = K_v(1) = 2\int_0^1 \tau_v(s)^2 \, ds = 2 \|v\|_2^2$, the first term evaluates to:
-$$h_+(0) \left( \frac{1}{2} F(0) \right) = h_+(0) \|v\|_2^2.$$
-For the second term, subtracting the cosine inversion gives:
-$$\frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr = \frac{1}{2} [F(0) - F(y)].$$
-Interchanging the $r$- and $y$-integrals via Fubini's theorem (as $g_v \in \mathcal{S}(\mathbb{R})$ has rapid decay) yields:
-$$\int_0^\infty \frac{1}{\sinh y} \left[ \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) (1 - \cos(ry)) \, dr \right] dy = \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
-Adding the two terms yields:
-$$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = \frac{1}{2} h_+(0) F(0) + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy = h_+(0) \|v\|_2^2 + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
+**Step 2: Transfer to Coordinate Space and Justification of Integral Interchange.**  
+Multiplying the multiplier identity $h_+(r) - h_+(0) = \int_0^\infty \frac{1 - \cos(ry)}{\sinh y} \, dy$ by $g_v(r)$ and integrating $\frac{1}{2\pi} \int_{-\infty}^\infty dr$:
+$$\frac{1}{2\pi}\int_{-\infty}^\infty [h_+(r) - h_+(0)] g_v(r) \, dr = \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \left[ \int_0^\infty \frac{1 - \cos(ry)}{\sinh y} \, dy \right] dr.$$
+We justify the interchange of integration without requiring Schwartz regularity:
+1. *Regularity and Asymptotics of $g_v(r)$:* Because $\tau_v$ is a finite trigonometric polynomial, $K_v$ is smooth on $[0, 1]$. On $[0, L]$, $F(y) = K_v(1 - y/L)$ is smooth with $F(L) = 0$. Integrating by parts twice in $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$:
+   $$g_v(r) = \left[ F(y) \frac{\sin(ry)}{r} \right]_0^L - \frac{1}{r} \int_0^L F'(y) \sin(ry) \, dy = \frac{1}{r^2} \left[ F'(L) \cos(rL) - F'(0) \right] - \frac{1}{r^2} \int_0^L F''(y) \cos(ry) \, dy.$$
+   Therefore, $g_v(r) = \mathcal{O}(r^{-2})$ as $|r| \to \infty$. Since $h_+(r) = \mathcal{O}(\log |r|)$ as $|r| \to \infty$, the integrand satisfies $[h_+(r) - h_+(0)] g_v(r) = \mathcal{O}(r^{-2}\log |r|) \in L^1(\mathbb{R})$, establishing absolute convergence of the frequency integral.
+2. *Absolute Integrability of the Coordinate Kernel:* Near $y = 0$, $F(0) - F(y) = \frac{y}{L} K_v'(1) + \mathcal{O}(y^2) = \mathcal{O}(y)$, so $\frac{F(0) - F(y)}{2\sinh y} = \mathcal{O}(1)$. For $y \ge L$, $F(y) \equiv 0$, so $\frac{F(0) - F(y)}{2\sinh y} = \frac{F(0)}{2\sinh y} = \mathcal{O}(e^{-y})$. Hence the coordinate integral $\int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy$ converges absolutely.
+3. *Rigorous Interchange via Truncation:* For $0 < \varepsilon < R < \infty$, on the compact strip $[\varepsilon, R] \times \mathbb{R}$, the integrand $\frac{1 - \cos(ry)}{\sinh y} |g_v(r)| \le \frac{2}{\sinh y} |g_v(r)|$ is jointly integrable because $\int_\varepsilon^R \frac{2}{\sinh y} \, dy < \infty$ and $\int_{-\infty}^\infty |g_v(r)| \, dr < \infty$ (since $g_v(r) = \mathcal{O}(r^{-2})$). By Fubini's theorem on $[\varepsilon, R] \times \mathbb{R}$:
+   $$\frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \left[ \int_\varepsilon^R \frac{1 - \cos(ry)}{\sinh y} \, dy \right] dr = \int_\varepsilon^R \frac{1}{\sinh y} \left[ \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r)(1 - \cos(ry)) \, dr \right] dy.$$
+   Because $g_v(r) = \int_0^L F(y) \cos(ry) \, dy$ is the one-sided cosine transform of the continuous, compactly supported function $F \in L^1(\mathbb{R})$, Fourier cosine inversion gives:
+   $$\frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \, dr = \frac{1}{2} F(0), \qquad \frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \cos(ry) \, dr = \frac{1}{2} F(y) \quad \forall y \ge 0.$$
+   Subtracting gives $\frac{1}{2\pi}\int_{-\infty}^\infty g_v(r)(1 - \cos(ry)) \, dr = \frac{1}{2}[F(0) - F(y)]$. The right-hand side is therefore $\int_\varepsilon^R \frac{F(0) - F(y)}{2\sinh y} \, dy$.  
+   Taking $\varepsilon \downarrow 0$ and $R \to \infty$:
+   - On the right-hand side, since $\frac{F(0) - F(y)}{2\sinh y} \in L^1(0, \infty)$, the integral converges to $\int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy$.
+   - On the left-hand side, the inner integral is non-negative and bounded by $h_+(r) - h_+(0) \ge 0$. Since $|g_v(r)| [h_+(r) - h_+(0)] \in L^1(\mathbb{R})$, the dominated convergence theorem justifies passing the limit under the $r$-integral:
+     $$\lim_{\substack{\varepsilon \downarrow 0 \\ R \to \infty}} \frac{1}{2\pi} \int_{-\infty}^\infty g_v(r) \left[ \int_\varepsilon^R \frac{1 - \cos(ry)}{\sinh y} \, dy \right] dr = \frac{1}{2\pi} \int_{-\infty}^\infty [h_+(r) - h_+(0)] g_v(r) \, dr.$$
+   This proves the interchange identity rigorously:
+   $$\frac{1}{2\pi} \int_{-\infty}^\infty [h_+(r) - h_+(0)] g_v(r) \, dr = \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
+4. *Addition of the Constant Term:* Adding $h_+(0) (\frac{1}{2\pi}\int_{-\infty}^\infty g_v(r) \, dr) = h_+(0) (\frac{1}{2} F(0)) = h_+(0) \|v\|_2^2$ establishes:
+   $$\frac{1}{2\pi}\int_{-\infty}^\infty h_+(r) g_v(r) \, dr = \frac{1}{2} h_+(0) F(0) + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy = h_+(0) \|v\|_2^2 + \int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy.$$
 
 **Step 3: Interval Splitting and Tail Evaluation.**  
-Since $f_v(t)$ is supported on $[0, L]$, its autocorrelation $F(y) = K_v(1 - y/L)$ is identically zero for $y \ge L$. Splitting the integral into $[0, L]$ and $[L, \infty)$:
+Since $f_v(t)$ is supported on $[0, L]$, the positive-lag kernel $F(y) = K_v(1 - y/L) \mathbf{1}_{[0, L]}(y)$ is identically zero for $y \ge L$. Splitting the integral into $[0, L]$ and $[L, \infty)$:
 $$\int_0^\infty \frac{F(0) - F(y)}{2\sinh y} \, dy = \int_0^L \frac{K_v(1) - K_v(1 - y/L)}{2\sinh y} \, dy + \int_L^\infty \frac{K_v(1)}{2\sinh y} \, dy.$$
 The tail integral evaluates in closed form:
 $$\int_L^\infty \frac{1}{2\sinh y} \, dy = \int_L^\infty \frac{e^{-y}}{1 - e^{-2y}} \, dy = \frac{1}{2}\left[ \log\left( \frac{1 + e^{-y}}{1 - e^{-y}} \right) \right]_L^\infty = \frac{1}{2} \log\left( \frac{1 + e^{-L}}{1 - e^{-L}} \right) = \operatorname{artanh}(e^{-L}).$$
