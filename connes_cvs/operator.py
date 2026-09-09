@@ -35,6 +35,9 @@ from connes_cvs.kernels import _stable_b_imag
 # ============================================================
 _FLINT_VERSION: Optional[str]
 try:
+    import os
+    if os.environ.get("CONNES_CVS_DISABLE_FLINT", "").strip().lower() in ("1", "true", "yes"):
+        raise ImportError("FLINT disabled via CONNES_CVS_DISABLE_FLINT")
     import flint as _flint_module
     from flint import acb, arb, ctx as flint_ctx
     HAS_FLINT = True
@@ -201,7 +204,10 @@ def _h_plus_flint(tau: mp.mpf, dps: int) -> mp.mpf:
     tau_fl = arb(mp.nstr(tau_mp, dps + 10))
     z = acb(arb("0.25"), tau_fl / 2)
     result_fl = (-log_pi_fl + z.digamma().real)
-    return mp.mpf(result_fl._mpf_)
+    try:
+        return mp.mpf(result_fl._mpf_)
+    except (SystemError, Exception):
+        return mp.mpf(str(result_fl.mid()))
 
 
 def _h_plus_mpmath(tau: mp.mpf, dps: int) -> mp.mpf:
@@ -214,13 +220,18 @@ def _h_plus_mpmath(tau: mp.mpf, dps: int) -> mp.mpf:
     return mp.re(mp.digamma(z)) - mp.log(mp.pi)
 
 
+_flint_error_count = 0
+_MAX_FLINT_ERRORS = 5
+
+
 def h_plus(tau: mp.mpf, dps: int) -> mp.mpf:
     """
     Compute h_plus(tau) = Re(digamma(1/4 + i*tau/2)) - log(pi).
 
     This is the archimedean Mellin multiplier from the explicit formula.
     Uses python-flint when available for a substantially faster compiled
-    arbitrary-precision digamma backend.
+    arbitrary-precision digamma backend, with graceful fallback to mpmath
+    if python-flint encounters an engine or C-extension error (e.g. Cython/Python 3.13 SystemError).
 
     Parameters
     ----------
@@ -229,8 +240,22 @@ def h_plus(tau: mp.mpf, dps: int) -> mp.mpf:
     dps : int
         Decimal digits of precision.
     """
+    global HAS_FLINT, _flint_error_count
     if HAS_FLINT:
-        return _h_plus_flint(tau, dps)
+        try:
+            return _h_plus_flint(tau, dps)
+        except (SystemError, Exception) as err:
+            _flint_error_count += 1
+            if _flint_error_count == 1:
+                import sys
+                print(
+                    f"[connes_cvs.operator] NOTICE: python-flint raised {type(err).__name__} ({err}). "
+                    f"Falling back to pure mpmath digamma backend.",
+                    file=sys.stderr,
+                )
+            if _flint_error_count >= _MAX_FLINT_ERRORS:
+                HAS_FLINT = False
+            return _h_plus_mpmath(tau, dps)
     return _h_plus_mpmath(tau, dps)
 
 

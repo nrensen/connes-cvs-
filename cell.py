@@ -18,8 +18,10 @@ from connes_cvs.operator import (
     HAS_FLINT,
 )
 
-if HAS_FLINT:
+try:
     from flint import ctx as flint_ctx
+except ImportError:
+    flint_ctx = None
 
 import hashlib
 import json
@@ -559,7 +561,8 @@ def _generate_galerkin_matrix(
     L = mp.log(c_mp)
     prime_data, _ = prime_powers_up_to(int(mp.floor(c_mp)))
 
-    if HAS_FLINT:
+    import connes_cvs.operator as _op
+    if _op.HAS_FLINT and flint_ctx is not None:
         flint_ctx.prec = flint_bits
         flint_ctx.threads = 1
 
