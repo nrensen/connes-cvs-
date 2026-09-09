@@ -208,8 +208,10 @@ def cache_save(
         payload["timing"] = timing
 
     # Atomic write. The temporary file is in the same directory so
-    # filesystem rename semantics remain atomic.
-    temporary = path.with_suffix(".tmp")
+    # filesystem rename semantics remain atomic. Use a unique filename
+    # per PID and timestamp to avoid race conditions during concurrent runs.
+    import os
+    temporary = path.with_suffix(f".tmp.{os.getpid()}_{time.time_ns()}")
 
     with temporary.open(
         "w",
@@ -257,11 +259,14 @@ def cache_load(
     if not path.exists():
         raise FileNotFoundError(path)
 
-    with path.open(
-        "r",
-        encoding="utf-8",
-    ) as f:
-        payload = json.load(f)
+    try:
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as f:
+            payload = json.load(f)
+    except (SystemError, Exception):
+        raise FileNotFoundError(path)
 
     # Validate the cache record itself rather than trusting the
     # filename.
@@ -522,7 +527,12 @@ def _find_compatible_psi_cache(
     best_results = None
     best_N = -1
 
-    for path in cache_dir.glob("*.json"):
+    try:
+        cache_paths = list(cache_dir.glob("*.json"))
+    except (SystemError, Exception):
+        cache_paths = []
+
+    for path in cache_paths:
         try:
             with path.open("r", encoding="utf-8") as f:
                 payload = json.load(f)
@@ -540,7 +550,7 @@ def _find_compatible_psi_cache(
                 if entry_N > best_N:
                     best_N = entry_N
                     best_results = payload.get("results")
-        except Exception:
+        except (SystemError, Exception):
             continue
 
     return best_results, best_N
