@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-CELL 96 — REMOTE-PRODUCT CONVERGENCE THEOREM, UNCONDITIONAL OPERATOR-NORM
-          TELESCOPING ENCLOSURES, AND CLOSED TWO-POLE H(mu_j) AUDIT
+CELL 96 — UNCONDITIONAL FINITE-N OPERATOR-NORM ENCLOSURE OF THE REMOTE
+          STIELTJES PRODUCT, LOEWNER TELESCOPING, AND CLOSED TWO-POLE H(mu_j) AUDIT
 ================================================================================
 
 Strategic Roadmap Milestone M42 (Paper 4B Section 8.25 & Proposition 8.31):
@@ -261,8 +261,8 @@ def evaluate_mode_quantities(
 
 def run_cell96() -> None:
     print("=" * 115)
-    print("CELL 96 — REMOTE-PRODUCT CONVERGENCE THEOREM, UNCONDITIONAL OPERATOR-NORM")
-    print("          TELESCOPING ENCLOSURES, AND CLOSED TWO-POLE H(mu_j) AUDIT")
+    print("CELL 96 — UNCONDITIONAL FINITE-N OPERATOR-NORM ENCLOSURE OF THE REMOTE")
+    print("          STIELTJES PRODUCT, LOEWNER TELESCOPING, AND CLOSED TWO-POLE H(mu_j) AUDIT")
     print("=" * 115)
     print(f"Configuration: c = {C_PARAM}, L = log(c) = {mp.nstr(L_PARAM, 12)}, T = {T_PARAM}")
     print(f"Working Precision: {mp.mp.dps} decimal digits")
@@ -542,9 +542,9 @@ def run_cell96() -> None:
     print("-" * 135)
     print("Key Diagnostic Summary for Test C:")
     print("1. Rigorous product upper enclosure Pi_{2, tail}(L) <= exp(S_{inter}) <= exp(S_{op}) certified across all configurations.")
-    print("2. At continuum threshold L = 11, the remote tail product excess is bounded by:")
-    print("   Pi_{2, tail}(11) - 1 <= 2.94e-26  (N = 24),")
-    print("   proving that the continuum tail has completely decoupled to twenty-five decimal digits.")
+    print("2. At continuum threshold L = 11, the remote tail product excess is bounded unconditionally by:")
+    print("   Pi_{2, tail}(11) - 1 <= exp(S_{op}) - 1 <= 3.06e-26  (N = 24),")
+    print("   providing an explicit finite-N operator-norm enclosure of the remote continuum tail to twenty-six digits.")
     print()
 
     # =========================================================================

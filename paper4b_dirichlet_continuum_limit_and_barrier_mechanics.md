@@ -3359,14 +3359,23 @@ The results from `cell94.out` provide two distinct structural insights:
 4. **Strategic Formulation of Milestone M41 (`cell95.py`):**
    Rather than pushing to larger $N$ at $T = 400$, Milestone M41 fixes the boundary dimensions $N \in \{160, 176, 192\}$ and sweeps the Archimedean cutoff $T \in \{200, 400, 600, 800, 1000, 1200, 1600\}$. This experiment tests whether increasing $T$ beyond the resonance threshold ($T > \alpha_N$) eliminates the spurious deep/negative eigenvalues and recovers the $0.41$-scale boundary separation $g_{11}$ at $N = 176$ and $192$, calibrating the requisite scaling law $T_{\mathrm{req}}(N)$.
 
+5. **Early Confirmation from High-$T$ Sweep (`cell95.out` Control Diagnostics):**
+   Early runs of the Archimedean cutoff sweep at $T \in \{200, 400, 600\}$ across $N \in \{160, 176, 192\}$ establish a textbook control experiment:
+   - *Severe under-resolution ($T = 200$):* Across all three dimensions, $T = 200 < \alpha_{160} \approx 391.9$ is severely polluted, producing spurious deep negative states ($E_{11} \in [-1.56, -1.80]$) and suppressed gaps ($g_{11} \in [0.026, 0.072]$).
+   - *Resonance crossing ($T = 400$):* At $N = 160$ ($T > \alpha_{160}$), the spectrum is already stable ($E_{11} = 0.003975, g_{11} = 0.413895$). However, at $N = 176$ ($\alpha_{176} \approx 431.1 > 400$) and $N = 192$ ($\alpha_{192} \approx 470.3 > 400$), the spectrum collapses into the catastrophic zero/negative modes observed in `cell94`.
+   - *Full recovery ($T = 600$):* With $T = 600 > \alpha_{192}$, the anomalous collapse completely vanishes. The boundary spectrum at $N = 176$ and $N = 192$ lands directly back on the smooth $N = 160$ continuum branch:
+     $$g_{11}(160, 600) = 0.41846965, \quad g_{11}(176, 600) = 0.41836003, \quad g_{11}(192, 600) = 0.41824402.$$
+     Across an expansion of $\Delta N = 32$, the boundary gap $g_{11}$ varies by less than $0.054\%$.
+   - *Epistemic discipline on scaling laws:* These early data decisively confirm that the `cell94` breakdown was a purely numerical artifact of the finite-$T$ Archimedean truncation. Crucially, while $T = 600$ lies above $\alpha_{192}$ ($T/\alpha_{192} \approx 1.276$), we do **not** adopt a premature empirical "$1.25$ rule" as a mathematical fact; rather, the data establish that the transition satisfies $T \gtrsim \alpha_N$, with the exact scaling threshold to be calibrated across the complete $T \in \{600, \dots, 1600\}$ sweep of `cell95`.
+
 ---
 
-### Proposition 8.31 (Remote-Product Convergence Theorem, Loewner Operator-Norm Telescoping Enclosure, and Closed Two-Pole $H(\mu_j)$ Architecture)
+### Proposition 8.31 (Unconditional Finite-$N$ Operator-Norm Enclosure of the Remote Stieltjes Product, Loewner Telescoping, and Closed Two-Pole $H(\mu_j)$ Architecture)
 
 Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fixed core threshold. Let $Q_{\mathrm{even}}^{(N)}$ denote the even Galerkin matrix with ordered eigenvalues $0 \le E_0 < E_1 < \dots < E_N$, and let $\Delta_\ell \equiv E_{\ell+1} - E_\ell$.
 
 1. **Rigorous Exponential Product Enclosure (Rigorous Theorem):**
-   The infinite asymptotic tail of the remote Stieltjes product:
+   The asymptotic tail of the remote Stieltjes product:
    $$\Pi_{j, \mathrm{tail}}(L) \equiv \prod_{\ell = L+1}^{N-1} \omega_{j, \ell}$$
    satisfies the unconditional finite-$N$ upper bound:
    $$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) < \exp\left( \sum_{\ell = L+1}^{N-1} \frac{\Delta_j \Delta_\ell}{(E_\ell - E_j)(E_\ell - E_{j+1})} \right) \equiv \exp\big(\mathcal{S}_{\mathrm{inter}}(N; L)\big).}$$
@@ -3385,11 +3394,13 @@ Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fix
    $$\sum_{\ell = L+1}^{N-1} \Delta_\ell = \sum_{\ell = L+1}^{N-1} (E_{\ell+1} - E_\ell) = E_N - E_{L+1} \le \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty.$$
    Consequently, the interlacing tail sum satisfies the unconditional finite-$N$ operator-norm bound:
    $$\boxed{\mathcal{S}_{\mathrm{inter}}(N; L) \le \Delta_j \frac{E_N - E_{L+1}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} < \Delta_j \frac{\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})}.}$$
+   Exponentiating yields the explicit finite-$N$ product enclosure:
+   $$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \frac{\Delta_j \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \right] \le \exp\left[ \frac{\Delta_j M}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \right].}$$
    This bound requires **zero imported Weyl growth laws ($E_\ell \sim \ell^2$)** and **zero continuous ODE Sturm–Liouville assumptions**. It is an unconditional identity valid for every finite-rank Galerkin matrix.
 
-4. **Closed Two-Pole $H(\mu_j)$ Architecture and Spectral Filtering Suppression:**
+4. **Closed Two-Pole $H(\mu_j)$ Architecture and Bound-State Overlap Suppression:**
    Splitting the full Stieltjes product into the finite core and the remote tail:
-   $$\Pi_j = \Pi_{j, \mathrm{core}}(L) \cdot \Pi_{j, \mathrm{tail}}(L), \qquad \Pi_{j, \mathrm{tail}}(L) = 1 + \mathcal{O}\left( \frac{\Delta_j \|Q_{\mathrm{even}}\|_{\mathrm{op}}}{E_{L+1}^2} \right),$$
+   $$\Pi_j = \Pi_{j, \mathrm{core}}(L) \cdot \Pi_{j, \mathrm{tail}}(L), \qquad 0 < \Pi_{j, \mathrm{tail}}(L) - 1 \le \exp\left( \frac{\Delta_j \|Q_{\mathrm{even}}\|_{\mathrm{op}}}{E_{L+1}^2} \right) - 1,$$
    the boundary weight ratio $\alpha_j \equiv d_{j+1}^2 / d_j^2 = \zeta_j \Pi_j$ is determined to exponential precision by the finite core and local coordinate $\zeta_j \equiv \frac{E_{j+1} - z_j^*}{z_j^* - E_j}$.
    The regularized Stieltjes derivative $H(\mu_j) = (\mu_j - \lambda)^2 G_d'(\mu_j)$ is dominated by the two neighboring poles:
    $$H_{\mathrm{two-pole}}(\mu_j) = \frac{d_j^2 (\mu_j - \lambda)^2}{L_j^2} \left[ 1 + \Pi_j \zeta_j \left(\frac{L_j}{R_j}\right)^2 \right],$$
@@ -3397,6 +3408,43 @@ Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fix
    Because the internal Stieltjes zero $z_j^*$ obeys the exact coordinate balance $\zeta_j (L_j/R_j)^2 = \Theta(1)$, the two poles share the spectral density comparably. Combined with the consecutive ladder growth $H(\mu_{j+1})/H(\mu_j) \gg 1$, this drives the spectral filtering suppression of the excited overlaps:
    $$T_j \equiv \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 = \mathcal{K}_j \frac{H(\mu_1)}{H(\mu_j)} \longrightarrow 0 \qquad (j \ge 2),$$
    ensuring that bound-state leakage decouples exponentially in the continuum limit.
+
+---
+
+### 8.26 The Minimal Asymptotic Hypothesis for Continuum Tail Extinction ($L \to \infty$)
+
+Proposition 8.31 provides a rigorous, unconditional **finite-$N$ operator-norm enclosure** of the remote Stieltjes product:
+$$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})} \right].}$$
+As demonstrated in `cell96.out`, for any fixed finite dimension $N = 24$, setting the core threshold to $L = 11$ encloses the remote tail excess within $3.06 \times 10^{-26}$, with a slack of only $8.35$ over the actual observed deviation.
+
+To upgrade this finite-$N$ enclosure into a genuine asymptotic continuum convergence theorem ($\lim_{L \to \infty} \lim_{N \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$), we examine the exponent:
+$$\mathcal{E}_j(N; L) \equiv \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}.$$
+
+#### 1. Uniform Boundedness of the Numerator
+For any fixed mode $j$ (e.g. $j = 2$):
+1. The fixed-mode spectral gap $\Delta_j^{(N)} = E_{j+1}^{(N)} - E_j^{(N)}$ is uniformly bounded in $N$. In the semiclassical tunneling regime, $\Delta_2^{(N)}$ is exponentially small ($\Delta_2 \approx 1.37 \times 10^{-26}$ at $N = 24$).
+2. The Galerkin operator norm satisfies a uniform a priori bound $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ for all $N$. Empirically, across the sweep $N \in \{8, 12, 16, 20, 24\}$, $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ increases mildly from $2.63$ to $3.81$, well within standard operator-theoretic bounds for the Connes–CvS Galerkin truncation.
+Thus, the numerator is uniformly bounded:
+$$\sup_{N \ge L+2} \Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le \mathcal{C}_j < \infty.$$
+
+#### 2. The Quadratic Denominator and Minimal Spectral Growth
+For any core cutoff $L$ chosen above the semiclassical barrier top ($L \ge 11$), the core eigenvalues satisfy $E_j^{(N)}, E_{j+1}^{(N)} \ll E_{L+1}^{(N)}$ (for instance, at $N = 24$, $E_2, E_3 < 10^{-22}$ while $E_{12} \approx 1.3064$). The denominator therefore scales asymptotically as:
+$$(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)}) \sim \big(E_{L+1}^{(N)}\big)^2.$$
+Crucially, because the denominator contains **two independent factors** $E_{L+1} - E_j$ and $E_{L+1} - E_{j+1}$, vanishing of the exponent $\mathcal{E}_j(N; L) \to 0$ does **not** require:
+- Quadratic Weyl asymptotics ($E_L \sim L^2$),
+- Linear spectral gap expansion ($\Delta_L \sim L$),
+- Continuous Sturm–Liouville nodal domain properties.
+
+Rather, the exponent vanishes under the **Minimal Asymptotic Spectral Growth Hypothesis**:
+$$\mathbf{H}_{\mathrm{min\text{-}spec}}: \qquad \lim_{L \to \infty} \liminf_{N \to \infty} E_{L+1}^{(N)} = \infty.$$
+Indeed, even ultra-slow sub-linear growth (such as $E_{L+1}^{(N)} \ge \delta(L)$ with $\delta(L) \sim L^\beta$ for any $\beta > 0$, or even $\delta(L) \sim \sqrt{\log L}$) forces the exponent to vanish like $\mathcal{O}(\delta(L)^{-2})$.
+
+#### 3. Structural Origin in the Galerkin Operator
+In the finite-rank Galerkin truncation, mode indices $m \in \{0, \dots, N\}$ correspond to Fourier basis functions $e^{2\pi i m t / L}$. The diagonal kinetic terms of the underlying operator scale as $m^2$, while the Archimedean and prime dispersion terms preserve non-vanishing high-frequency spectral spread. Consequently, as the discrete dimension $N$ and the core cutoff $L$ are taken large, the high-energy spectrum expands, ensuring that $E_{L+1}^{(N)}$ escapes any compact interval.
+
+This reduces the analytical programme for remote tail decoupling from an intractable continuum density problem to a straightforward operator question:
+$$\boxed{\text{Prove that the upper Galerkin spectrum does not accumulate at a finite ceiling: } \lim_{L \to \infty} E_{L+1} = \infty.}$$
+Under $\mathbf{H}_{\mathrm{min\text{-}spec}}$, the remote Stieltjes product satisfies $\lim_{L \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$ unconditionally.
 
 ---
 
@@ -3609,7 +3657,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Spectral Projector Convergence, Gap Prominence $\Gamma_{11}$, & Extended Sweeps) | Audit of projector Cauchy differences $\|\Delta P_K\|_{\mathrm{op}}$, gap prominence $\Gamma_{11} = \frac{g_{11}}{\max(g_{10}, g_{12})}$, and competing hypotheses $\mathrm{H}_{\mathrm{gap}}(10)$ vs $\mathrm{H}_{\mathrm{gap}}(11)$ across $N \in \{44, \dots, 64\}$ | `cell93.py` | `cell93.out` |
 | Section 8.25 (High-Throughput Large-$N$ Boundary Gap & Projector Convergence Stress Test) | Overnight stress test of boundary gaps $g_{10} \dots g_{13}$, prominence ratio $\Gamma_{11}$, descriptive logarithmic slopes $s_{11}, s_{E11}$, and projector Cauchy convergence across $N \in \{64, \dots, 256\}$ | `cell94.py` | `cell94.out` |
 | Section 8.25 (Archimedean Cutoff Calibration & High-$T$ Spectral Recovery Sweep) | Sweep of $T \in \{200, \dots, 1600\}$ across fixed dimensions $N \in \{160, 176, 192\}$, audit of control stability at $N=160$, and recovery of $0.41$ gap for $T > \alpha_N$ | `cell95.py` | `cell95.out` |
-| Section 8.25 (Remote-Product Convergence, Loewner Operator-Norm Telescoping, & Two-Pole Closure) | Certification of Proposition 8.31, audit of expansion ratio $C_{j, \ell} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}$, unconditional operator-norm bound $\mathcal{S}_{\mathrm{inter}} \le \frac{\Delta_j \|Q\|_{\mathrm{op}}}{E_{L+1}^2}$, and two-pole $H(\mu_j)$ closure | `cell96.py` | `cell96.out` |
+| Section 8.25 (Unconditional Remote-Product Operator-Norm Enclosure & Two-Pole Closure) | Certification of Proposition 8.31, audit of expansion ratio $C_{j, \ell} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}$, unconditional operator-norm bound $\mathcal{S}_{\mathrm{inter}} \le \frac{\Delta_j \|Q\|_{\mathrm{op}}}{E_{L+1}^2}$, and two-pole $H(\mu_j)$ closure | `cell96.py` | `cell96.out` |
 
 
 ---
