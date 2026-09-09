@@ -3405,52 +3405,81 @@ Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fix
    The regularized Stieltjes derivative $H(\mu_j) = (\mu_j - \lambda)^2 G_d'(\mu_j)$ is dominated by the two neighboring poles:
    $$H_{\mathrm{two-pole}}(\mu_j) = \frac{d_j^2 (\mu_j - \lambda)^2}{L_j^2} \left[ 1 + \Pi_j \zeta_j \left(\frac{L_j}{R_j}\right)^2 \right],$$
    where $L_j \equiv \mu_j - E_j$ and $R_j \equiv E_{j+1} - \mu_j$.
-   Because the internal Stieltjes zero $z_j^*$ obeys the exact coordinate balance $\zeta_j (L_j/R_j)^2 = \Theta(1)$, the two poles share the spectral density comparably. Combined with the consecutive ladder growth $H(\mu_{j+1})/H(\mu_j) \gg 1$, this drives the spectral filtering suppression of the excited overlaps:
    $$T_j \equiv \frac{a_j^2}{a_1^2} \left( \frac{\mu_1 - \lambda}{\mu_j - \lambda} \right)^2 = \mathcal{K}_j \frac{H(\mu_1)}{H(\mu_j)} \longrightarrow 0 \qquad (j \ge 2),$$
    ensuring that bound-state leakage decouples exponentially in the continuum limit.
 
 ---
 
-### 8.26 The Exact Telescoping Tail Condition ($\mathbf{H}_{\mathrm{tail}}(j)$), Relative High-Spectrum Growth, and Dual-Regime Scaling
+### 8.26 The Exact Telescoping Tail Condition ($\mathbf{H}_{\mathrm{tail}}(j)$), Dual-Regime Scaling, and Relative High-Spectrum Growth
 
-Proposition 8.31 provides a rigorous, unconditional **finite-$N$ operator-norm enclosure** of the remote Stieltjes product:
+Proposition 8.31 established the rigorous, unconditional **finite-$N$ operator-norm enclosure** of the remote Stieltjes product:
 $$1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big) \le \exp\big(\mathcal{E}_j^{\mathrm{op}}(N, L)\big),$$
 where the exact telescoping exponent is:
 $$\boxed{\mathcal{E}_j^{\mathrm{exact}}(N, L) \equiv \frac{\Delta_j^{(N)} (E_N^{(N)} - E_{L+1}^{(N)})}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})},}$$
 and the operator-norm envelope is:
 $$\boxed{\mathcal{E}_j^{\mathrm{op}}(N, L) \equiv \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}.}$$
 
-As certified in `cell96.out`, for any fixed finite dimension $N = 24$, setting the core threshold to $L = 11$ encloses the remote tail excess within $3.06 \times 10^{-26}$, with a slack of only $8.35\times$ over the actual observed tail deviation ($3.67 \times 10^{-27}$).
+Execution of `cell97.py` (`cell97.out`) across dimensions $N \in \{8, 12, 16, 20, 24\}$ and core thresholds $L \in \{4, 8, 11\}$ verified the strict bounding chain throughout:
+$$\mathcal{S}_{\mathrm{dev}} < \mathcal{S}_{\mathrm{inter}} \le \mathcal{E}_j^{\mathrm{exact}} \le \mathcal{E}_j^{\mathrm{op}}.$$
+At $N = 24, L = 11$, the exact telescoping bound evaluates to:
+$$\mathcal{S}_{\mathrm{dev}} = 3.667 \times 10^{-27}, \quad \mathcal{S}_{\mathrm{inter}} = 8.342 \times 10^{-27}, \quad \mathcal{E}_2^{\mathrm{exact}} = 2.013 \times 10^{-26}, \quad \mathcal{E}_2^{\mathrm{op}} = 3.062 \times 10^{-26}.$$
+The exact telescoping bound $\mathcal{E}_2^{\mathrm{exact}}$ exceeds the actual interlacing sum by only a factor of $2.41\times$ (and actual deviation by $5.49\times$), while the cruder operator envelope $\mathcal{E}_2^{\mathrm{op}}$ adds only another $1.52\times$ of slack. This demonstrates that Proposition 8.31 captures the finite-$N$ tail to remarkable quantitative tightness.
+
+#### Table 8.25.29: Exact Telescoping Tail Exponent Decomposition across Dimensions ($L = 11$, Mode $j = 2$, $T = 400$)
+$$\begin{array}{r|c|c|c|c|c|c|c}
+N & E_{12} & \Delta_2 & E_N - E_{12} & \|Q_{\mathrm{even}}\|_{\mathrm{op}} & \mathcal{E}_2^{\mathrm{exact}} & \mathcal{E}_2^{\mathrm{op}} & \text{Slack } \frac{\mathcal{E}_2^{\mathrm{op}}}{\mathcal{E}_2^{\mathrm{exact}}} \\ \hline
+16 & 2.1695 & 1.213 \times 10^{-19} & 1.1398 & 3.3093 & 2.932 \times 10^{-20} & 8.491 \times 10^{-20} & 2.896 \\
+20 & 1.9599 & 9.839 \times 10^{-24} & 1.6705 & 3.6304 & 4.238 \times 10^{-24} & 9.255 \times 10^{-24} & 2.173 \\
+24 & 1.3064 & 1.365 \times 10^{-26} & 2.5070 & 3.8134 & 2.013 \times 10^{-26} & 3.062 \times 10^{-26} & 1.521
+\end{array}$$
 
 #### 1. The Exact Asymptotic Condition ($\mathbf{H}_{\mathrm{tail}}(j)$)
-To upgrade this finite-$N$ enclosure into a continuum convergence theorem ($\lim_{L \to \infty} \lim_{N \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$), the genuinely minimal condition is:
-$$\mathbf{H}_{\mathrm{tail}}(j): \qquad \lim_{\substack{L \to \infty \\ N \to \infty}} \mathcal{E}_j^{\mathrm{exact}}(N, L) = 0.$$
-Because $1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big)$, $\mathbf{H}_{\mathrm{tail}}(j)$ is both necessary and sufficient within the telescoping framework to ensure $\Pi_{j, \mathrm{tail}}(L) \to 1$. It demands precisely what the algebraic reduction requires and nothing more.
+To upgrade this finite-$N$ enclosure into a continuum convergence theorem ($\lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$), the minimal condition supplied by this algebraic reduction is:
+$$\mathbf{H}_{\mathrm{tail}}(j): \qquad \lim_{L \to \infty} \limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{exact}}(N, L) = 0.$$
+Because $1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big)$, condition $\mathbf{H}_{\mathrm{tail}}(j)$ is a **sufficient tail-extinction condition**. 
+Because $\mathcal{E}_j^{\mathrm{exact}}$ is an upper bound on $\log \Pi_{j, \mathrm{tail}}$ rather than an exact representation, necessity for the product itself is not asserted. Rather, $\mathbf{H}_{\mathrm{tail}}(j)$ is the exact minimal demand of the telescoping architecture, requiring zero imported continuous Sturm–Liouville or Weyl growth laws.
 
-#### 2. Dual-Regime Distinction: Fixed-$T$ vs Resolution-Preserving Continuum Limit
-A critical conceptual distinction emerges from the high-$T$ Archimedean calibration (`cell95`):
-- **Fixed Finite Archimedean Cutoff ($T < \infty, N \to \infty$):** The truncated operator acts on a fixed frequency window $[-T, T]$; its operator norm is bounded by a fixed constant $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$. In this regime, all eigenvalues satisfy $0 \le E_k^{(N)} \le M(c, T)$, so eigenvalues cannot escape to $+\infty$. Instead, as $N \to \infty$, eigenvalues accumulate in $[0, M(c, T)]$. Tail extinction in this fixed-$T$ setting is governed by mode accumulation ($E_N - E_{L+1}$ shrinking relative to $(E_{L+1}-E_j)^2$) or by the super-exponential collapse of the low-mode gap $\Delta_j^{(N)} \to 0$.
-- **Resolution-Preserving Continuum Limit ($N \to \infty, T = T(N) \to \infty$ with $T(N) > \alpha_N = \frac{2\pi N}{L}$):** To avoid the Archimedean resonance truncation artifact identified in `cell94` and `cell95`, the cutoff $T$ must scale with $N$. In this physical limit, the operator bandwidth expands, allowing both the highest eigenvalue $E_N^{(N)}$ and the continuum threshold eigenvalues $E_{L+1}^{(N)}$ to grow.
+#### 2. The Primary Asymptotic Engine: Bound-State Gap Damping $\Delta_j(N) \to 0$
+Table 8.25.29 reveals a central structural feature:
+Across $N \in \{16, 20, 24\}$ at fixed continuum threshold $L = 11$, the denominator does not become enormous; in fact, $E_{12}$ declines from $2.170 \to 1.960 \to 1.306$, causing the geometric factor $G_{\mathrm{spec}} \equiv \frac{E_N - E_{12}}{(E_{12}-E_2)(E_{12}-E_3)}$ to drift modestly upward ($0.24 \to 0.43 \to 1.47$).
+Yet, the tail exponent plummets by six orders of magnitude:
+$$\mathcal{E}_2^{\mathrm{exact}}: \quad 2.93 \times 10^{-20} \longrightarrow 4.24 \times 10^{-24} \longrightarrow 2.01 \times 10^{-26}.$$
+The dominant empirical engine of tail extinction is **overwhelmingly the semiclassical tunneling splitting**:
+$$\Delta_2(N) \longrightarrow 0 \qquad (1.21 \times 10^{-19} \to 9.84 \times 10^{-24} \to 1.37 \times 10^{-26}).$$
+Consequently, the telescoping bound does **not** rely on high-energy spectral growth escaping to infinity; the bound-state splitting $\Delta_j(N)$ itself rapidly extinguishes the tail exponent.
 
-#### 3. Interpretable Sufficient Condition: Relative High-Spectrum Growth
-For any low bound-state mode $j$ (e.g. $j = 2$):
-1. The fixed-mode spectral gap $\Delta_j^{(N)} = E_{j+1}^{(N)} - E_j^{(N)}$ is uniformly bounded ($\Delta_j \le C_j$), and in fact decays exponentially fast in the semiclassical tunneling regime ($\Delta_2 \sim 10^{-26}$ at $N = 24$).
-2. The low modes $E_j^{(N)}, E_{j+1}^{(N)}$ remain bounded below the barrier top.
-3. For $L$ chosen in the continuum sector ($E_{L+1} \gg E_{j+1}$), the denominator is $(E_{L+1} - E_j)(E_{L+1} - E_{j+1}) \approx (E_{L+1}^{(N)})^2$.
+#### 3. The Rigorous Asymptotic Hierarchy
+Factoring the operator-norm envelope yields the **Relative High-Spectrum Growth Ratio**:
+$$R_{\mathrm{spec}}(N; L) \equiv \frac{\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}, \qquad \mathcal{E}_j^{\mathrm{op}}(N; L) = \Delta_j^{(N)} R_{\mathrm{spec}}(N; L).$$
+At $N = 24, T = 400, L = 11$, the spectrum yields:
+$$E_{12} = 1.3064, \quad D(11) = (E_{12} - E_2)(E_{12} - E_3) = 1.7067, \quad \|Q_{\mathrm{even}}\|_{\mathrm{op}} = 3.8134 \implies R_{\mathrm{spec}}(24; 11) \approx 2.2344.$$
+Because $\Delta_j(N)$ is an active, rapidly shrinking quantity rather than a fixed number, the asymptotic condition is the product:
+$$\boxed{\Delta_j^{(N)} R_{\mathrm{spec}}(N; L) \longrightarrow 0 \qquad (N, L \to \infty).}$$
+This establishes a clear, rigorous hierarchy of sufficient asymptotic mechanisms:
+1. **Exact Finite-$N$ Enclosure:**
+   $$\Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \Delta_j^{(N)} \frac{E_N^{(N)} - E_{L+1}^{(N)}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})} \right].$$
+2. **Sufficient Asymptotic Tail Condition ($\mathbf{H}_{\mathrm{tail}}$):**
+   $$\mathcal{E}_j^{\mathrm{exact}}(N, L) \longrightarrow 0.$$
+3. **Convenient Stronger Product Envelope:**
+   $$\Delta_j^{(N)} R_{\mathrm{spec}}(N; L) \approx \Delta_j^{(N)} \frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0.$$
+   This condition is satisfied under three distinct regimes:
+   - *Regime A:* $R_{\mathrm{spec}} \to 0$;
+   - *Regime B:* $R_{\mathrm{spec}} = \mathcal{O}(1)$ while $\Delta_j \to 0$ (the empirically observed regime);
+   - *Regime C:* Even if $R_{\mathrm{spec}} \to \infty$, provided its growth is slower than the exponential decay $e^{\sigma_j N}$ of the tunneling gap.
+4. **Stronger Purely Spectral Condition (Independent of Tunneling):**
+   If $\Delta_j$ were merely bounded away from infinity, vanishing of the envelope requires:
+   $$\frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad \Longleftrightarrow \qquad E_N \sim (E_{L+1})^p \quad \text{with } p < 2.$$
 
-Therefore, bounding the numerator by $E_N^{(N)} - E_{L+1}^{(N)} \le E_N^{(N)} = \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ yields the **Relative High-Spectrum Growth Condition**:
-$$R_{\mathrm{spec}}(N, L) \equiv \frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad \Longleftrightarrow \qquad E_N^{(N)} = o\left((E_{L+1}^{(N)})^2\right).$$
-If the spectral ceiling grows as $E_N \sim (E_{L+1})^p$, vanishing of the tail requires only:
-$$p < 2.$$
-Even if the operator norm grows substantially with $N$ or $T(N)$, the quadratic denominator $(E_{L+1})^2$ provides an enormous suppression margin.
+#### 4. Dual-Regime Scaling and Resolution Lessons from Test D
+The dual-regime framework distinguishes:
+- **Fixed-$T$ Regime ($T < \infty$):** The operator norm satisfies $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ unconditionally (Proposition 8.29). Eigenvalues are confined to a compact interval $[0, M(c, T)]$. Tail extinction is guaranteed because $\Delta_j(N) \to 0$ while the denominator remains strictly bounded away from zero.
+- **Resolution-Preserving Regime ($T(N) > \alpha_N = \frac{2\pi N}{L}$):** Cutoff $T$ scales with dimension $N$ to prevent the Archimedean resonance truncation artifact (`cell94`/`cell95`). In this regime, the bandwidth expands, allowing both $E_N$ and $E_{L+1}$ to evolve.
 
-#### 4. The Bound-State Gap Pre-Factor Suppression
-Moreover, for bound states ($j \ge 1$), the numerator contains the explicit factor $\Delta_j^{(N)}$. Because the ground and low bound-state doublets undergo exponential semiclassical splitting ($\Delta_j^{(N)} \le C e^{-\sigma N}$), the product:
-$$\mathcal{E}_j^{\mathrm{exact}}(N, L) \le \Delta_j^{(N)} R_{\mathrm{spec}}(N, L)$$
-vanishes exponentially fast even if the geometric spectral ratio $R_{\mathrm{spec}}(N, L)$ remains $\mathcal{O}(1)$ or experiences mild polynomial growth.
-
-#### 5. Empirical Motivation from Galerkin High-Frequency Dispersion
-In the discrete Galerkin representation, the diagonal kinetic terms scale as $m^2$, while the Archimedean and prime dispersion terms preserve high-frequency spectral spread. This heuristic suggests that in the physical resolution-preserving limit ($T(N) > \alpha_N$), the spectral ceiling $E_N$ expands while preserving $p < 2$ growth relative to the barrier-top threshold $E_{L+1}$. Auditing the empirical behavior of $R_{\mathrm{spec}}(N, L)$ and the slack ratio $E_N / (E_N - E_{L+1})$ across discrete dimensions is the focus of Milestone M43 (`cell97.py`).
+*Diagnostic Lesson from `cell97` Test D:*
+In Test D, evaluating across $T \in \{100, 200, 400, 800\}$ at $N = 24$ ($\alpha_{24} \approx 58.79$) showed stable behavior for $T \in \{100, 200, 400\}$ ($E_{12} \approx 1.28 \to 1.31$, $\Delta_2 \approx 7.6 \times 10^{-27} \to 1.37 \times 10^{-26}$).
+However, at $T = 800$, $\Delta_2$ spiked to $2.99 \times 10^{-4}$ and $E_4$ dropped below zero ($-4.32 \times 10^{-5}$).
+This crucial diagnostic reveals that:
+> **Resolution Calibration Principle:** The resonance condition $T > \alpha_N$ is a **necessary** condition for resolution, but **not by itself sufficient** to guarantee numerical health. Scaling $T$ excessively relative to the available quadrature resolution or dimension can introduce high-$T$ integration pathologies. Cross-$T$ stability must be verified to ensure the parameters lie within the well-conditioned resolution window.
 
 ---
 
