@@ -3386,21 +3386,21 @@ Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fix
    $$\eta_{\mathrm{inter}}(j, \ell) = C_{j, \ell} \mathcal{T}_{\mathrm{tele}}(\ell), \qquad \text{where} \quad C_{j, \ell} \equiv \frac{E_{\ell+1} - E_{j+1}}{E_\ell - E_j} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}.$$
    When $E_j, E_{j+1} \ll E_\ell$, this satisfies the asymptotic equivalence $C_{j, \ell} \approx \frac{E_{\ell+1}}{E_\ell} = 1 + \frac{\Delta_\ell}{E_\ell}$. Consequently:
    - In the tunneling ladder ($\ell \le 10$): consecutive eigenvalues jump by orders of magnitude ($E_{\ell+1}/E_\ell \gg 1$), explaining why $C_{2, \ell}$ reaches $\sim 2.165 \times 10^4$ at $\ell=4$.
-   - Above the barrier top ($\ell \ge 12$): eigenvalues are macroscopic ($E_\ell \ge 1.3$) and gaps are bounded ($\Delta_\ell \le 0.5$), ensuring $C_{j, \ell} \in [1.03, 1.38]$ is uniformly bounded.
+   - Above the barrier top ($\ell \ge 12$): empirically observed at $N=24$ (`cell96.out`), eigenvalues are macroscopic ($E_\ell \ge 1.3$) and gaps are bounded ($\Delta_\ell \le 0.5$), yielding $C_{2, \ell} \in [1.03, 1.38]$.
 
 3. **Unconditional Finite-$N$ Operator-Norm Telescoping Bound (Rigorous Theorem):**
    Because the eigenvalues are strictly increasing ($E_{L+1} \le E_\ell < E_{\ell+1}$), the denominators satisfy $(E_\ell - E_j)(E_\ell - E_{j+1}) \ge (E_{L+1} - E_j)(E_{L+1} - E_{j+1}) > 0$ for all $\ell \ge L+1$.
    Factoring out this infimum denominator converts the remaining sum into an **exact telescoping sum of spectral increments**:
-   $$\sum_{\ell = L+1}^{N-1} \Delta_\ell = \sum_{\ell = L+1}^{N-1} (E_{\ell+1} - E_\ell) = E_N - E_{L+1} \le \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty.$$
-   Consequently, the interlacing tail sum satisfies the unconditional finite-$N$ operator-norm bound:
-   $$\boxed{\mathcal{S}_{\mathrm{inter}}(N; L) \le \Delta_j \frac{E_N - E_{L+1}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} < \Delta_j \frac{\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})}.}$$
+   $$\sum_{\ell = L+1}^{N-1} \Delta_\ell = \sum_{\ell = L+1}^{N-1} (E_{\ell+1} - E_\ell) = E_N - E_{L+1} \le \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} = E_N.$$
+   Consequently, the interlacing tail sum satisfies the unconditional finite-$N$ bounding chain:
+   $$\boxed{\mathcal{S}_{\mathrm{inter}}(N; L) \le \Delta_j \frac{E_N - E_{L+1}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \equiv \mathcal{E}_j^{\mathrm{exact}}(N, L) \le \Delta_j \frac{\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \equiv \mathcal{E}_j^{\mathrm{op}}(N, L).}$$
    Exponentiating yields the explicit finite-$N$ product enclosure:
-   $$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \frac{\Delta_j \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \right] \le \exp\left[ \frac{\Delta_j M}{(E_{L+1} - E_j)(E_{L+1} - E_{j+1})} \right].}$$
+   $$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big) \le \exp\big(\mathcal{E}_j^{\mathrm{op}}(N, L)\big).}$$
    This bound requires **zero imported Weyl growth laws ($E_\ell \sim \ell^2$)** and **zero continuous ODE Sturm–Liouville assumptions**. It is an unconditional identity valid for every finite-rank Galerkin matrix.
 
 4. **Closed Two-Pole $H(\mu_j)$ Architecture and Bound-State Overlap Suppression:**
    Splitting the full Stieltjes product into the finite core and the remote tail:
-   $$\Pi_j = \Pi_{j, \mathrm{core}}(L) \cdot \Pi_{j, \mathrm{tail}}(L), \qquad 0 < \Pi_{j, \mathrm{tail}}(L) - 1 \le \exp\left( \frac{\Delta_j \|Q_{\mathrm{even}}\|_{\mathrm{op}}}{E_{L+1}^2} \right) - 1,$$
+   $$\Pi_j = \Pi_{j, \mathrm{core}}(L) \cdot \Pi_{j, \mathrm{tail}}(L), \qquad 0 < \Pi_{j, \mathrm{tail}}(L) - 1 \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big) - 1,$$
    the boundary weight ratio $\alpha_j \equiv d_{j+1}^2 / d_j^2 = \zeta_j \Pi_j$ is determined to exponential precision by the finite core and local coordinate $\zeta_j \equiv \frac{E_{j+1} - z_j^*}{z_j^* - E_j}$.
    The regularized Stieltjes derivative $H(\mu_j) = (\mu_j - \lambda)^2 G_d'(\mu_j)$ is dominated by the two neighboring poles:
    $$H_{\mathrm{two-pole}}(\mu_j) = \frac{d_j^2 (\mu_j - \lambda)^2}{L_j^2} \left[ 1 + \Pi_j \zeta_j \left(\frac{L_j}{R_j}\right)^2 \right],$$
@@ -3411,40 +3411,46 @@ Let $N \ge 2$, let $j \ge 0$ be any fixed low mode, and let $L \ge j+1$ be a fix
 
 ---
 
-### 8.26 The Minimal Asymptotic Hypothesis for Continuum Tail Extinction ($L \to \infty$)
+### 8.26 The Exact Telescoping Tail Condition ($\mathbf{H}_{\mathrm{tail}}(j)$), Relative High-Spectrum Growth, and Dual-Regime Scaling
 
 Proposition 8.31 provides a rigorous, unconditional **finite-$N$ operator-norm enclosure** of the remote Stieltjes product:
-$$\boxed{1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})} \right].}$$
-As demonstrated in `cell96.out`, for any fixed finite dimension $N = 24$, setting the core threshold to $L = 11$ encloses the remote tail excess within $3.06 \times 10^{-26}$, with a slack of only $8.35$ over the actual observed deviation.
+$$1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big) \le \exp\big(\mathcal{E}_j^{\mathrm{op}}(N, L)\big),$$
+where the exact telescoping exponent is:
+$$\boxed{\mathcal{E}_j^{\mathrm{exact}}(N, L) \equiv \frac{\Delta_j^{(N)} (E_N^{(N)} - E_{L+1}^{(N)})}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})},}$$
+and the operator-norm envelope is:
+$$\boxed{\mathcal{E}_j^{\mathrm{op}}(N, L) \equiv \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}.}$$
 
-To upgrade this finite-$N$ enclosure into a genuine asymptotic continuum convergence theorem ($\lim_{L \to \infty} \lim_{N \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$), we examine the exponent:
-$$\mathcal{E}_j(N; L) \equiv \frac{\Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}.$$
+As certified in `cell96.out`, for any fixed finite dimension $N = 24$, setting the core threshold to $L = 11$ encloses the remote tail excess within $3.06 \times 10^{-26}$, with a slack of only $8.35\times$ over the actual observed tail deviation ($3.67 \times 10^{-27}$).
 
-#### 1. Uniform Boundedness of the Numerator
-For any fixed mode $j$ (e.g. $j = 2$):
-1. The fixed-mode spectral gap $\Delta_j^{(N)} = E_{j+1}^{(N)} - E_j^{(N)}$ is uniformly bounded in $N$. In the semiclassical tunneling regime, $\Delta_2^{(N)}$ is exponentially small ($\Delta_2 \approx 1.37 \times 10^{-26}$ at $N = 24$).
-2. The Galerkin operator norm satisfies a uniform a priori bound $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ for all $N$. Empirically, across the sweep $N \in \{8, 12, 16, 20, 24\}$, $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ increases mildly from $2.63$ to $3.81$, well within standard operator-theoretic bounds for the Connes–CvS Galerkin truncation.
-Thus, the numerator is uniformly bounded:
-$$\sup_{N \ge L+2} \Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le \mathcal{C}_j < \infty.$$
+#### 1. The Exact Asymptotic Condition ($\mathbf{H}_{\mathrm{tail}}(j)$)
+To upgrade this finite-$N$ enclosure into a continuum convergence theorem ($\lim_{L \to \infty} \lim_{N \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$), the genuinely minimal condition is:
+$$\mathbf{H}_{\mathrm{tail}}(j): \qquad \lim_{\substack{L \to \infty \\ N \to \infty}} \mathcal{E}_j^{\mathrm{exact}}(N, L) = 0.$$
+Because $1 < \Pi_{j, \mathrm{tail}}(L) \le \exp\big(\mathcal{E}_j^{\mathrm{exact}}(N, L)\big)$, $\mathbf{H}_{\mathrm{tail}}(j)$ is both necessary and sufficient within the telescoping framework to ensure $\Pi_{j, \mathrm{tail}}(L) \to 1$. It demands precisely what the algebraic reduction requires and nothing more.
 
-#### 2. The Quadratic Denominator and Minimal Spectral Growth
-For any core cutoff $L$ chosen above the semiclassical barrier top ($L \ge 11$), the core eigenvalues satisfy $E_j^{(N)}, E_{j+1}^{(N)} \ll E_{L+1}^{(N)}$ (for instance, at $N = 24$, $E_2, E_3 < 10^{-22}$ while $E_{12} \approx 1.3064$). The denominator therefore scales asymptotically as:
-$$(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)}) \sim \big(E_{L+1}^{(N)}\big)^2.$$
-Crucially, because the denominator contains **two independent factors** $E_{L+1} - E_j$ and $E_{L+1} - E_{j+1}$, vanishing of the exponent $\mathcal{E}_j(N; L) \to 0$ does **not** require:
-- Quadratic Weyl asymptotics ($E_L \sim L^2$),
-- Linear spectral gap expansion ($\Delta_L \sim L$),
-- Continuous Sturm–Liouville nodal domain properties.
+#### 2. Dual-Regime Distinction: Fixed-$T$ vs Resolution-Preserving Continuum Limit
+A critical conceptual distinction emerges from the high-$T$ Archimedean calibration (`cell95`):
+- **Fixed Finite Archimedean Cutoff ($T < \infty, N \to \infty$):** The truncated operator acts on a fixed frequency window $[-T, T]$; its operator norm is bounded by a fixed constant $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$. In this regime, all eigenvalues satisfy $0 \le E_k^{(N)} \le M(c, T)$, so eigenvalues cannot escape to $+\infty$. Instead, as $N \to \infty$, eigenvalues accumulate in $[0, M(c, T)]$. Tail extinction in this fixed-$T$ setting is governed by mode accumulation ($E_N - E_{L+1}$ shrinking relative to $(E_{L+1}-E_j)^2$) or by the super-exponential collapse of the low-mode gap $\Delta_j^{(N)} \to 0$.
+- **Resolution-Preserving Continuum Limit ($N \to \infty, T = T(N) \to \infty$ with $T(N) > \alpha_N = \frac{2\pi N}{L}$):** To avoid the Archimedean resonance truncation artifact identified in `cell94` and `cell95`, the cutoff $T$ must scale with $N$. In this physical limit, the operator bandwidth expands, allowing both the highest eigenvalue $E_N^{(N)}$ and the continuum threshold eigenvalues $E_{L+1}^{(N)}$ to grow.
 
-Rather, the exponent vanishes under the **Minimal Asymptotic Spectral Growth Hypothesis**:
-$$\mathbf{H}_{\mathrm{min\text{-}spec}}: \qquad \lim_{L \to \infty} \liminf_{N \to \infty} E_{L+1}^{(N)} = \infty.$$
-Indeed, even ultra-slow sub-linear growth (such as $E_{L+1}^{(N)} \ge \delta(L)$ with $\delta(L) \sim L^\beta$ for any $\beta > 0$, or even $\delta(L) \sim \sqrt{\log L}$) forces the exponent to vanish like $\mathcal{O}(\delta(L)^{-2})$.
+#### 3. Interpretable Sufficient Condition: Relative High-Spectrum Growth
+For any low bound-state mode $j$ (e.g. $j = 2$):
+1. The fixed-mode spectral gap $\Delta_j^{(N)} = E_{j+1}^{(N)} - E_j^{(N)}$ is uniformly bounded ($\Delta_j \le C_j$), and in fact decays exponentially fast in the semiclassical tunneling regime ($\Delta_2 \sim 10^{-26}$ at $N = 24$).
+2. The low modes $E_j^{(N)}, E_{j+1}^{(N)}$ remain bounded below the barrier top.
+3. For $L$ chosen in the continuum sector ($E_{L+1} \gg E_{j+1}$), the denominator is $(E_{L+1} - E_j)(E_{L+1} - E_{j+1}) \approx (E_{L+1}^{(N)})^2$.
 
-#### 3. Structural Origin in the Galerkin Operator
-In the finite-rank Galerkin truncation, mode indices $m \in \{0, \dots, N\}$ correspond to Fourier basis functions $e^{2\pi i m t / L}$. The diagonal kinetic terms of the underlying operator scale as $m^2$, while the Archimedean and prime dispersion terms preserve non-vanishing high-frequency spectral spread. Consequently, as the discrete dimension $N$ and the core cutoff $L$ are taken large, the high-energy spectrum expands, ensuring that $E_{L+1}^{(N)}$ escapes any compact interval.
+Therefore, bounding the numerator by $E_N^{(N)} - E_{L+1}^{(N)} \le E_N^{(N)} = \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ yields the **Relative High-Spectrum Growth Condition**:
+$$R_{\mathrm{spec}}(N, L) \equiv \frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad \Longleftrightarrow \qquad E_N^{(N)} = o\left((E_{L+1}^{(N)})^2\right).$$
+If the spectral ceiling grows as $E_N \sim (E_{L+1})^p$, vanishing of the tail requires only:
+$$p < 2.$$
+Even if the operator norm grows substantially with $N$ or $T(N)$, the quadratic denominator $(E_{L+1})^2$ provides an enormous suppression margin.
 
-This reduces the analytical programme for remote tail decoupling from an intractable continuum density problem to a straightforward operator question:
-$$\boxed{\text{Prove that the upper Galerkin spectrum does not accumulate at a finite ceiling: } \lim_{L \to \infty} E_{L+1} = \infty.}$$
-Under $\mathbf{H}_{\mathrm{min\text{-}spec}}$, the remote Stieltjes product satisfies $\lim_{L \to \infty} \Pi_{j, \mathrm{tail}}(L) = 1$ unconditionally.
+#### 4. The Bound-State Gap Pre-Factor Suppression
+Moreover, for bound states ($j \ge 1$), the numerator contains the explicit factor $\Delta_j^{(N)}$. Because the ground and low bound-state doublets undergo exponential semiclassical splitting ($\Delta_j^{(N)} \le C e^{-\sigma N}$), the product:
+$$\mathcal{E}_j^{\mathrm{exact}}(N, L) \le \Delta_j^{(N)} R_{\mathrm{spec}}(N, L)$$
+vanishes exponentially fast even if the geometric spectral ratio $R_{\mathrm{spec}}(N, L)$ remains $\mathcal{O}(1)$ or experiences mild polynomial growth.
+
+#### 5. Empirical Motivation from Galerkin High-Frequency Dispersion
+In the discrete Galerkin representation, the diagonal kinetic terms scale as $m^2$, while the Archimedean and prime dispersion terms preserve high-frequency spectral spread. This heuristic suggests that in the physical resolution-preserving limit ($T(N) > \alpha_N$), the spectral ceiling $E_N$ expands while preserving $p < 2$ growth relative to the barrier-top threshold $E_{L+1}$. Auditing the empirical behavior of $R_{\mathrm{spec}}(N, L)$ and the slack ratio $E_N / (E_N - E_{L+1})$ across discrete dimensions is the focus of Milestone M43 (`cell97.py`).
 
 ---
 
@@ -3658,6 +3664,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (High-Throughput Large-$N$ Boundary Gap & Projector Convergence Stress Test) | Overnight stress test of boundary gaps $g_{10} \dots g_{13}$, prominence ratio $\Gamma_{11}$, descriptive logarithmic slopes $s_{11}, s_{E11}$, and projector Cauchy convergence across $N \in \{64, \dots, 256\}$ | `cell94.py` | `cell94.out` |
 | Section 8.25 (Archimedean Cutoff Calibration & High-$T$ Spectral Recovery Sweep) | Sweep of $T \in \{200, \dots, 1600\}$ across fixed dimensions $N \in \{160, 176, 192\}$, audit of control stability at $N=160$, and recovery of $0.41$ gap for $T > \alpha_N$ | `cell95.py` | `cell95.out` |
 | Section 8.25 (Unconditional Remote-Product Operator-Norm Enclosure & Two-Pole Closure) | Certification of Proposition 8.31, audit of expansion ratio $C_{j, \ell} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}$, unconditional operator-norm bound $\mathcal{S}_{\mathrm{inter}} \le \frac{\Delta_j \|Q\|_{\mathrm{op}}}{E_{L+1}^2}$, and two-pole $H(\mu_j)$ closure | `cell96.py` | `cell96.out` |
+| Section 8.26 (Exact Telescoping Tail Condition $\mathbf{H}_{\mathrm{tail}}(j)$, Relative High-Spectrum Growth $R_{\mathrm{spec}}$, & Component Forensics) | Multi-dimension audit of $E_{L+1}$, $E_N - E_{L+1}$, $\|Q\|_{\mathrm{op}}$, exact exponent $\mathcal{E}_j^{\mathrm{exact}}$, operator envelope $\mathcal{E}_j^{\mathrm{op}}$, slack $E_N/(E_N-E_{L+1})$, and relative high-spectrum growth $R_{\mathrm{spec}} = E_N/E_{L+1}^2$ | `cell97.py` | `cell97.out` |
 
 
 ---
