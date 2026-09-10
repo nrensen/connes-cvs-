@@ -5,7 +5,7 @@ CELL 85 — THREE-REGIME SPECTRAL PARTITION, CONTINUUM GAP ENCLOSURE C_{cont}(K)
           AND KINETIC-BARRIER OPERATOR MATRIX DECOMPOSITION
 ================================================================================
 
-Strategic Roadmap Milestone M31 (Paper 5C Section 8.25 & Proposition 8.28):
+Strategic Roadmap Milestone M31 (Paper NR2 Section 8.25 & Proposition 8.28):
 ----------------------------------------------------------------------------
 Following the discovery in Cell 84 that:
   1. The exact spectral expansion ratio identity eta_{inter}(j, l) = C_{j, l} * T_{tele}(l)

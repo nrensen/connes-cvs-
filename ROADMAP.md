@@ -5,9 +5,9 @@
 **Status:** Canonical Project Strategy & Master Mathematical Roadmap  
 **Repository Architecture:** [AGENTS.md](file:///c:/data/github/connes-cvs-/AGENTS.md) (Operating Standards) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md) (Comprehensive Historical Research Notebook)  
 **Associated Manuscripts:**
-- Paper NR1: *An Exact Resolvent and Commutator Toolkit* (Locked Toolkit Baseline)
+- Paper NR1: *An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form.* (Locked Toolkit Baseline)
 - Paper NR2: *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity* (Asymptotic Programme)
-- Paper NR3: *Continuum Operator Limits and the Weil Criterion* (In Preparation)
+- Paper NR3: *The Excited Bound-State Sector in the Connes–CvS Galerkin Model: Sturm–Liouville Nodal Hierarchy, Multi-c Gap Universality, and Transmission Resonances with the Riemann Zeros* (In Preparation)
 
 ---
 
