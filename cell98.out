@@ -1,0 +1,81 @@
+
+========================================================================
+CELL 98 — FESHBACH / HIGH-MODE SEPARATION
+========================================================================
+
+C=13, N=192, T=600, dps=50
+
+
+GALERKIN MATRIX CACHE: GENERATION PRECISION PROMOTED
+  requested dps = 50
+  working dps   = 70
+  generation dps = 70
+
+GALERKIN MATRIX CACHE: HIT
+  key            = 03fee50a84601d980ddfbdb58f963f612eb947677ab4571e0e08b8d08d88690c
+  N              = 192 (dim = 385)
+  generation dps = 70
+  lookup         = 0.004793 s
+
+GALERKIN MATRIX CACHE: RETURN
+  decode         = 1.313431 s
+  validation     = 0.383158 s
+  total          = 1.701381 s
+
+Full Galerkin matrix loaded in 1.702 s
+
+Canonical matrix:
+  dimension = 193
+  conversion = 0.259 s
+  symmetry error = 0.0
+
+FULL CANONICAL SPECTRUM
+  E11 = -1.06311187849184059e-51
+  E12 = 4.66838153119400767e-50
+  g11 = 4.77469271904319173e-50
+  eigensolve = 533.068 s
+
+========================================================================
+FESHBACH SWEEP
+========================================================================
+
+Columns:
+M | dim(P) | min high eig | dist(E11,sigma(C)) | ||B|| | envelope(E11) | ||R(E11)|| | envelope(E12) | ||R(E12)||
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 4 |      5 | 1.45139154e-28 |   1.45139154e-28 |  0.889004021 |  5.44531318e+27 |  0.461967434 |  5.44531318e+27 |  0.461967434
+ 8 |      9 | 1.88980127e-11 |   1.88980127e-11 |   1.14728463 |  6.96508169e+10 |   2.62770887 |  6.96508169e+10 |   2.62770887
+12 |     13 | 7.41265906e-5 |    7.41265906e-5 |  0.905929341 |      11071.7081 |   2.42292422 |      11071.7081 |   2.42292422
+16 |     17 | 0.00643217896 |    0.00643217896 |    1.0491102 |      171.113431 |   2.23779296 |      171.113431 |   2.23779296
+24 |     25 |  0.304443499 |      0.304443499 |   1.00799655 |        3.337424 |  0.909138322 |        3.337424 |  0.909138322
+32 |     33 |  0.504743253 |      0.504743253 |  0.881513203 |      1.53952633 |  0.594124076 |      1.53952633 |  0.594124076
+48 |     49 |  0.823369018 |      0.823369018 |  0.955945317 |      1.10986864 |  0.527468667 |      1.10986864 |  0.527468667
+64 |     65 |  0.892261937 |      0.892261937 |   0.95874828 |      1.03018881 |   0.31726353 |      1.03018881 |   0.31726353
+
+========================================================================
+SUMMARY
+========================================================================
+
+The quantity to watch is not merely ||B||.
+The Feshbach control parameter is
+    ||B||^2 / dist(lambda, sigma(C))
+and the actual correction is
+    ||B(C-lambda)^(-1)B^T||.
+
+If the high-mode mechanism is working as hoped, we want to see:
+
+  1. dist(E11, sigma(C)) bounded away from zero;
+  2. ||B|| decreasing as M increases;
+  3. the actual Schur correction decreasing;
+  4. the actual correction substantially below its resolvent envelope;
+  5. effective eigenvalue residuals becoming small.
+
+The decisive analytical target is then a bound of the form
+
+    ||B_MN||^2 / gamma_M
+
+    <= C * Delta_M * R_spec(M,L),
+
+with the right-hand side -> 0.
+
+This cell deliberately does not assume that bound.
+It measures the two sides needed to formulate it.

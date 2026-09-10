@@ -264,10 +264,14 @@ def feshbach_correction(A, B, C, lam):
         R(lambda)
           = B (C - lambda I)^(-1) B^T
 
-    using a linear solve rather than explicitly forming the inverse.
-    """
+    using column-by-column linear solves rather than explicitly
+    forming the inverse.
 
+    If B is p x q and C is q x q, then each column of B^T
+    is solved against (C - lambda I).
+    """
     q = C.rows
+    p = B.rows
 
     shifted = mp.matrix(q, q)
 
@@ -279,20 +283,31 @@ def feshbach_correction(A, B, C, lam):
 
     # Solve
     #
-    #     (C - lambda I) X = B^T.
+    #     (C - lambda I) x_j = (B^T)_j
     #
-    # X has q rows and p columns.
+    # for each of the p columns of B^T.
+    #
+    # X is q x p.
 
-    X = mp.lu_solve(
-        shifted,
-        B.T,
-    )
+    X = mp.matrix(q, p)
+
+    for j in range(p):
+        rhs = mp.matrix(q, 1)
+
+        for i in range(q):
+            rhs[i] = B[j, i]
+
+        x = mp.lu_solve(
+            shifted,
+            rhs,
+        )
+
+        for i in range(q):
+            X[i, j] = x[i]
 
     R = B * X
 
     # Remove tiny numerical asymmetry.
-    p = R.rows
-
     Rsym = mp.matrix(p, p)
 
     for i in range(p):
