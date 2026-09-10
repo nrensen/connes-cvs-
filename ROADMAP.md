@@ -270,7 +270,8 @@ The following operational milestones define the active analytical and computatio
 
 | Milestone | Target Gate | Mathematical Objective | Target Artifact / Script | Status |
 | :---: | :---: | :--- | :--- | :---: |
-| **M-G1.0** | Gate 1 | **Central Target Proposition 1.0:** Prove joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \Pi_{j, \mathrm{tail}} \to 1$ | Paper 4B Proposition 8.32 | **ACTIVE** |
+| **M-G1.0** | Gate 1 | **Central Target Proposition 1.0:** Prove joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \Pi_{j, \mathrm{tail}} \to 1$ | Paper 4B Proposition 8.37 | **ACTIVE** |
+| **M-G1.B** | Gate 1 | **Route 1B Analytical Reduction:** Conditional theorem $(\mathrm{H}_{\mathrm{gap}}(J) + \mathrm{H}_{\mathrm{collapse}}(j)) \implies \mathbf{H}_{\mathrm{tail}}(j)$; route comparison and forward path | [gate1_tail_extinction_reduction.md](file:///c:/data/github/connes-cvs-/gate1_tail_extinction_reduction.md) / Paper 4B Proposition 8.37 | **ESTABLISHED** |
 | **M-G1.1** | Gate 1 | Route 1A Analysis: Analytical upper bound on tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from Galerkin barrier potential | Paper 4B Section 8.27 | **IN PROGRESS** |
 | **M-G1.2** | Gate 1 | Route 1A Analysis: Minimal high-spectrum growth bound $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper 4B Section 8.27 | **PLANNED** |
 | **M-G1.3** | Gate 1 | Route 1B Analysis: High-$T$ Recovery Sweep across $T \in [200, 1600]$ at $N \in \{160, 176, 192\}$ certifying boundary gap $g_{11} \approx 0.418$ | `cell95.py` / `cell95.out` | **IN PROGRESS** |

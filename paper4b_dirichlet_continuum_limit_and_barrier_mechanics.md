@@ -3485,6 +3485,58 @@ This crucial diagnostic reveals that:
 
 ---
 
+### Proposition 8.37 (Route 1B Conditional Reduction of the Tail Extinction Condition $\mathbf{H}_{\mathrm{tail}}(j)$)
+
+Let $c > 1$ and $T \ge 1$ be fixed cutoff parameters. Let $j \ge 0$ be a fixed focus mode, and let $Q_{\mathrm{even}}^{(N)}$ denote the even Galerkin matrix with ordered eigenvalues $0 \le E_0^{(N)} < E_1^{(N)} < \cdots < E_N^{(N)}$, spectral gaps $\Delta_k^{(N)} \equiv E_{k+1}^{(N)} - E_k^{(N)}$, and Ritz limits $E_k^{(\infty)} = \lim_{N \to \infty} E_k^{(N)} \ge 0$ (Proposition 8.30).
+
+**Hypotheses.** Assume:
+1. **Uniform Boundary-Gap Hypothesis $\mathrm{H}_{\mathrm{gap}}(J)$:** There exist an integer $J \ge j + 1$, a constant $\eta_J > 0$, and a finite threshold $N_0 \ge 1$ such that:
+   $$E_{J+1}^{(N)} - E_J^{(N)} \ge \eta_J \qquad (\forall N \ge N_0).$$
+2. **Bound-State Ritz Collapse Hypothesis $\mathrm{H}_{\mathrm{collapse}}(j)$:** The continuum Ritz limits of modes $j$ and $j+1$ coincide:
+   $$\Delta_j^{(\infty)} \equiv E_{j+1}^{(\infty)} - E_j^{(\infty)} = 0.$$
+
+**Conclusion.** Then the tail extinction condition $\mathbf{H}_{\mathrm{tail}}(j)$ holds:
+$$\boxed{\lim_{L \to \infty} \limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{op}}(N, L) = 0,}$$
+and consequently:
+$$\lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.$$
+
+**Proof.**
+
+*Step 1 (Numerator bound).* Fix any $L \ge J$, and let $N > L$ with $N \ge N_0$. By the uniform operator-norm bound (Proposition 8.29):
+$$E_N^{(N)} - E_{L+1}^{(N)} \le E_N^{(N)} \le \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T).$$
+
+*Step 2 (Denominator bound).* Since $j + 1 \le J$ and eigenvalues are ordered, $E_{j+1}^{(N)} \le E_J^{(N)}$. By $\mathrm{H}_{\mathrm{gap}}(J)$:
+$$E_{J+1}^{(N)} - E_{j+1}^{(N)} \ge E_{J+1}^{(N)} - E_J^{(N)} \ge \eta_J.$$
+Since $L \ge J$, $E_{L+1}^{(N)} \ge E_{J+1}^{(N)}$, so:
+$$E_{L+1}^{(N)} - E_{j+1}^{(N)} \ge \eta_J, \qquad E_{L+1}^{(N)} - E_j^{(N)} \ge \eta_J.$$
+
+*Step 3 (Envelope bound).* Combining Steps 1–2 with the operator-norm envelope $\mathcal{E}_j^{\mathrm{op}}(N, L) = \Delta_j^{(N)} \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} / [(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})]$:
+$$\mathcal{E}_j^{\mathrm{op}}(N, L) \le \frac{M(c, T)}{\eta_J^2} \cdot \Delta_j^{(N)}.$$
+
+*Step 4 (Limit).* By $\mathrm{H}_{\mathrm{collapse}}(j)$, $\Delta_j^{(N)} \to \Delta_j^{(\infty)} = 0$ as $N \to \infty$. Therefore:
+$$\limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{op}}(N, L) \le \frac{M(c, T)}{\eta_J^2} \cdot \Delta_j^{(\infty)} = 0.$$
+Since this bound is uniform in $L \ge J$:
+$$\lim_{L \to \infty} \limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{op}}(N, L) = 0.$$
+Because $\mathcal{E}_j^{\mathrm{exact}} \le \mathcal{E}_j^{\mathrm{op}}$ (Proposition 8.31), $\mathbf{H}_{\mathrm{tail}}(j)$ follows, and the product enclosure $1 < \Pi_{j, \mathrm{tail}} \le \exp(\mathcal{E}_j^{\mathrm{op}}) \to 1$ yields the tail convergence. $\blacksquare$
+
+---
+
+#### Remark 8.37.1 (Independence and Necessity of the Two Hypotheses)
+
+The two hypotheses control independent structural features of the spectrum:
+- $\mathrm{H}_{\mathrm{gap}}(J)$ ensures the **spectral denominator** remains uniformly bounded away from zero. Without it, the continuum-sector eigenvalue $E_{L+1}^{(N)}$ could drift down toward the focus eigenvalue $E_{j+1}^{(N)}$, producing a potentially divergent $0/0$ form.
+- $\mathrm{H}_{\mathrm{collapse}}(j)$ ensures the **tunneling splitting numerator** vanishes. Without it, if $\Delta_j^{(\infty)} > 0$, the envelope satisfies $\limsup_{N} \mathcal{E}_j^{\mathrm{op}} \ge \Delta_j^{(\infty)} M / (E_{L+1}^{(\infty)} - E_{j+1}^{(\infty)})^2 > 0$, and the tail need not close.
+
+**Relationship to Route 1A (Exponential Tunneling):** The exponential tunneling hypothesis $\mathrm{H}_{\mathrm{tunnel}}(j)$ ($\Delta_j(N) \le C_j e^{-\sigma_j N}$ with $\sigma_j > 0$) strictly implies $\mathrm{H}_{\mathrm{collapse}}(j)$, since $C_j e^{-\sigma_j N} \to 0$. Route 1A is thus strictly stronger than Route 1B's hypotheses, but handles the broader resolution-preserving regime $T(N) > \alpha_N$ where $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ may grow with $N$.
+
+**Empirical status at the leading candidate $j = 2$, $J = 11$:**
+- $\mathrm{H}_{\mathrm{gap}}(11)$: $g_{11}(N) \in [0.54, 0.57]$ across $N \in \{28, \ldots, 44\}$ (Table 8.25.25); $g_{11} \approx 0.418$ at $N \in \{160, \ldots, 192\}$ (Remark 8.36). Active investigation in `cell95`.
+- $\mathrm{H}_{\mathrm{collapse}}(2)$: $\Delta_2(N) \approx 1.37 \times 10^{-26}$ at $N = 24$ (Table 8.25.29), decreasing by $\sim 6$ orders of magnitude per $\Delta N = 4$.
+
+The full analytical working note containing the route comparison, forward path analysis, and connection to Gates 2–3 is maintained in [gate1_tail_extinction_reduction.md](file:///c:/data/github/connes-cvs-/gate1_tail_extinction_reduction.md).
+
+---
+
 ## 9. The Analytical Roadmap toward Continuous Weil Positivity
 
 The empirical and asymptotic results established in this research programme suggest that the finite-rank Galerkin truncation may provide a convergent approximation to the continuous Weil quadratic form. 
