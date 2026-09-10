@@ -5,7 +5,7 @@ CELL 91 — BOUNDARY CLUSTER DYNAMICS, INDIVIDUAL EIGENVECTOR OVERLAPS,
           BOUNDARY GAPS, AND PROJECTOR ENCLOSURE
 ================================================================================
 
-Strategic Roadmap Milestone M37 (Paper 4B Section 8.25 & Remark 8.33):
+Strategic Roadmap Milestone M37 (Paper NR2 Section 8.25 & Remark 8.33):
 ----------------------------------------------------------------------
 Following the execution of Cell 90 and the reviewer's diagnostic:
   1. Convergence of K=10 Subspace:

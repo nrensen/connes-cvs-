@@ -2,7 +2,7 @@
 
 **Status:** Working analytical note (Gate 1 Work Item B)
 **Target:** [ROADMAP.md Gate 1 — M-G1.B](file:///c:/data/github/connes-cvs-/ROADMAP.md)
-**Dependencies:** Paper 4B Propositions 8.29, 8.30, 8.31 (all established)
+**Dependencies:** Paper NR2 Propositions 8.29, 8.30, 8.31 (all established)
 **Date:** 2026-09-10
 
 ---
@@ -16,10 +16,10 @@ $$\mathbf{H}_{\mathrm{tail}}(j): \quad \lim_{L \to \infty} \limsup_{N \to \infty
 | :--- | :--- | :--- | :--- |
 | **Route 1B** (Fixed-$T$) | (I) $\mathrm{H}_{\mathrm{gap}}(J)$: uniform spectral gap; (II) $\mathrm{H}_{\mathrm{collapse}}(j)$: bound-state Ritz collapse | Both are active numerical conjectures with strong empirical support | Fixed-$T$ regime only |
 | **Route 1A** (Tunneling) | Exponential splitting $\Delta_j \le C e^{-\sigma N}$ and $R_{\mathrm{spec}} = o(e^{\sigma N})$ | Empirical WKB only; no rigorous proof | Handles $T(N) \to \infty$ |
-| **Route 1C** (Wavepacket) | Dipole cancellation bound on $\|P_{\perp u_0} Kc\|^2$ | Pythagorean identity proved (Paper 4) | Complementary mechanism |
+| **Route 1C** (Wavepacket) | Dipole cancellation bound on $\|P_{\perp u_0} Kc\|^2$ | Pythagorean identity proved (Paper NR1) | Complementary mechanism |
 | **Route 1D** (Resolvent) | Direct trace-class resolvent convergence | Formulation stage | Bypasses mode-by-mode |
 
-**Main Result:** Route 1B yields a *rigorous conditional theorem* (Proposition 8.37 in Paper 4B) reducing the infinite-dimensional tail extinction problem to two explicit, testable hypotheses about the finite-dimensional Galerkin spectrum.
+**Main Result:** Route 1B yields a *rigorous conditional theorem* (Proposition 8.37 in Paper NR2) reducing the infinite-dimensional tail extinction problem to two explicit, testable hypotheses about the finite-dimensional Galerkin spectrum.
 
 ---
 
@@ -42,7 +42,7 @@ The implication follows from the unconditional enclosure $1 < \Pi_{j, \mathrm{ta
 
 ### 1.2 The Existing Enclosure Chain
 
-The exact telescoping exponent (Proposition 8.31, Paper 4B) provides the rigorous finite-$N$ bounding hierarchy:
+The exact telescoping exponent (Proposition 8.31, Paper NR2) provides the rigorous finite-$N$ bounding hierarchy:
 $$\mathcal{S}_{\mathrm{dev}} < \mathcal{S}_{\mathrm{inter}} \le \mathcal{E}_j^{\mathrm{exact}}(N, L) \le \mathcal{E}_j^{\mathrm{op}}(N, L),$$
 where:
 $$\mathcal{E}_j^{\mathrm{exact}}(N, L) = \frac{\Delta_j^{(N)} \big(E_N^{(N)} - E_{L+1}^{(N)}\big)}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}, \qquad \mathcal{E}_j^{\mathrm{op}}(N, L) = \frac{\Delta_j^{(N)} \cdot \|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})}.$$
@@ -65,7 +65,7 @@ At $N = 24$, $T = 400$, $L = 11$: $\Delta_2 \approx 1.37 \times 10^{-26}$, $R_{\
 
 ### 2.1 The Analytical Ingredients
 
-Route 1B assembles three established results from Paper 4B into a conditional tail-extinction theorem:
+Route 1B assembles three established results from Paper NR2 into a conditional tail-extinction theorem:
 
 **Ingredient 1 — Uniform Operator-Norm Bound (Proposition 8.29, Rigorous):**
 At fixed cutoff parameters $c > 1$ and $T \ge 1$, the even Galerkin operator norm is uniformly bounded:
@@ -96,11 +96,11 @@ $$E_{J+1}^{(N)} - E_J^{(N)} \ge \eta_J \qquad (\forall N \ge N_0).$$
 $$\Delta_j^{(\infty)} \equiv \lim_{N \to \infty} \big[E_{j+1}^{(N)} - E_j^{(N)}\big] = 0.$$
 That is, the continuum Ritz limits of modes $j$ and $j+1$ coincide: $E_{j+1}^{(\infty)} = E_j^{(\infty)}$.
 
-> **Empirical Status:** For the deep tunneling modes ($j \le 10$), the gaps collapse exponentially: $\Delta_2(N) \approx 1.37 \times 10^{-26}$ at $N = 24$ (Table 8.25.29 in Paper 4B), decreasing by 6–7 orders of magnitude per $\Delta N = 4$. The 11-mode tunneling cluster converges toward a degenerate ground-state energy $E_k^{(\infty)} \approx 0$ for $k \le 10$.
+> **Empirical Status:** For the deep tunneling modes ($j \le 10$), the gaps collapse exponentially: $\Delta_2(N) \approx 1.37 \times 10^{-26}$ at $N = 24$ (Table 8.25.29 in Paper NR2), decreasing by 6–7 orders of magnitude per $\Delta N = 4$. The 11-mode tunneling cluster converges toward a degenerate ground-state energy $E_k^{(\infty)} \approx 0$ for $k \le 10$.
 
 ### 2.3 The Conditional Reduction Theorem
 
-**Proposition 8.37 (Route 1B Conditional Reduction of $\mathbf{H}_{\mathrm{tail}}$; see Paper 4B).**
+**Proposition 8.37 (Route 1B Conditional Reduction of $\mathbf{H}_{\mathrm{tail}}$; see Paper NR2).**
 *Let $c > 1$ and $T \ge 1$ be fixed cutoff parameters. Let $j \ge 0$ be a fixed focus mode. Assume:*
 1. *$\mathrm{H}_{\mathrm{gap}}(J)$ holds for some $J \ge j + 1$.*
 2. *$\mathrm{H}_{\mathrm{collapse}}(j)$ holds: $\Delta_j^{(\infty)} = 0$.*
@@ -157,7 +157,7 @@ The theorem cleanly separates the tail extinction into two independent spectral 
 ### 2.5 Epistemic Status
 
 > **Rigorous conditional theorem, pending two hypotheses.**
-> The logical chain Proposition 8.29 + Proposition 8.30 + Proposition 8.31 $\implies$ (Proposition 8.37 conditional on $\mathrm{H}_{\mathrm{gap}} + \mathrm{H}_{\mathrm{collapse}}$) is a complete proof. No additional analytical tools are imported; the entire argument operates within the established Paper 4B framework.
+> The logical chain Proposition 8.29 + Proposition 8.30 + Proposition 8.31 $\implies$ (Proposition 8.37 conditional on $\mathrm{H}_{\mathrm{gap}} + \mathrm{H}_{\mathrm{collapse}}$) is a complete proof. No additional analytical tools are imported; the entire argument operates within the established Paper NR2 framework.
 >
 > Neither $\mathrm{H}_{\mathrm{gap}}(J)$ nor $\mathrm{H}_{\mathrm{collapse}}(j)$ is currently proved. Both have strong numerical support across all tested dimensions.
 
@@ -171,7 +171,7 @@ The theorem cleanly separates the tail extinction into two independent spectral 
 There exist constants $C_j < \infty$ and $\sigma_j > 0$ such that:
 $$\Delta_j(N) \le C_j \, e^{-\sigma_j N} \qquad (\forall N \ge 1).$$
 
-> **Empirical Status:** The WKB barrier computation (Paper 4B Section 4.1) yields the semiclassical scaling:
+> **Empirical Status:** The WKB barrier computation (Paper NR2 Section 4.1) yields the semiclassical scaling:
 > $$\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c,$$
 > predicting $\sigma_j \approx \frac{\pi}{4} \log c$. At $c = 13$: $\sigma_j \approx \frac{\pi}{4} \log 13 \approx 2.014$.
 > Numerically, the actual boundary suppression exceeds the WKB prediction by $\sim 5\%$ (`cell47`). However, no rigorous analytical proof of exponential splitting exists for the discrete Galerkin operator.
@@ -210,7 +210,7 @@ This is an open hard analytical problem (M-G1.1 in [ROADMAP.md](file:///c:/data/
 | | **Route 1B** (Fixed-$T$ Loewner) | **Route 1A** (Exponential Tunneling) | **Route 1C** (Wavepacket Cancellation) | **Route 1D** (Resolvent Bypass) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Key Hypothesis** | $\mathrm{H}_{\mathrm{gap}}(J) + \mathrm{H}_{\mathrm{collapse}}(j)$ | $\mathrm{H}_{\mathrm{tunnel}}(j)$ + soft growth | Dipole residual bound | Trace-class perturbation |
-| **Paper 4B Tools Used** | Prop 8.29, 8.30, 8.31 | Prop 8.31, Section 4.1 | Commutator identity (Paper 4) | — |
+| **Paper NR2 Tools Used** | Prop 8.29, 8.30, 8.31 | Prop 8.31, Section 4.1 | Commutator identity (Paper NR1) | — |
 | **Regime** | Fixed $T$ only | All regimes (incl. $T(N) \to \infty$) | Mode-by-mode | Global |
 | **Analytical Difficulty** | Low (conditional theorem is elementary) | High (WKB for discrete operators) | Medium (coordinate bounds) | High (functional analysis) |
 | **Proof Status** | ✅ Conditional theorem proved | ❌ Conditional + unproved hypothesis | ⚠️ Pythagorean identity proved, bounds open | ❌ Formulation stage |
@@ -274,7 +274,7 @@ The value of Route 1B is that $\mathrm{H}_{\mathrm{collapse}}(j)$ is a weaker hy
 
 ### 6.3 Recommended next steps
 
-1. **Record Proposition 8.35 in Paper 4B** as a conditional theorem with explicit epistemic labeling.
+1. **Record Proposition 8.35 in Paper NR2** as a conditional theorem with explicit epistemic labeling.
 2. **Continue `cell95` investigation** of $g_{11}(N)$ at high $N$ to strengthen the empirical foundation for $\mathrm{H}_{\mathrm{gap}}(11)$.
 3. **Defer `cell98`** until the analytical landscape is fully mapped and a specific falsification/verification target is formulated.
 4. **Investigate whether Gate 2 construction (Friedrichs extension, strong resolvent convergence) can directly yield $\mathrm{H}_{\mathrm{gap}}$ and $\mathrm{H}_{\mathrm{collapse}}$** — if so, the tail extinction theorem becomes an immediate corollary of the continuum limit.

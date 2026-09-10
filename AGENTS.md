@@ -30,19 +30,19 @@ To maintain absolute mathematical integrity, audit-proof rigor, and consistency 
 
 The repository maintains a strict architectural and epistemological boundary between its mathematical manuscripts:
 
-### Tier 1: Paper 4 (`paper4_exact_resolvent_and_dirichlet_limit.md`) — The Bedrock Toolkit
+### Tier 1: Paper NR1 (`Paper-NR1.md`) — The Bedrock Toolkit
 - **Unconditional Finite-$N$ Rigor:**
-  Paper 4 is the permanent, locked mathematical foundation. Every theorem, proposition, lemma, and corollary must be an exact, unconditional identity valid for all $N \ge 1$ and all cutoff parameters $c > 1$.
+  Paper NR1 is the permanent, locked mathematical foundation. Every theorem, proposition, lemma, and corollary must be an exact, unconditional identity valid for all $N \ge 1$ and all cutoff parameters $c > 1$.
 - **Complete, Unbroken Proofs:**
   Proofs must be simple, complete, and rigorous. There must be **no skipped steps, no hand-waving, no unverified contour indentations, and no missing normalization factors** (e.g., the exact $\pi$ factor in divided-difference contractions).
 - **Zero Speculation:**
-  Paper 4 must contain **no speculation, no heuristic modeling, and no attempts to foretell future results**. Semiclassical limits, barrier mechanics, tunneling ladders, and continuum conjectures are strictly barred from this manuscript.
+  Paper NR1 must contain **no speculation, no heuristic modeling, and no attempts to foretell future results**. Semiclassical limits, barrier mechanics, tunneling ladders, and continuum conjectures are strictly barred from this manuscript.
 - **Frozen Status:**
-  Paper 4 is frozen. It must not be modified unless repairing a verified typographical or mathematical error.
+  Paper NR1 is frozen. It must not be modified unless repairing a verified typographical or mathematical error.
 
-### Tier 2: Paper 4B (`paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md`) — Semiclassical & Continuum Programme
+### Tier 2: Paper NR2 (`Paper-NR2.md`) — Semiclassical & Continuum Programme
 - **Explicit Epistemic Labeling:**
-  Paper 4B explores the large-$N$ continuum limit, barrier mechanics, spectral filtering, and boundary decoupling. While speculative ideas and heuristic models are permitted, they must be **strictly and visibly distinguished from established mathematical facts**:
+  Paper NR2 explores the large-$N$ continuum limit, barrier mechanics, spectral filtering, and boundary decoupling. While speculative ideas and heuristic models are permitted, they must be **strictly and visibly distinguished from established mathematical facts**:
   - `Theorem / Proposition (Rigorous)`: Reserved solely for results with complete, mathematically watertight proofs.
   - `Conjecture / Hypothesis`: Explicitly designated for unproven theoretical targets (e.g., the Boundary-Defect Decoupling Conjecture).
   - `Empirical Evidence / Scaling Observation`: Findings derived from finite numerical sweeps across discrete dimensions $N$. Numerical power-law fits (e.g., across 5 data points) must **never** be described as "analytical proofs" or "rigorously secured" facts.
@@ -70,7 +70,7 @@ The repository maintains a strict architectural and epistemological boundary bet
   To maintain clear separation between historical record-keeping, forward-looking mathematical strategy, and permanent mathematical manuscripts:
   1. [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md) (**What happened?**): The comprehensive, chronological scientific research notebook recording every computational cell (`cell0` through present), its mathematical rationale, raw output, established results, and refuted hypotheses.
   2. [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (**Where are we trying to go, and why?**): The canonical strategic master plan structured around five conceptual Mathematical Gates and the explicit chain of obligations ($\mathcal{Q}_{c, N} \to \mathcal{Q}_\infty \to \mathcal{W} \implies \mathrm{RH}$). It must **never** be used as a sequential log of completed cell outputs.
-  3. **The Manuscripts** ([paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md), [paper4b.md](file:///c:/data/github/connes-cvs-/paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md), `paper5.md`) (**What has been established?**): Formally written, peer-review-ready mathematical papers adhering strictly to the Tiering and Epistemic Discipline rules of Section 2.
+  3. **The Manuscripts** ([paperNR1.md](file:///c:/data/github/connes-cvs-/Paper-NR1.md), [Paper-NR2.md](file:///c:/data/github/connes-cvs-/Paper-NR2.md), `Paper-NR3.md`) (**What has been established?**): Formally written, peer-review-ready mathematical papers adhering strictly to the Tiering and Epistemic Discipline rules of Section 2.
 
 - **The Five Mathematical Gates:**
   All research work is organized around five strictly sequenced gates:

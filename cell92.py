@@ -5,7 +5,7 @@ CELL 92 — BOUNDARY-GAP STRESS TEST AT EXTENDED DIMENSIONS (N <= 56),
           RITZ RESIDUALS r_j, AND 11|12 DECOUPLING PERSISTENCE
 ================================================================================
 
-Strategic Roadmap Milestone M38 (Paper 4B Section 8.25 & Remark 8.34):
+Strategic Roadmap Milestone M38 (Paper NR2 Section 8.25 & Remark 8.34):
 ----------------------------------------------------------------------
 Following the execution of Cell 91 and the reviewer's diagnostic:
   1. The Boundary-Gap Invariance:

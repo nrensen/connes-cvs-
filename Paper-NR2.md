@@ -3,13 +3,13 @@
 **Authors:** Research Record / Connes–CvS Investigation Series  
 **Date:** September 2026  
 **Software & Reproducibility Suite:** `https://github.com/akivag613/connes-cvs-` (mirror: `nrensen/connes-cvs-`)  
-**Status:** Standalone Manuscript / Research Programme (Companion to Paper 4: *The Toolkit*)
+**Status:** Standalone Manuscript / Research Programme (Companion to Paper NR1: *The Toolkit*)
 
 ---
 
 ### Abstract
 
-The truncated Weil quadratic form of Connes–van Suijlekom (2025) and Connes–Consani–Moscovici (2026) projects the explicit formula for the Riemann zeta function onto finite-rank Galerkin subspaces of band $N$ on a logarithmic scaling interval $[0, L] = [0, \log c]$. While the algebraic structure of the finite-$N$ Archimedean resolvent, Cauchy transform, and commutator algebra are established as exact mathematical theorems in the companion paper (Paper 4: *An Exact Resolvent and Commutator Toolkit*), the physical mechanism driving Weil positivity in the infinite-dimensional limit $N \to \infty$ involves non-trivial asymptotic and continuum phenomena.
+The truncated Weil quadratic form of Connes–van Suijlekom (2025) and Connes–Consani–Moscovici (2026) projects the explicit formula for the Riemann zeta function onto finite-rank Galerkin subspaces of band $N$ on a logarithmic scaling interval $[0, L] = [0, \log c]$. While the algebraic structure of the finite-$N$ Archimedean resolvent, Cauchy transform, and commutator algebra are established as exact mathematical theorems in the companion paper (Paper NR1: *An Exact Resolvent and Commutator Toolkit*), the physical mechanism driving Weil positivity in the infinite-dimensional limit $N \to \infty$ involves non-trivial asymptotic and continuum phenomena.
 
 This manuscript sets forth the analytical and empirical research programme investigating the continuum limit $N \to \infty$ across 24 Galerkin dimensions ($N = 1, \dots, 24$) and multiple prime cutoffs $c \in \{5, 7, 11, 13, 17\}$:
 
@@ -19,7 +19,7 @@ This manuscript sets forth the analytical and empirical research programme inves
 2. **The Continuum Solitary Wave and Infinite-Order Boundary Flatness (Conjecture):** As $N \to \infty$, the spatial trigonometric wave $T_{v_N}(t)$ converges to a smooth, strictly positive solitary wave $T_\infty(t)$ on $[0, L]$ with dual Dirichlet boundary vanishing $T_\infty(0) = T_\infty(L) = 0$ and conjectured infinite-order flat boundary contact: $T_\infty^{(k)}(0) = T_\infty^{(k)}(L) = 0$ for all $k \ge 0$, such that the zero-extension $\widetilde{T}_\infty \in C_c^\infty(\mathbb{R})$ with $\operatorname{supp} \widetilde{T}_\infty = [0, L]$. This boundary flatness conditionally eliminates the finite-rank Volterra boundary jump at $\omega = 1$, removing the classical obstruction to continuous Weil positivity.
 3. **Semiclassical WKB Barrier Tunneling Mechanics:** Inverting the ground-state profile defines an effective Schrödinger potential $V_{\mathrm{conf}}(t) - E = T''(t)/T(t)$ whose midpoint well rises steeply toward the boundaries. Semiclassical WKB tunneling action across the barrier $\mathcal{S}_{\mathrm{WKB}} = \int_0^{t_{\mathrm{turn}}} \sqrt{T''/T} \, dt$ reproduces the observed logarithmic boundary suppression to within $5.3\%$ across 47 orders of magnitude, consistent with the empirical scaling law $\mathcal{S}_{\mathrm{WKB}}(N, c) \approx \frac{\pi N}{4} \log c$.
 4. **Legendre Multipole Decomposition and Asymptotic Tail Extinction:** Via Bauer's spherical Bessel expansion, $T_{v_N}(t)$ decomposes into Legendre multipoles with alternating signs, producing strictly constructive interference at the midpoint and destructive cancellation at the boundaries. The high-frequency Taylor coefficients $A_k(N)$ extinguish rapidly across all orders ($A_0 \sim 10^{-40}, A_1 \sim 10^{-34}, A_2 \sim 10^{-29}$ at $N = 24$), motivating the conjecture that the continuum resolvent $R_\infty(r) = o(r^{-k})$ decays faster than every inverse power of $r$.
-5. **Tri-Partite Zero-Energy Equilibrium and Finite-$T$ Archimedean Leakage:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates the exact finite-$T$ Archimedean cutoff leakage $\delta_T^{\mathrm{tail}} = \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v) - \lambda_{\min}(24) = 1.668 \times 10^{-43}$, certified free of numerical truncation error and proven in Theorem 5.5 of Paper 4 to be 100% continuous tail leakage from the finite integration cutoff $T = 400$.
+5. **Tri-Partite Zero-Energy Equilibrium and Finite-$T$ Archimedean Leakage:** Continuous-variable numerical quadrature and the exact closed-form digamma identity independently cancel the algebraic pole ($+1.551652$) and prime ($-0.071854$) contributions down to a residual of $Q_{\mathrm{total}} = 4.201 \times 10^{-43}$ at $N = 24$ (with continuous quadrature agreeing to $4.96 \times 10^{-25}$). The ratio $\lambda_{\min}(24) / Q_{\mathrm{total}} = 0.6030$ against the matrix eigenvalue $\lambda_{\min}(24) = 2.533 \times 10^{-43}$ isolates the exact finite-$T$ Archimedean cutoff leakage $\delta_T^{\mathrm{tail}} = \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v) - \lambda_{\min}(24) = 1.668 \times 10^{-43}$, certified free of numerical truncation error and proven in Theorem 5.5 of Paper NR1 to be 100% continuous tail leakage from the finite integration cutoff $T = 400$.
 6. **Formal Continuum Wiener–Hopf Scaling, Interlaced Tunneling Ladders, and Operator Reformulation of the First Jet:** In the continuum scaling limit, the divided-difference Galerkin kernel transforms into a half-line Wiener–Hopf convolution operator with kernel $K_{\mathrm{sym}}(w) = \frac{w}{2\sinh(w/2)}$ whose symbol factors into squared Gamma functions $\frac{\pi^2}{\cosh^2(\pi k)} = [\Gamma(\frac{1}{2} - ik)]^2 [\Gamma(\frac{1}{2} + ik)]^2$. The resulting double pole at $k = -i/2$ generates a logarithmic boundary layer $\phi(x) \sim -\log x$ as $x \to 0^+$, explaining the observed bulk/edge asymmetry between $D_0$ and $D_1$. Below the double-well barrier top, the even and odd spectra form an interlaced ladder of bound tunneling doublets ($E_0 < \mu_1 < E_1 < \dots < \mu_{N/2} < E_{N/2}$). The first coordinate transition dipole moment $\langle e_1, Kc \rangle = -D_0 a_1 / \Delta_1 \approx 1.3134 = \mathcal{O}(1)$ carries $99.9999\%$ of the coordinate norm $\|Kc\|^2$, providing empirical evidence connecting the overlap ratio $C_N = |a_1| / \sqrt{\Delta_1} \approx 2.4$ to the transition dipole moment. The first-jet ratio decomposes into exact operator components $D_1/D_0 = \kappa^2 [\mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2]$, and exhibits numerical behaviour consistent with an asymptotic spectral filtering mechanism where the ratio appears to stabilize near $\approx -0.77$ with net ratio $(D_1/D_0) / [\kappa^2 \mathcal{T}_{\mathrm{diag}}] \sim 0.23$ across tested dimensions. The square-root overlap scaling ($|d_k| \approx 24.1 \sqrt{\Delta_k}$, $|a_j| \approx 2.24 \sqrt{\Delta_j}$) keeps small denominators bounded mode by mode, supporting the hypothesis that $u_1^{-1} = |D_1/D_0|$ is bounded polynomially ($\sim N^{2.6 - 2.8}$ over the tested range), which would guarantee exponential boundary-defect decoupling in the continuum limit.
 7. **The Analytical Roadmap toward Continuous Weil Positivity:** We formulate the three open mathematical stages required to convert these empirical and asymptotic findings into a complete proof of Weil positivity on the idele class group.
 
@@ -41,8 +41,8 @@ $$Q_{c, N} = Q_{\mathrm{prime}} + Q_{\mathrm{pole}} + Q_{\mathrm{arch}}.$$
 
 The investigation of this finite-rank system naturally divides into two distinct mathematical realms:
 
-1. **The Exact Finite-$N$ Toolkit (Paper 4):**
-   In the companion paper, *An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form* [Paper 4], all finite-$N$ algebraic structures are established unconditionally as pure mathematical theorems. These include:
+1. **The Exact Finite-$N$ Toolkit (Paper NR1):**
+   In the companion paper, *An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form* [Paper NR1], all finite-$N$ algebraic structures are established unconditionally as pure mathematical theorems. These include:
    - The exact four-term Volterra reduction.
    - The squared rational resolvent identity $R_v(r) \equiv \frac{2}{L} [ \frac{v_0}{r} + \sqrt{2}\sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} ]^2$ and operator identity $D(z) \equiv [(I + z\mathcal{L})^{-1} T_v](0)$.
    - Unconditional pointwise non-negativity $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$ on $\mathbb{R}$.
@@ -53,7 +53,7 @@ The investigation of this finite-rank system naturally divides into two distinct
    - The exact small-denominator cancellation $(E_k - \lambda)$ in the odd-even resolvent coupling.
 
 2. **The Asymptotic Continuum Programme (This Manuscript):**
-   While Paper 4 provides the exact mathematical machinery, it does not address the physical and asymptotic questions of how the system behaves as the dimension $N \to \infty$:
+   While Paper NR1 provides the exact mathematical machinery, it does not address the physical and asymptotic questions of how the system behaves as the dimension $N \to \infty$:
    - Why is the minimum eigenvalue $\lambda_{\min}(N) > 0$ strictly positive for all finite $N$?
    - What is the geometric and semiclassical mechanism driving $\lambda_{\min}(N) \to 0$?
    - Does the finite trigonometric wave converge to a well-behaved continuous profile?
@@ -297,7 +297,7 @@ At high frequencies, the finite-$N$ resolvent plunges: $R_{v_{24}}(10.0) = 0.036
 
 ## 6. Accumulating Pole Mechanism and Heat Boundary Dynamics
 
-The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Paper 4 provides the conceptual mechanism reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$) with a non-trivial continuous-variable resolvent $R_\infty(r)$:
+The operator-resolvent representation $D_N(z) = \big[(I + z\mathcal{L})^{-1} T_{v_N}\big](0)$ established in Paper NR1 provides the conceptual mechanism reconciling the extinction of the inverse-power tail coefficients ($A_k(N) \to 0$) with a non-trivial continuous-variable resolvent $R_\infty(r)$:
 
 1. **Accumulation of Resolvent Poles at the Origin:**
    At every finite dimension $N$, $D_N(z)$ is a rational function whose poles lie on the negative real axis at:
@@ -338,13 +338,13 @@ $$\mathcal{Q}_{\mathrm{matrix}}(v_N) = \mathcal{Q}_{\mathrm{pole}}(v_N) + \mathc
 - $N = 24$: $\mathcal{Q}_{\mathrm{pole}} = +1.5516521957$, $\mathcal{Q}_{\mathrm{prime}} = -0.0718544317$, $\mathcal{Q}_{\mathrm{arch}} = -1.4797977640$, summing to $\mathcal{Q}_{\mathrm{total}} = 4.20136 \times 10^{-43}$ ($\lambda_{\min} = 2.53348 \times 10^{-43}$).
 
 *The Certified Archimedean Cutoff Leakage $\delta_T^{\mathrm{tail}}$ (`cell56.py`, `cell57.py`).*
-Evaluating the continuous Archimedean functional via the exact closed-form digamma identity (Corollary 5.4 of Paper 4) yields $\mathcal{Q}_{\mathrm{arch}}^{\mathrm{exact}} = -1.479797763974798326397825\dots$, matching continuous numerical quadrature to $4.96 \times 10^{-25}$. The tripartite continuous balance cancels algebraically from $\mathcal{O}(1)$ to $\mathcal{Q}_{\mathrm{total}} = 4.2013606231 \times 10^{-43}$. 
+Evaluating the continuous Archimedean functional via the exact closed-form digamma identity (Corollary 5.4 of Paper NR1) yields $\mathcal{Q}_{\mathrm{arch}}^{\mathrm{exact}} = -1.479797763974798326397825\dots$, matching continuous numerical quadrature to $4.96 \times 10^{-25}$. The tripartite continuous balance cancels algebraically from $\mathcal{O}(1)$ to $\mathcal{Q}_{\mathrm{total}} = 4.2013606231 \times 10^{-43}$. 
 
 The ratio against the finite-cutoff Galerkin eigenvalue $\lambda_{\min}(24) = 2.5334848706 \times 10^{-43}$ is:
 
 $$\frac{\lambda_{\min}(24)}{\mathcal{Q}_{\mathrm{total}}} = 0.6030153319\dots \qquad \left(\frac{\mathcal{Q}_{\mathrm{total}}}{\lambda_{\min}(24)} \approx 1.65837\right).$$
 
-In the companion paper (Paper 4, Theorem 5.5) and Cell 57 (`cell57.py`), this residual is proven to be **100% finite-$T$ Archimedean cutoff tail leakage**:
+In the companion paper (Paper NR1, Theorem 5.5) and Cell 57 (`cell57.py`), this residual is proven to be **100% finite-$T$ Archimedean cutoff tail leakage**:
 
 $$\delta_T^{\mathrm{tail}} \equiv \mathcal{Q}_{\mathrm{total}}^{(\infty)}(v_{24}) - \lambda_{\min}(24) = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v_{24}, r, L) \, dr = 1.66787575 \times 10^{-43}.$$
 
@@ -402,10 +402,10 @@ $$\frac{D_1}{D_0} = \kappa^2 \left[ e^T Q_{\mathrm{even}}^\dagger \big( b + \mat
 
 *where $b_n = n \psi(n)$ and $\mathcal{E}_{\mathrm{arith}} = \langle \psi, (Q_{\mathrm{odd}} - \lambda I)^{-1}\psi \rangle$. Because the ground-state eigenvalue $\lambda_{\min}(N) \sim 10^{-43}$ is negligible compared to $D_0 \sim 10^{-20}$ at large $N$ (Cell 55), the $\mathcal{O}(\lambda)$ term vanishes asymptotically, leaving $D_1/D_0$ governed exclusively by the unperturbed resolvent.*
 
-*Proof.* From the rank-$4$ commutator identity (Theorem 6.1 of Paper 4), $[M^2, Q] u = D_0 b - B_1 e$. Using the exact odd-sector identity $B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}$ (Theorem 6.2 of Paper 4), we have $(Q - \lambda I) M^2 u = -D_0 (b + \mathcal{E}_{\mathrm{arith}} e)$. Projecting onto $u^\perp$ via $Q_{\mathrm{even}}^\dagger$ and contracting with $e^T$ (recalling $e^T M^2 u = -D_1 / \kappa^2$ and $e^T u = D_0$) gives $-D_1 / \kappa^2 = -D_0 [e^T Q_{\mathrm{even}}^\dagger \mathbf{w} - \|Mu\|_2^2] + \mathcal{O}(\lambda D_0)$. Dividing by $-D_0$ yields the result. $\blacksquare$
+*Proof.* From the rank-$4$ commutator identity (Theorem 6.1 of Paper NR1), $[M^2, Q] u = D_0 b - B_1 e$. Using the exact odd-sector identity $B_1 = -D_0 \mathcal{E}_{\mathrm{arith}}$ (Theorem 6.2 of Paper NR1), we have $(Q - \lambda I) M^2 u = -D_0 (b + \mathcal{E}_{\mathrm{arith}} e)$. Projecting onto $u^\perp$ via $Q_{\mathrm{even}}^\dagger$ and contracting with $e^T$ (recalling $e^T M^2 u = -D_1 / \kappa^2$ and $e^T u = D_0$) gives $-D_1 / \kappa^2 = -D_0 [e^T Q_{\mathrm{even}}^\dagger \mathbf{w} - \|Mu\|_2^2] + \mathcal{O}(\lambda D_0)$. Dividing by $-D_0$ yields the result. $\blacksquare$
 
 ### Proposition 8.4 (Exact Operator Decomposition, Bound-State Interlacing, and Spectral Filtering Mechanism)
-*Using the exact algebraic small-denominator cancellation theorem and $K^2$-commutator resolvent representation from Paper 4 (Theorems 7.2 & 7.3), the first-jet ratio admits the exact operator decomposition:*
+*Using the exact algebraic small-denominator cancellation theorem and $K^2$-commutator resolvent representation from Paper NR1 (Theorems 7.2 & 7.3), the first-jet ratio admits the exact operator decomposition:*
 
 $$\frac{D_1}{D_0} = \kappa^2 \left[ \mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2 \right], \qquad \mathcal{T}_{\mathrm{diag}} \equiv M_1 \langle d, R_{\mathrm{even}} d \rangle, \quad \mathcal{T}_{\mathrm{cross}} \equiv \langle d, R_{\mathrm{even}} K\boldsymbol\psi \rangle,$$
 
@@ -418,7 +418,7 @@ $$\frac{D_1}{D_0} = \kappa^2 \left[ \mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\
    Each step up the ladder increases the eigenvalue by 2 to 3 orders of magnitude ($E_k / \mu_k \sim 10^3$, $\mu_{k+1} / E_k \sim 10^3$; e.g. at $N = 24$, $E_0 \approx 2.53 \times 10^{-43}$, $\mu_1 \approx 4.35 \times 10^{-40}$, $E_1 \approx 4.50 \times 10^{-37}$, $\dots$, $\mu_{12} \approx 1.07$, $E_{12} \approx 1.31$).
 
 2. **Transition Dipole Moment and Mode 1 Saturation (Cell 61):**
-   Taking matrix elements of the rank-2 commutator $[Q, K] = -\boldsymbol\psi d^T + d\boldsymbol\psi^T$ on the ground state $c$ yields the exact coordinate projection $\langle e_j, K c \rangle = -D_0 \frac{a_j}{\Delta_{\mathrm{odd}, j}}$ (Corollary 6.3.1 of Paper 4). For the lowest odd mode $e_1$, this projection factors into the product of two dimensionless invariants:
+   Taking matrix elements of the rank-2 commutator $[Q, K] = -\boldsymbol\psi d^T + d\boldsymbol\psi^T$ on the ground state $c$ yields the exact coordinate projection $\langle e_j, K c \rangle = -D_0 \frac{a_j}{\Delta_{\mathrm{odd}, j}}$ (Corollary 6.3.1 of Paper NR1). For the lowest odd mode $e_1$, this projection factors into the product of two dimensionless invariants:
    $$|\langle e_1, K c \rangle| = \left(\frac{D_0}{\sqrt{\Delta_{\mathrm{odd}, 1}}}\right) \left(\frac{|a_1|}{\sqrt{\Delta_{\mathrm{odd}, 1}}}\right) \equiv R_D \cdot C_N.$$
    Computational evaluation demonstrates that $|\langle e_1, K c \rangle| \approx 1.3134 = \mathcal{O}(1)$ represents the transition dipole moment of the two-level tunneling doublet. Because $R_D = D_0 / \sqrt{\Delta_1} \in [0.41, 0.64]$ is $\mathcal{O}(1)$ across 20 orders of magnitude, the overlap ratio $C_N \equiv |a_1| / \sqrt{\Delta_1} \approx 2.406$ is structurally constrained by the transition dipole moment to remain $\mathcal{O}(1)$ across the entire tested ladder. Furthermore, mode 1 carries **$99.9999\%$** of the total full-space coordinate norm $\|Kc\|^2 = 1.72507$, indicating that the coordinate commutator acts effectively on a two-state tunneling doublet.
 
@@ -474,7 +474,7 @@ $$R_{\mathrm{even}} = R_{\mathrm{bound}} + R_{\mathrm{scatt}},$$
 3. **Spatial Boundary Layer Width and Decoupling:**
    *The boundary layer width $\delta_N = \sqrt{u_1} \ge \frac{1}{\kappa \sqrt{C_{\mathrm{upper}}} N^{\max(1, p/2)} \sqrt{\log N}}$ shrinks only algebraically. Substituting this polynomial lower bound into the boundary-defect metric $\mathcal{D}(N) = D_0^2 [1 + 1/(T^2 u_1)]^2$ demonstrates that $\mathcal{D}(N) \to 0$ collapses exponentially fast like $e^{-2\mathcal{S}_{\mathrm{WKB}}} N^{2\max(2, p)} (\log N)^2 \to 0$, which would establish the Boundary-Defect Decoupling Conjecture under these hypotheses.*
 
-*Proof.* By Theorem 7.3 and Corollary 7.3.1 of Paper 4, $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$. Splitting $R_{\mathrm{even}} = R_{\mathrm{scatt}} + R_{\mathrm{bound}}$:
+*Proof.* By Theorem 7.3 and Corollary 7.3.1 of Paper NR1, $D_1/D_0 = \kappa^2 [\langle d, R_{\mathrm{even}} s_2 \rangle - D_0^2 M_2]$. Splitting $R_{\mathrm{even}} = R_{\mathrm{scatt}} + R_{\mathrm{bound}}$:
 For the scattering piece, since $\|R_{\mathrm{scatt}}\| \le 1/E_{\mathrm{gap}}$, applying the Cauchy–Schwarz inequality with $\|d\|_2 = \sqrt{2N+1}$ and the scattering growth hypothesis $\|s_2\|_2 \le C_s N^{3/2} \log N$ yields $|\langle d, R_{\mathrm{scatt}} s_2 \rangle| \le C_{\mathrm{scatt}} N^2 \log N$.
 For the bound piece, the small denominators $\Delta_k = E_k - \lambda$ are canceled algebraically via Corollary 7.3.1: $\frac{d_k \langle u_k, s_2 \rangle}{E_k - \lambda} = -\frac{d_k \langle u_k, K^2 c \rangle}{D_0}$. By assumption 3, this sum is bounded by $C_{\mathrm{bound}} N^p$.
 Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal{O}(1)$ yields the upper bound $|D_1/D_0| \le C_{\mathrm{upper}} N^{\max(2, p)} \log N$. Inverting this bound directly yields the polynomial lower bound on $u_1 = |D_0/D_1|$, which would establish boundary-defect decoupling under these hypotheses. $\blacksquare$
@@ -483,7 +483,7 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
 *The first-jet ratio $D_1/D_0$ and the spectral-filtering remainder admit an exact analytical reduction that eliminates the exponentially small denominator $D_0$ from the bound-state sector, transforming the asymptotic boundary decoupling problem into positive-resolvent operator estimates:*
 
 1. **Exact Squared-Resolvent Laurent Jet Identity and Boundary Cancellation Asymmetry:**
-   *From the exact rational resolvent representation of Paper 4 (Theorem 3.1 & Corollary 5.4), the squared resolvent is given by:*
+   *From the exact rational resolvent representation of Paper NR1 (Theorem 3.1 & Corollary 5.4), the squared resolvent is given by:*
    $$R_v(r) = \frac{2}{L} \left[ \frac{v_0}{r} + \sqrt{2} \sum_{m=1}^N \frac{r v_m}{r^2 - a_m^2} \right]^2, \qquad a_m = \frac{2\pi m}{L}.$$
    *Expanding the rational factor for $r > a_N$:*
    $$\frac{r}{r^2 - a_m^2} = \frac{1}{r} \frac{1}{1 - a_m^2/r^2} = \frac{1}{r} + \frac{a_m^2}{r^3} + \frac{a_m^4}{r^5} + \dots$$
@@ -516,7 +516,7 @@ Combining both contributions and the negligible norm shift $D_0^2 M_2 = \mathcal
    *Under universal profile scaling $D_0^{k-1} D_k / D_1^k = \mathcal{O}(1)$, the $k$-th term scales as $X_N^{k-1} = (D_1/D_0)^{k-1}$. The equation is an infinite nonlinear resummation in $X_N$. A low-order term-by-term Taylor truncation cannot fix the asymptotic exponent without controlling the resummation. This motivates the scaling representation $D_1/D_0 = (\kappa N)^2 s_N$, where $s_N$ is a dimensionless profile factor generated by the full boundary layer, accounting for the observed $N^{2.6}$ numerical drift in Cell 54 while maintaining exact parity between $D_0$ and $D_1$ under WKB exponential barrier decay.*
 
 3. **The Operator Identity and Collective Resolvent Cancellation:**
-   *Using the exact operator representation of Paper 4 (Theorems 7.2 & 7.3):*
+   *Using the exact operator representation of Paper NR1 (Theorems 7.2 & 7.3):*
    $$\frac{D_1}{D_0} = \kappa^2 \left[ \mathcal{T}_{\mathrm{diag}} + \mathcal{T}_{\mathrm{cross}} - D_0^2 M_2 \right], \qquad \mathcal{T}_{\mathrm{diag}} \equiv M_1 \langle d, R_{\mathrm{even}} d \rangle, \quad \mathcal{T}_{\mathrm{cross}} \equiv \langle d, R_{\mathrm{even}} K\boldsymbol\psi \rangle.$$
    *In this representation, the exponentially small denominator $D_0$ is canceled algebraically at the operator level. At $N = 24$ (Cell 62), the three terms evaluate to:*
    $$\kappa^2 \mathcal{T}_{\mathrm{diag}} = +2\,234\,013.195, \qquad \kappa^2 \mathcal{T}_{\mathrm{cross}} = -1\,714\,040.497, \qquad \kappa^2 D_0^2 M_2 = 10.352,$$
@@ -3581,17 +3581,17 @@ Recent investigations have conjectured that under appropriate Sobolev regulariza
 
 $$\mathcal{Q}_{\mathrm{arch}}^{(\infty)}(\tau) \stackrel{?}{=} \frac{1}{\pi} \int_0^\infty h_+(r) |\widehat{\tau}(r)|^2 \, dr + \Delta_{\mathrm{boundary}}(\tau(0)).$$
 
-Auditing this conjecture against the exact algebraic identities established in Paper 4 (Corollary 5.4 & Theorem 5.5) reveals an exact finite-$(N, L)$ mathematical mechanism that is considerably richer and more tractable than the heuristic continuum limit:
+Auditing this conjecture against the exact algebraic identities established in Paper NR1 (Corollary 5.4 & Theorem 5.5) reveals an exact finite-$(N, L)$ mathematical mechanism that is considerably richer and more tractable than the heuristic continuum limit:
 
 1. **Exact Manifest Positivity of the Boundary Defect:**
-   From Corollary 5.4 of Paper 4, for any finite dimension $N$ and interval length $L$:
+   From Corollary 5.4 of Paper NR1, for any finite dimension $N$ and interval length $L$:
    $$\mathcal{Q}_{\mathrm{arch}}(v) = h_+(0) v_0^2 + \sum_{m=1}^N v_m^2 h_+(a_m) + B_{N, L}(v),$$
    where the boundary defect is defined by:
    $$B_{N, L}(v) \equiv \frac{2}{L} \sum_{n=0}^\infty \frac{1 - e^{-q_n L}}{q_n^2} \left[ v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} \right]^2 \ge 0.$$
    Crucially, $B_{N, L}(v) \ge 0$ is **manifestly non-negative** for every finite $(N, L)$ before taking any continuum limit. Non-vanishing boundary amplitudes $D_0 \neq 0$ strictly *increase* the Archimedean energy rather than incurring a negative penalty.
 
 2. **The Positive Jet-Energy Quadratic Form:**
-   Recall from Theorem 3.2 and Theorem 5.5 of Paper 4 that the boundary evaluation of the operator resolvent generates the Taylor endpoint jets:
+   Recall from Theorem 3.2 and Theorem 5.5 of Paper NR1 that the boundary evaluation of the operator resolvent generates the Taylor endpoint jets:
    $$D(1/q_n^2) = v_0 + \sqrt{2}\sum_{m=1}^N \frac{q_n^2 v_m}{q_n^2 + a_m^2} = \sum_{j=0}^\infty \frac{(-1)^j D_j}{q_n^{2j}}, \qquad D_j = T_v^{(2j)}(0).$$
    Squaring this series yields $[D(1/q_n^2)]^2 = \sum_{j, k=0}^\infty (-1)^{j+k} D_j D_k q_n^{-(2j+2k)}$. Substituting into $B_{N, L}(v)$ proves that the boundary defect is an exact **positive quadratic form in the endpoint-jet vector** $\mathbf{D} = (D_0, D_1, D_2, \dots)^T$:
    $$B_{N, L}(v) = \frac{2}{L} \sum_{j, k=0}^\infty (-1)^{j+k} D_j D_k \mu_{j+k}(L) = \frac{2}{L} \mathbf{D}^T H_L \mathbf{D} = \sum_{k=0}^\infty A_k(N) \mu_k(L),$$
@@ -3764,4 +3764,4 @@ The calculations reported in this manuscript were performed using Python and the
 8. D. Slepian and H. O. Pollak, *Prolate spheroidal wave functions, Fourier analysis and uncertainty — I*, Bell System Tech. J. 40 (1961), 43–63.
 9. H. J. Landau and H. O. Pollak, *Prolate spheroidal wave functions, Fourier analysis and uncertainty — II*, Bell System Tech. J. 40 (1961), 65–84.
 10. A. Groskin and N. Rensen, *connes-cvs: Arbitrary-precision computational suite and verification archive for the truncated Connes–van Suijlekom Galerkin form*, software repository and raw numerical logs, GitHub: https://github.com/akivag613/connes-cvs- (mirror: https://github.com/nrensen/connes-cvs-) (2026).
-11. Research Record / Connes–CvS Series, *An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form*, Companion Paper (Paper 4), GitHub: `nrensen/connes-cvs-` (2026).
+11. Research Record / Connes–CvS Series, *An Exact Resolvent and Commutator Toolkit for the Truncated Connes–van Suijlekom Weil Quadratic Form*, Companion Paper (Paper NR1), GitHub: `nrensen/connes-cvs-` (2026).

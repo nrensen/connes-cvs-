@@ -5,7 +5,7 @@ CELL 94 — HIGH-THROUGHPUT LARGE-N BOUNDARY GAP & PROJECTOR CONVERGENCE
           STRESS TEST (N in {64, 80, 96, 112, ..., 256})
 ================================================================================
 
-Strategic Roadmap Milestone M40 (Paper 4B Section 8.25 & Remark 8.35):
+Strategic Roadmap Milestone M40 (Paper NR2 Section 8.25 & Remark 8.35):
 ----------------------------------------------------------------------
 Following the execution of Cell 92/93 and the reviewer's diagnostic:
   1. The Purpose of an Overnight Run to Large N in the Hundreds:

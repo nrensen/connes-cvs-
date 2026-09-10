@@ -5,7 +5,7 @@ CELL 77 — STIELTJES OUTER PRODUCT FACTOR Pi_j, PAIRWISE GAP LOCALIZATION,
          CHARACTERISTIC-POLYNOMIAL RATIO DECOMPOSITION, AND ASYMMETRY BALANCE
 ================================================================================
 
-Strategic Roadmap Milestone M23 (Paper 4B Section 8.25):
+Strategic Roadmap Milestone M23 (Paper NR2 Section 8.25):
 ---------------------------------------------------------
 Following the certified completion of Milestone M22 in cell 76, this cell
 investigates the analytical structure, mode-by-mode localization, and

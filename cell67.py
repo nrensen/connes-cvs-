@@ -9,7 +9,7 @@ PURPOSE:
 --------
 Investigate the relative tunneling-scale hierarchy and barrier-thinning mechanism
 connecting the excited odd-sector resolvent moment M_1^{exc} and the excited
-second resolvent moment M_{2,exc} in Paper 4B (§8.10 & §8.11) across dimensions
+second resolvent moment M_{2,exc} in Paper NR2 (§8.10 & §8.11) across dimensions
 N in {8, 12, 16, 20, 24}:
 
 1. Relative Tunneling-Scale Hierarchy:

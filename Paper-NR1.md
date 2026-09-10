@@ -4,7 +4,7 @@
 **Authors:** Research Record / Connes–CvS Investigation Series  
 **Date:** September 2026  
 **Software & Reproducibility Suite:** `https://github.com/akivag613/connes-cvs-` (mirror: `nrensen/connes-cvs-`)  
-**Status:** Standalone Manuscript / The Rigorous Toolkit (Companion to Paper 4B: *The Research Programme*)
+**Status:** Standalone Manuscript / The Rigorous Toolkit (Companion to Paper NR2: *The Research Programme*)
 
 ---
 
@@ -69,7 +69,7 @@ $$\boxed{\text{CvS finite Fourier amplitude} \implies \text{explicit squared amp
 
 establishing exact closed-form algebraic solutions for the Archimedean Cauchy transform, the Weierstrass pole decomposition, and the low-rank commutator projections. No novelty is claimed for the general autocorrelation/Fourier-square principle itself.
 
-We emphasize that **every theorem and identity established in this paper is an exact, unconditional finite-$N$ mathematical statement**. We do not assert that finite-$N$ kernel non-negativity proves Weil positivity or the Riemann Hypothesis. All asymptotic questions concerning the infinite-dimensional limit $N \to \infty$ (such as solitary wave profiles, semiclassical WKB barrier tunneling, and formal Wiener–Hopf continuum scaling) are systematically investigated in the companion paper, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation* [Paper 4B].
+We emphasize that **every theorem and identity established in this paper is an exact, unconditional finite-$N$ mathematical statement**. We do not assert that finite-$N$ kernel non-negativity proves Weil positivity or the Riemann Hypothesis. All asymptotic questions concerning the infinite-dimensional limit $N \to \infty$ (such as solitary wave profiles, semiclassical WKB barrier tunneling, and formal Wiener–Hopf continuum scaling) are systematically investigated in the companion paper, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation* [Paper NR2].
 
 The toolkit established herein proves:
 - The exact squared rational resolvent identity for $K_{\mathrm{Fourier}}$, proving pointwise non-negativity globally on $\mathbb{R}$.
@@ -784,4 +784,4 @@ The exact algebraic identities and theorems established in this manuscript were 
 8. D. Slepian and H. O. Pollak, *Prolate spheroidal wave functions, Fourier analysis and uncertainty — I*, Bell System Tech. J. 40 (1961), 43–63.
 9. H. J. Landau and H. O. Pollak, *Prolate spheroidal wave functions, Fourier analysis and uncertainty — II*, Bell System Tech. J. 40 (1961), 65–84.
 10. A. Groskin and N. Rensen, *connes-cvs: Arbitrary-precision computational suite and verification archive for the truncated Connes–van Suijlekom Galerkin form*, software repository and raw numerical logs, GitHub: https://github.com/akivag613/connes-cvs- (mirror: https://github.com/nrensen/connes-cvs-) (2026).
-11. Research Record / Connes–CvS Series, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation*, Companion Paper (Paper 4B), GitHub: `nrensen/connes-cvs-` (2026).
+11. Research Record / Connes–CvS Series, *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity in the Connes–van Suijlekom Galerkin Truncation*, Companion Paper (Paper NR2), GitHub: `nrensen/connes-cvs-` (2026).

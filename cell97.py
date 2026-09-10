@@ -5,7 +5,7 @@ CELL 97 — EXACT TELESCOPING TAIL CONDITION H_tail(j), RELATIVE HIGH-SPECTRUM
           GROWTH R_spec, DUAL-REGIME SCALING, AND COMPONENT FORENSICS
 ================================================================================
 
-Strategic Roadmap Milestone M43 (Paper 4B Section 8.26 & Proposition 8.31):
+Strategic Roadmap Milestone M43 (Paper NR2 Section 8.26 & Proposition 8.31):
 ----------------------------------------------------------------------------
 Proposition 8.31 proved the unconditional finite-N operator-norm enclosure
 of the remote Stieltjes product:

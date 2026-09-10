@@ -9,7 +9,7 @@ AND THREE-FACTOR BOUND-STATE TAIL FILTERING T_j = K_j * G_j * S_j
 PURPOSE:
 --------
 Investigate the exact finite-N Stieltjes derivative factorization of odd source
-overlaps and modewise excited tail ratios (Paper 4B §8.23, Milestone M18):
+overlaps and modewise excited tail ratios (Paper NR2 §8.23, Milestone M18):
     a_j^2 / a_1^2 = K_j * G_j
 across discrete Galerkin dimensions N in {8, 12, 16, 20, 24}:
 

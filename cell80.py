@@ -6,7 +6,7 @@ CELL 80 — SPECTRAL-WIDE AUDIT OF THE STIELTJES SIGN RATIO epsilon_l = N_l / P_
          AND BOUNDARY-WEIGHT LADDER GEOMETRIC DECAY
 ================================================================================
 
-Strategic Roadmap Milestone M26 (Paper 4B Section 8.25 & Corollary 8.26.1):
+Strategic Roadmap Milestone M26 (Paper NR2 Section 8.25 & Corollary 8.26.1):
 ----------------------------------------------------------------------------
 Following the discovery in cell 79 (Milestone M25) that the bare closed remote bound
 eta_{2, l} = [ Delta_2 * Delta_l ] / [ alpha_l * D_{2, l}^2 ] failed at the upper

@@ -6,7 +6,7 @@ CELL 81 — TRI-PARTITE SPECTRAL DECOMPOSITION OF THE REMOTE OUTER FACTOR
          AUDIT, AND ASYMPTOTIC SCALING
 ================================================================================
 
-Strategic Roadmap Milestone M27 (Paper 4B Section 8.25):
+Strategic Roadmap Milestone M27 (Paper NR2 Section 8.25):
 --------------------------------------------------------
 Following the findings of Cell 80 (Milestone M26), which certified the corrected
 closed remote pairwise bound:

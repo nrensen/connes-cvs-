@@ -5,7 +5,7 @@ CELL 89 — GEOMETRY OF THE LOW-ENERGY EIGENSPACE: SPECTRAL PROJECTORS,
           COORDINATE DELOCALIZATION, AND PRINCIPAL ANGLE SWEEPS
 ================================================================================
 
-Strategic Roadmap Milestone M35 (Paper 4B Section 8.25 & Remark 8.31):
+Strategic Roadmap Milestone M35 (Paper 50 Section 8.25 & Remark 8.31):
 ----------------------------------------------------------------------
 Following the execution of Cell 88 and the reviewer's critical diagnostic:
   1. Coordinate Submatrix Coercivity Collapse:

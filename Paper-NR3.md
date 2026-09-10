@@ -38,9 +38,9 @@ on all admissible test functions $g = f * f^*$.
 
 In recent work, Connes and van Suijlekom (2025) and Connes, Consani, and Moscovici (2026) introduced a finite-dimensional Galerkin projection of the continuous Weil quadratic form onto a discrete $(2N+1)$-dimensional prolate spheroidal Fourier basis indexed by frequencies $m \in \{-N, \dots, N\}$ on the interval $[-L/2, L/2]$, where $L = \log c$ denotes the logarithmic prime cutoff associated with a prime $c > 1$.
 
-### Division of Labor between Paper 4 and Paper 5
+### Division of Labor between Paper NR1 and Paper NR3
 
-In the preceding paper of this series (Paper 4), the analytical and numerical investigation was focused strictly on the Archimedean tail problem and the isolated ground state:
+In the preceding paper of this series (Paper NR1), the analytical and numerical investigation was focused strictly on the Archimedean tail problem and the isolated ground state:
 - Proving the exact rational resolvent identity $R_v(r) \equiv \frac{1}{r^2} A(1/r^2)$ on $\mathbb{C} \setminus \{0, \pm a_1, \dots, \pm a_N\}$;
 - Establishing unconditional pointwise non-negativity of the Fourier-side kernel $K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0$;
 - Demonstrating the exponential boundary extinction $|T_{v_N}(0)| \to 0$ and the prolate solitary wave profile $T_\infty(t)$ of the minimizing ground state.
@@ -51,7 +51,7 @@ However, the prolate Galerkin operator $Q_{c, N}$ is not a rank-one projection; 
 3. **Is transmission extinction at the Riemann zeros unique to the ground state?**
 4. **Is the fundamental spectral gap $E_1 - E_0$ an artifact of the specific prime cutoff $c$, or does it obey an invariant scaling law across different arithmetic geometries?**
 
-The present paper addresses these questions. Following the conservative architectural discipline established in Paper 4, we strictly demarcate:
+The present paper addresses these questions. Following the conservative architectural discipline established in Paper NR1, we strictly demarcate:
 - **Layer A (Exact Theorems):** Finite-$N$ matrix symmetries, parity decoupling, and closed algebraic representations of the Fourier amplitudes $\Phi_v(r)$;
 - **Layer B (Numerical Observations):** Eigenvalues, nodal coordinates, transmission intensities, and multi-$c$ gap ratios evaluated at 50 decimal digits of precision across explicitly stated parameter domains ($N \le 20, c \in \{5, 7, 11, 13, 17\}$);
 - **Layer C (Conjectures and Open Problems):** Asymptotic limits as $N \to \infty$, the formulation of the limiting continuum differential operator, and connections to Connes' global absorption spectrum.
@@ -174,7 +174,7 @@ and the resulting physical classification.
 ### Physical Interpretation of the Three Regimes
 
 The numerical data reveal a clean tripartite structure:
-1. **The Bound-State Regime ($k = 0, \dots, 16$):** 17 of the 41 states ($41.5\%$) exhibit decay exponents $\alpha_k \ge 0.5$. In this regime, the eigenvalues drop by roughly two to three orders of magnitude per state. These states correspond to quantum bound states trapped inside the effective potential well $V_{\mathrm{eff}}(t)$ identified in Paper 4. In the continuum limit $N \to \infty$, all 17 bound states vanish into the zero eigenvalue continuum.
+1. **The Bound-State Regime ($k = 0, \dots, 16$):** 17 of the 41 states ($41.5\%$) exhibit decay exponents $\alpha_k \ge 0.5$. In this regime, the eigenvalues drop by roughly two to three orders of magnitude per state. These states correspond to quantum bound states trapped inside the effective potential well $V_{\mathrm{eff}}(t)$ identified in Paper NR1. In the continuum limit $N \to \infty$, all 17 bound states vanish into the zero eigenvalue continuum.
 2. **The Transitional Regime ($k = 17, \dots, 21$):** 5 states possess intermediate exponents $0.1 \le \alpha_k < 0.5$. These modes probe the top of the confining barrier.
 3. **The Scattering Continuum Regime ($k = 22, \dots, 40$):** 19 states exhibit negligible decay exponents ($\alpha_k < 0.05$). Their energies lie in the positive range $[1.20, 3.62]$ and remain virtually identical between $N = 16$ and $N = 20$. These modes represent delocalized scattering states whose energies reflect the continuum spectrum of the Weil quadratic form outside the bound well.
 
@@ -256,7 +256,7 @@ The numerical results demonstrate an extraordinary phenomenon:
 
 ## 6. Universal Transmission Resonances with the Riemann Zeros
 
-In Paper 4, we noted that the Fourier amplitude $\Phi_0(r)$ of the ground state solitary wave vanishes at the nontrivial zeros of the Riemann zeta function $\zeta(1/2 + i\gamma) = 0$. A critical open question was whether this vanishing was an accidental artifact of the ground state.
+In Paper NR1, we noted that the Fourier amplitude $\Phi_0(r)$ of the ground state solitary wave vanishes at the nontrivial zeros of the Riemann zeta function $\zeta(1/2 + i\gamma) = 0$. A critical open question was whether this vanishing was an accidental artifact of the ground state.
 
 To test this hypothesis, we evaluated the transmission intensity $|\Phi_k(\gamma_j)|^2$ across all eight lowest bound states ($k = 0, \dots, 7$) at the first five nontrivial Riemann zeros:
 - $\gamma_1 \approx 14.134725141735$
@@ -295,7 +295,7 @@ The mathematical explanation for this universality follows directly from the ope
 
 ## 7. Parity-Dependent Arithmetic Energy Cancellation
 
-In Paper 4, we showed that the ground-state eigenvalue balance satisfies an exact tripartite decomposition:
+In Paper NR1, we showed that the ground-state eigenvalue balance satisfies an exact tripartite decomposition:
 
 $$\mathcal{Q}_{\mathrm{pole}} + \mathcal{Q}_{\mathrm{prime}} + \mathcal{Q}_{\mathrm{arch}} = E_0,$$
 
@@ -419,4 +419,4 @@ All computations were executed in arbitrary-precision arithmetic (`mpmath`, 50 d
 2. Connes, A., Consani, C., and Moscovici, H. (2026). *Prolate Spheroidal Wave Functions and Weil Positivity*.
 3. Guinand, A. P. (1948). *A Summation Formula in the Theory of Prime Numbers*. Proc. London Math. Soc.
 4. Weil, A. (1952). *Sur les « formules explicites » de la théorie des nombres premiers*. Comm. Sém. Math. Univ. Lund.
-5. Research Record (2026). *Exact Rational Resolvent and Pointwise Positivity of the Archimedean Kernel in the Truncated Weil Quadratic Form: Numerical Evidence for a Dirichlet Continuum Limit* (Paper 4). Repository manuscript `paper4_exact_resolvent_and_dirichlet_limit.md`.
+5. Research Record (2026). *Exact Rational Resolvent and Pointwise Positivity of the Archimedean Kernel in the Truncated Weil Quadratic Form: Numerical Evidence for a Dirichlet Continuum Limit* (Paper NR1). Repository manuscript `Paper-NR1.md`.

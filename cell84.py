@@ -5,7 +5,7 @@ CELL 84 — SPECTRAL EXPANSION RATIO ENCLOSURES, CALIBRATED TELESCOPING BOUNDS,
           AND GALERKIN BARRIER-TOP TRANSITION FORENSICS
 ================================================================================
 
-Strategic Roadmap Milestone M30 (Paper 4B Section 8.25 & Proposition 8.28):
+Strategic Roadmap Milestone M30 (Paper NR2 Section 8.25 & Proposition 8.28):
 ----------------------------------------------------------------------------
 Following the universal interlacing tail bound established in Cell 83 (Lemma 8.27):
     0 < omega_{j, l} - 1 < eta_{inter}(j, l) = [ Delta_j * Delta_l ] / [ (E_l - E_j) * (E_l - E_{j+1}) ],

@@ -8,7 +8,7 @@ AND EVEN-RESOLVENT CANCELLATION IN THE FIRST RELATIVE TUNNELING GAP
 PURPOSE:
 --------
 Investigate the exact finite-N algebraic reduction of the first relative tunneling
-gap (Paper 4B §8.19, Milestone M14):
+gap (Paper NR2 §8.19, Milestone M14):
     R_gap(N) = D_0^2 / (mu_1 - lambda_0)
 across discrete Galerkin dimensions N in {8, 12, 16, 20, 24}:
 

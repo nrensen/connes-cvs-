@@ -11,7 +11,7 @@ Investigate the global weighted resolvent trace:
     T_N = Tr_{H_odd}[ K^2 (Q_odd - lambda I)^{-1} P_{perp u_0} ]
         = sum_{m=1}^N m^2 [R_{odd, perp}(lambda)]_{mm}
         = sum_{j=1}^{N-1} ||K u_j||^2 / (mu_j - lambda)
-across discrete Galerkin dimensions N in {8, 12, 16, 20, 24} (Paper 4B §8.17 & §8.18):
+across discrete Galerkin dimensions N in {8, 12, 16, 20, 24} (Paper NR1 §8.17 & §8.18):
 
 1. Exact Identity Verification:
    Verify the exact equality between the Fourier-basis diagonal trace:

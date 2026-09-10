@@ -2,7 +2,7 @@
 CELL 55 — NUMERICAL VALIDATION OF THEOREM 6.15: NON-SINGULAR SPECTRAL RESOLVENT
 RESUMMATION, COMMUTATOR FORCED MOMENT BALANCE, AND MELLIN SCALING CONVERGENCE
 
-Following the algebraic discoveries of Paper 4 (Theorems 6.10–6.15) and the
+Following the algebraic discoveries of Paper NR1 (Theorems 6.10–6.15) and the
 computational diagnostics of Cells 51–54, Cell 55 provides the definitive
 numerical validation of the exact operator-theoretic framework:
 

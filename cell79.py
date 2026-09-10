@@ -5,7 +5,7 @@ CELL 79 — AUDIT OF THE ONE-SIDED STIELTJES DISPLACEMENT BOUND delta_l < Delta_
          NEGATIVE-TO-POSITIVE RATIO N_l / P_l, AND CLOSED REMOTE PRODUCT BOUNDS
 ================================================================================
 
-Strategic Roadmap Milestone M25 (Paper 4B Corollary 8.26.1):
+Strategic Roadmap Milestone M25 (Paper NR2 Corollary 8.26.1):
 -------------------------------------------------------------
 Following the certification of the exact pairwise identity in cell 78 (Milestone M24),
 this cell numerically audits the closed-form remote localization bound established in

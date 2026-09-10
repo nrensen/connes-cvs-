@@ -5,7 +5,7 @@ CELL 90 — NESTED-N SPECTRAL SUBSPACE OVERLAP, PROJECTOR CONVERGENCE,
           AND TRANSITION CLUSTER DYNAMICS
 ================================================================================
 
-Strategic Roadmap Milestone M36 (Paper 4B Section 8.25 & Remark 8.32):
+Strategic Roadmap Milestone M36 (Paper NR2 Section 8.25 & Remark 8.32):
 ----------------------------------------------------------------------
 Following the execution of Cell 89 and the reviewer's diagnostic:
   1. Deceleration of E_{13} Drift:

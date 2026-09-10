@@ -3,7 +3,7 @@
 **Document Type:** Strategic Mathematical Working Note (Gate 3 Normalization & Structural Audit)  
 **Date:** September 2026  
 **Status:** Working Analytical Foundational Note (Finite-Subspace Identity Proved Exactly on $\mathcal{H}_{c, N}$; Continuum Extension Open)  
-**Associated Manuscripts & Records:** [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (Gate 3) | [paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)  
+**Associated Manuscripts & Records:** [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (Gate 3) | [Paper-NR1.md](file:///c:/data/github/connes-cvs-/Paper-NR1.md) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)  
 
 ---
 
@@ -190,7 +190,7 @@ The tail integral evaluates in closed form:
 $$\int_L^\infty \frac{1}{2\sinh y} \, dy = \int_L^\infty \frac{e^{-y}}{1 - e^{-2y}} \, dy = \frac{1}{2}\left[ \log\left( \frac{1 + e^{-y}}{1 - e^{-y}} \right) \right]_L^\infty = \frac{1}{2} \log\left( \frac{1 + e^{-L}}{1 - e^{-L}} \right) = \operatorname{artanh}(e^{-L}).$$
 
 **Step 4: Equivalence with Discrete Cauchy Sum.**  
-From Paper 4 (Theorem 4.3), the series expansion is $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [\frac{\|v\|_2^2}{n+1} - J(q_n)]$.  
+From Paper NR1 (Theorem 4.3), the series expansion is $\mathcal{Q}_{\mathrm{arch}}(v) = C_{\mathrm{arch}} \|v\|_2^2 + \sum_{n=0}^\infty [\frac{\|v\|_2^2}{n+1} - J(q_n)]$.  
 Splitting the summand:
 $$\frac{\|v\|_2^2}{n+1} - J(q_n) = \left( \frac{\|v\|_2^2}{n+1} - \frac{2\|v\|_2^2}{q_n} \right) + \left( \frac{2\|v\|_2^2}{q_n} - J(q_n) \right).$$
 Summing the first bracket: $\sum_{n=0}^\infty (\frac{\|v\|_2^2}{n+1} - \frac{2\|v\|_2^2}{q_n}) = \|v\|_2^2 (\psi(1/4) + \gamma)$.  
@@ -255,7 +255,7 @@ $$\mathcal{W}[g] - \langle v, Q_{c, N}^{(T)} v \rangle = \mathcal{R}_{\mathrm{cu
 where:
 1. **The Archimedean Cutoff Tail $\mathcal{R}_{\mathrm{cutoff}}(T; v)$:**
    $$\mathcal{R}_{\mathrm{cutoff}}(T; v) = \frac{1}{\pi} \int_T^\infty h_+(r) K_{\mathrm{Fourier}}(v, r, L) \, dr.$$
-   Vanishes as $T \to \infty$ with geometric rate $(a_N/T)^2$ for $T > a_N = 2\pi N / L$ (Paper 4 Theorem 5.1).
+   Vanishes as $T \to \infty$ with geometric rate $(a_N/T)^2$ for $T > a_N = 2\pi N / L$ (Paper NR1 Theorem 5.1).
 2. **The Prime Truncation Tail $\mathcal{R}_{\mathrm{prime}}(c; g)$:**
    $$\mathcal{R}_{\mathrm{prime}}(c; g) = -\frac{1}{\pi} \sum_{p^k > c} \frac{\log p}{p^{k/2}} \widehat{g}\left(\frac{\log p^k}{2\pi}\right).$$
    For an arbitrary test function $g$, $\mathcal{R}_{\mathrm{prime}}(c; g) \ne 0$ at finite $c$. Recovery of the full prime series strictly requires the prime cutoff limit $c \to \infty$.

@@ -5,7 +5,7 @@ CELL 93 — SPECTRAL PROJECTOR CONVERGENCE ||P_K^{(N+4)} - P_K^{(N)}||,
           BOUNDARY GAP PROMINENCE GAMMA_11, AND EXTENDED SWEEPS (N <= 64)
 ================================================================================
 
-Strategic Roadmap Milestone M39 (Paper 4B Section 8.25 & Remark 8.35):
+Strategic Roadmap Milestone M39 (Paper NR2 Section 8.25 & Remark 8.35):
 ----------------------------------------------------------------------
 Following the execution of Cell 92 and the reviewer's diagnostic:
   1. Downward Drift of the 11|12 Gap:

@@ -5,7 +5,7 @@ CELL 83 — UNIVERSAL INTERLACING TAIL BOUND, TELESCOPING SPECTRAL ENCLOSURES,
           AND EVEN EIGENVALUE SPACING ASYMPTOTICS
 ================================================================================
 
-Strategic Roadmap Milestone M29 (Paper 4B Section 8.25):
+Strategic Roadmap Milestone M29 (Paper NR2 Section 8.25):
 --------------------------------------------------------
 Following the decisive breakthrough of Cell 82 (Milestone M28), which proved that:
   1. The direct displacement tail T_{2, tail}(N; L) matches the exact tail deviation

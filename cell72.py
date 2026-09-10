@@ -8,7 +8,7 @@ CELL 72 — TARGETED AUDIT OF SEMICLASSICAL ACTION COMPETITION AND EVEN-RESOLVEN
 PURPOSE:
 --------
 Perform a dedicated numerical and asymptotic reconnaissance of the primary excited
-wavepacket tail mode j = 2 (Paper 4B §8.23, Milestone M19).
+wavepacket tail mode j = 2 (Paper NR2 §8.23, Milestone M19).
 
 From Cell 70, mode j = 2 constitutes 99.997% of the entire wavepacket tail
 sum_{j >= 2} T_j at N = 24. From Cell 71, the overlap ratio a_2^2 / a_1^2 is not

@@ -6,7 +6,7 @@ CELL 78 — EXACT PAIRWISE CANCELLATION IDENTITY FOR omega_{j, l} - 1,
          AND QUANTITATIVE REMOTE PRODUCT LOCALIZATION BOUNDS
 ================================================================================
 
-Strategic Roadmap Milestone M24 (Paper 4B Proposition 8.26):
+Strategic Roadmap Milestone M24 (Paper NR2 Proposition 8.26):
 -------------------------------------------------------------
 Following the completion of Milestone M23 in cell 77, this cell audits the exact
 algebraic foundation underlying the localization of the outer Stieltjes factor:

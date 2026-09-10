@@ -5,7 +5,7 @@ CELL 87 — NESTED GALERKIN MIN-MAX MONOTONICITY, CONTINUUM RITZ LIMITS,
           AND FIXED-INDEX SPECTRAL SEPARATION E_{13}^{(\infty)} > 0
 ================================================================================
 
-Strategic Roadmap Milestone M33 (Paper 4B Section 8.25 & Proposition 8.30):
+Strategic Roadmap Milestone M33 (Paper NR2 Section 8.25 & Proposition 8.30):
 ----------------------------------------------------------------------------
 Following the execution of Cell 86 and the reviewer's decisive critique:
   1. The Operator-Norm Gap Ceiling:

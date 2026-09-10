@@ -8,7 +8,7 @@ CELL 74 — AUDIT OF LOCAL TWO-POLE CLUSTERING ARCHITECTURE, INTERLACING
 PURPOSE:
 --------
 Perform a dedicated numerical and structural audit of the local two-pole clustering
-architecture of the positive regularized Stieltjes function H(mu) (Paper 4B §8.24,
+architecture of the positive regularized Stieltjes function H(mu) (Paper NR2 §8.24,
 Milestone M21).
 
 From Cell 73, the nearest even pole E_2 accounts for only 39.56% of H(mu_2) at N = 24,

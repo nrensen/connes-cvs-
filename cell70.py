@@ -8,7 +8,7 @@ AND MODE-BY-MODE SPECTRAL FILTERING IN THE COORDINATE WAVEPACKET
 PURPOSE:
 --------
 Investigate the exact finite-N relative tail ratio and first-mode spectral
-concentration of the excited coordinate wavepacket (Paper 4B §8.22, Milestone M17):
+concentration of the excited coordinate wavepacket (Paper NR2 §8.22, Milestone M17):
     v_exc = P_{perp u_0} K c
 across discrete Galerkin dimensions N in {8, 12, 16, 20, 24}:
 

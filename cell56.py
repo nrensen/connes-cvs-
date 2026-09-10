@@ -3,7 +3,7 @@ CELL 56 — EXACT ARCHIMEDEAN CAUCHY TRANSFORM, QUADRATURE-FREE POLE DECOMPOSITI
 AND CONTINUOUS-DISCRETE WEIL ENERGY BALANCE
 
 Following the algebraic proofs of Theorem 6.16 (Exact Archimedean Cauchy Transform)
-and Corollary 6.17 (Exact Closed-Form Pole Decomposition) in Paper 4, Cell 56
+and Corollary 6.17 (Exact Closed-Form Pole Decomposition) in Paper NR1, Cell 56
 provides the comprehensive numerical verification and exploitation suite:
 
 PART 1: NUMERICAL VALIDATION OF THEOREM 6.16 (CAUCHY TRANSFORM IDENTITY)

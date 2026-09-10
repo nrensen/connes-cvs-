@@ -5,7 +5,7 @@ CELL 82 — FINITE-CORE + TAIL SPECTRAL ARCHITECTURE, CUMULATIVE LOWER SPECTRAL
          MASS, DIRECT DISPLACEMENT TAIL, AND UNIFORM ASYMPTOTIC SUMMABILITY
 ================================================================================
 
-Strategic Roadmap Milestone M28 (Paper 4B Section 8.25):
+Strategic Roadmap Milestone M28 (Paper NR2 Section 8.25):
 --------------------------------------------------------
 Following the findings of Cell 81 (Milestone M27), which revealed that the weighted
 remote sum S_2(N) is overwhelmingly concentrated in the three modes immediately

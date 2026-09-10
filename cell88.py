@@ -5,7 +5,7 @@ CELL 88 — UNIFORM MIN-MAX LOWER BOUNDS ON E_{13}, LOW-ENERGY MODE COUNTING,
           AND CONTINUUM PRINCIPAL SUBMATRIX COERCIVITY
 ================================================================================
 
-Strategic Roadmap Milestone M34 (Paper 4B Section 8.25 & Proposition 8.30):
+Strategic Roadmap Milestone M34 (Paper NR2 Section 8.25 & Proposition 8.30):
 ----------------------------------------------------------------------------
 Following the execution of Cell 87 and the reviewer's critical warning:
   1. Nested Galerkin monotonicity (E_k^{(N+1)} <= E_k^{(N)}) is an exact theorem

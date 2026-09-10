@@ -5,9 +5,9 @@
 **Status:** Canonical Project Strategy & Master Mathematical Roadmap  
 **Repository Architecture:** [AGENTS.md](file:///c:/data/github/connes-cvs-/AGENTS.md) (Operating Standards) | [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md) (Comprehensive Historical Research Notebook)  
 **Associated Manuscripts:**
-- Paper 4: *An Exact Resolvent and Commutator Toolkit* (Locked Toolkit Baseline)
-- Paper 4B: *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity* (Asymptotic Programme)
-- Paper 5: *Continuum Operator Limits and the Weil Criterion* (In Preparation)
+- Paper NR1: *An Exact Resolvent and Commutator Toolkit* (Locked Toolkit Baseline)
+- Paper NR2: *The Dirichlet Continuum Limit, Barrier Mechanics, and Asymptotic Weil Positivity* (Asymptotic Programme)
+- Paper NR3: *Continuum Operator Limits and the Weil Criterion* (In Preparation)
 
 ---
 
@@ -17,7 +17,7 @@ The Connes–van Suijlekom (2025) and Connes–Consani–Moscovici (2026) framew
 
 $$\mathcal{Q}_{\mathrm{Weil}}(v) = \mathcal{Q}_{\mathrm{pole}}(v) + \mathcal{Q}_{\mathrm{prime}}(v) + \mathcal{Q}_{\mathrm{arch}}(v).$$
 
-In Paper 4, we proved the unconditional global non-negativity of the Fourier-side kernel:
+In Paper NR1, we proved the unconditional global non-negativity of the Fourier-side kernel:
 $$K_{\mathrm{Fourier}}(v, r, L) = \Phi_v(r)^2 \ge 0 \qquad \forall r \in \mathbb{R}, \; \forall v \in \mathbb{R}^{N+1}.$$
 
 However, **kernel non-negativity alone does not prove positivity of the Archimedean form or the Weil form**, because the Archimedean multiplier:
@@ -71,7 +71,7 @@ $$\boxed{\textbf{Finite Galerkin Matrix } \mathcal{Q}_{c, N} \;\xrightarrow{\tex
 
 ## 3. Mathematical Foundations & Established Architecture
 
-The repository's permanent mathematical foundation is established across Paper 4 and Paper 4B:
+The repository's permanent mathematical foundation is established across Paper NR1 and Paper NR2:
 
 ### 3.1 Operator Dominance & Schur Decoupling
 Splitting the Archimedean multiplier into positive and negative parts $h_+(r) = h_+^+(r) - h_+^-(r)$ where $h_+^-$ is supported strictly on $[0, r_*]$ induces the operator splitting:
@@ -156,7 +156,7 @@ Rather than tracking sequential computational scripts, the research programme is
 - **Central Mathematical Proposition (Gate 1 Target):**
   Prove that the remote Stieltjes product converges to unity in the joint limit:
   $$\boxed{\lim_{L \to \infty} \limsup_{N \to \infty} \mathcal{E}_j^{\mathrm{exact}}(N, L) = 0 \quad \Longrightarrow \quad \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.}$$
-  Via the operator-norm enclosure (Paper 4B Lemma 8.28), a sufficient condition for this proposition is:
+  Via the operator-norm enclosure (Paper NR2 Lemma 8.28), a sufficient condition for this proposition is:
   $$\boxed{\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.}$$
   *Gate 1 does not require proving a particular spectral growth law or enforcing a specific exponent. All asymptotic models ($p < 2$, WKB tunneling, polynomial gap bounds, coordinate wavepacket transmission cancellation) are candidate routes toward this proposition, not standalone objectives.*
 
@@ -165,16 +165,16 @@ Rather than tracking sequential computational scripts, the research programme is
 - **Competing Analytical Routes & Component Estimates:**
   1. **Route 1A (Exponential Tunneling Splitting with Soft Growth — Dominant Route):**
      - *Mechanics:* Establish an analytical bound on bound-state tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ with $\sigma_j > 0$ derived from the discrete Galerkin potential barrier, coupled with any soft/polynomial bound on the upper spectrum $R_{\mathrm{spec}}(N, L) = o(e^{-\sigma_j N})^{-1} = o(e^{\sigma_j N})$.
-     - *Status:* Empirically confirmed ($\Delta_2 \sim 10^{-26}$ at $N=24$), analytical WKB barrier modeling active in Paper 4B Section 8.27.
+     - *Status:* Empirically confirmed ($\Delta_2 \sim 10^{-26}$ at $N=24$), analytical WKB barrier modeling active in Paper NR2 Section 8.27.
   2. **Route 1B (Fixed Cutoff $T$ Uniform Loewner Boundedness):**
      - *Mechanics:* Under a fixed Archimedean cutoff $T$, Loewner divided-difference smoothness ensures $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ uniformly in $N$. The spectrum cannot escape to infinity ($R_{\mathrm{spec}}$ bounded). Tail extinction follows unconditionally once the continuum Ritz base stabilizes: $\inf_N (E_{L+1}^{(N)} - E_{j+1}^{(N)}) \ge g_* > 0$.
      - *Status:* High-$T$ recovery sweeps (`cell95.py`) ongoing to certify $g_{11} \approx 0.418$.
   3. **Route 1C (Coordinate Wavepacket Transmission Cancellation):**
      - *Mechanics:* Bounding the excitation residual $\|P_{\perp u_0} Kc\|^2$ and demonstrating that mode-by-mode destructive phase interference quenches oscillatory transmission across the barrier top.
-     - *Status:* Exact Pythagorean decomposition established in Paper 4; reduces the problem to dipole excitation residual and mode transmission factors.
+     - *Status:* Exact Pythagorean decomposition established in Paper NR1; reduces the problem to dipole excitation residual and mode transmission factors.
   4. **Route 1D (Direct Operator-Theoretic / Resolvent Bypass):**
      - *Mechanics:* Bypassing mode-by-mode product estimates entirely via direct trace-class resolvent convergence or relative compactness of the perturbation $(Q_{\mathrm{even}}^{(N)} - \mu)^{-1} - (Q_{\mathrm{even}}^{(\infty)} - \mu)^{-1}$.
-     - *Status:* Candidate analytical formulation under investigation for Paper 5.
+     - *Status:* Candidate analytical formulation under investigation for Paper NR3.
 
 ---
 
@@ -255,7 +255,7 @@ To maintain repository standards and prevent `ROADMAP.md` from degenerating into
 3. **Repository Separation of Responsibilities:**
    - [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md): Records every cell chronologically, detailing hypotheses, methods, raw outputs, established results, and refuted conjectures.
    - [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md): Defines active mathematical gates, analytical obstructions, and the strategic chain of obligations.
-   - [paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md) & [paper4b.md](file:///c:/data/github/connes-cvs-/paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md): Capture vetted, permanent mathematics with strict epistemic labeling.
+   - [Paper-NR1.md](file:///c:/data/github/connes-cvs-/Paper-NR1.md) & [Paper-NR2.md](file:///c:/data/github/connes-cvs-/Paper-NR2.md): Capture vetted, permanent mathematics with strict epistemic labeling.
 4. **Roadmap Update Granularity & Strategic Lifecycle:**
    `ROADMAP.md` operates at the level of gates and propositions, not computational steps or routes. `ROADMAP.md` should **rarely change after a cell succeeds**. It changes when our **belief about the research strategy** changes:
    - *No Roadmap Update:* "Cell 98 confirms exponential tunneling to $N=32$" is a historical computational datum logged in `cell_history_map.md`.
@@ -270,19 +270,19 @@ The following operational milestones define the active analytical and computatio
 
 | Milestone | Target Gate | Mathematical Objective | Target Artifact / Script | Status |
 | :---: | :---: | :--- | :--- | :---: |
-| **M-G1.0** | Gate 1 | **Central Target Proposition 1.0:** Prove joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \Pi_{j, \mathrm{tail}} \to 1$ | Paper 4B Proposition 8.37 | **ACTIVE** |
-| **M-G1.B** | Gate 1 | **Route 1B Analytical Reduction:** Conditional theorem $(\mathrm{H}_{\mathrm{gap}}(J) + \mathrm{H}_{\mathrm{collapse}}(j)) \implies \mathbf{H}_{\mathrm{tail}}(j)$; route comparison and forward path | [gate1_tail_extinction_reduction.md](file:///c:/data/github/connes-cvs-/gate1_tail_extinction_reduction.md) / Paper 4B Proposition 8.37 | **ESTABLISHED** |
-| **M-G1.1** | Gate 1 | Route 1A Analysis: Analytical upper bound on tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from Galerkin barrier potential | Paper 4B Section 8.27 | **IN PROGRESS** |
-| **M-G1.2** | Gate 1 | Route 1A Analysis: Minimal high-spectrum growth bound $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper 4B Section 8.27 | **PLANNED** |
+| **M-G1.0** | Gate 1 | **Central Target Proposition 1.0:** Prove joint-limit tail extinction $\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \Pi_{j, \mathrm{tail}} \to 1$ | Paper NR2 Proposition 8.37 | **ACTIVE** |
+| **M-G1.B** | Gate 1 | **Route 1B Analytical Reduction:** Conditional theorem $(\mathrm{H}_{\mathrm{gap}}(J) + \mathrm{H}_{\mathrm{collapse}}(j)) \implies \mathbf{H}_{\mathrm{tail}}(j)$; route comparison and forward path | [gate1_tail_extinction_reduction.md](file:///c:/data/github/connes-cvs-/gate1_tail_extinction_reduction.md) / Paper NR2 Proposition 8.37 | **ESTABLISHED** |
+| **M-G1.1** | Gate 1 | Route 1A Analysis: Analytical upper bound on tunneling splitting $\Delta_j(N) \le C_j e^{-\sigma_j N}$ from Galerkin barrier potential | Paper NR2 Section 8.27 | **IN PROGRESS** |
+| **M-G1.2** | Gate 1 | Route 1A Analysis: Minimal high-spectrum growth bound $R_{\mathrm{spec}}(N, L) = o(e^{\sigma_j N})$ under resolution scaling $T(N) > \alpha_N$ | Paper NR2 Section 8.27 | **PLANNED** |
 | **M-G1.3** | Gate 1 | Route 1B Analysis: High-$T$ Recovery Sweep across $T \in [200, 1600]$ at $N \in \{160, 176, 192\}$ certifying boundary gap $g_{11} \approx 0.418$ | `cell95.py` / `cell95.out` | **IN PROGRESS** |
 | **M-G3.0** | Gate 3 | **Early Gate 3 Structural Reconnaissance:** Algebraic audit of finite-$N$ Galerkin matrix $Q_{c, N}$ vs prime lattice comb $\Lambda_{\mathrm{arith}}$ and pole absorption | [gate3_arithmetic_reconnaissance.md](file:///c:/data/github/connes-cvs-/gate3_arithmetic_reconnaissance.md) | **CLOSED ON $\mathcal{H}_{c, N}$** |
-| **M-G2.1** | Gate 2 | Formulation of the continuum limiting quadratic form $Q_\infty$ and Friedrichs domain $\mathcal{D}(Q_\infty)$ | Paper 5 Section 2 | **PLANNED** |
-| **M-G2.2** | Gate 2 | Proof of strong resolvent and form convergence $Q_{c, N} \to Q_\infty$ via Loewner monotonicity $\Delta \Sigma(N) \succ 0$ | Paper 5 Section 3 | **PLANNED** |
-| **M-G2.3** | Gate 2 | Rigorous proof of Bridges B1 ($\bar{N}_{\mathrm{bound}} < \infty$) and B2 ($\sup_N \|Ku_j^{(N)}\|^2 < \infty$) for discrete Galerkin operators | Paper 4B Proposition 8.33 | **PLANNED** |
-| **M-G3.1** | Gate 3 | Analytical evaluation of $Q_\infty$ against prime Dirac delta comb and proof of Weil functional identity $Q_\infty[f] = \mathcal{W}[f]$ | Paper 5 Section 4 | **FALSIFICATION GATE** |
-| **M-G3.2** | Gate 3 | DLMF Binet integral coordinate-space transfer and dual lattice sampling ($\Lambda_{\mathrm{Fourier}}$ vs $\Lambda_{\mathrm{arith}}$) | Paper 5 Section 5 | **PLANNED** |
-| **M-G4.1** | Gate 4 | Proof of continuum operator dominance $\mathcal{Q}_{\mathrm{positive}} \succeq \mathcal{Q}_{\mathrm{arch}}^{(-)}$ on $\mathcal{H}$ | Paper 5 Section 6 | **PLANNED** |
-| **M-G5.1** | Gate 5 | Double density theorem ($\bigcup_{c, N} \mathcal{H}_{c, N}$ dense in $\mathcal{W}_{\mathrm{admissible}}$) and deduction of RH via Weil (1952) | Paper 5 Section 7 | **LONG-TERM TARGET** |
+| **M-G2.1** | Gate 2 | Formulation of the continuum limiting quadratic form $Q_\infty$ and Friedrichs domain $\mathcal{D}(Q_\infty)$ | Paper NR3 Section 2 | **PLANNED** |
+| **M-G2.2** | Gate 2 | Proof of strong resolvent and form convergence $Q_{c, N} \to Q_\infty$ via Loewner monotonicity $\Delta \Sigma(N) \succ 0$ | Paper NR3 Section 3 | **PLANNED** |
+| **M-G2.3** | Gate 2 | Rigorous proof of Bridges B1 ($\bar{N}_{\mathrm{bound}} < \infty$) and B2 ($\sup_N \|Ku_j^{(N)}\|^2 < \infty$) for discrete Galerkin operators | Paper NR2 Proposition 8.33 | **PLANNED** |
+| **M-G3.1** | Gate 3 | Analytical evaluation of $Q_\infty$ against prime Dirac delta comb and proof of Weil functional identity $Q_\infty[f] = \mathcal{W}[f]$ | Paper NR3 Section 4 | **FALSIFICATION GATE** |
+| **M-G3.2** | Gate 3 | DLMF Binet integral coordinate-space transfer and dual lattice sampling ($\Lambda_{\mathrm{Fourier}}$ vs $\Lambda_{\mathrm{arith}}$) | Paper NR3 Section 5 | **PLANNED** |
+| **M-G4.1** | Gate 4 | Proof of continuum operator dominance $\mathcal{Q}_{\mathrm{positive}} \succeq \mathcal{Q}_{\mathrm{arch}}^{(-)}$ on $\mathcal{H}$ | Paper NR3 Section 6 | **PLANNED** |
+| **M-G5.1** | Gate 5 | Double density theorem ($\bigcup_{c, N} \mathcal{H}_{c, N}$ dense in $\mathcal{W}_{\mathrm{admissible}}$) and deduction of RH via Weil (1952) | Paper NR3 Section 7 | **LONG-TERM TARGET** |
 
 ---
 

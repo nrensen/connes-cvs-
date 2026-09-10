@@ -6,7 +6,7 @@ CELL 76 — SCALE-INVARIANT STIELTJES-RESIDUE REPAIR AUDIT, NORMALIZED ZERO
          RATIO SPECTRAL FACTORIZATION
 ================================================================================
 
-Strategic Roadmap Milestone M22 (Paper 4B Section 8.24 & Proposition 8.25):
+Strategic Roadmap Milestone M22 (Paper NR2 Section 8.24 & Proposition 8.25):
 ----------------------------------------------------------------------------
 Following the execution of cell 75, this cell executes the definitive scale-
 invariant audit and repair of the Stieltjes-residue product formula for boundary

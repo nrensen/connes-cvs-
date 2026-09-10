@@ -3,7 +3,7 @@ CELL 75 — EXACT STIELTJES-RESIDUE PRODUCT FORMULA FOR BOUNDARY WEIGHTS d_k^2,
           INTERLACING STIELTJES ZEROS z_j^* VS ODD EIGENVALUES mu_j,
           AND LOCAL POLE ASYMMETRY CANCELLATION IDENTITY
 
-Theoretical Targets (Milestone M22, Paper 4B Section 8.24):
+Theoretical Targets (Milestone M22, Paper NR2 Section 8.24):
 1. Exact Stieltjes-Residue Theorem:
    Let G_d(z) = <d, (Q_even - z I)^{-1} d> = sum_{k=0}^N d_k^2 / (E_k - z).
    On each interlaced interval (E_j, E_{j+1}) for j in 0..N-1, G_d(z) is strictly

@@ -5,7 +5,7 @@ CELL 86 — OPERATOR-NORM BOUNDS ON LOEWNER GALERKIN MATRICES, SPECTRAL GAP
           CEILINGS, AND BARRIER INDEX INVARIANCE K(N) ACROSS DIMENSIONS
 ================================================================================
 
-Strategic Roadmap Milestone M32 (Paper 4B Section 8.25 & Proposition 8.29):
+Strategic Roadmap Milestone M32 (Paper NR2 Section 8.25 & Proposition 8.29):
 ----------------------------------------------------------------------------
 Following the execution of Cell 85 and the analytical breakthrough in Proposition 8.29:
   1. The Exact Gap Representation:

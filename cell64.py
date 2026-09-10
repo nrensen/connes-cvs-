@@ -43,7 +43,7 @@ PROTOCOL:
    Test how min eig(C) and min eig(S) scale as the high-mode boundary shifts.
    At m_cut = 12 (barrier top), test whether the scattering continuum block
    C_scatt possesses an O(1) gap (lambda_min >= 1.30), connecting to
-   Proposition 8.6 of Paper 4B.
+   Proposition 8.6 of Paper NR2.
 5. Synthesis Table & Clean Termination Sentinel.
 
 DIMENSIONS:

@@ -8,7 +8,7 @@ SEMICLASSICAL FLUX-MATCHING, THE BOUND-STATE LADDER, AND TRANSMISSION CANCELLATI
 PURPOSE:
 --------
 Investigate the substantive physical and mathematical mechanisms behind Hypotheses
-H1, H2, and H3 in Paper 4B (Proposition 8.10) across dimensions N in {8, 12, 16, 20, 24}:
+H1, H2, and H3 in Paper NR2 (Proposition 8.10) across dimensions N in {8, 12, 16, 20, 24}:
 
 1. Hypothesis H1 (Tunneling-Flux Relation):
    Test the semiclassical invariance of the ratio:

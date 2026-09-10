@@ -5,7 +5,7 @@ CELL 96 — UNCONDITIONAL FINITE-N OPERATOR-NORM ENCLOSURE OF THE REMOTE
           STIELTJES PRODUCT, LOEWNER TELESCOPING, AND CLOSED TWO-POLE H(mu_j) AUDIT
 ================================================================================
 
-Strategic Roadmap Milestone M42 (Paper 4B Section 8.25 & Proposition 8.31):
+Strategic Roadmap Milestone M42 (Paper NR2 Section 8.25 & Proposition 8.31):
 ----------------------------------------------------------------------------
 While cell95 maps the high-T Archimedean cutoff calibration across large dimensions,
 Cell 96 executes the analytical programme governing the remote Stieltjes product:

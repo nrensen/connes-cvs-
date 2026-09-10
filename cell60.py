@@ -35,7 +35,7 @@ Part 3: Mode-by-Mode Small-Denominator Cancellation in the Excited Even Sector (
 Part 4: The Invariant Product D_0^2 * M_2 = ||K c||^2 ~ O(1)
         Demonstrates why D_0^2 ~ 10^-40 and M_2 ~ 10^40 multiply to exactly 1.725!
 Part 5: Analytical Synthesis and Asymptotic Scaling Exponent
-        Summarizes the spectral overlap cancellation law and its implications for Paper 4/4B.
+        Summarizes the spectral overlap cancellation law and its implications for Paper NR1/NR2.
 ================================================================================
 """
 

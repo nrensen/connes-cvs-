@@ -10,7 +10,7 @@ PURPOSE:
 Perform a dedicated numerical audit of the positive regularized Stieltjes function
 H(mu) = (mu - lam_0)^2 * G_d'(mu) and verify the exact modal ratio representation:
     Q_j = H(mu_1) / H(mu_j)   <===>   T_j = K_j * (H(mu_1) / H(mu_j))
-established in Paper 4B Proposition 8.24 (Milestone M20).
+established in Paper NR2 Proposition 8.24 (Milestone M20).
 
 Background & Analytical Framework:
 ----------------------------------
