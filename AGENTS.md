@@ -60,11 +60,37 @@ The repository maintains a strict architectural and epistemological boundary bet
   - *Fourier Operator Category Duality:* In Fourier representations, diagonal index multiplication $c_m \mapsto m c_m$ corresponds in physical coordinate space to differentiation $\frac{L}{2\pi i} \partial_t c(t)$, NOT multiplication by $t$. Always maintain exact category hygiene between coordinate multiplication and Fourier frequency differentiation.
   - *Calibrated Cancellation Language:* Describe suppression of inner products across oscillatory modes as "strongly suppressed by destructive interference" or "consistent with phase cancellation", never as "exponentially quenched" without an explicit exponential estimate.
   - *The Epistemic Trinity:* Maintain the strict boundary:
-    $$\text{numerical localization} \neq \text{mathematical reduction} \neq \text{structural explanation}.$$
+    $$\text{numerical localization} \neq \text{mathematical reduction} \neq \text{structural explanation}$$
 
 ---
 
-## 3. Strategic Roadmap Alignment (`ROADMAP.md`)
+## 3. Strategic Roadmap Alignment & Architecture (`ROADMAP.md` & `cell_history_map.md`)
+
+- **The Three Documents, Three Jobs Principle:**
+  To maintain clear separation between historical record-keeping, forward-looking mathematical strategy, and permanent mathematical manuscripts:
+  1. [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md) (**What happened?**): The comprehensive, chronological scientific research notebook recording every computational cell (`cell0` through present), its mathematical rationale, raw output, established results, and refuted hypotheses.
+  2. [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) (**Where are we trying to go, and why?**): The canonical strategic master plan structured around five conceptual Mathematical Gates and the explicit chain of obligations ($\mathcal{Q}_{c, N} \to \mathcal{Q}_\infty \to \mathcal{W} \implies \mathrm{RH}$). It must **never** be used as a sequential log of completed cell outputs.
+  3. **The Manuscripts** ([paper4.md](file:///c:/data/github/connes-cvs-/paper4_exact_resolvent_and_dirichlet_limit.md), [paper4b.md](file:///c:/data/github/connes-cvs-/paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md), `paper5.md`) (**What has been established?**): Formally written, peer-review-ready mathematical papers adhering strictly to the Tiering and Epistemic Discipline rules of Section 2.
+
+- **The Five Mathematical Gates:**
+  All research work is organized around five strictly sequenced gates:
+  - *Gate 1 (Active):* Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction ($\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1$). All specific growth formulations ($p < 2$, WKB tunneling, polynomial bounds, coordinate transmission cancellation) are strictly candidate analytical routes toward this core proposition, not standalone objectives.
+  - *Gate 2:* Continuum Limiting Operator & Quadratic Form ($Q_N \to Q_\infty$, domain, boundary conditions, bound-state preservation).
+  - *Gate 3 (Hard Falsification Gate):* Arithmetic Reconnection & The Weil Bridge ($Q_\infty \stackrel{?}{=} \mathcal{W}$ on the idele class group). A small, controlled early Gate 3 structural reconnaissance is conducted in parallel with Gate 1 ($\text{Gate 1 work} \parallel \text{early Gate 3 structural audit}$) to test the algebraic fidelity of $Q_{c, N} \stackrel{?}{\leftrightarrow} \mathcal{W}$ and the reconciliation of $\Lambda_{\mathrm{Fourier}}$ and $\Lambda_{\mathrm{arith}}$.
+  - *Gate 4:* Positivity Equivalence ($Q_\infty \succeq 0 \iff \mathcal{W}[g] \ge 0$).
+  - *Gate 5:* Invocation of the Weil Criterion & The Riemann Hypothesis ($\bigcup \mathcal{H}_{c, N}$ dense $\implies \mathrm{RH}$).
+
+- **Pre-Flight Cell Formulation Requirement:**
+  Before authoring any new computational cell (`cell*.py`), agents must explicitly identify:
+  1. *Target Gate:* Which of Gates 1–5 does this script serve?
+  2. *Target Proposition / Hypothesis:* What exact mathematical statement is being tested?
+  3. *Verification / Falsification Criterion:* What quantitative outcome confirms or refutes the conjecture?
+  4. *Forward Path to Weil:* How does this advance the chain toward the continuum Weil functional?
+  Computational cells are subordinate diagnostic probes, **never** standalone roadmap milestones.
+
+- **The Hard Arithmetic Falsification Gate (Gate 3 Protocol):**
+  If the continuum quadratic form $Q_\infty$ fails to match André Weil's explicit functional $\mathcal{W}$ on the idele class group, the finite-rank Galerkin construction represents an isolated toy model and cannot prove the Riemann Hypothesis.
+  If falsification occurs at Gate 3, agents must **immediately halt**, record the exact algebraic discrepancy, and report it to the user. Extending numerical sweeps past a failed arithmetic gate is strictly prohibited.
 
 - **The Archimedean Sign Problem:**
   Agents must remember that proving $K_{\mathrm{Fourier}}(v, r, L) = |\Phi_v(r)|^2 \ge 0$ is **not sufficient** to prove Weil positivity, because the Archimedean weight:
@@ -80,7 +106,9 @@ The repository maintains a strict architectural and epistemological boundary bet
   2. *Programme 2:* Continuum density and the Weil criterion ($\bigcup_{c, N} \mathcal{H}_{c, N}$ dense in Weil's test class $\implies \mathrm{RH}$).
   Never conflate finite-dimensional matrix positivity with the density theorem needed for the Riemann Hypothesis.
 - **Roadmap Traceability Principle:**
-  Every computational script, analytical investigation, diagnostic suite, and manuscript revision must trace back directly to an active stage or milestone defined in `ROADMAP.md`. Uncharted excursions and speculative side-tracks are strictly prohibited.
+  Every computational script, analytical investigation, diagnostic suite, and manuscript revision must trace back directly to an active gate or milestone defined in `ROADMAP.md`. Uncharted excursions and speculative side-tracks are strictly prohibited.
+- **Roadmap Update Granularity (Gates and Propositions, Not Cells):**
+  `ROADMAP.md` operates at the level of gates and target propositions, not computational steps or routes. `ROADMAP.md` should **rarely change after a cell succeeds**. It changes when our **belief about the research strategy** changes (e.g., an analytical proof is completed, an obstruction is eliminated, a route is superseded, or an arithmetic gate is falsified). Routine numerical logs belong in `cell_history_map.md`, never in `ROADMAP.md`.
 - **Living Document Governance (Update the Roadmap First):**
   The roadmap is a living, working document, not a rigid straitjacket. When computational evidence or analytical discoveries suggest that a pivot, refinement, or change of direction is warranted:
   1. *Pause and articulate the rationale:* Clearly state why the course needs to evolve.

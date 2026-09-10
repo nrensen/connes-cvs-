@@ -3444,7 +3444,7 @@ Table 8.25.29 reveals a central structural feature:
 Across $N \in \{16, 20, 24\}$ at fixed continuum threshold $L = 11$, the denominator does not become enormous; in fact, $E_{12}$ declines from $2.170 \to 1.960 \to 1.306$, causing the geometric factor $G_{\mathrm{spec}} \equiv \frac{E_N - E_{12}}{(E_{12}-E_2)(E_{12}-E_3)}$ to drift modestly upward ($0.24 \to 0.43 \to 1.47$).
 Yet, the tail exponent plummets by six orders of magnitude:
 $$\mathcal{E}_2^{\mathrm{exact}}: \quad 2.93 \times 10^{-20} \longrightarrow 4.24 \times 10^{-24} \longrightarrow 2.01 \times 10^{-26}.$$
-The dominant empirical engine of tail extinction is **overwhelmingly the semiclassical tunneling splitting**:
+The finite-$N$ computations identify the semiclassical tunneling splitting as the dominant observed mechanism of tail extinction:
 $$\Delta_2(N) \longrightarrow 0 \qquad (1.21 \times 10^{-19} \to 9.84 \times 10^{-24} \to 1.37 \times 10^{-26}).$$
 Consequently, the telescoping bound does **not** rely on high-energy spectral growth escaping to infinity; the bound-state splitting $\Delta_j(N)$ itself rapidly extinguishes the tail exponent.
 
@@ -3460,19 +3460,21 @@ This establishes a clear, rigorous hierarchy of sufficient asymptotic mechanisms
    $$\Pi_{j, \mathrm{tail}}(L) \le \exp\left[ \Delta_j^{(N)} \frac{E_N^{(N)} - E_{L+1}^{(N)}}{(E_{L+1}^{(N)} - E_j^{(N)})(E_{L+1}^{(N)} - E_{j+1}^{(N)})} \right].$$
 2. **Sufficient Asymptotic Tail Condition ($\mathbf{H}_{\mathrm{tail}}$):**
    $$\mathcal{E}_j^{\mathrm{exact}}(N, L) \longrightarrow 0.$$
-3. **Convenient Stronger Product Envelope:**
-   $$\Delta_j^{(N)} R_{\mathrm{spec}}(N; L) \approx \Delta_j^{(N)} \frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0.$$
-   This condition is satisfied under three distinct regimes:
-   - *Regime A:* $R_{\mathrm{spec}} \to 0$;
-   - *Regime B:* $R_{\mathrm{spec}} = \mathcal{O}(1)$ while $\Delta_j \to 0$ (the empirically observed regime);
+3. **Headline Asymptotic Mechanism (Regime B: Bound-State Damping):**
+   Because $\Delta_j(N)$ is an active, rapidly shrinking bound-state tunneling quantity rather than a static parameter, the asymptotic condition is fundamentally the product:
+   $$\boxed{\Delta_j^{(N)} R_{\mathrm{spec}}(N; L) \approx \Delta_j^{(N)} \frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad (N, L \to \infty).}$$
+   This product structure admits three conceptual regimes:
+   - *Regime B (Headline Observed Mechanism):* $R_{\mathrm{spec}} = \mathcal{O}(1)$ while $\Delta_j(N) \to 0$ exponentially fast. This is the mechanism directly identified by the finite-$N$ computations ($R_{\mathrm{spec}}(24; 11) \approx 2.23$, $\Delta_2 \sim 10^{-26}$).
+   - *Regime A:* $R_{\mathrm{spec}} \to 0$ independently.
    - *Regime C:* Even if $R_{\mathrm{spec}} \to \infty$, provided its growth is slower than the exponential decay $e^{\sigma_j N}$ of the tunneling gap.
-4. **Stronger Purely Spectral Condition (Independent of Tunneling):**
-   If $\Delta_j$ were merely bounded away from infinity, vanishing of the envelope requires:
-   $$\frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad \Longleftrightarrow \qquad E_N \sim (E_{L+1})^p \quad \text{with } p < 2.$$
+4. **Stronger, Tunneling-Independent Sufficient Condition:**
+   If one ignores bound-state tunneling damping entirely (treating $\Delta_j$ as merely bounded), vanishing of the operator envelope requires the purely spectral condition:
+   $$\frac{E_N^{(N)}}{(E_{L+1}^{(N)})^2} \longrightarrow 0 \qquad \Longleftrightarrow \qquad E_N^{(N)} = o\left((E_{L+1}^{(N)})^2\right).$$
+   Under a convenient power-law growth model $E_N \sim (E_{L+1})^p$, this condition is satisfied whenever $p < 2$. It is emphasized that $E_N = o(E_{L+1}^2)$ is the exact spectral requirement; $p < 2$ is a modeled growth-law parameterization rather than a necessary general characterization.
 
 #### 4. Dual-Regime Scaling and Resolution Lessons from Test D
 The dual-regime framework distinguishes:
-- **Fixed-$T$ Regime ($T < \infty$):** The operator norm satisfies $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ unconditionally (Proposition 8.29). Eigenvalues are confined to a compact interval $[0, M(c, T)]$. Tail extinction is guaranteed because $\Delta_j(N) \to 0$ while the denominator remains strictly bounded away from zero.
+- **Fixed-$T$ Regime ($T < \infty$):** The operator norm satisfies $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M(c, T) < \infty$ unconditionally (Proposition 8.29). Eigenvalues are confined to a compact interval $[0, M(c, T)]$. Tail extinction follows whenever the relevant denominator remains uniformly separated from zero; in the present bound-state/continuum separation this is expected to hold, while $\Delta_j(N) \to 0$ supplies the dominant observed damping.
 - **Resolution-Preserving Regime ($T(N) > \alpha_N = \frac{2\pi N}{L}$):** Cutoff $T$ scales with dimension $N$ to prevent the Archimedean resonance truncation artifact (`cell94`/`cell95`). In this regime, the bandwidth expands, allowing both $E_N$ and $E_{L+1}$ to evolve.
 
 *Diagnostic Lesson from `cell97` Test D:*

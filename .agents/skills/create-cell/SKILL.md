@@ -25,17 +25,27 @@ This skill defines the canonical architectural standards, code skeletons, numeri
 
 ---
 
-## 2. Canonical Script Layout
+## 2. Strategic Alignment & Documentation Protocol
+
+Before writing any new cell script, agents must ensure it satisfies the **Strategic Roadmap Traceability Principle**:
+1. **Strategic Gate Alignment:** Every cell script must explicitly declare in its header docstring which of the five **Mathematical Gates** in [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) it serves (e.g. *Gate 1: Finite-N Spectral Mechanism & Asymptotic Tail Extinction*).
+2. **Target Statement & Falsification Criterion:** The docstring must state the exact theorem, lemma, or hypothesis under test, along with the precise quantitative threshold for falsification or confirmation.
+3. **Subordinate Diagnostic Role:** Cells are diagnostic and empirical probes, **never** standalone milestones. They do not replace mathematical theorems.
+4. **Notebook Logging in `cell_history_map.md`:** Once a cell is executed and its `.out` file analyzed, its mathematical rationale, computed findings, and refuted hypotheses must be logged in [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md), **NOT** added as narrative clutter to [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md).
+
+---
+
+## 3. Canonical Script Layout
 
 Every cell script must follow this modular structure:
 
 ```
-1. Header Docstring (Cell ID, Purpose, Strategic Roadmap Target, Dimensions)
+1. Header Docstring (Cell ID, Purpose, Target Gate, Tested Proposition, Falsification Criterion)
 2. Precision & Parameter Configuration (mpmath dps, c, L, T, N_LIST)
 3. Mathematical Utilities & Numerical Recipes (quadratures, basis functions)
 4. Canonical Parity Projection Matrix (E: R^{N+1} -> R^{2N+1})
 5. Problem-Specific Operator Construction & Eigensolvers
-6. Dimension Loop & Structured Diagnostics
+6. Dimension Loop & Structured Diagnostics (Guarded against ZeroDivisionError)
 7. Multi-Dimension Synthesis Table
 8. Clean Completion Sentinel
 ```
@@ -241,10 +251,12 @@ def solve_generalized_eigenproblem(
 
 ---
 
-## 4. Pre-Flight Quality Checklist
+## 5. Pre-Flight Quality Checklist
 
 Before committing any cell script, audit against this checklist:
 
+- [ ] **Strategic Gate Alignment:** Does the header docstring explicitly cite which of the 5 Mathematical Gates in `ROADMAP.md` is targeted, along with the precise mathematical statement and falsification criterion?
+- [ ] **Singularity & Division-by-Zero Protection:** Are all denominator differences guarded? (e.g. In spectral product or tail analyses, are local/focus modes such as $\ell = j$ and $\ell = j+1$ strictly guarded or excluded before evaluating differences like $|E_{j+1} - E_\ell|$?)
 - [ ] **F-String Bracket Escaping:** Are mathematical sets in f-strings escaped with double braces?
   - ❌ Incorrect: `print(f"Energy in {e_0, e_1} = {val}")` (causes `NameError: name 'e_0' is not defined`)
   - ✅ Correct: `print(f"Energy in {{e_0, e_1}} = {val}")`
@@ -252,7 +264,7 @@ Before committing any cell script, audit against this checklist:
   - ❌ Incorrect: `f"{rec['shift_pct']:.2f}%"` (crashes with `TypeError: unsupported format string passed to mpf.__format__`)
   - ✅ Correct: `mp.nstr(val, digits)` or `f"{float(val):.2f}%"`
 - [ ] **Basis Consistency:** Is the script operating strictly in the intended basis ($v$-basis of size $N+1$ vs full-space exponential basis of size $2N+1$)?
-- [ ] **Removable Singularities:** Are all denominators protected against algebraic zeroes via Taylor series expansions?
+- [ ] **Removable Singularities:** Are all continuous denominators protected against algebraic zeroes via Taylor series expansions?
 - [ ] **Eigenpair Residual Checking:** Are computed eigenvalues and eigenvectors checked for numerical residuals (e.g. $\|A x - \lambda B x\|_2$)?
 - [ ] **Epistemic Labeling:** Does the script avoid describing numerical dominance tests as "rigorous certificates"?
 - [ ] **Dispassionate Output:** Are all printed labels and messages purely technical and descriptive?
