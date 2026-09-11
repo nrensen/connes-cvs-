@@ -1,8 +1,10 @@
-# Gate 1 Analytical Reduction: Feshbach Coupling Isotropization and Scalar Spectral Averaging
+# Cell 101 Analytical Note: Feshbach Coupling Isotropization and Scalar Spectral Averaging
 
-**Status:** Working Analytical Document (Gate 1 / Route 1D / Phase VIII)  
+**Companion Computational Script:** [`cell101.py`](file:///c:/data/github/connes-cvs-/cell101.py) | **Verification Log:** [`cell101.out`](file:///c:/data/github/connes-cvs-/cell101.out)  
+**Status:** Working Research Note (Gate 1 / Route 1D / Phase VIII)  
+**Promoted Content:** Paper NR2 Section 9.2 ([`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md#L3697-L3735))  
 **Target:** [ROADMAP.md Gate 1 — Finite-N Spectral Mechanism](file:///c:/data/github/connes-cvs-/ROADMAP.md)  
-**Dependencies:** Cells 98, 99, 100 ([cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)); Paper NR1 Theorem 7.3; Paper NR2 Section 8  
+**Dependencies:** Cells 98–101 ([cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md)); Paper NR1 Theorem 7.3; Paper NR2 Section 9  
 **Date:** September 2026  
 
 ---

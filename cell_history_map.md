@@ -3240,8 +3240,18 @@ across $M \in \{32, 48, 64\}$ at $N=192$, $c=13$, $T=600$:
 
 **Falsification criterion:** If $D_{\mathrm{KS}}$, $D_{\mathrm{TV}}$, or $\varepsilon_M$ fails to decay as $M$ increases from 32 to 64, or if modal coupling concentrates persistently in a low-energy boundary layer, the asymptotic isotropization hypothesis is refuted.
 
+### What it established
+* **Companion Analytical Note Linkage:** Detailed analytical derivations, exact operator representations, and reduction theorems are documented in the companion research note [`cell101.md`](file:///c:/data/github/connes-cvs-/cell101.md).
+* **Exact Resolvent Expectation Identity Certified:** The identity $\mathbb{E}_{w^{\rm iso}}[r] \equiv S_M(E_{11}) / S_M^{\rm iso}(E_{11})$ was certified with zero numerical discrepancy ($0.0$ at 70 dps) across all tested cutoffs, confirming that the isotropic ratio is an exact expectation under the normalized resolvent probability measure $w_j^{\rm iso}$.
+* **Excess Ratio Collapse ($\varepsilon_M \to 0.092$):** The excess ratio $\varepsilon_M = S_M / S_M^{\rm iso} - 1$ drops from $0.9624$ ($M=32$) to $0.6036$ ($M=48$) down to $\mathbf{0.0919}$ ($M=64$), exhibiting an empirical power-law decay rate of $\gamma \approx 3.39$.
+* **Monotone Decay of Kolmogorov–Smirnov Distance:** $D_{\mathrm{KS}}$ plummets monotonically: $0.458$ ($M=32$) $\to 0.341$ ($M=48$) $\to \mathbf{0.209}$ ($M=64$) (scaling rate $\gamma \approx 1.13$).
+* **Lowest-Mode Ratio Suppression:** The ratio $r_0$ for the lowest mode continues downward: $4.969$ ($M=32$) $\to 4.196$ ($M=48$) $\to \mathbf{2.975}$ ($M=64$).
+* **Bulk Spectral Flattening in Deciles:** At $M=64$, the lowest-energy decile (modes 0--12, $\mu \in [0.892, 2.055]$) has a mean coupling ratio of $r = 0.9508$ and carries $9.66\%$ of the coupling mass, within $3.4\%$ of the pure isotropic target ($10.0\%$).
+* **Computational Efficiency Breakthrough:** Vectorized $V = B \times U$ evaluation and omission of redundant direct LU solves reduced section runtimes to $178$--$338$ seconds (a $>5\times$ speedup over Cell 100).
+* **Manuscript Promotion:** Supported the conservative promotion of the exact finite-$N$ coupling-weighted spectral representation (Proposition 9.1) and isotropic comparison identity (Proposition 9.2) into [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md#L3697-L3735).
+
 ### Status
-**Authored / awaiting execution.** Script created following create-cell skill standards.
+**Established.** Exact expectation identity certified; spectral discrepancy metrics quantified across cutoffs; exact identities promoted to Paper NR2.
 
 ---
 

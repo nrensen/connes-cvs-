@@ -3694,6 +3694,41 @@ Auditing this conjecture against the exact algebraic identities established in P
 
    Under this criterion, any polynomial bound on the excited-sector resolvent matrix elements guarantees that the boundary-layer defect decouples in the continuum limit, independently of prior proof of infinite-order $C^\infty$ boundary flatness. This requirement is established by **Proposition 8.10**, which proves the exact finite-$N$ commutator cancellations and Cauchy–Schwarz resolvent coercivity (Part I), reducing the Polynomial Decoupling Criterion to Hypotheses H1, H2, H2$_{\mathrm{odd}}$, and H3 (Part II), thereby ensuring that boundary-defect leakage decouples exponentially in the continuum limit.
 
+### 9.2 High-Mode Spectral Decoupling and the Coupling-Weighted Resolvent Representation
+
+In investigating the decoupling of the low-energy bound-state cluster from the continuum (Stage 1 of the asymptotic programme), a central question is how the high-frequency Galerkin modes back-react on the low-energy subspace. 
+
+Let $H \in \mathbb{R}^{(N+1)\times(N+1)}$ denote the symmetric canonical even-sector Galerkin matrix with ground eigenvalue $E_{11} \approx 0$. At cutoff index $M \in \{1, \ldots, N-1\}$, partition $H$ into low-energy ($P$-sector, dimension $p = M+1$) and high-energy ($Q$-sector, dimension $q_M = N-M$) blocks:
+$$H = \begin{pmatrix} A_M & B_M \\ B_M^* & C_M \end{pmatrix}.$$
+
+The exact effective Hamiltonian acting on the low-energy subspace $P$ at spectral parameter $E < \min \sigma(C_M)$ is given by the Feshbach / Schur complement:
+$$H_{\mathrm{eff}}(E) = A_M - R_M(E), \qquad R_M(E) \equiv B_M (C_M - E I)^{-1} B_M^*.$$
+
+**Proposition 9.1 (Exact Coupling-Weighted Spectral Representation).**  
+*Let $\{(\mu_j, u_j)\}_{j=0}^{q_M-1}$ denote the orthonormal eigensystem of the high-sector block $C_M u_j = \mu_j u_j$ with $\mu_0 \le \mu_1 \le \cdots \le \mu_{q_M-1}$. For any $E < \mu_0$, the Feshbach correction matrix admits the exact spectral decomposition:*
+$$R_M(E) = \sum_{j=0}^{q_M-1} \frac{(B_M u_j)(B_M u_j)^*}{\mu_j - E}.$$
+*Taking the trace yields the exact scalar Stieltjes representation:*
+$$\operatorname{tr} R_M(E) = \sum_{j=0}^{q_M-1} \frac{\|B_M u_j\|^2}{\mu_j - E} = \int_{\mu_0}^\infty \frac{d\nu_M(\mu)}{\mu - E},$$
+*where $\nu_M$ is the discrete coupling-weighted spectral measure on $\mathbb{R}$:*
+$$\nu_M \equiv \sum_{j=0}^{q_M-1} \|B_M u_j\|^2 \delta_{\mu_j}.$$
+*By trace cyclicity, the total coupling mass is given unconditionally by the Frobenius norm:*
+$$\int d\nu_M = \sum_{j=0}^{q_M-1} \|B_M u_j\|^2 = \operatorname{tr}(B_M B_M^*) = \|B_M\|_F^2.$$
+
+*Proof.*  
+Since $\{u_j\}_{j=0}^{q_M-1}$ is an orthonormal basis of the high-sector subspace $\mathbb{R}^{q_M}$, the high-sector resolvent operator decomposes as $(C_M - E I)^{-1} = \sum_{j=0}^{q_M-1} \frac{u_j u_j^*}{\mu_j - E}$. Substituting into the definition of $R_M(E)$ and taking the trace yields the claim directly. $\quad \blacksquare$
+
+**Proposition 9.2 (The Isotropic Comparison Identity).**  
+*Define the modal coupling strengths $a_j \equiv \|B_M u_j\|^2$, the mean coupling weight per mode $\bar{a} \equiv \frac{\|B_M\|_F^2}{q_M}$, and the normalized modal coupling anisotropy ratios:*
+$$r_j \equiv \frac{a_j}{\bar{a}} = \frac{\|B_M u_j\|^2}{\|B_M\|_F^2 / q_M}, \qquad \frac{1}{q_M} \sum_{j=0}^{q_M-1} r_j \equiv 1.$$
+*Let $S_M(E) \equiv \operatorname{tr} R_M(E)$, and define the isotropic control trace by assigning uniform weight $\bar{a}$ to every high eigenmode:*
+$$S_M^{\rm iso}(E) \equiv \bar{a} \sum_{j=0}^{q_M-1} \frac{1}{\mu_j - E} = \frac{\|B_M\|_F^2}{q_M} \operatorname{tr}\big((C_M - E I)^{-1}\big).$$
+*Then the ratio of the true Feshbach trace to the isotropic control is identically a resolvent-weighted average of the modal anisotropy ratios $r_j$:*
+$$\frac{S_M(E)}{S_M^{\rm iso}(E)} = \frac{\sum_{j=0}^{q_M-1} r_j (\mu_j - E)^{-1}}{\sum_{j=0}^{q_M-1} (\mu_j - E)^{-1}} = \sum_{j=0}^{q_M-1} w_j^{\rm iso}(E) \, r_j,$$
+*where $w_j^{\rm iso}(E) \equiv \frac{(\mu_j - E)^{-1}}{\sum_k (\mu_k - E)^{-1}}$ is the normalized isotropic resolvent probability measure ($\sum_j w_j^{\rm iso} = 1$).*
+
+*Scientific & Epistemic Qualification:*  
+Propositions 9.1 and 9.2 are exact finite-dimensional operator identities valid for all $M < N$. They provide a rigorous mathematical framework for analyzing the high-mode Schur complement. Whether the normalized anisotropy ratios $r_j$ converge toward unity as $M \to \infty$ (the Asymptotic Spectral Isotropization Hypothesis) is an active empirical and semiclassical investigation documented in the companion research notes (`cell100.md`, `cell101.md`), and is not asserted here as a settled continuum theorem.
+
 ---
 
 ## 10. Computational Reproducibility and Software Availability
@@ -3748,6 +3783,10 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 8.25 (Archimedean Cutoff Calibration & High-$T$ Spectral Recovery Sweep) | Sweep of $T \in \{200, \dots, 1600\}$ across fixed dimensions $N \in \{160, 176, 192\}$, audit of control stability at $N=160$, and recovery of $0.41$ gap for $T > \alpha_N$ | `cell95.py` | `cell95.out` |
 | Section 8.25 (Unconditional Remote-Product Operator-Norm Enclosure & Two-Pole Closure) | Certification of Proposition 8.31, audit of expansion ratio $C_{j, \ell} = 1 + \frac{\Delta_\ell - \Delta_j}{E_\ell - E_j}$, unconditional operator-norm bound $\mathcal{S}_{\mathrm{inter}} \le \frac{\Delta_j \|Q\|_{\mathrm{op}}}{E_{L+1}^2}$, and two-pole $H(\mu_j)$ closure | `cell96.py` | `cell96.out` |
 | Section 8.26 (Exact Telescoping Tail Condition $\mathbf{H}_{\mathrm{tail}}(j)$, Relative High-Spectrum Growth $R_{\mathrm{spec}}$, & Component Forensics) | Multi-dimension audit of $E_{L+1}$, $E_N - E_{L+1}$, $\|Q\|_{\mathrm{op}}$, exact exponent $\mathcal{E}_j^{\mathrm{exact}}$, operator envelope $\mathcal{E}_j^{\mathrm{op}}$, slack $E_N/(E_N-E_{L+1})$, and relative high-spectrum growth $R_{\mathrm{spec}} = E_N/E_{L+1}^2$ | `cell97.py` | `cell97.out` |
+| Section 9.2 (Feshbach Decoupling & High-Mode Resolvent Sweep) | Feshbach block decomposition, coupling norm $\|B_M\| = \mathcal{O}(1)$, and Schur complement decay | `cell98.py` | `cell98.out` |
+| Section 9.2 (Spectral Decomposition of Feshbach Correction) | High-sector eigenpair decomposition $\sum_j \frac{(B u_j)(B u_j)^*}{\mu_j - E}$ & Parseval verification | `cell99.py` | `cell99.out` |
+| Section 9.2 (Coupling-Weighted Spectral Measure & Isotropic Control) | Discrete measure $\nu_M = \sum a_j \delta_{\mu_j}$, low-edge mass collapse ($26\% \to 2.3\%$), & isotropic ratio $S_M/S_M^{\rm iso} \to 1.092$ | `cell100.py` | `cell100.out` |
+| Section 9.2 (Coupling Anisotropy Profile & Resolvent Identity) | Verification of $\mathbb{E}_{w^{\rm iso}}[r] \equiv S_M/S_M^{\rm iso}$, discrepancy scaling ($D_{\mathrm{KS}}, D_{\mathrm{TV}}$), & decile profiles | `cell101.py` | `cell101.out` |
 
 
 ---

@@ -31,7 +31,11 @@ Before writing any new cell script, agents must ensure it satisfies the **Strate
 1. **Strategic Gate Alignment:** Every cell script must explicitly declare in its header docstring which of the five **Mathematical Gates** in [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md) it serves (e.g. *Gate 1: Finite-N Spectral Mechanism & Asymptotic Tail Extinction*).
 2. **Target Statement & Falsification Criterion:** The docstring must state the exact theorem, lemma, or hypothesis under test, along with the precise quantitative threshold for falsification or confirmation.
 3. **Subordinate Diagnostic Role:** Cells are diagnostic and empirical probes, **never** standalone milestones. They do not replace mathematical theorems.
-4. **Notebook Logging in `cell_history_map.md`:** Once a cell is executed and its `.out` file analyzed, its mathematical rationale, computed findings, and refuted hypotheses must be logged in [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md), **NOT** added as narrative clutter to [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md).
+4. **Companion Analytical Note Protocol (`cell<n>.md`):**
+   All theoretical derivations, operator identities, tested hypotheses, and intermediate reductions supporting a computational cell must be placed directly in a dedicated companion note named `cell<n>.md` (e.g. `cell101.md`). Ad-hoc notes with disparate names are prohibited.
+   - $\text{cell note } (\text{cell}\langle n\rangle\text{.md}) = \text{what we are thinking}$ (exploratory, working reductions).
+   - $\text{manuscripts } (\text{Paper-NR1, NR2}) = \text{what we believe is mathematically worth claiming}$ (settled theorems promoted after review).
+5. **Notebook Logging in `cell_history_map.md`:** Once a cell is executed and its `.out` file analyzed, its mathematical rationale, computed findings, and refuted hypotheses must be logged in [cell_history_map.md](file:///c:/data/github/connes-cvs-/cell_history_map.md), with explicit links to `cell<n>.md`, **NOT** added as narrative clutter to [ROADMAP.md](file:///c:/data/github/connes-cvs-/ROADMAP.md).
 
 ---
 

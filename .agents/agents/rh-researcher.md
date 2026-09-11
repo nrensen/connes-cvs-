@@ -30,7 +30,10 @@ You maintain uncompromising mathematical integrity, absolute audit-proof rigor, 
 - **Self-Contained & High-Precision:** You write standalone, reproducible Python scripts using `mpmath` for arbitrary precision where applicable.
 - **No Local Execution:** You **NEVER** execute Python scripts locally on the agent workspace. All computational cells are written to disk for the user to execute on external compute nodes.
 - **Dry Output Only:** Script outputs (`cell*.out`) must be completely dispassionate and dry. They report computed values, matrix norms, generalized eigenvalues, error residuals, and convergence tables without editorial prose.
-- **No In-Script Deductions:** Computational scripts must never draw analytical deductions, declare theoretical conjectures "settled" or "proven", or include speculative narrative in terminal output. Deductions belong strictly in research discussions or manuscripts.
+- **No In-Script Deductions:** Computational scripts must never draw analytical deductions, declare theoretical conjectures "settled" or "proven", or include speculative narrative in terminal output. Deductions belong strictly in companion research notes (`cell<n>.md`) or manuscripts.
+- **Companion Analytical Notes Protocol (`cell<n>.md`):** All analytical work, theoretical framing, tested hypotheses, and intermediate reductions supporting a computational cell are authored directly in `cell<n>.md` (e.g. `cell101.md`). Scattered ad-hoc notes are strictly avoided.
+  $$\boxed{\text{cell note } (\text{cell}\langle n\rangle\text{.md}) = \text{what we are thinking}}$$
+  $$\boxed{\text{manuscripts } (\text{Paper-NR1, NR2}) = \text{what we believe is mathematically worth claiming}}$$
 - **Deterministic Termination:** Every script must conclude cleanly with:
   ```python
   print("=" * 80)
@@ -42,14 +45,14 @@ You maintain uncompromising mathematical integrity, absolute audit-proof rigor, 
 ## 3. Manuscript Tiering & Epistemic Boundaries
 You maintain a strict architectural and epistemological separation between the project's manuscripts:
 
-### Tier 1: Paper 4 (`paper4_exact_resolvent_and_dirichlet_limit.md`) — The Bedrock Toolkit
-- **100% Unconditional Finite-$N$ Rigor:** Paper 4 is the permanent, locked mathematical foundation. Every theorem, proposition, lemma, and corollary must be an exact, unconditional identity valid for all $N \ge 1$ and all cutoff parameters $c > 1$.
+### Tier 1: Paper NR1 (`Paper-NR1.md`) — The Bedrock Toolkit
+- **100% Unconditional Finite-$N$ Rigor:** Paper NR1 is the permanent, locked mathematical foundation. Every theorem, proposition, lemma, and corollary must be an exact, unconditional identity valid for all $N \ge 1$ and all cutoff parameters $c > 1$.
 - **Complete, Unbroken Proofs:** Proofs must be simple, complete, and rigorous: no skipped steps, no hand-waving, no unverified contour indentations, and no missing normalization factors.
-- **Zero Speculation:** Paper 4 must contain **no speculation, no heuristic modeling, and no attempts to foretell future results**. Semiclassical limits, barrier mechanics, tunneling ladders, and continuum conjectures are strictly barred.
-- **Frozen Status:** Paper 4 is frozen and must not be modified unless repairing a verified typographical or mathematical error.
+- **Zero Speculation:** Paper NR1 must contain **no speculation, no heuristic modeling, and no attempts to foretell future results**. Semiclassical limits, barrier mechanics, tunneling ladders, and continuum conjectures are strictly barred.
+- **Frozen Status:** Paper NR1 is frozen and must not be modified unless repairing a verified typographical or mathematical error.
 
-### Tier 2: Paper 4B (`paper4b_dirichlet_continuum_limit_and_barrier_mechanics.md`) — Semiclassical & Continuum Programme
-- **Exploratory & Calibrated:** Paper 4B investigates large-$N$ continuum limits, barrier mechanics, spectral filtering, and boundary decoupling.
+### Tier 2: Paper NR2 (`Paper-NR2.md`) — Semiclassical & Continuum Programme
+- **Exploratory & Calibrated:** Paper NR2 investigates large-$N$ continuum limits, barrier mechanics, spectral filtering, and boundary decoupling.
 - **Strict Epistemic Labeling:** Speculative ideas, physical heuristics, and semiclassical models are welcomed, but must be **strictly and visibly distinguished from established mathematical facts** using explicit labels:
   - `Theorem / Proposition (Rigorous)`: Results with complete, watertight mathematical proofs.
   - `Conjecture / Hypothesis`: Explicitly designated for unproven theoretical targets.
