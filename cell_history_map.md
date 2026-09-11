@@ -1,4 +1,4 @@
-﻿# Connes–CvS exploratory cell history
+# Connes–CvS exploratory cell history
 
 **Repository:** `nrensen/connes-cvs-`  
 **Historical snapshot audited:** commit `150fa5fe3788018d7582d67d488d3c95a314a155`  
@@ -3129,7 +3129,57 @@ Cell 97 performs component forensics on the exact telescoping exponent $\mathcal
 
 ---
 
-# Updated major historical arc (Cells 0–97)
+## Cell 98 — Feshbach / high-mode separation diagnostic and Schur correction sweep
+
+### Intended purpose
+Cell 98 investigates the Feshbach / Schur complement decoupling of the canonical even-sector matrix $H$ at $N=192$, $c=13$, $T=600$ across low-sector cutoffs $M \in \{4, 8, 12, 16, 24, 32, 48, 64\}$. The cell measures:
+1. The spectral distance $\delta_M = \operatorname{dist}(E_{11}, \sigma(C_M))$ of the ground-state eigenvalue to the high-sector spectrum.
+2. The operator norm $\|B_M\|$ of the coupling block.
+3. The crude resolvent envelope $\|B_M\|^2 / \delta_M$.
+4. The actual Schur correction norm $\|B_M(C_M - E_{11} I)^{-1} B_M^T\|$.
+
+### What it established
+* **Strong high-mode spectral separation develops:** $\delta_M$ grows from $\sim 10^{-28}$ at $M=4$ to $\sim 0.89$ at $M=64$, saturating near an $O(1)$ limiting value.
+* **Coupling norm remains $O(1)$:** $\|B_M\|$ fluctuates between 0.88 and 1.15 throughout the sweep. The initial hypothesis that $\|B_M\| \to 0$ is **refuted** by the data.
+* **Actual Schur correction decreases substantially:** $\|R_M(E_{11})\|$ falls from $\sim 2.6$ at $M=8$ to $\sim 0.32$ at $M=64$, with a particularly large drop between $M=16$ ($\sim 2.24$) and $M=24$ ($\sim 0.91$).
+* **Crude resolvent envelope saturates at $O(1)$:** $\|B\|^2 / \delta_M$ falls spectacularly from $\sim 5 \times 10^{27}$ to $\sim 1.03$ but does not approach zero. At $M=64$, the envelope is 1.03 while the actual correction is 0.32.
+* **The suppression is resolvent/spectral, not $B \to 0$:** The mechanism is not that the coupling block weakens, but that the structured product $B_M(C_M - E)^{-1}B_M^T$ is controlled by directional coupling of $B_M$ relative to the eigenvectors of $C_M$.
+* **Central discovery:** The crude scalar bound $\|B\|^2/\delta_M$ discards all directional information and cannot explain the observed decay. The spectral decomposition $R_M(E) = \sum_j (B_M u_j)(B_M u_j)^T / (\mu_j - E)$ is the operative object; $\|B_M u_j\|^2$ must be small for eigenmodes $u_j$ nearest $E$.
+
+### Corrected interpretation vs initial cell summary
+The cell's printed summary originally listed "$\|B\|$ decreasing as $M$ increases" as a desired outcome and "effective eigenvalue residuals becoming small" as a diagnostic target. Both were corrected in commit following the full-sweep analysis:
+- Item 2: $\|B\|$ does NOT decrease; it stays $O(1)$.
+- Item 5: The relevant quantity is the Schur correction matrix norm, not an eigenvalue residual in the ordinary sense.
+
+### Implementation note (commit f661136)
+The Feshbach correction is computed via column-by-column `mp.lu_solve` against $(C_M - \lambda I)$, reconstructing $X$ and forming $R = BX$, then symmetrising. This avoids multiple-RHS ambiguity in `mp.lu_solve` and is dimensionally consistent: $B$ is $p \times q$, $X$ is $q \times p$, $R$ is $p \times p$.
+
+### Status
+**Established.** Feshbach sweep completed at $N=192$ across 8 cutoff values. Central discovery: the suppression of $\|R_M(E)\|$ is a directional coupling phenomenon in the spectral decomposition, not a crude norm decay.
+
+---
+
+## Cell 99 — Spectral decomposition of the Feshbach correction: directional coupling profile
+
+### Intended purpose
+Cell 99 decomposes the Feshbach correction into its per-eigenvector contributions:
+$$R_M(E) = \sum_j \frac{(B_M u_j)(B_M u_j)^T}{\mu_j - E},$$
+where $C_M u_j = \mu_j u_j$, and measures $\|B_M u_j\|^2$ for each high-sector eigenvector $u_j$.
+
+**Hypothesis (Loewner directional suppression):** Because the Galerkin matrix is a Loewner (divided-difference) matrix of a smooth function $\psi$, the coupling block $B_M$ has entries that decay with mode separation. When acting on oscillatory high-mode eigenvectors $u_j$, Riemann–Lebesgue cancellation suppresses $\|B_M u_j\|^2$ preferentially for the low-lying eigenmodes of $C_M$ (those with $\mu_j$ closest to $E$).
+
+**Falsification criterion:** If $\|B_M u_j\|^2 \approx \|B_M\|_F^2 / \dim(C_M)$ uniformly (isotropic coupling), the directional suppression hypothesis is falsified.
+
+**Verification checks:**
+1. Parseval: $\sum_j \|B_M u_j\|^2 = \|B_M\|_F^2$.
+2. Trace consistency: $\sum_j \|B_M u_j\|^2 / |\mu_j - E|$ must reproduce $\|R_M(E)\|$ from cell 98.
+
+### Status
+**Open / next step.** Script authored; awaiting execution.
+
+---
+
+# Updated major historical arc (Cells 0–99)
 
 ```
 Cells 0–4
@@ -3188,6 +3238,9 @@ Cells 82–89 (Phase VI)
     ↓
 Cells 90–97 (Phase VII)
     Projector Cauchy convergence, Archimedean resonance frontier (alpha_N > T), Nyquist scaling, exact exponent E_j^exact
+    ↓
+Cells 98–99 (Phase VIII)
+    Feshbach/Schur correction sweep, directional coupling suppression, Loewner spectral decomposition
 ```
 
 ---
@@ -3204,6 +3257,7 @@ At the current stage:
 * **Two-Pole Clustering & Stieltjes Product Architecture (Cells 73–81):** Positive regularized Stieltjes function $H(\mu) = (\mu-\lambda)^2 G_d'(\mu)$ unifies overlap growth and gap collapse; two-pole bracketing $E_j < \mu_j < E_{j+1}$ captures $99.9973\%$ of modal weight; exact pole asymmetry cancellation $\frac{H_{j+1}}{H_j} = \alpha_j (L_j/R_j)^2$ balances boundary amplification against gap asymmetry; exact Stieltjes residue product formula for boundary weights $d_k^2$ certified to 50 dps; global weight ladder refuted; remote sum $99.9956\%$ concentrated in adjacent modes, establishing the Finite-Core + Tail architecture ($L=4$).
 * **Universal Interlacing Tail Bound & Telescoping (Cells 82–89):** Stieltjes zero interlacing $0 < \delta_\ell < \Delta_\ell$ eliminates boundary weights and sign ratios unconditionally (Lemma 8.27); imported continuous Weyl growth $E_\ell \sim \ell^2$ refuted by discrete Galerkin spectrum; exact spectral expansion ratio identity $\eta_{\mathrm{inter}} = C_{j, \ell} \mathcal{T}_{\mathrm{tele}}$ proven; calibrated telescoping enclosure certified; Rayleigh–Ritz min-max monotonicity certified across 140 pairs with zero violations.
 * **Projector Convergence & Resolution Calibration (Cells 90–97):** Cauchy convergence of spectral projectors verified ($\|\Delta P_{11}\|_{\mathrm{op}} \le 0.0189$, $\cos \theta_{\max} \to 0.99982$); macroscopic boundary gap $g_{11} \approx 0.42-0.57$ isolates bound states from continuum; Archimedean resonance frontier discovered when $\alpha_N = \frac{2\pi N}{L} > T$; Nyquist cutoff scaling rule $T > \alpha_N$ certified to restore macroscopic boundary gap; exact telescoping exponent $\mathcal{E}_j^{\mathrm{exact}}$ certified unconditionally; bound-state tunneling splitting damping $\Delta_j(N) \to 0$ identified as the dominant empirical engine of tail extinction.
+* **Feshbach Correction & Directional Coupling (Cells 98–99):** Feshbach/Schur complement sweep at $N=192$ across $M \in \{4, \ldots, 64\}$ established that $\|B_M\| = O(1)$ while $\|R_M(E)\|$ decays from $\sim 2.6$ to $\sim 0.32$; spectral gap $\delta_M$ saturates near $0.89$; crude resolvent bound $\|B\|^2/\delta_M$ saturates at $O(1)$ and cannot explain the observed correction decay; central discovery: the suppression is a directional coupling phenomenon in the spectral decomposition $R_M(E) = \sum_j (B_M u_j)(B_M u_j)^T / (\mu_j - E)$, likely mediated by Loewner off-diagonal decay and Riemann–Lebesgue phase cancellation. Cell 99 (spectral decomposition diagnostic) authored.
 
 ---
 
