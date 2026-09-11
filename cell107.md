@@ -41,7 +41,7 @@ $$H_{jk} = \frac{\psi(j) - \psi(k)}{j - k} + \frac{\psi(j) + \psi(k)}{j + k} = \
 4. **The High-Sector Sobolev Tail Bound (Theorem 3):**
    Projecting onto the high sector $Q = \{M+1, \dots, N\}$ where $C_M - E_{11} I$ has spectral gap $\delta_M \ge \delta_\infty \approx 0.892 > 0$:
    $$\boxed{\|u_N^{(Q)}\| \le \frac{1}{\delta_M} \left( \|\xi_N^{(Q)}\| + \|B_M^T u_N^{(P)}\| \right).}$$
-   This provides the independent uniform estimate, bounding the $H^2$-Sobolev tail purely in terms of the low-mode core $u_N^{(P)}$ and the source vector $\xi_N$.
+   This provides an exact finite-$(N, M)$ enclosure, bounding the $H^2$-Sobolev tail purely in terms of the low-mode core $u_N^{(P)}$ and the source vector $\xi_N$, and transforming the asymptotic regularity problem into establishing uniform control over these driving terms.
 
 ---
 
@@ -109,35 +109,39 @@ $$\|u_N\|_2^2 = \sum_{m=1}^N m^4 v_{N, m}^2 = \mathcal{K}_2(N).$$
 *The kinetic vector $u_N = K^2 v_N$ satisfies the exact linear system:*
 $$\boxed{(H - E_{11} I) u_N = \xi_N,}$$
 *where the source vector $\xi_N \equiv -[K^2, H] v_N \in \mathbb{R}^{N+1}$ has explicit components:*
-$$\xi_{N, 0} = \frac{1}{\sqrt{2}} \sum_{k=1}^N a_k v_{N, k} = \frac{1}{\sqrt{2}} \langle a, v_N \rangle,$$
-$$\xi_{N, j} = \alpha_N - \beta_N a_j - \frac{1}{\sqrt{2}} a_j v_{N, 0} \qquad (j \ge 1),$$
+$$\xi_{N, 0} = \frac{1}{\sqrt{2}} \sum_{k=1}^N a_k v_{N, k} = \frac{1}{\sqrt{2}} \langle a, v_N \rangle = \frac{\alpha_N}{\sqrt{2}},$$
+$$\xi_{N, j} = \alpha_N - \left( \beta_N + \frac{v_{N, 0}}{\sqrt{2}} \right) a_j = \alpha_N - \frac{T_{v_N}(0)}{\sqrt{2}} a_j \qquad (j \ge 1),$$
 *with scalar coefficients:*
 $$\alpha_N \equiv \langle a, v_N \rangle = \sum_{m=1}^N 2 m \psi(m) v_{N, m}, \qquad \beta_N \equiv \langle e, v_N \rangle = \sum_{m=1}^N v_{N, m}.$$
 
 *Proof.*  
-Follows immediately from substituting Theorem 1 and the row 0 boundary couplings into $-[K^2, H] v_N$. $\quad \blacksquare$
+For $j \ge 1$:
+$$\xi_{N, j} = -([K^2, H] v_N)_j = -([K^2, H]_{j, 0} v_{N, 0} + \sum_{k=1}^N [K^2, H]_{j, k} v_{N, k}).$$
+Using Theorem 1 and the row 0 boundary couplings:
+$$[K^2, H]_{j, 0} = \frac{1}{\sqrt{2}} a_j, \qquad [K^2, H]_{j, k} = a_j - a_k \quad (k \ge 1).$$
+Thus:
+$$\xi_{N, j} = -\frac{a_j v_{N, 0}}{\sqrt{2}} - \sum_{k=1}^N (a_j - a_k) v_{N, k} = -\frac{a_j v_{N, 0}}{\sqrt{2}} - a_j \sum_{k=1}^N v_{N, k} + \sum_{k=1}^N a_k v_{N, k}.$$
+Substituting $\alpha_N = \sum_{k=1}^N a_k v_{N, k}$ and $\beta_N = \sum_{k=1}^N v_{N, k}$:
+$$\xi_{N, j} = \alpha_N - \left( \beta_N + \frac{v_{N, 0}}{\sqrt{2}} \right) a_j.$$
+Since $T_{v_N}(0) = v_{N, 0} + \sqrt{2} \beta_N$, we have $\beta_N + \frac{v_{N, 0}}{\sqrt{2}} = \frac{T_{v_N}(0)}{\sqrt{2}}$, which gives:
+$$\xi_{N, j} = \alpha_N - \frac{T_{v_N}(0)}{\sqrt{2}} a_j. \quad \blacksquare$$
 
 ---
 
-## 3. The Physical-Space Mechanism: Dirichlet Damping of $\beta_N$
+## 3. The Physical-Space Mechanism: Boundary Defect Damping of the Source
 
-### 3.1 Connection to the Solitary Wave Boundary Contact
-The scalar $\beta_N = \sum_{m=1}^N v_{N, m}$ is the sum of all positive-mode Fourier coefficients.
-In physical coordinate space $t \in [0, L]$, the solitary wave is:
-$$T_{v_N}(t) = v_{N, 0} + \sqrt{2} \sum_{m=1}^N v_{N, m} \cos\left(\frac{2\pi m t}{L}\right).$$
-At the left boundary $t = 0$:
-$$T_{v_N}(0) = v_{N, 0} + \sqrt{2} \sum_{m=1}^N v_{N, m} = v_{N, 0} + \sqrt{2} \beta_N.$$
-Because the solitary wave satisfies the dual Dirichlet boundary condition $T_{v_N}(0) \approx 0$ (Paper NR2, Section 4):
-$$\beta_N = \frac{T_{v_N}(0) - v_{N, 0}}{\sqrt{2}} \approx -\frac{v_{N, 0}}{\sqrt{2}} = \mathcal{O}(1).$$
-At $N=192$, $v_{N, 0} \approx 0.06383$, which gives:
-$$\beta_N \approx -\frac{0.06383}{\sqrt{2}} \approx -0.04513.$$
-Thus, $\beta_N$ does not grow with $N$; it is strictly bounded by the solitary wave normalization!
-
-### 3.2 Boundedness of $\alpha_N$
-The scalar $\alpha_N = \sum_{m=1}^N 2 m \psi(m) v_{N, m}$ involves $m v_{N, m}$.
-Because $v_{N, m}$ is exponentially localized at small $m \le 8$ ($v_m \sim e^{-\sigma m}$ with $\sigma \approx 1.0$), and $\psi(m)$ is bounded by the Weil distribution, the sum is overwhelmingly concentrated in the low-mode core:
-$$\alpha_N = \sum_{m=1}^8 2 m \psi(m) v_{N, m} + \mathcal{O}(e^{-8\sigma}) = \mathcal{O}(1).$$
-Consequently, the source vector $\xi_N = \alpha_N e - \beta_N a$ has bounded norm independent of $N$.
+### 3.1 The Exact Boundary-Defect Source Representation
+Restricting the source vector to the high sector $Q = \{M+1, \dots, N\}$:
+$$\boxed{\xi_N^{(Q)} = \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)}.}$$
+This formula reveals the true physical and mathematical mechanism governing the source:
+- The vector $a_k = 2 k \psi(k)$ grows substantially with $k$. If it entered unmitigated (multiplied by an $\mathcal{O}(1)$ factor), the source norm $\|\xi_N^{(Q)}\|$ would grow with $N$.
+- However, $a^{(Q)}$ appears multiplied **strictly by the Dirichlet boundary defect** $\frac{T_{v_N}(0)}{\sqrt{2}}$!
+- In `cell107.out`, the evaluated boundary defect plummets to $10^{-25}$:
+  $$T_{v_N}(0) \approx -6.663 \times 10^{-25} \quad (N=192).$$
+  The relative boundary contact is $|T_{v_N}(0)|/v_{N, 0} \approx 1.04 \times 10^{-23}$.
+- Meanwhile, the scalar projection $\alpha_N = \sum_{m=1}^N 2 m \psi(m) v_{N, m}$ undergoes massive destructive interference against the oscillatory mode coefficients, collapsing to:
+  $$\alpha_N \approx 1.923 \times 10^{-22} \quad (N=192).$$
+- Consequently, the entire source vector $\xi_N^{(Q)}$ is of order $10^{-21}$, suppressed by **exact physical boundary cancellation**!
 
 ---
 
@@ -151,21 +155,18 @@ $$B_M^T u_N^{(P)} + (C_M - E_{11} I) u_N^{(Q)} = \xi_N^{(Q)}.$$
 Because $C_M - E_{11} I$ is strictly positive definite with spectral gap $\delta_M \ge \delta_\infty \approx 0.892 > 0$:
 $$\boxed{u_N^{(Q)} = (C_M - E_{11} I)^{-1} \left( \xi_N^{(Q)} - B_M^T u_N^{(P)} \right).}$$
 
-### 4.2 The Independent Uniform Estimate
+### 4.2 The Exact Finite-$(N, M)$ Enclosure
 
 **Theorem 3 (Commutator-Driven High-Sector Tail Enclosure).**  
-*For any cutoff $M \ge 24$, the $H^2$-Sobolev tail moment satisfies:*
-$$\boxed{\|u_N^{(Q)}\|_2 \equiv \left( \sum_{m=M+1}^N m^4 v_{N, m}^2 \right)^{1/2} \le \frac{1}{\delta_M} \left( \|\xi_N^{(Q)}\|_2 + \|B_M^T u_N^{(P)}\|_2 \right).}$$
+*For any finite dimensions $N > M \ge 24$, the $H^2$-Sobolev tail moment satisfies the exact inequality:*
+$$\boxed{\|u_N^{(Q)}\|_2 \equiv \left( \sum_{m=M+1}^N m^4 v_{N, m}^2 \right)^{1/2} \le \frac{1}{\delta_M} \left( \left\| \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)} \right\|_2 + \|B_M^T u_N^{(P)}\|_2 \right).}$$
 
-*Significance:*
-1. The right-hand side depends **only** on:
-   - The spectral gap $\delta_M \ge 0.892 > 0$.
-   - The low-mode core kinetic vector $u_N^{(P)} = (0^2 v_0, 1^2 v_1, \dots, M^2 v_M)^T$, which involves only modes $m \le M$ and is independent of $N$ as $N \to \infty$.
-   - The high-sector source vector $\xi_N^{(Q)} = \alpha_N e^{(Q)} - \beta_N a^{(Q)}$, whose entries $a_k = 2 k \psi(k)$ are explicit evaluations of the Weil functional.
-2. This establishes the **independent uniform estimate** that was missing in Cell 106:
-   $$\sup_{N \ge 1} \|u_N^{(Q)}\|_2 \le \frac{1}{\delta_M} \left( \|\xi_\infty^{(Q)}\| + \|B_M^T u_\infty^{(P)}\| \right) < \infty.$$
-3. Combined with the low-mode kinetic energy $\|u_N^{(P)}\|^2 \le M^4 \|v_N\|^2 < \infty$, this proves:
-   $$\sup_{N \ge 1} \mathcal{K}_2(N) = \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 < \infty.$$
+### 4.3 Epistemic Status: Established Theorem vs Remaining Asymptotic Step
+Following the reviewer's calibration, we distinguish the exact finite-$N$ identities from the asymptotic target:
+- **Established Mathematical Fact (Theorem 3):** The high-mode $H^2$ tail $\|u_N^{(Q)}\|$ is rigorously enclosed by the right-hand side for all finite $N, M$. The numerical audit in [`cell107.out`](file:///c:/data/github/connes-cvs-/cell107.out) verifies this enclosure at cutoffs $M \in \{24, 32, 48, 64\}$ with tight slack factors between $2.4\times$ and $28.4\times$.
+- **The Remaining Asymptotic Step:** Establishing uniform boundedness $\sup_N \mathcal{K}_2(N) < \infty$ requires proving that the combined source $\|\alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)}\|$ and the low-mode core coupling $\|B_M^T u_N^{(P)}\|$ remain uniformly bounded as $N \to \infty$.
+- This shifts the research target to a much sharper and potentially solvable problem:
+  $$\boxed{\textbf{Prove that } \left\| \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)} \right\|_2 \le C_\xi < \infty \quad \text{uniformly in } N.}$$
 
 ---
 
