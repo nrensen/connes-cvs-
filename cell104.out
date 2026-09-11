@@ -1,0 +1,186 @@
+================================================================================
+CELL 104 — PROJECTED COUPLING ANATOMY & DESTRUCTIVE INTERFERENCE AUDIT
+  Eigenvector Complementarity, Exact Rayleigh Shift, & Mode Cancellation
+  Configuration: N = 192, c = 13, T = 600
+  mpmath dps: 70
+================================================================================
+
+--- STEP 1: RETRIEVING GALERKIN MATRIX ---
+Canonical even matrix H: shape (193, 193), time: 1.96 s
+
+--- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H ---
+Ground-state eigenvalue E11:      -1.06311187849184058521227e-51
+Spectral ceiling ||H||_op:        6.46724721545787
+Eigenvector norm:                 1.0
+Eigenpair residual ||Hv - Ev||:   6.234217464e-71
+Eigensolve runtime: 530.97 s
+
+============================================================
+--- CUTOFF M = 24 (P: 0..24, dim 25; Q: 25..192, dim 168) ---
+============================================================
+
+  --- THEOREM 1: EXACT EIGENVECTOR COMPLEMENTARITY ---
+  ||v^(Q)||^2 (tail mass):        9.21893912523859e-26
+  ||w_M||^2 (projected norm):     1.24219104979504e-25
+  Complementarity res ||w - w*||: 3.900070223e-71
+  Relative complementarity res:   1.106568311e-58
+  Theorem 1 certified (< 1e-50):  True
+
+  --- THEOREM 2: EXACT RAYLEIGH SHIFT ENERGY IDENTITY ---
+  Delta E11^Fesh (resolvent):     7.72655760242558e-26
+  Delta E11^tail (<vQ, (C-E)vQ>): 7.72655760242558e-26
+  Rayleigh identity residual:     2.686878499e-85
+  Relative Rayleigh residual:     3.477458704e-60
+  Theorem 2 certified (< 1e-50):  True
+
+  --- THEOREM 3: TWO-SIDED TAIL-MASS SANDWICH ---
+  delta_M:                        0.3044434989
+  Shift bounds [lower, upper]:    [2.8066461e-26, 5.9621158e-25]
+  Energy shift sandwich holds:    True (ratio: 0.838118)
+  Norm bounds [lower, upper]:     [8.5446515e-27, 3.8558477e-24]
+  Norm sandwich holds:            True (ratio: 1.34743)
+
+  --- THEOREM 4: COLLECTIVE DESTRUCTIVE INTERFERENCE FORENSICS ---
+  Interface mode k = M+1:         k = 25
+  Largest single term |v_m H_mk|: 0.00682574792 at m = 3
+  Sum of absolute terms:          0.02248666557
+  Net sum |w_(24, 25)|:           3.18991662e-13
+  Cancellation Ratio C_M(M+1):    7.0493e+10 (~ 10^10.8)
+  Core sum (m <= 8):           -3.398344508e-6
+  Buffer sum (m > 8):          3.398344189e-6
+  |Core + Buffer| / |Core|:       9.38668e-8
+  Tail decay rate sigma_M:        1.20096
+  Cutoff runtime: 371.05 s
+
+============================================================
+--- CUTOFF M = 32 (P: 0..32, dim 33; Q: 33..192, dim 160) ---
+============================================================
+
+  --- THEOREM 1: EXACT EIGENVECTOR COMPLEMENTARITY ---
+  ||v^(Q)||^2 (tail mass):        2.71273556934202e-33
+  ||w_M||^2 (projected norm):     3.91827655239516e-33
+  Complementarity res ||w - w*||: 3.900070223e-71
+  Relative complementarity res:   6.23052846e-55
+  Theorem 1 certified (< 1e-50):  True
+
+  --- THEOREM 2: EXACT RAYLEIGH SHIFT ENERGY IDENTITY ---
+  Delta E11^Fesh (resolvent):     2.94203771498531e-33
+  Delta E11^tail (<vQ, (C-E)vQ>): 2.94203771498531e-33
+  Rayleigh identity residual:     4.880401154e-88
+  Relative Rayleigh residual:     1.658850643e-55
+  Theorem 2 certified (< 1e-50):  True
+
+  --- THEOREM 3: TWO-SIDED TAIL-MASS SANDWICH ---
+  delta_M:                        0.5047432531
+  Shift bounds [lower, upper]:    [1.369235e-33, 1.7543932e-32]
+  Energy shift sandwich holds:    True (ratio: 1.08453)
+  Norm bounds [lower, upper]:     [6.9111212e-34, 1.1346094e-31]
+  Norm sandwich holds:            True (ratio: 1.4444)
+
+  --- THEOREM 4: COLLECTIVE DESTRUCTIVE INTERFERENCE FORENSICS ---
+  Interface mode k = M+1:         k = 33
+  Largest single term |v_m H_mk|: 0.006574534018 at m = 3
+  Sum of absolute terms:          0.02157981362
+  Net sum |w_(32, 33)|:           5.464817205e-17
+  Cancellation Ratio C_M(M+1):    3.94886e+14 (~ 10^14.6)
+  Core sum (m <= 8):           2.019377174e-7
+  Buffer sum (m > 8):          -2.019377173e-7
+  |Core + Buffer| / |Core|:       2.70619e-10
+  Tail decay rate sigma_M:        1.17168
+  Cutoff runtime: 325.22 s
+
+============================================================
+--- CUTOFF M = 48 (P: 0..48, dim 49; Q: 49..192, dim 144) ---
+============================================================
+
+  --- THEOREM 1: EXACT EIGENVECTOR COMPLEMENTARITY ---
+  ||v^(Q)||^2 (tail mass):        4.38740499259108e-47
+  ||w_M||^2 (projected norm):     2.63485589528634e-46
+  Complementarity res ||w - w*||: 3.900070223e-71
+  Relative complementarity res:   2.402669265e-48
+  Theorem 1 certified (< 1e-50):  True
+
+  --- THEOREM 2: EXACT RAYLEIGH SHIFT ENERGY IDENTITY ---
+  Delta E11^Fesh (resolvent):     1.04862094261227e-46
+  Delta E11^tail (<vQ, (C-E)vQ>): 1.04862094261227e-46
+  Rayleigh identity residual:     1.35252909e-94
+  Relative Rayleigh residual:     1.289816973e-48
+  Theorem 2 certified (< 1e-50):  True
+
+  --- THEOREM 3: TWO-SIDED TAIL-MASS SANDWICH ---
+  delta_M:                        0.8233690183
+  Shift bounds [lower, upper]:    [3.6124533e-47, 2.8374433e-46]
+  Energy shift sandwich holds:    True (ratio: 2.39007)
+  Norm bounds [lower, upper]:     [2.9743822e-47, 1.8350447e-45]
+  Norm sandwich holds:            True (ratio: 6.0055)
+
+  --- THEOREM 4: COLLECTIVE DESTRUCTIVE INTERFERENCE FORENSICS ---
+  Interface mode k = M+1:         k = 49
+  Largest single term |v_m H_mk|: 0.001230239794 at m = 3
+  Sum of absolute terms:          0.004058817236
+  Net sum |w_(48, 49)|:           1.482383902e-23
+  Cancellation Ratio C_M(M+1):    2.73803e+20 (~ 10^20.4)
+  Core sum (m <= 8):           -1.139132365e-6
+  Buffer sum (m > 8):          1.139132365e-6
+  |Core + Buffer| / |Core|:       1.30133e-17
+  Tail decay rate sigma_M:        1.1119
+  Cutoff runtime: 235.02 s
+
+============================================================
+--- CUTOFF M = 64 (P: 0..64, dim 65; Q: 65..192, dim 128) ---
+============================================================
+
+  --- THEOREM 1: EXACT EIGENVECTOR COMPLEMENTARITY ---
+  ||v^(Q)||^2 (tail mass):        2.70319694334793e-52
+  ||w_M||^2 (projected norm):     2.77223507341289e-51
+  Complementarity res ||w - w*||: 3.900070223e-71
+  Relative complementarity res:   0.0
+  Theorem 1 certified (< 1e-50):  True
+
+  --- THEOREM 2: EXACT RAYLEIGH SHIFT ENERGY IDENTITY ---
+  Delta E11^Fesh (resolvent):     7.44796811633453e-52
+  Delta E11^tail (<vQ, (C-E)vQ>): 7.44796811633453e-52
+  Rayleigh identity residual:     3.104245309e-97
+  Relative Rayleigh residual:     0.0
+  Theorem 2 certified (< 1e-50):  True
+
+  --- THEOREM 3: TWO-SIDED TAIL-MASS SANDWICH ---
+  delta_M:                        0.8922619374
+  Shift bounds [lower, upper]:    [2.4119597e-52, 1.7482243e-51]
+  Energy shift sandwich holds:    True (ratio: 0.0)
+  Norm bounds [lower, upper]:     [2.1520999e-52, 1.1306199e-50]
+  Norm sandwich holds:            True (ratio: 0.0)
+
+  --- THEOREM 4: COLLECTIVE DESTRUCTIVE INTERFERENCE FORENSICS ---
+  Interface mode k = M+1:         k = 65
+  Largest single term |v_m H_mk|: 0.00926930626 at m = 3
+  Sum of absolute terms:          0.03031791556
+  Net sum |w_(64, 65)|:           1.255362102e-26
+  Cancellation Ratio C_M(M+1):    2.41507e+24 (~ 10^24.4)
+  Core sum (m <= 8):           5.442909352e-6
+  Buffer sum (m > 8):          -5.442909352e-6
+  |Core + Buffer| / |Core|:       2.30642e-21
+  Tail decay rate sigma_M:        0.927656
+  Cutoff runtime: 167.78 s
+
+===================================================================================================================
+CELL 104 SYNTHESIS: EIGENVECTOR COMPLEMENTARITY & DESTRUCTIVE INTERFERENCE
+===================================================================================================================
+   M |    ||v^(Q)||^2 |      ||w_M||^2 |   Delta_E_Fesh |   Res_comp |   Res_Rayl |     C_M(M+1) |   Core_bal |  sigma_M
+-------------------------------------------------------------------------------------------------------------------
+  24 |    9.21894e-26 |    1.24219e-25 |    7.72656e-26 |    3.9e-71 |  2.687e-85 |    7.049e+10 |   9.387e-8 |    1.201
+  32 |    2.71274e-33 |    3.91828e-33 |    2.94204e-33 |    3.9e-71 |   4.88e-88 |    3.949e+14 |  2.706e-10 |    1.172
+  48 |     4.3874e-47 |    2.63486e-46 |    1.04862e-46 |    3.9e-71 |  1.353e-94 |    2.738e+20 |  1.301e-17 |    1.112
+  64 |     2.7032e-52 |    2.77224e-51 |    7.44797e-52 |    3.9e-71 |  3.104e-97 |    2.415e+24 |  2.306e-21 |   0.9277
+===================================================================================================================
+
+--- PRECISE THEORETICAL CONCLUSIONS ---
+1. Theorem 1 (w_M == -(C_M - E11*I) v^(Q)):     CERTIFIED
+2. Theorem 2 (Delta E11 == <v^(Q), (C-E) v^(Q)>): CERTIFIED
+3. Theorem 3 (Two-Sided Tail-Mass Sandwich):    CERTIFIED
+4. Theorem 4 (Collective Destructive Interf.):  CERTIFIED
+Total script runtime: 1632.00 s
+
+================================================================================
+CELL 104 EXECUTION COMPLETE
+================================================================================
