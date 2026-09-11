@@ -1,0 +1,185 @@
+
+========================================================================
+CELL 101 — COUPLING ISOTROPIZATION PROFILE & DISCREPANCY SCALING
+========================================================================
+
+C=13, N=192, T=600, dps=50, working_dps=70
+Target cutoffs M: [32, 48, 64]
+
+
+GALERKIN MATRIX CACHE: GENERATION PRECISION PROMOTED
+  requested dps = 50
+  working dps   = 70
+  generation dps = 70
+
+GALERKIN MATRIX CACHE: HIT
+  key            = 03fee50a84601d980ddfbdb58f963f612eb947677ab4571e0e08b8d08d88690c
+  N              = 192 (dim = 385)
+  generation dps = 70
+  lookup         = 0.000921 s
+
+GALERKIN MATRIX CACHE: RETURN
+  decode         = 1.348963 s
+  validation     = 0.375909 s
+  total          = 1.725793 s
+Full Galerkin matrix loaded in 1.726 s
+Canonical matrix converted (dim=193) in 0.263 s
+Canonical ground energy E11 = -1.06311187849184059e-51
+Full spectrum solve in 542.008 s
+
+========================================================================
+ANALYSIS AT M = 32  (dim P = 33, dim Q = 160)
+========================================================================
+  high-sector eigensolve (160x160) = 333.695 s
+  coupling projection V = B*U (33x160) = 4.957 s
+
+  BASIC PARAMETERS & INTEGRITY
+    high spectrum span = [0.5047432531, 6.466814442]
+    spectral distance delta_M = 0.5047432531
+    total coupling mass ||B||_F^2 = 1.0742000369
+    Parseval absolute error = 5.43341e-71
+    isotropic weight per mode = 0.006713750231
+
+  ISOTROPIC TRACE RATIO & EXACT RESOLVENT IDENTITY
+    S_M(E11)                  = 0.727923588973
+    S_M^iso(E11)              = 0.370931950282
+    S_M / S_M^iso             = 1.962418143
+    excess ratio eps_M        = 0.9624181428 (96.24%)
+    E_{w_iso}[r] check diff  = 3.62227e-71
+
+  SPECTRAL UNIFORMITY & DISCREPANCY METRICS
+    Kolmogorov-Smirnov distance D_KS = 0.4580533
+    Total Variation distance D_TV    = 0.633655
+    Coefficient of variation CV(r)   = 3.7248065
+    lowest mode ratio r_0            = 4.96887  (mu_0 = 0.504743)
+    extremal range [r_min, r_max]    = [0.000526604, 43.8857]
+
+  DECILE SPECTRAL PROFILE (q=160 modes into 10 bins)
+   bin        modes                 mu range     mean r_j    mass frac   iso target
+     1       0-- 15         [0.50474, 1.718]      5.40424      54.042%        10.0%
+     2      16-- 31         [1.8261, 2.3664]     0.819253      8.1925%        10.0%
+     3      32-- 47         [2.4001, 2.9317]      0.59818      5.9818%        10.0%
+     4      48-- 63         [2.9514, 3.3025]     0.397279      3.9728%        10.0%
+     5      64-- 79          [3.322, 3.7375]     0.552251      5.5225%        10.0%
+     6      80-- 95         [3.7739, 4.1419]     0.146217      1.4622%        10.0%
+     7      96--111         [4.1638, 4.5452]     0.556022      5.5602%        10.0%
+     8     112--127         [4.5652, 5.0053]     0.427425      4.2742%        10.0%
+     9     128--143         [5.0228, 5.4862]     0.870588      8.7059%        10.0%
+    10     144--159          [5.514, 6.4668]     0.228541      2.2854%        10.0%
+  cutoff M=32 completed in 338.96 s
+
+========================================================================
+ANALYSIS AT M = 48  (dim P = 49, dim Q = 144)
+========================================================================
+  high-sector eigensolve (144x144) = 237.706 s
+  coupling projection V = B*U (49x144) = 6.017 s
+
+  BASIC PARAMETERS & INTEGRITY
+    high spectrum span = [0.8233690183, 6.466555654]
+    spectral distance delta_M = 0.8233690183
+    total coupling mass ||B||_F^2 = 1.29250427926
+    Parseval absolute error = 2.35448e-70
+    isotropic weight per mode = 0.008975724162
+
+  ISOTROPIC TRACE RATIO & EXACT RESOLVENT IDENTITY
+    S_M(E11)                  = 0.662175303272
+    S_M^iso(E11)              = 0.412937260769
+    S_M / S_M^iso             = 1.603573633
+    excess ratio eps_M        = 0.6035736326 (60.36%)
+    E_{w_iso}[r] check diff  = 0.0
+
+  SPECTRAL UNIFORMITY & DISCREPANCY METRICS
+    Kolmogorov-Smirnov distance D_KS = 0.34149916
+    Total Variation distance D_TV    = 0.57302486
+    Coefficient of variation CV(r)   = 1.8403052
+    lowest mode ratio r_0            = 4.19578  (mu_0 = 0.823369)
+    extremal range [r_min, r_max]    = [0.00201752, 10.1239]
+
+  DECILE SPECTRAL PROFILE (q=144 modes into 10 bins)
+   bin        modes                 mu range     mean r_j    mass frac   iso target
+     1       0-- 14        [0.82337, 1.9196]      4.27839      44.567%        10.0%
+     2      15-- 29         [2.0129, 2.4843]     0.832209      8.6688%        10.0%
+     3      30-- 44         [2.5077, 3.0647]     0.569821      5.9356%        10.0%
+     4      45-- 59          [3.0934, 3.439]     0.736126       7.668%        10.0%
+     5      60-- 73         [3.4486, 3.8951]     0.732892      7.1253%        10.0%
+     6      74-- 87           [3.91, 4.2948]     0.812105      7.8955%        10.0%
+     7      88--101         [4.3231, 4.6219]     0.515355      5.0104%        10.0%
+     8     102--115         [4.6513, 5.1166]     0.509636      4.9548%        10.0%
+     9     116--129          [5.1726, 5.562]     0.553519      5.3814%        10.0%
+    10     130--143         [5.5712, 6.4666]     0.287335      2.7935%        10.0%
+  cutoff M=48 completed in 244.04 s
+
+========================================================================
+ANALYSIS AT M = 64  (dim P = 65, dim Q = 128)
+========================================================================
+  high-sector eigensolve (128x128) = 171.303 s
+  coupling projection V = B*U (65x128) = 6.341 s
+
+  BASIC PARAMETERS & INTEGRITY
+    high spectrum span = [0.8922619374, 6.466263054]
+    spectral distance delta_M = 0.8922619374
+    total coupling mass ||B||_F^2 = 1.37451974436
+    Parseval absolute error = 1.81114e-70
+    isotropic weight per mode = 0.0107384355
+
+  ISOTROPIC TRACE RATIO & EXACT RESOLVENT IDENTITY
+    S_M(E11)                  = 0.459686276604
+    S_M^iso(E11)              = 0.420980081169
+    S_M / S_M^iso             = 1.091943057
+    excess ratio eps_M        = 0.09194305661 (9.194%)
+    E_{w_iso}[r] check diff  = 0.0
+
+  SPECTRAL UNIFORMITY & DISCREPANCY METRICS
+    Kolmogorov-Smirnov distance D_KS = 0.20882046
+    Total Variation distance D_TV    = 0.55168825
+    Coefficient of variation CV(r)   = 1.9693095
+    lowest mode ratio r_0            = 2.97525  (mu_0 = 0.892262)
+    extremal range [r_min, r_max]    = [0.00367084, 12.5885]
+
+  DECILE SPECTRAL PROFILE (q=128 modes into 10 bins)
+   bin        modes                 mu range     mean r_j    mass frac   iso target
+     1       0-- 12        [0.89226, 2.0551]     0.950827      9.6568%        10.0%
+     2      13-- 25         [2.1015, 2.5816]     0.721263      7.3253%        10.0%
+     3      26-- 38         [2.6469, 3.0935]      2.20739      22.419%        10.0%
+     4      39-- 51         [3.1189, 3.4485]      0.40654      4.1289%        10.0%
+     5      52-- 64         [3.5499, 3.9145]      2.23187      22.667%        10.0%
+     6      65-- 77          [3.949, 4.3263]      1.12334      11.409%        10.0%
+     7      78-- 90         [4.3562, 4.7215]     0.563451      5.7225%        10.0%
+     8      91--103         [4.7815, 5.2135]     0.700699      7.1165%        10.0%
+     9     104--115          [5.257, 5.5767]     0.638611       5.987%        10.0%
+    10     116--127         [5.5861, 6.4663]     0.380565      3.5678%        10.0%
+  cutoff M=64 completed in 178.04 s
+
+================================================================================
+CELL 101 — MULTI-CUTOFF SYNTHESIS & ISOTROPIZATION RATE
+================================================================================
+
+   M    q    delta_M        S_M      S_iso     ratio      eps_M      D_KS      D_TV     CV(r)      r_0
+------------------------------------------------------------------------------------------------------
+  32  160   0.504743   0.727924   0.370932   1.96242    0.96242   0.45805   0.63365    3.7248    4.969
+  48  144   0.823369   0.662175   0.412937   1.60357    0.60357    0.3415   0.57302    1.8403    4.196
+  64  128   0.892262   0.459686    0.42098   1.09194   0.091943   0.20882   0.55169    1.9693    2.975
+
+EMPIRICAL SCALING EXPONENTS BETWEEN SUCCESSIVE CUTOFFS (rate gamma where metric ~ M^-gamma):
+
+  Step M=32 -> M=48 (factor 1.50):
+    excess ratio eps_M rate gamma  = 1.151
+    Kolmogorov-Smirnov D_KS rate   = 0.7242
+    Total Variation D_TV rate      = 0.248
+    Coefficient of variation rate  = 1.739
+
+  Step M=48 -> M=64 (factor 1.33):
+    excess ratio eps_M rate gamma  = 6.541
+    Kolmogorov-Smirnov D_KS rate   = 1.71
+    Total Variation D_TV rate      = 0.1319
+    Coefficient of variation rate  = -0.2355
+
+  Overall scaling M=32 -> M=64:
+    excess ratio eps_M rate gamma  = 3.388
+    Kolmogorov-Smirnov D_KS rate   = 1.133
+    Total Variation D_TV rate      = 0.1998
+    Coefficient of variation rate  = 0.9195
+
+================================================================================
+CELL 101 EXECUTION COMPLETE
+================================================================================
