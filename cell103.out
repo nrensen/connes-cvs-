@@ -1,0 +1,205 @@
+================================================================================
+CELL 103 — ASYMPTOTIC SCALING AUDIT
+  Geometric Prefactor C_geom, Isotropic Baseline S_M^iso, & Master Enclosure
+  Configuration: N = 192, c = 13, T = 600
+  mpmath dps: 70
+================================================================================
+
+--- STEP 1: RETRIEVING GALERKIN MATRIX ---
+Canonical even matrix H: shape (193, 193), time: 1.97 s
+
+--- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H ---
+Ground-state eigenvalue E11: -1.0631118784918405852e-51
+First excited eigenvalue E1: 4.6683815311940076685e-50
+Spectral gap E1 - E11:       4.774692719043191727e-50
+Ground-state eigenvector norm: 1.0
+Eigensolve runtime: 538.67 s
+
+============================================================
+--- CUTOFF M = 24 (P-space: 0..24, dim 25; Q-space: 25..192, dim 168) ---
+============================================================
+  ||B_M||_F^2:                 1.82794122355
+  mu_0 (lowest high-mode):     0.304443498866
+  mu_max (highest high-mode):  6.46690736864
+  delta_M = mu_0 - E11:        0.304443498866
+  diam(sigma(C_M)):            6.16246386977
+  Eigensolve Q-sector (168x168): 377.55 s
+
+  --- THEOREM 1: UNIVERSAL BANDWIDTH BOUND ON C_geom ---
+  C_geom (exact):              8.516835328
+  C_geom bound (diam/delta):   20.24173251
+  Theorem 1 verified:          True (slack: 2.377x)
+
+  --- THEOREM 2: ISOTROPIC BASELINE STRUCTURE ---
+  G_bar_M(E11) = <g>_unif:     0.367513072
+  G_bar bounds:                [0.15463342, 3.2846817]
+  G_bar bounds satisfied:      True
+  S_M^iso = ||B||_F^2 * G_bar: 0.6717922945
+  Actual Feshbach trace S_M:   1.333082622
+  Trace discrepancy Delta S:   0.6612903279
+  Relative excess epsilon_M:   0.9843672416
+  D_KS distance:               0.3913388576
+  KS discrepancy bound B_KS:   2.239062629 (slack: 3.386x)
+
+  --- THEOREM 3: MASTER ENCLOSURE & RELATIVE BOUNDS ---
+  Master Bound B_master:       3.021471078 (slack: 2.267x)
+  Master Bound verified:       True
+  |eps_M| <= C_geom * D_KS:    True (bound: 3.3329686)
+  |eps_M| <= Univ * D_KS:      True (bound: 7.9213765)
+
+  --- MECHANISM 2: GROUND-STATE PROJECTION AUDIT ---
+  ||v^(P)||^2 (ground in P):   1.0
+  ||v^(Q)||^2 (ground in Q):   9.218939125e-26
+  Projected energy E_proj:     1.24219105e-25
+  Rayleigh shift Delta E_Fesh: 7.726557602e-26
+  Projection bound E_proj/del: 4.080202252e-25 (slack: 5.281x)
+  Projection bound verified:   True
+  Per-mode average trace S/p:  0.0533233049
+  Cutoff runtime: 382.14 s
+
+============================================================
+--- CUTOFF M = 32 (P-space: 0..32, dim 33; Q-space: 33..192, dim 160) ---
+============================================================
+  ||B_M||_F^2:                 1.0742000369
+  mu_0 (lowest high-mode):     0.504743253123
+  mu_max (highest high-mode):  6.46681444238
+  delta_M = mu_0 - E11:        0.504743253123
+  diam(sigma(C_M)):            5.96207118926
+  Eigensolve Q-sector (160x160): 328.90 s
+
+  --- THEOREM 1: UNIVERSAL BANDWIDTH BOUND ON C_geom ---
+  C_geom (exact):              5.289652659
+  C_geom bound (diam/delta):   11.81208694
+  Theorem 1 verified:          True (slack: 2.233x)
+
+  --- THEOREM 2: ISOTROPIC BASELINE STRUCTURE ---
+  G_bar_M(E11) = <g>_unif:     0.34530994
+  G_bar bounds:                [0.15463564, 1.9812053]
+  G_bar bounds satisfied:      True
+  S_M^iso = ||B||_F^2 * G_bar: 0.3709319503
+  Actual Feshbach trace S_M:   0.727923589
+  Trace discrepancy Delta S:   0.3569916387
+  Relative excess epsilon_M:   0.9624181428
+  D_KS distance:               0.4580533018
+  KS discrepancy bound B_KS:   0.8987469225 (slack: 2.518x)
+
+  --- THEOREM 3: MASTER ENCLOSURE & RELATIVE BOUNDS ---
+  Master Bound B_master:       1.345765929 (slack: 1.849x)
+  Master Bound verified:       True
+  |eps_M| <= C_geom * D_KS:    True (bound: 2.4229429)
+  |eps_M| <= Univ * D_KS:      True (bound: 5.4105654)
+
+  --- MECHANISM 2: GROUND-STATE PROJECTION AUDIT ---
+  ||v^(P)||^2 (ground in P):   1.0
+  ||v^(Q)||^2 (ground in Q):   2.712735569e-33
+  Projected energy E_proj:     3.918276552e-33
+  Rayleigh shift Delta E_Fesh: 2.942037715e-33
+  Projection bound E_proj/del: 7.762910209e-33 (slack: 2.639x)
+  Projection bound verified:   True
+  Per-mode average trace S/p:  0.02205829057
+  Cutoff runtime: 334.31 s
+
+============================================================
+--- CUTOFF M = 48 (P-space: 0..48, dim 49; Q-space: 49..192, dim 144) ---
+============================================================
+  ||B_M||_F^2:                 1.29250427926
+  mu_0 (lowest high-mode):     0.823369018315
+  mu_max (highest high-mode):  6.46655565383
+  delta_M = mu_0 - E11:        0.823369018315
+  diam(sigma(C_M)):            5.64318663552
+  Eigensolve Q-sector (144x144): 237.47 s
+
+  --- THEOREM 1: UNIVERSAL BANDWIDTH BOUND ON C_geom ---
+  C_geom (exact):              3.317453085
+  C_geom bound (diam/delta):   6.85377578
+  Theorem 1 verified:          True (slack: 2.066x)
+
+  --- THEOREM 2: ISOTROPIC BASELINE STRUCTURE ---
+  G_bar_M(E11) = <g>_unif:     0.3194861846
+  G_bar bounds:                [0.15464183, 1.2145223]
+  G_bar bounds satisfied:      True
+  S_M^iso = ||B||_F^2 * G_bar: 0.4129372608
+  Actual Feshbach trace S_M:   0.6621753033
+  Trace discrepancy Delta S:   0.2492380425
+  Relative excess epsilon_M:   0.6035736326
+  D_KS distance:               0.3414991569
+  KS discrepancy bound B_KS:   0.4678196916 (slack: 1.877x)
+
+  --- THEOREM 3: MASTER ENCLOSURE & RELATIVE BOUNDS ---
+  Master Bound B_master:       0.9490141738 (slack: 1.433x)
+  Master Bound verified:       True
+  |eps_M| <= C_geom * D_KS:    True (bound: 1.1329074)
+  |eps_M| <= Univ * D_KS:      True (bound: 2.3405587)
+
+  --- MECHANISM 2: GROUND-STATE PROJECTION AUDIT ---
+  ||v^(P)||^2 (ground in P):   1.0
+  ||v^(Q)||^2 (ground in Q):   4.387404993e-47
+  Projected energy E_proj:     2.634855895e-46
+  Rayleigh shift Delta E_Fesh: 1.048620943e-46
+  Projection bound E_proj/del: 3.200091134e-46 (slack: 3.052x)
+  Projection bound verified:   True
+  Per-mode average trace S/p:  0.0135137817
+  Cutoff runtime: 243.86 s
+
+============================================================
+--- CUTOFF M = 64 (P-space: 0..64, dim 65; Q-space: 65..192, dim 128) ---
+============================================================
+  ||B_M||_F^2:                 1.37451974436
+  mu_0 (lowest high-mode):     0.892261937369
+  mu_max (highest high-mode):  6.46626305444
+  delta_M = mu_0 - E11:        0.892261937369
+  diam(sigma(C_M)):            5.57400111707
+  Eigensolve Q-sector (128x128): 170.00 s
+
+  --- THEOREM 1: UNIVERSAL BANDWIDTH BOUND ON C_geom ---
+  C_geom (exact):              3.154356329
+  C_geom bound (diam/delta):   6.24704572
+  Theorem 1 verified:          True (slack: 1.98x)
+
+  --- THEOREM 2: ISOTROPIC BASELINE STRUCTURE ---
+  G_bar_M(E11) = <g>_unif:     0.3062743063
+  G_bar bounds:                [0.15464883, 1.1207471]
+  G_bar bounds satisfied:      True
+  S_M^iso = ||B||_F^2 * G_bar: 0.4209800812
+  Actual Feshbach trace S_M:   0.4596862766
+  Trace discrepancy Delta S:   0.03870619543
+  Relative excess epsilon_M:   0.09194305661
+  D_KS distance:               0.208820459
+  KS discrepancy bound B_KS:   0.277297111 (slack: 7.164x)
+
+  --- THEOREM 3: MASTER ENCLOSURE & RELATIVE BOUNDS ---
+  Master Bound B_master:       0.7426657117 (slack: 1.616x)
+  Master Bound verified:       True
+  |eps_M| <= C_geom * D_KS:    True (bound: 0.65869414)
+  |eps_M| <= Univ * D_KS:      True (bound: 1.304511)
+
+  --- MECHANISM 2: GROUND-STATE PROJECTION AUDIT ---
+  ||v^(P)||^2 (ground in P):   1.0
+  ||v^(Q)||^2 (ground in Q):   2.703196943e-52
+  Projected energy E_proj:     2.772235073e-51
+  Rayleigh shift Delta E_Fesh: 7.447968116e-52
+  Projection bound E_proj/del: 3.106974485e-51 (slack: +infx)
+  Projection bound verified:   True
+  Per-mode average trace S/p:  0.007072096563
+  Cutoff runtime: 176.70 s
+
+==============================================================================================================
+CELL 103 SYNTHESIS: UNIVERSAL SCALING, ISOTROPY, & GROUND-STATE PROJECTION
+==============================================================================================================
+   M |  delta_M | ||B||_F^2 |    G_bar |  C_exact |  C_bound |    D_KS |      S_M |    S_iso |    eps_M |     E_proj | Delta_E_Fesh
+--------------------------------------------------------------------------------------------------------------
+  24 |   0.3044 |    1.8279 |   0.3675 |    8.517 |    20.24 |  0.3913 |    1.333 |   0.6718 |   0.9844 |  1.242e-25 |   7.7266e-26
+  32 |   0.5047 |    1.0742 |   0.3453 |     5.29 |    11.81 |  0.4581 |   0.7279 |   0.3709 |   0.9624 |  3.918e-33 |    2.942e-33
+  48 |   0.8234 |    1.2925 |   0.3195 |    3.317 |    6.854 |  0.3415 |   0.6622 |   0.4129 |   0.6036 |  2.635e-46 |   1.0486e-46
+  64 |   0.8923 |    1.3745 |   0.3063 |    3.154 |    6.247 |  0.2088 |   0.4597 |    0.421 |  0.09194 |  2.772e-51 |    7.448e-52
+==============================================================================================================
+
+--- PRECISE THEORETICAL CONCLUSIONS ---
+1. Theorem 1 (C_geom <= diam / delta_M):        CERTIFIED
+2. Theorem 3 (S_M <= Master Enclosure):        CERTIFIED
+3. Mechanism 2 (Delta E_Fesh <= E_proj/delta):  CERTIFIED
+Total script runtime: 1677.65 s
+
+================================================================================
+CELL 103 EXECUTION COMPLETE
+================================================================================
