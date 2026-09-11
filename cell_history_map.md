@@ -3398,18 +3398,22 @@ Cell 105 attacks the controlling open question of Gate 1: proving quantitative l
 ### Intended purpose
 Cell 106 attacks the missing analytical link of Route D: determining whether the quadratic form $\langle v, H v \rangle$ can dominate a weighted modal norm to prove $\sup_N \|v_N\|_{H^s} < \infty$:
 1. **The Global Quadratic Form Domination Obstruction (Theorem 1 in [`cell106.md`](file:///c:/data/github/connes-cvs-/cell106.md)):**
-   Prove analytically that because $\|H_N\|_{\mathrm{op}} \le M_H \approx 6.47 < \infty$ is uniformly bounded, $H_N$ cannot satisfy any global dominance inequality $H_N \succeq c \operatorname{diag}(w) - C I_N$ for any unbounded weight sequence $w_m \to \infty$. This proves that Route D cannot close through global operator inequalities.
-2. **The Ground-State Regularity Mechanism:**
-   Establish that uniform Sobolev boundedness $\sup_N \|v_N\|_{H^s} < \infty$ is an eigenvector-level regularity property of the ground state $v_N$, stemming from the $C^\infty([0, L])$ regularity of the continuum solitary wave profile $T_\infty(t) = \lim_{N \to \infty} T_{v_N}(t)$.
+   Prove analytically that because $\|H_N\|_{\mathrm{op}}$ is bounded or grows at most logarithmically ($\mathcal{O}(\log N)$), $H_N$ cannot satisfy any global dominance inequality $H_N \succeq c \operatorname{diag}(w) - C I_N$ for any polynomial Sobolev weight $w_m = m^{2s}$. This proves that Route D cannot close through global operator inequalities.
+2. **The Ground-State Regularity Investigation & The Regularity Gap:**
+   Establish that uniform Sobolev boundedness $\sup_N \|v_N\|_{H^s} < \infty$ is an eigenvector-level regularity property. Acknowledge the critical analytical gap: $T_{v_N} \xrightarrow{L^2} T_\infty$ and $T_\infty \in C^\infty$ do not by themselves imply uniform discrete $H^s$ bounds without an independent uniform estimate.
 3. **Multi-Dimensional Dimension Sweep Audit:**
-   Evaluate Sobolev moments $\mathcal{K}_s(N) \equiv \sum_{m=1}^N m^{2s} v_{N, m}^2$ across discrete dimensions $N \in \{32, 48, 64, 96, 128, 192\}$ at $c=13, T=600$ in [`cell106.py`](file:///c:/data/github/connes-cvs-/cell106.py) to audit $N$-saturation and stability.
+   Evaluate Sobolev moments $\mathcal{K}_s(N) \equiv \sum_{m=1}^N m^{2s} v_{N, m}^2$ across discrete dimensions $N \in \{32, 48, 64, 96, 128, 192\}$ at $c=13, T=600$ in [`cell106.py`](file:///c:/data/github/connes-cvs-/cell106.py).
 4. **Diagonal vs Off-Diagonal Energy Budget:**
-   Audit the decomposition $H_N = D_N + O_N$, tracking the positive diagonal expectation $\langle v_N, D_N v_N \rangle \approx 0.16$ and its cancellation against negative off-diagonal energy $\langle v_N, O_N v_N \rangle \approx -0.16$ yielding $E_{11}(N) \approx 0$.
-5. **Architectural Blueprint for Paper NR2 Section 9:**
-   Synthesize the progression (Isotropization $\to$ Deterministic comparison $\to$ Exact complementarity $\to$ Ground-state localization) into a publication-ready blueprint.
+   Audit the decomposition $H_N = D_N + O_N$, tracking the positive diagonal expectation $\langle v_N, D_N v_N \rangle \approx 0.1066$ and its exact cancellation against negative off-diagonal energy $\langle v_N, O_N v_N \rangle \approx -0.1066$ yielding $E_{11}(N) \approx -1.06 \times 10^{-51}$.
+
+### Findings & Verification
+- **Theorem 1 Certified:** The diagonal deficit along basis directions $H_{mm} - c m^2$ plummets to $-32.2$ ($c=0.001$), $-364.0$ ($c=0.01$), and $-3681.8$ ($c=0.1$) at $N=192$, confirming the analytical impossibility of global quadratic form domination.
+- **Ground-State Sobolev Saturation:** Moments strongly saturate from $N=64$ onward ($\mathcal{K}_2 = 82.19 \to 82.87 \to 82.98 \to 83.06$; $\mathcal{K}_4 = 18590 \to 18792 \to 18822 \to 18844$). Relative change from $N=128$ to $N=192$ is $1.0 \times 10^{-3}$ ($s=2$) and $1.2 \times 10^{-3}$ ($s=4$).
+- **Ground-State Energy Cancellation:** $\langle v_N, D_N v_N \rangle = 0.10662788$ is cancelled by $\langle v_N, O_N v_N \rangle = -0.10662788$ to 51 digits (cancellation ratio $1.0 \times 10^{50}$).
+- **Epistemic Calibration:** Data provide strong empirical evidence for uniform Sobolev boundedness, but the bridge transferring continuum $C^\infty$ smoothness to discrete eigenvectors uniformly in $N$ requires an independent analytical estimate (the target for Cell 107).
 
 ### Status
-**Established analytically / Authored computational verification.** Companion research note [`cell106.md`](file:///c:/data/github/connes-cvs-/cell106.md) completed; companion audit script [`cell106.py`](file:///c:/data/github/connes-cvs-/cell106.py) ready for execution.
+**Established.** Theorem 1 certified; multi-dimensional Sobolev saturation and energy cancellation logged in [`cell106.out`](file:///c:/data/github/connes-cvs-/cell106.out).
 
 ---
 

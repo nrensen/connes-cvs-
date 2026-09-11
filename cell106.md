@@ -26,14 +26,11 @@ $$\boxed{\textbf{Can the quadratic form itself dominate a weighted modal norm st
    $$H_N \succeq c \operatorname{diag}(w_0, \dots, w_N) - C I_N \qquad (c > 0)$$
    can hold for any unbounded weight sequence $w_m \to \infty$. Because the Galerkin operator $H_N$ is uniformly bounded ($\|H_N\|_{\mathrm{op}} \le M_H \approx 6.47 < \infty$), its spectrum is strictly contained in $[E_{11}, M_H]$. Global dominance of an unbounded diagonal operator would force the spectrum of $H_N$ to tend to $+\infty$, which is impossible.
 2. **The Diagonal vs Off-Diagonal Energy Budget:**
-   The diagonal entries $H_{mm} = \psi'(m) + \frac{\psi(m)}{m}$ are strictly positive and bounded ($H_{mm} \in [0.04, 5.80]$). On the ground state $v_N$, the positive diagonal expectation $\langle v_N, D v_N \rangle \approx 0.16$ is almost exactly cancelled by the negative off-diagonal coupling $\langle v_N, O v_N \rangle \approx -0.16$, yielding the ground-state eigenvalue $E_{11} \approx -10^{-51} \approx 0$.
-3. **The $N$-Uniform Saturation Mechanism:**
-   Because global operator dominance fails, uniform Sobolev boundedness $\sup_N \|v_N\|_{H^s} < \infty$ is **not** an operator-level property of $H_N$; it is an **eigenvector-level regularity property** of the ground state $v_N$.
-   In physical coordinate space, $v_N$ represents the Fourier coefficients of the discrete solitary wave $T_{v_N}(t) \in C^\infty([0, L])$. As $N \to \infty$, $T_{v_N}$ converges in $C^\infty$ to the continuum solitary profile $T_\infty(t)$. The Sobolev moments:
-   $$\mathcal{K}_s(N) \equiv \sum_{m=1}^N m^{2s} v_{N, m}^2 \asymp \int_0^L |\partial_t^s T_{v_N}(t)|^2 dt$$
-   converge to finite continuum integrals $\int_0^L |\partial_t^s T_\infty(t)|^2 dt < \infty$.
-4. **Numerical Audit across Dimensions:**
-   Evaluating across $N \in \{32, 48, 64, 96, 128, 192\}$ demonstrates that the Sobolev moments $\mathcal{K}_s(N)$ rapidly saturate to stable constants, with variations $< 10^{-12}$ between $N=128$ and $N=192$, confirming uniform boundedness.
+   The diagonal entries $H_{mm} = \psi'(m) + \frac{\psi(m)}{m}$ are strictly positive and bounded ($H_{mm} \in [0.043, 5.801]$). On the ground state $v_N$, the positive diagonal expectation $\langle v_N, D v_N \rangle \approx 0.1066$ is almost exactly cancelled by the negative off-diagonal coupling $\langle v_N, O v_N \rangle \approx -0.1066$, yielding the ground-state eigenvalue $E_{11} \approx -10^{-51} \approx 0$.
+3. **The Regularity Gap:**
+   Because global operator dominance fails, uniform Sobolev boundedness $\sup_N \|v_N\|_{H^s} < \infty$ is an **eigenvector-level regularity property** of $v_N$. While $T_{v_N} \to T_\infty$ in $L^2([0, L])$ and $T_\infty \in C^\infty([0, L])$, this does **not** automatically imply uniform discrete Sobolev boundedness $\sup_N \|T_{v_N}\|_{H^s} < \infty$. An independent uniform estimate is required to bridge continuum smoothness to the discrete Galerkin eigenvectors.
+4. **Strong Numerical Saturation across Dimensions:**
+   Evaluating across $N \in \{32, 48, 64, 96, 128, 192\}$ demonstrates that the Sobolev moments $\mathcal{K}_s(N)$ strongly saturate from $N=64$ onward, with relative variations between $N=128$ and $N=192$ of only $\sim 1.0 \times 10^{-3}$ for $s=2$ ($\mathcal{K}_2 = 82.98 \to 83.06$) and $\sim 1.2 \times 10^{-3}$ for $s=4$ ($\mathcal{K}_4 = 18822 \to 18844$), providing excellent empirical motivation for the analytical transfer target.
 
 ---
 
@@ -70,9 +67,9 @@ This directly contradicts the hypothesis that $\lim_{m \to \infty} w_m = +\infty
 ### 1.3 Physical and Mathematical Significance
 Theorem 1 provides a clean, definitive answer to the reviewer's question:
 - The Connes–van Suijlekom Galerkin matrix $H_N$ is a **zero-order (or logarithmic) pseudodifferential operator**, not a differential operator.
-- At $N=192$, $\|H_N\|_{\mathrm{op}} \approx 6.467 < \infty$. The spectrum of $H_N$ is confined to the compact interval $[E_{11}, 6.467]$.
-- Consequently, the quadratic form $\langle v, H v \rangle$ cannot dominate any weighted $\ell^2$-norm $W$ on the whole Hilbert space.
-- Therefore, **Route D cannot close the problem through global operator dominance.** Any proof of $\sup_N \|v_N\|_{H^s} < \infty$ must exploit properties specific to the ground state $v_N$, rather than an operator-wide inequality.
+- In the numerical sweep, $\|H_N\|_{\mathrm{op}}$ increases slowly ($4.114$ at $N=32 \to 6.467$ at $N=192$), consistent with at most logarithmic growth $\mathcal{O}(\log N)$ driven by the Archimedean weight $h_+(\tau) \sim \frac{1}{2}\log(\tau^2/4)$.
+- Even if $\|H_N\|_{\mathrm{op}}$ grows logarithmically with $N$, any polynomial Sobolev weight $w_m = m^{2s}$ ($s > 0$) grows as $m^{2s}$. Because $\lim_{N \to \infty} \frac{N^{2s}}{\log N} = \infty$, the Galerkin matrix $H_N$ cannot dominate any polynomial Sobolev weight $W_N$, whether $\|H_N\|_{\mathrm{op}}$ is uniformly bounded or grows logarithmically.
+- Therefore, **Route D cannot close the problem through global operator dominance.** Any proof of $\sup_N \|v_N\|_{H^s} < \infty$ must exploit properties specific to the ground state $v_N$, rather than an operator-wide coercivity inequality.
 
 ---
 
@@ -100,14 +97,14 @@ Decompose $H = D + O$, where $D = \operatorname{diag}(H_{00}, \dots, H_{NN})$ an
 For the ground state $v_N$:
 $$\langle v_N, H v_N \rangle = \langle v_N, D v_N \rangle + \langle v_N, O v_N \rangle = E_{11}(N) \approx -1.06 \times 10^{-51} \approx 0.$$
 Because $D \succ 0$ and $v_N \neq 0$:
-$$\langle v_N, D v_N \rangle = \sum_{m=0}^N H_{mm} v_{N, m}^2 > 0.$$
+$$\langle v_N, D v_N \rangle = \sum_{m=0}^N H_{mm} v_{N, m}^2 > 0 \approx 0.1066.$$
 Therefore:
-$$\boxed{\langle v_N, O v_N \rangle = E_{11} - \langle v_N, D v_N \rangle \approx -\langle v_N, D v_N \rangle < 0.}$$
+$$\boxed{\langle v_N, O v_N \rangle = E_{11} - \langle v_N, D v_N \rangle \approx -0.1066 < 0.}$$
 The off-diagonal coupling must be strictly negative on the ground state, perfectly cancelling the positive diagonal energy to within 51 decimal digits!
 
 ---
 
-## 3. The Ground-State Regularity Mechanism
+## 3. The Ground-State Regularity Investigation & The Regularity Gap
 
 ### 3.1 Duality Between Mode Space and Coordinate Space
 The $H^s$-Sobolev norm of the discrete eigenvector $v_N \in \mathbb{R}^{N+1}$ is defined by:
@@ -119,19 +116,27 @@ $$\|T_{v_N}'\|_{L^2}^2 = \frac{4\pi^2}{L} \sum_{m=1}^N m^2 v_{N, m}^2, \qquad \|
 Thus, modal Sobolev boundedness $\sup_N \|v_N\|_{H^s} < \infty$ is **strictly equivalent** to coordinate-space $H^s$-regularity:
 $$\boxed{\sup_{N \ge 1} \sum_{m=0}^N m^{2s} v_{N, m}^2 < \infty \quad \Longleftrightarrow \quad \sup_{N \ge 1} \|T_{v_N}\|_{H^s([0, L])} < \infty.}$$
 
-### 3.2 Smoothness of the Limiting Solitary Wave
-In Phase I (Cells 41–47), the project proved that as $N \to \infty$, the sequence of discrete eigenfunctions $T_{v_N}(t)$ converges in $L^2([0, L])$ to a unique continuum solitary wave profile $T_\infty(t)$.
-Furthermore:
-1. $T_\infty(t)$ is a smooth, unimodal solitary wave centered at the midpoint $t = L/2$.
-2. It decays rapidly toward both boundaries $t \to 0$ and $t \to L$.
-3. All derivatives $T_\infty'(t), T_\infty''(t), \dots, T_\infty^{(k)}(t)$ are bounded, square-integrable functions on $[0, L]$.
-4. Consequently:
-   $$\|T_\infty\|_{H^s}^2 = \int_0^L \left( |T_\infty(t)|^2 + |\partial_t^s T_\infty(t)|^2 \right) dt < \infty \qquad (\forall s \ge 0).$$
+### 3.2 The Regularity Gap: Continuum Smoothness vs Discrete Uniform Bounds
+In Phase I (Cells 41–47), the project demonstrated that as $N \to \infty$, the sequence of discrete eigenfunctions $T_{v_N}(t)$ converges in $L^2([0, L])$ to a unique continuum solitary wave profile $T_\infty(t)$, which is smooth: $T_\infty \in C^\infty([0, L])$.
+Consequently, the continuum profile has finite Sobolev energy:
+$$\|T_\infty\|_{H^s}^2 = \int_0^L \left( |T_\infty(t)|^2 + |\partial_t^s T_\infty(t)|^2 \right) dt < \infty \qquad (\forall s \ge 0).$$
 
-Because $T_{v_N} \to T_\infty$ in the Sobolev topology $H^s([0, L])$:
-$$\lim_{N \to \infty} \sum_{m=0}^N (1 + m^2)^s v_{N, m}^2 = \|T_\infty\|_{H^s}^2 < \infty.$$
-This provides the **rigorous structural explanation** for why the discrete Sobolev moments $\mathcal{K}_s(N)$ are uniformly bounded:
-The ground state is a smooth solitary wave in physical space whose derivatives have finite $L^2$ energy independent of the Galerkin truncation cutoff $N$.
+However, we must strictly respect the analytical boundary:
+$$\boxed{T_{v_N} \xrightarrow{L^2} T_\infty \quad+\quad T_\infty \in C^\infty([0, L]) \quad\not\Longrightarrow\quad \sup_{N \ge 1} \|T_{v_N}\|_{H^s} < \infty.}$$
+A sequence of Galerkin polynomials can converge in $L^2$ to a $C^\infty$ function while carrying high-frequency oscillatory noise that causes derivatives to blow up as $N \to \infty$. Smoothness of the limit $T_\infty$ does **not** prevent discrete derivative divergence without an independent uniform estimate.
+
+### 3.3 Empirical Evidence for Uniform Saturation
+While an analytical bridge remains to be proven, the computational audit in [`cell106.out`](file:///c:/data/github/connes-cvs-/cell106.out) provides unusually compelling empirical evidence that the ground-state Sobolev moments $\mathcal{K}_s(N)$ have finite $N \to \infty$ limits:
+- At $s = 2$:
+  $$\mathcal{K}_2(64) = 82.1863 \;\longrightarrow\; \mathcal{K}_2(96) = 82.8736 \;\longrightarrow\; \mathcal{K}_2(128) = 82.9809 \;\longrightarrow\; \mathcal{K}_2(192) = 83.0642.$$
+  The relative change from $N=128$ to $N=192$ is:
+  $$\frac{|\mathcal{K}_2(192) - \mathcal{K}_2(128)|}{\mathcal{K}_2(192)} \approx 0.001003 \approx 1.0 \times 10^{-3}.$$
+- At $s = 4$:
+  $$\mathcal{K}_4(64) = 18590.2 \;\longrightarrow\; \mathcal{K}_4(96) = 18791.9 \;\longrightarrow\; \mathcal{K}_4(128) = 18821.7 \;\longrightarrow\; \mathcal{K}_4(192) = 18844.3.$$
+  The relative change from $N=128$ to $N=192$ is:
+  $$\frac{|\mathcal{K}_4(192) - \mathcal{K}_4(128)|}{\mathcal{K}_4(192)} \approx 0.001199 \approx 1.2 \times 10^{-3}.$$
+
+The observed saturation is strongly consistent with the $C^\infty$ regularity of the continuum solitary wave, but proving an analytical bridge transferring continuum smoothness to the discrete eigenvectors uniformly in $N$ remains the active analytical target.
 
 ---
 
