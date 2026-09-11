@@ -1,0 +1,167 @@
+
+========================================================================
+CELL 102 — DETERMINISTIC RESOLVENT COMPARISON & WASSERSTEIN AUDIT
+========================================================================
+
+C=13, N=192, T=600, dps=50, working_dps=70
+Sweep cutoffs M: [24, 32, 48, 64]
+
+
+GALERKIN MATRIX CACHE: GENERATION PRECISION PROMOTED
+  requested dps = 50
+  working dps   = 70
+  generation dps = 70
+
+GALERKIN MATRIX CACHE: HIT
+  key            = 03fee50a84601d980ddfbdb58f963f612eb947677ab4571e0e08b8d08d88690c
+  N              = 192 (dim = 385)
+  generation dps = 70
+  lookup         = 0.005501 s
+
+GALERKIN MATRIX CACHE: RETURN
+  decode         = 1.342269 s
+  validation     = 0.369041 s
+  total          = 1.716811 s
+Full Galerkin matrix loaded in 1.717 s
+Canonical matrix converted (dim=193) in 0.259 s
+Canonical ground energy E11 = -1.06311187849184059e-51
+Full spectrum solve in 539.743 s
+
+========================================================================
+AUDIT AT M = 24  (dim P = 25, dim Q = 168)
+========================================================================
+  high-sector eigensolve (168x168) in 375.602 s
+  coupling projection V = B*U in 3.922 s
+
+  THEOREM 1: EXACT SUMMATION-BY-PARTS IDENTITY
+    actual S_M - S_M^iso        = 0.66129032792
+    SbP formula total           = 0.66129032792
+    identity absolute residual  = 9.05568e-72
+    boundary term |K_{q-1}|       = 4.34673e-69  (exact zero: True)
+
+  THEOREM 2: KOLMOGOROV-SMIRNOV UPPER BOUND
+    Kolmogorov-Smirnov D_KS     = 0.39133886
+    spectral inverse-gap diff   = 3.1300483
+    actual |S_M - S_M^iso|      = 0.6612903279
+    KS bound B_KS               = 2.239062629
+    bound holds (delta <= B_KS) = True
+    bounding slack B_KS / delta = 3.3859
+    relative excess eps_M       = 0.984367
+    relative bound C_geom*D_KS  = 3.33297
+    geometric factor C_geom     = 8.51684
+
+  THEOREM 3: WASSERSTEIN-1 OPTIMAL TRANSPORT BOUND
+    Wasserstein-1 distance W_1  = 1.0983903
+    spectral distance delta_M   = 0.3044435
+    Wasserstein bound B_W       = 21.6623466
+    bound holds (delta <= B_W)  = True
+    bounding slack B_W / delta  = 32.7577
+  M=24 completed in 379.79 s
+
+========================================================================
+AUDIT AT M = 32  (dim P = 33, dim Q = 160)
+========================================================================
+  high-sector eigensolve (160x160) in 329.124 s
+  coupling projection V = B*U in 4.826 s
+
+  THEOREM 1: EXACT SUMMATION-BY-PARTS IDENTITY
+    actual S_M - S_M^iso        = 0.356991638691
+    SbP formula total           = 0.356991638691
+    identity absolute residual  = 9.05568e-72
+    boundary term |K_{q-1}|       = 3.77622e-69  (exact zero: True)
+
+  THEOREM 2: KOLMOGOROV-SMIRNOV UPPER BOUND
+    Kolmogorov-Smirnov D_KS     = 0.4580533
+    spectral inverse-gap diff   = 1.8265696
+    actual |S_M - S_M^iso|      = 0.3569916387
+    KS bound B_KS               = 0.8987469225
+    bound holds (delta <= B_KS) = True
+    bounding slack B_KS / delta = 2.51756
+    relative excess eps_M       = 0.962418
+    relative bound C_geom*D_KS  = 2.42294
+    geometric factor C_geom     = 5.28965
+
+  THEOREM 3: WASSERSTEIN-1 OPTIMAL TRANSPORT BOUND
+    Wasserstein-1 distance W_1  = 1.3413155
+    spectral distance delta_M   = 0.50474325
+    Wasserstein bound B_W       = 5.655552865
+    bound holds (delta <= B_W)  = True
+    bounding slack B_W / delta  = 15.8423
+  M=32 completed in 334.21 s
+
+========================================================================
+AUDIT AT M = 48  (dim P = 49, dim Q = 144)
+========================================================================
+  high-sector eigensolve (144x144) in 238.889 s
+  coupling projection V = B*U in 5.871 s
+
+  THEOREM 1: EXACT SUMMATION-BY-PARTS IDENTITY
+    actual S_M - S_M^iso        = 0.249238042503
+    SbP formula total           = 0.249238042503
+    identity absolute residual  = 1.13196e-71
+    boundary term |K_{q-1}|       = 2.35448e-69  (exact zero: True)
+
+  THEOREM 2: KOLMOGOROV-SMIRNOV UPPER BOUND
+    Kolmogorov-Smirnov D_KS     = 0.34149916
+    spectral inverse-gap diff   = 1.0598804
+    actual |S_M - S_M^iso|      = 0.2492380425
+    KS bound B_KS               = 0.4678196916
+    bound holds (delta <= B_KS) = True
+    bounding slack B_KS / delta = 1.877
+    relative excess eps_M       = 0.603574
+    relative bound C_geom*D_KS  = 1.13291
+    geometric factor C_geom     = 3.31745
+
+  THEOREM 3: WASSERSTEIN-1 OPTIMAL TRANSPORT BOUND
+    Wasserstein-1 distance W_1  = 1.0667835
+    spectral distance delta_M   = 0.82336902
+    Wasserstein bound B_W       = 2.033851567
+    bound holds (delta <= B_W)  = True
+    bounding slack B_W / delta  = 8.16028
+  M=48 completed in 245.06 s
+
+========================================================================
+AUDIT AT M = 64  (dim P = 65, dim Q = 128)
+========================================================================
+  high-sector eigensolve (128x128) in 172.024 s
+  coupling projection V = B*U in 5.907 s
+
+  THEOREM 1: EXACT SUMMATION-BY-PARTS IDENTITY
+    actual S_M - S_M^iso        = 0.0387061954348
+    SbP formula total           = 0.0387061954348
+    identity absolute residual  = 0.0
+    boundary term |K_{q-1}|       = 4.34673e-70  (exact zero: True)
+
+  THEOREM 2: KOLMOGOROV-SMIRNOV UPPER BOUND
+    Kolmogorov-Smirnov D_KS     = 0.20882046
+    spectral inverse-gap diff   = 0.9660983
+    actual |S_M - S_M^iso|      = 0.03870619543
+    KS bound B_KS               = 0.277297111
+    bound holds (delta <= B_KS) = True
+    bounding slack B_KS / delta = 7.16415
+    relative excess eps_M       = 0.0919431
+    relative bound C_geom*D_KS  = 0.658694
+    geometric factor C_geom     = 3.15436
+
+  THEOREM 3: WASSERSTEIN-1 OPTIMAL TRANSPORT BOUND
+    Wasserstein-1 distance W_1  = 0.35867463
+    spectral distance delta_M   = 0.89226194
+    Wasserstein bound B_W       = 0.6192512744
+    bound holds (delta <= B_W)  = True
+    bounding slack B_W / delta  = 15.9988
+  M=64 completed in 178.26 s
+
+========================================================================================
+CELL 102 — SYNTHESIS: DETERMINISTIC DISCREPANCY BOUNDS & SLACK RATIOS
+========================================================================================
+
+   M    q     delta_S        B_KS   slack_KS        W_1         B_W    slack_W    C_geom     eps_M
+--------------------------------------------------------------------------------------------------
+  24  168     0.66129      2.2391      3.386      1.098      21.662      32.76     8.517    0.9844
+  32  160     0.35699     0.89875      2.518      1.341      5.6556      15.84      5.29    0.9624
+  48  144     0.24924     0.46782      1.877      1.067      2.0339       8.16     3.317    0.6036
+  64  128    0.038706      0.2773      7.164     0.3587     0.61925       16.0     3.154   0.09194
+
+================================================================================
+CELL 102 EXECUTION COMPLETE
+================================================================================
