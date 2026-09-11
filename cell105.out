@@ -1,0 +1,129 @@
+================================================================================
+CELL 105 — GROUND-STATE QUANTITATIVE LOCALIZATION & DECAY PROFILE AUDIT
+  Functional Form Selection, Sobolev Enclosures, & Combes-Thomas Locality
+  Configuration: N = 192, c = 13, T = 600
+  mpmath dps: 70
+================================================================================
+
+--- STEP 1: RETRIEVING GALERKIN MATRIX ---
+Canonical even matrix H: shape (193, 193), time: 1.95 s
+
+--- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H ---
+Ground-state eigenvalue E11:      -1.06311187849184058521227e-51
+Spectral ceiling ||H||_op:        6.46724721545787
+Ground-state norm:                1.0
+Leading component v_0:            0.0638323058507814
+Eigensolve runtime: 526.11 s
+
+--- STEP 3: DENSE TAIL MASS SWEEP & RATE PROFILE ---
+  M =  8 | ||v^(Q)||^2 =   4.22605810498e-7 | sigma_M = 0.917302
+  M = 12 | ||v^(Q)||^2 =   7.5161019843e-12 | sigma_M =  1.06725
+  M = 16 | ||v^(Q)||^2 =  1.03592400125e-16 | sigma_M =  1.15019
+  M = 20 | ||v^(Q)||^2 =  8.95659559726e-21 | sigma_M =  1.15405
+  M = 24 | ||v^(Q)||^2 =  9.21893912524e-26 | sigma_M =  1.20096
+  M = 32 | ||v^(Q)||^2 =  2.71273556934e-33 | sigma_M =  1.17168
+  M = 40 | ||v^(Q)||^2 =  4.30245396922e-41 | sigma_M =  1.16184
+  M = 48 | ||v^(Q)||^2 =  4.38740499259e-47 | sigma_M =   1.1119
+  M = 56 | ||v^(Q)||^2 =  1.61677388774e-51 | sigma_M =  1.04421
+  M = 64 | ||v^(Q)||^2 =  2.70319694335e-52 | sigma_M = 0.927656
+  M = 80 | ||v^(Q)||^2 =  9.97268189329e-53 | sigma_M = 0.748357
+  M = 96 | ||v^(Q)||^2 =  7.01319684706e-53 | sigma_M = 0.625465
+
+--- STEP 4: SOBOLEV KINETIC MOMENTS & THEOREM 3 ENCLOSURES ---
+  Sobolev index s = 1 | ||v||_{H^1}^2 = 8.73436022073
+  Sobolev index s = 2 | ||v||_{H^2}^2 = 99.5329171607
+  Sobolev index s = 3 | ||v||_{H^3}^2 = 1398.3072057
+  Sobolev index s = 4 | ||v||_{H^4}^2 = 23874.275585
+  Sobolev index s = 6 | ||v||_{H^6}^2 = 14115924.9934
+
+  Audit of Theorem 3: ||v^(Q)(M)||^2 <= M^(-2s) * ||v||_{H^s}^2
+  [Sobolev Index s = 1 (Rate M^(-2))]
+    M = 24: Actual = 9.2189391e-26 | Bound =   0.01516382 | Holds: True (Slack: 1.645e+23x)
+    M = 32: Actual = 2.7127356e-33 | Bound = 0.0085296487 | Holds: True (Slack: 3.144e+30x)
+    M = 48: Actual = 4.387405e-47 | Bound =  0.003790955 | Holds: True (Slack: 8.641e+43x)
+    M = 64: Actual = 2.7031969e-52 | Bound = 0.0021324122 | Holds: True (Slack: 7.888e+48x)
+  [Sobolev Index s = 2 (Rate M^(-4))]
+    M = 24: Actual = 9.2189391e-26 | Bound = 0.00030000035 | Holds: True (Slack: 3.254e+21x)
+    M = 32: Actual = 2.7127356e-33 | Bound = 9.4921987e-5 | Holds: True (Slack: 3.499e+28x)
+    M = 48: Actual = 4.387405e-47 | Bound = 1.8750022e-5 | Holds: True (Slack: 4.274e+41x)
+    M = 64: Actual = 2.7031969e-52 | Bound = 5.9326242e-6 | Holds: True (Slack: 2.195e+46x)
+  [Sobolev Index s = 4 (Rate M^(-8))]
+    M = 24: Actual = 9.2189391e-26 | Bound = 2.1689037e-7 | Holds: True (Slack: 2.353e+18x)
+    M = 32: Actual = 2.7127356e-33 | Bound = 2.1713527e-8 | Holds: True (Slack: 8.004e+24x)
+    M = 48: Actual = 4.387405e-47 | Bound = 8.4722801e-10 | Holds: True (Slack: 1.931e+37x)
+    M = 64: Actual = 2.7031969e-52 | Bound = 8.4818465e-11 | Holds: True (Slack: 3.138e+41x)
+
+--- STEP 5: FUNCTIONAL FORM REGRESSION ON TAIL |v_m| ---
+  Fitting Window: modes m in [12, 60] (49 points)
+  -------------------------------------------------------------
+  Model 1 (Pure Exponential):        R^2 = 0.981422
+    |v_m| ~ C * exp(-sigma * m):     sigma = 1.05739
+  -------------------------------------------------------------
+  Model 2 (Modulated Exponential):   R^2 = 0.994476
+    |v_m| ~ C * m^(-gamma) * e^(-sigma*m): sigma = 0.468583, gamma = 18.9656
+  -------------------------------------------------------------
+  Model 3 (Stretched Exponential):   R^2 = 0.991801
+    |v_m| ~ C * exp(-sigma * m^beta): beta = 0.7, sigma = 4.35091
+  -------------------------------------------------------------
+  Model 4 (Pure Power Law):          R^2 = 0.986548
+    |v_m| ~ C * m^(-p):              p = 33.438
+
+--- STEP 6: COMBES-THOMAS OFF-DIAGONAL DECAY IN H ---
+  Distance d =  1 | Mean |H_{i, i+d}| =     0.43287113 | Max |H_{i, i+d}| =       1.431742
+  Distance d =  2 | Mean |H_{i, i+d}| =      0.2069514 | Max |H_{i, i+d}| =     0.78439665
+  Distance d =  3 | Mean |H_{i, i+d}| =     0.13088384 | Max |H_{i, i+d}| =     0.42774858
+  Distance d =  4 | Mean |H_{i, i+d}| =     0.10318217 | Max |H_{i, i+d}| =     0.33424326
+  Distance d =  8 | Mean |H_{i, i+d}| =    0.051243899 | Max |H_{i, i+d}| =     0.16048834
+  Distance d = 12 | Mean |H_{i, i+d}| =    0.034074359 | Max |H_{i, i+d}| =     0.11661807
+  Distance d = 16 | Mean |H_{i, i+d}| =    0.018106387 | Max |H_{i, i+d}| =    0.064984657
+  Distance d = 24 | Mean |H_{i, i+d}| =    0.018986577 | Max |H_{i, i+d}| =    0.058316967
+  Distance d = 32 | Mean |H_{i, i+d}| =    0.012211622 | Max |H_{i, i+d}| =    0.045563319
+  Distance d = 48 | Mean |H_{i, i+d}| =   0.0089355522 | Max |H_{i, i+d}| =    0.027702609
+  Distance d = 64 | Mean |H_{i, i+d}| =   0.0076001612 | Max |H_{i, i+d}| =     0.02430632
+
+--- STEP 7: DIAGONAL VALUES AND SPECTRAL DISTANCES ---
+  k =   0 | H_{kk} = 0.043033743 | (H_{kk}-E11) = 0.043033743 | Row sum excl:  2.0807393 | Diag ratio: 0.02068
+  k =   1 | H_{kk} = 0.087633985 | (H_{kk}-E11) = 0.087633985 | Row sum excl:  2.9310134 | Diag ratio: 0.0299
+  k =   2 | H_{kk} = 0.093013588 | (H_{kk}-E11) = 0.093013588 | Row sum excl:  2.9751276 | Diag ratio: 0.03126
+  k =   4 | H_{kk} = 0.13762222 | (H_{kk}-E11) = 0.13762222 | Row sum excl:  3.2343517 | Diag ratio: 0.04255
+  k =   8 | H_{kk} = 0.89723356 | (H_{kk}-E11) = 0.89723356 | Row sum excl:  4.8330359 | Diag ratio: 0.1856
+  k =  16 | H_{kk} =   1.009049 | (H_{kk}-E11) =   1.009049 | Row sum excl:  3.5739969 | Diag ratio: 0.2823
+  k =  24 | H_{kk} =  2.4803607 | (H_{kk}-E11) =  2.4803607 | Row sum excl:  6.1369321 | Diag ratio: 0.4042
+  k =  32 | H_{kk} =  2.7538213 | (H_{kk}-E11) =  2.7538213 | Row sum excl:  3.0308425 | Diag ratio: 0.9086
+  k =  48 | H_{kk} =   2.292701 | (H_{kk}-E11) =   2.292701 | Row sum excl:  2.9702989 | Diag ratio: 0.7719
+  k =  64 | H_{kk} =  4.1814298 | (H_{kk}-E11) =  4.1814298 | Row sum excl:  3.0071933 | Diag ratio:   1.39
+  k =  96 | H_{kk} =  1.9093432 | (H_{kk}-E11) =  1.9093432 | Row sum excl:  3.2445479 | Diag ratio: 0.5885
+  k = 128 | H_{kk} =  4.0860331 | (H_{kk}-E11) =  4.0860331 | Row sum excl:  2.9561324 | Diag ratio:  1.382
+  k = 160 | H_{kk} =  5.8006591 | (H_{kk}-E11) =  5.8006591 | Row sum excl:  3.6530068 | Diag ratio:  1.588
+  k = 192 | H_{kk} =  4.6318236 | (H_{kk}-E11) =  4.6318236 | Row sum excl:  2.8868015 | Diag ratio:  1.604
+
+==============================================================================================================
+CELL 105 SYNTHESIS: QUANTITATIVE LOCALIZATION SCORECARD
+==============================================================================================================
+   M |      ||v^(Q)||^2 |  sigma_M |      s=1 Bound |      s=2 Bound |      s=4 Bound |   Best Model
+--------------------------------------------------------------------------------------------------------------
+   8 |       4.22606e-7 |   0.9173 |         0.1365 |         0.0243 |       0.001423 | Modulated Exp
+  12 |       7.5161e-12 |    1.067 |        0.06066 |         0.0048 |       5.552e-5 | Modulated Exp
+  16 |      1.03592e-16 |     1.15 |        0.03412 |       0.001519 |       5.559e-6 | Modulated Exp
+  20 |       8.9566e-21 |    1.154 |        0.02184 |      0.0006221 |       9.326e-7 | Modulated Exp
+  24 |      9.21894e-26 |    1.201 |        0.01516 |         0.0003 |       2.169e-7 | Modulated Exp
+  32 |      2.71274e-33 |    1.172 |        0.00853 |       9.492e-5 |       2.171e-8 | Modulated Exp
+  40 |      4.30245e-41 |    1.162 |       0.005459 |       3.888e-5 |       3.643e-9 | Modulated Exp
+  48 |       4.3874e-47 |    1.112 |       0.003791 |       1.875e-5 |      8.472e-10 | Modulated Exp
+  56 |      1.61677e-51 |    1.044 |       0.002785 |       1.012e-5 |      2.468e-10 | Modulated Exp
+  64 |       2.7032e-52 |   0.9277 |       0.002132 |       5.933e-6 |      8.482e-11 | Modulated Exp
+  80 |      9.97268e-53 |   0.7484 |       0.001365 |        2.43e-6 |      1.423e-11 | Modulated Exp
+  96 |       7.0132e-53 |   0.6255 |      0.0009477 |       1.172e-6 |      3.309e-12 | Modulated Exp
+==============================================================================================================
+
+--- PRECISE THEORETICAL CONCLUSIONS ---
+1. Theorem 3 (Sobolev Tail Enclosures):          CERTIFIED
+2. Best-fit Functional Form:                     Modulated Exp (R^2 = 0.994476)
+   Model parameters (Modulated Exp):             sigma = 0.46858, gamma = 18.966
+   Model parameters (Pure Exp):                  sigma = 1.0574
+3. Pure Power Law Fit (R^2):                     0.986548 (Exponent p = 33.438)
+Total script runtime: 528.29 s
+
+================================================================================
+CELL 105 EXECUTION COMPLETE
+================================================================================
