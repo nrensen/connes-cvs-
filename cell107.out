@@ -1,0 +1,59 @@
+================================================================================
+CELL 107 — RANK-TWO COMMUTATOR IDENTITY & SOBOLEV REGULARITY AUDIT
+  Kinetic Commutator Algebra, Ground-State Resolvent, & High-Sector Enclosures
+  Configuration: c = 13, T = 600, N_max = 192
+  mpmath dps: 70
+================================================================================
+
+--- STEP 1: RETRIEVING GALERKIN MATRIX (N = 192) ---
+Canonical even matrix H: shape (193, 193), time: 1.96 s
+
+--- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H ---
+Ground-state eigenvalue E11:      -1.06311187849184058521227e-51
+Leading component v_0:            0.0638323058507814
+Eigensolve runtime: 533.22 s
+
+--- STEP 3: THEOREM 1 AUDIT: COMMUTATOR RANK-TWO STRUCTURE ---
+  Max residual on positive modes (j, k >= 1): 1.390952307e-68
+  Max residual on row 0 couplings (j = 0):     2.318253844e-69
+  Theorem 1 Certified (< 1e-50):              True
+
+--- STEP 4: THEOREM 2 AUDIT: KINETIC RESOLVENT EQUATION ---
+  Scalar alpha_N = <a, v_N>:                  1.92271005002e-22
+  Scalar beta_N  = <e, v_N>:                  -0.0451362563259
+  Max residual ||(H - E11*I) u_N - xi_N||:     1.088180127e-66
+  Max formula residual ||xi_N - xi_formula||: 4.162382033e-69
+  Theorem 2 Certified (< 1e-50):              True
+
+--- STEP 5: DIRICHLET DAMPING AUDIT ACROSS DIMENSIONS ---
+   N |            v_0 |         beta_N |   -v_0 / sqrt(2) |           T_v(0) |   |T_v(0)|/v_0
+----------------------------------------------------------------------------------------
+  32 |     0.54294079 |    -0.38391712 |      -0.38391712 |     1.185243e-23 |    2.18301e-23
+  48 |     0.45583543 |    -0.32232433 |      -0.32232433 |   -1.7827683e-24 |    3.91099e-24
+  64 |    0.070810069 |    -0.05007028 |      -0.05007028 |    -9.674133e-25 |    1.36621e-23
+  96 |    0.065443746 |   -0.046275716 |     -0.046275716 |   -7.2987393e-25 |    1.11527e-23
+ 128 |    0.064548436 |   -0.045642637 |     -0.045642637 |   -6.9222105e-25 |    1.07241e-23
+ 192 |    0.063832306 |   -0.045136256 |     -0.045136256 |   -6.6633793e-25 |    1.04389e-23
+----------------------------------------------------------------------------------------
+
+--- STEP 6: THEOREM 3 AUDIT: HIGH-SECTOR SOBOLEV TAIL ENCLOSURES ---
+   M |    delta_M |   ||u_N^(Q)||_2 (Actual) |        Bound Value |  Holds |  Slack Ratio
+------------------------------------------------------------------------------------
+  24 |   0.304443 |          1.992917339e-10 |    7.015514519e-10 |   True |         3.52
+  32 |   0.504743 |          5.675791633e-14 |    1.360730678e-13 |   True |        2.397
+  48 |   0.823369 |          1.595667512e-20 |     5.07628233e-20 |   True |        3.181
+  64 |   0.892262 |          1.613926378e-22 |    4.581562778e-21 |   True |        28.39
+------------------------------------------------------------------------------------
+
+================================================================================
+CELL 107 SYNTHESIS: COMMUTATOR ALGEBRA & SOBOLEV ENCLOSURE SCORECARD
+================================================================================
+1. Theorem 1 (Commutator Rank-Two Identity):    CERTIFIED (residual: 1.391e-68)
+2. Theorem 2 (Kinetic Resolvent Equation):      CERTIFIED (residual: 1.088e-66)
+3. Dirichlet Damping (beta_N -> -v_0 / sqrt(2)): CERTIFIED (|T_v(0)|/v_0 -> 0)
+4. Theorem 3 (High-Sector Tail Enclosures):     CERTIFIED
+Total script runtime: 2433.82 s
+
+================================================================================
+CELL 107 EXECUTION COMPLETE
+================================================================================
