@@ -141,10 +141,10 @@ Combining Proposition 9.1 with Theorem 2 yields the master analytical bound on t
 *For any $E < \mu_0$, the operator norm of the Feshbach correction is bounded by:*
 $$\boxed{\|R_M(E)\|_{\mathrm{op}} \le S_M(E) \le S_M^{\rm iso}(E) + \|B_M\|_F^2 \cdot D_{\mathrm{KS}}(M) \cdot \left( \frac{1}{\delta_M} - \frac{1}{\mu_{q-1} - E} \right).}$$
 
-### Weakest Asymptotic Decoupling Hypothesis
+### Asymptotic Decoupling Hypothesis
 To guarantee that the Feshbach correction norm $\|R_M(E_{11})\| \to 0$ in the joint continuum limit, it is **sufficient** that:
 1. The macroscopic spectral gap remains open: $\delta_M \ge \delta_\infty > 0$.
-2. The Kolmogorov–Smirnov discrepancy vanishes: $D_{\mathrm{KS}}(M) \to 0$.
+2. The scaled discrepancy vanishes: $C_{\mathrm{geom}}(M) \cdot D_{\mathrm{KS}}(M) \to 0$ (or equivalently $\|B_M\|_F^2 \cdot D_{\mathrm{KS}}(M) / \delta_M \to 0$).
 3. The isotropic baseline trace vanishes: $S_M^{\rm iso}(E_{11}) = \frac{\|B_M\|_F^2}{q_M} \operatorname{tr}((C_M - E_{11} I)^{-1}) \to 0$.
 
-Notice that this requires **no knowledge of individual eigenvector coordinates $u_j$** and **no assumption of pointwise $r_j \to 1$**. Cumulative weak convergence $D_{\mathrm{KS}} \to 0$ combined with density-of-states scaling closes the bound.
+Notice that this requires **no knowledge of individual eigenvector coordinates $u_j$** and **no assumption of pointwise $r_j \to 1$**. Cumulative weak convergence $C_{\mathrm{geom}}(M) D_{\mathrm{KS}}(M) \to 0$ combined with isotropic baseline scaling $S_M^{\rm iso}(E_{11}) \to 0$ closes the bound. Whether $C_{\mathrm{geom}}(M) = \mathcal{O}(1)$ uniformly in $M$ (which would reduce condition 2 strictly to $D_{\mathrm{KS}} \to 0$) is an open scaling problem attacked in Cell 103.
