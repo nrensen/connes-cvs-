@@ -3255,7 +3255,32 @@ across $M \in \{32, 48, 64\}$ at $N=192$, $c=13$, $T=600$:
 
 ---
 
-# Updated major historical arc (Cells 0–101)
+## Cell 102 — Deterministic resolvent comparison theorems & optimal transport bounds
+
+### Intended purpose
+Cell 102 establishes and computationally audits exact analytical comparison theorems between the actual Feshbach trace $S_M(E_{11})$ and the isotropic control $S_M^{\rm iso}(E_{11})$, replacing empirical convergence statements with rigorous deterministic bounds:
+1. **Exact Discrete Summation-by-Parts Identity (Theorem 1 in [`cell102.md`](file:///c:/data/github/connes-cvs-/cell102.md)):**
+   $$S_M - S_M^{\rm iso} = \bar{a} \sum_{j=0}^{q-2} K_j (g_j - g_{j+1}), \qquad K_k \equiv \sum_{j=0}^k (r_j - 1), \quad g_j \equiv \frac{1}{\mu_j - E_{11}},$$
+   with vanishing boundary term ($K_{q-1} \equiv 0$).
+2. **Unconditional Kolmogorov–Smirnov Discrepancy Bound (Theorem 2 in [`cell102.md`](file:///c:/data/github/connes-cvs-/cell102.md)):**
+   $$|S_M - S_M^{\rm iso}| \le \mathcal{B}_{\mathrm{KS}}(M) \equiv \|B_M\|_F^2 \cdot D_{\mathrm{KS}}(M) \cdot \left( \frac{1}{\delta_M} - \frac{1}{\mu_{q-1} - E_{11}} \right).$$
+   Controls the relative excess ratio by $|\varepsilon_M| \le C_{\mathrm{geom}}(M) D_{\mathrm{KS}}(M)$ with $C_{\mathrm{geom}} = \Theta(1)$, rigorously proving that $D_{\mathrm{KS}}(M) \to 0 \implies \varepsilon_M \to 0$.
+3. **Continuous Stieltjes & Wasserstein-1 Enclosure (Theorem 3 in [`cell102.md`](file:///c:/data/github/connes-cvs-/cell102.md)):**
+   $$|S_M - S_M^{\rm iso}| \le \mathcal{B}_{\mathcal{W}}(M) \equiv \frac{\|B_M\|_F^2}{\delta_M^2} \mathcal{W}_1\left( \widetilde{\nu}_M, \widetilde{\nu}_M^{\rm iso} \right),$$
+   bounding the resolvent error by the optimal transport (earth mover's) distance between the normalized coupling measure and the uniform high-sector spectral measure.
+4. **Computational Audit across Cutoffs:**
+   Evaluates the exact identities and computes bounding slack ratios across $M \in \{24, 32, 48, 64\}$ at $N=192, c=13, T=600$.
+
+**Target Proposition:** The deterministic comparison theorems hold unconditionally; cumulative spectral convergence $D_{\mathrm{KS}}(M) \to 0$ or $\mathcal{W}_1(M) \to 0$ is mathematically sufficient to control the Feshbach decoupling error without mode-by-mode convergence.
+
+**Falsification criterion:** If the discrete summation-by-parts identity fails beyond numerical resolution, or if $|S_M - S_M^{\rm iso}|$ violates either $\mathcal{B}_{\mathrm{KS}}$ or $\mathcal{B}_{\mathcal{W}}$ for any cutoff, the theorems are refuted.
+
+### Status
+**Authored / awaiting execution.** Companion analytical note [`cell102.md`](file:///c:/data/github/connes-cvs-/cell102.md) completed; computational audit script [`cell102.py`](file:///c:/data/github/connes-cvs-/cell102.py) created.
+
+---
+
+# Updated major historical arc (Cells 0–102)
 
 ```
 Cells 0–4
@@ -3315,8 +3340,8 @@ Cells 82–89 (Phase VI)
 Cells 90–97 (Phase VII)
     Projector Cauchy convergence, Archimedean resonance frontier (alpha_N > T), Nyquist scaling, exact exponent E_j^exact
     ↓
-Cells 98–101 (Phase VIII)
-    Feshbach/Schur decoupling, spectral measure isotropization (S_M/S_M^iso -> 1.092), and discrepancy scaling
+Cells 98–102 (Phase VIII)
+    Feshbach/Schur decoupling, spectral measure isotropization (S_M/S_M^iso -> 1.092), and deterministic comparison theorems
 ```
 
 ---
