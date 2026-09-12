@@ -3673,11 +3673,34 @@ Following the discovery in Cell 112a that the lowest eigenvalue ceases to coinci
 Dry, dispassionate output without qualitative labels ("certified", "holds", etc.), reporting computed numerical values, overlaps, residuals, and scaling products.
 
 ### Status
-**Pre-flight certified.** Analytical note [`cell113.md`](file:///c:/data/github/connes-cvs-/cell113.md) and execution script [`cell113.py`](file:///c:/data/github/connes-cvs-/cell113.py) ready for compute node execution.
+**Executed (`cell113.out`).** Max-overlap continuation tracked $k=0$ throughout $N \in [24, 96]$ because the lowest eigenvector rotates gradually through $N \in [48, 56]$ ($\mathcal{O}_0 \approx 0.876 > \mathcal{O}_1$), following the delocalizing state ($v_0 \to 0.064$) rather than transferring to the localized state ($k=1, v_0 \approx 0.666$). Consequently, Part C evaluated the exact same state as Cell 111, reproducing the $2 \times 10^{-21}$ plateau ($P_\alpha^{\mathrm{sol}} / P_\alpha^{(0)} \equiv 1.0$). Part B revealed strong $T$-dependence from $T=500$ to $600$. Prompted Cell 114 to replace single-vector overlap with 2D invariant subspace tracking and physical localization invariants ($L_{24}, \mathcal{K}_2$).
 
 ---
 
-# Updated major historical arc (Cells 0–113)
+## Cell 114 (Two-State Spectral Reordering Anatomy & Localization Invariants)
+
+* **Script:** [`cell114.py`](file:///c:/data/github/connes-cvs-/cell114.py)
+* **Output:** `cell114.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell114.md`](file:///c:/data/github/connes-cvs-/cell114.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Cell 113 demonstrated that single-vector overlap continuation fails across near-degeneracies where eigenvectors rotate. Cell 114 resolves the spectral transition through four targeted modules:
+1. **Module 1 (Two-Dimensional Subspace Tracking):** Sweeps $N \in [40, 60]$ with fine step $\Delta N = 2$. Measures the 2D invariant subspace overlap via SVD of the $2 \times 2$ inter-dimensional matrix $M = V_{\mathrm{old}}^T V_{\mathrm{new}}$, extracting principal singular values $(\sigma_1, \sigma_2)$ and the internal planar rotation angle $\phi(N) = \arctan(|M_{01}|/|M_{00}|)$.
+2. **Module 2 (Physical Localization Invariants):** Evaluates core mass concentration $L_{24}(v) \equiv \sum_{m=0}^{24} v_m^2$, kinetic Sobolev moment $\mathcal{K}_2(v) \equiv \sum_{m=1}^N m^4 v_m^2$, and central amplitude $v_0$ across the transition, establishing an operator-independent definition of the solitary branch.
+3. **Module 3 (High-$N$ Branch Comparison):** Concurrently evaluates State $k = 0$ (delocalized edge candidate) and State $k = 1$ (localized candidate) across $N \in \{64, 80, 96, 128, 192\}$, measuring $T_v(0)$, $\alpha_N$, and $P_\alpha(N) = |\alpha_N|\sqrt{N}$ on both branches.
+4. **Module 4 (Finite-$T$ Structure at $N = 48$):** Re-evaluates both states across cached cutoffs $T \in \{400, 500, 600\}$ with zero quadrature overhead.
+
+### Output Standard
+Dry, dispassionate numerical reporting without qualitative labels ("certified", "holds", etc.).
+
+### Status
+**Pre-flight certified.** Analytical note [`cell114.md`](file:///c:/data/github/connes-cvs-/cell114.md) and execution script [`cell114.py`](file:///c:/data/github/connes-cvs-/cell114.py) ready for compute node execution.
+
+---
+
+# Updated major historical arc (Cells 0–114)
 
 ```
 Cells 0–4
@@ -3724,6 +3747,9 @@ Cell 112 / 112a (Phase IX)
     ↓
 Cell 113 (Phase IX)
     Eigenvector overlap continuation, finite-T leakage separation, and solitary-branch extinction audit
+    ↓
+Cell 114 (Phase IX)
+    Two-state spectral reordering anatomy, 2D subspace principal angles, physical localization invariants, and high-N branch comparison
 ```
 
 ---
