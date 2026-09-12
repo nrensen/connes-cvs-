@@ -3786,23 +3786,53 @@ To determine whether the $N^{-1/3}$ boundary scaling is an actual boundary-layer
 ## Cell 118 (Global Modal Cancellation Anatomy, Macroscopic Coordinate Profile, & Arithmetic Remainder Audit)
 
 * **Script:** [`cell118.py`](file:///c:/data/github/connes-cvs-/cell118.py)
-* **Output:** `cell118.out` (pending compute node execution)
+* **Output:** [`cell118.out`](file:///c:/data/github/connes-cvs-/cell118.out) (runtime: 2233.15 s at 70 dps)
 * **Companion Analytical Note:** [`cell118.md`](file:///c:/data/github/connes-cvs-/cell118.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
 
 ### Target & Mathematical Rationale
 Having retired the local Airy boundary-layer model in Cell 117, Cell 118 investigates the true mechanism producing the $10^{-22}$ boundary residual:
-1. **Dual-Coordinate Profiling:** Re-indexes the modal flux in the continuous macroscopic coordinate $x \equiv k/N \in (0, 1)$ alongside discrete distance $j \equiv N - k$.
-2. **Continuum Limiting Cancellation Profile:** Evaluates cumulative partial sums $S_N(x) = \sum_{k \le xN} F_{N, k}$ across $x \in (0, 1)$ to determine whether $S_N(x)$ collapses onto a universal continuum cancellation curve $G(x)$.
-3. **Arithmetic Correlation Audit:** Analyzes whether the boundary residual $\alpha_N$ tracks the oscillatory arithmetic symbol derivative $\psi'(N)$ or prime-power sums.
+1. **Low-Mode Peak ($k = 3$):** Audits individual low-mode contributions $F_{N, k}$ and partial sums $S_N(m)$ for $k \le 10$ across $N \in \{64, 96, 128, 160, 192\}$.
+2. **Macroscopic Cancellation Curve:** Samples $S_N(x) = \sum_{k \le xN} F_{N, k}$ on the continuum coordinate $x = k/N \in (0, 1]$ to test for a universal normalized cancellation curve $g_N(x) = S_N(xN) / M_{\mathrm{peak}}(N)$.
+3. **Arithmetic Correlation Audit:** Evaluates Pearson correlation between boundary residuals ($\alpha_N$, $(H u_N)_N$) and prime-power cosine sums $\Sigma_{\mathrm{cos}}(N)$ and symbol derivatives $\psi_{\mathrm{prime}}'(N)$.
+
+### What it Established (Audit Results)
+1. **Low-Mode Peak at $k = 3$ Confirmed:** For every dimension $N \in [64, 192]$, $S_N(m)$ reaches its global extremum at $k = 3$ ($M_{\mathrm{peak}} \sim 10^{-3} - 10^{-2}$). However, the individual sign patterns of $F_{N, k}$ are $N$-dependent, so the peak cannot be explained solely by the static product $k^2 v_k$.
+2. **Normalized Master-Curve Collapse Falsified:** Normalized profiles $g_N(x)$ do not collapse (spreads exceed $300\%-7000\%$).
+3. **Discovery of Early Extinction into a Quasi-Stable Residual:** While normalized collapse fails, unnormalized sums $S_N(x)$ converge rapidly to the $10^{-22}$ scale: for $N = 192$, $S_N(0.1) \approx 5 \times 10^{-10}$, $S_N(0.2) \approx -3 \times 10^{-19}$, and by $x = 0.3$, $S_N(0.3) = -1.28 \times 10^{-22}$. Throughout $x \in [0.4, 0.95]$, $S_N(x)$ enters a quasi-stable plateau $\sim -1.3 \times 10^{-22}$. Almost all cancellation occurs early in the continuum coordinate ($x \lesssim 0.2-0.3$).
+4. **Dynamic Range / Decades of Cancellation:** The cancellation factor reaches $\mathcal{C}_{\mathrm{cancel}}(192) = 1.37 \times 10^{20}$, representing approximately 20 decades of cancellation across the spectrum.
+5. **Arithmetic Correlation Outcome:** Simple linear correlations with $\Sigma_{\mathrm{cos}}$ and $\psi_{\mathrm{prime}}'$ are weak ($|r| \le 0.24$). The strong correlation $r(\alpha_N, (H u_N)_N) = 0.809$ reflects their shared operator origin via Theorem 1, not an independent prime-power phase lock.
 
 ### Status
-**Authoring.** Pre-flight specification for [`cell118.md`](file:///c:/data/github/connes-cvs-/cell118.md) and [`cell118.py`](file:///c:/data/github/connes-cvs-/cell118.py).
+**Executed (`cell118.out`) & Calibrated.** Productive reconnaissance: established that cancellation occurs predominantly by $x \sim 0.2-0.3$ and enters a quasi-stable plateau.
 
 ---
 
-# Updated major historical arc (Cells 0–118)
+## Cell 119 (Exact Algebraic Modal Decomposition: $A_{N, k}$ vs $B_{N, k}$ Cancellation Balance)
+
+* **Script:** [`cell119.py`](file:///c:/data/github/connes-cvs-/cell119.py)
+* **Output:** `cell119.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell119.md`](file:///c:/data/github/connes-cvs-/cell119.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Having established in Cell 118 that cancellation occurs by $x \sim 0.2-0.3$ and is not a local boundary layer, Cell 119 attacks the exact algebraic structure of the boundary-row divided-difference kernel:
+$$F_{N, k} = \frac{2(N\psi(N) - k\psi(k))}{N^2 - k^2} k^2 v_{N, k} \equiv A_{N, k} - B_{N, k},$$
+where:
+$$A_{N, k} \equiv a_N \frac{k^2 v_{N, k}}{N^2 - k^2}, \qquad B_{N, k} \equiv a_k \frac{k^2 v_{N, k}}{N^2 - k^2},$$
+with $a_N = 2 N \psi(N)$ and $a_k = 2 k \psi(k)$:
+1. **Total Sums Separation:** Evaluates $\Sigma_A(N) \equiv \sum_{k=1}^N A_{N, k}$ and $\Sigma_B(N) \equiv \sum_{k=1}^N B_{N, k}$ across $N \in \{64, 96, 128, 160, 192\}$. Determines whether both sums are individually large ($\sim 10^{-2}$) and cancel each other to $10^{-22}$, or if one is already suppressed.
+2. **Trajectory Tracking:** Compares the cumulative partial sums $S_A(x) = \sum_{k \le xN} A_{N, k}$ and $S_B(x) = \sum_{k \le xN} B_{N, k}$ along $x \in (0, 1)$.
+3. **Algebraic Connection to Theorem 1:** Derives the analytical connection between $\Sigma_A$, $\Sigma_B$, $\alpha_N = \sum a_k v_k$, and the contact term $\frac{a_N}{\sqrt{2}} T_v(0)$.
+
+### Status
+**Authoring.** Pre-flight specification for [`cell119.md`](file:///c:/data/github/connes-cvs-/cell119.md) and [`cell119.py`](file:///c:/data/github/connes-cvs-/cell119.py).
+
+---
+
+# Updated major historical arc (Cells 0–119)
 
 ```
 Cells 0–4
@@ -3860,10 +3890,13 @@ Cell 116 (Phase IX)
     Boundary-flux kernel asymptotics: boundary proportionality |alpha|/|T| ~ 284 confirmed, empirical N^(-1/3) candidate evaluated, 10-order core cancellation exposed, a_N oscillation diagnosed
     ↓
 Cell 117 (Phase IX)
-    Boundary-row modal profiling: Airy boundary layer scaling collapse refuted, 20-order cancellation exposed (C_cancel ~ 1.37e20, k_peak = 3), Airy hypothesis retired
+    Boundary-row modal profiling: Airy boundary layer scaling collapse refuted, 20 decades of cancellation exposed (C_cancel ~ 1.37e20, k_peak = 3), Airy hypothesis retired
     ↓
 Cell 118 (Phase IX)
-    Global modal cancellation anatomy, macroscopic coordinate x = k/N profile, and arithmetic remainder audit
+    Global modal cancellation anatomy: early extinction by x ~ 0.2-0.3 discovered, quasi-stable plateau revealed, simple prime cosine correlation disfavoured
+    ↓
+Cell 119 (Phase IX)
+    Exact algebraic modal decomposition: A_{N, k} vs B_{N, k} cancellation balance, partial sum trajectories, and Theorem 1 algebraic synthesis
 ```
 
 ---
