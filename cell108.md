@@ -92,66 +92,64 @@ $$\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0.$$
 
 *Numerical Audit (`cell107.out`):*
 - At $N=192$, $|T_{v_N}(0)| \approx 6.66 \times 10^{-25}$.
+*Numerical Audit (`cell107.out` & `cell108.out`):*
+- At $N=192$, $|T_{v_N}(0)| \approx 6.66 \times 10^{-25}$.
 - $N^{3/2} = 192^{3/2} \approx 2.66 \times 10^3$.
 - Product: $\frac{|T_{v_N}(0)|}{\sqrt{2}} \|a^{(Q)}\|_2 \approx 1.77 \times 10^{-21}$.
 - Scalar $\alpha_N \approx 1.92 \times 10^{-22} \implies |\alpha_N| \sqrt{N - M} \approx 2.66 \times 10^{-21}$.
-- Total source norm: $\|\xi_N^{(Q)}\|_2 \approx 4.4 \times 10^{-21}$.
+- Total source norm: $\|\xi_N^{(Q)}\|_2 \approx 2.43 \times 10^{-21}$ (safely bounded by the triangle bound $3.10 \times 10^{-21}$).
 
-The boundary cancellation suppresses the potentially divergent term $a^{(Q)}$ by **more than 21 orders of magnitude**!
+*Epistemic Caveat on Asymptotic Extinction:*  
+While the computed quantities are fantastically small ($\sim 10^{-21}$), the discrete sequences $|T_{v_N}(0)| N^{3/2}$ and $|\alpha_N| \sqrt{N}$ do not decrease monotonically after $N=64$; instead, they level off and rise slightly (from $0.35 \times 10^{-21}$ to $1.25 \times 10^{-21}$, and from $2.02 \times 10^{-21}$ to $2.66 \times 10^{-21}$). This is an artifact of the finite precision floor (50 dps eigensolve resolution limit) rather than physical divergence, but it means asymptotic limits cannot be rigorously inferred from these discrete data points alone.
 
 ---
 
-## 3. Low-Mode Core Cross-Coupling: Unconditional Bounds & Convergence
+## 3. Low-Mode Core Cross-Coupling: Operator-Norm Bound and Inherent Circularity
 
-### 3.1 Unconditional Boundedness of $B_M^T u_N^{(P)}$
+### 3.1 The Operator-Norm Bound and Its Circularity
 Consider the core coupling term:
 $$(B_M^T u_N^{(P)})_k = \sum_{j=1}^M H_{jk} j^2 v_{N, j} \qquad (k = M+1, \dots, N).$$
 Here $u_N^{(P)} \in \mathbb{R}^{M+1}$ is the core kinetic vector.
 
-**Proposition 2 (Unconditional Core Coupling Bound).**  
+**Proposition 2 (Conditional Operator-Norm Core Bound).**  
 *For any fixed cutoff $M$ and all dimensions $N > M$:*
-$$\|B_M^T u_N^{(P)}\|_2 \le \|H_N\|_{\mathrm{op}} \|u_N^{(P)}\|_2 \le M_H \sqrt{\mathcal{K}_2(N)}.$$
-*For $N \ge 64$, where $\mathcal{K}_2(N) \le 83.1$ and $\|H_N\|_{\mathrm{op}} \le 6.47$:*
-$$\|B_M^T u_N^{(P)}\|_2 \le 6.47 \times \sqrt{83.1} \approx 58.98 < \infty.$$
+$$\|B_M^T u_N^{(P)}\|_2 \le \|H_N\|_{\mathrm{op}} \|u_N^{(P)}\|_2 \le \|H_N\|_{\mathrm{op}} \sqrt{\mathcal{K}_2(N)}.$$
 
-This provides an **unconditional upper bound** independent of any boundary decay assumptions!
+*The Circularity Identified by the Reviewer:*  
+In earlier drafts, it was tempting to substitute observed numerical values ($\mathcal{K}_2(N) \le 83.1$ and $\|H_N\|_{\mathrm{op}} \le 6.47$) to assert that $\|B_M^T u_N^{(P)}\|_2 \le 58.98$ is unconditionally bounded. However, **$\mathcal{K}_2(N) \le 83.1$ is precisely the uniform Sobolev bound we set out to prove**.  
+Feeding this back into the high-sector resolvent enclosure yields:
+$$\sqrt{\mathcal{K}_2(N)} \lesssim \|\xi_N^{(Q)}\|_2 + \frac{\|H_N\|_{\mathrm{op}}}{\delta_M} \sqrt{\mathcal{K}_2(N)}.$$
+Because $\frac{\|H_N\|_{\mathrm{op}}}{\delta_M} \approx \frac{6.47}{0.89} \approx 7.25 > 1$, this inequality cannot close the estimate on $\mathcal{K}_2(N)$!  
+Therefore, the operator-norm estimate is inherently circular and cannot establish uniform Sobolev regularity.
 
 ### 3.2 Asymptotic Stability as $N \to \infty$ for Fixed $M$
-For a fixed cutoff $M$ (e.g. $M=64$):
-1. The low-mode eigenvector components $v_{N, j}$ converge to continuum solitary components $v_{\infty, j}$ with exponentially small discretization error.
-2. The core vector $u_N^{(P)} \to u_\infty^{(P)} \in \mathbb{R}^{M+1}$ stabilizes.
-3. The entries $H_{jk} = \frac{2(j\psi(j) - k\psi(k))}{j^2 - k^2}$ decay as $\mathcal{O}\left(\frac{1}{k - j}\right)$ for $k \gg M$.
-4. The infinite $\ell^2$ series:
-   $$\lim_{N \to \infty} \|B_M^T u_N^{(P)}\|_2^2 = \sum_{k=M+1}^\infty \left| \sum_{j=1}^M H_{jk} j^2 v_{\infty, j} \right|^2 < \infty$$
-   converges unconditionally by the Cauchy–Schwarz inequality and square-summability of $H$'s off-diagonal rows.
+Despite the failure of the crude operator-norm bound, the actual computed cross-coupling exhibits extraordinary numerical convergence. For fixed $M$, the vector $\|B_M^T u_N^{(P)}\|_2$ stabilizes as $N$ grows:
+- At $M=24$: $\|B_M^T u_N^{(P)}\|_2 \approx 2.146 \times 10^{-10}$ ($N=96$) $\to 2.136 \times 10^{-10}$ ($N=192$)
+- At $M=32$: $\|B_M^T u_N^{(P)}\|_2 \approx 6.94 \times 10^{-14}$ ($N=96$) $\to 6.87 \times 10^{-14}$ ($N=192$)
+- At $M=48$: $\|B_M^T u_N^{(P)}\|_2 \approx 4.12 \times 10^{-20}$ ($N=96$) $\to 3.96 \times 10^{-20}$ ($N=192$)
+- At $M=64$: $\|B_M^T u_N^{(P)}\|_2 \approx 1.18 \times 10^{-21}$ ($N=96$) $\to 2.01 \times 10^{-21}$ ($N=192$)
 
-### 3.3 Exponential Suppression with Cutoff $M$
-Furthermore, because the ground state $v_N$ is localized in the low modes (solitary wave core), the cross-coupling $\|B_M^T u_N^{(P)}\|_2$ decreases dramatically as $M$ increases:
-- At $M=24$: $\|B_M^T u_N^{(P)}\|_2 \approx 2.13 \times 10^{-10}$
-- At $M=32$: $\|B_M^T u_N^{(P)}\|_2 \approx 6.87 \times 10^{-14}$
-- At $M=48$: $\|B_M^T u_N^{(P)}\|_2 \approx 4.18 \times 10^{-20}$
-- At $M=64$: $\|B_M^T u_N^{(P)}\|_2 \approx 4.09 \times 10^{-21}$
-
-At $M=64$, the cross-coupling has fallen to the numerical noise floor ($10^{-21}$), matching the boundary-damped source $\|\xi_N^{(Q)}\|_2$!
+This strongly indicates the existence of a well-defined limiting object $B_M^T u_\infty^{(P)}$ for each fixed $M$, pointing to a non-circular analytical route.
 
 ---
 
-## 4. The Ground-State Regularity Bridge
+## 4. The Conditional Regularity Reduction
 
-### 4.1 Statement of the Regularity Bridge Theorem
+### 4.1 Statement of the Conditional Reduction
+Combining Theorem 1 with the exact finite-$(N, M)$ enclosure (Cell 107 Theorem 3):
 
-Combining Theorem 1 and Proposition 2 with the exact finite-$(N, M)$ enclosure (Cell 107 Theorem 3):
-
-**Theorem 2 (The Ground-State Regularity Bridge).**  
+**Theorem 2 (The Conditional Regularity Reduction).**  
 *Fix a cutoff $M \ge 24$ such that $\delta_M \ge \delta_\infty > 0$. If the discrete Galerkin ground states satisfy:*
-$$\lim_{N \to \infty} |T_{v_N}(0)| N^{3/2} = 0 \qquad \text{and} \qquad \lim_{N \to \infty} |\alpha_N| \sqrt{N} = 0,$$
-*then the Galerkin ground-state sequence possesses uniform discrete $H^2$-Sobolev regularity:*
-$$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \equiv \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 \le \mathcal{K}_2(M) + \frac{1}{\delta_M^2} \sup_{N > M} \left( \|\xi_N^{(Q)}\|_2 + \|B_M^T u_N^{(P)}\|_2 \right)^2 < \infty.}$$
+1. **Source Boundary Extinction:** $\lim_{N \to \infty} |T_{v_N}(0)| N^{3/2} = 0$ and $\lim_{N \to \infty} |\alpha_N| \sqrt{N} = 0$.
+2. **Independent Core Coupling Bound:** $\sup_{N > M} \|B_M^T u_N^{(P)}\|_2 \le C_B(M) < \infty$ without assuming $\sup_N \mathcal{K}_2(N) < \infty$.
 
-*Significance:*  
-This theorem rigorously resolves the **Regularity Gap** identified by the reviewer in Cell 106:
-$$\boxed{\textbf{Continuum Dirichlet vanishing } T_\infty(0) = 0 \quad\Longleftrightarrow\quad \textbf{Uniform Galerkin regularity } \sup_N \mathcal{K}_2(N) < \infty.}$$
-The discrete operator's high-frequency modes cannot blow up because the divided-difference commutator channels all high-frequency generation through the boundary defect $T_{v_N}(0)$, which is exponentially quenched by the solitary wave!
+*Then the Galerkin ground-state sequence possesses uniform discrete $H^2$-Sobolev regularity:*
+$$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \equiv \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 \le \mathcal{K}_2(M) + \frac{1}{\delta_M^2} (C_\xi + C_B(M))^2 < \infty.}$$
+
+*Epistemic Assessment:*  
+Cell 108 has successfully solved the first term (the source $\xi_N^{(Q)}$) conditionally on boundary defect extinction. However, it has **not** established an independent bound on the second term $\|B_M^T u_N^{(P)}\|_2$.  
+Therefore, the Regularity Gap is **not yet closed**. The open problem is strictly isolated:
+$$\boxed{\textbf{Target for Cell 109: Prove } \sup_{N > M} \|B_M^T u_N^{(P)}\|_2 < \infty \textbf{ directly from low-mode kernel decay, without assuming } \mathcal{K}_2(N) \le C.}$$
 
 ---
 
