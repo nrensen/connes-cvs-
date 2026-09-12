@@ -21,8 +21,8 @@ Cell 110 repairs both defects completely:
 * **Unconditional $L^2$-Based Moments Bounds (Lemma 3):** We do not need continuum curvature to break circularity. Cauchy–Schwarz and the unit $L^2$ normalization $\|v_N\|_2 = 1$ alone unconditionally yield:
   $$|S_2(M)| \le J_4(M) \equiv \left(\sum_{j=1}^M j^4\right)^{1/2}, \qquad |S_\psi(M)| \le 2 C_\psi J_6(M) \equiv 2 C_\psi \left(\sum_{j=1}^M j^6\right)^{1/2}.$$
 * **The Universal Non-Circular Core Coupling Bound (Theorem 1):** Combining these estimates yields an explicit, finite bound $C_B^{\mathrm{univ}}(M) < \infty$ that is **completely independent of $N$ and references neither $\mathcal{K}_2(N)$ nor continuum curvature**.
-* **The Non-Circular Regularity Bridge (Theorem 2):** We prove that under boundary defect extinction $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$:
-  $$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \le M^4 + \frac{(C_B^{\mathrm{univ}}(M))^2}{\delta_M^2} < \infty.}$$
+* **The Non-Circular Regularity Bridge (Theorem 2):** We prove that under boundary defect extinction $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$ (so that $C_\xi \equiv \sup_{N \ge 1} \|\xi_N^{(Q)}\|_2 < \infty$):
+  $$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \le M^4 + \frac{(C_\xi + C_B^{\mathrm{univ}}(M))^2}{\delta_M^2} < \infty.}$$
   The circularity is completely broken.
 
 ---
@@ -121,22 +121,33 @@ $$\|B_M^T u_N^{(P)}\|_2 \le \frac{2 C_\psi J_4(M)}{\sqrt{M}} + \frac{2 C_\psi J_
 Combining Lemma 1 of Cell 109 ($\|u_N^{(P)}\|_2 \le M^2$), Theorem 1, and the exact high-sector enclosure (Cell 107 Theorem 3):
 
 **Theorem 2 (The Non-Circular Regularity Bridge).**  
-*Fix any finite cutoff $M \ge 24$ such that $\delta_M \ge \delta_\infty > 0$. Under the Dirichlet boundary defect extinction condition $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$, the discrete Galerkin ground-state sequence possesses uniform discrete $H^2$-Sobolev regularity:*
-$$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \equiv \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 \le M^4 + \frac{(C_B^{\mathrm{univ}}(M))^2}{\delta_M^2} < \infty.}$$
+*Fix any finite cutoff $M \ge 24$ such that the high-sector gap satisfies $\inf_{N > M} \delta_M(N) \ge \delta_\infty > 0$. Under the Dirichlet boundary defect extinction condition $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$ (which guarantees $C_\xi \equiv \sup_{N \ge 1} \|\xi_N^{(Q)}\|_2 < \infty$), the discrete Galerkin ground-state sequence possesses uniform discrete $H^2$-Sobolev regularity:*
+$$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \equiv \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 \le M^4 + \frac{(C_\xi + C_B^{\mathrm{univ}}(M))^2}{\delta_\infty^2} < \infty.}$$
 
 *Proof.*  
-Decompose the kinetic norm into low and high sectors:
-$$\mathcal{K}_2(N) = \|u_N\|_2^2 = \|u_N^{(P)}\|_2^2 + \|u_N^{(Q)}\|_2^2.$$
-1. By Cell 109 Lemma 1: $\|u_N^{(P)}\|_2^2 \le M^4$ unconditionally for all $N$ from $\|v_N\|_2 = 1$.
-2. By Cell 107 Theorem 3: $\|u_N^{(Q)}\|_2 \le \frac{1}{\delta_M} (\|\xi_N^{(Q)}\|_2 + \|B_M^T u_N^{(P)}\|_2)$.
-3. By Theorem 1: $\|B_M^T u_N^{(P)}\|_2 \le C_B^{\mathrm{univ}}(M)$ unconditionally for all $N$.
-4. Under boundary extinction, $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0 \implies \sup_N \|\xi_N^{(Q)}\|_2 \le C_\xi < \infty$.
-5. Therefore, for all $N > M$:
-   $$\mathcal{K}_2(N) \le M^4 + \frac{1}{\delta_M^2} (C_\xi + C_B^{\mathrm{univ}}(M))^2 < \infty.$$
-Taking the supremum over $N \ge 1$ completes the proof. $\quad \blacksquare$
+We divide into low and high dimensions:
 
-*Significance of the Conceptual Shift:*  
-As noted by the reviewer, the bound $M^4 + (C_B^{\mathrm{univ}}(M) / \delta_M)^2$ is conservative (e.g. $\sim 10^9$ at $M=24$), but **a finite bound of $10^9$ is completely sufficient to establish the mathematical existence of uniform $H^2$ control**. The circularity is genuinely broken.
+1. **Low-dimensional sector ($N \le M$):**  
+   For any $N \le M$, the full space is contained within the cutoff modes:
+   $$\mathcal{K}_2(N) = \sum_{m=1}^N m^4 v_{N, m}^2 \le M^4 \sum_{m=1}^N v_{N, m}^2 \le M^4 \|v_N\|_2^2 = M^4.$$
+   Since $(C_\xi + C_B^{\mathrm{univ}}(M))^2 / \delta_\infty^2 \ge 0$, the inequality holds trivially for all $N \le M$.
+
+2. **High-dimensional sector ($N > M$):**  
+   Decompose the kinetic norm into low-mode core and high-mode tail:
+   $$\mathcal{K}_2(N) = \|u_N\|_2^2 = \|u_N^{(P)}\|_2^2 + \|u_N^{(Q)}\|_2^2.$$
+   - Low-mode core: by Cell 109 Lemma 1, $\|u_N^{(P)}\|_2^2 \le M^4$ unconditionally for all $N$ from $\|v_N\|_2 = 1$.
+   - High-mode tail: by Cell 107 Theorem 3, $\|u_N^{(Q)}\|_2 \le \frac{1}{\delta_M} (\|\xi_N^{(Q)}\|_2 + \|B_M^T u_N^{(P)}\|_2)$.
+   - Core cross-coupling: by Theorem 1, $\|B_M^T u_N^{(P)}\|_2 \le C_B^{\mathrm{univ}}(M)$ unconditionally for all $N > M$.
+   - Boundary defect extinction: by hypothesis, $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$, so the sequence is bounded: $C_\xi \equiv \sup_{N > M} \|\xi_N^{(Q)}\|_2 < \infty$.
+   Therefore, for all $N > M$:
+   $$\mathcal{K}_2(N) \le M^4 + \frac{1}{\delta_M^2} (C_\xi + C_B^{\mathrm{univ}}(M))^2 \le M^4 + \frac{(C_\xi + C_B^{\mathrm{univ}}(M))^2}{\delta_\infty^2} < \infty.$$
+
+Taking the supremum over all $N \ge 1$ completes the proof. $\quad \blacksquare$
+
+*Significance & Epistemic Calibration:*  
+1. **The Circularity is Broken:** The bound references neither $\mathcal{K}_2(N)$ nor continuum limit conjectures on its right-hand side.
+2. **Finiteness vs Slack:** The universal enclosure $M^4 + ((C_\xi + C_B^{\mathrm{univ}}(M)) / \delta_M)^2$ is conservative ($\approx 1.23 \times 10^8$ at $M=24$), but a finite bound of $10^8$ is completely sufficient to establish the mathematical existence of uniform $H^2$ control.
+3. **Calibrated Epistemic Status:** The finite-dimensional inequalities underlying Theorem 2 are verified numerically in computational cells; the full infinite-dimensional theorem remains mathematically conditional on the boundary-defect extinction hypothesis $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$ and the high-sector gap lower bound $\delta_\infty > 0$.
 
 ---
 

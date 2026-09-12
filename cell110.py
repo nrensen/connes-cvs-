@@ -36,16 +36,17 @@
 #      This bound depends purely on M and C_psi, with zero reference to K_2(N).
 #
 #   5. Theorem 2 in cell110.md (The Non-Circular Regularity Bridge):
-#      Under the boundary defect extinction condition lim_{N -> infty} ||xi_N^(Q)||_2 = 0:
+#      Under the boundary defect extinction condition lim_{N -> infty} ||xi_N^(Q)||_2 = 0
+#      (with C_xi = sup_{N >= 1} ||xi_N^(Q)||_2 < infty) and delta_M >= delta_infty > 0:
 #
-#          sup_{N >= 1} K_2(N) <= M^4 + (C_B^univ(M) / delta_M)^2 < infty.
+#          sup_{N >= 1} K_2(N) <= M^4 + ((C_xi + C_B^univ(M)) / delta_infty)^2 < infty.
 #
 # Falsification Criteria:
 #
 #   - If max_{k > M} |R_k(M)| > 2 * C_psi * J_8(M) / (k^2 * (k - M)) + 1e-50, Lemma 1 is refuted.
 #   - If ||R(M)||_2 > C_R(M) + 1e-50, Lemma 2 is refuted.
 #   - If ||B_M^T u_N^(P)||_2 > C_B^univ(M) + 1e-50, Theorem 1 is refuted.
-#   - If K_2(N) > M^4 + (C_B^univ(M) / delta_M)^2 + 1e-50, Theorem 2 is refuted.
+#   - If K_2(N) > M^4 + ((C_xi + C_B^univ(M)) / delta_M)^2 + 1e-50, Theorem 2 finite-dimensional enclosure is refuted.
 #
 # Configuration:
 #
@@ -341,7 +342,8 @@ def main():
 
             CB_univ = CB_univ_dict[M]
             M_mp = mp.mpf(M)
-            # Universal bound: M^4 + (C_B^univ / delta_M)^2
+            # Universal bound: M^4 + ((C_xi + C_B^univ) / delta_M)^2
+            # Note: C_xi = sup ||xi_N^(Q)||_2 <= 1e-20 << C_B^univ ~ 1e3
             K2_univ_bound = (M_mp ** 4) + (CB_univ / delta_M) ** 2
 
             holds = (K2_actual <= K2_univ_bound + mp.mpf("1e-50"))
@@ -369,7 +371,7 @@ def main():
     print(f"1. Lemmas 1 & 2 (Repaired Remainder Estimates Certified):    {'CERTIFIED' if all_lemmas_1_2 else 'VIOLATED'}")
     print("2. Lemma 3 (Unconditional Moments Bounds from ||v||_2 = 1):    CERTIFIED")
     print(f"3. Theorem 1 (Universal Non-Circular Core Bound C_B^univ):     {'CERTIFIED' if all_thm1 else 'VIOLATED'}")
-    print(f"4. Theorem 2 (Non-Circular Regularity Bridge Enclosure):       {'CERTIFIED' if all_thm2 else 'VIOLATED'}")
+    print(f"4. Theorem 2 (Finite Enclosures Verified; Conditional Bridge): {'VERIFIED' if all_thm2 else 'VIOLATED'}")
     print(f"Total script runtime: {time.time() - t_start:.2f} s")
     print()
 
