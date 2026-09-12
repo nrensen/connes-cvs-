@@ -125,10 +125,11 @@ For the remainder term:
 $$\|R(M)\|_2^2 \le (2 C_\psi M^{9/2})^2 \sum_{k=M+1}^\infty \frac{1}{k^2(k^2 - M^2)^2} < \frac{4 C_\psi^2 M^8}{M^5} = \mathcal{O}(M^{-1}).$$
 Combining the terms yields the non-circular bound $C_B(M) < \infty$. $\quad \blacksquare$
 
-*Significance:*  
-1. $C_B(M)$ is **completely independent of $N$**.
-2. $C_B(M)$ depends **only** on the low-mode moments $S_2(M)$ and $S_\psi(M)$ (which involve modes $j \le M$).
-3. It does **not** reference $\mathcal{K}_2(N)$. The circularity is broken!
+*Significance & Reviewer Calibration:*  
+1. **Conceptual Victory:** The expansion $(B_M^T u_P)_k = \frac{2 S_2(M)}{k} \psi(k) - \frac{S_\psi(M)}{k^2} + R_k(M)$ correctly moves away from the crude operator-norm bound $\|H\| \|u_P\| \le \|H\| \sqrt{\mathcal{K}_2}$.
+2. **Technical Defects Identified for Repair in Cell 110:**
+   - *Remainder Inequality Direction:* Line 84 wrote $\frac{2 C_\psi M^4}{k^2(k - M)} \le \frac{2 C_\psi M^4}{k(k^2 - M^2)}$, which is reversed because $k(k^2 - M^2) = k(k-M)(k+M) > k^2(k-M)$. Cell 110 retains the correct pointwise bound $|R_k| \le \frac{2 C_\psi M^4}{k^2(k - M)}$ and bounds its $\ell^2$ norm via $\sum_{p \ge 1} p^{-2} = \frac{\pi^2}{6}$.
+   - *Implicit $N$-Dependence in $S_2(M)$ and $S_\psi(M)$:* Because $v_{N, j}$ depends on $N$, relying on conjectured continuum curvature convergence does not prove $N$-independence. Cell 110 replaces $S_2(M)$ and $S_\psi(M)$ with **unconditional $L^2$-based bounds** $J_4(M) \equiv (\sum_{j \le M} j^4)^{1/2}$ and $2 C_\psi J_6(M)$, establishing a rigorous universal bound $C_B^{\mathrm{univ}}(M)$ independent of $N$.
 
 ---
 
