@@ -3927,7 +3927,7 @@ Breaking this circularity requires bounding $B_M^* u_N^{(P)}$ directly through t
 
 ---
 
-### 9.9 Direct Divided-Difference Decay and the Certified Non-Circular Regularity Bridge
+### 9.9 Direct Divided-Difference Decay and the Rigorous Conditional Regularity Bridge
 
 We now present the resolution of the regularity circularity. On the core subspace $P = \{0, \dots, M\}$, the frequencies are strictly capped at $M$. Bounding the core coupling directly from the unit $L^2$-normalization $\|v_N\|_2 = 1$ yields an unconditional bound independent of $N$.
 
@@ -3971,7 +3971,7 @@ We now state the principal theorem of the regularity programme:
 **Theorem 9.16 (The Non-Circular Ground-State Regularity Bridge — Rigorous).**  
 *Fix a cutoff $M \ge 24$. Assume:*  
 *(H$_{\mathrm{ext}}$) The Dirichlet boundary defect extinguishes asymptotically: $\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0$, so that $C_\xi \equiv \sup_{N \ge 1} \|\xi_N^{(Q)}\|_2 < \infty$.*  
-*(H$_{\mathrm{gap}}$) The high-sector spectral gap is uniformly positive: $\inf_{N > M} \delta_M(N) \ge \delta_\infty > 0$.*  
+*(H$_{\mathrm{gap}}$) The high-sector spectral gap is uniformly positive: $\inf_{N > M} \delta_M(N) \ge \delta_\infty > 0$. (This is a high-sector coercivity condition on the sub-block $C_M$ relative to $E_{11}$ and should not be conflated with the low-energy tunneling-gap hypotheses investigated in §8.25.)*  
 
 *Then the discrete Galerkin ground-state sequence possesses uniform discrete $H^2$-Sobolev regularity across all dimensions:*
 $$\boxed{\sup_{N \ge 1} \mathcal{K}_2(N) \equiv \sup_{N \ge 1} \sum_{m=1}^N m^4 v_{N, m}^2 \le M^4 + \frac{(C_\xi + C_B^{\mathrm{univ}}(M))^2}{\delta_\infty^2} < \infty.}$$
@@ -4024,7 +4024,7 @@ $$\boxed{
 \end{array}
 }$$
 
-If the empirically supported semiclassical exponential boundary-suppression law $|T_{v_N}(0)| = \mathcal{O}(e^{-\sigma N})$ can be established uniformly, then the boundary contact term $|T_{v_N}(0)| \|a^{(Q)}\|_2 \le C e^{-\sigma N} N^{3/2} \to 0$ extinguishes with infinite margin. The remaining analytical task is therefore to establish the rate $\alpha_N = o(N^{-1/2})$, preferably directly from the ground-state eigenvalue equation.
+If the empirically supported exponential boundary-suppression law can be established uniformly, the boundary term is extinguished with infinite margin. The principal remaining analytical task is therefore to establish $\alpha_N = o(N^{-1/2})$, preferably directly from the ground-state eigenvalue equation.
 
 ---
 
