@@ -153,7 +153,7 @@ Taking the supremum over all $N \ge 1$ completes the proof. $\quad \blacksquare$
 
 ## 5. Empirical Refinement: Solitary Wave Boundary Curvature
 
-Why is the actual observed kinetic moment $\mathcal{K}_2(192) \approx 83.064$ so much smaller than the universal bound $10^9$?
+Why is the actual observed kinetic moment $\mathcal{K}_2(192) \approx 83.064$ so much smaller than the $10^8$-scale universal bound?
 
 **Proposition 1 (Empirical Boundary Curvature Refinement).**  
 *In the actual ground state, destructive phase interference and solitary wave localization suppress the core moments by many orders of magnitude:*
@@ -181,5 +181,5 @@ The companion script performs an exact, focused audit at $c=13, T=600$ (70 dps):
    Verify $\|R(M)\|_2 \le C_R(M) \equiv \frac{2 \pi C_\psi J_8(M)}{\sqrt{6} (M + 1)^2}$.
 4. **Audit 4: Universal Core Coupling Bound (Theorem 1):**
    Verify that the actual coupling $\|B_M^T u_N^{(P)}\|_2 \le C_B^{\mathrm{univ}}(M)$ across $N \in \{64, 96, 128, 192\}$ and $M \in \{24, 32, 48, 64\}$.
-5. **Audit 5: Universal Total Sobolev Regularity Enclosure (Theorem 2):**
-   Evaluate $M^4 + (C_B^{\mathrm{univ}}(M) / \delta_M)^2$ to confirm unconditional finiteness.
+5. **Audit 5: Finite-Dimensional Regularity Enclosure Verification:**
+   Evaluate the universal finite-$N$ enclosure $M^4 + ((C_\xi + C_B^{\mathrm{univ}}(M)) / \delta_M)^2$ to confirm unconditional finiteness of the finite-dimensional model, distinguishing this numerical audit from the infinite-dimensional theorem whose bound references $C_\xi = \sup_{N \ge 1} \|\xi_N^{(Q)}\|_2$ and $\delta_\infty$.
