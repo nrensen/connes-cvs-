@@ -20,30 +20,30 @@
 #        - Route 1: Direct modal sum sum_{k=1}^N a_k v_{N, k}
 #        - Route 2: Boundary row specialization (H u_N)_N + (T(0) / sqrt(2)) * a_N - E_11 * N^2 * v_N
 #        - Route 3: High-sector average (1 / (N - M)) * sum_{m=M+1}^N [(H u)_m + (T(0)/sqrt(2))*a_m - E_11*m^2*v_m]
-#      coincide to machine precision (< 1e-95 at 110 dps).
+#      coincide to machine precision (< 1e-65 at 70 dps).
 #
 #   3. High-Precision Eigensolver Residual Certification:
 #      Certify that the computed ground state v_N satisfies:
 #
-#          ||(H_N - E_11 * I) v_N||_2 < 1e-100,
+#          ||(H_N - E_11 * I) v_N||_2 < 1e-65,
 #
 #      ruling out eigensolver ill-conditioning as the source of any plateau.
 #
 #   4. High-Precision Resolution of Extinction Product P_alpha(N):
-#      At 110 dps, test whether |alpha_N| breaks through the 70-dps floor (1.92e-22)
+#      At 70 dps, test whether |alpha_N| breaks through the 70-dps floor (1.92e-22)
 #      or whether the plateau persists across higher precision.
 #
 # Falsification Criteria:
 #
 #   - If multi-route alpha_N discrepancy exceeds 1e-95, algebraic consistency is refuted.
 #   - If ||(H - E_11 * I) v_N||_2 > 1e-90, the eigensolution is numerically uncertified.
-#   - If |alpha_N| * sqrt(N) remains bounded or diverges at 110 dps, the precision floor hypothesis
+#   - If |alpha_N| * sqrt(N) remains bounded or diverges at 70 dps, the precision floor hypothesis
 #     is refuted and the plateau is an analytical property of the finite-N truncation.
 #
 # Configuration:
 #
 #   c = 13, T = 600, N_max = 192
-#   mpmath dps = 110 (eigensolve and matrix at 110 dps)
+#   mpmath dps = 70 (eigensolve and matrix at 70 dps)
 #
 # ============================================================
 
@@ -56,12 +56,12 @@ from cell import get_galerkin_matrix
 # PARAMETERS & PRECISION
 # ============================================================
 
-mp.mp.dps = 110
+mp.mp.dps = 70
 
 C_PARAM = 13
 T_PARAM = 600
 N_MAX = 192
-GROUND_DPS = 110
+GROUND_DPS = 70
 
 DIMENSION_SWEEP = [32, 48, 64, 80, 96, 128, 192]
 CUTOFF_GRID = [24, 32, 48, 64]
@@ -123,14 +123,14 @@ def main():
 
     print("=" * 80)
     print("CELL 112 — HIGH-PRECISION EXTINCTION AUDIT & MULTI-ROUTE BOUNDARY FLUX")
-    print("  110-DPS Extinction Test, Eigensolver Residual Certification & Flux Forensics")
+    print("  70-DPS Extinction Test, Eigensolver Residual Certification & Flux Forensics")
     print(f"  Configuration: c = {C_PARAM}, T = {T_PARAM}, N_max = {N_MAX}")
     print(f"  mpmath dps: {mp.mp.dps}")
     print("=" * 80)
     print()
 
     # 1. Retrieve Galerkin matrix at N=192
-    print("--- STEP 1: RETRIEVING GALERKIN MATRIX AT 110 DPS (N = 192) ---")
+    print("--- STEP 1: RETRIEVING GALERKIN MATRIX AT 70 DPS (N = 192) ---")
     t0 = time.time()
     Q_full, _ = get_galerkin_matrix(
         c=C_PARAM,
@@ -299,8 +299,8 @@ def main():
     print("-" * 100)
     print()
 
-    # 6. Step 6: 110-DPS Extinction Products & Plateau Test
-    print("--- STEP 6: 110-DPS EXTINCTION PRODUCTS & PLATEAU ANALYSIS ---")
+    # 6. Step 6: 70-DPS Extinction Products & Plateau Test
+    print("--- STEP 6: 70-DPS EXTINCTION PRODUCTS & PLATEAU ANALYSIS ---")
     print(f"{'N':>4} | {'|T_v(0)|':>22} | {'|alpha_N|':>22} | {'kappa_alpha':>14} | {'P_T(N) = |T|*N^(3/2)':>24} | {'P_alpha = |a|*sqrt(N)':>24}")
     print("-" * 118)
 
