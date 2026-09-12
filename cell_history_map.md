@@ -3764,27 +3764,45 @@ Following Cell 115's discovery of sub-critical decay $|\alpha_N| \sim N^{-0.288}
 ## Cell 117 (Boundary-Row Modal Profiling & Boundary Layer Scaling Collapse Diagnostic)
 
 * **Script:** [`cell117.py`](file:///c:/data/github/connes-cvs-/cell117.py)
-* **Output:** `cell117.out` (pending compute node execution)
+* **Output:** [`cell117.out`](file:///c:/data/github/connes-cvs-/cell117.out) (runtime: 1412.63 s at 70 dps)
 * **Companion Analytical Note:** [`cell117.md`](file:///c:/data/github/connes-cvs-/cell117.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
 
 ### Target & Mathematical Rationale
-To determine whether the $N^{-1/3}$ boundary scaling is an actual boundary-layer phenomenon of the discrete operator or merely an empirical coincidence, Cell 117 computes the individual modal boundary flux terms:
-$$F_{N, k} \equiv H_{Nk} k^2 v_{N, k}$$
-re-indexed by distance from the boundary $j \equiv N - k$ for $j \in \{0, 1, 2, \dots, 24\}$ across five dimensions $N \in \{64, 96, 128, 160, 192\}$:
-1. **Direct Scaling Collapse Test:** Tests whether the boundary-row modal profiles collapse onto a universal curve:
-   $$F_{N, N-j} \stackrel{?}{\approx} N^{-\mu} f(j / N^\theta)$$
-   with $\theta = 1/3$ (Airy hypothesis) versus other exponents.
-2. **Analytical & Numerical Audit of $H_{0, N}$:** Derives the explicit formula for $H_{0, N} = \sqrt{2} \psi(N) / N$ and audits the oscillatory behavior of $a_N = 2 N \psi(N)$ to explain its sign changes.
-3. **Cumulative Flux Profile:** Tracks the running partial sum $\sum_{j=0}^J F_{N, N-j}$ to quantify where the destructive cancellation between core modes and the boundary actually occurs.
+To determine whether the $N^{-1/3}$ boundary scaling is an actual boundary-layer phenomenon of the discrete operator or merely an empirical coincidence, Cell 117 computes individual modal boundary flux terms $F_{N, k} = H_{Nk} k^2 v_{N, k}$ re-indexed by distance from the boundary $j = N - k \in [0, 24]$ across five dimensions $N \in \{64, 96, 128, 160, 192\}$.
+
+### What it Established (Audit Results)
+1. **Definitive Refutation of the Airy Scaling Collapse:** Rescaled boundary modes $S_{N, j} = N^{1/3} F_{N, N-j}$ fail to collapse. The discrete fixed-depth test ($\theta = 0$) exhibits massive relative spreads ($500\%$ to $1073\%$). The Airy coordinate test ($\theta = 1/3$, $\eta = j / N^{1/3}$) yields ratios $S_{192}/S_{64}$ swinging wildly from $-1.48$ to $+0.008$ with multiple sign inversions. The Airy boundary-layer hypothesis is **decisively refuted and retired**.
+2. **Analytical Confirmation of $a_N$ Oscillatory Envelope:** Confirmed $H_{0, N} = \sqrt{2}\psi(N)/N$ and $a_N = 2 N \psi(N)$ to machine precision ($10^{-70}$). The non-decaying almost-periodic sum $\psi_{\mathrm{prime}}(N)$ imparts an $\mathcal{O}(N)$ oscillatory envelope to $a_N$, confirming that boundary behavior cannot be explained by smooth asymptotic scaling of $a_N$.
+3. **Discovery of Massive 20-Order Destructive Cancellation:** The net boundary flux $(H u_N)_N \sim 10^{-22}$ is produced by vast destructive cancellation across the spectrum. Cumulative partial sums $S_{\mathrm{core}}(M) = \sum_{k=1}^M F_{N, k}$ peak at $k_{\mathrm{peak}} = 3$ ($M_{\mathrm{peak}} \sim 10^{-3} - 10^{-2}$) for every $N$. The cancellation factor $\mathcal{C}_{\mathrm{cancel}}(N) \equiv M_{\mathrm{peak}}(N) / |(H u_N)_N|$ reaches $1.37 \times 10^{20}$ at $N = 192$.
+4. **Epistemic Re-Interpretation of the Cell 115 Exponent:** The fitted exponent $\beta \approx -0.29$ does not represent the scaling of a local boundary layer, but an oscillatory cancellation residual. The investigation pivots from local boundary layers to global arithmetic and spectral cancellation.
 
 ### Status
-**Authoring.** Pre-flight specification for [`cell117.md`](file:///c:/data/github/connes-cvs-/cell117.md) and [`cell117.py`](file:///c:/data/github/connes-cvs-/cell117.py).
+**Executed (`cell117.out`) & Calibrated.** Decisive negative result: Airy boundary layer hypothesis refuted and retired.
 
 ---
 
-# Updated major historical arc (Cells 0–117)
+## Cell 118 (Global Modal Cancellation Anatomy, Macroscopic Coordinate Profile, & Arithmetic Remainder Audit)
+
+* **Script:** [`cell118.py`](file:///c:/data/github/connes-cvs-/cell118.py)
+* **Output:** `cell118.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell118.md`](file:///c:/data/github/connes-cvs-/cell118.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Having retired the local Airy boundary-layer model in Cell 117, Cell 118 investigates the true mechanism producing the $10^{-22}$ boundary residual:
+1. **Dual-Coordinate Profiling:** Re-indexes the modal flux in the continuous macroscopic coordinate $x \equiv k/N \in (0, 1)$ alongside discrete distance $j \equiv N - k$.
+2. **Continuum Limiting Cancellation Profile:** Evaluates cumulative partial sums $S_N(x) = \sum_{k \le xN} F_{N, k}$ across $x \in (0, 1)$ to determine whether $S_N(x)$ collapses onto a universal continuum cancellation curve $G(x)$.
+3. **Arithmetic Correlation Audit:** Analyzes whether the boundary residual $\alpha_N$ tracks the oscillatory arithmetic symbol derivative $\psi'(N)$ or prime-power sums.
+
+### Status
+**Authoring.** Pre-flight specification for [`cell118.md`](file:///c:/data/github/connes-cvs-/cell118.md) and [`cell118.py`](file:///c:/data/github/connes-cvs-/cell118.py).
+
+---
+
+# Updated major historical arc (Cells 0–118)
 
 ```
 Cells 0–4
@@ -3842,7 +3860,10 @@ Cell 116 (Phase IX)
     Boundary-flux kernel asymptotics: boundary proportionality |alpha|/|T| ~ 284 confirmed, empirical N^(-1/3) candidate evaluated, 10-order core cancellation exposed, a_N oscillation diagnosed
     ↓
 Cell 117 (Phase IX)
-    Boundary-row modal profiling, distance-from-boundary j = N - k scaling collapse diagnostic, and exact H_{0, N} oscillatory audit
+    Boundary-row modal profiling: Airy boundary layer scaling collapse refuted, 20-order cancellation exposed (C_cancel ~ 1.37e20, k_peak = 3), Airy hypothesis retired
+    ↓
+Cell 118 (Phase IX)
+    Global modal cancellation anatomy, macroscopic coordinate x = k/N profile, and arithmetic remainder audit
 ```
 
 ---
