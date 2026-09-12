@@ -3551,53 +3551,69 @@ Cell 110 repairs the technical defects identified in Cell 109 and rigorously for
 
 ---
 
-# Updated major historical arc (Cells 0–110)
+## Cell 111 (Discrete Boundary Defect Extinction & The Scalar Cancellation Mechanism)
+
+* **Script:** [`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py)
+* **Output:** `cell111.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Following the formalization of the non-circular regularity bridge (Theorem 9.16 in Paper NR2), Gate 1 is reduced to establishing the boundary-defect extinction condition:
+$$\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0 \quad \Longleftrightarrow \quad \lim_{N \to \infty} \left\| \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)} \right\|_2 = 0.$$
+Under the triangle inequality $\|\xi_N^{(Q)}\|_2 \le |\alpha_N|\sqrt{N-M} + \frac{|T_{v_N}(0)|}{\sqrt{2}}\|a^{(Q)}\|_2$, the contact term vanishes with infinite margin under WKB boundary suppression $|T_{v_N}(0)| = \mathcal{O}(e^{-\sigma N})$. The singular remaining analytical requirement is to establish the rate:
+$$\alpha_N \equiv \sum_{k=1}^N 2 k \psi(k) v_{N, k} = o(N^{-1/2}).$$
+
+### Key Analytical Propositions & Architecture ([`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md))
+1. **The Exact Row-Wise Resolvent Identity (Theorem 1 in [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md)):**
+   Prove that for every mode $m \in \{1, \dots, N\}$, the scalar $\alpha_N$ satisfies the exact algebraic identity:
+   $$\alpha_N = (H u_N)_m + \frac{T_{v_N}(0)}{\sqrt{2}} a_m - E_{11} m^2 v_{N, m},$$
+   and at $m=0$, $(H u_N)_0 = \alpha_N / \sqrt{2}$.
+2. **The Upper-Boundary Mode Decomposition ($m = N$):**
+   Evaluating at $m = N$ partitions $\alpha_N$ into the boundary kinetic flux $(H u_N)_N = \sum_{k=1}^N H_{Nk} k^2 v_{N, k}$, the contact term $\frac{T_{v_N}(0)}{\sqrt{2}} a_N = \sqrt{2} N \psi(N) T_{v_N}(0)$, and the ground-state leakage $-E_{11} N^2 v_{N, N}$.
+3. **Physical Curvature Suppression of Boundary Flux:**
+   Show that $(H u_N)_N \approx \frac{2\psi(N)}{N} S_2(N) - \frac{1}{N^2} S_\psi(N)$, which is strongly quenched by solitary wave boundary curvature vanishing $S_2(N) \to 0$.
+4. **The Boundary Contact Proportionality Hypothesis (Hypothesis 1):**
+   Test whether $\alpha_N \sim \kappa_\alpha(N) T_{v_N}(0)$ with $\kappa_\alpha(N) = \mathcal{O}(N)$, which guarantees exponential extinction $|\alpha_N| \sqrt{N - M} \to 0$.
+5. **Physical Coordinate Representation (Theorem 2 in [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md)):**
+   Derive $\alpha_N = -\frac{L}{\sqrt{2}\pi} \int_0^L \mathcal{W}(t) T_{v_N}'(t) dt = -\frac{L}{\sqrt{2}\pi} [ \mathcal{W} T ]_0^L + \frac{L}{\sqrt{2}\pi} \int_0^L \mathcal{W}' T dt$, providing physical motivation for boundary defect proportionality.
+
+### Script Verification Pipeline ([`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py))
+- Multi-dimension sweep across $N \in \{16, 24, 32, 48, 64, 96, 128, 192\}$ at 70 dps.
+- Verification of Theorem 1 row identity residuals $\max_{1 \le m \le N} |\alpha_N - \mathrm{RHS}_m| < 10^{-60}$.
+- Forensics on the $m = N$ decomposition: $(H u_N)_N$ vs contact term.
+- Extinction product tracking: $P_T(N) = |T_{v_N}(0)| N^{3/2}$ and $P_\alpha(N) = |\alpha_N| \sqrt{N}$.
+- Exact high-sector boundary defect norm $\|\xi_N^{(Q)}\|_2$ and triangle bound comparison across $M \in \{24, 32, 48, 64\}$.
+
+### Status
+**Pre-flight certified.** Analytical note [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md) and execution script [`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py) ready for compute node execution.
+
+---
+
+# Updated major historical arc (Cells 0–111)
 
 ```
 Cells 0–4
     Initial reconstruction and Fourier dictionary
     ↓
-Cell 5
-    Archimedean discrepancy discovered
+Cells 5–20
+    Archimedean discrepancy discovered, source, coordinate, category and quadratic-form forensics
     ↓
-Cells 6–20
-    Source, coordinate, category and quadratic-form forensics
+Cells 21–34
+    Independent brute-force validation, analytical elimination of inner integral, finite-T convergence map, pointwise tail anatomy
     ↓
-Cell 21
-    Independent brute-force quadratic validation
-    ↓
-Cells 22–23
-    Analytic elimination of inner integral + optimised calculation
-    ↓
-Cells 24–26
-    Finite-T convergence map, cross-checks, and long-range tail
-    ↓
-Cells 27–31
-    Pointwise tail anatomy, signed integration, and quadrature forensics
-    ↓
-Cells 32–34
-    Analytical r^-2 tail, common factor 1-cos(rL), and systematic N-scan
-    ↓
-Cells 35–40
-    Endpoint jets, moment convolution, generating function, and rational kernel identity
-    ↓
-Cells 41–47
-    Solitary wave continuum profile, WKB tunneling barrier, super-polynomial decay, multi-c scaling
+Cells 35–47
+    Endpoint jets, moment convolution, generating function, solitary wave continuum profile, WKB tunneling barrier
     ↓
 Cells 48–50 (Phase II)
     Excited bound states, Sturm nodal ladder, transmission zeros at Riemann zeros, 41-state spectrum
     ↓
-Cells 51–54
-    Resolvent anatomy, double-scaling boundary layer, first-jet cancellation scale D_0/D_1
+Cells 51–58
+    Resolvent anatomy, double-scaling boundary layer, first-jet cancellation scale D_0/D_1, finite-T cutoff defect
     ↓
-Cells 55–58
-    Commutator algebra, exact Cauchy transform, finite-T cutoff defect lambda_N - Q_total == -delta_T, Hankel forms
-    ↓
-Cells 59–61
-    Odd-even spectral gap collapse, M_1 vs M_2 paradox, square-root overlap |a_1| ~ sqrt(Delta_1), single WKB scale
-    ↓
-Cells 62–65 (Phase III)
-    Operator dominance reconnaissance, Gram collapse, 80-dps Schur decoupling, Loewner monotonicity
+Cells 59–65 (Phase III)
+    Odd-even spectral gap collapse, operator dominance reconnaissance, 80-dps Schur decoupling, Loewner monotonicity
     ↓
 Cells 66–72 (Phase IV)
     Hypotheses H1-H3 audit, relative tunneling gap R_gap, wavepacket dipole alignment, Stieltjes overlap ratios
@@ -3612,7 +3628,10 @@ Cells 90–97 (Phase VII)
     Projector Cauchy convergence, Archimedean resonance frontier (alpha_N > T), Nyquist scaling, exact exponent E_j^exact
     ↓
 Cells 98–110 (Phase VIII)
-    Feshbach/Schur decoupling, exact eigenvector complementarity w_M = -(C-E)v^(Q), two-sided tail sandwich Delta E ~ ||v^(Q)||^2, commutator algebra, and the certified non-circular regularity bridge
+    Feshbach/Schur decoupling, exact eigenvector complementarity w_M = -(C-E)v^(Q), two-sided tail sandwich Delta E ~ ||v^(Q)||^2, commutator algebra, and the non-circular regularity bridge
+    ↓
+Cell 111 (Phase IX)
+    Discrete boundary defect extinction, exact row-wise resolvent identities, boundary mode decomposition, curvature cancellation, and the scalar alpha_N = o(N^(-1/2)) rate
 ```
 
 ---
