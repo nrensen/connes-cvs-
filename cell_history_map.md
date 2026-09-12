@@ -3713,35 +3713,55 @@ Cell 113 demonstrated that single-vector overlap continuation fails across near-
 ## Cell 115 (Localized Branch Boundary Defect Asymptotic Power-Law Regression)
 
 * **Script:** [`cell115.py`](file:///c:/data/github/connes-cvs-/cell115.py)
-* **Output:** `cell115.out` (pending compute node execution)
+* **Output:** [`cell115.out`](file:///c:/data/github/connes-cvs-/cell115.out) (runtime: 1722.17 s $\approx$ 28.7 min at 70 dps)
 * **Companion Analytical Note:** [`cell115.md`](file:///c:/data/github/connes-cvs-/cell115.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
 
 ### Target & Mathematical Rationale
-Having eliminated branch ambiguity (state $k = 1$ is confirmed as the localized solitary candidate for $N \ge 64$), Cell 115 addresses the decisive quantitative question: **Does the localized branch possess a nonzero limiting boundary defect $\alpha_\infty > 0$ at finite $T = 600$, or is there any hidden power-law decay?**
+Having eliminated branch ambiguity in Cell 114 (state $k = 1$ is confirmed as the localized solitary candidate for $N \ge 64$), Cell 115 addresses the quantitative scaling question: **Does the localized branch possess a nonzero limiting boundary defect $\alpha_\infty > 0$ at finite $T = 600$, or is there a power-law decay?**
+1. Dense grid: $N \in \{48, 64, 80, 96, 112, 128, 144, 160, 192\}$ ($n = 8$ post-transition points).
+2. Evaluates $E_k, v_0, 1 - L_{24}, \mathcal{K}_2, |T_v(0)|, |\alpha_N|, P_\alpha, P_T$, and ratios on both branches.
+3. Ordinary least-squares log-log regressions: $\log_{10} Y = \beta \log_{10} N + \log_{10} C$.
 
-1. **Dimension Grid:** Sweeps $N \in \{48, 64, 80, 96, 112, 128, 144, 160, 192\}$ extracted instantly from the cached $N = 192, T = 600$ matrix at 70 dps.
-2. **Concurrent Observables for $k = 1$ and $k = 0$:**
-   - $E_k, v_0, 1 - L_{24}, \mathcal{K}_2$
-   - Boundary contact defect $|T_v(0)|$ and boundary coupling $|\alpha_N|$
-   - Scaled products: $N^{1/2}|\alpha_N|$ ($P_\alpha$), $N|\alpha_N|$, $N^{3/2}|T_v(0)|$, $N|T_v(0)|$
-3. **Logarithmic Power-Law Regressions:**
-   Fits power laws on the localized branch $k = 1$ for $N \ge 64$:
-   $$\log_{10} |\alpha_N| = \beta_\alpha \log_{10} N + C_\alpha$$
-   $$\log_{10} |T_v(0)| = \beta_T \log_{10} N + C_T$$
-   $$\log_{10} P_\alpha(N) = \gamma_\alpha \log_{10} N + D_\alpha$$
-   $$\log_{10} \big(N^{3/2}|T_v(0)|\big) = \gamma_T \log_{10} N + D_T$$
-4. **Falsification / Certification Criteria:**
-   - If $\beta_\alpha \approx 0$ (or $\gamma_\alpha \approx 0.5$ with $R^2 \approx 1$), the boundary coupling $\alpha_N$ does not vanish, confirming a nonzero limiting boundary defect $\alpha_\infty > 0$ for the finite-$T=600$ Galerkin model.
-   - If $\beta_\alpha < -0.5$, boundary extinction is confirmed.
+### What it Established (Audit Results)
+1. **Rejection of the Nonzero Plateau Hypothesis:** The measured scaling exponent on the localized branch is $\hat{\beta}_\alpha = -0.2885 \pm 0.0631$ ($R^2 = 0.7767$), bounded away from zero by $> 4.5$ standard errors ($[-0.415, -0.162]$ at $2\sigma$). The data refute a constant nonzero limit $\alpha_N \to \alpha_\infty > 0$ and favour a slow power-law decay toward zero.
+2. **Sub-Critical Decay Gap (Gate 1 Extinction Fails at Observed Scale):** The required extinction rates are $\alpha_N = o(N^{-1/2})$ ($\beta < -0.50$) and $T_v(0) = o(N^{-3/2})$ ($\beta < -1.50$). The empirical exponents miss these targets by substantial margins:
+   - For $|\alpha_N|$: $\Delta_\alpha = \hat{\beta}_\alpha - (-0.50) = +0.2115$, causing $P_\alpha(N) = |\alpha_N|\sqrt{N} \sim N^{+0.2115}$ to grow slowly.
+   - For $|T_v(0)|$: $\hat{\beta}_T = -0.3244 \pm 0.0642$ ($R^2 = 0.8099$), missing by $\Delta_T = +1.1756$, causing $P_T(N) = N^{3/2}|T_v(0)| \sim N^{+1.1756}$ ($R^2 = 0.9824$) to grow rapidly.
+3. **Deconstruction of the "Plateau":** The apparent $2 \times 10^{-21}$ plateau is revealed to be a slowly rising power law ($3^{0.2115} \approx 1.26$, matching the movement from $1.94 \times 10^{-21}$ to $2.33 \times 10^{-21}$).
+4. **Branch Invariance of the Scaling Mechanism:** Edge branch ($k = 0$) has nearly identical exponents ($\beta_\alpha^{(0)} = -0.2624, \beta_T^{(0)} = -0.2976$); branch ratio decays as $N^{-0.0261}$ ($R^2 = 0.836$). Branch selection affects only the prefactor ($\sim 13\%$), not the underlying asymptotic mechanism.
+5. **Methodological Limits:** 8 data points, $R^2 \approx 0.78$; results represent an empirical finite-range power law over $64 \le N \le 192$, not an asymptotic theorem. Runtime ($1722$ s) shows brute-force extension to higher $N$ has diminishing returns. Mandates an analytical attack in Cell 116.
 
 ### Status
-**Authoring.** Pre-flight specification for [`cell115.py`](file:///c:/data/github/connes-cvs-/cell115.py) and [`cell115.md`](file:///c:/data/github/connes-cvs-/cell115.md).
+**Executed (`cell115.out`) & Audited.** Analytical note [`cell115.md`](file:///c:/data/github/connes-cvs-/cell115.md) updated with full numerical results, rejection of the nonzero plateau hypothesis, and formulation of the sub-critical decay gap.
 
 ---
 
-# Updated major historical arc (Cells 0–115)
+## Cell 116 (Boundary-Flux Kernel Asymptotics & The Fractional Power Mechanism)
+
+* **Script:** [`cell116.py`](file:///c:/data/github/connes-cvs-/cell116.py)
+* **Output:** `cell116.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell116.md`](file:///c:/data/github/connes-cvs-/cell116.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Having established empirically in Cell 115 that boundary coupling decays sub-critically as $|\alpha_N| \sim N^{-0.288}$ and $|T_v(0)| \sim N^{-0.324}$, Cell 116 pivots from brute-force numerical sweeps to an analytical investigation of the exact boundary-flux identity:
+$$\alpha_N = (H u_N)_N + \frac{T_v(0)}{\sqrt{2}} a_N - E_{11} N^2 v_{N, N}.$$
+With the eigenvalue term $E_{11} N^2 v_N \sim 10^{-59}$ negligible, the boundary coupling is governed by:
+$$\alpha_N \approx \sum_{k=1}^N H_{Nk} k^2 v_{N, k} + \frac{T_v(0)}{\sqrt{2}} a_N.$$
+Cell 116 analytically dissects:
+1. **Boundary-Row Kernel Decomposition:** Splits $H_{Nk} = \frac{2(N\psi(N) - k\psi(k))}{N^2 - k^2}$ into bulk modes ($k \ll N$) and boundary layer modes ($N - k = \mathcal{O}(N^\theta)$).
+2. **The Origin of the Fractional Exponent $\sim -1/3$:** Investigates whether boundary layer contraction, solitary wave curvature $T_\infty''(0)$, and the finite-$T$ Archimedean truncation analytically produce an $N^{-1/3}$-type scaling regime.
+3. **Decisive Gate 1 Obstruction Test:** Analyzes whether $\beta_\alpha \approx -1/3$ is an insurmountable fixed-$T$ barrier (mandating the joint limit $(N, T) \to \infty$) or a finite-size transient that crosses over to super-critical decay at a higher scale $N_*$.
+
+### Status
+**Pre-flight authoring.** Pre-flight specification for [`cell116.md`](file:///c:/data/github/connes-cvs-/cell116.md) and [`cell116.py`](file:///c:/data/github/connes-cvs-/cell116.py).
+
+---
+
+# Updated major historical arc (Cells 0–116)
 
 ```
 Cells 0–4
@@ -3793,7 +3813,10 @@ Cell 114 (Phase IX)
     Two-state spectral reordering anatomy, 2D subspace principal angles, physical localization invariants, and high-N branch comparison
     ↓
 Cell 115 (Phase IX)
-    Localized branch boundary defect asymptotic power-law regression, nonzero limiting defect test, and Gate 1 scaling verdict
+    Localized branch boundary defect asymptotic power-law regression: sub-critical decay beta_alpha = -0.288, beta_T = -0.324 discovered, constant plateau refuted
+    ↓
+Cell 116 (Phase IX)
+    Boundary-flux kernel asymptotics, bulk vs boundary layer decomposition, and the fractional power mechanism
 ```
 
 ---
