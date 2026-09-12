@@ -3738,30 +3738,53 @@ Having eliminated branch ambiguity in Cell 114 (state $k = 1$ is confirmed as th
 
 ---
 
-## Cell 116 (Boundary-Flux Kernel Asymptotics & The Fractional Power Mechanism)
+## Cell 116 (Boundary-Flux Kernel Asymptotics & The Fractional Power Reconnaissance)
 
 * **Script:** [`cell116.py`](file:///c:/data/github/connes-cvs-/cell116.py)
-* **Output:** `cell116.out` (pending compute node execution)
+* **Output:** [`cell116.out`](file:///c:/data/github/connes-cvs-/cell116.out) (runtime: 543.20 s at 70 dps)
 * **Companion Analytical Note:** [`cell116.md`](file:///c:/data/github/connes-cvs-/cell116.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
 
 ### Target & Mathematical Rationale
-Having established empirically in Cell 115 that boundary coupling decays sub-critically as $|\alpha_N| \sim N^{-0.288}$ and $|T_v(0)| \sim N^{-0.324}$, Cell 116 pivots from brute-force numerical sweeps to an analytical investigation of the exact boundary-flux identity:
-$$\alpha_N = (H u_N)_N + \frac{T_v(0)}{\sqrt{2}} a_N - E_{11} N^2 v_{N, N}.$$
-With the eigenvalue term $E_{11} N^2 v_N \sim 10^{-59}$ negligible, the boundary coupling is governed by:
-$$\alpha_N \approx \sum_{k=1}^N H_{Nk} k^2 v_{N, k} + \frac{T_v(0)}{\sqrt{2}} a_N.$$
-Cell 116 analytically dissects:
-1. **Boundary-Row Kernel Decomposition:** Splits $H_{Nk} = \frac{2(N\psi(N) - k\psi(k))}{N^2 - k^2}$ into bulk modes ($k \ll N$) and boundary layer modes ($N - k = \mathcal{O}(N^\theta)$).
-2. **The Origin of the Fractional Exponent $\sim -1/3$:** Investigates whether boundary layer contraction, solitary wave curvature $T_\infty''(0)$, and the finite-$T$ Archimedean truncation analytically produce an $N^{-1/3}$-type scaling regime.
-3. **Decisive Gate 1 Obstruction Test:** Analyzes whether $\beta_\alpha \approx -1/3$ is an insurmountable fixed-$T$ barrier (mandating the joint limit $(N, T) \to \infty$) or a finite-size transient that crosses over to super-critical decay at a higher scale $N_*$.
+Following Cell 115's discovery of sub-critical decay $|\alpha_N| \sim N^{-0.288}$ and $|T_v(0)| \sim N^{-0.324}$, Cell 116 executes an analytical reconnaissance of the exact boundary-flux identity $(H u_N)_N = \alpha_N - \frac{T_v(0)}{\sqrt{2}} a_N + E_{11} N^2 v_{N, N}$ to investigate candidate mechanisms producing an $N^{-1/3}$-type scaling law.
+
+### What it Established (Audit Results)
+1. **Observed Boundary Proportionality:** The ratio $\kappa_\alpha(N) \equiv |\alpha_N| / |T_v(0)|$ is empirically stable across $N \in [64, 192]$ at $284.18 \pm 3.51$ (only $3.99\%$ relative variation), confirming that both quantities share the exact same scaling exponent. The exact Theorem 1 identity residual is $2.33 \times 10^{-69}$ at $N = 192$.
+2. **Empirical $N^{-1/3}$ Compatibility:** Invariant sequences $N^{1/3}|\alpha_N|$ and $N^{1/3}|T_v(0)|$ vary by only $15.3\%$ and $17.2\%$, making $N^{-1/3}$ a plausible empirical envelope.
+3. **Refutation of the $a_N$ Proportionality Explanation:** The hypothesis that $\kappa_\alpha \approx 2 (a_N/\sqrt{2})$ universally is **refuted**. The sequence $a_N / \sqrt{2} = \sqrt{2} N \psi(N)$ oscillates wildly from $+24.17$ to $-145.38$ due to high-frequency trigonometric terms in the prime/pole/Archimedean components of $\psi(N)$. Equipartition at $N = 192$ is an empirical feature at $N=192$, not an exact identity for all $N$.
+4. **Massive 10-Order Cancellation in Boundary Flux:** Decomposing $(H u_N)_N$ reveals that the low-mode core ($k \le 24$) contributes $-5.03 \times 10^{-13}$, which is ten orders of magnitude larger than the net flux ($-8.35 \times 10^{-23}$). Boundary flux is a delicate cancellation problem, not a simple boundary-layer dominated sum.
+5. **Epistemic Qualification:** The Airy boundary layer is an imported heuristic analogy, not a derived theorem. Premature claims that fixed-$T$ extinction is impossible and that $T(N) \ge 2\pi N/L$ eliminates the defect are retracted.
 
 ### Status
-**Pre-flight authoring.** Pre-flight specification for [`cell116.md`](file:///c:/data/github/connes-cvs-/cell116.md) and [`cell116.py`](file:///c:/data/github/connes-cvs-/cell116.py).
+**Executed (`cell116.out`) & Calibrated.** Analytical note [`cell116.md`](file:///c:/data/github/connes-cvs-/cell116.md) calibrated with all corrections. Mandates Cell 117 to directly test for boundary layer scaling collapse.
 
 ---
 
-# Updated major historical arc (Cells 0–116)
+## Cell 117 (Boundary-Row Modal Profiling & Boundary Layer Scaling Collapse Diagnostic)
+
+* **Script:** [`cell117.py`](file:///c:/data/github/connes-cvs-/cell117.py)
+* **Output:** `cell117.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell117.md`](file:///c:/data/github/connes-cvs-/cell117.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+To determine whether the $N^{-1/3}$ boundary scaling is an actual boundary-layer phenomenon of the discrete operator or merely an empirical coincidence, Cell 117 computes the individual modal boundary flux terms:
+$$F_{N, k} \equiv H_{Nk} k^2 v_{N, k}$$
+re-indexed by distance from the boundary $j \equiv N - k$ for $j \in \{0, 1, 2, \dots, 24\}$ across five dimensions $N \in \{64, 96, 128, 160, 192\}$:
+1. **Direct Scaling Collapse Test:** Tests whether the boundary-row modal profiles collapse onto a universal curve:
+   $$F_{N, N-j} \stackrel{?}{\approx} N^{-\mu} f(j / N^\theta)$$
+   with $\theta = 1/3$ (Airy hypothesis) versus other exponents.
+2. **Analytical & Numerical Audit of $H_{0, N}$:** Derives the explicit formula for $H_{0, N} = \sqrt{2} \psi(N) / N$ and audits the oscillatory behavior of $a_N = 2 N \psi(N)$ to explain its sign changes.
+3. **Cumulative Flux Profile:** Tracks the running partial sum $\sum_{j=0}^J F_{N, N-j}$ to quantify where the destructive cancellation between core modes and the boundary actually occurs.
+
+### Status
+**Authoring.** Pre-flight specification for [`cell117.md`](file:///c:/data/github/connes-cvs-/cell117.md) and [`cell117.py`](file:///c:/data/github/connes-cvs-/cell117.py).
+
+---
+
+# Updated major historical arc (Cells 0–117)
 
 ```
 Cells 0–4
@@ -3816,7 +3839,10 @@ Cell 115 (Phase IX)
     Localized branch boundary defect asymptotic power-law regression: sub-critical decay beta_alpha = -0.288, beta_T = -0.324 discovered, constant plateau refuted
     ↓
 Cell 116 (Phase IX)
-    Boundary-flux kernel asymptotics, bulk vs boundary layer decomposition, and the fractional power mechanism
+    Boundary-flux kernel asymptotics: boundary proportionality |alpha|/|T| ~ 284 confirmed, empirical N^(-1/3) candidate evaluated, 10-order core cancellation exposed, a_N oscillation diagnosed
+    ↓
+Cell 117 (Phase IX)
+    Boundary-row modal profiling, distance-from-boundary j = N - k scaling collapse diagnostic, and exact H_{0, N} oscillatory audit
 ```
 
 ---
