@@ -3680,27 +3680,68 @@ Dry, dispassionate output without qualitative labels ("certified", "holds", etc.
 ## Cell 114 (Two-State Spectral Reordering Anatomy & Localization Invariants)
 
 * **Script:** [`cell114.py`](file:///c:/data/github/connes-cvs-/cell114.py)
-* **Output:** `cell114.out` (pending compute node execution)
+* **Output:** [`cell114.out`](file:///c:/data/github/connes-cvs-/cell114.out) (runtime 1048.25 s at 70 dps)
 * **Companion Analytical Note:** [`cell114.md`](file:///c:/data/github/connes-cvs-/cell114.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
 
 ### Target & Mathematical Rationale
-Cell 113 demonstrated that single-vector overlap continuation fails across near-degeneracies where eigenvectors rotate. Cell 114 resolves the spectral transition through four targeted modules:
-1. **Module 1 (Two-Dimensional Subspace Tracking):** Sweeps $N \in [40, 60]$ with fine step $\Delta N = 2$. Measures the 2D invariant subspace overlap via SVD of the $2 \times 2$ inter-dimensional matrix $M = V_{\mathrm{old}}^T V_{\mathrm{new}}$, extracting principal singular values $(\sigma_1, \sigma_2)$ and the internal planar rotation angle $\phi(N) = \arctan(|M_{01}|/|M_{00}|)$.
-2. **Module 2 (Physical Localization Invariants):** Evaluates core mass concentration $L_{24}(v) \equiv \sum_{m=0}^{24} v_m^2$, kinetic Sobolev moment $\mathcal{K}_2(v) \equiv \sum_{m=1}^N m^4 v_m^2$, and central amplitude $v_0$ across the transition, establishing an operator-independent definition of the solitary branch.
+Cell 113 demonstrated that single-vector overlap continuation fails across near-degeneracies where eigenvectors rotate. Cell 114 resolved the spectral transition through four targeted modules:
+1. **Module 1 (Two-Dimensional Subspace Tracking):** Sweeps $N \in [40, 60]$ with fine step $\Delta N = 2$. Measures 2D invariant subspace overlap via SVD of $M = V_{\mathrm{old}}^T V_{\mathrm{new}}$, extracting principal singular values $(\sigma_1, \sigma_2)$ and the cross-$N$ basis-overlap diagnostic $\phi_{\mathrm{overlap}}(N) = \arctan(|M_{01}|/|M_{00}|)$.
+2. **Module 2 (Physical Localization Invariants):** Evaluates core mass concentration $L_{24}(v)$, kinetic Sobolev moment $\mathcal{K}_2(v)$, and central amplitude $v_0$ across the transition.
 3. **Module 3 (High-$N$ Branch Comparison):** Concurrently evaluates State $k = 0$ (delocalized edge candidate) and State $k = 1$ (localized candidate) across $N \in \{64, 80, 96, 128, 192\}$, measuring $T_v(0)$, $\alpha_N$, and $P_\alpha(N) = |\alpha_N|\sqrt{N}$ on both branches.
-4. **Module 4 (Finite-$T$ Structure at $N = 48$):** Re-evaluates both states across cached cutoffs $T \in \{400, 500, 600\}$ with zero quadrature overhead.
+4. **Module 4 (Finite-$T$ Structure at $N = 48$):** Re-evaluates both states across cached cutoffs $T \in \{400, 500, 600\}$.
 
-### Output Standard
-Dry, dispassionate numerical reporting without qualitative labels ("certified", "holds", etc.).
+### What it Established (Audit Results)
+1. **Branch Ambiguity Resolved:** For $N \ge 64$, state $k = 1$ is unambiguously the localized solitary candidate ($v_0 \to 0.6664, E_1 \to 4.67 \times 10^{-50}$), while state $k = 0$ is a delocalized edge mode sinking into the negative Archimedean leakage floor ($v_0 \to 0.0638, E_0 \to -1.063 \times 10^{-51}$).
+2. **Crucial Negative Finding (Branch Escape Route Refuted):** On the localized $k = 1$ branch, the boundary extinction product $P_\alpha(k=1) = |\alpha_N|\sqrt{N}$ does **NOT** decay:
+   $$P_\alpha^{(1)}(64) = 1.938 \times 10^{-21} \quad \longrightarrow \quad P_\alpha^{(1)}(192) = 2.328 \times 10^{-21}.$$
+   The coupling ratio $P_\alpha^{(1)} / P_\alpha^{(0)}$ drops gently from $0.902$ to $0.874$ ($\sim 13\%$), but sits firmly in the exact same $10^{-21}$ plateau. The hoped-for explanation *"extinction failed because we measured the wrong branch"* is firmly refuted.
+3. **Contact Defect Scaling:** For $k = 1$, $|T_v(0)|$ drops gently from $8.72 \times 10^{-25}$ to $5.81 \times 10^{-25}$, which does not meet $o(N^{-3/2})$; $N^{3/2}|T_v(0)|$ actually increases from $4.46 \times 10^{-22}$ to $1.54 \times 10^{-21}$.
+4. **Four Key Diagnostic Corrections:**
+   - $\mathcal{K}_2 \approx 83.1$ belongs to the edge branch ($k=0$), not the solitary wave ($k=1$ has $\mathcal{K}_2 \to 24.59$). States exchange $\mathcal{K}_2$ character through $N \in [40, 60]$ ($\mathcal{K}_2(0): 9.23 \to 83.06; \mathcal{K}_2(1): 97.14 \to 24.59$). $\mathcal{K}_2$ is withdrawn as a branch identifier.
+   - SVD diagnostic $\phi$ is a cross-$N$ projection diagnostic $\phi_{\mathrm{overlap}}$, not an internal eigenstate rotation angle; 2D subspace is invariant ($\sigma_1 \approx 1, \sigma_2 \ge 0.9999986$).
+   - Core mass complement $1 - L_{24}$ in scientific notation must be reported to resolve modal leakage.
+   - Empirical branch identification is governed by $v_0 \approx 0.666$ and $E_1 \approx 4.67 \times 10^{-50}$.
+5. **Finite-$T$ Interaction:** Sweep at $N = 48$ shows increasing $T$ moves the system into the exact same state-mixing regime as increasing $N$.
 
 ### Status
-**Pre-flight certified.** Analytical note [`cell114.md`](file:///c:/data/github/connes-cvs-/cell114.md) and execution script [`cell114.py`](file:///c:/data/github/connes-cvs-/cell114.py) ready for compute node execution.
+**Executed (`cell114.out`) & Calibrated.** Analytical note [`cell114.md`](file:///c:/data/github/connes-cvs-/cell114.md) updated with four corrections and Gate 1 epistemic split: Regularity mechanism is conditionally closed (Theorem 9.16), while boundary-defect extinction is currently unsupported at $T=600$.
 
 ---
 
-# Updated major historical arc (Cells 0–114)
+## Cell 115 (Localized Branch Boundary Defect Asymptotic Power-Law Regression)
+
+* **Script:** [`cell115.py`](file:///c:/data/github/connes-cvs-/cell115.py)
+* **Output:** `cell115.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell115.md`](file:///c:/data/github/connes-cvs-/cell115.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Having eliminated branch ambiguity (state $k = 1$ is confirmed as the localized solitary candidate for $N \ge 64$), Cell 115 addresses the decisive quantitative question: **Does the localized branch possess a nonzero limiting boundary defect $\alpha_\infty > 0$ at finite $T = 600$, or is there any hidden power-law decay?**
+
+1. **Dimension Grid:** Sweeps $N \in \{48, 64, 80, 96, 112, 128, 144, 160, 192\}$ extracted instantly from the cached $N = 192, T = 600$ matrix at 70 dps.
+2. **Concurrent Observables for $k = 1$ and $k = 0$:**
+   - $E_k, v_0, 1 - L_{24}, \mathcal{K}_2$
+   - Boundary contact defect $|T_v(0)|$ and boundary coupling $|\alpha_N|$
+   - Scaled products: $N^{1/2}|\alpha_N|$ ($P_\alpha$), $N|\alpha_N|$, $N^{3/2}|T_v(0)|$, $N|T_v(0)|$
+3. **Logarithmic Power-Law Regressions:**
+   Fits power laws on the localized branch $k = 1$ for $N \ge 64$:
+   $$\log_{10} |\alpha_N| = \beta_\alpha \log_{10} N + C_\alpha$$
+   $$\log_{10} |T_v(0)| = \beta_T \log_{10} N + C_T$$
+   $$\log_{10} P_\alpha(N) = \gamma_\alpha \log_{10} N + D_\alpha$$
+   $$\log_{10} \big(N^{3/2}|T_v(0)|\big) = \gamma_T \log_{10} N + D_T$$
+4. **Falsification / Certification Criteria:**
+   - If $\beta_\alpha \approx 0$ (or $\gamma_\alpha \approx 0.5$ with $R^2 \approx 1$), the boundary coupling $\alpha_N$ does not vanish, confirming a nonzero limiting boundary defect $\alpha_\infty > 0$ for the finite-$T=600$ Galerkin model.
+   - If $\beta_\alpha < -0.5$, boundary extinction is confirmed.
+
+### Status
+**Authoring.** Pre-flight specification for [`cell115.py`](file:///c:/data/github/connes-cvs-/cell115.py) and [`cell115.md`](file:///c:/data/github/connes-cvs-/cell115.md).
+
+---
+
+# Updated major historical arc (Cells 0–115)
 
 ```
 Cells 0–4
@@ -3750,6 +3791,9 @@ Cell 113 (Phase IX)
     ↓
 Cell 114 (Phase IX)
     Two-state spectral reordering anatomy, 2D subspace principal angles, physical localization invariants, and high-N branch comparison
+    ↓
+Cell 115 (Phase IX)
+    Localized branch boundary defect asymptotic power-law regression, nonzero limiting defect test, and Gate 1 scaling verdict
 ```
 
 ---

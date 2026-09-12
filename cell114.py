@@ -141,7 +141,7 @@ def compute_2x2_subspace_svd(v_prev_0, v_prev_1, N_prev, v_curr_0, v_curr_1, N_c
     sig1 = mp.sqrt(max(mp.mpf("0"), lam1))
     sig2 = mp.sqrt(max(mp.mpf("0"), lam2))
 
-    # Rotation angle within the subspace: phi = arctan(|m01| / |m00|)
+    # Cross-N basis-overlap diagnostic: phi_overlap = arctan(|m01| / |m00|)
     phi_rad = mp.atan2(abs(m01), abs(m00))
     phi_deg = phi_rad * mp.mpf("180") / mp.pi
 
@@ -279,8 +279,8 @@ def main():
     # MODULE 2: PHYSICAL LOCALIZATION INVARIANTS ACROSS THE TRANSITION
     # ============================================================
     print("--- MODULE 2: PHYSICAL LOCALIZATION INVARIANTS ACROSS THE TRANSITION ---")
-    print("  State k = 0 vs State k = 1: Central Amplitude v_0, Core Mass L_24, Kinetic Moment K_2")
-    print(f"{'N':>4} | {'v_0(k=0)':>10} | {'v_0(k=1)':>10} | {'L_24(k=0)':>10} | {'L_24(k=1)':>10} | {'K_2(k=0)':>14} | {'K_2(k=1)':>14} | {'Localized':>10}")
+    print("  State k = 0 vs State k = 1: Central Amplitude v_0, Tail Mass (1 - L_24), Kinetic Moment K_2")
+    print(f"{'N':>4} | {'v_0(k=0)':>10} | {'v_0(k=1)':>10} | {'(1-L24)(0)':>12} | {'(1-L24)(1)':>12} | {'K_2(k=0)':>14} | {'K_2(k=1)':>14} | {'Max v_0':>8}")
     print("-" * 96)
 
     for N_sub in N_FINE_SWEEP:
@@ -288,18 +288,21 @@ def main():
         v0_0, _, _, L24_0, K2_0, _ = compute_invariants(d["v0"], N_sub)
         v0_1, _, _, L24_1, K2_1, _ = compute_invariants(d["v1"], N_sub)
 
-        # Localized state identified by core mass L_24
-        loc_label = "k = 0" if L24_0 > L24_1 else "k = 1"
+        tail_0 = max(mp.mpf("0"), 1 - L24_0)
+        tail_1 = max(mp.mpf("0"), 1 - L24_1)
+
+        # Localized candidate identified by central amplitude v_0
+        loc_label = "k = 0" if v0_0 > v0_1 else "k = 1"
 
         print(
             f"{N_sub:>4} | "
             f"{mp.nstr(v0_0, 6):>10} | "
             f"{mp.nstr(v0_1, 6):>10} | "
-            f"{mp.nstr(L24_0, 6):>10} | "
-            f"{mp.nstr(L24_1, 6):>10} | "
+            f"{mp.nstr(tail_0, 6):>12} | "
+            f"{mp.nstr(tail_1, 6):>12} | "
             f"{mp.nstr(K2_0, 6):>14} | "
             f"{mp.nstr(K2_1, 6):>14} | "
-            f"{loc_label:>10}"
+            f"{loc_label:>8}"
         )
 
     print("-" * 96)
@@ -310,8 +313,8 @@ def main():
     # ============================================================
     print("--- MODULE 3: HIGH-N BRANCH COMPARISON & EXTINCTION METRICS (T = 600) ---")
     print("  Concurrent evaluation of State k = 0 (Edge Candidate) and State k = 1 (Localized Candidate)")
-    print(f"{'N':>4} | {'k':>2} | {'Energy E':>18} | {'v_0':>8} | {'L_24':>9} | {'K_2':>10} | {'|T_v(0)|':>16} | {'|alpha_N|':>16} | {'P_alpha = |a|*sqrt(N)':>22}")
-    print("-" * 122)
+    print(f"{'N':>4} | {'k':>2} | {'Energy E':>18} | {'v_0':>8} | {'1 - L_24':>12} | {'K_2':>10} | {'|T_v(0)|':>16} | {'|alpha_N|':>16} | {'P_alpha = |a|*sqrt(N)':>22}")
+    print("-" * 125)
 
     high_records = {}
 
@@ -330,6 +333,7 @@ def main():
 
             E_val = evals_sub[k]
             v0_val, _, _, L24_val, K2_val, _ = compute_invariants(vec, N_sub)
+            tail_val = max(mp.mpf("0"), 1 - L24_val)
 
             T_zero = vec[0] + mp.sqrt(2) * sum(vec[m] for m in range(1, dim_sub))
             alpha_N = sum(a_vec[m] * vec[m] for m in range(1, dim_sub))
@@ -354,14 +358,14 @@ def main():
                 f"{k:>2} | "
                 f"{mp.nstr(E_val, 10):>18} | "
                 f"{mp.nstr(v0_val, 5):>8} | "
-                f"{mp.nstr(L24_val, 5):>9} | "
+                f"{mp.nstr(tail_val, 6):>12} | "
                 f"{mp.nstr(K2_val, 5):>10} | "
                 f"{mp.nstr(abs_T, 8):>16} | "
                 f"{mp.nstr(abs_alpha, 8):>16} | "
                 f"{mp.nstr(P_alpha, 8):>22}"
             )
 
-    print("-" * 122)
+    print("-" * 125)
     print()
 
     # Step 3b: Extinction Ratio Table between k = 1 and k = 0
@@ -392,8 +396,8 @@ def main():
     # ============================================================
     print(f"--- MODULE 4: FINITE-T SPECTRAL STRUCTURE AT FIXED N = {N_T_FIXED} ---")
     print("  Evaluation across cached cutoffs T in {400, 500, 600}:")
-    print(f"{'T':>4} | {'k':>2} | {'Energy E':>18} | {'v_0':>8} | {'L_24':>9} | {'K_2':>10} | {'|T_v(0)|':>16} | {'|alpha_48|':>16} | {'Solve Time':>10}")
-    print("-" * 107)
+    print(f"{'T':>4} | {'k':>2} | {'Energy E':>18} | {'v_0':>8} | {'1 - L_24':>12} | {'K_2':>10} | {'|T_v(0)|':>16} | {'|alpha_48|':>16} | {'Solve Time':>10}")
+    print("-" * 110)
 
     t_mod4 = time.time()
 
@@ -423,6 +427,7 @@ def main():
 
             E_val = evals_T[k]
             v0_val, _, _, L24_val, K2_val, _ = compute_invariants(vec_T, N_T_FIXED)
+            tail_T = max(mp.mpf("0"), 1 - L24_val)
 
             T_zero = vec_T[0] + mp.sqrt(2) * sum(vec_T[m] for m in range(1, dim_T))
             alpha_T = sum(a_T[m] * vec_T[m] for m in range(1, dim_T))
@@ -432,7 +437,7 @@ def main():
                 f"{k:>2} | "
                 f"{mp.nstr(E_val, 10):>18} | "
                 f"{mp.nstr(v0_val, 5):>8} | "
-                f"{mp.nstr(L24_val, 5):>9} | "
+                f"{mp.nstr(tail_T, 6):>12} | "
                 f"{mp.nstr(K2_val, 5):>10} | "
                 f"{mp.nstr(abs(T_zero), 8):>16} | "
                 f"{mp.nstr(abs(alpha_T), 8):>16} | "
@@ -441,7 +446,7 @@ def main():
             # Only print time on first row for given T
             dt_str = ' ' * 10
 
-    print("-" * 107)
+    print("-" * 110)
     print(f"Total Module 4 runtime: {time.time() - t_mod4:.2f} s")
     print()
 
