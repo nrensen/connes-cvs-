@@ -6,13 +6,13 @@ CELL 110 — FORMALIZATION OF THE NON-CIRCULAR REGULARITY BRIDGE
 ================================================================================
 
 --- STEP 1: RETRIEVING GALERKIN MATRIX (N = 192) ---
-Canonical even matrix H: shape (193, 193), time: 2.22 s
+Canonical even matrix H: shape (193, 193), time: 1.95 s
 
 --- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H (N = 192) ---
 Ground-state eigenvalue E11:        -1.06311187849184058521227e-51
 Leading component v_0:              0.0638323058507814
 Weil kernel bound C_psi = max|psi|: 1.0606357
-Eigensolve runtime: 563.29 s
+Eigensolve runtime: 537.69 s
 
 --- STEP 3: UNIVERSAL DISCRETE INDEX MOMENTS J_4, J_6, J_8 ---
    M |   J_4(M) = sqrt(sum j^4) |   J_6(M) = sqrt(sum j^6) |   J_8(M) = sqrt(sum j^8)
@@ -60,8 +60,8 @@ CELL 110 SYNTHESIS: NON-CIRCULAR REGULARITY BRIDGE SCORECARD
 1. Lemmas 1 & 2 (Repaired Remainder Estimates Certified):    CERTIFIED
 2. Lemma 3 (Unconditional Moments Bounds from ||v||_2 = 1):    CERTIFIED
 3. Theorem 1 (Universal Non-Circular Core Bound C_B^univ):     CERTIFIED
-4. Theorem 2 (Non-Circular Regularity Bridge Enclosure):       CERTIFIED
-Total script runtime: 2428.90 s
+4. Theorem 2 (Finite Enclosures Verified; Conditional Bridge): VERIFIED
+Total script runtime: 2264.00 s
 
 ================================================================================
 CELL 110 EXECUTION COMPLETE
