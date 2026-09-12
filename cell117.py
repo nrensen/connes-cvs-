@@ -94,19 +94,18 @@ def calc_psi_prime(n_val: int, L: mp.mpf, prime_data: list) -> mp.mpf:
     return -s / PI
 
 
-def calc_psi_pole(n_val: int, L: mp.mpf) -> mp.mpf:
+def calc_psi_pole(n_val: int, L: mp.mpf, c_val: mp.mpf) -> mp.mpf:
     """
-    Compute zeta-pole contribution to psi(n_val):
-    psi_pole(n) = (1/pi) * integral_0^L sin(2*pi*n*(1 - y/L)) * 2*cosh(y/2) dy.
+    Exact analytical closed-form evaluation of the zeta-pole piece:
+    psi_pole(n) = (1/pi) * integral_0^L sin(2*pi*n*(1 - y/L)) * 2*cosh(y/2) dy
+                = [ (2*n/L) / (1/4 + (2*pi*n/L)^2) ] * (sqrt(c) + 1/sqrt(c) - 2).
+    Zero numerical quadrature required.
     """
-    PI = mp.pi
     n_mp = mp.mpf(n_val)
-    two_pi_n = 2 * PI * n_mp
-
-    def integrand(y):
-        return mp.sin(two_pi_n * (mp.mpf("1") - y / L)) * mp.mpf("2") * mp.cosh(y / mp.mpf("2"))
-
-    return mp.quad(integrand, [mp.mpf("0"), L]) / PI
+    k_val = 2 * mp.pi * n_mp / L
+    sqrt_c = mp.sqrt(c_val)
+    geom_factor = sqrt_c + mp.mpf("1") / sqrt_c - mp.mpf("2")
+    return ((2 * n_mp / L) / (mp.mpf("0.25") + k_val ** 2)) * geom_factor
 
 
 def extract_canonical_H(Q_full, N_full: int, N_sub: int) -> mp.matrix:
@@ -210,7 +209,7 @@ def main():
         aN_over_sqrt2 = a_vec[n_val] / mp.sqrt(mp.mpf("2"))
 
         p_prime = calc_psi_prime(n_val, L_mp, prime_data)
-        p_pole = calc_psi_pole(n_val, L_mp)
+        p_pole = calc_psi_pole(n_val, L_mp, c_mp)
         p_arch = psi_tot - p_prime - p_pole
 
         print(
