@@ -3598,7 +3598,40 @@ $$\alpha_N \equiv \sum_{k=1}^N 2 k \psi(k) v_{N, k} = o(N^{-1/2}).$$
 
 ---
 
-# Updated major historical arc (Cells 0–111)
+## Cell 112 (High-Precision Extinction Audit & Multi-Route Boundary Flux Cancellation)
+
+* **Script:** [`cell112.py`](file:///c:/data/github/connes-cvs-/cell112.py)
+* **Output:** `cell112.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell112.md`](file:///c:/data/github/connes-cvs-/cell112.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+In Cell 111, the scalar $\alpha_N$ and boundary defect $T_{v_N}(0)$ hit an apparent numerical precision floor at 70 dps for $N \ge 64$ ($\alpha_N \approx 1.92 \times 10^{-22}$), leaving the extinction hypothesis $\alpha_N = o(N^{-1/2})$ unproven. Cell 112 executes a decisive high-precision audit at 110 dps to test whether the plateau breaks, while proving analytically the algebraic origin of the boundary kinetic flux coupling $(H u_N)_N \approx \frac{T(0)}{\sqrt{2}} a_N$.
+
+### Key Analytical Propositions & Architecture ([`cell112.md`](file:///c:/data/github/connes-cvs-/cell112.md))
+1. **Theorem 1 (Algebraic Redirection of Boundary Kinetic Flux — Rigorous):**
+   Prove that the boundary flux $(H u_N)_N = \sum_{k=1}^N H_{Nk} k^2 v_{N, k}$ identically satisfies:
+   $$(H u_N)_N = \alpha_N - \frac{T_{v_N}(0)}{\sqrt{2}} a_N + E_{11} N^2 v_{N, N},$$
+   originating from the exact rational partial fraction decomposition $\frac{k^2}{N^2 - k^2} = -1 + \frac{N^2}{N^2 - k^2}$, where the large cross-term $\frac{a_N v_0}{\sqrt{2}}$ cancels identically against the $N$-th row of $(H - E_{11} I) v_N = 0$.
+2. **Multi-Route Evaluation of $\alpha_N$:**
+   Compute $\alpha_N$ across three independent mathematical routes:
+   - Route 1: Direct modal sum $\sum_{k=1}^N a_k v_{N, k}$.
+   - Route 2: Boundary row specialization $(H u_N)_N + \frac{T(0)}{\sqrt{2}} a_N - E_{11} N^2 v_N$.
+   - Route 3: High-sector average across upper modes $m \in \{M+1, \dots, N\}$.
+3. **Independent Eigensolver Residual Certification:**
+   Evaluate $\|(H - E_{11} I) v_N\|_2 < 10^{-100}$ and Rayleigh quotient error at 110 dps to certify the eigenpair against ill-conditioning.
+4. **Spectral Doublet & Branch Tracking:**
+   Track the lowest three eigenpairs $(E_0, E_1, E_2)$ across $N \in \{32, \dots, 192\}$ to investigate the transition in $v_0$ observed at $N=64$.
+5. **High-Precision Extinction Metrics:**
+   Evaluate $P_T(N) = |T(0)| N^{3/2}$, $P_\alpha(N) = |\alpha_N| \sqrt{N}$, and $\kappa_\alpha(N) = |\alpha_N| / |T(0)|$ at 110 dps to determine whether the 70-dps plateau breaks.
+
+### Status
+**Pre-flight certified.** Analytical note [`cell112.md`](file:///c:/data/github/connes-cvs-/cell112.md) and execution script [`cell112.py`](file:///c:/data/github/connes-cvs-/cell112.py) ready for compute node execution.
+
+---
+
+# Updated major historical arc (Cells 0–112)
 
 ```
 Cells 0–4
@@ -3639,6 +3672,9 @@ Cells 98–110 (Phase VIII)
     ↓
 Cell 111 (Phase IX)
     Discrete boundary defect extinction, exact row-wise resolvent identities, boundary mode decomposition, curvature cancellation, and the scalar alpha_N = o(N^(-1/2)) rate
+    ↓
+Cell 112 (Phase IX)
+    High-precision extinction audit (110 dps), algebraic redirection of boundary flux, multi-route alpha_N certification, and eigensolver residual verification
 ```
 
 ---
