@@ -3987,9 +3987,9 @@ Taking the supremum over all $N \ge 1$ completes the proof. $\quad \blacksquare$
 *Remark 9.1 (The Three-Level Regularity Hierarchy):*  
 Theorem 9.16 establishes the existence of a finite bound: at $M=24$, $M^4 + (C_B^{\mathrm{univ}}(24)/\delta_\infty)^2 \approx 1.23 \times 10^8 < \infty$. In numerical audits (`cell110.out`), the actual kinetic moment is $\mathcal{K}_2(192) \approx 83.064$. This reveals a three-level hierarchy:
 $$\boxed{83 \;\ll\; 1.23 \times 10^8 \;\ll\; \infty.}$$
-- The bound $1.23 \times 10^8 < \infty$ is the **universal mathematical regularity theorem**: it proves finiteness unconditionally from $\|v_N\|_2 = 1$, with zero circularity and zero dependence on fine cancellation.
+- The bound $1.23 \times 10^8 < \infty$ is the **universal part of the regularity mechanism**: once the boundary-extinction and uniform-gap hypotheses are supplied, finiteness follows without any further regularity assumption or circular estimate, with zero circularity and zero dependence on fine cancellation.
 - The smallness $83 \ll 10^8$ is the **special physical/solitary-wave structure**: in the actual ground state, destructive phase interference quenches the moments to $S_2(24) \approx -6.32 \times 10^{-11} \ll J_4(24) \approx 1263$, which converges to the continuum boundary curvature $-\frac{1}{\sqrt{2}}(L/2\pi)^2 T_\infty''(0)$. 
-The universal theorem establishes mathematical existence; the solitary-wave curvature explains physical tightness.
+The universal mechanism establishes mathematical existence; the solitary-wave curvature explains physical tightness.
 
 ---
 
@@ -4004,8 +4004,27 @@ Previously, the investigation was burdened by an apparent circularity: controlli
 Consequently, Gate 1 is now cleanly bifurcated into:
 1. **The Regularity Mechanism:** Solved conditionally by Theorem 9.16.
 2. **The Discrete Boundary Defect Extinction Target:** The remaining open mathematical question:
-$$\boxed{\lim_{N \to \infty} \|\xi_N^{(Q)}\|_2 = 0 \quad \Longleftrightarrow \quad \lim_{N \to \infty} \left( \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)} \right) = 0.}$$
-Because $T_{v_N}(0) \sim e^{-\sigma N}$ decays exponentially under the semiclassical WKB barrier, the boundary contact term $|T_{v_N}(0)| \|a^{(Q)}\|_2 \le C e^{-\sigma N} N^{3/2} \to 0$ extinguishes with infinite margin. The remaining analytical task is to establish the asymptotic vanishing of the scalar $\alpha_N = \sum_{k=1}^N 2 k \psi(k) v_{N, k}$ through the ground-state eigenvalue equation.
+$$\boxed{\|\xi_N^{(Q)}\|_2 = \left\| \alpha_N e^{(Q)} - \frac{T_{v_N}(0)}{\sqrt{2}} a^{(Q)} \right\|_2 \longrightarrow 0.}$$
+
+By Proposition 9.11, the boundary-defect vector satisfies the triangle estimate:
+$$\|\xi_N^{(Q)}\|_2 \le |\alpha_N| \sqrt{N - M} + \frac{|T_{v_N}(0)|}{\sqrt{2}} \|a^{(Q)}\|_2 \le |\alpha_N| \sqrt{N - M} + C |T_{v_N}(0)| N^{3/2}.$$
+Hence the asymptotic extinction hypothesis $(H_{\mathrm{ext}})$ is immediately reduced to two explicit rate conditions:
+$$\boxed{(H_{\mathrm{ext}}) \quad \Longleftarrow \quad \begin{cases} \alpha_N = o(N^{-1/2}), \\[2mm] |T_{v_N}(0)| = o(N^{-3/2}). \end{cases}}$$
+
+The overarching logical structure of Gate 1 now reduces to the cascade:
+$$\boxed{
+\begin{array}{ccc}
+\alpha_N = o(N^{-1/2}) & + & |T_{v_N}(0)| = o(N^{-3/2}) \\
+&& \downarrow \\
+&& (H_{\mathrm{ext}}) \\
+&& \downarrow \\
+(H_{\mathrm{gap}}) & + & \text{Theorem 9.16} \\
+&& \downarrow \\
+&& \sup_{N \ge 1} \mathcal{K}_2(N) < \infty.
+\end{array}
+}$$
+
+If the empirically supported semiclassical exponential boundary-suppression law $|T_{v_N}(0)| = \mathcal{O}(e^{-\sigma N})$ can be established uniformly, then the boundary contact term $|T_{v_N}(0)| \|a^{(Q)}\|_2 \le C e^{-\sigma N} N^{3/2} \to 0$ extinguishes with infinite margin. The remaining analytical task is therefore to establish the rate $\alpha_N = o(N^{-1/2})$, preferably directly from the ground-state eigenvalue equation.
 
 ---
 
