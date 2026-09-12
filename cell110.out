@@ -1,0 +1,68 @@
+================================================================================
+CELL 110 — FORMALIZATION OF THE NON-CIRCULAR REGULARITY BRIDGE
+  Repaired Remainder Estimates, Universal L^2 Bounds, & Regularity Bridge
+  Configuration: c = 13, T = 600, N_max = 192
+  mpmath dps: 70
+================================================================================
+
+--- STEP 1: RETRIEVING GALERKIN MATRIX (N = 192) ---
+Canonical even matrix H: shape (193, 193), time: 2.22 s
+
+--- STEP 2: GROUND-STATE EIGENSYSTEM OF FULL H (N = 192) ---
+Ground-state eigenvalue E11:        -1.06311187849184058521227e-51
+Leading component v_0:              0.0638323058507814
+Weil kernel bound C_psi = max|psi|: 1.0606357
+Eigensolve runtime: 563.29 s
+
+--- STEP 3: UNIVERSAL DISCRETE INDEX MOMENTS J_4, J_6, J_8 ---
+   M |   J_4(M) = sqrt(sum j^4) |   J_6(M) = sqrt(sum j^6) |   J_8(M) = sqrt(sum j^8)
+------------------------------------------------------------------------------------
+  24 |                1327.7876 |                27472.544 |                592980.41
+  32 |                2691.8574 |                 73906.54 |                2117078.5
+  48 |                7324.7433 |                300182.59 |               12836292.0
+  64 |                14940.694 |                814364.12 |               46317047.0
+------------------------------------------------------------------------------------
+
+--- STEP 4: LEMMAS 1 & 2 AUDIT: REPAIRED REMAINDER ESTIMATES ---
+   M |    Max Pointwise |R_k| |    Max Bound Lemma 1 |     ||R||_2 (Actual) |     C_R(M) Lemma 2 |  Holds
+----------------------------------------------------------------------------------------------------
+  24 |          1.7534538e-10 |            2012.5958 |        1.9605728e-10 |          2581.2544 |   True
+  32 |          5.9683574e-14 |            4123.8734 |        6.6957804e-14 |          5289.0731 |   True
+  48 |          2.9645006e-20 |              11340.8 |        1.0573702e-19 |           14545.14 |   True
+  64 |          1.5849155e-20 |            23254.681 |        6.7566925e-20 |          29825.287 |   True
+----------------------------------------------------------------------------------------------------
+
+--- STEP 5: THEOREM 1 AUDIT: UNIVERSAL NON-CIRCULAR CORE BOUND C_B^univ(M) ---
+   M | ||B_M^T u_P||_2 (Actual) |    C_B^univ(M) Theorem 1 |  Holds |    Slack Ratio
+------------------------------------------------------------------------------
+  24 |            2.1358278e-10 |                3442.3558 |   True |      1.612e+13
+  32 |            6.8681961e-14 |                6798.5234 |   True |      9.899e+16
+  48 |            3.9572843e-20 |                17893.325 |   True |      4.522e+23
+  64 |            2.0125336e-21 |                35734.925 |   True |      1.776e+25
+------------------------------------------------------------------------------
+
+--- STEP 6: THEOREM 2 AUDIT: NON-CIRCULAR REGULARITY BRIDGE ENCLOSURE ---
+   N |    M |    delta_M |  K_2(N) (Actual) |    Universal Bound M^4 + (C_B/delta)^2 |  Holds
+------------------------------------------------------------------------------------------
+  64 |   24 |   0.310391 |        82.186288 |                           1.2332876e+8 |   True
+  64 |   32 |   0.508193 |        82.186288 |                           1.8001498e+8 |   True
+  96 |   24 |   0.307079 |        82.873591 |                           1.2599587e+8 |   True
+  96 |   32 |    0.50593 |        82.873591 |                           1.8161956e+8 |   True
+ 128 |   24 |   0.305562 |        82.980899 |                           1.2724671e+8 |   True
+ 128 |   32 |   0.505186 |        82.980899 |                           1.8215192e+8 |   True
+ 192 |   24 |   0.304443 |        83.064197 |                             1.28181e+8 |   True
+ 192 |   32 |   0.504743 |        83.064197 |                           1.8246982e+8 |   True
+------------------------------------------------------------------------------------------
+
+================================================================================
+CELL 110 SYNTHESIS: NON-CIRCULAR REGULARITY BRIDGE SCORECARD
+================================================================================
+1. Lemmas 1 & 2 (Repaired Remainder Estimates Certified):    CERTIFIED
+2. Lemma 3 (Unconditional Moments Bounds from ||v||_2 = 1):    CERTIFIED
+3. Theorem 1 (Universal Non-Circular Core Bound C_B^univ):     CERTIFIED
+4. Theorem 2 (Non-Circular Regularity Bridge Enclosure):       CERTIFIED
+Total script runtime: 2428.90 s
+
+================================================================================
+CELL 110 EXECUTION COMPLETE
+================================================================================
