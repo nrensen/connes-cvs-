@@ -3554,7 +3554,7 @@ Cell 110 repairs the technical defects identified in Cell 109 and rigorously for
 ## Cell 111 (Discrete Boundary Defect Extinction & The Scalar Cancellation Mechanism)
 
 * **Script:** [`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py)
-* **Output:** `cell111.out` (pending compute node execution)
+* **Output:** [`cell111.out`](file:///c:/data/github/connes-cvs-/cell111.out) (commit `65cc540`, runtime 5293.30 s)
 * **Companion Analytical Note:** [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
@@ -3573,21 +3573,28 @@ $$\alpha_N \equiv \sum_{k=1}^N 2 k \psi(k) v_{N, k} = o(N^{-1/2}).$$
 2. **The Upper-Boundary Mode Decomposition ($m = N$):**
    Evaluating at $m = N$ partitions $\alpha_N$ into the boundary kinetic flux $(H u_N)_N = \sum_{k=1}^N H_{Nk} k^2 v_{N, k}$, the contact term $\frac{T_{v_N}(0)}{\sqrt{2}} a_N = \sqrt{2} N \psi(N) T_{v_N}(0)$, and the ground-state leakage $-E_{11} N^2 v_{N, N}$.
 3. **Physical Curvature Suppression of Boundary Flux:**
-   Show that $(H u_N)_N \approx \frac{2\psi(N)}{N} S_2(N) - \frac{1}{N^2} S_\psi(N)$, which is strongly quenched by solitary wave boundary curvature vanishing $S_2(N) \to 0$.
+   Heuristic expansion $(H u_N)_N \approx \frac{2\psi(N)}{N} S_2(N) - \frac{1}{N^2} S_\psi(N)$, showing coupling between boundary flux and curvature cancellation $S_2(N) \to 0$.
 4. **The Boundary Contact Proportionality Hypothesis (Hypothesis 1):**
    Test whether $\alpha_N \sim \kappa_\alpha(N) T_{v_N}(0)$ with $\kappa_\alpha(N) = \mathcal{O}(N)$, which guarantees exponential extinction $|\alpha_N| \sqrt{N - M} \to 0$.
 5. **Physical Coordinate Representation (Theorem 2 in [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md)):**
-   Derive $\alpha_N = -\frac{L}{\sqrt{2}\pi} \int_0^L \mathcal{W}(t) T_{v_N}'(t) dt = -\frac{L}{\sqrt{2}\pi} [ \mathcal{W} T ]_0^L + \frac{L}{\sqrt{2}\pi} \int_0^L \mathcal{W}' T dt$, providing physical motivation for boundary defect proportionality.
+   Corrected integral identity $\alpha_N = -\frac{L}{2\sqrt{2}\pi} \int_0^L \mathcal{W}(t) T_{v_N}'(t) dt = \frac{L}{2\sqrt{2}\pi} \int_0^L \mathcal{W}' T dt - \frac{L}{2\sqrt{2}\pi} [ \mathcal{W} T ]_0^L$.
 
-### Script Verification Pipeline ([`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py))
-- Multi-dimension sweep across $N \in \{16, 24, 32, 48, 64, 96, 128, 192\}$ at 70 dps.
-- Verification of Theorem 1 row identity residuals $\max_{1 \le m \le N} |\alpha_N - \mathrm{RHS}_m| < 10^{-60}$.
-- Forensics on the $m = N$ decomposition: $(H u_N)_N$ vs contact term.
-- Extinction product tracking: $P_T(N) = |T_{v_N}(0)| N^{3/2}$ and $P_\alpha(N) = |\alpha_N| \sqrt{N}$.
-- Exact high-sector boundary defect norm $\|\xi_N^{(Q)}\|_2$ and triangle bound comparison across $M \in \{24, 32, 48, 64\}$.
+### Findings & Verification (`cell111.out`)
+- **Theorem 1 Certified:** Across all $N \in \{16, \dots, 192\}$ and all modes $m$, maximum row identity residual is $1.088 \times 10^{-66}$, and row 0 residual is $3.25 \times 10^{-72}$.
+- **Boundary Mode Decomposition ($m=N$) Verified:** At $N=192$, $\alpha_N = 1.923 \times 10^{-22}$ decomposes into $(H u_N)_N = 9.540 \times 10^{-23}$, contact term $\frac{T(0)}{\sqrt{2}} a_N = 9.687 \times 10^{-23}$, and leakage $-8.19 \times 10^{-75}$ (error $8.47 \times 10^{-70}$). The boundary flux and contact defect are comparable and of the exact same scale as $\alpha_N$.
+- **Boundary Contact Proportionality ($\kappa_\alpha$) Numerically Supported:** The ratio $\kappa_\alpha(N) \equiv |\alpha_N| / |T_{v_N}(0)|$ tracks $157.1 \to 189.7 \to 215.7 \to 256.4 \to 277.5 \to 282.2 \to 284.6 \to 288.5$, consistent with $\mathcal{O}(N)$ or a slowly saturating law.
+- **Precision Plateau Identified:** For $N \ge 64$, $S_2(N) \approx 2.48 \times 10^{-19}$, $\alpha_N \approx 1.92 \times 10^{-22}$, and $T_{v_N}(0) \approx 6.66 \times 10^{-25}$ effectively stabilize. Consequently, $P_\alpha(N) = |\alpha_N| \sqrt{N}$ turns upward from $2.02 \times 10^{-21}$ to $2.66 \times 10^{-21}$, and $\|\xi_N^{(Q)}\|_2$ turns upward from $1.76 \times 10^{-21}$ to $2.43 \times 10^{-21}$.
+- **Triangle Inequality Tightness:** The ratio $\mathrm{Bound}_{\mathrm{tri}} / \|\xi_N^{(Q)}\|_2 \in [1.02, 1.34]$, proving no hidden cancellation in the source norm.
+
+### Reviewer Verdict & Epistemic Calibration
+- **Proved:** Exact row-wise resolvent identity (Theorem 1); exact $m=N$ boundary decomposition; exact source norm calculations.
+- **Numerically Supported:** Boundary contact proportionality $\kappa_\alpha = \mathcal{O}(N)$; intimate coupling of boundary kinetic flux and contact defect.
+- **Unproven / Open:** Extinction rate $\alpha_N = o(N^{-1/2})$; curvature vanishing $T_\infty''(0) = 0$; extinction products $P_\alpha \to 0$ and $\|\xi_N^{(Q)}\|_2 \to 0$.
+- **Factor-of-Two Correction:** Corrected physical-space prefactor from $\frac{L}{\sqrt{2}\pi}$ to $\frac{L}{2\sqrt{2}\pi}$; integration-by-parts bulk integral $\int \mathcal{W}' T dt$ remains, so contact proportionality is a hypothesis, not an identity.
+- **Next Step:** Cell 112 high-precision extinction test at 100–120 dps with independent multi-route evaluation of $\alpha_N$ and boundary flux cancellation analysis.
 
 ### Status
-**Pre-flight certified.** Analytical note [`cell111.md`](file:///c:/data/github/connes-cvs-/cell111.md) and execution script [`cell111.py`](file:///c:/data/github/connes-cvs-/cell111.py) ready for compute node execution.
+**Established (Structural breakthrough on $\alpha_N$).** Exact row-wise identity proved; boundary flux and contact defect coupled; extinction rate open pending 100–120 dps resolution in Cell 112.
 
 ---
 
