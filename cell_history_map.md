@@ -3651,11 +3651,33 @@ Cell 112a resolves this in < 1 minute by:
 - Concurrently evaluating boundary flux, $\alpha_N$ across three independent routes, and extinction products on both the literal ground state and the solitary wave branch ($k = k_{\mathrm{sol}}$).
 
 ### Status
-**Pre-flight certified.** Analytical note [`cell112a.md`](file:///c:/data/github/connes-cvs-/cell112a.md) and execution script [`cell112a.py`](file:///c:/data/github/connes-cvs-/cell112a.py) ready for compute node execution.
+**Pre-flight certified.** Analytical note [`cell112a.md`](file:///c:/data/github/connes-cvs-/cell112a.md) and execution script [`cell112a.py`](file:///c:/data/github/connes-cvs-/cell112a.py) executed through $N=96$ (`cell112a.out`), discovering the sharp spectral reordering where the solitary wave becomes the first excited state ($E_1 \approx 4.71 \times 10^{-50}, v_0 \approx 0.666$) while the literal ground state drops to the negative Archimedean leakage floor ($E_0 \approx -10^{-51}, v_0 \approx 0.064$).
 
 ---
 
-# Updated major historical arc (Cells 0–112a)
+## Cell 113 (Eigenvector Overlap Continuation, Finite-$T$ Separation & Solitary Branch Extinction)
+
+* **Script:** [`cell113.py`](file:///c:/data/github/connes-cvs-/cell113.py)
+* **Output:** `cell113.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell113.md`](file:///c:/data/github/connes-cvs-/cell113.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+Following the discovery in Cell 112a that the lowest eigenvalue ceases to coincide with the localized solitary wave for $N \ge 48-64$, Cell 113 resolves the branch continuation and finite-$T$ edge separation:
+1. **Part A (Fine Overlap Continuation):** Tracks $v_N^{\mathrm{sol}}$ continuously across $N \in [24, 96]$ with $\Delta N = 4$ via inter-dimensional eigenvector overlap $\mathcal{O}_k = |\langle v_{\mathrm{prev}}^{\mathrm{sol}}, v_N^{(k)} \rangle|$, diagnosing whether the reordering is an avoided crossing or an exact crossing.
+2. **Part B (Finite-$T$ Leakage Intervention):** Evaluates the spectrum across $T \in \{400, 500, 600\}$ at fixed $N = 48$, testing whether the negative eigenvalue $E_{\mathrm{edge}}(T)$ tracks the continuous Archimedean cutoff tail defect $\delta_T^{\mathrm{tail}}$ while $E_{\mathrm{sol}}(T)$ remains stable.
+3. **Part C (Solitary Branch Extinction):** Computes $T_{\mathrm{sol}}(0)$, $\alpha_N^{\mathrm{sol}}$, and the extinction product $P_\alpha^{\mathrm{sol}}(N) = |\alpha_N^{\mathrm{sol}}| \sqrt{N}$ specifically on $v_N^{\mathrm{sol}}$, testing whether extinction decay continues once the cutoff edge mode is separated.
+
+### Output Standard
+Dry, dispassionate output without qualitative labels ("certified", "holds", etc.), reporting computed numerical values, overlaps, residuals, and scaling products.
+
+### Status
+**Pre-flight certified.** Analytical note [`cell113.md`](file:///c:/data/github/connes-cvs-/cell113.md) and execution script [`cell113.py`](file:///c:/data/github/connes-cvs-/cell113.py) ready for compute node execution.
+
+---
+
+# Updated major historical arc (Cells 0–113)
 
 ```
 Cells 0–4
@@ -3699,6 +3721,9 @@ Cell 111 (Phase IX)
     ↓
 Cell 112 / 112a (Phase IX)
     High-precision extinction audit, multi-eigenvalue branch tracking (solitary wave vs edge mode), algebraic redirection of boundary flux, and multi-route alpha_N certification
+    ↓
+Cell 113 (Phase IX)
+    Eigenvector overlap continuation, finite-T leakage separation, and solitary-branch extinction audit
 ```
 
 ---
