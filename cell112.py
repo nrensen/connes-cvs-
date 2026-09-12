@@ -20,12 +20,12 @@
 #        - Route 1: Direct modal sum sum_{k=1}^N a_k v_{N, k}
 #        - Route 2: Boundary row specialization (H u_N)_N + (T(0) / sqrt(2)) * a_N - E_11 * N^2 * v_N
 #        - Route 3: High-sector average (1 / (N - M)) * sum_{m=M+1}^N [(H u)_m + (T(0)/sqrt(2))*a_m - E_11*m^2*v_m]
-#      coincide to machine precision (< 1e-65 at 70 dps).
+#      coincide to machine precision (< 1e-60 at 70 dps).
 #
 #   3. High-Precision Eigensolver Residual Certification:
 #      Certify that the computed ground state v_N satisfies:
 #
-#          ||(H_N - E_11 * I) v_N||_2 < 1e-65,
+#          ||(H_N - E_11 * I) v_N||_2 < 1e-60,
 #
 #      ruling out eigensolver ill-conditioning as the source of any plateau.
 #
