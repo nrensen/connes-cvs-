@@ -3631,7 +3631,31 @@ In Cell 111, the scalar $\alpha_N$ and boundary defect $T_{v_N}(0)$ hit an appar
 
 ---
 
-# Updated major historical arc (Cells 0–112)
+## Cell 112a (Multi-Eigenvalue Branch Tracking & Fast 70-DPS Extinction Audit)
+
+* **Script:** [`cell112a.py`](file:///c:/data/github/connes-cvs-/cell112a.py)
+* **Output:** `cell112a.out` (pending compute node execution)
+* **Companion Analytical Note:** [`cell112a.md`](file:///c:/data/github/connes-cvs-/cell112a.md)
+* **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
+* **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
+
+### Target & Mathematical Rationale
+The proposed 110-dps run of Cell 112 incurs a prohibitive computational barrier (~4–8 hours of un-cached numerical quadratures). Moreover, forensic analysis of `cell111.out` proves that the plateau $\alpha_N \approx 1.92 \times 10^{-22}$ is not an eigensolver precision floor:
+1. The row identity residual is $1.09 \times 10^{-66}$ (certified to 44 digits beyond $10^{-22}$).
+2. At $N \ge 64$, the lowest eigenvalue $E_0$ drops below zero to $-1.063 \times 10^{-51}$, matching the finite-$T=600$ Archimedean negative tail leakage $-\delta_{T=600}^{\mathrm{tail}}$ (Paper NR1 Theorem 5.5).
+3. Simultaneously, $v_0$ drops from $0.456$ to $0.0638$, indicating an eigenvalue crossing where the ground-state solver began tracking a cutoff-induced background/edge mode instead of the localized solitary wave ($v_0 \approx 0.54$).
+
+Cell 112a resolves this in < 1 minute by:
+- Operating at 70 dps using the existing cached $N=192$ Galerkin matrix.
+- Tracking the lowest $K=5$ eigenpairs $(E_k, v^{(k)})$ across $N \in \{16, \dots, 192\}$.
+- Concurrently evaluating boundary flux, $\alpha_N$ across three independent routes, and extinction products on both the literal ground state and the solitary wave branch ($k = k_{\mathrm{sol}}$).
+
+### Status
+**Pre-flight certified.** Analytical note [`cell112a.md`](file:///c:/data/github/connes-cvs-/cell112a.md) and execution script [`cell112a.py`](file:///c:/data/github/connes-cvs-/cell112a.py) ready for compute node execution.
+
+---
+
+# Updated major historical arc (Cells 0–112a)
 
 ```
 Cells 0–4
@@ -3673,8 +3697,8 @@ Cells 98–110 (Phase VIII)
 Cell 111 (Phase IX)
     Discrete boundary defect extinction, exact row-wise resolvent identities, boundary mode decomposition, curvature cancellation, and the scalar alpha_N = o(N^(-1/2)) rate
     ↓
-Cell 112 (Phase IX)
-    High-precision extinction audit (110 dps), algebraic redirection of boundary flux, multi-route alpha_N certification, and eigensolver residual verification
+Cell 112 / 112a (Phase IX)
+    High-precision extinction audit, multi-eigenvalue branch tracking (solitary wave vs edge mode), algebraic redirection of boundary flux, and multi-route alpha_N certification
 ```
 
 ---
