@@ -6,18 +6,18 @@ CELL 111 — DISCRETE BOUNDARY DEFECT EXTINCTION & SCALAR CANCELLATION
 ================================================================================
 
 --- STEP 1: RETRIEVING GALERKIN MATRIX (N = 192) ---
-Canonical even matrix H: shape (193, 193), time: 4503.43 s
+Canonical even matrix H: shape (193, 193), time: 1.99 s
 
 --- STEP 2: GROUND-STATE EIGENSOLVES ACROSS DIMENSION SWEEP ---
-  N =  16: E11 = 7.39242801807921e-35, v_0 = 0.5567104069, solve time = 0.30 s
-  N =  24: E11 = 2.60414820917249e-43, v_0 = 0.5468540494, solve time = 0.97 s
+  N =  16: E11 = 7.39242801807921e-35, v_0 = 0.5567104069, solve time = 0.31 s
+  N =  24: E11 = 2.60414820917249e-43, v_0 = 0.5468540494, solve time = 0.99 s
   N =  32: E11 = 2.16823687768015e-49, v_0 = 0.5429407919, solve time = 2.39 s
-  N =  48: E11 = 2.10258275643526e-50, v_0 = 0.4558354347, solve time = 8.21 s
-  N =  64: E11 = -5.08467779617232e-52, v_0 = 0.07081006916, solve time = 19.57 s
-  N =  96: E11 = -9.33493144722106e-52, v_0 = 0.06544374587, solve time = 67.65 s
-  N = 128: E11 = -1.00537462515273e-51, v_0 = 0.06454843571, solve time = 159.19 s
-  N = 192: E11 = -1.06311187849184e-51, v_0 = 0.06383230585, solve time = 530.56 s
-Total eigensolves runtime: 788.85 s
+  N =  48: E11 = 2.10258275643526e-50, v_0 = 0.4558354347, solve time = 8.37 s
+  N =  64: E11 = -5.08467779617232e-52, v_0 = 0.07081006916, solve time = 19.91 s
+  N =  96: E11 = -9.33493144722106e-52, v_0 = 0.06544374587, solve time = 68.89 s
+  N = 128: E11 = -1.00537462515273e-51, v_0 = 0.06454843571, solve time = 162.38 s
+  N = 192: E11 = -1.06311187849184e-51, v_0 = 0.06383230585, solve time = 543.81 s
+Total eigensolves runtime: 807.06 s
 
 --- STEP 3: VERIFICATION OF THEOREM 1 (EXACT ROW-WISE RESOLVENT IDENTITY) ---
   Identity tested: alpha_N = (H u_N)_m + (T(0) / sqrt(2)) * a_m - E_11 * m^2 * v_m (m >= 1)
@@ -104,11 +104,11 @@ CELL 111 SYNTHESIS: BOUNDARY DEFECT EXTINCTION SCORECARD
 ================================================================================
 1. Theorem 1 (Exact Row-Wise Identity holds across all m >= 1):     CERTIFIED
 2. Upper Boundary Specialization (m = N exact decomposition):       CERTIFIED
-3. Curvature Cancellation in Boundary Flux (S_2(N) suppression):    CERTIFIED
-4. Boundary Contact Proportionality (kappa_alpha tracked):          CERTIFIED
-5. Extinction Product Decay (P_alpha(N) = |alpha| * sqrt(N) -> 0):  CERTIFIED
-6. Exact High-Sector Defect Norm (||xi_N^(Q)||_2 -> 0):             CERTIFIED
-Total script runtime: 5293.30 s
+3. Curvature Cancellation in Boundary Flux:                         HEURISTIC MODEL / OPEN
+4. Boundary Contact Proportionality (kappa_alpha tracked):          NUMERICALLY SUPPORTED
+5. Extinction Product Decay (P_alpha(N) = |alpha| * sqrt(N) -> 0):  PLATEAU OBSERVED / OPEN
+6. Exact High-Sector Defect Norm (||xi_N^(Q)||_2 -> 0):             PLATEAU OBSERVED / OPEN
+Total script runtime: 810.08 s
 
 ================================================================================
 CELL 111 EXECUTION COMPLETE
