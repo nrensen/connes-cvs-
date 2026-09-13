@@ -4085,15 +4085,22 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 * **Companion Note:** [`cell131.md`](file:///c:/data/github/connes-cvs-/cell131.md)
 * **Target:** Gate 1 (Milestone M-G1.5 / Semiclassical Potential Barrier & Mode Quenching)
-* **Status:** Theoretical Formulation Completed (Analytical Note) & Computational Audit Script Authored ([`cell131.py`](file:///c:/data/github/connes-cvs-/cell131.py))
-* **Execution Script:** Ready for high-precision external execution (`mpmath` at 50 dps)
+* **Status:** Certified at 50 dps (Execution Completed in [`cell131.out`](file:///c:/data/github/connes-cvs-/cell131.out))
+* **Execution Script:** [`cell131.py`](file:///c:/data/github/connes-cvs-/cell131.py) (Runtime: 1262.7s across $N \in [16, 64]$)
 
-### Key Analytical Objectives & Formulations
-1. **Exact Subspace Operator Balance on $\Phi^\perp$:** Formulated the exact compression of the decomposed Friedrichs operator onto the codimension-11 continuum spectral subspace $\Phi^\perp = \operatorname{Ran}(I - P_{\mathrm{bound}})$ via the $(N+1) \times (N-10)$ isometry $U_{\mathrm{cont}} = [u_{11}, \dots, u_N]$:
-   $$\widehat{Q}_{\mathrm{even}} \equiv U_{\mathrm{cont}}^T Q_{\mathrm{even}} U_{\mathrm{cont}} = \widehat{\Omega} + \widehat{\Delta Q}_{\mathrm{arch}} - \widehat{\mathcal{K}}_{\mathrm{neg}} + \widehat{Q}_{\mathrm{pole}} \succeq E_{11} I \approx 0.58 I > 0.$$
-2. **Probe 1 (Archimedean Off-Diagonal Control):** Isolated the divided-difference defect $\Delta Q_{\mathrm{arch}} \equiv Q_{\mathrm{arch}}^{\mathrm{even}} - \operatorname{diag}(h_+(a_m))$ and formulated its compressed operator norm $\|\widehat{\Delta Q}_{\mathrm{arch}}\|_{\mathrm{op}}$ on $\Phi^\perp$ to test whether off-diagonal coupling degrades the diagonal floor $c_0 \approx 0.1567$.
-3. **Probe 2 (Projected Negative Potential Control):** Compressed the positive semidefinite negative operator $\mathcal{K}_{\mathrm{neg}} = \widetilde{W} - \Delta\widetilde{\mathcal{D}}$ onto $\Phi^\perp$ as $\widehat{\mathcal{K}}_{\mathrm{neg}} = U_{\mathrm{cont}}^T (\widetilde{W} - \Delta\widetilde{\mathcal{D}}) U_{\mathrm{cont}}$, and defined the potential-well shielding ratio $\mathcal{S}_{\mathrm{supp}} \equiv \lambda_{\max}(\widehat{\mathcal{K}}_{\mathrm{neg}}) / \lambda_{\max}(\mathcal{K}_{\mathrm{neg}})$ to test suppression of the step potential.
-4. **Coupled Backbone Form Domination:** Formulated the direct competition operator $\widehat{\mathcal{Q}}_{\mathrm{comp}} \equiv \widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$ to test whether $\lambda_{\min}(\widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}) > 0$ holds on $\Phi^\perp$.
+### Key Analytical Results & Decisive Falsifications
+1. **Retirement of the Macroscopic $0.58$ Continuum Floor:** Audited the lowest continuum eigenvalue $E_{11}(N)$ across $N \in [16, 64]$, finding $E_{11}(16) \approx 1.976 \to E_{11}(64) \approx 0.006025$. The earlier fixed threshold of $\approx 0.58$ was a low-$N$ transient. However, the bound-state cluster simultaneously collapses ($E_{10}(64) \approx 6.99 \times 10^{-6}$), maintaining a sharp three-orders-of-magnitude separation:
+   $$g_{11}(64) \equiv E_{11} - E_{10} \approx 0.006018, \qquad \frac{E_{11}}{E_{10}} \approx 862 > 0.$$
+2. **Decisive Falsification of Hypothesis H-OffDiag:** The Archimedean off-diagonal norm $\|\widehat{\Delta Q}_{\mathrm{arch}}\|_{\mathrm{op}}$ does not decay on $\Phi^\perp$; it plateaus near $\approx 0.780 \gg c_0 = 0.1567$. The off-diagonal divided-difference coupling is an $\mathcal{O}(1)$ operator on the continuum subspace and cannot be treated as a small perturbation.
+3. **Decisive Falsification of Hypothesis H-Supp (Potential Well Shielding):** Spectral projection onto $\Phi^\perp$ produces virtually zero suppression of the negative potential:
+   $$\mathcal{S}_{\mathrm{supp}}(64) \equiv \frac{\lambda_{\max}(\widehat{\mathcal{K}}_{\mathrm{neg}})}{\lambda_{\max}(\mathcal{K}_{\mathrm{neg}})} = \frac{12.816423}{12.816543} = 0.99999065 \approx 1.$$
+   The heuristic intuition that bound-state orthogonality shields continuum states from the potential well is mathematically refuted.
+4. **Falsification of Hypothesis H-Dom (Separate Form Domination):** The competition operator $\widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$ fails to be positive definite for $N \ge 24$, reaching $\lambda_{\min} = -0.486979$ at $N = 64$.
+5. **Confirmation of the Coupled Cancellation Mechanism:** Despite the failure of all three separate hypotheses, the full continuum operator remains **strictly positive** across all dimensions:
+   $$\lambda_{\min}(\widehat{Q}_{\mathrm{even}}) = E_{11}(N) = 0.00602464 > 0 \quad (N = 64).$$
+   Positivity is an emergent cooperative effect: the negative deficit of $\widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$ ($-0.487$) is overcome by the off-diagonal Archimedean operator ($\|\cdot\| = 0.780$) and the pole projector ($\max = 0.297$).
+6. **Subspace Geometry of the Zero Mode:** $\kappa_0(64) \approx 0.03995$ (4% leakage), yet $\lambda_{\min}(\widehat{\Omega}) = 7.199 \gg 0$, proving that $\Phi^\perp$ geometrically prevents alignment with the unconstrained negative zero mode.
+7. **Trace Identity Balance:** Trace conservation $\Delta \operatorname{Tr} \approx 10^{-49} - 10^{-48}$ certified to 50 dps across all 8 tested dimensions.
 
 ---
 
@@ -4196,8 +4203,8 @@ Cell 129 (Gate 1 Two-Regime Multiplier Theorem & Step-Potential Matrix Inequalit
 Cell 130 (Gate 1 Exact Component Decomposition Audit & Spectrum of Prime Form)
     Exact component decomposition Q_prime_even === -W_tilde + D_tilde^per + Delta_D_tilde proved analytically; closed-form boundary kernel J_mn(q) derived; 50-dps verification suite authored
     ↓
-Cell 131 (Gate 1 Archimedean Off-Diagonal Control & Projected Negative-Potential Compression)
-    Exact compression on codimension-11 continuum subspace Phi^perp; Archimedean off-diagonal defect Delta Q_arch; negative potential shielding S_supp; coupled competition Omega_hat - K_hat_neg
+Cell 131 (Gate 1 Subspace Compression & Coupled Cancellation Discovery)
+    50-dps audit on Phi^perp: H-OffDiag, H-Supp, and H-Dom decisively falsified (S_supp ~ 0.999991, lambda_min(Omega-K) ~ -0.487); macroscopic 0.58 floor retired (E_11(N) decreases from 1.976 to 0.006025 while cluster E_10 drops to 7e-6, maintaining 862x separation); strict positivity lambda_min(Q_hat) = E_11 > 0 survives via emergent coupled cancellation with Archimedean off-diagonal and pole operators
 ```
 
 ---
