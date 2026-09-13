@@ -5,7 +5,7 @@ CELL 123 — OPERATOR DECOMPOSITION AUDIT: HIGH-MODE COERCIVITY & CORE SPECTRA
 ================================================================================
 
 [Retrieving cached Q_total at N_max = 64, T = 600, dps = 70...]
-  -> Retrieved in 0.20 s.
+  -> Retrieved in 0.19 s.
 
 ================================================================================
 --- MODULE 1: OPERATOR TRIPARTITE DECOMPOSITION & NORM VERIFICATION ---
@@ -60,7 +60,7 @@ Testing Hypothesis H-C3.2: E_13 >= lambda_{10}(C_3) >= E_{10} (Interior Interlac
 Testing Hypothesis H-C12: lambda_min(C_{12}) >= c_{12} > 0 on span{e_12, ..., e_N}
 Testing Cauchy Bound: E_13 >= lambda_1(C_{12}) >= lambda_min(C_{12})
 
-   N | lambda_min(C_{12}) |   lambda_1(C_{12}) |      E_{13}(Q) |   E_13 >= lam_1? |  c_{12} >= 0.40?
+   N |   lambda_min(C_12) |     lambda_1(C_12) |        E_13(Q) |   E_13 >= lam_1? |    c_12 >= 0.40?
 ----------------------------------------------------------------------------------------------
   16 |      0.03825042179 |       0.8467403649 |    2.490428977 |         VERIFIED |    SUB-THRESHOLD
   20 |      0.00357132843 |      0.09494701226 |    2.066670714 |         VERIFIED |    SUB-THRESHOLD
@@ -73,7 +73,7 @@ Testing Cauchy Bound: E_13 >= lambda_1(C_{12}) >= lambda_min(C_{12})
   64 |       7.8730407e-6 |    0.0008199378504 |    0.582418695 |         VERIFIED |    SUB-THRESHOLD
 
 --- Component Spectra on H_{high}^{(12)} = span{e_12, ..., e_N} ---
-   N | [lambda_min, lambda_max](C_{12, ar}) | [lambda_min, lambda_max](C_{12, pr}) | [lambda_min, lambda_max](C_{12, po})
+   N | [lambda_min, lambda_max](C_12, ar) | [lambda_min, lambda_max](C_12, pr) | [lambda_min, lambda_max](C_12, po)
 ----------------------------------------------------------------------------------------------------------
   16 |                   [1.555, 1.848] |                  [-1.676, 1.008] |            [-2.488e-71, 2.94e-6]
   20 |                   [1.554, 2.068] |                  [-1.866, 1.544] |           [-4.939e-71, 3.662e-6]
@@ -103,20 +103,28 @@ Mapping lambda_min(C_M) across M to pinpoint the bound-state-to-continuum transi
   64 |  4.64e-39 |  1.83e-33 |  1.79e-23 |  5.42e-15 |   7.53e-8 |   7.87e-6 | 0.0002521 |  0.002134
 
 ================================================================================
---- MODULE 5: SYNTHESIS & AUDIT CONCLUSIONS ---
+--- MODULE 5: SYNTHESIS & AUDIT SUMMARY ---
 ================================================================================
-1. Naive Route C Coercivity Premise (C_3 >= 0.386 I):
-   - Minimum eigenvalue across all N: lambda_min(C_3) = 4.63995287e-39
-   - Bound-state collapse confirmed: lambda_min(C_3) <= E_3 holds identically.
-   - Conclusion: FALSIFIED. C_3 contains remaining bound states and is NOT coercive.
+1. M = 3 Principal Submatrix C_3 = Q_even[3..N, 3..N]:
+   - lambda_min(C_3) range across N in [16, 64]: [4.63995287e-39, 1.742486654e-20]
+   - Cauchy bound-state collapse: lambda_min(C_3) <= E_3 verified identically.
+   - Coercivity premise C_3 >= 0.386 I: Not supported by numerical data.
+   - Interior interlacing E_13 >= lambda_10(C_3) >= E_10: Verified identically.
 
-2. Core-Submatrix Coercivity Conjecture (C_12 >= c_12 > 0):
+2. M = 12 Principal Submatrix C_12 = Q_even[12..N, 12..N]:
    - lambda_min(C_12) range across N in [14, 64]: [7.873e-6, 0.03825]
-   - Cauchy lower bound E_13 >= lambda_1(C_12) >= lambda_min(C_12) verified identically.
-   - Conclusion: CERTIFIED. Projecting out the 12-dimensional bound-state core
-     secures macroscopic coercivity c_12 ~ 0.50 uniformly in N.
+   - lambda_1(C_12) range across N in [14, 64]:   [0.00081994, 0.84674]
+   - Uniform coercivity C_12 >= c I > 0: Not supported; lambda_min(C_12) decreases by 4 orders of magnitude.
+   - Cauchy interlacing E_13 >= lambda_1(C_12) >= lambda_min(C_12): Verified identically.
 
-Total execution time: 647.97 s
+3. Component Spectra on High Modes (N = 64):
+   - C_arch (M=12):  [1.553, 3.216]
+   - C_prime (M=12): [-2.373, 2.212]
+   - C_pole (M=12):  [-1.029e-70, 4.424e-6]
+   - Observation: Prime component is strongly indefinite; full submatrix near-positivity
+     results from cancellation between Archimedean and prime sectors.
+
+Total execution time: 674.10 s
 ================================================================================
 CELL 123 EXECUTION COMPLETE
 ================================================================================
