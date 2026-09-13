@@ -5,7 +5,7 @@
 $$(\mathcal{Q}_{\mathrm{comp}} - \mu_0 I) v_{\mathrm{bad}} = \sum_{k=0}^{10} \lambda_k u_k, \qquad \lambda_k \equiv \langle u_k, \mathcal{Q}_{\mathrm{comp}} v_{\mathrm{bad}} \rangle$$
 on the canonical even space $\mathbb{R}^{N+1}$, demonstrating that:
 1. The solitary negative state $v_{\mathrm{bad}}$ is the unique ground state of a constrained variational problem whose deficit $\mu_0 \approx -0.4870$ is maintained against the attractive step potential by an exact vector of Lagrange constraint forces $\boldsymbol\lambda = (\lambda_0, \dots, \lambda_{10})^T$.
-2. Under canonical phase alignment ($T_{v_{\mathrm{bad}}}(0) > 0$), the physical wavepacket $T_{v_{\mathrm{bad}}}(t)$ exhibits rapid Cauchy convergence in $L^2(d\mu)$ toward a stationary continuum spatial profile $T_\infty(t)$.
+2. Under canonical phase alignment ($T_{v_{\mathrm{bad}}}(0) > 0$), the physical wavepacket $T_{v_{\mathrm{bad}}}(t)$ exhibits strong numerical stabilization in $L^2(d\mu)$ toward a stationary spatial profile.
 3. The competition Hamiltonian decomposes into three positive/negative physical forms:
    $$\mathcal{Q}_{\mathrm{comp}} \equiv D_{\mathrm{mult}} - \widetilde{W} + \widetilde{\mathcal{D}}^{\mathrm{true}},$$
    where the maximum depth of the prime step potential $W(L) = 2 \sum_{q \le c} w_q \approx 9.9438$ coincides identically with the average translation stiffness $\overline{4 M(m)} \equiv W(L)$, establishing the exact baseline around which the $-0.4870$ deficit is stabilized.
