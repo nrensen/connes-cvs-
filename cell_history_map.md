@@ -3874,12 +3874,30 @@ for $L \in \{4, 6, 8, 10, 12, 14, 16\}$ and $N \in \{16, 20, 24, 28, 32, 36, 40,
 The test determines whether the apparent success at $L = 8$ is robust as $L$ increases past the bound-state capacity ($\bar{N}_{\mathrm{bound}} \approx 11$) into the scattering continuum, tracking the supremum envelope $\mathcal{S}_j(L) = \sup_N \mathcal{P}_j(N, L)$ to empirically test the joint limit:
 $$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.$$
 
+### What it Established (Audit Results)
+1. **Discovery of the Bound-State-to-Continuum Spectral Transition:** The lower Ritz gap $g_{2, L}(N) \equiv E_{L+1}^{(N)} - E_3^{(N)}$ undergoes a sharp, qualitative transition between $L = 10$ and $L = 12$. For $L \le 10$, $g_{2, L}(N)$ collapses exponentially with $N$ ($g_{2, 4} \to 5.04 \times 10^{-27}$, $g_{2, 6} \to 1.48 \times 10^{-17}$, $g_{2, 8} \to 1.83 \times 10^{-9}$, $g_{2, 10} \to 6.03 \times 10^{-3}$ at $N = 64$). For $L \ge 12$, the gap stabilizes to macroscopic values: $g_{2, 12} \ge 0.582$, $g_{2, 14} \ge 0.782$, and $g_{2, 16} \ge 0.873$ across all tested dimensions $N \in [16, 64]$. This confirms that the bound-state capacity of the well is $\bar{N}_{\mathrm{bound}} \approx 11$.
+2. **Route 1B Revived in Continuum-Core Form:** Cell 120's rejection of Route 1B applied to fixed small core sizes inside the well ($L = 4$). Once $L \ge 12$ pushes the tail boundary into the scattering continuum, the remote denominator stabilizes: $R_{\mathrm{spec}}(64, 12) \approx 15.14$, $R_{\mathrm{spec}}(64, 14) \approx 8.39$, and $R_{\mathrm{spec}}(64, 16) \approx 6.74$. Route 1B is dead for small $L$ inside the well, but revived and active for continuum cores $L \ge \bar{N}_{\mathrm{bound}}$.
+3. **Spectacular Gate 1 Product Extinction:** In the continuum regime, the Gate 1 product drops by over 50 orders of magnitude relative to $L = 4$: $\mathcal{P}_2(64, 12) \approx 3.83 \times 10^{-40}$ and $\mathcal{P}_2(64, 16) \approx 1.71 \times 10^{-40}$. The supremum envelope $\mathcal{S}_2(L) \equiv \sup_{N \ge 20} \mathcal{P}_2(N, L)$ collapses monotonically across core sizes from $5.65 \times 10^{12}$ down to $3.14 \times 10^{-26}$.
+4. **Multi-Doublet Consistency:** Universal suppression verified across doublets $j \in \{0, 1, 2\}$, obeying the natural hierarchy $P_0 < P_1 < P_2$ (e.g. at $N=32, L=8$: $P_0 \approx 6.75 \times 10^{-32}$, $P_1 \approx 9.89 \times 10^{-26}$, $P_2 \approx 4.50 \times 10^{-20}$).
+5. **Calibrated Epistemic Brake:** Provides strong finite-$N$ empirical evidence for the continuum-core regime of Gate 1 across tested dimensions ($N \le 64, L \le 16$), but does not constitute an analytical proof of the double limit. $R_{\mathrm{spec}}(N, 12)$ grows mildly from $0.535 \to 15.14$, indicating that $R_{\mathrm{spec}}$ is not strictly constant in $N$, but satisfies $R_{\mathrm{spec}} \ll e^{cN}$, which is completely dominated by tunneling suppression $\Delta_2 \sim 10^{-41}$.
+
 ### Status
-**Planned / Script Authored (`cell121.py`, `cell121.md`).** Ready for external execution.
+**Executed (`cell121.out`, runtime: 90.42 s at 70 dps) & Audited / Calibrated.** Discovered the bound-state-to-continuum spectral transition and revived Route 1B for continuum cores ($L \ge 12$).
 
 ---
 
-# Updated major historical arc (Cells 0–121)
+## Cell 122 (Analytical Lower Bound on Continuum Spectral Threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$)
+
+* **Companion Analytical Note:** [`cell122.md`](file:///c:/data/github/connes-cvs-/cell122.md)
+* **Target:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M-G1.0 / Milestone M-G1.4)
+* **Status:** In Progress / Analytical Reduction Protocol
+
+### Target & Mathematical Rationale
+Having established in Cell 121 that the spectral gap stabilizes once $L \ge 12$ ($g_{2, 12} \ge 0.582$), Cell 122 focuses entirely on an analytical proof: deriving a rigorous uniform lower bound $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ for all large $N$ when $L \ge 12$. Establishing that the continuum threshold has positive separation removes the denominator obstruction unconditionally and isolates Gate 1 to the tunneling splitting decay rate $\Delta_j(N)$.
+
+---
+
+# Updated major historical arc (Cells 0–122)
 
 ```
 Cells 0–4
@@ -3950,6 +3968,9 @@ Cell 120 (Gate 1 Route 1B vs 1A)
     ↓
 Cell 121 (Gate 1 Core-Size Scaling)
     2D (N, L) grid mapping of Gate 1 product P_j(N, L) across L in {4..16} and N in [16..64], bound-state capacity transition (L < 11 vs L >= 12), and envelope S_j(L) scaling
+    ↓
+Cell 122 (Gate 1 Continuum Threshold Proof)
+    Analytical lower bound on the continuum spectral threshold E_{L+1}^{(N)} >= E_cont^- > 0 for L >= 12, eliminating small denominators and reducing Gate 1 to tunneling splitting Delta_j(N)
 ```
 
 ---
