@@ -4081,7 +4081,23 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–130)
+## Cell 131 (Archimedean Off-Diagonal Control & Projected Negative-Potential Compression on $\Phi^\perp$)
+
+* **Companion Note:** [`cell131.md`](file:///c:/data/github/connes-cvs-/cell131.md)
+* **Target:** Gate 1 (Milestone M-G1.5 / Semiclassical Potential Barrier & Mode Quenching)
+* **Status:** Theoretical Formulation Completed (Analytical Note) & Computational Audit Script Authored ([`cell131.py`](file:///c:/data/github/connes-cvs-/cell131.py))
+* **Execution Script:** Ready for high-precision external execution (`mpmath` at 50 dps)
+
+### Key Analytical Objectives & Formulations
+1. **Exact Subspace Operator Balance on $\Phi^\perp$:** Formulated the exact compression of the decomposed Friedrichs operator onto the codimension-11 continuum spectral subspace $\Phi^\perp = \operatorname{Ran}(I - P_{\mathrm{bound}})$ via the $(N+1) \times (N-10)$ isometry $U_{\mathrm{cont}} = [u_{11}, \dots, u_N]$:
+   $$\widehat{Q}_{\mathrm{even}} \equiv U_{\mathrm{cont}}^T Q_{\mathrm{even}} U_{\mathrm{cont}} = \widehat{\Omega} + \widehat{\Delta Q}_{\mathrm{arch}} - \widehat{\mathcal{K}}_{\mathrm{neg}} + \widehat{Q}_{\mathrm{pole}} \succeq E_{11} I \approx 0.58 I > 0.$$
+2. **Probe 1 (Archimedean Off-Diagonal Control):** Isolated the divided-difference defect $\Delta Q_{\mathrm{arch}} \equiv Q_{\mathrm{arch}}^{\mathrm{even}} - \operatorname{diag}(h_+(a_m))$ and formulated its compressed operator norm $\|\widehat{\Delta Q}_{\mathrm{arch}}\|_{\mathrm{op}}$ on $\Phi^\perp$ to test whether off-diagonal coupling degrades the diagonal floor $c_0 \approx 0.1567$.
+3. **Probe 2 (Projected Negative Potential Control):** Compressed the positive semidefinite negative operator $\mathcal{K}_{\mathrm{neg}} = \widetilde{W} - \Delta\widetilde{\mathcal{D}}$ onto $\Phi^\perp$ as $\widehat{\mathcal{K}}_{\mathrm{neg}} = U_{\mathrm{cont}}^T (\widetilde{W} - \Delta\widetilde{\mathcal{D}}) U_{\mathrm{cont}}$, and defined the potential-well shielding ratio $\mathcal{S}_{\mathrm{supp}} \equiv \lambda_{\max}(\widehat{\mathcal{K}}_{\mathrm{neg}}) / \lambda_{\max}(\mathcal{K}_{\mathrm{neg}})$ to test suppression of the step potential.
+4. **Coupled Backbone Form Domination:** Formulated the direct competition operator $\widehat{\mathcal{Q}}_{\mathrm{comp}} \equiv \widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$ to test whether $\lambda_{\min}(\widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}) > 0$ holds on $\Phi^\perp$.
+
+---
+
+# Updated major historical arc (Cells 0–131)
 
 ```
 Cells 0–4
@@ -4179,6 +4195,9 @@ Cell 129 (Gate 1 Two-Regime Multiplier Theorem & Step-Potential Matrix Inequalit
     ↓
 Cell 130 (Gate 1 Exact Component Decomposition Audit & Spectrum of Prime Form)
     Exact component decomposition Q_prime_even === -W_tilde + D_tilde^per + Delta_D_tilde proved analytically; closed-form boundary kernel J_mn(q) derived; 50-dps verification suite authored
+    ↓
+Cell 131 (Gate 1 Archimedean Off-Diagonal Control & Projected Negative-Potential Compression)
+    Exact compression on codimension-11 continuum subspace Phi^perp; Archimedean off-diagonal defect Delta Q_arch; negative potential shielding S_supp; coupled competition Omega_hat - K_hat_neg
 ```
 
 ---
