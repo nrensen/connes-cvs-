@@ -30,17 +30,17 @@ Following the reviewer mandate, this note investigates whether the coupled conti
    We prove that for any even trigonometric polynomial $T_v(t) = v_0 + \sqrt{2} \sum_{m=1}^N v_m \cos(a_m t)$, the divided-difference quadratic form is identically the truncated prime autocorrelation:
    $$\langle v, Q_{\mathrm{prime}} v \rangle = -2 \sum_{q = p^k \le c} \frac{\Lambda(q)}{\sqrt{q}} \int_{\log q}^L T_v(t) T_v(t - \log q) \, dt.$$
 2. **Exact Polarization & Translation Defect (Proposition 2.2):**  
-   Using polarization, the prime autocorrelation factors as:
+   Using polarization, the prime autocorrelation factors into bulk mass, translation defect, and boundary mismatch:
    $$\int_{\log q}^L T_v(t) T_v(t - \log q) \, dt = \int_{\log q}^L T_v(t)^2 \, dt - \frac{1}{2} \mathcal{D}_q[v] - \frac{1}{2} \mathcal{B}_q[v],$$
-   where $\mathcal{D}_q[v] \equiv \int_{\log q}^L |T_v(t) - T_v(t - \log q)|^2 \, dt$ is the $L^2$ translation defect at prime shift $\log q$.
+   where $\mathcal{D}_q[v] \equiv \int_{\log q}^L |T_v(t) - T_v(t - \log q)|^2 \, dt \ge 0$ is the $L^2$ translation defect at prime shift $\log q$, and $\mathcal{B}_q[v] \equiv \int_0^{\log q} T_v(t)^2 \, dt - \int_{L - \log q}^L T_v(t)^2 \, dt$ is the boundary mismatch.
 3. **The Scaling Mismatch Obstruction (Theorem 3.1):**  
    No polynomial Sobolev functional $\mathcal{R}_s[v] = \|T_v\|_{H^s}^2$ ($s > 0$) can satisfy $Q_{\mathrm{arch}}[v] \ge a \mathcal{R}_s[v] - b$. The Archimedean symbol grows strictly logarithmically ($h_+(a_m) \sim \log m$), whereas $\|e_m\|_{H^s}^2 = m^{2s}$, so $\lim_{m \to \infty} Q_{\mathrm{arch}}[e_m] / \|e_m\|_{H^s}^2 = 0$.
-4. **The Logarithmic Functional Dilemma (Theorem 3.2):**  
-   For the natural logarithmic functional $\mathcal{R}_{\log}[v] = \sum_{m=1}^N \log(1 + a_m) v_m^2$, $Q_{\mathrm{arch}}[v] \ge \alpha \mathcal{R}_{\log}[v] - \beta$ holds, but $Q_{\mathrm{prime}}[v]$ is a bounded operator on $\ell^2$ whose extremal negative modes persist into arbitrarily high frequency shells ($\lambda_{\min}(C_{M, \mathrm{prime}}) \approx -2.373$ for all $M$). Consequently, $Q_{\mathrm{prime}}[v]$ cannot be bounded by $-c \mathcal{R}_{\log}[v]^\theta - d$ with $\theta < 1$.
-5. **The Structural Verdict (Theorem 5.1):**  
-   **Scalar functional subordination ($a\mathcal{R} - c\mathcal{R}^\theta$) is structurally incapable of explaining continuum positivity.** $Q_{\mathrm{arch}}$ (a pseudo-differential Fourier multiplier of logarithmic order) and $Q_{\mathrm{prime}}$ (an arithmetic translation operator on finite intervals) belong to incompatible operator categories.
-6. **The Emergent Variational Solution:**  
-   The continuum floor $E_{11} \approx 0.58$ is an emergent property of the **unified Friedrichs form on the adapted trial codimension complement $\Phi^\perp$**, governed by the discrete Agmon tunneling rate $\Delta_j(N)$ relative to the spectral resolvent factor $R_{\mathrm{spec}}(N, L)$, rather than intermediate scalar subordination.
+4. **Inadequacy of Logarithmic Functional Subordination (Proposition 3.2):**  
+   For the natural logarithmic functional $\mathcal{R}_{\log}[v] = \sum_{m=1}^N \log(1 + a_m) v_m^2$, $Q_{\mathrm{arch}}[v] \ge \alpha \mathcal{R}_{\log}[v] - \beta$ holds, and $Q_{\mathrm{prime}}$ satisfies a trivial lower bound $Q_{\mathrm{prime}}[v] \ge -C_{\mathrm{prime}}$. However, combining these scalar bounds yields $\alpha \mathcal{R}_{\log}[v] - (\beta + C_{\mathrm{prime}})$, which drops to negative values on states with low logarithmic frequency, failing to recover the positive continuum margin.
+5. **The Structural Verdict (Proposition 5.1):**  
+   **Scalar functional subordination ($a\mathcal{R} - c\mathcal{R}^\theta$) is structurally inadequate to establish the continuum floor.** $Q_{\mathrm{arch}}$ (a smooth Fourier multiplier of logarithmic order) and $Q_{\mathrm{prime}}$ (an arithmetic translation operator on finite intervals) belong to incompatible operator categories.
+6. **The Emergent Variational Target:**  
+   The continuum floor $E_{11} \approx 0.58$ (observed in finite Galerkin sweeps) is formulated as a target property of the **unified Friedrichs form on the adapted trial codimension complement $\Phi^\perp$**, governed by the discrete Agmon tunneling rate $\Delta_j(N)$ relative to the spectral resolvent factor $R_{\mathrm{spec}}(N, L)$, rather than intermediate scalar subordination.
 
 ---
 
@@ -126,40 +126,35 @@ Taking the ratio as $m \to \infty$:
 $$\lim_{m \to \infty} \frac{\langle e_m, Q_{\mathrm{arch}} e_m \rangle}{\|T_{e_m}\|_{H^s}^2} = \lim_{m \to \infty} \frac{\log(m / L)}{L (2\pi m / L)^{2s}} = 0 \quad (\forall s > 0).$$
 Consequently, for any $a > 0$ and $b \in \mathbb{R}$, the inequality $Q_{\mathrm{arch}}[e_m] \ge a \|e_m\|_{H^s}^2 - b$ is violated for all sufficiently large $m$. $\blacksquare$
 
-*Significance:* The Archimedean operator is a **logarithmic pseudo-differential operator** (order $0^+$), not a differential operator of positive order ($s > 0$). It cannot dominate any polynomial Sobolev norm.
+*Significance:* The Archimedean operator is a **logarithmic pseudo-differential operator** (order $0^+$), not a differential operator of positive order ($s > 0$). It is much weaker at high frequencies than an ordinary kinetic operator, and cannot dominate any polynomial Sobolev norm.
 
 ---
 
 ### 3.2 Candidate 2: Logarithmic Regularity Functional
-Since $Q_{\mathrm{arch}}$ grows logarithmically, the only functional that $Q_{\mathrm{arch}}$ can conceivably dominate from below is the **logarithmic spectral weight**:
+Since $Q_{\mathrm{arch}}$ grows logarithmically, the natural functional to compare with $Q_{\mathrm{arch}}$ from below is the **logarithmic spectral weight**:
 $$\mathcal{R}_{\log}[v] \equiv \sum_{m=1}^N \log(1 + a_m) v_m^2 \qquad (\|v\|_2 = 1).$$
 Because $h_+(a_m) = \log(a_m / 2\pi) + \mathcal{O}(a_m^{-1})$, there exist explicit constants $\alpha > 0, \beta \in \mathbb{R}$ such that:
 $$Q_{\mathrm{arch}}[v] \ge \alpha \mathcal{R}_{\log}[v] - \beta \qquad (\forall v \in \mathbb{R}^{N+1}, \|v\|_2 = 1).$$
 
-We now ask: can the prime operator be bounded from below by $-\mathcal{R}_{\log}[v]^\theta$?
+We now analyze whether subordinating $Q_{\mathrm{prime}}$ to $\mathcal{R}_{\log}$ can produce a positive continuum floor.
 
-### Theorem 3.2 (Failure of Logarithmic Functional Subordination)
-There exist no constants $c > 0, d \in \mathbb{R}$ and exponent $\theta \in (0, 1)$ such that:
-$$Q_{\mathrm{prime}}[v] \ge -c \mathcal{R}_{\log}[v]^\theta - d \qquad (\forall v \in \mathbb{R}^{N+1}, \|v\|_2 = 1).$$
+### Proposition 3.2 (Inadequacy of Logarithmic Scalar Subordination)
+Although $Q_{\mathrm{prime}}$ satisfies the uniform lower bound $Q_{\mathrm{prime}}[v] \ge -C_{\mathrm{prime}} \|v\|^2$ (and thus inequalities of the form $Q_{\mathrm{prime}}[v] \ge -c \mathcal{R}_{\log}[v]^\theta - d$ are trivially satisfied whenever $d \ge C_{\mathrm{prime}} \approx 2.373$), any such scalar lower bound is **incapable of recovering the positive continuum margin**.
 
-*Proof.*  
-From the Cell 123 computational audit ([`cell123.out`](file:///c:/data/github/connes-cvs-/cell123.out)), for any coordinate cutoff $M \ge 1$, the restricted submatrix $C_{M, \mathrm{prime}} = P_{\ge M} Q_{\mathrm{prime}} P_{\ge M}$ possesses a negative eigenvalue that does not diminish as $M$ increases:
-$$\lambda_{\min}(C_{M, \mathrm{prime}}) \approx -2.373 \qquad (\forall M \in \{3, 12, \dots\}).$$
-Let $w_M \in \operatorname{span}\{e_M, \dots, e_N\}$ be the normalized unit eigenvector achieving this minimum:
-$$\langle w_M, Q_{\mathrm{prime}} w_M \rangle \approx -2.373.$$
-Because $w_M$ is supported entirely on modes $m \ge M$, its logarithmic regularity satisfies:
-$$\mathcal{R}_{\log}[w_M] = \sum_{m=M}^N \log(1 + a_m) |w_{M, m}|^2 \ge \log(1 + a_M) \sum_{m=M}^N |w_{M, m}|^2 = \log(1 + a_M).$$
-As the cutoff $M \to \infty$, $a_M = 2\pi M / L \to \infty$, which forces:
-$$\lim_{M \to \infty} \mathcal{R}_{\log}[w_M] = +\infty.$$
-If the inequality $Q_{\mathrm{prime}}[v] \ge -c \mathcal{R}_{\log}[v]^\theta - d$ held with $\theta < 1$:
-As $\mathcal{R}_{\log} \to \infty$, the bound would permit $Q_{\mathrm{prime}}$ to become arbitrarily negative (since $-c \mathcal{R}_{\log}^\theta \to -\infty$), which does not prevent negative values, but more critically:
-For any fixed $v$, $\|Q_{\mathrm{prime}}\|_{\ell^2 \to \ell^2} \le C_{\mathrm{prime}} \approx 2.373$ is **uniformly bounded**.  
-The operator $Q_{\mathrm{prime}}$ does not grow with frequency; it is a bounded, oscillating operator.  
-Its negative spectrum is spread across all frequency shells $M$, so high logarithmic regularity does **not** suppress the negative expectation. $\blacksquare$
+*Analytical Derivation.*  
+1. **Inequality Direction:** Because $Q_{\mathrm{prime}}$ is a bounded operator on $\ell^2$, $Q_{\mathrm{prime}}[v] \ge -C_{\mathrm{prime}}$ already holds for all unit vectors $v$. Any proposed lower bound $-c \mathcal{R}_{\log}[v]^\theta - d$ with $c \ge 0, d \ge C_{\mathrm{prime}}$ is trivially satisfied because:
+   $$-c \mathcal{R}_{\log}[v]^\theta - d \le -d \le -C_{\mathrm{prime}} \le Q_{\mathrm{prime}}[v].$$
+   The fact that $-c \mathcal{R}_{\log}^\theta$ becomes more negative as $\mathcal{R}_{\log}$ grows makes the lower bound easier, not harder, to satisfy.
+2. **Failure to Secure Positivity:** Combining $Q_{\mathrm{arch}}[v] \ge \alpha \mathcal{R}_{\log}[v] - \beta$ with the uniform lower bound $Q_{\mathrm{prime}}[v] \ge -C_{\mathrm{prime}}$ yields:
+   $$\langle v, (Q_{\mathrm{arch}} + Q_{\mathrm{prime}}) v \rangle \ge \alpha \mathcal{R}_{\log}[v] - (\beta + C_{\mathrm{prime}}).$$
+   On normalized trial states $v \in \Phi^\perp$, $\mathcal{R}_{\log}[v]$ can be relatively small (for wavepackets whose spectral mass is concentrated on moderate modes). Whenever $\mathcal{R}_{\log}[v] < (\beta + C_{\mathrm{prime}})/\alpha$, the lower bound is strictly negative, failing to recover the observed positive margin $E_{11} \approx +0.58$.
+3. **Empirical Frequency Independence:** In the Cell 123 computational sweeps at finite cutoffs $M \in \{3, 12, \dots\}$, the submatrix $C_{M, \mathrm{prime}} = P_{\ge M} Q_{\mathrm{prime}} P_{\ge M}$ maintained an extremal negative eigenvalue $\lambda_{\min} \approx -2.373$ across tested dimensions. This empirical observation indicates that high frequency alone does not suppress the negative expectation of the prime form.
+
+*Conclusion:* Scalar subordination has not been shown mathematically impossible; it has been shown, in the forms investigated here, **incapable of recovering the observed positive margin**.
 
 ---
 
-## 4. Arithmetic Incommensurability and Destructive Interference
+## 4. Arithmetic Incommensurability and The Translation Defect
 
 Why then does the coupled sum $Q_{\mathrm{arch}} + Q_{\mathrm{prime}}$ remain positive?  
 To answer this, we examine the fine structure of the prime shifts $\log q$.
@@ -167,10 +162,10 @@ To answer this, we examine the fine structure of the prime shifts $\log q$.
 ### 4.1 The Alignment Condition
 From Theorem 2.1, $\langle v, Q_{\mathrm{prime}} v \rangle$ is made maximally negative when the shifted integrals are simultaneously maximized:
 $$\int_{\log q}^L T_v(t) T_v(t - \log q) \, dt \approx \int_{\log q}^L T_v(t)^2 \, dt \qquad (\forall q \in \mathcal{P}_c).$$
-By Proposition 2.2, this requires the translation defects $\mathcal{D}_q[v]$ to be simultaneously near zero:
+By Proposition 2.2, this requires the translation defects $\mathcal{D}_q[v]$ and boundary mismatches $\mathcal{B}_q[v]$ to be simultaneously near zero:
 $$T_v(t) \approx T_v(t - \log q) \quad \text{for all } q \in \{2, 3, 4, 5, 7, 8, 9, 11, 13\}.$$
 
-### 4.2 The Arithmetic Incommensurability Obstruction
+### 4.2 The Arithmetic Incommensurability Principle
 In continuous function spaces, simultaneous translation invariance requires $T_v(t)$ to be periodic with periods $\tau_p = \log p$ for all primes $p \le c$.
 
 ### Proposition 4.1 (Arithmetic Incommensurability)
@@ -179,43 +174,57 @@ $$\{\log 2, \, \log 3, \, \log 5, \, \log 7, \, \log 11, \, \log 13\}$$
 is **strictly linearly independent over the field of rational numbers $\mathbb{Q}$**:
 $$\sum_{j=1}^P c_j \log p_j = 0 \quad (c_j \in \mathbb{Q}) \quad \iff \quad c_1 = c_2 = \dots = c_P = 0.$$
 Consequently:
-1. There exists no non-constant periodic function on $\mathbb{R}$ that is invariant under shifts by both $\log 2$ and $\log 3$.
-2. Any wavepacket $T_v(t)$ that is phased to constructively reinforce the shift $\log 2$ must be out of phase with respect to $\log 3, \log 5, \log 7$.
-3. The cross-prime sum undergoes **destructive phase interference**:
-   $$\sum_{q \in \mathcal{P}_c} \frac{\Lambda(q)}{\sqrt{q}} \int_{\log q}^L T_v(t) T_v(t - \log q) \, dt \ll \sum_{q \in \mathcal{P}_c} \frac{\Lambda(q)}{\sqrt{q}} \|T_v\|_{L^2}^2.$$
+1. There exists no non-constant periodic function on $\mathbb{R}$ that is invariant under shifts by both $\log 2$ and $\log 3$ (since $\log 2 / \log 3 \notin \mathbb{Q}$).
+2. Any wavepacket $T_v(t)$ that is phased to constructively reinforce the shift $\log 2$ cannot be simultaneously periodic with respect to $\log 3, \log 5, \log 7$.
+
+### Critical Epistemic Distinction: Qualitative Incommensurability vs Quantitative Cancellation
+Exact incommensurability establishes that *simultaneous exact periodicity is impossible*.  
+However, it does **not** automatically provide an a priori quantitative lower bound on the sum of translation defects:
+$$\sum_{q \in \mathcal{P}_c} w_q \mathcal{D}_q[v] \ge \mathfrak{c} > 0.$$
+Near-periodicity across a finite collection of shifts can still occur in discrete finite-dimensional spaces. Translating qualitative arithmetic incommensurability into a quantitative coercivity bound requires an explicit lower bound on the collection of translation defects:
+$$\boxed{\text{How small can the weighted collection } \sum_{q \le c} w_q \mathcal{D}_q[v] \text{ simultaneously be on } \Phi^\perp?}$$
 
 ---
 
-## 5. Why Scalar Functional Subordination Fails & The Unified Resolution
+### 4.3 The Boundary Mismatch Term $\mathcal{B}_q[v]$
+Proposition 2.2 isolated the boundary mass asymmetry across prime intervals:
+$$\mathcal{B}_q[v] \equiv \int_0^{\log q} T_v(t)^2 \, dt - \int_{L - \log q}^L T_v(t)^2 \, dt.$$
 
-### Theorem 5.1 (Structural Verdict on Scalar Subordination)
-The continuum positivity of the Connes–CvS Galerkin operator cannot be established by subordinating $Q_{\mathrm{arch}}$ and $Q_{\mathrm{prime}}$ to any single intermediate scalar functional $\mathcal{R}[v]$:
-$$\boxed{Q_{\mathrm{arch}}[v] \ge a \mathcal{R}[v] - b \quad \text{and} \quad Q_{\mathrm{prime}}[v] \ge -c \mathcal{R}[v]^\theta - d \quad (0 < \theta < 1) \quad \text{is structurally obstructed.}}$$
+This boundary term connects directly to the boundary defect investigations of Cells 111–120:
+1. **Physical Meaning:** $\mathcal{B}_q[v]$ measures the difference in mass of the state $T_v$ between the left boundary strip $[0, \log q]$ and the right boundary strip $[L - \log q, L]$.
+2. **Interaction with Dirichlet Vanishing:** In Paper NR2, the continuum solitary wave satisfies dual Dirichlet vanishing: $T_\infty(0) = T_\infty(L) = 0$. On states with strong boundary localization, $\mathcal{B}_q[v]$ can be non-zero and could significantly affect the balance between the arithmetic and Archimedean forms.
+3. **Key Analytical Questions:**
+   - Does $\sum w_q \mathcal{B}_q[v]$ cancel against boundary leakage in $Q_{\mathrm{arch}}$?
+   - Is $\mathcal{B}_q[v]$ suppressed by the quasimode orthogonality constraints $v \in \Phi^\perp$?
+   - Does it vanish in the large-$N$ limit under the true continuum boundary conditions?
+Understanding $\mathcal{B}_q[v]$ is an important analytical bridge between boundary mechanics and the arithmetic form.
 
-*Analytical Rationale.*  
-The obstruction stems from an irreconcilable difference in **operator categories**:
-1. **$Q_{\mathrm{arch}}$ is a smooth Fourier multiplier:** Its spectral characteristics are governed by frequency growth ($h_+(a_m) \sim \log m$). It measures global smoothness on $[0, L]$.
-2. **$Q_{\mathrm{prime}}$ is an arithmetic difference operator:** Its spectral characteristics are governed by discrete shifted correlations at points $t - \log q$. It measures localized shift periodicity.
-3. **Category Mismatch:** Functions that are localized in Fourier frequency are delocalized in spatial shifts, and functions that possess discrete shift correlations have extensive, non-decaying Fourier expansions.
-4. Because $Q_{\mathrm{arch}}$ grows only logarithmically, any functional $\mathcal{R}[v]$ dominated by $Q_{\mathrm{arch}}$ must be sub-logarithmic in Fourier space. But a sub-logarithmic functional is too weak to detect the oscillatory phase cancellation among incommensurate prime shifts in $Q_{\mathrm{prime}}$.
+---
+
+## 5. The Structural Verdict & The Unified Variational Resolution
+
+### Proposition 5.1 (Inadequacy of Scalar Functional Subordination)
+Scalar functional subordination ($Q_{\mathrm{arch}} \ge a\mathcal{R}, Q_{\mathrm{prime}} \ge -c\mathcal{R}^\theta$) is structurally inadequate to explain the continuum threshold:
+1. **Category Mismatch:** $Q_{\mathrm{arch}}$ is a smooth Fourier multiplier governed by frequency growth ($h_+(a_m) \sim \log m$), measuring global smoothness on $[0, L]$. $Q_{\mathrm{prime}}$ is an arithmetic translation operator governed by discrete shifted correlations at points $t - \log q$.
+2. **Sub-Logarithmic Insufficiency:** Because $Q_{\mathrm{arch}}$ grows only logarithmically, any functional dominated by $Q_{\mathrm{arch}}$ must grow sub-logarithmically. But sub-logarithmic functionals are too insensitive to detect phase cancellations among incommensurate prime shifts.
 
 ---
 
 ### The Unified Variational Resolution: Direct Quasimode Min-Max
-Because scalar subordination fails, the continuum threshold must be proved through the **unified Friedrichs form**:
+Because scalar subordination is inadequate, the continuum threshold must be proved through the **unified Friedrichs form**:
 
 $$\mathcal{Q}_{\mathrm{even}}[v] = \langle v, Q_{\mathrm{even}} v \rangle = \langle v, (Q_{\mathrm{arch}} + Q_{\mathrm{prime}} + Q_{\mathrm{pole}}) v \rangle.$$
 
 The proof architecture is structured around two distinct mechanisms:
-1. **Subspace Gap Isolation (Programme 1):**  
+1. **Subspace Gap Target (Programme 1):**  
    The bound-state sector ($K \approx 11$) is isolated by constructing explicit adapted trial quasimodes $\Phi = \operatorname{span}\{\phi_1, \dots, \phi_K\}$ approximating the low-energy well states.  
-   On the orthogonal complement $\Phi^\perp$, the unified matrix satisfies:
-   $$C \equiv U_{\Phi^\perp}^T Q_{\mathrm{even}} U_{\Phi^\perp} \succeq c_* I > 0,$$
-   where $c_* \approx 0.58$ is an exact property of the full coupled matrix, not a sum of component floors.
+   On the orthogonal complement $\Phi^\perp$, the target property is:
+   $$C \equiv U_{\Phi^\perp}^T Q_{\mathrm{even}} U_{\Phi^\perp} \succeq c_* I > 0.$$
+   *Epistemic Note:* $c_* \approx 0.58$ is an empirical continuum floor observed in finite Galerkin numerical sweeps, not an established theorem of the continuum operator. Establishing $C \succeq c_* I > 0$ analytically on $\Phi^\perp$ remains the core open challenge.
 2. **Agmon Tunneling Rate vs Resolvent Growth (Gate 1 Pipeline):**  
    The core proposition of Gate 1:
    $$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \quad \Longrightarrow \quad \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1,$$
-   does **not** require independent component positivity. It requires establishing that the discrete boundary tunneling rate $\Delta_j(N) \le C_j e^{-\sigma_j N}$ decays sufficiently rapidly to overcome the growth of the spectral resolvent factor $R_{\mathrm{spec}}(N, L)$.
+   requires establishing that the discrete boundary tunneling rate $\Delta_j(N) \le C_j e^{-\sigma_j N}$ decays sufficiently rapidly to overcome the growth of the spectral resolvent factor $R_{\mathrm{spec}}(N, L)$.
 
 ---
 
@@ -226,14 +235,15 @@ The proof architecture is structured around two distinct mechanisms:
 | **Cell 123** | Tripartite decomposition audit ($M=3, 12$) | $C_{12, \mathrm{arch}} \approx 1.553, \lambda_{\min}(C_{\mathrm{prime}}) \approx -2.373$ | Coordinate submatrix coercivity dead |
 | **Cell 124** | Spectral-subspace projection $P_{\mathrm{cont}} = I - P_{\mathrm{bound}}$ | Non-circularity dilemma formulated | Shift from coordinate cuts to trial quasimodes |
 | **Cell 125** | Variational quasimode codimension bound | Exact coupling $\|B\|_2 = \|R\|_2 = \varepsilon$; conditional transfer | Coercivity of $C$ isolated as the core hurdle |
-| **Cell 126** | Componentwise form domination audit | $C_{\mathrm{arch}} - C_{\mathrm{prime}} \approx -0.820 < 0$ unconditionally | Componentwise domination retired |
-| **Cell 127** | Coupled regularity functional search ($\mathcal{R}[v]$) | Exact autocorrelation formula; scaling mismatch obstruction proved | Scalar functional subordination retired; unified min-max ratified |
+| **Cell 126** | Componentwise form domination audit | $C_{\mathrm{arch}} - C_{\mathrm{prime}} \approx -0.820 < 0$ on coordinate cuts | Coordinate componentwise domination retired |
+| **Cell 127** | Coupled regularity functional search ($\mathcal{R}[v]$) | Exact autocorrelation formula; translation defect $\mathcal{D}_q$; boundary mismatch $\mathcal{B}_q$; scalar subordination inadequate | Scalar functional subordination retired; unified min-max ratified |
 
 ### Conclusion for Gate 1
-Cell 127 completes the analytical clarification of Gate 1:
-- We do not seek an artificial scalar functional $\mathcal{R}[v]$ to bridge Archimedean geometry and arithmetic primes.
-- We treat $Q_{\mathrm{even}}$ as an indivisible coupled operator.
-- The next milestone (M-G1.5) proceeds by direct Rayleigh–Ritz min-max analysis on $Q_{\mathrm{even}}$ with adapted well quasimodes.
+**Cell 127 completes the analytical clarification of why the scalar-subordination route is inadequate and identifies the unified variational problem as the remaining Gate-1 target.**
+
+The next cell (Cell 128) will investigate:
+$$\boxed{\text{Can the exact translation-defect representation yield a lower bound on } Q_{\mathrm{even}}[v] \text{ on } \Phi^\perp?}$$
+Specifically: deriving the analytical relation between the weighted translation defects $\sum w_q \mathcal{D}_q[v]$, the boundary mismatch terms $\sum w_q \mathcal{B}_q[v]$, and the Archimedean form $Q_{\mathrm{arch}}[v]$, without introducing artificial scalar Sobolev functionals.
 
 ---
 
@@ -246,3 +256,4 @@ Cell 127 completes the analytical clarification of Gate 1:
 - [`Paper-NR1.md`](file:///c:/data/github/connes-cvs-/Paper-NR1.md) — Exact Resolvent and Commutator Toolkit
 - [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) — The Semiclassical Continuum Programme
 - [`ROADMAP.md`](file:///c:/data/github/connes-cvs-/ROADMAP.md) — Strategic Roadmap (Gate 1 Pipeline)
+
