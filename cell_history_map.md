@@ -4140,14 +4140,17 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 * **Companion Note:** [`cell134.md`](file:///c:/data/github/connes-cvs-/cell134.md)
 * **Target:** Gate 1 (Milestone M-G1.6 / Continuum Limiting Variational Problem)
-* **Status:** Verification Suite Authored ([`cell134.py`](file:///c:/data/github/connes-cvs-/cell134.py), [`cell134.md`](file:///c:/data/github/connes-cvs-/cell134.md))
-* **Execution Script:** [`cell134.py`](file:///c:/data/github/connes-cvs-/cell134.py) (Ready for external compute node execution at 50 dps)
+* **Status:** AUDITED & CERTIFIED (50 dps via [`cell134.out`](file:///c:/data/github/connes-cvs-/cell134.out))
+* **Execution Script:** [`cell134.py`](file:///c:/data/github/connes-cvs-/cell134.py)
 
-### Key Analytical Results Formulated
-1. **Exact Discrete Euler–Lagrange Equation:** Proved that $v_{\mathrm{bad}} = U_{\mathrm{cont}} w_{\mathrm{bad}}$ satisfies $(\mathcal{Q}_{\mathrm{comp}} - \mu_0 I) v_{\mathrm{bad}} = \sum_{k=0}^{10} \lambda_k u_k$ with exact Lagrange constraint multipliers $\lambda_k \equiv \langle u_k, \mathcal{Q}_{\mathrm{comp}} v_{\mathrm{bad}} \rangle$, measuring the barrier forces exerted by the 11 bound states against well penetration.
-2. **Canonical Phase Alignment & Cauchy Profile Convergence:** Enforced canonical positive boundary phase $T_{v_{\mathrm{bad}}}(0) > 0$ to eliminate spurious $\pm 1$ sign flips; formulated the Cauchy distance metric $\delta_{\mathrm{Cauchy}}(N) \equiv \|v_{\mathrm{bad}}^{(N)} - v_{\mathrm{bad}}^{(64)}\|_2$ to test strong $L^2$ convergence toward a limiting spatial profile $T_\infty(t)$.
-3. **Three-Way Energy Partition Balance:** Decomposed $\mathcal{Q}_{\mathrm{comp}} \equiv D_{\mathrm{mult}} - \widetilde{W} + \widetilde{\mathcal{D}}^{\mathrm{true}}$ where $\widetilde{\mathcal{D}}^{\mathrm{true}} = \widetilde{\mathcal{D}}^{\mathrm{per}} + \Delta\widetilde{\mathcal{D}} \succeq 0$. Proved that the maximum step-potential depth $W(L) = 2 \sum w_q \approx 8.9212$ coincides identically with the average translation stiffness $\overline{4 M(m)} \equiv W(L)$.
-4. **Continuum 1D Variational Agenda:** Formulated the non-local continuum Schrödinger equation $\mathcal{L}_{\mathrm{cont}} T_\infty - W T_\infty - \mu_0 T_\infty = \sum \lambda_k T_{u_k}$, establishing the variational bridge toward Gate 2.
+### Key Analytical & Certified Results
+1. **Algebraic Consistency of the Constrained Euler–Lagrange Equation:** Verified that $v_{\mathrm{bad}} = U_{\mathrm{cont}} w_{\mathrm{bad}}$ satisfies $(\mathcal{Q}_{\mathrm{comp}} - \mu_0 I) v_{\mathrm{bad}} = \sum_{k=0}^{10} \lambda_k u_k$ to $\|\mathbf{r}_{\mathrm{EL}}\|_2 \le 3.42 \times 10^{-50}$ across all $N \in [24, 64]$. Clarified that this residual confirms the algebraic projection consistency of the compression construction.
+2. **Macroscopic Multi-Mode Constraint Force:** Discovered that the constraint force maintaining equilibrium against the step well is an $O(1)$ vector with $\|\boldsymbol\lambda\|_2 \approx 1.6733$, distributed across several bound states ($\lambda_1 = -0.9821, \lambda_2 = -0.5573, \lambda_{10} = +0.4866, \lambda_0 = -0.1707$ at $N = 64$), with the dominant normal-space force switching from $k=0$ at lower $N$ to $k=1$ at $N \ge 48$.
+3. **Certified Three-Way Energy Partition Balance:** Proved and certified the exact decomposition $\mathcal{Q}_{\mathrm{comp}} \equiv D_{\mathrm{mult}} - \widetilde{W} + \widetilde{\mathcal{D}}^{\mathrm{true}}$ where $\widetilde{\mathcal{D}}^{\mathrm{true}} = \widetilde{\mathcal{D}}^{\mathrm{per}} + \Delta\widetilde{\mathcal{D}} \succeq 0$. The three forms stabilize cleanly:
+   $$R_{\mathrm{mult}} \to 1.174, \qquad R_W \to 3.710, \qquad R_{\mathcal{D}}^{\mathrm{true}} \to 2.049 \implies \mu_0 \to -0.487,$$
+   with balance error $< 1.34 \times 10^{-51}$. The energy harvested from the well is strictly constrained to $R_W / W(L) \approx 37.31\%$ ($3.710 / 9.944$).
+4. **Average Translation Stiffness Identity:** Proved the exact frequency-averaged identity $W(L) = 2 \sum_{q \le c} w_q = 9.943768796 \equiv 4 \overline{M(m)}$, demonstrating that kinetic translation stiffness on average cancels the maximum well depth.
+5. **Numerical Profile Stabilization Toward Reference:** Under canonical phase alignment $T(0) > 0$, the spatial state stabilizes monotonically toward the $N=64$ reference, with $\delta_{\mathrm{Cauchy}}(48) = 0.065$ and peak mode frozen at $m^* = 26$.
 
 ---
 
