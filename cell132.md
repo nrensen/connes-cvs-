@@ -92,20 +92,95 @@ We analyze the coordinate distribution across the discrete Fourier modes $m \in 
 
 ---
 
-## 4. Pre-Flight Computational Protocol (`cell132.py`)
+## 5. Audited Computational Results (`cell132.out` at 50 dps)
 
-[`cell132.py`](file:///c:/data/github/connes-cvs-/cell132.py) executes this investigation under strict repository standards:
-- **Precision:** `mp.mp.dps = 50`.
-- **Dimension Grid:** $N \in [16, 20, 24, 28, 32, 40, 48, 64]$.
-- **Parameters:** $c = 13$, $L = \log 13 \approx 2.56494935746$, $T = 600$.
-- **Dynamic Verification:** Dynamically evaluates and prints `VERIFICATION STATUS: PASSED/FAILED` based on $\|\mathcal{R}\|_{\mathrm{op}} < 10^{-45}$ and `RAYLEIGH IDENTITY AUDIT: PASSED/FAILED`.
-- **Outputs 4 Structured Tables:**
-  - Table 1: Full Matrix Residual Audit ($\|\mathcal{R}\|_{\max}, \|\mathcal{R}\|_F, \|\mathcal{R}\|_{\mathrm{op}}$).
-  - Table 2: Spectrum of Competition Operator $\widehat{\mathcal{Q}}_{\mathrm{comp}}$ ($k_{\mathrm{neg}}, \mu_0, \mu_1, \mu_2$).
-  - Table 3: Rayleigh Quotient Budget of $w_{\mathrm{bad}}$ ($R_{\mathrm{comp}}, R_{\Omega}, R_{\mathrm{neg}}, R_{\mathrm{arch}}, R_{\mathrm{pole}}, R_{\mathrm{net}}, \rho_{\mathrm{restore}}$).
-  - Table 4: Physical Modal Anatomy of $v_{\mathrm{bad}}$ ($|v_0|^2, \sum_{m=1}^3 |v_m|^2, \text{tail}, m^*, |v_{m^*}|^2$).
-- **Sentinel:** Terminated with clean 3-line completion sentinel.
-- **No Local Execution:** Strictly unexecuted locally on the agent workspace.
+The repaired computational suite [`cell132.py`](file:///c:/data/github/connes-cvs-/cell132.py) was executed to 50 decimal digits across $N \in [16, 64]$ with $c = 13$, $L = \log 13 \approx 2.56494935746$, and $T = 600$. The raw certified outputs are summarized below:
+
+### Table 1: Full Matrix Residual Audit on $\Phi^\perp$
+$$\mathcal{R} \equiv \widehat{Q}_{\mathrm{even}} - \big(\widehat{\Omega} + \widehat{\Delta Q}_{\mathrm{arch}} - \widehat{\mathcal{K}}_{\mathrm{neg}} + \widehat{Q}_{\mathrm{pole}}\big)$$
+| $N$ | dim | $q$ | $\|\mathcal{R}\|_{\max}$ | $\|\mathcal{R}\|_F$ | $\|\mathcal{R}\|_{\mathrm{op}}$ | Status |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | 17 | 6 | $1.2829 \times 10^{-49}$ | $3.0076 \times 10^{-49}$ | $2.4375 \times 10^{-49}$ | PASSED |
+| 20 | 21 | 10 | $1.2829 \times 10^{-49}$ | $3.6786 \times 10^{-49}$ | $2.4545 \times 10^{-49}$ | PASSED |
+| 24 | 25 | 14 | $3.1539 \times 10^{-49}$ | $6.8854 \times 10^{-49}$ | $4.9381 \times 10^{-49}$ | PASSED |
+| 28 | 29 | 18 | $3.7419 \times 10^{-49}$ | $7.4822 \times 10^{-49}$ | $4.9747 \times 10^{-49}$ | PASSED |
+| 32 | 33 | 22 | $1.9244 \times 10^{-49}$ | $8.8977 \times 10^{-49}$ | $4.9643 \times 10^{-49}$ | PASSED |
+| 40 | 41 | 30 | $2.8732 \times 10^{-49}$ | $1.2095 \times 10^{-48}$ | $5.1447 \times 10^{-49}$ | PASSED |
+| 48 | 49 | 38 | $3.5280 \times 10^{-49}$ | $1.8014 \times 10^{-48}$ | $1.0140 \times 10^{-48}$ | PASSED |
+| 64 | 65 | 54 | $3.8488 \times 10^{-49}$ | $2.5563 \times 10^{-48}$ | $1.0319 \times 10^{-48}$ | PASSED |
+
+*Verification:* Dynamic check confirmed $\max \|\mathcal{R}\|_{\mathrm{op}} = 1.0319 \times 10^{-48} < 10^{-45}$.
+
+### Table 2: Spectrum of Competition Operator $\widehat{\mathcal{Q}}_{\mathrm{comp}} = \widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$
+| $N$ | $q$ | $k_{\mathrm{neg}}$ | $\mu_0$ (Floor) | $\mu_1$ | $\mu_2$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | 6 | 0 | $+1.725597$ | $+2.120419$ | $+2.488284$ |
+| 20 | 10 | 0 | $+0.878704$ | $+1.752100$ | $+2.044677$ |
+| 24 | 14 | 1 | $-0.008071$ | $+1.225795$ | $+1.766595$ |
+| 28 | 18 | 1 | $-0.284453$ | $+0.635955$ | $+1.213316$ |
+| 32 | 22 | 1 | $-0.386627$ | $+0.493214$ | $+0.802178$ |
+| 40 | 30 | 1 | $-0.457559$ | $+0.458163$ | $+0.724594$ |
+| 48 | 38 | 1 | $-0.478034$ | $+0.372578$ | $+0.608305$ |
+| 64 | 54 | 1 | $-0.486979$ | $+0.348278$ | $+0.542426$ |
+
+*Crucial Discovery:* Across all dimensions $N \ge 24$, the negative eigenspace of $\widehat{\mathcal{Q}}_{\mathrm{comp}}$ is **strictly one-dimensional** ($k_{\mathrm{neg}} \equiv 1$). The second eigenvalue remains strictly positive ($\mu_1(64) \approx +0.348 > 0$).
+
+### Table 3: Rayleigh Quotient Budget Along Principal Vulnerable State $w_{\mathrm{bad}}$
+| $N$ | $R_{\mathrm{comp}}$ | $R_{\Omega}$ | $R_{\mathrm{neg}}$ | $R_{\mathrm{arch}}$ | $R_{\mathrm{pole}}$ | $R_{\mathrm{net}}$ | $|\Delta_{\mathrm{Rayleigh}}|$ | $\rho_{\mathrm{restore}}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | $+1.725597$ | $9.984493$ | $8.258896$ | $+0.194056$ | $+0.107700$ | $+2.027353$ | $3.21 \times 10^{-50}$ | N/A (pos) |
+| 20 | $+0.878704$ | $8.130614$ | $7.251910$ | $+0.328636$ | $+0.102139$ | $+1.309479$ | $5.61 \times 10^{-50}$ | N/A (pos) |
+| 24 | $-0.008071$ | $9.079674$ | $9.087745$ | $+0.389944$ | $+0.129753$ | $+0.511625$ | $2.54 \times 10^{-50}$ | $64.389575$ |
+| 28 | $-0.284453$ | $9.057323$ | $9.341776$ | $+0.381364$ | $+0.152688$ | $+0.249599$ | $9.02 \times 10^{-51}$ | $1.877471$ |
+| 32 | $-0.386627$ | $9.011805$ | $9.398432$ | $+0.395356$ | $+0.177732$ | $+0.186461$ | $1.84 \times 10^{-50}$ | $1.482275$ |
+| 40 | $-0.457559$ | $8.954977$ | $9.412536$ | $+0.424750$ | $+0.204988$ | $+0.172178$ | $5.01 \times 10^{-51}$ | $1.376297$ |
+| 48 | $-0.478034$ | $8.943553$ | $9.421588$ | $+0.435069$ | $+0.210738$ | $+0.167773$ | $1.80 \times 10^{-50}$ | $1.350965$ |
+| 64 | $-0.486979$ | $8.944068$ | $9.431047$ | $+0.439820$ | $+0.212100$ | $+0.164940$ | $2.17 \times 10^{-50}$ | $1.338700$ |
+
+*Verification:* Dynamic audit confirmed $\max |\Delta_{\mathrm{Rayleigh}}| = 5.6128 \times 10^{-50} < 10^{-45}$.
+
+### Table 4: Physical Modal Anatomy of Vulnerable State $v_{\mathrm{bad}} = U_{\mathrm{cont}} w_{\mathrm{bad}}$
+| $N$ | $|v_0|^2$ | Low ($1..3$) | Mid ($4..10$) | Tail ($\ge 11$) | Peak $m^*$ | $|v_{m^*}|^2$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | $0.014430$ | $0.100843$ | $0.765509$ | $0.119218$ | 8 | $0.206162$ |
+| 20 | $0.013652$ | $0.086837$ | $0.156445$ | $0.743066$ | 16 | $0.333757$ |
+| 24 | $0.017393$ | $0.106731$ | $0.152137$ | $0.723740$ | 22 | $0.226242$ |
+| 28 | $0.020524$ | $0.124238$ | $0.165059$ | $0.690179$ | 22 | $0.162908$ |
+| 32 | $0.023935$ | $0.143661$ | $0.182068$ | $0.650336$ | 26 | $0.139055$ |
+| 40 | $0.027642$ | $0.164818$ | $0.201546$ | $0.605993$ | 26 | $0.131861$ |
+| 48 | $0.028421$ | $0.169330$ | $0.206430$ | $0.595820$ | 26 | $0.124668$ |
+| 64 | $0.028603$ | $0.170426$ | $0.207992$ | $0.592979$ | 26 | $0.120390$ |
+
+---
+
+## 6. Epistemic Assessment: The Emergence of Coupled Positivity
+
+### 6.1 What Has Been Certified (Exact Finite-$N$ Rigor)
+1. **Exact Operator Equivalence:** The full matrix residual $\|\mathcal{R}\|_{\mathrm{op}} \le 1.0319 \times 10^{-48}$ rigorously confirms that the four constituent operators $(\widehat{\Omega}, \widehat{\Delta Q}_{\mathrm{arch}}, \widehat{\mathcal{K}}_{\mathrm{neg}}, \widehat{Q}_{\mathrm{pole}})$ sum to $\widehat{Q}_{\mathrm{even}}$ without error.
+2. **Exact Rayleigh Partition:** The identity $R_{\mathrm{net}}(w) \equiv R_{\mathrm{comp}}(w) + R_{\mathrm{arch}}(w) + R_{\mathrm{pole}}(w)$ holds to $10^{-50}$ accuracy. The coupled cancellation is a certified algebraic reality of the discrete Friedrichs form.
+3. **Strict Solitary Instability of the Competition Hamiltonian:** $\widehat{\mathcal{Q}}_{\mathrm{comp}}$ develops **precisely one** negative eigenvalue across all tested dimensions $N \ge 24$ ($k_{\mathrm{neg}} \equiv 1$). The remainder of the continuum subspace ($\operatorname{dim} = 53$ at $N = 64$) is autonomously positive, bounded below by $\mu_1(64) \approx +0.348 > 0$.
+4. **Decisive Restoration along the Vulnerable Direction:** At $N = 64$, the competition deficit $R_{\mathrm{comp}} \approx -0.4870$ is cleanly overcome by $R_{\mathrm{arch}} \approx +0.4398$ and $R_{\mathrm{pole}} \approx +0.2121$, producing:
+   $$R_{\mathrm{restore}} = R_{\mathrm{arch}} + R_{\mathrm{pole}} \approx +0.6519 > |R_{\mathrm{comp}}| \approx 0.4870 \implies \rho_{\mathrm{restore}} \approx 1.3387 > 1,$$
+   yielding an energy margin of $R_{\mathrm{net}} \approx +0.1649 > 0$.
+
+### 6.2 Strong Numerical Evidence (Asymptotic Candidates)
+1. **Plateauing of the Net Energy Margin:** As $N$ increases from $32 \to 64$, the net energy along the vulnerable direction stabilizes rather than collapses:
+   $$R_{\mathrm{net}}(32) \approx 0.1865 \;\to\; R_{\mathrm{net}}(40) \approx 0.1722 \;\to\; R_{\mathrm{net}}(48) \approx 0.1678 \;\to\; R_{\mathrm{net}}(64) \approx 0.1649.$$
+   Concurrently, the constituent pieces stabilize to distinct macroscopic scales:
+   $$R_{\mathrm{comp}} \to -0.49, \qquad R_{\mathrm{arch}} \to +0.44, \qquad R_{\mathrm{pole}} \to +0.21.$$
+2. **Freezing of the Modal Profile:** The principal vulnerable state $v_{\mathrm{bad}}$ is predominantly a high-frequency scattering wave (59.3% tail for $m \ge 11$), and its peak Fourier node is strictly frozen at $m^* = 26$ across $N \in \{32, 40, 48, 64\}$.
+
+### 6.3 What Remains Open (The Frontier of Gate 1)
+- **The Asymptotic Question:** Proving analytically that $k_{\mathrm{neg}} = 1$ remains true for all $N \to \infty$ and that $\liminf_{N \to \infty} R_{\mathrm{net}}(w_{\mathrm{bad}}) > 0$.
+- **The Structural Mechanism:** Why do $R_{\mathrm{arch}}$ and $R_{\mathrm{pole}}$ combine to consistently supply $+0.65$, exceeding $|R_{\mathrm{comp}}| \approx 0.49$?
+
+---
+
+## 7. Next Target: Cell 133 (Unified Coordinate/Spectral Representation of the Restoring Force)
+
+Rather than running further empirical sweeps, the research programme must now ask:
+$$\textbf{Do } R_{\mathrm{comp}}, R_{\mathrm{arch}}, \textbf{ and } R_{\mathrm{pole}} \textbf{ admit a unified representation that renders their cancellation structurally inevitable?}$$
+This motivates **Cell 133**: mapping $w_{\mathrm{bad}}$ into coordinate space $T_{v_{\mathrm{bad}}}(t)$ to analyze how physical phase oscillations simultaneously sample the potential well $W(t)$, the divided-difference kernel $\psi_{\mathrm{arch}}$, and the pole projection.
 
 ---
 
@@ -114,3 +189,4 @@ We analyze the coordinate distribution across the discrete Fourier modes $m \in 
 - [`cell130.md`](file:///c:/data/github/connes-cvs-/cell130.md) — Exact Component Decomposition of $Q_{\mathrm{prime}}^{\mathrm{even}}$
 - [`cell129.md`](file:///c:/data/github/connes-cvs-/cell129.md) — Two-Regime Multiplier Theorem & Monotonicity of $h_+(r)$
 - [`ROADMAP.md`](file:///c:/data/github/connes-cvs-/ROADMAP.md) — Strategic Roadmap (Gate 1 Pipeline, Milestone M-G1.5)
+
