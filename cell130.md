@@ -21,7 +21,7 @@ In previous analytical cells, the prime quadratic form $Q_{\mathrm{prime}}$ was 
    $$\langle v, Q_{\mathrm{prime}}^{\mathrm{even}} v \rangle = -\frac{2}{L} \sum_{q \le c} w_q \int_{\log q}^L T_v(t) T_v(t - \log q) \, dt,$$
    and used polarization to isolate the translation defect $\mathcal{D}_q[v]$ and boundary mismatch $\mathcal{B}_q[v]$.
 3. **Cell 128:** Proved the **Identical Vanishing Theorem** $\mathcal{B}_q[v] \equiv 0$ for all $v \in \mathbb{R}^{N+1}$ via midpoint reflection symmetry $T_v(L - t) \equiv T_v(t)$, established the Step-Potential representation $\langle v, \widetilde{W} v \rangle = \frac{1}{L}\int_0^L W(t) T_v(t)^2 dt$, and exposed the Diophantine incommensurability $\inf_{m \ge 1} M(m) = 0$.
-4. **Cell 129:** Proved the **Two-Regime Multiplier Theorem**, establishing that the effective diagonal multiplier $\Omega(m) = h_+(a_m) + 4M(m)$ satisfies $\inf_{m \ge 1} \Omega(m) \ge h_+(a_3) \approx +0.3862 > 0$ unconditionally, and proved strict monotonicity $\frac{d}{dr} h_+(r) > 0$ on $(0, \infty)$.
+4. **Cell 129:** Proved the **Two-Regime Multiplier Theorem**, establishing that the effective diagonal multiplier $\Omega(m) = h_+(a_m) + 4M(m)$ satisfies $\inf_{m \ge 1} \Omega(m) \ge h_+(a_3) \approx +0.1567 > 0$ unconditionally, and proved strict monotonicity $\frac{d}{dr} h_+(r) > 0$ on $(0, \infty)$.
 
 ### 1.2 The Analytical Objective of Cell 130
 Cell 129 formulated the operator decomposition of $Q_{\mathrm{prime}}^{\mathrm{even}}$ into three distinct physical operators:
@@ -297,12 +297,12 @@ There are zero missing constants, zero basis-normalization ambiguities, and zero
 With the prime form decomposed, André Weil's even quadratic functional becomes:
 $$\langle v, Q_{\mathrm{even}} v \rangle = \langle v, Q_{\mathrm{arch}} v \rangle + \sum_{m=1}^N 4 M(m) v_m^2 - \langle v, \widetilde{W} v \rangle + \langle v, \Delta\widetilde{\mathcal{D}} v \rangle + \langle v, Q_{\mathrm{pole}} v \rangle.$$
 By Theorem 3.2 of [`cell129.md`](file:///c:/data/github/connes-cvs-/cell129.md), the combined diagonal multiplier satisfies:
-$$\Omega(m) = h_+(a_m) + 4 M(m) \ge c_0 \approx +0.3862 > 0 \qquad (\forall m \ge 1).$$
+$$\Omega(m) = h_+(a_m) + 4 M(m) \ge c_0 \approx +0.1567 > 0 \qquad (\forall m \ge 1).$$
 The remaining analytical challenge for Milestone M-G1.5 is:
 1. Control the off-diagonal divided-difference entries of $Q_{\mathrm{arch}}$;
 2. Control the negative step-potential $-\widetilde{W}$ and boundary penalty $\Delta\widetilde{\mathcal{D}}$ on the codimension-11 complement $\Phi^\perp = \operatorname{Ran}(I - P_{\mathrm{bound}})$.
 
-Because the 11 bound states are heavily concentrated in the potential well, orthogonal projection onto $\Phi^\perp$ quenches the low-mode mass that couples to $-\widetilde{W}$, opening the direct path to establishing the continuum spectral floor $E_{11} \approx 0.58 > 0$.
+The numerical localization of the 11 bound states suggests that projection onto $\Phi^\perp$ may substantially suppress the low-mode mass responsible for the negative step-potential contribution. Establishing a uniform quantitative version of this suppression is the next coercivity problem.
 
 ---
 

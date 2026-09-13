@@ -283,6 +283,12 @@ def matrix_trace(A: mp.matrix) -> mp.mpf:
     return tr
 
 
+def symmetric_eigenvalues(A: mp.matrix) -> list[mp.mpf]:
+    """Compute and return sorted eigenvalues of symmetric matrix A in ascending order."""
+    vals, _ = mp.eigsy(A)
+    return sorted(vals)
+
+
 # ============================================================
 # MAIN AUDIT SUITE
 # ============================================================
@@ -352,11 +358,11 @@ def main():
         if res_max > mp.mpf("1e-45"):
             decomposition_passed = False
 
-        # Spectral analysis of components
-        eigs_Q, _ = mp.eigsy(Q_prime_even)
-        eigs_W, _ = mp.eigsy(W_tilde)
-        eigs_Dper, _ = mp.eigsy(D_per)
-        eigs_DeltaD, _ = mp.eigsy(Delta_D)
+        # Spectral analysis of components (sorted in ascending order)
+        eigs_Q = symmetric_eigenvalues(Q_prime_even)
+        eigs_W = symmetric_eigenvalues(W_tilde)
+        eigs_Dper = sorted([D_per[i, i] for i in range(D_per.rows)])
+        eigs_DeltaD = symmetric_eigenvalues(Delta_D)
 
         audit_records[N] = {
             "res_max": res_max,
