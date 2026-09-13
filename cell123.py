@@ -379,8 +379,8 @@ def main():
     print("Testing Cauchy Bound: E_13 >= lambda_1(C_{12}) >= lambda_min(C_{12})\n")
 
     print(
-        f"{'N':>4} | {'lambda_min(C_{12})':>18} | {'lambda_1(C_{12})':>18} | "
-        f"{'E_{13}(Q)':>14} | {'E_13 >= lam_1?':>16} | {'c_{12} >= 0.40?':>16}"
+        f"{'N':>4} | {'lambda_min(C_12)':>18} | {'lambda_1(C_12)':>18} | "
+        f"{'E_13(Q)':>14} | {'E_13 >= lam_1?':>16} | {'c_12 >= 0.40?':>16}"
     )
     print("-" * 94)
     for N_sub in [n for n in N_GRID if n >= 14]:
@@ -405,8 +405,8 @@ def main():
     # Component spectrum breakdown for M = 12
     print("\n--- Component Spectra on H_{high}^{(12)} = span{e_12, ..., e_N} ---")
     print(
-        f"{'N':>4} | {'[lambda_min, lambda_max](C_{12, ar})':>32} | "
-        f"{'[lambda_min, lambda_max](C_{12, pr})':>32} | {'[lambda_min, lambda_max](C_{12, po})':>32}"
+        f"{'N':>4} | {'[lambda_min, lambda_max](C_12, ar)':>32} | "
+        f"{'[lambda_min, lambda_max](C_12, pr)':>32} | {'[lambda_min, lambda_max](C_12, po)':>32}"
     )
     print("-" * 106)
     for N_sub in [n for n in N_GRID if n >= 14]:
@@ -453,9 +453,9 @@ def main():
     max_C3_all = max(results_M3[n]["lambda_min_C3"] for n in N_GRID)
     print(f"1. M = 3 Principal Submatrix C_3 = Q_even[3..N, 3..N]:")
     print(f"   - lambda_min(C_3) range across N in [16, 64]: [{mp.nstr(min_C3_all, 10)}, {mp.nstr(max_C3_all, 10)}]")
-    print(f"   - Cauchy bound-state collapse: lambda_min(C_3) <= E_3 verified identically.")
-    print(f"   - Coercivity premise C_3 >= 0.386 I: Not supported by numerical data.")
-    print(f"   - Interior interlacing E_13 >= lambda_{10}(C_3) >= E_{10}: Verified identically.")
+    print("   - Cauchy bound-state collapse: lambda_min(C_3) <= E_3 verified identically.")
+    print("   - Coercivity premise C_3 >= 0.386 I: Not supported by numerical data.")
+    print("   - Interior interlacing E_13 >= lambda_10(C_3) >= E_10: Verified identically.")
 
     # Summary of M = 12 findings
     valid_N12 = [n for n in N_GRID if n >= 14]
@@ -466,16 +466,16 @@ def main():
     print(f"\n2. M = 12 Principal Submatrix C_12 = Q_even[12..N, 12..N]:")
     print(f"   - lambda_min(C_12) range across N in [14, 64]: [{mp.nstr(min_C12_all, 5)}, {mp.nstr(max_C12_all, 5)}]")
     print(f"   - lambda_1(C_12) range across N in [14, 64]:   [{mp.nstr(min_lam1_12, 5)}, {mp.nstr(max_lam1_12, 5)}]")
-    print(f"   - Uniform coercivity C_12 >= c I > 0: Not supported; lambda_min(C_12) decreases by 4 orders of magnitude.")
-    print(f"   - Cauchy interlacing E_13 >= lambda_1(C_12) >= lambda_min(C_12): Verified identically.")
+    print("   - Uniform coercivity C_12 >= c I > 0: Not supported; lambda_min(C_12) decreases by 4 orders of magnitude.")
+    print("   - Cauchy interlacing E_13 >= lambda_1(C_12) >= lambda_min(C_12): Verified identically.")
 
     # Summary of component structure
     print(f"\n3. Component Spectra on High Modes (N = 64):")
-    print(f"   - C_{3, arch}:  [{mp.nstr(results_M3[64]['lambda_min_ar'], 4)}, {mp.nstr(results_M3[64]['lambda_max_ar'], 4)}]")
-    print(f"   - C_{3, prime}: [{mp.nstr(results_M3[64]['lambda_min_pr'], 4)}, {mp.nstr(results_M3[64]['lambda_max_pr'], 4)}]")
-    print(f"   - C_{3, pole}:  [{mp.nstr(results_M3[64]['lambda_min_po'], 4)}, {mp.nstr(results_M3[64]['lambda_max_po'], 4)}]")
-    print(f"   - Observation: Prime component is strongly indefinite; full submatrix near-positivity")
-    print(f"     results from cancellation between Archimedean and prime sectors.")
+    print(f"   - C_arch (M=12):  [{mp.nstr(results_M12[64]['lambda_min_ar'], 4)}, {mp.nstr(results_M12[64]['lambda_max_ar'], 4)}]")
+    print(f"   - C_prime (M=12): [{mp.nstr(results_M12[64]['lambda_min_pr'], 4)}, {mp.nstr(results_M12[64]['lambda_max_pr'], 4)}]")
+    print(f"   - C_pole (M=12):  [{mp.nstr(results_M12[64]['lambda_min_po'], 4)}, {mp.nstr(results_M12[64]['lambda_max_po'], 4)}]")
+    print("   - Observation: Prime component is strongly indefinite; full submatrix near-positivity")
+    print("     results from cancellation between Archimedean and prime sectors.")
 
     t_total = time.perf_counter() - t0_start
     print(f"\nTotal execution time: {t_total:.2f} s")
