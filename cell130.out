@@ -1,0 +1,72 @@
+================================================================================
+CELL 130 — EXACT COMPONENT DECOMPOSITION AUDIT
+Parameters: c = 13, L = 2.56494935746, dps = 50
+================================================================================
+Loaded 9 prime powers up to c = 13:
+  q =  2: log(q) = 0.69314718, weight w_q = 0.49012907
+  q =  3: log(q) = 1.0986123, weight w_q = 0.6342841
+  q =  4: log(q) = 1.3862944, weight w_q = 0.34657359
+  q =  5: log(q) = 1.6094379, weight w_q = 0.71976252
+  q =  7: log(q) = 1.9459101, weight w_q = 0.7354849
+  q =  8: log(q) = 2.0794415, weight w_q = 0.24506454
+  q =  9: log(q) = 2.1972246, weight w_q = 0.3662041
+  q = 11: log(q) = 2.3978953, weight w_q = 0.72299263
+  q = 13: log(q) = 2.5649494, weight w_q = 0.71138896
+--------------------------------------------------------------------------------
+PHASE 1: QUADRATURE VS CLOSED-FORM BOUNDARY CROSS-VALIDATION
+--------------------------------------------------------------------------------
+  N =  4: ||Delta_D_closed - Delta_D_quad||_max = 2.13821e-50  (5.28s)
+  N =  8: ||Delta_D_closed - Delta_D_quad||_max = 4.27642e-50  (22.16s)
+Quadrature cross-validation status: PASSED (err < 10^-45)
+--------------------------------------------------------------------------------
+PHASE 2: EXACT COMPONENT DECOMPOSITION AUDIT ACROSS DIMENSIONS N
+--------------------------------------------------------------------------------
+  N |    ||Res||_max |      ||Res||_F |    Tr(Q_prime) |        Tr(RHS) |   |Delta Tr|
+--------------------------------------------------------------------------------
+  4 |    2.73958e-50 |    3.56065e-50 |        -2.4328 |        -2.4328 |    3.207e-50
+  8 |    8.15193e-50 |    1.21031e-49 |       -2.55256 |       -2.55256 |    6.949e-50
+ 12 |    1.65377e-49 |    3.69555e-49 |       -2.08588 |       -2.08588 |    3.261e-49
+ 16 |    1.65377e-49 |     4.4081e-49 |       -2.73922 |       -2.73922 |    5.559e-49
+ 20 |    1.76737e-49 |    5.23098e-49 |       -1.51514 |       -1.51514 |    5.105e-49
+ 24 |    2.96009e-49 |    7.80448e-49 |       -1.85838 |       -1.85838 |    9.916e-49
+--------------------------------------------------------------------------------
+Exact decomposition identity status: CERTIFIED (||Res||_max < 10^-45)
+--------------------------------------------------------------------------------
+PHASE 3: COMPONENT SPECTRAL & NORM SIGNATURES
+--------------------------------------------------------------------------------
+Dimension N =  4 (dim = 5):
+  Q_prime_even:    spectrum in [-3.05864, 0.0]
+  Step Potential W: spectrum in [2.29294, 0.0]  (||W||_F = 6.83527)
+  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 17.8114)
+  Boundary Defect:  spectrum in [-6.41346, 0.0]  (||Delta_D||_F = 11.6182)
+  Step Potential W >= 0: TRUE
+  Boundary Defect <= 0:  TRUE
+----------------------------------------
+Dimension N =  8 (dim = 9):
+  Q_prime_even:    spectrum in [-3.06946, 0.0]
+  Step Potential W: spectrum in [2.12695, 0.0]  (||W||_F = 9.09707)
+  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 25.7339)
+  Boundary Defect:  spectrum in [-8.3125, 0.0]  (||Delta_D||_F = 17.3271)
+  Step Potential W >= 0: TRUE
+  Boundary Defect <= 0:  TRUE
+----------------------------------------
+Dimension N = 16 (dim = 17):
+  Q_prime_even:    spectrum in [-3.08265, 0.0]
+  Step Potential W: spectrum in [1.97542, 0.0]  (||W||_F = 12.489)
+  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 35.0593)
+  Boundary Defect:  spectrum in [-9.06698, 0.0]  (||Delta_D||_F = 23.5201)
+  Step Potential W >= 0: TRUE
+  Boundary Defect <= 0:  TRUE
+----------------------------------------
+Dimension N = 24 (dim = 25):
+  Q_prime_even:    spectrum in [-3.08744, 0.0]
+  Step Potential W: spectrum in [1.96302, 0.0]  (||W||_F = 15.1373)
+  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 44.0926)
+  Boundary Defect:  spectrum in [-9.77223, 0.0]  (||Delta_D||_F = 29.8475)
+  Step Potential W >= 0: TRUE
+  Boundary Defect <= 0:  TRUE
+----------------------------------------
+Total execution time: 39.01s
+================================================================================
+CELL 130 EXECUTION COMPLETE
+================================================================================
