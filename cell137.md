@@ -278,7 +278,7 @@ The certified results of Cell 137 establish a clear three-level conceptual hiera
    $$\mu_0 = -0.48697922 > -1/2 \qquad (\text{Finite-}N\text{ margin } +0.01302078).$$
    The true coupled operator outperforms the split Weyl bound by:
    $$\Delta_{\mathrm{coupling}} \equiv \mu_0 - \mu_0^{\mathrm{split}} \approx +0.841990.$$
-   This demonstrates that the positive margin above $-1/2$ **genuinely resides in the coupling between $K_{\mathrm{rest}}$ and $W_\perp$**. Because $K_{\mathrm{rest}}$ and $W_\perp$ do not commute, any wavepacket that attempts to harvest the full well depth ($4.2605$) incurs severe restoring penalties, forcing the true minimizer into a compromised state harvesting only $3.7098$.
+   At $N=64$, the positive margin above $-1/2$ arises entirely from the coupled variational problem and is lost under independent operator splitting. Because the finite-$N$ margin decreases monotonically across tested dimensions ($+0.4919 \to +0.2155 \to +0.1134 \to +0.0424 \to +0.0220 \to +0.0130$), this is an empirical finite-$N$ structural fact, not a theorem of continuum positivity. Because $K_{\mathrm{rest}}$ and $W_\perp$ do not commute, any wavepacket attempting to harvest the full well depth ($4.2605$) incurs severe restoring penalties, forcing the true minimizer into a compromised state harvesting only $3.7098$.
 
-This shifts the scientific frontier to **Cell 138**: understanding the relative geometry, extremal eigenvector misalignment, and low-dimensional effective subspace of $K_{\mathrm{rest}}$ and $W_\perp$.
+This shifts the scientific frontier to **Cell 138**: investigating the exact variational decomposition, operator incompatibility, and the collective spectral geometry of $K_{\mathrm{rest}}$ and $W_\perp$.
 
