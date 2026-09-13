@@ -8,12 +8,12 @@ Average translation stiffness / depth:      W(L) = 9.943768796
 Archimedean zero-frequency infimum:        h_+(0) = -5.372183419
 Positive-mode multiplier floor (m >= 1):   Omega_floor = 0.156708
 --------------------------------------------------------------------------------
-Completed N = 24 in   4.92s | eps_0 =  2.92%, ||W_perp|| = 4.2440, R_W = 3.7104, mu_0 = -0.008071
-Completed N = 28 in   7.79s | eps_0 =  3.32%, ||W_perp|| = 4.2581, R_W = 3.6746, mu_0 = -0.284453
-Completed N = 32 in  11.78s | eps_0 =  3.64%, ||W_perp|| = 4.2602, R_W = 3.6894, mu_0 = -0.386627
-Completed N = 40 in  23.08s | eps_0 =  3.94%, ||W_perp|| = 4.2605, R_W = 3.7005, mu_0 = -0.457559
-Completed N = 48 in  40.68s | eps_0 =  3.99%, ||W_perp|| = 4.2605, R_W = 3.7067, mu_0 = -0.478034
-Completed N = 64 in  96.78s | eps_0 =  4.00%, ||W_perp|| = 4.2605, R_W = 3.7098, mu_0 = -0.486979
+Completed N = 24 in   4.75s | eps_0 =  2.92%, ||W_perp|| = 4.2440, R_W = 3.7104, mu_0 = -0.008071
+Completed N = 28 in   7.49s | eps_0 =  3.32%, ||W_perp|| = 4.2581, R_W = 3.6746, mu_0 = -0.284453
+Completed N = 32 in  11.31s | eps_0 =  3.64%, ||W_perp|| = 4.2602, R_W = 3.6894, mu_0 = -0.386627
+Completed N = 40 in  22.11s | eps_0 =  3.94%, ||W_perp|| = 4.2605, R_W = 3.7005, mu_0 = -0.457559
+Completed N = 48 in  38.98s | eps_0 =  3.99%, ||W_perp|| = 4.2605, R_W = 3.7067, mu_0 = -0.478034
+Completed N = 64 in  92.16s | eps_0 =  4.00%, ||W_perp|| = 4.2605, R_W = 3.7098, mu_0 = -0.486979
 
 --------------------------------------------------------------------------------
 TABLE 1: 11-DIMENSIONAL ZERO-MODE MASS ENCLOSURE & KINETIC FLOOR
@@ -33,19 +33,19 @@ Theory: epsilon_0(N) = 1 - sum_{k=0}^{10} |(u_k)_0|^2 = max_{T perp B_{11}} |<T,
 TABLE 2: PROJECTED STEP-POTENTIAL OPERATOR NORM
 Definition: W_{perp B} = P_{B_{11}^perp} W_tilde P_{B_{11}^perp}, ||W_{perp B}||_op = lambda_max(W_hat_perp)
 --------------------------------------------------------------------------------
-   N | ||W_unproj|| |  ||W_perp|| |  lambda_max |  Ratio to W(L) |  Compression
+   N | ||W_unproj|| |  ||W_perp|| | Diff ||W||-||W_perp|| |  Ratio to W(L) |  Compression
 --------------------------------------------------------------------------------
-  24 |     4.260495 |    4.244045 |    4.244045 |         42.68% |       99.61%
-  28 |     4.260495 |    4.258124 |    4.258124 |         42.82% |       99.94%
-  32 |     4.260495 |    4.260232 |    4.260232 |         42.84% |       99.99%
-  40 |     4.260495 |    4.260493 |    4.260493 |         42.85% |      100.00%
-  48 |     4.260495 |    4.260495 |    4.260495 |         42.85% |      100.00%
-  64 |     4.260495 |    4.260495 |    4.260495 |         42.85% |      100.00%
+  24 |     4.260495 |    4.244045 |  1.64508137475347e-02 |         42.68% |       99.61%
+  28 |     4.260495 |    4.258124 |  2.37126784285659e-03 |         42.82% |       99.94%
+  32 |     4.260495 |    4.260232 |  2.63430613676623e-04 |         42.84% |       99.99%
+  40 |     4.260495 |    4.260493 |  2.04786478264323e-06 |         42.85% |      100.00%
+  48 |     4.260495 |    4.260495 |  9.79468992712358e-08 |         42.85% |      100.00%
+  64 |     4.260495 |    4.260495 |  1.82382577313004e-11 |         42.85% |      100.00%
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 TABLE 3: TERM-BY-TERM ENERGY DECOMPOSITION & CELL 135 REGRESSION AUDIT
-Target at N=64: A = 1.173761, W = 3.709783, D_true = 2.049043, mu_0 = -0.486979
+Target at N=64: A = 1.173761, W = 3.709783, D_true = 2.049043, mu_0 = -0.48697922
 --------------------------------------------------------------------------------
    N |       A[T] |   D_per[T] |  Delta_D[T] |  D_true[T] |       W[T] |   E[T] (mu_0) |   Status
 --------------------------------------------------------------------------------
@@ -75,14 +75,14 @@ Dichotomy: Case A (||W_perp|| approx R_W) vs Case B (||W_perp|| >> R_W)
 TABLE 5: OPERATOR SPLITTING VS COUPLED COMPETITION GROUND STATE
 Theory: mu_0 >= mu_0^{split} = lambda_min(K_rest) - ||W_perp||_op
 --------------------------------------------------------------------------------
-   N | lambda_min(K) | ||W_perp||_op |  mu_0^{split} |  mu_0 (Coupled) |  Coupling Gap |  Margin (> -1/2)
+   N | lambda_min(K) | ||W_perp||_op |  mu_0^{split} |  mu_0 (Coupled) |  Coupling Gain |  Margin (> -1/2)
 --------------------------------------------------------------------------------
-  24 |      3.481342 |      4.244045 |     -0.762703 |     -0.00807113 |     +0.754632 |      +0.49192887
-  28 |      3.059115 |      4.258124 |     -1.199009 |     -0.28445278 |     +0.914556 |      +0.21554722
-  32 |      2.992230 |      4.260232 |     -1.268002 |     -0.38662701 |     +0.881375 |      +0.11337299
-  40 |      2.948333 |      4.260493 |     -1.312160 |     -0.45755948 |     +0.854601 |      +0.04244052
-  48 |      2.935956 |      4.260495 |     -1.324539 |     -0.47803442 |     +0.846505 |      +0.02196558
-  64 |      2.931526 |      4.260495 |     -1.328969 |     -0.48697922 |     +0.841990 |      +0.01302078
+  24 |      3.481342 |      4.244045 |     -0.762703 |     -0.00807113 |      +0.754632 |      +0.49192887
+  28 |      3.059115 |      4.258124 |     -1.199009 |     -0.28445278 |      +0.914556 |      +0.21554722
+  32 |      2.992230 |      4.260232 |     -1.268002 |     -0.38662701 |      +0.881375 |      +0.11337299
+  40 |      2.948333 |      4.260493 |     -1.312160 |     -0.45755948 |      +0.854601 |      +0.04244052
+  48 |      2.935956 |      4.260495 |     -1.324539 |     -0.47803442 |      +0.846505 |      +0.02196558
+  64 |      2.931526 |      4.260495 |     -1.328969 |     -0.48697922 |      +0.841990 |      +0.01302078
 --------------------------------------------------------------------------------
 
 SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
@@ -98,7 +98,7 @@ SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
   Restoring Operator Lower Bound:        lambda_min(K_rest) = +2.931526
   Operator-Splitting Lower Bound:        mu_0^{split} = -1.328969
   True Coupled Competition Ground State: mu_0 = -0.48697922
-  Coupling Phase Interference Margin:    Delta_{coupling} = +0.841990
+  Coupling Gain over Split Weyl Bound:   Delta_{coupling} = +0.841990
   Finite-N Margin to Target -1/2:        Delta_{margin} = +0.01302078 > 0
 
 EPISTEMIC ASSESSMENT:
@@ -108,9 +108,9 @@ EPISTEMIC ASSESSMENT:
      confirming Case B: the ~37% harvest is NOT a geometric constraint of B_{11}^perp,
      but a variational selection feature driven by kinetic/translation penalties.
   3. The regression audit confirms exact mathematical consistency with Cells 132-136,
-     reproducing mu_0 = -0.48697922 and the stable finite-N margin Delta_{margin} = +0.01302078 > 0.
+     reproducing mu_0 = -0.48697922 and certifying a +0.841990 coupling gain over Weyl.
 
-Total execution time: 185.04s
+Total execution time: 176.80s
 ================================================================================
 CELL 137 EXECUTION COMPLETE
 ================================================================================
