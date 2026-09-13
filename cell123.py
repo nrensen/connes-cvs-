@@ -169,6 +169,19 @@ def extract_submatrix(A: mp.matrix, M: int) -> mp.matrix:
     return mp.mpf("0.5") * (sub + sub.T)
 
 
+def frobenius_norm(A: mp.matrix) -> mp.mpf:
+    """
+    Compute the Frobenius norm ||A||_F = sqrt(sum_{i,j} A_{ij}^2)
+    using explicit accumulation to ensure universal mpmath portability.
+    """
+    s = mp.mpf(0)
+    for i in range(A.rows):
+        for j in range(A.cols):
+            val = A[i, j]
+            s += val * val
+    return mp.sqrt(s)
+
+
 # ============================================================
 # MAIN EXECUTION FLOW
 # ============================================================
@@ -227,7 +240,7 @@ def main():
 
         # Check linear decomposition residual
         diff_mat = Q_even_tot - (Q_even_pr + Q_even_po + Q_even_ar)
-        frob_res = mp.norm(diff_mat, "f")
+        frob_res = frobenius_norm(diff_mat)
 
         # Solve eigenvalues of full Q_even
         eigs_tot, _ = mp.eigsy(Q_even_tot)
