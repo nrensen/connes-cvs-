@@ -16,7 +16,7 @@ Loaded 9 prime powers up to c = 13:
 PHASE 1: QUADRATURE VS CLOSED-FORM BOUNDARY CROSS-VALIDATION
 --------------------------------------------------------------------------------
   N =  4: ||Delta_D_closed - Delta_D_quad||_max = 2.13821e-50  (5.28s)
-  N =  8: ||Delta_D_closed - Delta_D_quad||_max = 4.27642e-50  (22.16s)
+  N =  8: ||Delta_D_closed - Delta_D_quad||_max = 4.27642e-50  (22.13s)
 Quadrature cross-validation status: PASSED (err < 10^-45)
 --------------------------------------------------------------------------------
 PHASE 2: EXACT COMPONENT DECOMPOSITION AUDIT ACROSS DIMENSIONS N
@@ -35,38 +35,38 @@ Exact decomposition identity status: CERTIFIED (||Res||_max < 10^-45)
 PHASE 3: COMPONENT SPECTRAL & NORM SIGNATURES
 --------------------------------------------------------------------------------
 Dimension N =  4 (dim = 5):
-  Q_prime_even:    spectrum in [-3.05864, 0.0]
-  Step Potential W: spectrum in [2.29294, 0.0]  (||W||_F = 6.83527)
-  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 17.8114)
+  Q_prime_even:    spectrum in [-3.05864, 0.884751]
+  Step Potential W: spectrum in [2.29294, 4.13388]  (||W||_F = 6.83527)
+  Periodic Defect:  spectrum in [0.0, 9.41634]  (||D_per||_F = 17.8114)
   Boundary Defect:  spectrum in [-6.41346, 0.0]  (||Delta_D||_F = 11.6182)
   Step Potential W >= 0: TRUE
   Boundary Defect <= 0:  TRUE
 ----------------------------------------
 Dimension N =  8 (dim = 9):
-  Q_prime_even:    spectrum in [-3.06946, 0.0]
-  Step Potential W: spectrum in [2.12695, 0.0]  (||W||_F = 9.09707)
-  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 25.7339)
+  Q_prime_even:    spectrum in [-3.06946, 1.76384]
+  Step Potential W: spectrum in [2.12695, 4.25168]  (||W||_F = 9.09707)
+  Periodic Defect:  spectrum in [0.0, 11.9345]  (||D_per||_F = 25.7339)
   Boundary Defect:  spectrum in [-8.3125, 0.0]  (||Delta_D||_F = 17.3271)
   Step Potential W >= 0: TRUE
   Boundary Defect <= 0:  TRUE
 ----------------------------------------
 Dimension N = 16 (dim = 17):
-  Q_prime_even:    spectrum in [-3.08265, 0.0]
-  Step Potential W: spectrum in [1.97542, 0.0]  (||W||_F = 12.489)
-  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 35.0593)
+  Q_prime_even:    spectrum in [-3.08265, 1.93415]
+  Step Potential W: spectrum in [1.97542, 4.26048]  (||W||_F = 12.489)
+  Periodic Defect:  spectrum in [0.0, 12.2536]  (||D_per||_F = 35.0593)
   Boundary Defect:  spectrum in [-9.06698, 0.0]  (||Delta_D||_F = 23.5201)
   Step Potential W >= 0: TRUE
   Boundary Defect <= 0:  TRUE
 ----------------------------------------
 Dimension N = 24 (dim = 25):
-  Q_prime_even:    spectrum in [-3.08744, 0.0]
-  Step Potential W: spectrum in [1.96302, 0.0]  (||W||_F = 15.1373)
-  Periodic Defect:  spectrum in [0.0, 0.0]  (||D_per||_F = 44.0926)
+  Q_prime_even:    spectrum in [-3.08744, 2.00654]
+  Step Potential W: spectrum in [1.96302, 4.2605]  (||W||_F = 15.1373)
+  Periodic Defect:  spectrum in [0.0, 12.8486]  (||D_per||_F = 44.0926)
   Boundary Defect:  spectrum in [-9.77223, 0.0]  (||Delta_D||_F = 29.8475)
   Step Potential W >= 0: TRUE
   Boundary Defect <= 0:  TRUE
 ----------------------------------------
-Total execution time: 39.01s
+Total execution time: 38.96s
 ================================================================================
 CELL 130 EXECUTION COMPLETE
 ================================================================================
