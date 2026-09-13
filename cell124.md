@@ -33,9 +33,9 @@ $$\frac{\langle w_j, Q_{\mathrm{even}} w_j \rangle}{\|w_j\|^2} \approx E_j + \ma
 This creates an artificial near-zero Ritz eigenvalue in $C_M$. Cauchy interlacing on coordinate blocks is therefore fundamentally incapable of separating the bound-state sector from the continuum. All coordinate-submatrix $M$-sweeps are permanently retired.
 
 ### The Solid Foundation (Cell 121)
-The failure of coordinate submatrix coercivity does **not** affect the existence of the physical continuum gap discovered in Cell 121:
-$$g_{2, 12}(N) \equiv E_{13}^{(N)} - E_3^{(N)} \ge 0.582 \quad (\forall N \in [16, 64]).$$
-Gate 1 relies exclusively on the eigenvalues of the **full operator**, not on the properties of its coordinate submatrices. The continuum gap is an unconditional property of the full spectrum.
+The failure of coordinate submatrix coercivity does **not** affect the empirical existence of the physical continuum gap discovered in Cell 121:
+$$g_{2, 12}(N) \equiv E_{13}^{(N)} - E_3^{(N)} \approx 0.582 \quad (\text{at } N = 64).$$
+Gate 1 relies exclusively on the eigenvalues of the **full operator**, not on the properties of its coordinate submatrices. While empirical across tested discrete dimensions, the continuum gap is an observed property of the full spectrum.
 
 ---
 
@@ -46,7 +46,7 @@ To isolate the continuum without suffering from coordinate tail leakage, the pro
 ### Definition 2.1 (Bound-State & Continuum Spectral Projectors)
 Let $Q_{\mathrm{even}}^{(N)} \in \mathbb{R}^{(N+1) \times (N+1)}$ be the canonical even Galerkin matrix, with ordered orthonormal eigenbasis $\{u_j^{(N)}\}_{j=0}^N$ and eigenvalues $E_0^{(N)} \le E_1^{(N)} \le \dots \le E_N^{(N)}$.
 
-For cutoff parameter $c = 13, T = 600$, the potential well supports exactly $\bar{N}_{\mathrm{bound}} \approx 11$ confined bound states with energies $E_0, \dots, E_{10} \le 10^{-5}$, while $E_{11} \approx 0.575$ and $E_{12} \approx 0.582$.
+For cutoff parameter $c = 13, T = 600$, current Galerkin calculations show an observed low-energy cluster of approximately $\bar{N}_{\mathrm{bound}} \approx 11$ states with energies $E_0, \dots, E_{10} \le 10^{-5}$, separated from higher states with $E_{11} \approx 0.575$ and $E_{12} \approx 0.582$ at $N = 64$. (Note: 11 is the empirical count from finite-dimensional calculations, not yet an analytically proved theorem).
 
 1. The **bound-state spectral projector** is defined as:
    $$P_{\mathrm{bound}}^{(N)} \equiv \sum_{j=0}^{\bar{N}_{\mathrm{bound}}-1} u_j^{(N)} (u_j^{(N)})^T.$$
@@ -55,17 +55,19 @@ For cutoff parameter $c = 13, T = 600$, the potential well supports exactly $\ba
 3. The **continuum-projected operator** is:
    $$Q_{\mathrm{cont}}^{(N)} \equiv P_{\mathrm{cont}}^{(N)} Q_{\mathrm{even}}^{(N)} P_{\mathrm{cont}}^{(N)} = \sum_{j=\bar{N}_{\mathrm{bound}}}^N E_j^{(N)} u_j^{(N)} (u_j^{(N)})^T.$$
 
-### Proposition 2.1 (Exact Coercivity on the Continuum Subspace)
+### Proposition 2.1 (Exact Spectral Coercivity on the Continuum Subspace)
 Let $\mathcal{H}_{\mathrm{cont}}^{(N)} \equiv \operatorname{Ran}(P_{\mathrm{cont}}^{(N)}) = \{v \in \mathbb{R}^{N+1} : \langle u_j^{(N)}, v \rangle = 0, \;\; \forall j < \bar{N}_{\mathrm{bound}}\}$.
 Then for every unit vector $v \in \mathcal{H}_{\mathrm{cont}}^{(N)}$ ($\|v\|_2 = 1$):
-$$\langle v, Q_{\mathrm{even}}^{(N)} v \rangle = \langle v, Q_{\mathrm{cont}}^{(N)} v \rangle \ge E_{\bar{N}_{\mathrm{bound}}}^{(N)} \approx 0.57558.$$
-Consequently, on its non-trivial invariant subspace $\mathcal{H}_{\mathrm{cont}}^{(N)}$, $Q_{\mathrm{cont}}^{(N)}$ is **strictly coercive** with spectral floor:
-$$\lambda_{\min}\left(Q_{\mathrm{cont}}^{(N)}\big|_{\mathcal{H}_{\mathrm{cont}}^{(N)}}\right) \equiv E_{\bar{N}_{\mathrm{bound}}}^{(N)} \ge E_{\mathrm{cont}}^- > 0 \quad (\forall N \ge 16),$$
-uniformly in $N$.
+$$\langle v, Q_{\mathrm{even}}^{(N)} v \rangle = \langle v, Q_{\mathrm{cont}}^{(N)} v \rangle \ge E_{\bar{N}_{\mathrm{bound}}}^{(N)}.$$
+Consequently, on its invariant subspace $\mathcal{H}_{\mathrm{cont}}^{(N)}$, $Q_{\mathrm{cont}}^{(N)}$ satisfies:
+$$\lambda_{\min}\left(Q_{\mathrm{cont}}^{(N)}\big|_{\mathcal{H}_{\mathrm{cont}}^{(N)}}\right) \equiv E_{\bar{N}_{\mathrm{bound}}}^{(N)}.$$
 
 *Proof.* Expanding $v = \sum_{j=\bar{N}_{\mathrm{bound}}}^N c_j u_j^{(N)}$ with $\sum |c_j|^2 = 1$:
 $$\langle v, Q_{\mathrm{even}}^{(N)} v \rangle = \sum_{j=\bar{N}_{\mathrm{bound}}}^N E_j^{(N)} |c_j|^2 \ge E_{\bar{N}_{\mathrm{bound}}}^{(N)} \sum_{j=\bar{N}_{\mathrm{bound}}}^N |c_j|^2 = E_{\bar{N}_{\mathrm{bound}}}^{(N)}.$$
 Because every bound-state component has been projected out orthogonally ($\langle u_j, v \rangle \equiv 0$ for $j < \bar{N}_{\mathrm{bound}}$), there is zero bound-state tail contamination. $\blacksquare$
+
+*Epistemic Remark on Proposition 2.1:*
+Proposition 2.1 is mathematically exact, but as recognized in §3, it is essentially a restatement of the spectral theorem. It identifies the exact mathematical object whose positivity is needed, but it does **not** constitute an independent proof of continuum positivity, because $P_{\mathrm{cont}}^{(N)}$ is defined using the exact eigenvectors $u_j^{(N)}$.
 
 ---
 
@@ -109,12 +111,14 @@ In the semiclassical analysis of Paper NR2 (§4–§5), the potential well $V_{\
    The Fourier coefficients of these analytic functions form discrete trial vectors $\boldsymbol\phi_k \in \mathbb{R}^{N+1}$:
    $$(\boldsymbol\phi_k)_m = \int_0^L \phi_k(t) \sqrt{\frac{2}{L}} \cos\left(\frac{2\pi m t}{L}\right) dt.$$
 
-### Lemma 4.1 (Quasimode Perturbation Estimate)
+### Heuristic Lemma 4.1 (Quasimode Perturbation Conjecture — Target for Cell 125)
 Let $\Phi = \operatorname{span}\{\boldsymbol\phi_0, \dots, \boldsymbol\phi_{K-1}\}$ be an orthonormal family of analytic quasimodes satisfying the approximate eigenvalue equation:
 $$\|Q_{\mathrm{even}} \boldsymbol\phi_k - \lambda_k \boldsymbol\phi_k\|_2 \le \varepsilon_k \ll 1, \qquad 0 \le \lambda_k \le \lambda_{\max}^{\mathrm{bound}} \ll 1.$$
-Let $V_\Phi = \Phi^\perp$. Then for every unit vector $v \in V_\Phi$:
-$$\langle v, Q_{\mathrm{even}} v \rangle \ge E_K - \sum_{k=0}^{K-1} \frac{\varepsilon_k^2}{E_K - \lambda_k}.$$
-If the quasimode residuals $\varepsilon_k$ are sufficiently small, the lower bound on $V_\Phi$ is strictly positive and bounded away from zero.
+Let $V_\Phi = \Phi^\perp$. It is tempting to write a Temple/Davis–Kahan-type estimate:
+$$\langle v, Q_{\mathrm{even}} v \rangle \ge E_K - \sum_{k=0}^{K-1} \frac{\varepsilon_k^2}{E_K - \lambda_k} \quad (\forall v \in V_\Phi, \|v\|=1).$$
+*Critical Epistemic Gap & Cell 125 Mandate:*  
+The formula above is an **unverified heuristic assertion**. The mere fact that $\|Q \boldsymbol\phi_k - \lambda_k \boldsymbol\phi_k\| \le \varepsilon_k$ does not automatically imply this lower bound on every vector orthogonal to all $\boldsymbol\phi_k$ without explicit hypotheses on mutual orthogonality, residual projection, and spectral gaps.  
+Deriving a mathematically watertight variational lower bound on $\Phi^\perp$ directly from first principles—or replacing it with invariant-subspace separation theorems ($\sin\Theta$ machinery)—is the primary analytical mandate of **Cell 125**.
 
 ---
 
@@ -131,8 +135,8 @@ $$P_{\mathrm{cont}} = I - \frac{1}{2\pi i} \oint_\Gamma (z I - Q)^{-1} dz.$$
 
 ### Structure of the Spectral Gap in the Complex Plane
 From the numerical audits of Cells 121 and 123:
-- The bound-state cluster satisfies: $\sigma_{\mathrm{bound}}(Q) \subset [0, 10^{-5}]$.
-- The continuum spectrum satisfies: $\sigma_{\mathrm{cont}}(Q) \subset [0.575, \infty)$.
+- The bound-state cluster satisfies: $\sigma_{\mathrm{bound}}(Q) \subset [0, 10^{-5}]$ (observed).
+- The continuum spectrum satisfies: $\sigma_{\mathrm{cont}}(Q) \subset [0.575, \infty)$ (observed).
 - The spectral gap is macroscopic:
   $$\mathrm{dist}(\sigma_{\mathrm{bound}}, \sigma_{\mathrm{cont}}) = E_{11} - E_{10} \approx 0.57557 > 0.57.$$
 
@@ -144,60 +148,38 @@ Along this contour:
 3. Resolvent norm bound:
    $$\|(z I - Q)^{-1}\|_{\mathrm{op}} = \frac{1}{\mathrm{dist}(z, \sigma(Q))} \le \frac{1}{0.20} = 5.0 \quad (\forall z \in \Gamma).$$
 
-### Operational Utility for Gate 1
-Because the resolvent norm is uniformly bounded by $5.0$ on the contour $\Gamma$, any analytic approximation to $Q$ (such as an asymptotic expansion in $N$ or a continuous differential operator limit) yields an immediate, stable approximation to the projector $P_{\mathrm{bound}}$ via resolvent perturbation theory:
-$$\|(z I - Q)^{-1} - (z I - Q_0)^{-1}\| \le \|(z I - Q)^{-1}\| \|(z I - Q_0)^{-1}\| \|Q - Q_0\|.$$
-This provides an analytical path to control the spectral projector without tracking individual high-multiplicity or clustered bound-state eigenvectors.
+### Operational Role: Auxiliary Stability, Not Primary Gap Proof
+Route 2 is best regarded as a **stability and perturbation tool once a spectral gap is independently established**, rather than the primary mechanism that creates the gap. Approximating $P_{\mathrm{bound}}$ via resolvent identities requires independent control over the resolvent of the unperturbed or limiting operator $\|(z I - Q_0)^{-1}\|$ on the same contour $\Gamma$.
 
 ---
 
-## 6. Route 3: Arithmetic–Archimedean Phase Cancellation on the Continuum
+## 6. Route 3: Speculative Heuristic — Prime Phase Interference
 
 Cell 123 revealed that high-mode coercivity fails in coordinate space because the prime operator $Q_{\mathrm{prime}}$ is **strongly indefinite** ($\lambda_{\min}(C_{\mathrm{prime}}) \approx -2.373$), canceling almost completely with the Archimedean piece ($C_{\mathrm{arch}} \ge 1.553$).
 
-Why, then, does the full operator possess a macroscopic continuum floor $E_{11} \approx 0.58$?
-
-### 6.1 The Coordinate-Space Mechanism
-In the physical coordinate representation on $L^2([0, L])$:
-1. **The Archimedean Operator:** Acts as a smooth, non-local integral operator with a strictly positive kinetic background:
-   $$Q_{\mathrm{arch}}[v, v] = \int_0^\infty h_+(r) |\Phi_v(r)|^2 dr.$$
-   For high-frequency modes ($r \ge r_* \approx 6.28984$), the multiplier $h_+(r) = \operatorname{Re}\psi(1/4 + ir/2) - \log \pi$ is strictly positive and grows logarithmically: $h_+(r) \sim \log(r/2)$.
-2. **The Prime Operator:** Acts as an explicit sum over prime powers:
-   $$Q_{\mathrm{prime}}[v, v] = -\frac{1}{\pi} \sum_{n \ge 2} \frac{\Lambda(n)}{\sqrt{n}} \int_0^\infty \cos(r \log n) |\Phi_v(r)|^2 dr.$$
-   The prime interaction is a collection of discrete delta-like phase modulations located at $\log(p^k)$.
-
-### 6.2 Bound States vs Continuum States
-- **Bound States:** Are tightly confined inside the potential well $[0, L]$. They can localize their energy density to constructively correlate with the negative fluctuations of the prime sum, allowing $\langle u_j, Q_{\mathrm{prime}} u_j \rangle < 0$ to drive the total energy $E_j \to 0$.
-- **Continuum States ($j \ge 11$):** Are delocalized scattering states. Their physical wavefunctions oscillate rapidly across the interval $[0, L]$ with high local wavenumber $k_j \ge \frac{2\pi \times 11}{L} \approx 26.9$.
-  When a rapidly oscillating continuum wavepacket is integrated against the prime distribution $\sum \frac{\Lambda(n)}{\sqrt{n}} \delta(x - \log n)$, the inner products experience **destructive Riemann phase cancellation**:
-  $$\sum_{p^k \le e^L} \frac{\Lambda(p^k)}{p^{k/2}} \cos(k_j \log(p^k) + \theta) = \mathcal{O}\left(k_j^{-1/2} \log k_j\right) \longrightarrow 0 \quad \text{as } k_j \to \infty.$$
-  By contrast, the Archimedean kinetic energy is positive-definite and non-oscillatory, scaling as $\sim \log k_j > 0$.
-
-### Proposition 6.1 (High-Energy Phase Quenching Principle)
-On delocalized states with mean frequency $k \ge k_{\mathrm{cont}}$:
-1. The prime interaction is bounded by phase cancellation:
-   $$|\langle v, Q_{\mathrm{prime}} v \rangle| \le \frac{C_{\mathrm{prime}}}{\sqrt{k}} \|v\|^2.$$
-2. The Archimedean kinetic form dominates:
-   $$\langle v, Q_{\mathrm{arch}} v \rangle \ge c_{\mathrm{arch}} \log(k) \|v\|^2.$$
-3. Therefore, for all modes above the bound-state localization threshold:
-   $$\langle v, Q_{\mathrm{even}} v \rangle = \langle v, (Q_{\mathrm{arch}} + Q_{\mathrm{prime}} + Q_{\mathrm{pole}}) v \rangle \ge c_{\mathrm{arch}} \log(k) - \frac{C_{\mathrm{prime}}}{\sqrt{k}} - \mathcal{O}(k^{-1}) \ge E_{\mathrm{cont}}^- > 0.$$
-
-*Epistemic Status:* Heuristic / Physical Mechanism. This provides the structural explanation for why the continuum threshold stabilizes at $0.58$: the indefinite prime term cannot pull down delocalized scattering states because phase interference quenches the prime sum.
+### Informal Physical Heuristic (Outside Active Proof Pipeline)
+In coordinate space, the prime operator is an explicit sum over prime powers with discrete spikes at $\log(p^k)$.  
+It is physically plausible that delocalized scattering states oscillating at high wavenumber $k \gg 1$ experience destructive phase cancellation against these prime spikes:
+$$\sum_{p^k \le e^L} \frac{\Lambda(p^k)}{p^{k/2}} \cos(k_j \log(p^k) + \theta) \stackrel{?}{=} \mathcal{O}\left(k_j^{-1/2} \log k_j\right) \longrightarrow 0.$$
+*Epistemic Warning:*  
+This is a **speculative number-theoretic heuristic**, not a proven analytical bound. Asserting sub-unitary bounds on prime exponential sums without proof violates repository standards. Route 3 is explicitly **excluded from the active proof pipeline** and serves only as an intuitive qualitative picture.
 
 ---
 
 ## 7. Strategic Conclusions & Forward Path for Gate 1
 
-### Summary of Cell 124 Theoretical Framework
+### Summary of Cell 124 Analytical Findings
 1. **Coordinate Submatrix Coercivity is Officially Retired:** Deleting coordinate modes $e_0, \dots, e_{M-1}$ leaves wavepacket tail leakage $\sim \mathcal{O}(\text{tail mass})$, producing near-zero Ritz eigenvalues ($\lambda_{\min}(C_{12}) \approx 7.87 \times 10^{-6}$).
-2. **Spectral Projection is Exactly Coercive:** On $\mathcal{H}_{\mathrm{cont}} = \operatorname{Ran}(I - P_{\mathrm{bound}})$, $Q_{\mathrm{cont}}$ has spectral floor identically equal to $E_{11} \approx 0.575$ (or $E_{13} \approx 0.582$).
-3. **Non-Circularity is Resolved Variationaly:** Through the Courant–Fischer codimension theorem (Theorem 4.1), any set of $K$ analytic well quasimodes $\{\boldsymbol\phi_k\}$ provides an unconditional variational lower bound on $E_K$ without computing exact matrix eigenvectors.
-4. **Physical Mechanism of Continuum Positivity:** Continuum states oscillate rapidly, causing destructive phase cancellation against the indefinite prime Dirac comb ($\mathcal{O}(k^{-1/2})$), allowing the positive Archimedean kinetic background to establish the macroscopic continuum floor $E_{\mathrm{cont}}^- \approx 0.58$.
+2. **Spectral Projection is Exactly Coercive:** On $\mathcal{H}_{\mathrm{cont}} = \operatorname{Ran}(I - P_{\mathrm{bound}})$, $Q_{\mathrm{cont}}$ has spectral floor identically equal to $E_{\bar{N}_{\mathrm{bound}}}$ by the spectral theorem. This identifies the target subspace but does not prove positivity independently.
+3. **Variational Min-Max is the True Analytical Route:** Through Courant–Fischer (Theorem 4.1), any trial subspace $\Phi$ provides an unconditional lower bound $E_K \ge \min_{v \in \Phi^\perp, \|v\|=1} \langle v, Q v \rangle$.
+4. **The Target for Cell 125:**
+   $$\boxed{\text{We now need to prove a variational lower bound, not define a spectral projector.}}$$
 
 ### Gate 1 Target Proposition 1.0 Pipeline
-With the continuum threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ physically and variationally secured for $L \ge 12$:
-$$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \quad \Longrightarrow \quad \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.$$
-The remaining link to complete Gate 1 is Route 1A: establishing the dense-operator parity-doublet tunneling decay $\Delta_j(N) \le C_j e^{-\sigma_j N}$ via semiclassical Agmon metrics on the discrete Galerkin lattice.
+Gate 1 separates into two decoupled problems:
+- **Problem A (Low-Energy Sector Removal):** Construct an analytic $K$-dimensional subspace $\Phi$ and prove $\langle v, Q_{\mathrm{even}} v \rangle \ge c_* > 0$ on $\Phi^\perp$ (Cell 125).
+- **Problem B (Tunneling Decay):** Establish $\Delta_j(N) \le C_j e^{-\sigma_j N}$ via dense-operator Agmon metrics (Route 1A).
+Importantly, Problem A does not depend on the boundary-defect decay rate $\alpha_N$, insulating Gate 1 from boundary-defect collapse.
 
 ---
 

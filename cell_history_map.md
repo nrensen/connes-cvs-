@@ -3940,7 +3940,7 @@ Directly audit the operator decomposition $Q_{\mathrm{even}} = Q_{\mathrm{even},
 
 * **Companion Note:** [`cell124.md`](file:///c:/data/github/connes-cvs-/cell124.md)
 * **Target:** Gate 1 (Milestone M-G1.5 / Spectral-Subspace Projection & Min-Max Continuum Threshold)
-* **Status:** Active / Theoretical Architecture Formulated
+* **Status:** Theoretical Architecture Formulated & Calibrated (Analytical Note)
 
 ### Target & Mathematical Rationale
 Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spectral subspace to eliminate bound-state tail leakage, and resolve the non-circularity dilemma for the continuum threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$:
@@ -3950,9 +3950,35 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
    - *Route 2 (Dunford–Schwartz Resolvent Contour):* $P_{\mathrm{bound}} = \frac{1}{2\pi i} \oint_{|z|=0.2} (z I - Q)^{-1} dz$ traversing the macroscopic spectral gap $[10^{-5}, 0.57]$.
    - *Route 3 (Arithmetic–Archimedean Phase Cancellation):* Rapid oscillations of continuum scattering states quench the indefinite prime Dirac comb by Riemann phase cancellation ($\mathcal{O}(k^{-1/2})$), leaving the strictly positive Archimedean kinetic background to establish the continuum floor.
 
+### Review & Epistemic Calibration
+1. **Proper Mathematical Object Identified:** The distinction $\operatorname{span}\{e_M, \dots, e_N\} \ne \operatorname{span}\{u_{11}, u_{12}, \dots\}$ is ratified. Coordinate truncation is permanently retired.
+2. **Tautological Status of $P_{\mathrm{cont}}$:** Defining $Q_{\mathrm{cont}} = P_{\mathrm{cont}} Q P_{\mathrm{cont}}$ with spectral floor $E_{11}$ is a restatement of the spectral theorem. It identifies the target object but does not prove positivity independently.
+3. **Quasimode Codimension Bound Identified as the True Engine:** The Courant–Fischer codimension formulation is the real advance for non-circularity.
+4. **Epistemic Gap Isolated:** Heuristic Lemma 4.1 ($\langle v, Q v \rangle \ge E_K - \sum \varepsilon_k^2 / (E_K - \lambda_k)$) was an unverified conjecture lacking a first-principles derivation. Cell 125 is tasked with deriving a rigorous, mathematically watertight variational lower bound.
+5. **Route 2 & Route 3 Demoted:** Route 2 is recognized as an auxiliary perturbation/stability tool rather than a primary gap creator. Route 3 (prime phase quenching) is quarantined as an informal physical heuristic outside the active proof pipeline.
+
 ---
 
-# Updated major historical arc (Cells 0–124)
+## Cell 125 (Variational Quasimode Codimension Bound: First-Principles Derivation)
+
+* **Companion Note:** [`cell125.md`](file:///c:/data/github/connes-cvs-/cell125.md)
+* **Target:** Gate 1 (Milestone M-G1.5 / Variational Quasimode Codimension Bound)
+* **Status:** Theoretical Derivation Completed (Analytical Note)
+* **Mandate:**
+  $$\boxed{\text{We now need to prove a variational lower bound, not define a spectral projector.}}$$
+
+### Key Analytical Results Established
+1. **Proposition 2.1 (Block Partitioning & Exact Residual Identity):** In an adapted orthonormal basis $U = [U_\Phi, U_{\Phi^\perp}]$, the coupling block satisfies $\|B\|_2 = \|R\|_2 = \varepsilon$ identically, where $R = Q U_\Phi - U_\Phi A$ is the trial subspace residual.
+2. **Theorem 3.1 (Subspace Angle Rayleigh Bound):** Proved unconditionally from first principles that for every unit vector $v \in \Phi^\perp$:
+   $$\langle v, Q_{\mathrm{even}} v \rangle \ge E_K \cos^2\theta_{\max} + E_0 \sin^2\theta_{\max} \ge E_K(1 - \sin^2\theta_{\max}),$$
+   where $\sin\theta_{\max} = \|\sin\Theta(\Phi, \operatorname{Ran}(P_K))\|_2$.
+3. **Theorem 4.1 & Theorem 5.1 (Approximate Invariant Subspace Separation Theorem):** Proved non-circular continuum gap separation: if the trial subspace captures the low-energy floor ($\lambda_{\max}(A) \le \bar{\mu}$), the residual satisfies $\varepsilon < (c_* - \bar{\mu})/2$, and $\Phi^\perp$ has coercivity floor $\lambda_{\min}(C) \ge c_*$, then the spectrum of $Q$ splits cleanly with:
+   $$E_K \ge c_* - \frac{\varepsilon^2}{c_* - \bar{\mu}} > \bar{\mu} + \varepsilon \ge E_{K-1}.$$
+   This breaks the circularity of Davis–Kahan and provides an exact, watertight variational engine for Gate 1.
+
+---
+
+# Updated major historical arc (Cells 0–125)
 
 ```
 Cells 0–4
@@ -4032,6 +4058,9 @@ Cell 123 (Gate 1 Operator Decomposition & Coercivity Audit)
     ↓
 Cell 124 (Gate 1 Spectral-Subspace Projection & Min-Max Continuum Threshold)
     Spectral-subspace projection P_cont = I - P_bound formulated; non-circularity dilemma addressed via Courant-Fischer quasimode codimension, Dunford-Schwartz resolvent contour, and prime phase quenching
+    ↓
+Cell 125 (Gate 1 Variational Quasimode Codimension Bound)
+    First-principles derivation of variational lower bound <v, Q v> >= c_* on Phi^\perp using approximate invariant subspace machinery (Davis-Kahan sin Theta / Rayleigh-Ritz perturbation)
 ```
 
 ---
