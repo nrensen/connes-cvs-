@@ -4,7 +4,7 @@ CELL 66 — SUBSTANTIVE AUDIT OF HYPOTHESES H1, H2, AND H3
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50
 Semiclassical action reference: sigma_WKB = (pi/2)*log(c) = 4.029013029
 
---- DIMENSION N =  8 (Elapsed: 105.99s) ---
+--- DIMENSION N =  8 (Elapsed: 135.80s) ---
   Ground state:  lambda_0 = 6.71093525e-23
   Lowest odd:    mu_0     = 3.842587375e-20
   Tunnel gap:    mu0-lam0 = 3.835876439e-20
@@ -27,7 +27,7 @@ Semiclassical action reference: sigma_WKB = (pi/2)*log(c) = 4.029013029
   5  0.0005793958  0.01084579    30.8543           1.7413            7.82136          
   ------------------------------------------------------------------------------------------
 
---- DIMENSION N = 12 (Elapsed: 150.94s) ---
+--- DIMENSION N = 12 (Elapsed: 189.11s) ---
   Ground state:  lambda_0 = 1.782476576e-29
   Lowest odd:    mu_0     = 1.385691618e-26
   Tunnel gap:    mu0-lam0 = 1.383909141e-26
@@ -50,7 +50,7 @@ Semiclassical action reference: sigma_WKB = (pi/2)*log(c) = 4.029013029
   5  3.920994e-8   1.742433e-6   65.2633           1.50243           11.2333          
   ------------------------------------------------------------------------------------------
 
---- DIMENSION N = 16 (Elapsed: 196.33s) ---
+--- DIMENSION N = 16 (Elapsed: 265.29s) ---
   Ground state:  lambda_0 = 7.118430151e-35
   Lowest odd:    mu_0     = 7.667173377e-32
   Tunnel gap:    mu0-lam0 = 7.660054947e-32
@@ -73,7 +73,7 @@ Semiclassical action reference: sigma_WKB = (pi/2)*log(c) = 4.029013029
   5  5.983208e-12  3.582074e-10  147.14            2.49945           10.6643          
   ------------------------------------------------------------------------------------------
 
---- DIMENSION N = 20 (Elapsed: 251.45s) ---
+--- DIMENSION N = 20 (Elapsed: 318.49s) ---
   Ground state:  lambda_0 = 1.323235908e-39
   Lowest odd:    mu_0     = 1.737880682e-36
   Tunnel gap:    mu0-lam0 = 1.736557446e-36
@@ -96,7 +96,7 @@ Semiclassical action reference: sigma_WKB = (pi/2)*log(c) = 4.029013029
   5  1.900499e-15  1.192694e-13  286.691           4.64226           7.83287          
   ------------------------------------------------------------------------------------------
 
---- DIMENSION N = 24 (Elapsed: 304.94s) ---
+--- DIMENSION N = 24 (Elapsed: 378.19s) ---
   Ground state:  lambda_0 = 2.533484871e-43
   Lowest odd:    mu_0     = 4.347808855e-40
   Tunnel gap:    mu0-lam0 = 4.34527537e-40

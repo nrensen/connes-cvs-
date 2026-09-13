@@ -6,20 +6,20 @@ CELL 112 — HIGH-PRECISION EXTINCTION AUDIT & MULTI-ROUTE BOUNDARY FLUX
 ================================================================================
 
 --- STEP 1: RETRIEVING GALERKIN MATRIX AT 70 DPS (N = 192) ---
-Canonical even matrix H: shape (193, 193), time: 2.01 s
+Canonical even matrix H: shape (193, 193), time: 1.98 s
 
 --- STEP 2: HIGH-PRECISION GROUND-STATE EIGENSOLVES & SPECTRUM TRACKING ---
    N |           E_0 (Ground) |    E_1 (1st Excited) |    E_2 (2nd Excited) |          v_0 |     Time
 ------------------------------------------------------------------------------------------------
-  32 |      2.16823687768e-49 |      8.563015257e-43 |      5.931664787e-37 |   0.54294079 |   2.46 s
-  48 |      2.10258275644e-50 |      1.489962953e-49 |      4.269195921e-43 |   0.45583543 |   8.78 s
-  64 |     -5.08467779617e-52 |      4.713489407e-50 |       1.41394575e-44 |  0.070810069 |  20.51 s
-  80 |     -8.38755872672e-52 |      4.686117461e-50 |      9.973419873e-45 |  0.066630883 |  41.10 s
-  96 |     -9.33493144722e-52 |      4.678472432e-50 |      8.847606933e-45 |  0.065443746 |  71.80 s
- 128 |     -1.00537462515e-51 |      4.672830808e-50 |      7.562187802e-45 |  0.064548436 | 163.74 s
- 192 |     -1.06311187849e-51 |      4.668381531e-50 |      6.604186999e-45 |  0.063832306 | 538.05 s
+  32 |      2.16823687768e-49 |      8.563015257e-43 |      5.931664787e-37 |   0.54294079 |   2.39 s
+  48 |      2.10258275644e-50 |      1.489962953e-49 |      4.269195921e-43 |   0.45583543 |   8.34 s
+  64 |     -5.08467779617e-52 |      4.713489407e-50 |       1.41394575e-44 |  0.070810069 |  19.91 s
+  80 |     -8.38755872672e-52 |      4.686117461e-50 |      9.973419873e-45 |  0.066630883 |  38.78 s
+  96 |     -9.33493144722e-52 |      4.678472432e-50 |      8.847606933e-45 |  0.065443746 |  68.70 s
+ 128 |     -1.00537462515e-51 |      4.672830808e-50 |      7.562187802e-45 |  0.064548436 | 161.23 s
+ 192 |     -1.06311187849e-51 |      4.668381531e-50 |      6.604186999e-45 |  0.063832306 | 542.34 s
 ------------------------------------------------------------------------------------------------
-Total eigensolves runtime: 846.44 s
+Total eigensolves runtime: 841.68 s
 
 --- STEP 3: EIGENSOLVER RESIDUAL & RAYLEIGH QUOTIENT CERTIFICATION ---
   Residual: ||(H - E_0 * I) v||_2, Rayleigh Error: |E_0 - <v, Hv>/||v||^2|
@@ -109,7 +109,7 @@ CELL 112 SYNTHESIS: HIGH-PRECISION EXTINCTION AUDIT SCORECARD
 3. Multi-Route alpha_N Consistency (|Route 1 - Route 2| < 1e-95):    CERTIFIED
 4. Boundary Flux/Contact Coupling (Ratio ~ 1):                       TRACKED
 5. High-Precision Extinction Progression (Plateau Resolution):       AUDITED
-Total script runtime: 850.50 s
+Total script runtime: 845.63 s
 
 ================================================================================
 CELL 112 EXECUTION COMPLETE

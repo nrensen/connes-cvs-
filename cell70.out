@@ -4,7 +4,7 @@ CELL 70 — AUDIT OF FIRST-MODE SPECTRAL CONCENTRATION, RELATIVE TAIL RATIO eps_
 ================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 0.18s) ---
+--- DIMENSION N =  8 (Elapsed: 0.12s) ---
   Excited gap:         mu_1 - lam_0           = 1.38723543e-15
   Dipole squared:      b_{01}^2               = 3.7372547e-5
   Excited norm:        ||v_exc||^2            = 3.73759357e-5
@@ -19,7 +19,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: T_4 = 2.9247388e-11  [O_4 = 2.7241486e+10, S_4 = 1.0736341e-21]
     Mode j = 5: T_5 = 1.2505655e-13  [O_5 = 7.6441406e+12, S_5 = 1.6359791e-26]
 
---- DIMENSION N = 12 (Elapsed: 0.40s) ---
+--- DIMENSION N = 12 (Elapsed: 0.37s) ---
   Excited gap:         mu_1 - lam_0           = 1.18648486e-21
   Dipole squared:      b_{01}^2               = 2.56364484e-5
   Excited norm:        ||v_exc||^2            = 2.56370911e-5
@@ -34,7 +34,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: T_4 = 2.070011e-12  [O_4 = 9.9834741e+11, S_4 = 2.0734375e-24]
     Mode j = 5: T_5 = 1.111112e-15  [O_5 = 2.3963243e+15, S_5 = 4.6367347e-31]
 
---- DIMENSION N = 16 (Elapsed: 1.45s) ---
+--- DIMENSION N = 16 (Elapsed: 1.26s) ---
   Excited gap:         mu_1 - lam_0           = 1.27595595e-26
   Dipole squared:      b_{01}^2               = 1.02870815e-5
   Excited norm:        ||v_exc||^2            = 1.02873083e-5
@@ -49,7 +49,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: T_4 = 3.3619144e-13  [O_4 = 1.176051e+13, S_4 = 2.8586467e-26]
     Mode j = 5: T_5 = 9.1971032e-17  [O_5 = 7.2485091e+16, S_5 = 1.2688269e-33]
 
---- DIMENSION N = 20 (Elapsed: 2.45s) ---
+--- DIMENSION N = 20 (Elapsed: 2.27s) ---
   Excited gap:         mu_1 - lam_0           = 6.39990962e-31
   Dipole squared:      b_{01}^2               = 4.29280108e-6
   Excited norm:        ||v_exc||^2            = 4.29284587e-6
@@ -64,7 +64,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: T_4 = 5.4664735e-14  [O_4 = 4.9712008e+13, S_4 = 1.0996284e-27]
     Mode j = 5: T_5 = 1.0752367e-17  [O_5 = 3.734347e+17, S_5 = 2.8793165e-35]
 
---- DIMENSION N = 24 (Elapsed: 4.40s) ---
+--- DIMENSION N = 24 (Elapsed: 2.99s) ---
   Excited gap:         mu_1 - lam_0           = 2.94860198e-34
   Dipole squared:      b_{01}^2               = 2.25258131e-6
   Excited norm:        ||v_exc||^2            = 2.2525915e-6

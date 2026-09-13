@@ -12,21 +12,21 @@ Canonical Cutoff for Detailed Audits: K = 12 (Modes 0 ... 12, Dim = 13)
    Completed N = 16 in 0.46s | E_13 = 2.49019
 
 >>> Processing Dimension N = 20 (dim = 21) ...
-   Completed N = 20 in 0.85s | E_13 = 2.06247
+   Completed N = 20 in 0.84s | E_13 = 2.06247
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.43s | E_13 = 1.8012
+   Completed N = 24 in 1.42s | E_13 = 1.8012
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.25s | E_13 = 1.31022
+   Completed N = 28 in 2.21s | E_13 = 1.31022
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 3.33s | E_13 = 0.813235
+   Completed N = 32 in 3.29s | E_13 = 0.813235
 
 >>> Processing Dimension N = 36 (dim = 37) ...
    Completed N = 36 in 4.73s | E_13 = 0.78161
 
-All dimensions processed in 13.05s.
+All dimensions processed in 12.95s.
 
 =======================================================================================================================================
 TEST A: Spectral Projector Coordinate Mass Distribution (Canonical Cutoff K = 12, Dim = 13)

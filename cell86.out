@@ -9,24 +9,24 @@ Barrier Cutoffs Sweep: K in [10, 11, 12]
 =============================================================================================================================
 
 >>> Processing Dimension N = 8 ...
-   Completed N = 8 in 0.08s | ||Q_even|| = 2.62582 | Max Gap = 1.279186
+   Completed N = 8 in 0.09s | ||Q_even|| = 2.62582 | Max Gap = 1.279186
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.21s | ||Q_even|| = 3.2533296 | Max Gap = 1.714506
+   Completed N = 12 in 0.23s | ||Q_even|| = 3.2533296 | Max Gap = 1.714506
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 0.46s | ||Q_even|| = 3.3120468 | Max Gap = 0.94762631
+   Completed N = 16 in 0.51s | ||Q_even|| = 3.3120468 | Max Gap = 0.94762631
 
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 0.85s | ||Q_even|| = 3.6126764 | Max Gap = 1.0753655
+   Completed N = 20 in 0.96s | ||Q_even|| = 3.6126764 | Max Gap = 1.0753655
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 1.42s | ||Q_even|| = 3.8133554 | Max Gap = 0.90982487
+   Completed N = 24 in 1.57s | ||Q_even|| = 3.8133554 | Max Gap = 0.90982487
 
 >>> Processing Dimension N = 28 ...
-   Completed N = 28 in 2.24s | ||Q_even|| = 4.097518 | Max Gap = 0.64529777
+   Completed N = 28 in 2.42s | ||Q_even|| = 4.097518 | Max Gap = 0.64529777
 
-All dimensions processed in 5.25s.
+All dimensions processed in 5.78s.
 
 ===================================================================================================================
 TEST A: Operator Norm Scaling ||Q_{even}^{(N)}|| and Frobenius Norm across Dimensions N

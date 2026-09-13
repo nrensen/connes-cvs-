@@ -9,21 +9,21 @@ Continuum Base Index: Mode 13 (Cutoff K = 12)
 =======================================================================================================================================
 
 >>> Processing Dimension N = 16 (dim = 17) ...
-   Completed N = 16 in 0.47s | E_13 = 2.490185 | lambda_min(Q_cont) = 0.15916813
+   Completed N = 16 in 0.46s | E_13 = 2.490185 | lambda_min(Q_cont) = 0.15916813
 
 >>> Processing Dimension N = 20 (dim = 21) ...
-   Completed N = 20 in 0.92s | E_13 = 2.0624737 | lambda_min(Q_cont) = 0.01984558
+   Completed N = 20 in 0.91s | E_13 = 2.0624737 | lambda_min(Q_cont) = 0.01984558
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.64s | E_13 = 1.8012007 | lambda_min(Q_cont) = 0.00095063809
+   Completed N = 24 in 1.61s | E_13 = 1.8012007 | lambda_min(Q_cont) = 0.00095063809
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.71s | E_13 = 1.3102186 | lambda_min(Q_cont) = 0.00030696054
+   Completed N = 28 in 2.68s | E_13 = 1.3102186 | lambda_min(Q_cont) = 0.00030696054
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 4.14s | E_13 = 0.81323492 | lambda_min(Q_cont) = 0.00018822476
+   Completed N = 32 in 4.11s | E_13 = 0.81323492 | lambda_min(Q_cont) = 0.00018822476
 
-All dimensions processed in 9.88s.
+All dimensions processed in 9.78s.
 
 =======================================================================================================================================
 TEST A: Continuum Principal Submatrix Spectrum & Variational Lower Bound on E_{13}^{(N)}

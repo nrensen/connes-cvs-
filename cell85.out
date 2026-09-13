@@ -9,16 +9,16 @@ Barrier Cutoffs Sweep: K in [6, 10, 11, 12, 14]
 =============================================================================================================================
 
 >>> Processing Dimension N = 8 ...
-   Completed N = 8 in 0.45s | Delta_2 = 1.4661614e-9
+   Completed N = 8 in 0.49s | Delta_2 = 1.4661614e-9
      K = 6: C_cont = 1.94991 (peak 7) | Cont Dev = 4.89651e-10 | Calib Bound = 1.03423e-9 | Share = 0.0002668%
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.99s | Delta_2 = 4.8298678e-15
+   Completed N = 12 in 1.09s | Delta_2 = 4.8298678e-15
      K = 6: C_cont = 51.7592 (peak 7) | Cont Dev = 4.66165e-13 | Calib Bound = 5.48104e-11 | Share = 5.209e-7%
      K = 10: C_cont = 1.18114 (peak 11) | Cont Dev = 1.21466e-16 | Calib Bound = 3.17627e-16 | Share = 1.357e-10%
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 1.86s | Delta_2 = 1.2071033e-19
+   Completed N = 16 in 2.38s | Delta_2 = 1.2071033e-19
      K = 6: C_cont = 347.812 (peak 7) | Cont Dev = 1.26968e-14 | Calib Bound = 1.12682e-11 | Share = 2.789e-8%
      K = 10: C_cont = 1.19493 (peak 15) | Cont Dev = 1.21674e-20 | Calib Bound = 2.94699e-20 | Share = 2.672e-14%
      K = 11: C_cont = 1.19493 (peak 15) | Cont Dev = 1.01227e-20 | Calib Bound = 2.29131e-20 | Share = 2.223e-14%
@@ -26,7 +26,7 @@ Barrier Cutoffs Sweep: K in [6, 10, 11, 12, 14]
      K = 14: C_cont = 1.19493 (peak 15) | Cont Dev = 3.89263e-21 | Calib Bound = 8.48921e-21 | Share = 8.55e-15%
 
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 3.14s | Delta_2 = 9.8425743e-24
+   Completed N = 20 in 3.83s | Delta_2 = 9.8425743e-24
      K = 6: C_cont = 736.187 (peak 7) | Cont Dev = 4.20852e-16 | Calib Bound = 7.59523e-13 | Share = 1.434e-9%
      K = 10: C_cont = 1.63487 (peak 11) | Cont Dev = 3.88475e-24 | Calib Bound = 8.96997e-24 | Share = 1.324e-17%
      K = 11: C_cont = 1.19255 (peak 13) | Cont Dev = 1.62207e-24 | Calib Bound = 2.7405e-24 | Share = 5.527e-18%
@@ -34,14 +34,14 @@ Barrier Cutoffs Sweep: K in [6, 10, 11, 12, 14]
      K = 14: C_cont = 1.12335 (peak 18) | Cont Dev = 8.00406e-25 | Calib Bound = 1.27845e-24 | Share = 2.727e-18%
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 4.84s | Delta_2 = 1.3704206e-26
+   Completed N = 24 in 7.00s | Delta_2 = 1.3704206e-26
      K = 6: C_cont = 816.46 (peak 7) | Cont Dev = 7.46398e-17 | Calib Bound = 1.6451e-13 | Share = 5.317e-10%
      K = 10: C_cont = 3.29423 (peak 11) | Cont Dev = 2.4592e-26 | Calib Bound = 1.02e-25 | Share = 1.752e-19%
      K = 11: C_cont = 1.37876 (peak 12) | Cont Dev = 3.66732e-27 | Calib Bound = 9.50839e-27 | Share = 2.612e-20%
      K = 12: C_cont = 1.13259 (peak 21) | Cont Dev = 1.70855e-27 | Calib Bound = 4.54693e-27 | Share = 1.217e-20%
      K = 14: C_cont = 1.13259 (peak 21) | Cont Dev = 1.57871e-27 | Calib Bound = 3.48626e-27 | Share = 1.125e-20%
 
-All dimensions processed in 11.29s.
+All dimensions processed in 14.79s.
 
 =======================================================================================================================================
 TEST A: Exact Gap Quotient Audit & Monotonicity (N = 24, Mode j = 2)

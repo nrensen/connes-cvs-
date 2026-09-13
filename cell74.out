@@ -4,7 +4,7 @@ CELL 74 — AUDIT OF LOCAL TWO-POLE CLUSTERING ARCHITECTURE, INTERLACING
 =========================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 0.15s) ---
+--- DIMENSION N =  8 (Elapsed: 0.13s) ---
   Mode 2 Interlacing:  E_2 < mu_2 < E_3 = True
     Left dist delta_L  = mu_2 - E_2     = 1.85880446e-11
     Right dist delta_R = E_3 - mu_2     = 1.44757336e-9
@@ -17,7 +17,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Ladder ratio C_1 = H(mu_2)/H(mu_1)    = 15877.056
   Ladder ratio C_2 = H(mu_3)/H(mu_2)    = 7874.86938
 
---- DIMENSION N = 12 (Elapsed: 0.41s) ---
+--- DIMENSION N = 12 (Elapsed: 0.38s) ---
   Mode 2 Interlacing:  E_2 < mu_2 < E_3 = True
     Left dist delta_L  = mu_2 - E_2     = 4.88884803e-17
     Right dist delta_R = E_3 - mu_2     = 4.78097934e-15
@@ -30,7 +30,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Ladder ratio C_1 = H(mu_2)/H(mu_1)    = 60011.3143
   Ladder ratio C_2 = H(mu_3)/H(mu_2)    = 13905.6326
 
---- DIMENSION N = 16 (Elapsed: 0.94s) ---
+--- DIMENSION N = 16 (Elapsed: 0.88s) ---
   Mode 2 Interlacing:  E_2 < mu_2 < E_3 = True
     Left dist delta_L  = mu_2 - E_2     = 7.64059389e-22
     Right dist delta_R = E_3 - mu_2     = 1.19946274e-19
@@ -43,7 +43,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Ladder ratio C_1 = H(mu_2)/H(mu_1)    = 73372.3618
   Ladder ratio C_2 = H(mu_3)/H(mu_2)    = 33300.8032
 
---- DIMENSION N = 20 (Elapsed: 1.74s) ---
+--- DIMENSION N = 20 (Elapsed: 1.67s) ---
   Mode 2 Interlacing:  E_2 < mu_2 < E_3 = True
     Left dist delta_L  = mu_2 - E_2     = 6.1473443e-26
     Right dist delta_R = E_3 - mu_2     = 9.78110086e-24
@@ -56,7 +56,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Ladder ratio C_1 = H(mu_2)/H(mu_1)    = 165592.744
   Ladder ratio C_2 = H(mu_3)/H(mu_2)    = 32428.8543
 
---- DIMENSION N = 24 (Elapsed: 3.00s) ---
+--- DIMENSION N = 24 (Elapsed: 2.66s) ---
   Mode 2 Interlacing:  E_2 < mu_2 < E_3 = True
     Left dist delta_L  = mu_2 - E_2     = 5.55914444e-29
     Right dist delta_R = E_3 - mu_2     = 1.36486145e-26

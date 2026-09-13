@@ -19,7 +19,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Denom D_0^2 term:       D_0^2                         = 6.481e-21
   Denom exc term:         (mu_2-lam)^2 * E_even(2)      = 2.267e-11
 
---- DIMENSION N = 12 (Elapsed: 0.38s) ---
+--- DIMENSION N = 12 (Elapsed: 0.37s) ---
   Tunneling gap:       mu_1 - lam_0                   = 1.18648486e-21
   Boundary squared:    D_0^2                          = 4.41839913e-27
   Num pole num:        D_0^2 + (mu_1-lam)^2*E_even(1) = 1.59066966e-21
@@ -34,7 +34,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Denom D_0^2 term:       D_0^2                         = 4.418e-27
   Denom exc term:         (mu_2-lam)^2 * E_even(2)      = 9.546e-17
 
---- DIMENSION N = 16 (Elapsed: 0.86s) ---
+--- DIMENSION N = 16 (Elapsed: 0.85s) ---
   Tunneling gap:       mu_1 - lam_0                   = 1.27595595e-26
   Boundary squared:    D_0^2                          = 3.17795205e-32
   Num pole num:        D_0^2 + (mu_1-lam)^2*E_even(1) = 3.01331226e-26
@@ -49,7 +49,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Denom D_0^2 term:       D_0^2                         = 3.178e-32
   Denom exc term:         (mu_2-lam)^2 * E_even(2)      = 2.211e-21
 
---- DIMENSION N = 20 (Elapsed: 1.60s) ---
+--- DIMENSION N = 20 (Elapsed: 1.61s) ---
   Tunneling gap:       mu_1 - lam_0                   = 6.39990962e-31
   Boundary squared:    D_0^2                          = 7.02834385e-37
   Num pole num:        D_0^2 + (mu_1-lam)^2*E_even(1) = 1.64538314e-30
@@ -64,7 +64,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Denom D_0^2 term:       D_0^2                         = 7.028e-37
   Denom exc term:         (mu_2-lam)^2 * E_even(2)      = 2.725e-25
 
---- DIMENSION N = 24 (Elapsed: 2.73s) ---
+--- DIMENSION N = 24 (Elapsed: 2.74s) ---
   Tunneling gap:       mu_1 - lam_0                   = 2.94860198e-34
   Boundary squared:    D_0^2                          = 1.29495976e-40
   Num pole num:        D_0^2 + (mu_1-lam)^2*E_even(1) = 5.87448032e-34

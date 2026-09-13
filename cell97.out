@@ -9,17 +9,17 @@ Core Thresholds Sweep: L in [4, 8, 11]
 =============================================================================================================================
 
 >>> Processing Dimension N = 8 (T = 400) ...
-   Completed N = 8 in 0.46s | ||Q_even||_op = 2.62582 | E_0 = 6.7109353e-23
+   Completed N = 8 in 0.45s | ||Q_even||_op = 2.62582 | E_0 = 6.7109353e-23
 >>> Processing Dimension N = 12 (T = 400) ...
-   Completed N = 12 in 1.01s | ||Q_even||_op = 3.2533296 | E_0 = 1.7824766e-29
+   Completed N = 12 in 0.99s | ||Q_even||_op = 3.2533296 | E_0 = 1.7824766e-29
 >>> Processing Dimension N = 16 (T = 400) ...
-   Completed N = 16 in 1.91s | ||Q_even||_op = 3.3120468 | E_0 = 7.1184302e-35
+   Completed N = 16 in 1.86s | ||Q_even||_op = 3.3120468 | E_0 = 7.1184302e-35
 >>> Processing Dimension N = 20 (T = 400) ...
-   Completed N = 20 in 3.21s | ||Q_even||_op = 3.6126764 | E_0 = 1.3232359e-39
+   Completed N = 20 in 3.14s | ||Q_even||_op = 3.6126764 | E_0 = 1.3232359e-39
 >>> Processing Dimension N = 24 (T = 400) ...
-   Completed N = 24 in 4.95s | ||Q_even||_op = 3.8133554 | E_0 = 2.5334848e-43
+   Completed N = 24 in 4.84s | ||Q_even||_op = 3.8133554 | E_0 = 2.5334848e-43
 
-All baseline dimensions processed in 11.56s.
+All baseline dimensions processed in 11.28s.
 
 =================================================================================================================================================
 TEST A: Modewise Spectral Component Forensics (N = 24, Mode j = 2)
@@ -135,6 +135,6 @@ Diagnostic Summary for Test D:
    remains completely quenched by the astronomical gap damping factor Delta_2 ~ 10^{-26}.
 
 ================================================================================
-Total execution time: 418.22s
+Total execution time: 26.37s
 CELL 97 EXECUTION COMPLETE
 ================================================================================

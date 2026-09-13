@@ -4,7 +4,7 @@ CELL 82 — FINITE-CORE + TAIL ARCHITECTURE, CUMULATIVE SPECTRAL MASS, DIRECT DI
 =========================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 0.45s) ---
+--- DIMENSION N =  8 (Elapsed: 0.53s) ---
   Total Remote Modes: 6, Total S_2 = 0.000411952, Total dev = 0.00018354
   [Test A] Core vs Tail Decomposition across Core Thresholds L:
      L |           S_core |           S_tail |   Tail Share |         dev_tail |   dev_tail Share
@@ -17,7 +17,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
      4 |         1.18625e-6 |         1.58654e-6 |        1.337 |             9.5392e-72
      6 |        4.89651e-10 |         3.50731e-9 |        7.163 |            1.39611e-71
 
---- DIMENSION N = 12 (Elapsed: 1.00s) ---
+--- DIMENSION N = 12 (Elapsed: 1.11s) ---
   Total Remote Modes: 10, Total S_2 = 0.000249557, Total dev = 8.95004e-5
   [Test A] Core vs Tail Decomposition across Core Thresholds L:
      L |           S_core |           S_tail |   Tail Share |         dev_tail |   dev_tail Share
@@ -31,7 +31,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
      4 |         4.46639e-8 |         1.16847e-7 |        2.616 |            2.90255e-71
      6 |        4.66165e-13 |        6.15211e-13 |         1.32 |             1.5763e-71
 
---- DIMENSION N = 16 (Elapsed: 1.88s) ---
+--- DIMENSION N = 16 (Elapsed: 2.00s) ---
   Total Remote Modes: 14, Total S_2 = 0.000129764, Total dev = 4.55302e-5
   [Test A] Core vs Tail Decomposition across Core Thresholds L:
      L |           S_core |           S_tail |   Tail Share |         dev_tail |   dev_tail Share
@@ -45,7 +45,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
      4 |         7.28827e-9 |         2.31639e-8 |        3.178 |            6.81641e-71
      6 |        1.26968e-14 |        2.90187e-14 |        2.286 |            3.90997e-71
 
---- DIMENSION N = 20 (Elapsed: 3.16s) ---
+--- DIMENSION N = 20 (Elapsed: 3.84s) ---
   Total Remote Modes: 18, Total S_2 = 8.8423e-5, Total dev = 2.93497e-5
   [Test A] Core vs Tail Decomposition across Core Thresholds L:
      L |           S_core |           S_tail |   Tail Share |         dev_tail |   dev_tail Share
@@ -59,7 +59,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
      4 |         1.76277e-9 |         5.04811e-9 |        2.864 |            2.91211e-72
      6 |        4.20852e-16 |        1.10417e-15 |        2.624 |            1.81277e-72
 
---- DIMENSION N = 24 (Elapsed: 4.86s) ---
+--- DIMENSION N = 24 (Elapsed: 5.29s) ---
   Total Remote Modes: 22, Total S_2 = 4.49688e-5, Total dev = 1.40391e-5
   [Test A] Core vs Tail Decomposition across Core Thresholds L:
      L |           S_core |           S_tail |   Tail Share |         dev_tail |   dev_tail Share

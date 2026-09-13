@@ -52,7 +52,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Dominant pole k_dom          = 4 (Share: 56.69%)
   Nearest pole k_near          = 3 (dist = 1.4134e-17, bound ratio = 2.3096)
 
---- DIMENSION N = 20 (Elapsed: 1.54s) ---
+--- DIMENSION N = 20 (Elapsed: 1.73s) ---
   H(mu_1)                      = 1.64538314e-30
   H(mu_1) Stieltjes residual   = 4.217e-81
   H(mu_2)                      = 2.72463509e-25
@@ -68,7 +68,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
   Dominant pole k_dom          = 4 (Share: 52.94%)
   Nearest pole k_near          = 3 (dist = 1.134e-21, bound ratio = 2.1252)
 
---- DIMENSION N = 24 (Elapsed: 2.67s) ---
+--- DIMENSION N = 24 (Elapsed: 3.21s) ---
   H(mu_1)                      = 5.87448032e-34
   H(mu_1) Stieltjes residual   = 2.059e-84
   H(mu_2)                      = 2.32423303e-28

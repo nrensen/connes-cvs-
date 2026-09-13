@@ -4,7 +4,7 @@ CELL 79 — AUDIT OF THE ONE-SIDED STIELTJES DISPLACEMENT BOUND delta_l < Delta_
 =========================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 0.46s) ---
+--- DIMENSION N =  8 (Elapsed: 0.49s) ---
   [Test A] One-Sided Displacement Bound delta_l vs Delta_l / alpha_l:
      l |                delta_l |      Delta_l / alpha_l |  Ratio R_delta | Bound Met?
     --------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     sum eta_{2, l} (Upper Bound) = 0.00052040021
     Enclosure Status              = HOLD
 
---- DIMENSION N = 12 (Elapsed: 1.00s) ---
+--- DIMENSION N = 12 (Elapsed: 1.05s) ---
   [Test A] One-Sided Displacement Bound delta_l vs Delta_l / alpha_l:
      l |                delta_l |      Delta_l / alpha_l |  Ratio R_delta | Bound Met?
     --------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     sum eta_{2, l} (Upper Bound) = 0.00033915588
     Enclosure Status              = HOLD
 
---- DIMENSION N = 16 (Elapsed: 1.86s) ---
+--- DIMENSION N = 16 (Elapsed: 2.18s) ---
   [Test A] One-Sided Displacement Bound delta_l vs Delta_l / alpha_l:
      l |                delta_l |      Delta_l / alpha_l |  Ratio R_delta | Bound Met?
     --------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     sum eta_{2, l} (Upper Bound) = 0.00016411986
     Enclosure Status              = HOLD
 
---- DIMENSION N = 20 (Elapsed: 3.22s) ---
+--- DIMENSION N = 20 (Elapsed: 4.28s) ---
   [Test A] One-Sided Displacement Bound delta_l vs Delta_l / alpha_l:
      l |                delta_l |      Delta_l / alpha_l |  Ratio R_delta | Bound Met?
     --------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
     sum eta_{2, l} (Upper Bound) = 0.00012056358
     Enclosure Status              = HOLD
 
---- DIMENSION N = 24 (Elapsed: 4.82s) ---
+--- DIMENSION N = 24 (Elapsed: 6.44s) ---
   [Test A] One-Sided Displacement Bound delta_l vs Delta_l / alpha_l:
      l |                delta_l |      Delta_l / alpha_l |  Ratio R_delta | Bound Met?
     --------------------------------------------------------------------------------

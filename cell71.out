@@ -5,7 +5,7 @@ CELL 71 — AUDIT OF THE EXACT STIELTJES DERIVATIVE OVERLAP FACTORIZATION
 ==============================================================================================================
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
 
---- DIMENSION N =  8 (Elapsed: 0.22s) ---
+--- DIMENSION N =  8 (Elapsed: 0.14s) ---
   Excited gap:         mu_1 - lam_0         = 1.38723543e-15
   Mode 1 KE:           ||K u_1||^2          = 8.23338356
   Mode 1 Stieltjes:    G_d'(mu_1)           = 7.4193074e+14
@@ -17,7 +17,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: O_4 = 2.724149e+10 = K_4 (4.3119) * G_4 (6.3177e+9)  |  S_4 = 1.07363e-21  ==>  T_4 = 2.92474e-11
     Mode j = 5: O_5 = 7.644141e+12 = K_5 (3.8258) * G_5 (1.998e+12)  |  S_5 = 1.63598e-26  ==>  T_5 = 1.25057e-13
 
---- DIMENSION N = 12 (Elapsed: 0.66s) ---
+--- DIMENSION N = 12 (Elapsed: 0.38s) ---
   Excited gap:         mu_1 - lam_0         = 1.18648486e-21
   Mode 1 KE:           ||K u_1||^2          = 9.22938815
   Mode 1 Stieltjes:    G_d'(mu_1)           = 1.12994055e+21
@@ -29,7 +29,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: O_4 = 9.983474e+11 = K_4 (3.4839) * G_4 (2.8656e+11)  |  S_4 = 2.07344e-24  ==>  T_4 = 2.07001e-12
     Mode j = 5: O_5 = 2.396324e+15 = K_5 (4.9111) * G_5 (4.8794e+14)  |  S_5 = 4.63673e-31  ==>  T_5 = 1.11111e-15
 
---- DIMENSION N = 16 (Elapsed: 1.23s) ---
+--- DIMENSION N = 16 (Elapsed: 0.86s) ---
   Excited gap:         mu_1 - lam_0         = 1.27595595e-26
   Mode 1 KE:           ||K u_1||^2          = 9.75413984
   Mode 1 Stieltjes:    G_d'(mu_1)           = 1.85085661e+26
@@ -41,7 +41,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: O_4 = 1.176051e+13 = K_4 (3.227) * G_4 (3.6444e+12)  |  S_4 = 2.85865e-26  ==>  T_4 = 3.36191e-13
     Mode j = 5: O_5 = 7.248509e+16 = K_5 (6.8988) * G_5 (1.0507e+16)  |  S_5 = 1.26883e-33  ==>  T_5 = 9.1971e-17
 
---- DIMENSION N = 20 (Elapsed: 2.33s) ---
+--- DIMENSION N = 20 (Elapsed: 1.76s) ---
   Excited gap:         mu_1 - lam_0         = 6.39990962e-31
   Mode 1 KE:           ||K u_1||^2          = 10.0497396
   Mode 1 Stieltjes:    G_d'(mu_1)           = 4.01716214e+30
@@ -53,7 +53,7 @@ Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 50, V_* = 1.0
     Mode j = 4: O_4 = 4.971201e+13 = K_4 (3.4194) * G_4 (1.4538e+13)  |  S_4 = 1.09963e-27  ==>  T_4 = 5.46647e-14
     Mode j = 5: O_5 = 3.734347e+17 = K_5 (7.9132) * G_5 (4.7191e+16)  |  S_5 = 2.87932e-35  ==>  T_5 = 1.07524e-17
 
---- DIMENSION N = 24 (Elapsed: 3.83s) ---
+--- DIMENSION N = 24 (Elapsed: 3.63s) ---
   Excited gap:         mu_1 - lam_0         = 2.94860198e-34
   Mode 1 KE:           ||K u_1||^2          = 10.2186531
   Mode 1 Stieltjes:    G_d'(mu_1)           = 6.75673908e+33

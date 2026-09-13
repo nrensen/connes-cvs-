@@ -7,7 +7,7 @@ Primary Partition: m_cut = 3 (Low modes: {e_0, e_1, e_2}, High modes: {e_3, ...,
 --------------------------------------------------------------------------------
 DIMENSION N = 4 (Canonical Basis Dimension = 5)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 198.975 s
+  Matrix build elapsed time: 199.250 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 8.827406198365735349650571e-15
   Full matrix Q_Weil second eigenvalue   lambda_1 = 7.9095634863158e-10
 
@@ -29,12 +29,12 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 4: 198.998 s
+Total elapsed time for N = 4: 199.271 s
 
 --------------------------------------------------------------------------------
 DIMENSION N = 8 (Canonical Basis Dimension = 9)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 366.120 s
+  Matrix build elapsed time: 405.761 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 6.710935250125962103470959e-23
   Full matrix Q_Weil second eigenvalue   lambda_1 = 8.54331975948526e-18
 
@@ -56,12 +56,12 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 8: 366.209 s
+Total elapsed time for N = 8: 405.850 s
 
 --------------------------------------------------------------------------------
 DIMENSION N = 12 (Canonical Basis Dimension = 13)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 533.931 s
+  Matrix build elapsed time: 881.852 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 1.782476576272269447043514e-29
   Full matrix Q_Weil second eigenvalue   lambda_1 = 3.98733381675716e-24
 
@@ -83,12 +83,12 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 12: 534.202 s
+Total elapsed time for N = 12: 882.149 s
 
 --------------------------------------------------------------------------------
 DIMENSION N = 16 (Canonical Basis Dimension = 17)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 689.161 s
+  Matrix build elapsed time: 994.082 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 7.118430150813116688753164e-35
   Full matrix Q_Weil second eigenvalue   lambda_1 = 3.60078077614994e-29
 
@@ -110,12 +110,12 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 16: 689.795 s
+Total elapsed time for N = 16: 995.268 s
 
 --------------------------------------------------------------------------------
 DIMENSION N = 20 (Canonical Basis Dimension = 21)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 843.754 s
+  Matrix build elapsed time: 1265.804 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 1.323235908109911798715256e-39
   Full matrix Q_Weil second eigenvalue   lambda_1 = 1.28780291682685e-33
 
@@ -137,12 +137,12 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 20: 845.033 s
+Total elapsed time for N = 20: 1267.283 s
 
 --------------------------------------------------------------------------------
 DIMENSION N = 24 (Canonical Basis Dimension = 25)
 --------------------------------------------------------------------------------
-  Matrix build elapsed time: 995.177 s
+  Matrix build elapsed time: 1739.948 s
   Full matrix Q_Weil smallest eigenvalue lambda_0 = 2.53348484007809227351107e-43
   Full matrix Q_Weil second eigenvalue   lambda_1 = 4.49583650561819e-37
 
@@ -164,7 +164,7 @@ DIAGNOSTIC 2: 3x3 Schur Complement S_low Audit:
   All pivots D_{ii}(S_low) strictly positive: True
   Schur complement condition satisfied (C > 0 and S_low > 0): True
 
-Total elapsed time for N = 24: 997.391 s
+Total elapsed time for N = 24: 1743.249 s
 
 ================================================================================
 DIAGNOSTIC 3: Cutoff Sensitivity Sweep at N = 24

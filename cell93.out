@@ -9,24 +9,24 @@ Projector Cutoffs Focus: K in [10, 11, 12, 13]
 =======================================================================================================================================
 
 >>> Processing Dimension N = 44 (dim = 45) ...
-   Completed N = 44 in 9.81s | E_11 = 0.00922593 | E_12 = 0.55085 | g_11 = 0.541624
+   Completed N = 44 in 9.86s | E_11 = 0.00922593 | E_12 = 0.55085 | g_11 = 0.541624
 
 >>> Processing Dimension N = 48 (dim = 49) ...
-   Completed N = 48 in 12.54s | E_11 = 0.00818908 | E_12 = 0.46048 | g_11 = 0.452291
+   Completed N = 48 in 12.62s | E_11 = 0.00818908 | E_12 = 0.46048 | g_11 = 0.452291
 
 >>> Processing Dimension N = 52 (dim = 53) ...
-   Completed N = 52 in 15.88s | E_11 = 0.00659387 | E_12 = 0.435999 | g_11 = 0.429406
+   Completed N = 52 in 16.04s | E_11 = 0.00659387 | E_12 = 0.435999 | g_11 = 0.429406
 
 >>> Processing Dimension N = 56 (dim = 57) ...
-   Completed N = 56 in 19.57s | E_11 = 0.00626811 | E_12 = 0.433563 | g_11 = 0.427295
+   Completed N = 56 in 20.14s | E_11 = 0.00626811 | E_12 = 0.433563 | g_11 = 0.427295
 
 >>> Processing Dimension N = 60 (dim = 61) ...
-   Completed N = 60 in 126.39s | E_11 = 0.00578352 | E_12 = 0.429196 | g_11 = 0.423412
+   Completed N = 60 in 24.35s | E_11 = 0.00578352 | E_12 = 0.429196 | g_11 = 0.423412
 
 >>> Processing Dimension N = 64 (dim = 65) ...
-   Completed N = 64 in 130.40s | E_11 = 0.00529441 | E_12 = 0.425751 | g_11 = 0.420457
+   Completed N = 64 in 29.17s | E_11 = 0.00529441 | E_12 = 0.425751 | g_11 = 0.420457
 
-All dimensions processed in 314.60s.
+All dimensions processed in 112.19s.
 
 =======================================================================================================================================
 TEST A: Boundary Gaps g_j and Dimensionless Prominence Ratio Gamma_{11}(N) = g_{11} / max(g_{10}, g_{12})

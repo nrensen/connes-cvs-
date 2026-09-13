@@ -11,24 +11,24 @@ Canonical Barrier Cutoff: K = 12 (Continuum Base Mode = 13)
 =============================================================================================================================
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.21s | ||Q_even|| = 3.2533296 | E_13 = N/A
+   Completed N = 12 in 0.22s | ||Q_even|| = 3.2533296 | E_13 = N/A
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 0.45s | ||Q_even|| = 3.3120468 | E_13 = 2.490185
+   Completed N = 16 in 0.47s | ||Q_even|| = 3.3120468 | E_13 = 2.490185
 
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 0.84s | ||Q_even|| = 3.6126764 | E_13 = 2.0624737
+   Completed N = 20 in 0.93s | ||Q_even|| = 3.6126764 | E_13 = 2.0624737
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 1.42s | ||Q_even|| = 3.8133554 | E_13 = 1.8012007
+   Completed N = 24 in 1.52s | ||Q_even|| = 3.8133554 | E_13 = 1.8012007
 
 >>> Processing Dimension N = 28 ...
-   Completed N = 28 in 2.27s | ||Q_even|| = 4.097518 | E_13 = 1.3102186
+   Completed N = 28 in 2.42s | ||Q_even|| = 4.097518 | E_13 = 1.3102186
 
 >>> Processing Dimension N = 32 ...
-   Completed N = 32 in 3.34s | ||Q_even|| = 4.1140706 | E_13 = 0.81323492
+   Completed N = 32 in 3.59s | ||Q_even|| = 4.1140706 | E_13 = 0.81323492
 
-All dimensions processed in 8.53s.
+All dimensions processed in 9.14s.
 
 =============================================================================================================================
 TEST A: Strict Nested Galerkin Monotonicity Audit: E_k^{(N_2)} <= E_k^{(N_1)} (Poincare Separation Theorem)

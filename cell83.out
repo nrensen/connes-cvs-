@@ -9,35 +9,35 @@ Core Thresholds Sweep: L in [4, 6, 8]
 =========================================================================================================
 
 >>> Processing Dimension N = 8 ...
-   Completed N = 8 in 0.45s | Delta_2 = 1.4661614e-9 | Total Remote Dev = 0.00018353976
+   Completed N = 8 in 0.50s | Delta_2 = 1.4661614e-9 | Total Remote Dev = 0.00018353976
      L = 4: Tail Dev = 1.18625e-6 | Bound S_inter = 0.000682385 | Slack = 575.2 | Share = 0.6463%
      L = 6: Tail Dev = 4.89651e-10 | Bound S_inter = 1.03423e-9 | Slack = 2.112 | Share = 0.0002668%
 
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 0.99s | Delta_2 = 4.8298678e-15 | Total Remote Dev = 8.9500421e-5
+   Completed N = 12 in 1.07s | Delta_2 = 4.8298678e-15 | Total Remote Dev = 8.9500421e-5
      L = 4: Tail Dev = 4.46639e-8 | Bound S_inter = 0.000107235 | Slack = 2401.0 | Share = 0.0499%
      L = 6: Tail Dev = 4.66165e-13 | Bound S_inter = 5.39771e-11 | Slack = 115.8 | Share = 5.209e-7%
      L = 8: Tail Dev = 5.72309e-16 | Bound S_inter = 1.23331e-15 | Slack = 2.155 | Share = 6.394e-10%
 
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 1.86s | Delta_2 = 1.2071033e-19 | Total Remote Dev = 4.5530183e-5
+   Completed N = 16 in 2.01s | Delta_2 = 1.2071033e-19 | Total Remote Dev = 4.5530183e-5
      L = 4: Tail Dev = 7.28827e-9 | Bound S_inter = 2.86442e-5 | Slack = 3930.0 | Share = 0.01601%
      L = 6: Tail Dev = 1.26968e-14 | Bound S_inter = 1.12417e-11 | Slack = 885.4 | Share = 2.789e-8%
      L = 8: Tail Dev = 1.00239e-18 | Bound S_inter = 1.65086e-17 | Slack = 16.47 | Share = 2.202e-12%
 
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 3.11s | Delta_2 = 9.8425743e-24 | Total Remote Dev = 2.9349722e-5
+   Completed N = 20 in 3.57s | Delta_2 = 9.8425743e-24 | Total Remote Dev = 2.9349722e-5
      L = 4: Tail Dev = 1.76277e-9 | Bound S_inter = 1.22489e-5 | Slack = 6949.0 | Share = 0.006006%
      L = 6: Tail Dev = 4.20852e-16 | Bound S_inter = 7.58826e-13 | Slack = 1803.0 | Share = 1.434e-9%
      L = 8: Tail Dev = 3.03433e-21 | Bound S_inter = 4.24358e-19 | Slack = 139.9 | Share = 1.034e-14%
 
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 4.79s | Delta_2 = 1.3704206e-26 | Total Remote Dev = 1.4039105e-5
+   Completed N = 24 in 5.10s | Delta_2 = 1.3704206e-26 | Total Remote Dev = 1.4039105e-5
      L = 4: Tail Dev = 6.99048e-10 | Bound S_inter = 7.39959e-6 | Slack = 1.059e+4 | Share = 0.004979%
      L = 6: Tail Dev = 7.46398e-17 | Bound S_inter = 1.64435e-13 | Slack = 2203.0 | Share = 5.317e-10%
      L = 8: Tail Dev = 2.08437e-22 | Bound S_inter = 8.46839e-20 | Slack = 406.3 | Share = 1.485e-15%
 
-All dimensions processed in 11.20s.
+All dimensions processed in 12.25s.
 
 ===================================================================================================================
 TABLE 1: Modewise Lemma 8.27 Universal Interlacing Tail Bound Audit (N = 24, Mode j = 2)

@@ -10,27 +10,27 @@ Projector Cutoffs: K in [10, 11, 12, 13]
 =======================================================================================================================================
 
 >>> Processing Dimension N = 20 (dim = 21) ...
-   Completed N = 20 in 0.86s | E_11 = 1.19869 | E_12 = 1.9597
+   Completed N = 20 in 0.88s | E_11 = 1.19869 | E_12 = 1.9597
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.43s | E_11 = 0.39657 | E_12 = 1.3064
+   Completed N = 24 in 1.48s | E_11 = 0.39657 | E_12 = 1.3064
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.22s | E_11 = 0.126111 | E_12 = 0.664921
+   Completed N = 28 in 2.29s | E_11 = 0.126111 | E_12 = 0.664921
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 3.33s | E_11 = 0.0386853 | E_12 = 0.58886
+   Completed N = 32 in 3.46s | E_11 = 0.0386853 | E_12 = 0.58886
 
 >>> Processing Dimension N = 36 (dim = 37) ...
-   Completed N = 36 in 4.79s | E_11 = 0.0165406 | E_12 = 0.585805
+   Completed N = 36 in 4.96s | E_11 = 0.0165406 | E_12 = 0.585805
 
 >>> Processing Dimension N = 40 (dim = 41) ...
-   Completed N = 40 in 6.53s | E_11 = 0.0112179 | E_12 = 0.572442
+   Completed N = 40 in 6.76s | E_11 = 0.0112179 | E_12 = 0.572442
 
 >>> Processing Dimension N = 44 (dim = 45) ...
-   Completed N = 44 in 103.88s | E_11 = 0.00922593 | E_12 = 0.55085
+   Completed N = 44 in 9.05s | E_11 = 0.00922593 | E_12 = 0.55085
 
-All dimensions processed in 123.05s.
+All dimensions processed in 28.89s.
 
 =======================================================================================================================================
 TEST A: Boundary Spectral Gaps & Energy Trajectories for Modes j in {10, 11, 12, 13, 14}

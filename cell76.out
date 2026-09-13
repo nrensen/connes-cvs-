@@ -5,7 +5,7 @@ CELL 76 — SCALE-INVARIANT STIELTJES-RESIDUE REPAIR AUDIT, NORMALIZED ZERO RESI
 Parameters: c = 13, L = 2.56494935746154, T = 400, dps = 70, V_* = 1.0
 Root Finder: Pure bracketed bisection, stopping tol = 1.0e-55 (bracket width / gap)
 
---- DIMENSION N =  8 (Elapsed: 183.72s) ---
+--- DIMENSION N =  8 (Elapsed: 0.14s) ---
   Total Norm ||d||^2:  Exact = 17, Computed = 17.0, Residual = 2.898e-70
   Even Ground State E_0: 6.71093525013e-23, Odd Ground State mu_0: 3.84258737456e-20
   [Tests A & B] Pure Bisection Stieltjes Zeros z_j^* on (E_j, E_{j+1}):
@@ -43,7 +43,7 @@ Root Finder: Pure bracketed bisection, stopping tol = 1.0e-55 (bracket width / g
     Asymmetry Identity Residual: 1.811e-71
     Two-Pole Cluster Fidelity:   99.9804%
 
---- DIMENSION N = 12 (Elapsed: 85.69s) ---
+--- DIMENSION N = 12 (Elapsed: 0.44s) ---
   Total Norm ||d||^2:  Exact = 25, Computed = 25.0, Residual = 8.693e-70
   Even Ground State E_0: 1.78247657627e-29, Odd Ground State mu_0: 1.38569161775e-26
   [Tests A & B] Pure Bisection Stieltjes Zeros z_j^* on (E_j, E_{j+1}):
@@ -81,7 +81,7 @@ Root Finder: Pure bracketed bisection, stopping tol = 1.0e-55 (bracket width / g
     Asymmetry Identity Residual: 0.0
     Two-Pole Cluster Fidelity:   99.9877%
 
---- DIMENSION N = 16 (Elapsed: 83.58s) ---
+--- DIMENSION N = 16 (Elapsed: 1.01s) ---
   Total Norm ||d||^2:  Exact = 33, Computed = 33.0, Residual = 1.739e-69
   Even Ground State E_0: 7.11843015081e-35, Odd Ground State mu_0: 7.66717337741e-32
   [Tests A & B] Pure Bisection Stieltjes Zeros z_j^* on (E_j, E_{j+1}):
@@ -119,7 +119,7 @@ Root Finder: Pure bracketed bisection, stopping tol = 1.0e-55 (bracket width / g
     Asymmetry Identity Residual: 3.622e-71
     Two-Pole Cluster Fidelity:   99.9941%
 
---- DIMENSION N = 20 (Elapsed: 83.04s) ---
+--- DIMENSION N = 20 (Elapsed: 1.84s) ---
   Total Norm ||d||^2:  Exact = 41, Computed = 41.0, Residual = 1.739e-69
   Even Ground State E_0: 1.32323590811e-39, Odd Ground State mu_0: 1.73788068203e-36
   [Tests A & B] Pure Bisection Stieltjes Zeros z_j^* on (E_j, E_{j+1}):
@@ -157,7 +157,7 @@ Root Finder: Pure bracketed bisection, stopping tol = 1.0e-55 (bracket width / g
     Asymmetry Identity Residual: 1.811e-71
     Two-Pole Cluster Fidelity:   99.9948%
 
---- DIMENSION N = 24 (Elapsed: 82.17s) ---
+--- DIMENSION N = 24 (Elapsed: 2.78s) ---
   Total Norm ||d||^2:  Exact = 49, Computed = 49.0, Residual = 6.955e-69
   Even Ground State E_0: 2.53348484008e-43, Odd Ground State mu_0: 4.3478088547e-40
   [Tests A & B] Pure Bisection Stieltjes Zeros z_j^* on (E_j, E_{j+1}):

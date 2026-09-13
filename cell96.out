@@ -9,17 +9,17 @@ Core Thresholds Sweep: L in [4, 6, 8, 11]
 ===================================================================================================================
 
 >>> Processing Dimension N = 8 ...
-   Completed N = 8 in 0.52s | ||Q_even||_op = 2.62582 | E_0 = 6.7109353e-23
+   Completed N = 8 in 0.44s | ||Q_even||_op = 2.62582 | E_0 = 6.7109353e-23
 >>> Processing Dimension N = 12 ...
-   Completed N = 12 in 1.17s | ||Q_even||_op = 3.2533296 | E_0 = 1.7824766e-29
+   Completed N = 12 in 0.98s | ||Q_even||_op = 3.2533296 | E_0 = 1.7824766e-29
 >>> Processing Dimension N = 16 ...
-   Completed N = 16 in 2.93s | ||Q_even||_op = 3.3120468 | E_0 = 7.1184302e-35
+   Completed N = 16 in 1.85s | ||Q_even||_op = 3.3120468 | E_0 = 7.1184302e-35
 >>> Processing Dimension N = 20 ...
-   Completed N = 20 in 3.84s | ||Q_even||_op = 3.6126764 | E_0 = 1.3232359e-39
+   Completed N = 20 in 3.10s | ||Q_even||_op = 3.6126764 | E_0 = 1.3232359e-39
 >>> Processing Dimension N = 24 ...
-   Completed N = 24 in 5.61s | ||Q_even||_op = 3.8133554 | E_0 = 2.5334848e-43
+   Completed N = 24 in 4.81s | ||Q_even||_op = 3.8133554 | E_0 = 2.5334848e-43
 
-All dimensions processed in 14.07s.
+All dimensions processed in 11.19s.
 
 =======================================================================================================================================
 TEST A: Modewise Spectral Expansion Ratio Identity & Growth Ratio Approximation (N = 24, Mode j = 2)

@@ -9,27 +9,27 @@ Subspace Cutoffs K in [8, 9, 10, 11, 12, 13, 14, 15] (Subspace Dimensions 9 ... 
 =======================================================================================================================================
 
 >>> Processing Dimension N = 16 (dim = 17) ...
-   Completed N = 16 in 0.45s | E_13 = 2.49019
+   Completed N = 16 in 0.47s | E_13 = 2.49019
 
 >>> Processing Dimension N = 20 (dim = 21) ...
    Completed N = 20 in 0.85s | E_13 = 2.06247
 
 >>> Processing Dimension N = 24 (dim = 25) ...
-   Completed N = 24 in 1.41s | E_13 = 1.8012
+   Completed N = 24 in 1.43s | E_13 = 1.8012
 
 >>> Processing Dimension N = 28 (dim = 29) ...
-   Completed N = 28 in 2.23s | E_13 = 1.31022
+   Completed N = 28 in 2.22s | E_13 = 1.31022
 
 >>> Processing Dimension N = 32 (dim = 33) ...
-   Completed N = 32 in 3.34s | E_13 = 0.813235
+   Completed N = 32 in 3.31s | E_13 = 0.813235
 
 >>> Processing Dimension N = 36 (dim = 37) ...
-   Completed N = 36 in 4.75s | E_13 = 0.78161
+   Completed N = 36 in 4.77s | E_13 = 0.78161
 
 >>> Processing Dimension N = 40 (dim = 41) ...
-   Completed N = 40 in 6.53s | E_13 = 0.726113
+   Completed N = 40 in 6.49s | E_13 = 0.726113
 
-All dimensions processed in 19.56s.
+All dimensions processed in 19.54s.
 
 =======================================================================================================================================
 TEST A: Nested-N Spectral Subspace Overlap: Minimum Principal Cosine sigma_{min}((U_K^{(N)})^T U_K^{(N+4)})
