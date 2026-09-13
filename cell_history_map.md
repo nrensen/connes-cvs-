@@ -3812,7 +3812,7 @@ Having retired the local Airy boundary-layer model in Cell 117, Cell 118 investi
 ## Cell 119 (Exact Algebraic Modal Decomposition: $A_{N, k}$ vs $B_{N, k}$ Cancellation Balance)
 
 * **Script:** [`cell119.py`](file:///c:/data/github/connes-cvs-/cell119.py)
-* **Output:** `cell119.out` (pending compute node execution)
+* **Output:** [`cell119.out`](file:///c:/data/github/connes-cvs-/cell119.out) (runtime: 1940.57 s at 70 dps)
 * **Companion Analytical Note:** [`cell119.md`](file:///c:/data/github/connes-cvs-/cell119.md)
 * **Manuscript Reference:** Companion to [`Paper-NR2.md`](file:///c:/data/github/connes-cvs-/Paper-NR2.md) §9.10
 * **Gate Alignment:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M12)
@@ -3820,15 +3820,17 @@ Having retired the local Airy boundary-layer model in Cell 117, Cell 118 investi
 ### Target & Mathematical Rationale
 Having established in Cell 118 that cancellation occurs by $x \sim 0.2-0.3$ and is not a local boundary layer, Cell 119 attacks the exact algebraic structure of the boundary-row divided-difference kernel:
 $$F_{N, k} = \frac{2(N\psi(N) - k\psi(k))}{N^2 - k^2} k^2 v_{N, k} \equiv A_{N, k} - B_{N, k},$$
-where:
-$$A_{N, k} \equiv a_N \frac{k^2 v_{N, k}}{N^2 - k^2}, \qquad B_{N, k} \equiv a_k \frac{k^2 v_{N, k}}{N^2 - k^2},$$
-with $a_N = 2 N \psi(N)$ and $a_k = 2 k \psi(k)$:
-1. **Total Sums Separation:** Evaluates $\Sigma_A(N) \equiv \sum_{k=1}^N A_{N, k}$ and $\Sigma_B(N) \equiv \sum_{k=1}^N B_{N, k}$ across $N \in \{64, 96, 128, 160, 192\}$. Determines whether both sums are individually large ($\sim 10^{-2}$) and cancel each other to $10^{-22}$, or if one is already suppressed.
-2. **Trajectory Tracking:** Compares the cumulative partial sums $S_A(x) = \sum_{k \le xN} A_{N, k}$ and $S_B(x) = \sum_{k \le xN} B_{N, k}$ along $x \in (0, 1)$.
-3. **Algebraic Connection to Theorem 1:** Derives the analytical connection between $\Sigma_A$, $\Sigma_B$, $\alpha_N = \sum a_k v_k$, and the contact term $\frac{a_N}{\sqrt{2}} T_v(0)$.
+where $A_{N, k} \equiv a_N \frac{k^2 v_{N, k}}{N^2 - k^2}$ and $B_{N, k} \equiv a_k \frac{k^2 v_{N, k}}{N^2 - k^2}$, with $a_N = 2 N \psi(N)$ and $a_k = 2 k \psi(k)$.
+
+### What it Established (Audit Results)
+1. **Hypothesis H1 Falsified (No $A/B$ Inter-Component Cancellation):** Both total off-diagonal sums $\Sigma_A^{\mathrm{off}}$ and $\Sigma_B^{\mathrm{off}}$ are individually microscopic across all $N \in [64, 192]$: $\Sigma_A \sim 10^{-23}$ and $\Sigma_B \sim 10^{-22}$. At $N = 192$, $\Sigma_A = +4.28 \times 10^{-23}$ and $\Sigma_B = +1.57 \times 10^{-22}$, yielding $\Delta \Sigma = -1.14 \times 10^{-22}$ and net flux $(H u_N)_N = -8.35 \times 10^{-23}$. The cancellation factor is $\mathcal{C}_{AB} = 1.38$, completely ruling out an inter-component $10^{20}$-scale cancellation.
+2. **Internal Oscillatory Cancellation in $A$ Alone:** In the cumulative trajectory, $A$ itself undergoes virtually the entire $10^{20}$-scale cancellation: $S_A(x)$ drops from $-1.14 \times 10^{-2}$ at $x = 0.02$ down to $-2.82 \times 10^{-19}$ at $x = 0.20$ and $+4.96 \times 10^{-23}$ at $x = 0.30$. $B$ never exceeds $6 \times 10^{-5}$ and is negligible throughout the low-mode peak.
+3. **Hypothesis H2 Falsified (Failure of Naive Taylor Moments):** Solitary moments $M_2 \sim -2.2 \times 10^{-19}$ and $M_{\psi, 3} \sim 5.4 \times 10^{-17}$ fail to approximate the exact sums, giving large relative errors ($8\times$ to $83\times$). Naive termwise Taylor expansions do not uniformly control the oscillatory sum.
+4. **Exact Theorem 1 Residual Certified:** The row-wise identity $(H u_N)_N = \alpha_N - \frac{a_N}{\sqrt{2}} T_v(0) + E_1 N^2 v_{N, N}$ closes to $2.33 \times 10^{-69}$ residual at $N = 192$.
+5. **Phase IX Formally Closed:** The boundary-defect rate $\alpha_N = o(N^{-1/2})$ is an auxiliary sufficient condition that exhibits sub-critical empirical decay ($\alpha_N \sim N^{-0.29}$) at fixed $T$. Continuing micro-analysis on $\alpha_N$ yields diminishing returns. Phase IX is officially complete; the programme pivots back to the core Gate 1 proposition $\Delta_j(N) R_{\mathrm{spec}}(N, L) \to 0$ via Route 1B (Loewner smoothness + Ritz gap) and Route 1A (Discrete Agmon/WKB barrier).
 
 ### Status
-**Authoring.** Pre-flight specification for [`cell119.md`](file:///c:/data/github/connes-cvs-/cell119.md) and [`cell119.py`](file:///c:/data/github/connes-cvs-/cell119.py).
+**Executed (`cell119.out`, runtime: 1940.57 s) & Calibrated / Phase IX Closed.** Definitive capstone to the boundary-flux arc.
 
 ---
 

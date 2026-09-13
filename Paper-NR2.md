@@ -4024,7 +4024,9 @@ $$\boxed{
 \end{array}
 }$$
 
-If the empirically supported exponential boundary-suppression law can be established uniformly, the boundary term is extinguished with infinite margin. The principal remaining analytical task is therefore to establish $\alpha_N = o(N^{-1/2})$, preferably directly from the ground-state eigenvalue equation.
+If the empirically supported exponential boundary-suppression law can be established uniformly, the boundary term is extinguished with infinite margin. The principal remaining analytical task was therefore initially conceived as establishing $\alpha_N = o(N^{-1/2})$, preferably directly from the ground-state eigenvalue equation.
+
+However, detailed high-precision computational profiling across $N \in [64, 192]$ demonstrates that the boundary-flux / commutator approach represents an insufficient analytical engine. Numerical decomposition of the boundary flux into its exact divided-difference components $A_{N, k} = a_N \frac{k^2 v_k}{N^2 - k^2}$ and $B_{N, k} = a_k \frac{k^2 v_k}{N^2 - k^2}$ (Cell 119) shows that the observed $10^{20}$-scale cancellation is not an inter-component cancellation between $A$ and $B$: both complete off-diagonal sums are individually already of order $10^{-22}$, while the large $10^{-3} - 10^{-2}$ low-mode excursions cancel internally within the $A$-trajectory before $x = k/N \approx 0.2 - 0.3$. Because the empirical defect decay $\alpha_N \sim N^{-0.29}$ remains sub-critical relative to the required $N^{-1/2}$ threshold at fixed $T$, the boundary-flux data do not furnish an evident mechanism for closing the $K^2$-commutator sufficient condition. Consequently, the investigation ceases auxiliary boundary-defect tracking and returns directly to the governing Gate 1 proposition $\Delta_j(N) R_{\mathrm{spec}}(N, L) \to 0$ via discrete barrier mechanics (Route 1A) and Loewner operator-norm smoothness (Route 1B).
 
 ---
 
@@ -4093,6 +4095,7 @@ The calculations reported in this manuscript were performed using Python and the
 | Section 9.8 (Boundary Defect Source Decomposition & Circularity Diagnosis) | Triangle decomposition $\|\xi_N^{(Q)}\|_2 \le |\alpha_N|\sqrt{N-M} + \frac{|T_{v_N}(0)|}{\sqrt{2}} \|a^{(Q)}\|_2$, modal bound $\|a^{(Q)}\|_2 \le \frac{2}{\sqrt{3}} C_\psi N^{3/2}$ | `cell108.py` | `cell108.out` |
 | Section 9.9 (Divided-Difference Kernel Expansion & Low-Mode Curvature) | Direct kernel expansion $(B_M^* u_P)_k = \frac{2 S_2}{k}\psi(k) - \frac{S_\psi}{k^2} + R_k$, boundary curvature convergence $S_2 \to -v''(0)/\sqrt{2}$ | `cell109.py` | `cell109.out` |
 | Section 9.9 (Universal Core Bound & Non-Circular Regularity Bridge) | Unconditional $L^2$ moment bounds, repaired remainder norm $\|R\|_2 \le C_R(M)$, universal bound $C_B^{\mathrm{univ}}(M)$, and regularity bridge | `cell110.py` | `cell110.out` |
+| Section 9.10 (Boundary Defect Micro-Anatomy & Cancellation Forensics) | Discrete boundary identities, $N^{-0.29}$ sub-critical power law, Airy collapse refutation, macroscopic profile, and $A/B$ algebraic split | `cell111.py`–`cell119.py` | `cell111.out`–`cell119.out` |
 
 ---
 
