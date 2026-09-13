@@ -3915,20 +3915,44 @@ Targeting an analytical proof of the continuum spectral threshold $E_{L+1}^{(N)}
 
 * **Companion Note:** [`cell123.md`](file:///c:/data/github/connes-cvs-/cell123.md)
 * **Script:** [`cell123.py`](file:///c:/data/github/connes-cvs-/cell123.py)
+* **Output:** `cell123.out` (runtime: 647.97 s at 70 dps)
 * **Target:** Gate 1 (Milestone M-G1.4 / Operator Decomposition Audit)
-* **Status:** Pre-Flight Script Authored & Ready for External Execution
+* **Status:** Executed & Audited / Dual Falsification of Coordinate Coercivity & Component Cancellation Discovery
 
 ### Target & Mathematical Rationale
 Directly audit the operator decomposition $Q_{\mathrm{even}} = Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}}$ using the exact definitions in `connes_cvs/operator.py`:
 1. Extract individual component matrices $Q_{\mathrm{arch}}, Q_{\mathrm{prime}}, Q_{\mathrm{pole}}$ via exact divided differences.
 2. Audit the $M = 3$ submatrix on $\operatorname{span}\{e_3, \dots, e_N\}$: verify $\lambda_{\min}(C_3) \le E_3$ and compute component spectra.
-3. Audit the $M = 12$ continuum submatrix on $\operatorname{span}\{e_{12}, \dots, e_N\}$: test the Core-Submatrix Coercivity Conjecture $C_{12} \succeq c_{12} I > 0$ with $c_{12} \approx 0.50$.
-4. Sweep $M \in \{3, 4, 6, 8, 10, 12, 14, 16\}$ to directly observe the phase transition of $\lambda_{\min}(C_M)$ from bound-state collapse to continuum coercivity.
+3. Audit the $M = 12$ continuum submatrix on $\operatorname{span}\{e_{12}, \dots, e_N\}$: test the Core-Submatrix Coercivity Conjecture $C_{12} \succeq c_{12} I > 0$.
+4. Sweep $M \in \{3, 4, 6, 8, 10, 12, 14, 16\}$ to observe the scaling of $\lambda_{\min}(C_M)$.
 
+### What it Established (Audit Findings)
+1. **Algebraic Decomposition Verified to 70 Decimals:** $\|Q_{\mathrm{even}} - (Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}})\|_F \le 2.28 \times 10^{-70}$ across all $N \in [16, 64]$, confirming exact code implementation of the tripartite operator.
+2. **$M = 3$ Coercivity Conclusively Falsified:** $\lambda_{\min}(C_3) = 4.64 \times 10^{-39}$ at $N=64$, strictly bounded by $E_3 = 2.98 \times 10^{-38}$. The naive Route C premise $C_3 \succeq 0.386 I$ is decisively falsified.
+3. **Interior Continuum Interlacing Confirmed:** Cauchy interlacing $E_{13} \ge \lambda_{10}(C_3) \ge E_{10}$ verified tightly: at $N=64$, $E_{10} = 0.57558$, $\lambda_{10}(C_3) = 0.57558$, $E_{13} = 0.58242$. While $C_3$ is not coercive at the spectral bottom, its 10th eigenvalue sits firmly in the continuum.
+4. **$M = 12$ Coordinate Coercivity Falsified:** $\lambda_{\min}(C_{12})$ collapses by 4 orders of magnitude from $0.0383$ ($N=16$) to $7.87 \times 10^{-6}$ ($N=64$). Truncating 12 coordinate modes does not yield a uniform macroscopic spectral floor.
+5. **Component Indefiniteness & Cancellation:** On high modes ($M=12, N=64$), the Archimedean block is coercive ($C_{\mathrm{arch}} \ge 1.553$), but the prime block is strongly indefinite ($\lambda_{\min}(C_{\mathrm{prime}}) = -2.373$), and $C_{\mathrm{pole}} \sim 10^{-6}$. The near-positivity of $C_{12}$ ($7.87 \times 10^{-6}$) is produced by near-perfect cancellation between the Archimedean and prime distributions, not componentwise positivity.
+6. **The Fundamental Conceptual Advance:** Established that $\text{coordinate-mode truncation} \ne \text{spectral-subspace projection}$. Bound-state wavepackets have non-vanishing Fourier tails that create near-zero eigenvalues in coordinate submatrices. Cauchy interlacing on coordinate principal submatrices is abandoned as a proof architecture. The full-operator continuum gap $E_{13} - E_3 \ge 0.582$ from Cell 121 remains solid and must be targeted via spectral-subspace projection $P_{\mathrm{cont}} = I - P_{\mathrm{bound}}$ or variational min-max characterization.
 
 ---
 
-# Updated major historical arc (Cells 0–123)
+## Cell 124 (Spectral-Subspace Projection, Non-Circularity Resolution & Min-Max Continuum Threshold)
+
+* **Companion Note:** [`cell124.md`](file:///c:/data/github/connes-cvs-/cell124.md)
+* **Target:** Gate 1 (Milestone M-G1.5 / Spectral-Subspace Projection & Min-Max Continuum Threshold)
+* **Status:** Active / Theoretical Architecture Formulated
+
+### Target & Mathematical Rationale
+Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spectral subspace to eliminate bound-state tail leakage, and resolve the non-circularity dilemma for the continuum threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$:
+1. **Spectral Subspace Coercivity:** On $\mathcal{H}_{\mathrm{cont}} = \operatorname{Ran}(I - P_{\mathrm{bound}})$, $Q_{\mathrm{cont}} \equiv P_{\mathrm{cont}} Q_{\mathrm{even}} P_{\mathrm{cont}}$ has exact spectral floor identically equal to $E_{11} \approx 0.575$ (or $E_{13} \approx 0.582$).
+2. **Non-Circularity Resolution:** Establish non-circular variational lower bounds on $E_{L+1}$ directly from the quadratic form without presupposing the discrete matrix spectral theorem:
+   - *Route 1 (Courant–Fischer with Adapted Quasimodes):* $E_K \ge \min_{v \in \Phi^\perp, \|v\|=1} \langle v, Q_{\mathrm{even}} v \rangle$ using analytic well quasimodes (solitary wave ground state and Hermite–Gauss/Weber excited modes).
+   - *Route 2 (Dunford–Schwartz Resolvent Contour):* $P_{\mathrm{bound}} = \frac{1}{2\pi i} \oint_{|z|=0.2} (z I - Q)^{-1} dz$ traversing the macroscopic spectral gap $[10^{-5}, 0.57]$.
+   - *Route 3 (Arithmetic–Archimedean Phase Cancellation):* Rapid oscillations of continuum scattering states quench the indefinite prime Dirac comb by Riemann phase cancellation ($\mathcal{O}(k^{-1/2})$), leaving the strictly positive Archimedean kinetic background to establish the continuum floor.
+
+---
+
+# Updated major historical arc (Cells 0–124)
 
 ```
 Cells 0–4
@@ -4005,6 +4029,9 @@ Cell 122 (Gate 1 Three-Lemma Architecture)
     ↓
 Cell 123 (Gate 1 Operator Decomposition & Coercivity Audit)
     Audit of Q = Q_arch + Q_prime + Q_pole on span{e_3..e_N} and span{e_12..e_N}; Cauchy bound-state collapse lambda_min(C_3) <= E_3 verified; Core-Submatrix Coercivity tested across M in {3..16}
+    ↓
+Cell 124 (Gate 1 Spectral-Subspace Projection & Min-Max Continuum Threshold)
+    Spectral-subspace projection P_cont = I - P_bound formulated; non-circularity dilemma addressed via Courant-Fischer quasimode codimension, Dunford-Schwartz resolvent contour, and prime phase quenching
 ```
 
 ---

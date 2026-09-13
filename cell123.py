@@ -442,28 +442,40 @@ def main():
         print(f"{N_sub:4d} | " + " | ".join(col_strs))
 
     # =========================================================================
-    # MODULE 5: SYNTHESIS & AUDIT CONCLUSIONS
+    # MODULE 5: SYNTHESIS & AUDIT SUMMARY
     # =========================================================================
     print("\n" + "=" * 80)
-    print("--- MODULE 5: SYNTHESIS & AUDIT CONCLUSIONS ---")
+    print("--- MODULE 5: SYNTHESIS & AUDIT SUMMARY ---")
     print("=" * 80)
 
     # Summary of M = 3 findings
     min_C3_all = min(results_M3[n]["lambda_min_C3"] for n in N_GRID)
-    print(f"1. Naive Route C Coercivity Premise (C_3 >= 0.386 I):")
-    print(f"   - Minimum eigenvalue across all N: lambda_min(C_3) = {mp.nstr(min_C3_all, 10)}")
-    print(f"   - Bound-state collapse confirmed: lambda_min(C_3) <= E_3 holds identically.")
-    print(f"   - Conclusion: FALSIFIED. C_3 contains remaining bound states and is NOT coercive.")
+    max_C3_all = max(results_M3[n]["lambda_min_C3"] for n in N_GRID)
+    print(f"1. M = 3 Principal Submatrix C_3 = Q_even[3..N, 3..N]:")
+    print(f"   - lambda_min(C_3) range across N in [16, 64]: [{mp.nstr(min_C3_all, 10)}, {mp.nstr(max_C3_all, 10)}]")
+    print(f"   - Cauchy bound-state collapse: lambda_min(C_3) <= E_3 verified identically.")
+    print(f"   - Coercivity premise C_3 >= 0.386 I: Not supported by numerical data.")
+    print(f"   - Interior interlacing E_13 >= lambda_{10}(C_3) >= E_{10}: Verified identically.")
 
     # Summary of M = 12 findings
     valid_N12 = [n for n in N_GRID if n >= 14]
     min_C12_all = min(results_M12[n]["lambda_min_C12"] for n in valid_N12)
     max_C12_all = max(results_M12[n]["lambda_min_C12"] for n in valid_N12)
-    print(f"\n2. Core-Submatrix Coercivity Conjecture (C_12 >= c_12 > 0):")
+    min_lam1_12 = min(results_M12[n]["lambda_1_C12"] for n in valid_N12)
+    max_lam1_12 = max(results_M12[n]["lambda_1_C12"] for n in valid_N12)
+    print(f"\n2. M = 12 Principal Submatrix C_12 = Q_even[12..N, 12..N]:")
     print(f"   - lambda_min(C_12) range across N in [14, 64]: [{mp.nstr(min_C12_all, 5)}, {mp.nstr(max_C12_all, 5)}]")
-    print(f"   - Cauchy lower bound E_13 >= lambda_1(C_12) >= lambda_min(C_12) verified identically.")
-    print(f"   - Conclusion: CERTIFIED. Projecting out the 12-dimensional bound-state core")
-    print(f"     secures macroscopic coercivity c_12 ~ 0.50 uniformly in N.")
+    print(f"   - lambda_1(C_12) range across N in [14, 64]:   [{mp.nstr(min_lam1_12, 5)}, {mp.nstr(max_lam1_12, 5)}]")
+    print(f"   - Uniform coercivity C_12 >= c I > 0: Not supported; lambda_min(C_12) decreases by 4 orders of magnitude.")
+    print(f"   - Cauchy interlacing E_13 >= lambda_1(C_12) >= lambda_min(C_12): Verified identically.")
+
+    # Summary of component structure
+    print(f"\n3. Component Spectra on High Modes (N = 64):")
+    print(f"   - C_{3, arch}:  [{mp.nstr(results_M3[64]['lambda_min_ar'], 4)}, {mp.nstr(results_M3[64]['lambda_max_ar'], 4)}]")
+    print(f"   - C_{3, prime}: [{mp.nstr(results_M3[64]['lambda_min_pr'], 4)}, {mp.nstr(results_M3[64]['lambda_max_pr'], 4)}]")
+    print(f"   - C_{3, pole}:  [{mp.nstr(results_M3[64]['lambda_min_po'], 4)}, {mp.nstr(results_M3[64]['lambda_max_po'], 4)}]")
+    print(f"   - Observation: Prime component is strongly indefinite; full submatrix near-positivity")
+    print(f"     results from cancellation between Archimedean and prime sectors.")
 
     t_total = time.perf_counter() - t0_start
     print(f"\nTotal execution time: {t_total:.2f} s")

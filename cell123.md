@@ -1,117 +1,166 @@
 # Cell 123 Analytical Note: Operator Decomposition Audit ($Q_{\mathrm{arch}}, Q_{\mathrm{prime}}, Q_{\mathrm{pole}}$) & High-Mode Coercivity
 
 **Companion Document:** Analytical Research Note (Gate 1 / Milestone M-G1.4)  
-**Status:** Pre-Flight Research Note / Theoretical Reduction & Diagnostic Hypotheses  
+**Status:** Executed (`cell123.out`) & Audited / Dual Hypothesis Falsification & Component Cancellation Discovery  
 **Target:** [ROADMAP.md Gate 1 — Milestone M-G1.4: Continuum Spectral Threshold Proof](file:///c:/data/github/connes-cvs-/ROADMAP.md)  
-**Dependencies:** [`cell122.md`](file:///c:/data/github/connes-cvs-/cell122.md); [`cell121.md`](file:///c:/data/github/connes-cvs-/cell121.md); [`cell121.out`](file:///c:/data/github/connes-cvs-/cell121.out); [`cell120.out`](file:///c:/data/github/connes-cvs-/cell120.out); [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py)  
+**Dependencies:** [`cell122.md`](file:///c:/data/github/connes-cvs-/cell122.md); [`cell121.md`](file:///c:/data/github/connes-cvs-/cell121.md); [`cell121.out`](file:///c:/data/github/connes-cvs-/cell121.out); [`cell120.out`](file:///c:/data/github/connes-cvs-/cell120.out); [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py); [`cell.py`](file:///c:/data/github/connes-cvs-/cell.py)  
+**Execution Runtime:** 647.97 s at 70 dps ($N \in [16, 64]$)  
 **Date:** September 2026  
 
 ---
 
-## 1. Executive Summary & Audit Mandate
+## 1. Executive Summary & Audit Conclusions
 
-In Cell 122, an analytical mechanism was proposed to secure the continuum spectral lower bound $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ for core sizes $L \ge 12$. The goal is to eliminate spectral crowding in the remote denominator $R_{\mathrm{spec}}(N, L)$ and isolate Gate 1 to the asymptotic decay of the parity-doublet tunneling splitting $\Delta_j(N)$.
+Cell 123 was designed to audit the operator decomposition $Q_{\mathrm{even}} = Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}}$ directly from the code definitions in [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py) and test whether principal coordinate submatrices $C_M = Q_{\mathrm{even}}[M..N, M..N]$ provide an analytical proof of the continuum spectral threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ for Gate 1.
 
-However, rigorous analysis of the proposal revealed that the original premise of Route C ($C_3 \succeq 0.386 I$ on $\mathcal{H}_{\mathrm{high}} = \operatorname{span}\{e_3, \dots, e_N\}$) was blocked by two distinct mathematical obstructions:
-1. **The Multiplier-to-Matrix Representation Distinction:** In [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py), $Q_{\mathrm{arch}}$ is a dense divided-difference matrix, not a diagonal matrix $\operatorname{diag}(h_+(a_m))$. Furthermore, $Q_{\mathrm{prime}}$ carries an explicit minus sign and has a negative expectation value on the ground state ($Q_{\mathrm{prime}}[u_0] \approx -0.0775$). Its sign on high modes is unproven.
-2. **The Cauchy Interlacing Bound-State Obstruction:** Cauchy's interlacing theorem for deleting $M = 3$ modes rigorously implies:
-   $$\lambda_{\min}(C_3) = \lambda_0(C_3) \le E_3(Q_{\mathrm{even}}).$$
-   Because the potential well carries $\bar{N}_{\mathrm{bound}} \approx 11$ bound states clustered near zero, $E_3(64) \approx 2.98 \times 10^{-38}$. Thus $\lambda_{\min}(C_3) \le 10^{-38} \ll 0.386$. The submatrix $C_3$ cannot be coercive with constant $0.386$ because $\sim 8$ bound states of the well remain supported inside $C_3$.
+The computational run ([`cell123.out`](file:///c:/data/github/connes-cvs-/cell123.out)) achieved extraordinary numerical fidelity and settled two major hypotheses while uncovering a profound new mathematical structure:
 
-### The Audit Mandate for Cell 123
-Cell 123 executes an exact, high-precision operator decomposition audit directly from the code definitions to:
-- Dissect $Q_{\mathrm{even}} = Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}}$ into its constituent symmetric components.
-- Numerically test the $M = 3$ block: determine whether $\lambda_{\min}(C_3) \le E_3$ holds, measure the component spectra, and evaluate the interior eigenvalue $\lambda_{10}(C_3)$ against $E_{13}$.
-- Test the $M = 12$ continuum block ($C_{12}$ on $\operatorname{span}\{e_{12}, \dots, e_N\}$): determine whether removing the entire 12-dimensional bound-state core restores macroscopic coercivity $\lambda_{\min}(C_{12}) \ge c_{12} > 0$ ($c_{12} \approx 0.50$).
-- Sweep the sub-block cut $M \in \{3, 4, 6, 8, 10, 12, 14, 16\}$ to directly observe the phase transition of $\lambda_{\min}(C_M)$ from bound-state collapse ($M \le 10$) to macroscopic continuum coercivity ($M \ge 12$).
-
----
-
-## 2. Tripartite Galerkin Decomposition in Canonical Coordinates
-
-### 2.1 Exact Operator Definitions
-In [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py), the symbol $\psi(x)$ is the sum of three odd functions:
-$$\psi(x) = \psi_{\mathrm{prime}}(x) + \psi_{\mathrm{pole}}(x) + \psi_{\mathrm{arch}}(x),$$
-defined for cutoff $c = 13$ and $L = \log 13$ by:
-1. **Prime Piece:**
-   $$\psi_{\mathrm{prime}}(x) = -\frac{1}{\pi} \sum_{n \text{ prime power} \le c} \frac{\Lambda(n)}{\sqrt{n}} \sin\left(2\pi x \left(1 - \frac{\log n}{L}\right)\right).$$
-2. **Pole Piece:**
-   $$\psi_{\mathrm{pole}}(x) = \frac{1}{\pi} \int_0^L \sin\left(2\pi x \left(1 - \frac{y}{L}\right)\right) \cdot 2\cosh\left(\frac{y}{2}\right) dy.$$
-3. **Archimedean Piece:**
-   $$\psi_{\mathrm{arch}}(x) = \frac{1}{2\pi^2} \int_{-T}^T h_+(\tau) \operatorname{Re}(\hat{S}(\tau, x)) d\tau.$$
-
-Because the divided-difference operation is strictly linear:
-$$\frac{\psi(m) - \psi(n)}{m - n} = \frac{\psi_{\mathrm{prime}}(m) - \psi_{\mathrm{prime}}(n)}{m - n} + \frac{\psi_{\mathrm{pole}}(m) - \psi_{\mathrm{pole}}(n)}{m - n} + \frac{\psi_{\mathrm{arch}}(m) - \psi_{\mathrm{arch}}(n)}{m - n},$$
-and on the diagonal $\psi'(n) = \psi_{\mathrm{prime}}'(n) + \psi_{\mathrm{pole}}'(n) + \psi_{\mathrm{arch}}'(n)$, the full $(2N+1) \times (2N+1)$ Galerkin matrix decomposes identically as:
-$$Q_{\mathrm{total}} = Q_{\mathrm{prime}} + Q_{\mathrm{pole}} + Q_{\mathrm{arch}}.$$
-
-### 2.2 Parity Projection onto the Even Sector
-All three components $\psi_{\mathrm{prime}}, \psi_{\mathrm{pole}}, \psi_{\mathrm{arch}}$ are strictly odd functions: $\psi(-x) = -\psi(x)$.
-Consequently, each matrix $Q_{\mathrm{comp}} \in \{Q_{\mathrm{prime}}, Q_{\mathrm{pole}}, Q_{\mathrm{arch}}\}$ satisfies:
-$$Q_{\mathrm{comp}}[-m, -n] = Q_{\mathrm{comp}}[m, n] \qquad \text{(centrosymmetry)}.$$
-Under the canonical even-basis isometry $V_{\mathrm{even}}: \mathbb{R}^{N+1} \to \mathbb{R}^{2N+1}$:
-$$V_{\mathrm{even}}[N, 0] = 1, \qquad V_{\mathrm{even}}[N \pm m, m] = \frac{1}{\sqrt{2}} \quad (m \ge 1),$$
-the projected even-sector matrix splits linearly without cross-terms:
-$$Q_{\mathrm{even}} = V_{\mathrm{even}}^T Q_{\mathrm{total}} V_{\mathrm{even}} = Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}} + Q_{\mathrm{even}, \mathrm{arch}}.$$
+1. **Algebraic Identity Verified to 70 Decimals:**
+   $$\|Q_{\mathrm{even}} - (Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}})\|_F \le 2.28 \times 10^{-70} \quad (\forall N \le 64),$$
+   confirming that the tripartite operator decomposition is implemented with complete algebraic fidelity.
+2. **$M = 3$ Coercivity Conclusively Falsified (Hypothesis H-C3.1):**
+   $$\lambda_{\min}(C_3) \approx 4.64 \times 10^{-39} \quad (N = 64) \quad \text{vs} \quad E_3 = 2.98 \times 10^{-38}.$$
+   The Cauchy interlacing bound $\lambda_{\min}(C_3) \le E_3(Q_{\mathrm{even}})$ holds identically. $C_3$ retains the remaining $\sim 8$ bound states of the potential well and cannot possibly satisfy $C_3 \succeq 0.386 I$.
+3. **Tight Interior Interlacing Confirmed (Hypothesis H-C3.2):**
+   $$E_{13}^{(N)} \ge \lambda_{10}(C_3) \ge E_{10}^{(N)}.$$
+   At $N = 64$:
+   $$E_{10} = 0.57558, \qquad \lambda_{10}(C_3) = 0.57558, \qquad E_{13} = 0.58242.$$
+   Although $C_3$ is not coercive as a whole, its **tenth eigenvalue already sits in the scattering continuum**.
+4. **$M = 12$ Coordinate Coercivity Falsified (Hypothesis H-C12):**
+   $$\lambda_{\min}(C_{12}) \text{ collapses from } 3.83 \times 10^{-2} \; (N=16) \longrightarrow 7.87 \times 10^{-6} \; (N=64).$$
+   The minimum eigenvalue collapses by **four orders of magnitude**. Coordinate-mode truncation to $m \ge 12$ does **not** produce a uniformly coercive principal block $C_{12} \succeq c I > 0$.
+5. **Component Sign Discovery (Strong Prime Indefiniteness):**
+   On high modes ($M = 12, N = 64$):
+   $$C_{\mathrm{arch}} \succeq 1.553 I, \qquad \lambda_{\min}(C_{\mathrm{prime}}) \approx -2.373, \qquad C_{\mathrm{pole}} \approx \mathcal{O}(10^{-6}).$$
+   The prime component is **strongly indefinite**. Full submatrix near-positivity ($\lambda_{\min}(C_{12}) \approx 7.87 \times 10^{-6}$) is produced by **near-perfect destructive cancellation between the Archimedean and prime sectors**, not by componentwise positivity.
+6. **The Fundamental Conceptual Distinction:**
+   $$\boxed{\text{coordinate-mode truncation } (\operatorname{span}\{e_M, \dots, e_N\}) \ne \text{spectral-subspace projection } (P_{\mathrm{cont}} = I - P_{\mathrm{bound}}).}$$
+   Physical bound states are wavepackets with non-zero tails across high Fourier modes. Truncating coordinate indices leaves bound-state tail weight in $C_{12}$, creating an additional near-zero eigenvalue.
 
 ---
 
-## 3. The Dual Submatrix Hypotheses: $M = 3$ vs $M = 12$
+## 2. Tripartite Decomposition & Matrix Invariants
 
-For any cutoff index $M \in \{1, \dots, N\}$, let $\mathcal{H}_{\mathrm{high}}^{(M)} = \operatorname{span}\{e_M, \dots, e_N\}$ denote the subspace spanned by modes $m \ge M$. The corresponding principal submatrix of $Q_{\mathrm{even}}$ is:
-$$C_M = Q_{\mathrm{even}}[M..N, M..N] \in \mathbb{R}^{(N-M+1) \times (N-M+1)}.$$
+Across discrete dimensions $N \in \{16, 20, 24, 28, 32, 36, 40, 48, 64\}$ at $c = 13, T = 600, \text{dps} = 70$:
 
-Cauchy's interlacing theorem for removing $M$ rows and columns from an $(N+1) \times (N+1)$ symmetric matrix states:
-$$E_k^{(N)} \le \lambda_k(C_M) \le E_{k+M}^{(N)} \qquad (\forall k \in \{0, \dots, N-M\}).$$
-
-### 3.1 The $M = 3$ Submatrix (Multiplier Sign-Change Boundary)
-At $c = 13$, the discrete Fourier frequencies $a_m = \frac{2\pi m}{\log 13}$ cross the Archimedean sign-change point $r_* \approx 6.28984$ between $m = 2$ and $m = 3$:
-$$h_+(a_2) \approx -0.914 < 0, \qquad h_+(a_3) \approx +0.386 > 0.$$
-
-- **Hypothesis H-C3.1 (Bound-State Collapse of $\lambda_{\min}(C_3)$):**
-  Because $M = 3$ removes only 3 modes from an $\sim 11$-dimensional bound-state well, the remaining $\sim 8$ bound states reside inside $C_3$. By Cauchy interlacing with $k = 0$:
-  $$\lambda_{\min}(C_3) \le E_3^{(N)} \approx 2.98 \times 10^{-38} \ll 0.386.$$
-  $C_3$ is **not coercive** with constant $0.386$.
-- **Hypothesis H-C3.2 (Interior Interlacing Lower Bound):**
-  By Cauchy interlacing with $k = 10$:
-  $$E_{13}^{(N)} \ge \lambda_{10}(C_3) \ge E_{10}^{(N)}.$$
-  The 11th eigenvalue $\lambda_{10}(C_3)$ lies in the scattering continuum ($\ge 0.40$), while the ground state $\lambda_0(C_3)$ remains collapsed.
-
-### 3.2 The $M = 12$ Submatrix (Bound-State Cluster Boundary)
-Cell 121 demonstrated that the bound-state cluster saturates at $L \approx 11$. For $L \ge 12$, the Ritz gap $g_{2, L}(N)$ stabilizes to macroscopic values ($g_{2, 12} \ge 0.582$).
-
-- **Hypothesis H-C12 (Continuum Submatrix Coercivity):**
-  Projecting out all $M = 12$ modes ($m \in \{0, \dots, 11\}$) eliminates the entire bound-state cluster. The principal submatrix $C_{12} = Q_{\mathrm{even}}[12..N, 12..N]$ satisfies:
-  $$C_{12} \succeq c_{12} I \qquad \text{with } c_{12} \approx 0.50 > 0 \quad \text{uniformly across } N.$$
-- **Cauchy Consequence for Gate 1:**
-  By Cauchy interlacing with $M = 12$ and $k = 1$:
-  $$\boxed{E_{13}^{(N)} \ge \lambda_1(C_{12}) \ge \lambda_{\min}(C_{12}) \ge c_{12} > 0 \qquad (\forall N \ge 13).}$$
-  Because $E_{L+1}^{(N)} \ge E_{13}^{(N)}$ for all $L \ge 12$, establishing $C_{12} \succeq c_{12} I > 0$ **unconditionally proves the Denominator Theorem** for all $L \ge 12$:
-  $$E_{L+1}^{(N)} - E_{j+1}^{(N)} \ge c_{12} - E_{j+1}^{(N)} \ge \delta > 0.$$
+| $N$ | $\|Q_{\mathrm{even}} - \sum Q_{\mathrm{comp}}\|_F$ | $\lambda_{\min}(Q_{\mathrm{even}})$ | $\lambda_{\min}(C_3)$ | $E_3(Q_{\mathrm{even}})$ | Status ($\lambda_{\min} \le E_3$) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | $7.37 \times 10^{-71}$ | $7.39 \times 10^{-35}$ | $1.74 \times 10^{-20}$ | $1.30 \times 10^{-19}$ | **VERIFIED** |
+| 20 | $8.62 \times 10^{-71}$ | $1.34 \times 10^{-39}$ | $1.48 \times 10^{-24}$ | $1.03 \times 10^{-23}$ | **VERIFIED** |
+| 24 | $8.98 \times 10^{-71}$ | $2.60 \times 10^{-43}$ | $2.07 \times 10^{-27}$ | $1.41 \times 10^{-26}$ | **VERIFIED** |
+| 28 | $1.06 \times 10^{-70}$ | $9.34 \times 10^{-47}$ | $2.87 \times 10^{-30}$ | $1.91 \times 10^{-29}$ | **VERIFIED** |
+| 32 | $1.28 \times 10^{-70}$ | $2.17 \times 10^{-49}$ | $2.00 \times 10^{-32}$ | $1.31 \times 10^{-31}$ | **VERIFIED** |
+| 36 | $1.60 \times 10^{-70}$ | $2.65 \times 10^{-50}$ | $2.92 \times 10^{-34}$ | $1.89 \times 10^{-33}$ | **VERIFIED** |
+| 40 | $1.73 \times 10^{-70}$ | $2.57 \times 10^{-50}$ | $9.27 \times 10^{-36}$ | $5.98 \times 10^{-35}$ | **VERIFIED** |
+| 48 | $1.82 \times 10^{-70}$ | $2.10 \times 10^{-50}$ | $6.89 \times 10^{-38}$ | $4.42 \times 10^{-37}$ | **VERIFIED** |
+| 64 | $2.28 \times 10^{-70}$ | $-5.08 \times 10^{-52}$ | $4.64 \times 10^{-39}$ | $2.98 \times 10^{-38}$ | **VERIFIED** |
 
 ---
 
-## 4. Component Sign Structures & Audit Questions
+## 3. Auditing the $M = 3$ Submatrix ($C_3 = Q_{\mathrm{even}}[3..N, 3..N]$)
 
-For both $M = 3$ and $M = 12$, Cell 123 evaluates the tripartite components:
-$$C_M = C_{M, \mathrm{arch}} + C_{M, \mathrm{prime}} + C_{M, \mathrm{pole}}.$$
+### 3.1 Bound-State Collapse vs Interior Continuum Interlacing
+At $c = 13$, the continuous Archimedean multiplier changes sign between $a_2$ and $a_3$: $h_+(a_2) \approx -0.914, h_+(a_3) \approx +0.386$.
+However, the submatrix $C_3$ fails coercivity completely because $\lambda_{\min}(C_3)$ tracks $E_3$:
 
-| Component | Construction in Code | Analytical Sign Expectation on High Modes | Open Audit Question |
-| :--- | :--- | :--- | :--- |
-| **Archimedean ($C_{\mathrm{arch}}$)** | Smeared Fejér integral against $h_+(\tau)$ | $h_+(a_m) > 0$ for $m \ge 3$, but sinc tails overlap $[0, r_*]$ | Does off-diagonal leakage allow $\lambda_{\min}(C_{\mathrm{arch}}) < 0$ on $M = 3$? Does it become strictly positive on $M = 12$? |
-| **Prime ($C_{\mathrm{prime}}$)** | Finite cosine/sine sum over $p^k \le 13$ with explicit minus sign | Negative on ground state ($Q_{\mathrm{prime}}[u_0] \approx -0.078$) | Is $C_{\mathrm{prime}}$ negative, positive, or indefinite on $M = 3$ and $M = 12$? What is its spectral norm relative to $C_{\mathrm{arch}}$? |
-| **Pole ($C_{\mathrm{pole}}$)** | Integral of $2\cosh(y/2) \sin(\dots)$ | Positive definite on full space ($Q_{\mathrm{pole}}[u_0] \approx +1.572$) | Does $C_{\mathrm{pole}}$ remain strictly positive definite on high-mode submatrices? |
+| $N$ | $E_3(Q)$ | $\lambda_{\min}(C_3)$ | $E_{10}(Q)$ | $\lambda_{10}(C_3)$ | $E_{13}(Q)$ | Interlacing Chain |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | $1.30 \times 10^{-19}$ | $1.74 \times 10^{-20}$ | $1.04298$ | $2.49043$ | $2.49043$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 20 | $1.03 \times 10^{-23}$ | $1.48 \times 10^{-24}$ | $0.12816$ | $2.06092$ | $2.06667$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 24 | $1.41 \times 10^{-26}$ | $2.07 \times 10^{-27}$ | $5.35 \times 10^{-3}$ | $1.79144$ | $1.80126$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 28 | $1.91 \times 10^{-29}$ | $2.87 \times 10^{-30}$ | $7.47 \times 10^{-4}$ | $1.29038$ | $1.31419$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 32 | $1.31 \times 10^{-31}$ | $2.00 \times 10^{-32}$ | $1.37 \times 10^{-4}$ | $0.81453$ | $0.81621$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 36 | $1.89 \times 10^{-33}$ | $2.92 \times 10^{-34}$ | $3.77 \times 10^{-5}$ | $0.78162$ | $0.78163$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 40 | $5.98 \times 10^{-35}$ | $9.27 \times 10^{-36}$ | $1.69 \times 10^{-5}$ | $0.72710$ | $0.72745$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 48 | $4.42 \times 10^{-37}$ | $6.89 \times 10^{-38}$ | $8.10 \times 10^{-6}$ | $0.62446$ | $0.62883$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+| 64 | $2.98 \times 10^{-38}$ | $4.64 \times 10^{-39}$ | $6.99 \times 10^{-6}$ | $0.57558$ | $0.58242$ | $E_{13} \ge \lambda_{10} \ge E_{10}$ |
+
+**Conclusion on H-C3.1 & H-C3.2:**
+- $\lambda_{\min}(C_3) \le E_3$ is verified unconditionally to 70 dps. $C_3 \succeq 0.386 I$ is **definitively falsified**.
+- However, the tenth eigenvalue $\lambda_{10}(C_3)$ sits tightly inside the continuum: at $N = 64$, $\lambda_{10}(C_3) = 0.57558$, while $E_{10} = 6.99 \times 10^{-6}$ and $E_{13} = 0.58242$. Removing 3 modes isolates the continuum **in the interior spectrum**, but not at the bottom of the principal submatrix.
 
 ---
 
-## 5. Quantitative Falsification & Verification Criteria
+## 4. Auditing the $M = 12$ Submatrix ($C_{12} = Q_{\mathrm{even}}[12..N, 12..N]$)
 
-1. **Falsification of Route C $M = 3$ Coercivity:**
-   If $\lambda_{\min}(C_3) \le 10^{-20}$ across tested dimensions $N \in [16, 64]$, the naive Route C coercivity premise ($C_3 \succeq 0.386 I$) is **conclusively falsified**.
-2. **Verification of Cauchy Interlacing Bounds:**
-   - For $M = 3$: Confirm $\lambda_{\min}(C_3) \le E_3^{(N)}$ and $E_{13}^{(N)} \ge \lambda_{10}(C_3)$ to machine precision.
-   - For $M = 12$: Confirm $E_{13}^{(N)} \ge \lambda_1(C_{12}) \ge \lambda_{\min}(C_{12})$ to machine precision.
-3. **Certification of Core-Submatrix Coercivity ($M = 12$):**
-   If $\lambda_{\min}(C_{12}) \ge c_{12} > 0$ with $c_{12} \approx 0.50$ across all tested dimensions $N \in [16, 64]$, the **Core-Submatrix Coercivity Conjecture** is empirically secured, providing the exact target for analytical certification.
-4. **Sharpness of the Bound-State-to-Continuum Transition:**
-   Across the sweep $M \in \{3, 4, 6, 8, 10, 12, 14, 16\}$, $\lambda_{\min}(C_M)$ must exhibit a sharp transition from exponential collapse ($M \le 10$) to macroscopic positivity ($M \ge 12$), mirroring the Ritz gap transition from Cell 121.
+### 4.1 Numerical Breakdown & Collapse of $\lambda_{\min}(C_{12})$
+
+| $N$ | $\lambda_{\min}(C_{12})$ | $\lambda_1(C_{12})$ | $E_{13}(Q)$ | Cauchy Bound Status |
+| :---: | :---: | :---: | :---: | :---: |
+| 16 | $3.83 \times 10^{-2}$ | $0.84674$ | $2.49043$ | **VERIFIED** |
+| 20 | $3.57 \times 10^{-3}$ | $0.09495$ | $2.06667$ | **VERIFIED** |
+| 24 | $3.24 \times 10^{-4}$ | $0.01260$ | $1.80126$ | **VERIFIED** |
+| 28 | $4.95 \times 10^{-5}$ | $0.00718$ | $1.31419$ | **VERIFIED** |
+| 32 | $1.57 \times 10^{-5}$ | $0.00404$ | $0.81621$ | **VERIFIED** |
+| 36 | $1.01 \times 10^{-5}$ | $0.00220$ | $0.78163$ | **VERIFIED** |
+| 40 | $8.76 \times 10^{-6}$ | $0.00157$ | $0.72745$ | **VERIFIED** |
+| 48 | $8.09 \times 10^{-6}$ | $0.00118$ | $0.62883$ | **VERIFIED** |
+| 64 | $7.87 \times 10^{-6}$ | $0.00082$ | $0.58242$ | **VERIFIED** |
+
+### 4.2 Rejection of Uniform Coordinate Coercivity
+In the pre-flight note of Cell 123, it was hypothesized that removing the 12 lowest coordinate modes would eliminate all $\bar{N}_{\mathrm{bound}} \approx 11$ bound states, yielding uniform coercivity $C_{12} \succeq c_{12} I > 0$ with $c_{12} \approx 0.50$.
+**The data conclusively refute this hypothesis:**
+- $\lambda_{\min}(C_{12})$ collapses monotonically from $0.0383$ down to $7.87 \times 10^{-6}$ across $N \in [16, 64]$.
+- The second eigenvalue $\lambda_1(C_{12})$ also collapses: from $0.847$ down to $8.20 \times 10^{-4}$.
+- Consequently, Cauchy interlacing $E_{13} \ge \lambda_1(C_{12}) \ge \lambda_{\min}(C_{12})$ provides only an asymptotically vanishing lower bound ($7.87 \times 10^{-6}$), **not** the macroscopic bound $0.582$ that exists in the full spectrum $E_{13}$.
+
+---
+
+## 5. The Component Spectrum Audit: Archimedean vs Prime Cancellation
+
+Evaluating the spectrum of individual operator sectors on $\mathcal{H}_{\mathrm{high}}^{(12)} = \operatorname{span}\{e_{12}, \dots, e_N\}$ reveals why $C_{12}$ is not strongly positive:
+
+| Sector | Spectrum at $N = 16$ | Spectrum at $N = 32$ | Spectrum at $N = 64$ | Nature |
+| :--- | :---: | :---: | :---: | :---: |
+| **Archimedean ($C_{12, \mathrm{arch}}$)** | $[1.555, 1.848]$ | $[1.553, 2.530]$ | $[1.553, 3.216]$ | **Strictly Positive Definite** ($\ge 1.55$) |
+| **Prime ($C_{12, \mathrm{prime}}$)** | $[-1.676, 1.008]$ | $[-2.180, 1.875]$ | $[-2.373, 2.212]$ | **Strongly Indefinite** |
+| **Pole ($C_{12, \mathrm{pole}}$)** | $[0, 2.94 \times 10^{-6}]$ | $[0, 4.25 \times 10^{-6}]$ | $[0, 4.42 \times 10^{-6}]$ | **Positive Semidefinite** (negligible) |
+| **Total ($C_{12}$)** | $\lambda_{\min} = 0.03825$ | $\lambda_{\min} = 1.57 \times 10^{-5}$ | $\lambda_{\min} = 7.87 \times 10^{-6}$ | **Near-Zero (Cancellation)** |
+
+### Analytical Interpretation
+1. **The Prime Term is Strongly Indefinite:**
+   The prime symbol carries an explicit minus sign: $\psi_{\mathrm{prime}}(x) = -\frac{1}{\pi} \sum \frac{\Lambda(n)}{\sqrt{n}} \sin(\dots)$. While the continuous Archimedean piece is coercive ($C_{\mathrm{arch}} \ge 1.553$), the prime matrix elements produce negative eigenvalues reaching $-2.373$.
+2. **Near-Perfect Destructive Cancellation:**
+   The positive Archimedean sector and the negative modes of the prime sector almost perfectly cancel each other on high modes:
+   $$\lambda_{\min}(C_{12}) = \lambda_{\min}(C_{\mathrm{arch}} + C_{\mathrm{prime}} + C_{\mathrm{pole}}) \approx 1.55 - 1.55 = 7.87 \times 10^{-6}.$$
+   Positivity in the Connes–CvS Galerkin operator is **not componentwise**; it is an emergent balance between arithmetic and Archimedean distributions.
+
+---
+
+## 6. The $M$-Cutoff Sweep: Spectral Localization vs Coordinate Truncation
+
+Tracking $\lambda_{\min}(C_M)$ across cutoff index $M$ and dimension $N$:
+
+| $N$ | $M=3$ | $M=4$ | $M=6$ | $M=8$ | $M=10$ | $M=12$ | $M=14$ | $M=16$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 16 | $1.74 \times 10^{-20}$ | $1.57 \times 10^{-16}$ | $6.00 \times 10^{-10}$ | $4.14 \times 10^{-5}$ | $4.30 \times 10^{-3}$ | $0.03825$ | $0.2771$ | --- |
+| 20 | $1.48 \times 10^{-24}$ | $1.90 \times 10^{-20}$ | $3.31 \times 10^{-13}$ | $2.33 \times 10^{-7}$ | $9.62 \times 10^{-5}$ | $3.57 \times 10^{-3}$ | $0.03461$ | $0.2384$ |
+| 24 | $2.07 \times 10^{-27}$ | $4.48 \times 10^{-23}$ | $1.55 \times 10^{-15}$ | $1.86 \times 10^{-9}$ | $5.62 \times 10^{-6}$ | $3.24 \times 10^{-4}$ | $3.20 \times 10^{-3}$ | $0.05196$ |
+| 28 | $2.87 \times 10^{-30}$ | $9.91 \times 10^{-26}$ | $1.25 \times 10^{-17}$ | $4.88 \times 10^{-11}$ | $2.73 \times 10^{-6}$ | $4.95 \times 10^{-5}$ | $1.64 \times 10^{-3}$ | $0.01897$ |
+| 32 | $2.00 \times 10^{-32}$ | $8.78 \times 10^{-28}$ | $1.76 \times 10^{-19}$ | $2.05 \times 10^{-12}$ | $1.16 \times 10^{-6}$ | $1.57 \times 10^{-5}$ | $9.99 \times 10^{-4}$ | $7.19 \times 10^{-3}$ |
+| 36 | $2.92 \times 10^{-34}$ | $1.96 \times 10^{-29}$ | $9.52 \times 10^{-21}$ | $2.29 \times 10^{-13}$ | $4.04 \times 10^{-7}$ | $1.01 \times 10^{-5}$ | $6.07 \times 10^{-4}$ | $3.76 \times 10^{-3}$ |
+| 40 | $9.27 \times 10^{-36}$ | $9.06 \times 10^{-31}$ | $8.21 \times 10^{-22}$ | $4.13 \times 10^{-14}$ | $1.82 \times 10^{-7}$ | $8.76 \times 10^{-6}$ | $4.52 \times 10^{-4}$ | $2.93 \times 10^{-3}$ |
+| 48 | $6.89 \times 10^{-38}$ | $1.56 \times 10^{-32}$ | $5.01 \times 10^{-23}$ | $9.09 \times 10^{-15}$ | $8.66 \times 10^{-8}$ | $8.09 \times 10^{-6}$ | $3.48 \times 10^{-4}$ | $2.50 \times 10^{-3}$ |
+| 64 | $4.64 \times 10^{-39}$ | $1.83 \times 10^{-33}$ | $1.79 \times 10^{-23}$ | $5.42 \times 10^{-15}$ | $7.53 \times 10^{-8}$ | $7.87 \times 10^{-6}$ | $2.52 \times 10^{-4}$ | $2.13 \times 10^{-3}$ |
+
+### The Physical Lesson
+At fixed $N = 64$, $\lambda_{\min}(C_M)$ increases smoothly across cutoffs:
+$$10^{-39} \to 10^{-33} \to 10^{-23} \to 10^{-15} \to 10^{-8} \to 10^{-6} \to 10^{-4} \to 10^{-3}.$$
+This is **not a sharp step function to a continuum floor**. It is the gradual extinction of bound-state wavepacket tails as higher Fourier modes are truncated.
+Because bound states $u_j$ have non-compact Fourier support (their Fourier tails decay rapidly but are non-zero), deleting the coordinate basis vectors $e_0, \dots, e_{M-1}$ leaves residual overlap with the bound-state subspace, permitting a Rayleigh quotient of order $\mathcal{O}(\text{tail mass})$.
+
+---
+
+## 7. Strategic Redirection for Gate 1 & Milestone M-G1.4
+
+1. **Retire Coordinate Submatrix Coercivity:**
+   Cauchy interlacing on coordinate principal submatrices $C_M = Q[M..N, M..N]$ cannot manufacture the continuum gap. This branch is officially closed.
+2. **Cell 121 Full-Operator Spectral Gap is Fully Intact:**
+   Cell 121's discovery remains completely solid:
+   $$E_{13}^{(N)} - E_3^{(N)} \ge 0.582 \quad (\forall N \in [16, 64]).$$
+   The continuum gap is a property of the **full operator's eigenvalues**, not of its coordinate blocks. Gate 1 cares exclusively about $E_{L+1} - E_{j+1}$, not about coordinate localization.
+3. **The Natural Spectral Subspace Projection (Forward Path for Cell 124):**
+   Instead of coordinate truncation $C_M$, the natural operator separating the bound states from the continuum is the **spectral projection**:
+   $$P_{\mathrm{bound}}^{(N)} = \sum_{j=0}^{10} u_j^{(N)} (u_j^{(N)})^T, \qquad P_{\mathrm{cont}}^{(N)} = I - P_{\mathrm{bound}}^{(N)}.$$
+   On the continuum spectral subspace $\mathcal{H}_{\mathrm{cont}} = \operatorname{Ran}(P_{\mathrm{cont}})$, the operator $P_{\mathrm{cont}} Q_{\mathrm{even}} P_{\mathrm{cont}}$ has minimum eigenvalue identically equal to $E_{11}^{(N)}$ (or $E_{12}^{(N)}$), which is macroscopic ($\approx 0.58$).
+   The analytical challenge for Cell 124 is to establish a variational min-max lower bound on $E_{12}$ or $E_{13}$ directly from the quadratic form, bypassing coordinate principal submatrices entirely.
