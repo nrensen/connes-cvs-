@@ -265,7 +265,7 @@ def run_cell132_audit():
     print(f"Bound-State Cutoff: N_bound = {N_BOUND} (continuum subspace dimension q = N - 10)")
     print("=" * 80)
 
-    prime_data = prime_powers_up_to(C_PARAM)
+    prime_data, primes_list = prime_powers_up_to(C_PARAM)
     print(f"Loaded {len(prime_data)} prime powers up to c = {C_PARAM}.")
 
     table1_rows = []  # Residual audit
@@ -281,7 +281,16 @@ def run_cell132_audit():
         # ----------------------------------------------------
         # 1. Retrieve full Q_even and compute exact eigenvectors
         # ----------------------------------------------------
-        Q_even_full = get_galerkin_matrix(N, C_PARAM, T_PARAM, "even", dps=GROUND_DPS)
+        Q_full, _ = get_galerkin_matrix(
+            c=C_PARAM,
+            N=N,
+            T=T_PARAM,
+            dps=GROUND_DPS,
+            verbose=False,
+        )
+        V_proj = canonical_even_projector(N)
+        Q_even_full = V_proj.T * Q_full * V_proj
+        Q_even_full = mp.mpf("0.5") * (Q_even_full + Q_even_full.T)
         E_sorted, V_even = symmetric_eigendecomposition(Q_even_full)
 
         # Continuum subspace isometry U_cont in R^{(N+1) x q_cont}
@@ -294,7 +303,6 @@ def run_cell132_audit():
         # ----------------------------------------------------
         # 2. Assemble full constituent operators
         # ----------------------------------------------------
-        V_proj = canonical_even_projector(N)
 
         # Archimedean full and divided difference
         psi_arch_vals = [h_plus(k * mp.pi / L_PARAM, T_PARAM) for k in range(N + 1)]
