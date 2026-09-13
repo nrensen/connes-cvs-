@@ -3834,7 +3834,52 @@ where $A_{N, k} \equiv a_N \frac{k^2 v_{N, k}}{N^2 - k^2}$ and $B_{N, k} \equiv 
 
 ---
 
-# Updated major historical arc (Cells 0–119)
+## Cell 120 (Gate 1 Route 1B Feasibility Audit & Discrete Barrier Mechanics for Route 1A)
+
+* **Script:** [`cell120.py`](file:///c:/data/github/connes-cvs-/cell120.py)
+* **Output:** [`cell120.out`](file:///c:/data/github/connes-cvs-/cell120.out) (runtime: 270.08 s at 70 dps)
+* **Companion Analytical Note:** [`cell120.md`](file:///c:/data/github/connes-cvs-/cell120.md)
+* **Target:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M-G1.0 / Strategic Fork: Route 1B vs Route 1A)
+
+### Target & Mathematical Rationale
+Following the formal closure of Phase IX in Cell 119, Cell 120 directly audited the two primary competing routes to the Gate 1 central proposition:
+$$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1.$$
+Route 1B posited that Loewner smoothness ensures $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}} \le M < \infty$ and that the lower Ritz gap $g_{j, L}(N) \equiv E_{L+1}^{(N)} - E_{j+1}^{(N)} \ge g_* > 0$ stabilizes, guaranteeing $R_{\mathrm{spec}}(N, L) = \mathcal{O}(1)$. Route 1A posited that parity doublet splitting decays exponentially $\Delta_j(N) \le C_j e^{-\sigma_j N}$ due to a discrete WKB barrier.
+
+### What it Established (Audit Results)
+1. **Route 1B Decisively Falsified for Fixed Small $L$:** While $\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}$ remains bounded ($3.32 \to 6.47$), the lower Ritz gap $g_{2, 4}(N) = E_5^{(N)} - E_3^{(N)}$ collapses by 15 orders of magnitude from $6.43 \times 10^{-12}$ at $N = 16$ down to $2.75 \times 10^{-27}$ at $N = 192$. Consequently, $R_{\mathrm{spec}}(N, 4)$ explodes from $8.02 \times 10^{22}$ to $8.56 \times 10^{53}$. The remote spectrum factor is not benign when the tail boundary is placed inside the low-energy bound-state cluster.
+2. **Physical Cause (Collective Bound-State Clustering Near Zero):** The entire low-lying positive spectrum collapses toward zero together ($E_3 \approx 1.47 \times 10^{-38}, E_5 \approx 2.75 \times 10^{-27}$ at $N = 192$). Because the well carries $\bar{N}_{\mathrm{bound}} \approx 11$ bound states beneath the barrier top, setting $L = 4$ traps the tail boundary inside the cluster.
+3. **The Core-Size Discovery ($L \ge 8$ Invariant Product Suppression):** In sharp contrast to $L = 4$, setting $L = 8$ yields an astonishingly small and rapidly decaying Gate 1 product:
+   $$\mathcal{P}_2(N, L=8): \quad 3.54 \times 10^{-19} \longrightarrow 3.88 \times 10^{-23} \quad (N = 16 \dots 64),$$
+   *despite* $R_{\mathrm{spec}}(64, 8) \approx 1.53 \times 10^{18}$ being huge. Tunneling suppression $\Delta_2(N)$ dominates residual spectral crowding by over 20 decades once $L$ is large enough.
+4. **Category Error Diagnosed in Tridiagonal Surrogate (Route 1A):** The Galerkin Hamiltonian is a dense matrix with non-zero off-diagonal couplings $H_{mn}$. Truncating to nearest-neighbor hopping $H_{m, m+1}$ and computing a discrete scalar Agmon action ($S_{\mathrm{Agmon}} \approx 18.96$) is an illegitimate surrogate diagnostic. Furthermore, the diagonal potential $V_{\mathrm{eff}}(m) = H_{mm}$ oscillates wildly ($0.26 \to 2.51$), producing 13 alternating turning points.
+5. **Numerical Precision Floor at 70 dps:** At $N \ge 40$, the ground doublet splitting $\Delta_0(N)$ hits the eigensolver precision floor near $10^{-50}$ ($4.89 \times 10^{-51} \to 2.78 \times 10^{-50}$), producing an unphysical sign flip in the estimated slope $\sigma_0$. Reliable numerical rates must be evaluated strictly above this floor.
+
+### Status
+**Executed (`cell120.out`, runtime: 270.08 s) & Calibrated.** Decisive route disqualification (Route 1B dead for fixed small $L$) and discovery of core-size product suppression.
+
+---
+
+## Cell 121 (Core-Size ($L$) Invariant Product Mapping & Bound-State-to-Continuum Transition)
+
+* **Script:** [`cell121.py`](file:///c:/data/github/connes-cvs-/cell121.py)
+* **Output:** `cell121.out` (pending external execution)
+* **Companion Analytical Note:** [`cell121.md`](file:///c:/data/github/connes-cvs-/cell121.md)
+* **Target:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M-G1.0 / Core-Size Scaling)
+
+### Target & Mathematical Rationale
+Building directly on the discoveries of Cell 120, Cell 121 maps the core-size dependence of the Gate 1 product across a systematic 2D grid:
+$$\mathcal{P}_j(N, L) \equiv \Delta_j(N) R_{\mathrm{spec}, j}(N, L)$$
+for $L \in \{4, 6, 8, 10, 12, 14, 16\}$ and $N \in \{16, 20, 24, 28, 32, 36, 40, 48, 64\}$.
+The test determines whether the apparent success at $L = 8$ is robust as $L$ increases past the bound-state capacity ($\bar{N}_{\mathrm{bound}} \approx 11$) into the scattering continuum, tracking the supremum envelope $\mathcal{S}_j(L) = \sup_N \mathcal{P}_j(N, L)$ to empirically test the joint limit:
+$$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.$$
+
+### Status
+**Planned / Script Authored (`cell121.py`, `cell121.md`).** Ready for external execution.
+
+---
+
+# Updated major historical arc (Cells 0–121)
 
 ```
 Cells 0–4
@@ -3899,6 +3944,12 @@ Cell 118 (Phase IX)
     ↓
 Cell 119 (Phase IX)
     Exact algebraic modal decomposition: A_{N, k} vs B_{N, k} cancellation balance, partial sum trajectories, and Theorem 1 algebraic synthesis
+    ↓
+Cell 120 (Gate 1 Route 1B vs 1A)
+    Route 1B audited: Ritz gaps collapse exponentially inside well, R_spec explodes to 10^53, Route 1B dead for fixed small L; L=8 product suppression ~ 10^-23 discovered; tridiagonal surrogate diagnosed
+    ↓
+Cell 121 (Gate 1 Core-Size Scaling)
+    2D (N, L) grid mapping of Gate 1 product P_j(N, L) across L in {4..16} and N in [16..64], bound-state capacity transition (L < 11 vs L >= 12), and envelope S_j(L) scaling
 ```
 
 ---
