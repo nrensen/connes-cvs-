@@ -94,60 +94,46 @@ contains $E_K$ in the denominator $\delta$, which creates apparent circularity i
 
 We now present two rigorous methods to break this circularity.
 
-### Method 1: The Feshbach/Schur Determinantal Gap Isolation
+### Method 1: The Feshbach/Schur Determinantal Formulation & Epistemic Audit
 
 Recall the block decomposition from Proposition 2.1:
 $$\widetilde{Q} = \begin{pmatrix} A & B^T \\ B & C \end{pmatrix}, \qquad \|B\|_2 = \varepsilon.$$
 Let $\lambda_{\max}(A) \le \bar{\mu} \ll 1$ be the maximum Rayleigh–Ritz energy on the trial subspace $\Phi$.
 
-### Theorem 4.1 (Schur Complement Resolvent Invertibility)
-Let $\gamma > \bar{\mu}$ be a target continuum threshold.
-Suppose that for all $\lambda \in (\bar{\mu} + \varepsilon, \gamma)$, the shifted matrix $Q - \lambda I$ is non-singular.
-Then $Q$ has **no eigenvalues in the interval $(\bar{\mu} + \varepsilon, \gamma)$**.
-Consequently:
-$$E_K \ge \gamma.$$
+*Epistemic Audit of Resolvent Invertibility (Circularity Diagnosed):*  
+One might be tempted to claim that if $Q - \lambda I$ is non-singular for all $\lambda \in (\bar{\mu} + \varepsilon, \gamma)$, then $E_K \ge \gamma$.  
+However, as established in the review of Cell 125, this argument is **circular**:
+1. Assuming that $(Q - \lambda I)^{-1}$ has no poles throughout an interval $(\bar{\mu} + \varepsilon, \gamma)$ assumes from the start that no eigenvalues exist in that interval—which is the very conclusion sought.
+2. Furthermore, Kato–Temple / Bauer–Fike bounds only guarantee that each eigenvalue of $A$ has *some* eigenvalue of $Q$ within distance $\varepsilon$. It does not by itself prove that these eigenvalues correspond to the *first* $K$ eigenvalues of $Q$ without an independent multiplicity/order argument.
+Consequently, Method 1 does not break the circularity and is retired as a proof of the gap.
 
-*Proof.* By the Kato–Temple / Bauer–Fike theorem for symmetric matrices, for each eigenvalue $\mu_j$ of $A$ ($j = 0, \dots, K-1$), there exists an exact eigenvalue $E_{\pi(j)}$ of $Q$ such that:
-$$|E_{\pi(j)} - \mu_j| \le \|R\|_2 = \varepsilon.$$
-Since $\mu_j \le \lambda_{\max}(A) \le \bar{\mu}$, these $K$ eigenvalues satisfy $E_{\pi(j)} \le \bar{\mu} + \varepsilon$.
-Because the eigenvalues are ordered $E_0 \le E_1 \le \dots \le E_{K-1} \le E_K$, the lowest $K$ eigenvalues of $Q$ are all accounted for in the interval $[E_0, \bar{\mu} + \varepsilon]$:
-$$E_{K-1} \le \bar{\mu} + \varepsilon.$$
-If $Q - \lambda I$ is non-singular for all $\lambda \in (\bar{\mu} + \varepsilon, \gamma)$, then by the intermediate value theorem for continuous eigenvalue paths, no eigenvalue can lie in $(\bar{\mu} + \varepsilon, \gamma)$.
-Therefore, the next eigenvalue $E_K$ must lie at or above $\gamma$:
-$$E_K \ge \gamma.$$
-$\blacksquare$
+---
 
-### Method 2: Direct Operator Form Domination on $\Phi^\perp$
+### Method 2: Direct Operator Form Domination on $\Phi^\perp$ (The Open Analytical Target)
 
-The cleanest non-circular route is to construct $\Phi$ such that $\lambda_{\min}(C)$ is bounded directly from the quadratic form:
+The true non-circular route is to prove that the compression $C = U_{\Phi^\perp}^T Q U_{\Phi^\perp}$ satisfies $\lambda_{\min}(C) \ge c_* > 0$ directly from the quadratic form:
 $$\langle v, Q_{\mathrm{even}} v \rangle = \langle v, Q_{\mathrm{arch}} v \rangle + \langle v, Q_{\mathrm{prime}} v \rangle + \langle v, Q_{\mathrm{pole}} v \rangle \quad (\forall v \in \Phi^\perp).$$
 
 Why did coordinate truncation $v \in \operatorname{span}\{e_{12}, \dots, e_N\}$ fail in Cell 123?
 - In coordinate space, the basis vectors $e_m = \sqrt{2/L} \cos(2\pi m t / L)$ for $m \ge 12$ are unconstrained inside the potential well $[0, L]$.
 - Specific linear combinations of high cosines can localize at the positions of the prime spikes $t_p = \log(p^k)$, exciting the negative eigenvalues of $Q_{\mathrm{prime}}$ ($\lambda_{\min}(C_{\mathrm{prime}}) \approx -2.373$) to cancel the Archimedean floor ($C_{\mathrm{arch}} \approx +1.553$).
 
-### Theorem 4.2 (Subspace-Constrained Form Domination)
+### Open Proposition 4.2 (Subspace-Constrained Delocalization & Form Domination Target)
 Suppose $\Phi$ contains:
 1. An orthonormal basis for the low coordinate modes: $\operatorname{span}\{e_0, \dots, e_M\} \subset \Phi$ ($M \ge 3$, where $h_+(a_m) \ge 0.386$ for $m > M$).
-2. The analytic well quasimodes $\{\phi_k^{\mathrm{well}}\}_{k=0}^{\bar{N}-1}$ capturing the confined states of the potential well $V_{\mathrm{conf}}(t)$.
+2. The analytic well quasimodes $\{\phi_k^{\mathrm{well}}\}_{k=0}^{K-1}$ capturing the confined states of the potential well $V_{\mathrm{conf}}(t)$.
 
-Then for every $v \in \Phi^\perp$:
-1. $v$ is orthogonal to all low Fourier modes $m \le M$, guaranteeing high-frequency Archimedean kinetic coercivity:
-   $$\langle v, Q_{\mathrm{arch}} v \rangle \ge h_+(a_{M+1}) \|v\|^2 - \mathcal{O}(\text{off-diagonal leakage}).$$
-2. $v$ is orthogonal to the localized well states, forcing $v$ to be a delocalized scattering state with bounded local amplitude at the prime coordinates $t_p$:
-   $$\sup_{t \in [0, L]} |v(t)|^2 \le C_{\mathrm{deloc}} \|v\|^2.$$
-3. On such delocalized states, the indefinite prime form is strictly controlled by:
-   $$|\langle v, Q_{\mathrm{prime}} v \rangle| \le C_{\mathrm{prime}}^{\mathrm{deloc}} \|v\|^2 < \langle v, Q_{\mathrm{arch}} v \rangle.$$
-Consequently:
-$$\inf_{v \in \Phi^\perp, \|v\|=1} \langle v, Q_{\mathrm{even}} v \rangle \ge c_* > 0.$$
+*The Central Open Analytical Question:*  
+Does orthogonality to $\Phi$ ($v \in \Phi^\perp$) mathematically force $v$ to be a **delocalized scattering state** with bounded local amplitude at the prime coordinates:
+$$\sup_{t \in [0, L]} |v(t)|^2 \stackrel{?}{\le} C_{\mathrm{deloc}} \|v\|^2?$$
+*Epistemic Warning:*  
+Orthogonality to a finite collection of localized well states does **not automatically imply pointwise delocalization**. High-energy scattering states could in principle still concentrate locally. Establishing an explicit, independent bound on $\langle v, Q_{\mathrm{prime}} v \rangle$ on $\Phi^\perp$ without assuming the continuum spectral gap is the exact analytical target for **Cell 126**.
 
 ---
 
-## 5. The Approximate Invariant Subspace Theorem
+## 5. The Approximate Invariant Subspace Separation Theorem
 
-Following the reviewer's insight in §11, we formulate the unified separation theorem:
-
-### Theorem 5.1 (Approximate Invariant Subspace Separation Theorem)
+### Theorem 5.1 (Conditional Subspace Gap Separation Theorem)
 Let $Q \in \mathbb{R}^{(N+1) \times (N+1)}$ be real symmetric.
 Let $\Phi$ be a $K$-dimensional subspace with orthonormal basis $U_\Phi \in \mathbb{R}^{(N+1) \times K}$.
 Let $A = U_\Phi^T Q U_\Phi$, and let $R = Q U_\Phi - U_\Phi A$ with $\|R\|_2 = \varepsilon$.
@@ -155,7 +141,7 @@ Suppose:
 1. **Low-Energy Subspace Floor:** The Rayleigh–Ritz spectrum of $\Phi$ is strictly bounded:
    $$\lambda_{\max}(A) \le \bar{\mu}.$$
 2. **Quasimode Residual:** $\varepsilon < \frac{c_* - \bar{\mu}}{2}$ for some target continuum threshold $c_* > \bar{\mu}$.
-3. **Codimension Coercivity:** On the orthogonal complement $\Phi^\perp$, the operator satisfies:
+3. **Codimension Coercivity Hypothesis:** On the orthogonal complement $\Phi^\perp$, the operator satisfies:
    $$\lambda_{\min}(C) \equiv \inf_{v \perp \Phi, \|v\|=1} \langle v, Q v \rangle \ge c_*.$$
 
 Then:
@@ -176,30 +162,30 @@ $$\|(A - \lambda I)^{-1}\|_2 \le \frac{1}{\lambda - \bar{\mu}}.$$
 Therefore:
 $$- B (A - \lambda I)^{-1} B^T \succeq 0.$$
 This means the second-order term is **positive semidefinite**!
-Consequently:
+Consequently, under Hypothesis 3 ($C \succeq c_* I$):
 $$S(\lambda) \succeq C - \lambda I \succeq (c_* - \lambda) I \succ 0.$$
 Since $S(\lambda)$ is strictly positive definite and $A - \lambda I$ is strictly negative definite, $\widetilde{Q} - \lambda I$ is non-singular for all $\lambda$ in this open interval.
-By Theorem 4.1, no eigenvalue of $Q$ can lie in $(\bar{\mu} + \varepsilon, c_* - \varepsilon^2/(c_* - \bar{\mu}))$.
-Since $E_0, \dots, E_{K-1} \le \bar{\mu} + \varepsilon$, the next eigenvalue must satisfy $E_K \ge c_* - \frac{\varepsilon^2}{c_* - \bar{\mu}}$. $\blacksquare$
+Therefore, no eigenvalue of $Q$ can lie in $(\bar{\mu} + \varepsilon, c_* - \varepsilon^2/(c_* - \bar{\mu}))$.
+Since the lowest $K$ eigenvalues of $Q$ lie below $\bar{\mu} + \varepsilon$, the $(K+1)$-th eigenvalue satisfies $E_K \ge c_* - \frac{\varepsilon^2}{c_* - \bar{\mu}}$. $\blacksquare$
+
+*Epistemic Limitation of Theorem 5.1:*  
+Theorem 5.1 is a **conditional transfer theorem**: it proves that *if* $C \succeq c_* I$, *then* the exact spectrum separates accordingly. It does **not** prove $C \succeq c_* I$ independently, because Hypothesis 3 assumes $\lambda_{\min}(C) \ge c_*$.
 
 ---
 
-## 6. Significance & Pre-Flight Synthesis for Gate 1
+## 6. Significance & Strategic Mandate for Cell 126
 
-Theorem 5.1 provides the exact, non-circular proof architecture demanded by the reviewer:
+Cell 125 has brought us to a clean, rigorous boundary:
 
-1. **Non-Circularity Resolved:**
-   Theorem 5.1 requires only:
-   - Constructing $\Phi$ such that $\lambda_{\max}(A) \le \bar{\mu}$ (easy: evaluate $U_\Phi^T Q U_\Phi$).
-   - Bounding the residual $\|R\|_2 \le \varepsilon$ (easy: evaluate $\|Q U_\Phi - U_\Phi A\|_2$).
-   - Bounding the continuum form $\lambda_{\min}(C) \ge c_*$ on $\Phi^\perp$.
-2. **Separation of Concerns:**
-   Gate 1 is now cleanly divided:
-   - **Step 1 (Variational Subspace Construction):** Construct the $K \approx 11$ trial vectors $\Phi$ (analytic well modes).
-   - **Step 2 (Residual Bound):** Show $\varepsilon \ll c_* - \bar{\mu}$.
-   - **Step 3 (Tunneling Decay):** Prove $\Delta_j(N) \le C_j e^{-\sigma_j N}$ via Route 1A.
-3. **No Local Code Execution:**
-   In accordance with repository guidelines, this note is purely analytical. Any subsequent diagnostic script (`cell125.py`) testing the quasimode residual $\varepsilon$ will be presented for external execution by the user.
+1. **What is Established:**
+   - The exact coupling identity $\|B\|_2 = \|R\|_2 = \varepsilon$ (Proposition 2.1).
+   - The exact subspace angle lower bound $\langle v, Q v \rangle \ge E_K \cos^2\theta_{\max} + E_0 \sin^2\theta_{\max}$ on $\Phi^\perp$ (Theorem 3.1).
+   - The conditional spectral-separation transfer theorem (Theorem 5.1).
+2. **The Remaining Analytical Obstruction:**
+   Proving that $C \equiv U_{\Phi^\perp}^T Q U_{\Phi^\perp} \succeq c_* I > 0$ directly from the quadratic form without presupposing $E_K$.
+3. **The Core Mandate for Cell 126:**
+   $$\boxed{\text{Gate 1 Denominator Problem} \quad \Longrightarrow \quad \text{Prove Delocalization / Control of } Q_{\mathrm{prime}} \text{ on } \Phi^\perp.}$$
+   Cell 126 will investigate whether the indefinite prime form $|\langle v, Q_{\mathrm{prime}} v \rangle| \le C_{\mathrm{prime}} \|v\|^2$ can be explicitly bounded on $\Phi^\perp$ against the positive Archimedean background $\langle v, Q_{\mathrm{arch}} v \rangle \ge C_{\mathrm{arch}} \|v\|^2$ with $C_{\mathrm{arch}} - C_{\mathrm{prime}} > 0$, derived entirely independently of $E_K$.
 
 ---
 
