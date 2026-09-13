@@ -138,22 +138,22 @@ $$\mu_0 = \lambda_{\min}(\widehat{Q}_{\mathrm{comp}}) \ge \lambda_{\min}(\wideha
 We define the **Operator-Splitting Lower Bound**:
 $$\mu_0^{\mathrm{split}} \equiv \lambda_{\min}(\widehat{K}_{\mathrm{rest}}) - \|W_{\perp \mathcal{B}}\|_{\mathrm{op}}.$$
 
-The gap $\Delta_{\mathrm{coupling}} \equiv \mu_0 - \mu_0^{\mathrm{split}} \ge 0$ measures the degree to which destructive phase interference between kinetic and potential eigenvectors prevents the worst-case potential state from coinciding with the lowest kinetic state.
+The gap $\Delta_{\mathrm{coupling}} \equiv \mu_0 - \mu_0^{\mathrm{split}} \ge 0$ represents the **coupling gain over the split Weyl bound**, measuring the extent to which the joint variational minimization of $K_{\mathrm{rest}} - W_\perp$ overcomes the pessimistic independent operator bound.
 
 ---
 
 ## 5. Mathematical Discovery: Case B (Variational Selection)
 
-The first execution of [`cell137.py`](file:///c:/data/github/connes-cvs-/cell137.py) certified two foundational facts:
+The high-precision execution of [`cell137.py`](file:///c:/data/github/connes-cvs-/cell137.py) certified two foundational facts:
 
 1. **Full 11-Dimensional Constant-Mode Enclosure:**
    $$\varepsilon_0(64) = 4.00\%, \qquad \langle e_0, P_{11} e_0 \rangle = 96.00\%.$$
-   The full 11-mode constraint subspace $\mathcal{B}_{11}$ captures $96\%$ of the zero mode, leaving at most $4\%$ leakage on $\mathcal{B}_{11}^\perp$. This yields the solid kinetic floor:
+   The full 11-mode constraint subspace $\mathcal{B}_{11}$ captures $96.00\%$ of the zero mode, leaving at most $4.00\%$ leakage on $\mathcal{B}_{11}^\perp$. This yields the solid kinetic floor:
    $$\mathcal{A}[T] + \mathcal{D}^{\mathrm{per}}[T] \ge \varepsilon_0 h_+(0) + (1 - \varepsilon_0) \times 0.156708 \approx -0.064197 \qquad \forall T \in \mathcal{B}_{11}^\perp, \ \|T\| = 1.$$
-2. **Projected Step-Potential Norm Decisively Solved:**
+2. **Projected Step-Potential Norm Decisively Evaluated:**
    $$\|P_{\mathcal{B}_{11}^\perp} \widetilde{W} P_{\mathcal{B}_{11}^\perp}\|_{\mathrm{op}} = 4.260495 \equiv \|\widetilde{W}\|_{\mathrm{op}}.$$
-   The 11-mode constraint **does not compress the step potential at all**.  
-   *Conclusion:* The observed $\approx 37.31\%$ well harvest ($R_W \approx 3.7098$) is **not** an artifact of the constraint projector $\mathcal{B}_{11}^\perp$. It is an **energy-selection phenomenon (Case B)**: deeper well harvesting would require steep gradients that incur excessive kinetic ($\mathcal{A}$) and translation ($\mathcal{D}^{\mathrm{true}}$) penalties.
+   The 11-mode constraint **does not materially compress the step potential at all** (identical to 6 decimal places).  
+   *Conclusion (Decisive finite-$N$ evidence against Case A):* The observed $\approx 37.31\%$ well harvest ($R_W \approx 3.7098$) is **not** an artifact of the constraint projector $\mathcal{B}_{11}^\perp$. The subspace still contains admissible directions harvesting significantly more ($\|W_{\perp \mathcal{B}}\|_{\mathrm{op}} - R_W(v_{\mathrm{bad}}) = 0.550712$, a $13\%$ relative gap). It is an **energy-selection phenomenon (Case B)**: deeper well harvesting would require steep spatial gradients that incur excessive kinetic ($\mathcal{A}$) and translation ($\mathcal{D}^{\mathrm{true}}$) penalties.
 
 ---
 
@@ -170,19 +170,115 @@ entry += w_q * integrand_val
 term = -(mp.mpf("8") / L_PARAM) * w_q * sin_prod * J_val
 entry += term
 ```
-Because $\Delta\mathcal{D}[v_{\mathrm{bad}}] < 0$, omitting this minus sign inverted $\Delta D \mapsto -\Delta D$, which corrupted $K_{\mathrm{neg}} = \widetilde{W} - \Delta D$ by $+2|\Delta D|$ and shifted $Q_{\mathrm{comp}}$ by $+15$, causing $\mu_0$ to report $+6.998$ instead of the true $-0.48697922$.
+Because $\Delta\mathcal{D}[v_{\mathrm{bad}}] < 0$, omitting this minus sign inverted $\Delta D \mapsto -\Delta D$, which corrupted $K_{\mathrm{neg}} = \widetilde{W} - \Delta D$ by $+2|\Delta D| \approx +15$ and shifted $Q_{\mathrm{comp}}$, causing $\mu_0$ to report $+6.998$ instead of the true $-0.48697922$.
 
 ### 6.2 Hard Regression Test Against Cell 135
 To guarantee absolute consistency across the repository, `cell137.py` incorporates an automated regression check on $v_{\mathrm{bad}}^{(64)}$ against the certified Cell 135 baseline:
 
 | Quantity | Evaluated $v_{\mathrm{bad}}^T (\cdot) v_{\mathrm{bad}}$ | Cell 135 Certified Reference | Status |
 | :---: | :---: | :---: | :---: |
-| $\mathcal{A}[T]$ | $v^T D_{\mathrm{mult}} v$ | $1.173761$ | **MATCH** |
-| $\mathcal{D}_{\mathrm{per}}[T]$ | $v^T D_{\mathrm{per}} v$ | Computed | --- |
-| $\Delta\mathcal{D}[T]$ | $v^T \Delta D v$ | Computed | --- |
-| $\mathcal{D}_{\mathrm{true}}[T]$ | $v^T D_{\mathrm{true}} v$ | $2.049043$ | **MATCH** |
-| $\mathcal{W}[T]$ | $v^T \widetilde{W} v$ | $3.709783$ | **MATCH** |
-| $\mathcal{E}[T]$ ($\mu_0$) | $v^T Q_{\mathrm{comp}} v$ | $-0.48697922$ | **CERTIFIED** |
+| $\mathcal{A}[T]$ | $1.173761$ | $1.173761$ | **MATCH** |
+| $\mathcal{D}_{\mathrm{per}}[T]$ | $7.770307$ | $7.770307$ | **MATCH** |
+| $\Delta\mathcal{D}[T]$ | $-5.721264$ | $-5.721264$ | **MATCH** |
+| $\mathcal{D}_{\mathrm{true}}[T]$ | $2.049043$ | $2.049043$ | **MATCH** |
+| $\mathcal{W}[T]$ | $3.709783$ | $3.709783$ | **MATCH** |
+| $\mathcal{E}[T]$ ($\mu_0$) | $-0.48697922$ | $-0.48697922$ | **CERTIFIED** |
 
-Once this regression test passes, the operator-splitting lower bound $\mu_0^{\mathrm{split}} = \lambda_{\min}(K_{\mathrm{rest}}) - \|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$ will evaluate the authentic competition Hamiltonian.
+The algebraic identity $1.173761 - 3.709783 + 2.049043 = -0.48697922$ closes to $< 10^{-45}$, proving exact mathematical consistency with Cells 135–136.
+
+---
+
+## 7. Certified 50-DPS Numerical Results
+
+Executed via external compute node (`cell137.out`, commit `28f8015`), runtime $185.04\text{ s}$ across $N \in [24, 64]$:
+
+### Table 1: 11-Dimensional Zero-Mode Mass Enclosure & Kinetic Floor
+$$\varepsilon_0(N) = 1 - \sum_{k=0}^{10} |(u_k)_0|^2 = \max_{T \perp \mathcal{B}_{11}} |\langle T, e_0 \rangle|^2$$
+
+| $N$ | $|u_0(0)|^2$ | Captured Mass in $\mathcal{B}_{11}$ | Max Leakage $\varepsilon_0(N)$ | $|v_{\mathrm{bad}}(0)|^2$ | Kinetic Floor |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 24 | $29.90\%$ | $97.08\%$ | $2.92\%$ | $1.74\%$ | $-0.004651$ |
+| 28 | $29.64\%$ | $96.68\%$ | $3.32\%$ | $2.05\%$ | $-0.027093$ |
+| 32 | $29.48\%$ | $96.36\%$ | $3.64\%$ | $2.39\%$ | $-0.044584$ |
+| 40 | $29.27\%$ | $96.06\%$ | $3.94\%$ | $2.76\%$ | $-0.060947$ |
+| 48 | $21.33\%$ | $96.01\%$ | $3.99\%$ | $2.84\%$ | $-0.063803$ |
+| **64** | **$1.56\%$** | **$96.00\%$** | **$4.00\%$** | **$2.86\%$** | **$-0.064197$** |
+
+*Key finding:* Despite individual eigenvector rotation ($|u_0(0)|^2$ drops from $29.90\%$ to $1.56\%$), the total captured zero-mode mass remains invariant at $96.00\%$, bounding leakage to $\le 4.00\%$ and providing a rigorous kinetic floor of $\ge -0.0642$.
+
+---
+
+### Table 2: Projected Step-Potential Operator Norm
+$$W_{\perp \mathcal{B}} = P_{\mathcal{B}_{11}^\perp} \widetilde{W} P_{\mathcal{B}_{11}^\perp}, \qquad \|W_{\perp \mathcal{B}}\|_{\mathrm{op}} = \lambda_{\max}(\widehat{W}_{\perp})$$
+
+| $N$ | $\|\widetilde{W}\|_{\mathrm{op}}$ (Unprojected) | $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$ (Projected) | $\lambda_{\max}$ | Ratio to $W(L)$ | Compression |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 24 | $4.260495$ | $4.244045$ | $4.244045$ | $42.68\%$ | $99.61\%$ |
+| 28 | $4.260495$ | $4.258124$ | $4.258124$ | $42.82\%$ | $99.94\%$ |
+| 32 | $4.260495$ | $4.260232$ | $4.260232$ | $42.84\%$ | $99.99\%$ |
+| 40 | $4.260495$ | $4.260493$ | $4.260493$ | $42.85\%$ | $100.00\%$ |
+| 48 | $4.260495$ | $4.260495$ | $4.260495$ | $42.85\%$ | $100.00\%$ |
+| **64** | **$4.260495$** | **$4.260495$** | **$4.260495$** | **$42.85\%$** | **$100.00\%$** |
+
+---
+
+### Table 3: Term-by-Term Energy Decomposition & Regression Audit
+
+| $N$ | $\mathcal{A}[T]$ | $\mathcal{D}_{\mathrm{per}}[T]$ | $\Delta\mathcal{D}[T]$ | $\mathcal{D}_{\mathrm{true}}[T]$ | $\mathcal{W}[T]$ | $\mathcal{E}[T]$ ($\mu_0$) | Status |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 24 | $1.436458$ | $7.643216$ | $-5.377377$ | $2.265839$ | $3.710369$ | $-0.00807113$ | OK |
+| 28 | $1.392251$ | $7.665071$ | $-5.667212$ | $1.997859$ | $3.674564$ | $-0.28445278$ | OK |
+| 32 | $1.307048$ | $7.704757$ | $-5.709007$ | $1.995750$ | $3.689425$ | $-0.38662701$ | OK |
+| 40 | $1.202064$ | $7.752913$ | $-5.712072$ | $2.040841$ | $3.700465$ | $-0.45755948$ | OK |
+| 48 | $1.178727$ | $7.764826$ | $-5.714910$ | $2.049916$ | $3.706678$ | $-0.47803442$ | OK |
+| **64** | **$1.173761$** | **$7.770307$** | **$-5.721264$** | **$2.049043$** | **$3.709783$** | **$-0.48697922$** | **CERTIFIED** |
+
+---
+
+### Table 4: Universal Supremum vs Variational Minimizer Harvest
+
+| $N$ | $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$ | $R_W(v_{\mathrm{bad}})$ | Harvest $\%$ | Harvest Gap $\Delta_W$ | Dichotomy Verdict |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 24 | $4.244045$ | $3.710369$ | $37.31\%$ | $0.533676$ | Case B (Variational) |
+| 28 | $4.258124$ | $3.674564$ | $36.95\%$ | $0.583561$ | Case B (Variational) |
+| 32 | $4.260232$ | $3.689425$ | $37.10\%$ | $0.570807$ | Case B (Variational) |
+| 40 | $4.260493$ | $3.700465$ | $37.21\%$ | $0.560029$ | Case B (Variational) |
+| 48 | $4.260495$ | $3.706678$ | $37.28\%$ | $0.553818$ | Case B (Variational) |
+| **64** | **$4.260495$** | **$3.709783$** | **$37.31\%$** | **$0.550712$** | **Case B (Variational)** |
+
+---
+
+### Table 5: Operator Splitting vs Coupled Competition Ground State
+$$\mu_0 \ge \mu_0^{\mathrm{split}} \equiv \lambda_{\min}(K_{\mathrm{rest}}) - \|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$$
+
+| $N$ | $\lambda_{\min}(K_{\mathrm{rest}})$ | $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$ | $\mu_0^{\mathrm{split}}$ | $\mu_0$ (Coupled) | Coupling Gain $\Delta_{\mathrm{coupling}}$ | Margin to $-1/2$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 24 | $3.481342$ | $4.244045$ | $-0.762703$ | $-0.00807113$ | $+0.754632$ | $+0.49192887$ |
+| 28 | $3.059115$ | $4.258124$ | $-1.199009$ | $-0.28445278$ | $+0.914556$ | $+0.21554722$ |
+| 32 | $2.992230$ | $4.260232$ | $-1.268002$ | $-0.38662701$ | $+0.881375$ | $+0.11337299$ |
+| 40 | $2.948333$ | $4.260493$ | $-1.312160$ | $-0.45755948$ | $+0.854601$ | $+0.04244052$ |
+| 48 | $2.935956$ | $4.260495$ | $-1.324539$ | $-0.47803442$ | $+0.846505$ | $+0.02196558$ |
+| **64** | **$2.931526$** | **$4.260495$** | **$-1.328969$** | **$-0.48697922$** | **$+0.841990$** | **$+0.01302078$** |
+
+---
+
+## 8. Epistemic Synthesis: The Three-Level Hierarchy
+
+The certified results of Cell 137 establish a clear three-level conceptual hierarchy:
+
+1. **Level 1 — Subspace Zero-Mode Enclosure:**
+   $$\mathcal{A}[T] + \mathcal{D}^{\mathrm{per}}[T] \ge \varepsilon_0(64) h_+(0) + (1 - \varepsilon_0(64)) \times 0.156708 \ge -0.064197.$$
+   The full 11-dimensional constraint eliminates $96.00\%$ of the dangerous negative Archimedean zero mode ($h_+(0) \approx -5.3722$), proving that low-frequency Archimedean leakage cannot derail positivity on $\mathcal{B}_{11}^\perp$.
+
+2. **Level 2 — Decoupled Operator Splitting (Weyl Bound):**
+   $$\mu_0 \ge \mu_0^{\mathrm{split}} = \lambda_{\min}(K_{\mathrm{rest}}) - \|W_{\perp \mathcal{B}}\|_{\mathrm{op}} = 2.931526 - 4.260495 = -1.328969.$$
+   This proves that **separate coercivity is mathematically insufficient**. Treating the restoring operator $K_{\mathrm{rest}}$ and the step well $W_\perp$ independently yields a bound well below $-1/2$, because the unrestricted supremum of the step potential on $\mathcal{B}_{11}^\perp$ remains large ($4.2605$).
+
+3. **Level 3 — Coupled Variational Minimization:**
+   $$\mu_0 = -0.48697922 > -1/2 \qquad (\text{Finite-}N\text{ margin } +0.01302078).$$
+   The true coupled operator outperforms the split Weyl bound by:
+   $$\Delta_{\mathrm{coupling}} \equiv \mu_0 - \mu_0^{\mathrm{split}} \approx +0.841990.$$
+   This demonstrates that the positive margin above $-1/2$ **genuinely resides in the coupling between $K_{\mathrm{rest}}$ and $W_\perp$**. Because $K_{\mathrm{rest}}$ and $W_\perp$ do not commute, any wavepacket that attempts to harvest the full well depth ($4.2605$) incurs severe restoring penalties, forcing the true minimizer into a compromised state harvesting only $3.7098$.
+
+This shifts the scientific frontier to **Cell 138**: understanding the relative geometry, extremal eigenvector misalignment, and low-dimensional effective subspace of $K_{\mathrm{rest}}$ and $W_\perp$.
 

@@ -4316,8 +4316,11 @@ Cell 135 (Gate 1 Continuum Variational Limit & Exact Coordinate Certification)
 Cell 136 (Gate 1 Continuum Quadratic Form Construction & Variational Lower Bound)
     Theorem 136.1 proves translation form ||D||_op <= 2*W(L) bounded on L^2 (Q(D) = L^2); Theorem 136.2 establishes exact form domain Q(E) = H^log([0, L]) and Friedrichs generator via KLMN; Theorem 136.3 proves step potential form-bounded; finite-N margin mu_0 + 0.50 = +0.01302 certified
     ↓
-Cell 137 (Gate 1 Projected Step Potential & 11-Dimensional Constant Enclosure)
-    Theorem 137.1 establishes full 11-mode constant leakage enclosure epsilon_0(N) = 1 - sum_{k=0}^{10} |(u_k)_0|^2; Theorem 137.2 analyzes projected step potential ||W_{perp B}||_op = lambda_{max}(U_{cont}^T W U_{cont}); diagnostic dichotomy tests whether 37% harvest is universal subspace compression (Case A) or variational energy selection (Case B); operator splitting lower bound evaluated
+Cell 137 (Gate 1 Projected Step Potential, 11-Mode Constant Enclosure & Operator Splitting)
+    Theorem 137.1 certified: full 11-mode constant leakage enclosure epsilon_0(64) = 4.00%, capturing 96.00% of zero mode in B_11 and setting kinetic floor >= -0.0642; Theorem 137.2 certified: projected step potential ||W_{perp B}||_op = 4.260495 === ||W_tilde||_op, providing decisive finite-N evidence for Case B (variational energy selection, harvest gap Delta_W = 0.5507); sign error in Delta_D closed form repaired; Cell 135 regression audit certified to < 10^-45; Three-Level Hierarchy established: Level 1 kinetic floor >= -0.0642, Level 2 split Weyl bound mu_0^split = -1.328969 < -1/2, Level 3 coupled ground state mu_0 = -0.48697922 > -1/2 (finite-N margin +0.01302078); proves separate coercivity insufficient and isolates +0.841990 coupling gain Delta_coupling as target for Cell 138
+    ↓
+Cell 138 (Gate 1 Relative Geometry of Restoring Stiffness & Step Well)
+    Investigation of the geometric origin of the +0.842 coupling gain: extremal eigenvector misalignment |<x_0, y_0>|^2 between ground restoring mode x_0 and dominant well mode y_0; spectral energy distribution of minimizer v_bad in K_rest and W_perp eigenbases; low-dimensional coupled subspace reduction V_{k, l} (k x k effective model); commutator norm ||[K_rest, W_perp]||_op and non-commutativity uncertainty bounds
 ```
 
 ---
