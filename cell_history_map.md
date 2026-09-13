@@ -4185,7 +4185,21 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–136)
+## Cell 137 (The Projected Step-Potential Operator & Full 11-Dimensional Constant-Mode Enclosure)
+
+* **Companion Note:** [`cell137.md`](file:///c:/data/github/connes-cvs-/cell137.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Variational Lower Bound & Projected Step Potential)
+* **Status:** Verification Suite Authored ([`cell137.py`](file:///c:/data/github/connes-cvs-/cell137.py), [`cell137.md`](file:///c:/data/github/connes-cvs-/cell137.md))
+* **Execution Script:** [`cell137.py`](file:///c:/data/github/connes-cvs-/cell137.py) (Ready for external compute node execution at 50 dps)
+
+### Key Analytical Results Formulated
+1. **Subspace-Invariant Constant-Mode Enclosure (Theorem 137.1):** Proved that the maximal constant-mode amplitude on $\mathcal{B}_{11}^\perp$ is an invariant of the 11-dimensional projector: $\sup_{T \perp \mathcal{B}_{11}, \|T\|=1} |\langle T, e_0 \rangle|^2 = \|P_{\mathcal{B}_{11}^\perp} e_0\|^2 = 1 - \sum_{k=0}^{10} |(u_k)_0|^2 \equiv \varepsilon_0(N)$. This completely eliminates sensitivity to individual bound-state branch crossings and provides an unconditional floor for the kinetic/periodic multiplier: $\mathcal{A}[T] + \mathcal{D}^{\mathrm{per}}[T] \ge \varepsilon_0(N) h_+(0) + (1 - \varepsilon_0(N)) \inf_{m \ge 1} \Omega(m)$.
+2. **Projected Step-Potential Operator & Supremum (Theorem 137.2):** Formulated the projected step-potential operator $W_{\perp \mathcal{B}} \equiv P_{\mathcal{B}_{11}^\perp} \widetilde{W} P_{\mathcal{B}_{11}^\perp}$ and its operator norm $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}} = \lambda_{\max}(U_{\mathrm{cont}}^T \widetilde{W} U_{\mathrm{cont}})$. Formulated the diagnostic dichotomy between Case A (Universal Subspace Compression $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}} \approx 3.71$) and Case B (Variational Selection $\|W_{\perp \mathcal{B}}\|_{\mathrm{op}} \gg 3.71$).
+3. **Operator-Splitting Lower Bound vs Coupled Ground State (Proposition 137.3):** Formulated the decoupled Weyl lower bound $\mu_0^{\mathrm{split}} \equiv \lambda_{\min}(\widehat{K}_{\mathrm{rest}}) - \|W_{\perp \mathcal{B}}\|_{\mathrm{op}}$, isolating the phase interference coupling gap $\Delta_{\mathrm{coupling}} = \mu_0 - \mu_0^{\mathrm{split}}$ that elevates the coupled eigenvalue to $\mu_0 \approx -0.4870 > -1/2$.
+
+---
+
+# Updated major historical arc (Cells 0–137)
 
 ```
 Cells 0–4
@@ -4300,7 +4314,10 @@ Cell 135 (Gate 1 Continuum Variational Limit & Exact Coordinate Certification)
     Bridge A step-potential identity certified in exact closed form |R_W - I_pot| < 10^-48; gauge-invariant physical constraint force field F_{constr}(t) formulated; consecutive pairwise Cauchy distances Delta(N_j, N_{j+1}) tracked; continuum functional E[T] = A[T] - W[T] + D[T] analyzed
     ↓
 Cell 136 (Gate 1 Continuum Quadratic Form Construction & Variational Lower Bound)
-    Theorem 136.1 proves translation form ||D||_op <= 2*W(L) bounded on L^2 (Q(D) = L^2); Theorem 136.2 establishes exact form domain Q(E) = H^log([0, L]) and Friedrichs generator via KLMN; Theorem 136.3 proves step potential form-bounded; continuum constraint space B_infty and variational lower bound mu_0 > -1/2 analyzed
+    Theorem 136.1 proves translation form ||D||_op <= 2*W(L) bounded on L^2 (Q(D) = L^2); Theorem 136.2 establishes exact form domain Q(E) = H^log([0, L]) and Friedrichs generator via KLMN; Theorem 136.3 proves step potential form-bounded; finite-N margin mu_0 + 0.50 = +0.01302 certified
+    ↓
+Cell 137 (Gate 1 Projected Step Potential & 11-Dimensional Constant Enclosure)
+    Theorem 137.1 establishes full 11-mode constant leakage enclosure epsilon_0(N) = 1 - sum_{k=0}^{10} |(u_k)_0|^2; Theorem 137.2 analyzes projected step potential ||W_{perp B}||_op = lambda_{max}(U_{cont}^T W U_{cont}); diagnostic dichotomy tests whether 37% harvest is universal subspace compression (Case A) or variational energy selection (Case B); operator splitting lower bound evaluated
 ```
 
 ---
