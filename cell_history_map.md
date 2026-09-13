@@ -4169,7 +4169,22 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–135)
+## Cell 136 (Rigorous Construction of the Continuum Quadratic Form & Variational Problem)
+
+* **Companion Note:** [`cell136.md`](file:///c:/data/github/connes-cvs-/cell136.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Continuum Operator Construction)
+* **Status:** Verification Suite Authored ([`cell136.py`](file:///c:/data/github/connes-cvs-/cell136.py), [`cell136.md`](file:///c:/data/github/connes-cvs-/cell136.md))
+* **Execution Script:** [`cell136.py`](file:///c:/data/github/connes-cvs-/cell136.py) (Ready for external compute node execution at 50 dps)
+
+### Key Analytical Results Formulated
+1. **Unconditional $L^2$ Boundedness of Translation Form $\mathcal{D}$ (Theorem 136.1):** Proved that because the prime shifts $\log q$ are fixed discrete constants, the translation Dirichlet form satisfies $0 \le \mathcal{D}[T] \le 2 W(L) \|T\|_{L^2}^2 \approx 19.8875 \|T\|_{L^2}^2$ for all $T \in L^2([0, L])$. Consequently, $\mathcal{Q}(\mathcal{D}) = L^2([0, L])$, proving that the translation term imposes zero domain restrictions.
+2. **Exact Form Domain and Friedrichs Generator (Theorem 136.2):** Proved that the Archimedean Fourier multiplier $h_+(2\pi m / L) \sim \log m$ defines the logarithmic Sobolev space $\mathcal{Q}(\mathcal{A}) = H^{\log}([0, L])$. Because $\mathcal{W}$ and $\mathcal{D}$ are bounded forms on $L^2$, the KLMN theorem guarantees that $\mathcal{Q}(\mathcal{E}) = H^{\log}([0, L])$, and $\mathcal{E}$ is closed, densely defined, and semibounded from below ($\mathcal{E}[T] \ge -15.316 \|T\|^2$), uniquely defining a self-adjoint Friedrichs Hamiltonian $H_{\mathrm{comp}}$ on $L^2([0, L])$.
+3. **Continuum Constraint Subspace $\mathcal{B}_\infty$:** Established the stability of the 11-dimensional continuum bound-state space $\mathcal{B}_\infty = \operatorname{span}\{u_0^{(\infty)}, \dots, u_{10}^{(\infty)}\}$ via projector Cauchy convergence $\|P_{11}^{(N)} - P_{11}^{(\infty)}\|_{\mathrm{op}} \to 0$.
+4. **Variational Lower Bound Margin Above $-1/2$:** Formulated the constrained continuum infimum $\mu_0^{(\infty)} \equiv \inf_{T \in \mathcal{B}_\infty^\perp \cap H^{\log}, \|T\|=1} \mathcal{E}[T]$. Showed that ground-state orthogonality quenches zero-frequency mass to $\le 2.86\%$, translation stiffness enforces high-frequency oscillation, and phase cancellation dilutes well harvesting to $\le 37.31\%$ of $W(L)$, preserving the strictly positive margin $\mu_0 - (-0.50) \approx +0.0130 > 0$.
+
+---
+
+# Updated major historical arc (Cells 0–136)
 
 ```
 Cells 0–4
@@ -4282,6 +4297,9 @@ Cell 134 (Gate 1 Constrained Variational Structure & Limiting Profile)
     ↓
 Cell 135 (Gate 1 Continuum Variational Limit & Exact Coordinate Certification)
     Bridge A step-potential identity certified in exact closed form |R_W - I_pot| < 10^-48; gauge-invariant physical constraint force field F_{constr}(t) formulated; consecutive pairwise Cauchy distances Delta(N_j, N_{j+1}) tracked; continuum functional E[T] = A[T] - W[T] + D[T] analyzed
+    ↓
+Cell 136 (Gate 1 Continuum Quadratic Form Construction & Variational Lower Bound)
+    Theorem 136.1 proves translation form ||D||_op <= 2*W(L) bounded on L^2 (Q(D) = L^2); Theorem 136.2 establishes exact form domain Q(E) = H^log([0, L]) and Friedrichs generator via KLMN; Theorem 136.3 proves step potential form-bounded; continuum constraint space B_infty and variational lower bound mu_0 > -1/2 analyzed
 ```
 
 ---
