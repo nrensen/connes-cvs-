@@ -4,12 +4,12 @@ Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50
 Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)
 ================================================================================
 Loaded 9 prime powers up to c = 13.
-Completed N = 24 in   4.27s | Delta_coup = +0.754632, Delta K = 0.2210, Delta W = 0.5337, cos2_th0 = 0.0000
-Completed N = 28 in   6.79s | Delta_coup = +0.914556, Delta K = 0.3310, Delta W = 0.5836, cos2_th0 = 0.0000
-Completed N = 32 in  10.45s | Delta_coup = +0.881375, Delta K = 0.3106, Delta W = 0.5708, cos2_th0 = 0.0000
-Completed N = 40 in  20.72s | Delta_coup = +0.854601, Delta K = 0.2946, Delta W = 0.5600, cos2_th0 = 0.0000
-Completed N = 48 in  36.81s | Delta_coup = +0.846505, Delta K = 0.2927, Delta W = 0.5538, cos2_th0 = 0.0000
-Completed N = 64 in  91.06s | Delta_coup = +0.841990, Delta K = 0.2913, Delta W = 0.5507, cos2_th0 = 0.0000
+Completed N = 24 in   4.29s | Delta_coup = +0.754632, Delta K = 0.2210, Delta W = 0.5337, cos2_th0 = 0.0000
+Completed N = 28 in   6.83s | Delta_coup = +0.914556, Delta K = 0.3310, Delta W = 0.5836, cos2_th0 = 0.0000
+Completed N = 32 in  10.44s | Delta_coup = +0.881375, Delta K = 0.3106, Delta W = 0.5708, cos2_th0 = 0.0000
+Completed N = 40 in  20.80s | Delta_coup = +0.854601, Delta K = 0.2946, Delta W = 0.5600, cos2_th0 = 0.0000
+Completed N = 48 in  37.10s | Delta_coup = +0.846505, Delta K = 0.2927, Delta W = 0.5538, cos2_th0 = 0.0000
+Completed N = 64 in  91.50s | Delta_coup = +0.841990, Delta K = 0.2913, Delta W = 0.5507, cos2_th0 = 0.0000
 
 --------------------------------------------------------------------------------
 TABLE 1: EXACT ALGEBRAIC DECOMPOSITION OF THE COUPLING GAIN
@@ -59,19 +59,19 @@ Models: V_{1,1} = span{x_0, y_0} (d<=2) vs V_{2,2} = span{x_0, x_1, y_0, y_1} (d
 --------------------------------------------------------------------------------
    N |  V_{1,1} Cap |    mu_0(1,1) |   Err(1,1) |  V_{2,2} Cap |    mu_0(2,2) |   Err(2,2) |   Model Quality
 --------------------------------------------------------------------------------
-  24 |       96.70% |    +0.061116 |   0.069187 |       96.99% |    +0.057835 |   0.065906 |            GOOD
-  28 |       81.33% |    +0.010924 |   0.295376 |       97.58% |    -0.222362 |   0.062091 |            GOOD
-  32 |       83.32% |    -0.088364 |   0.298263 |       97.40% |    -0.318576 |   0.068051 |            GOOD
-  40 |       84.19% |    -0.153904 |   0.303655 |       96.07% |    -0.354066 |   0.103494 |            GOOD
-  48 |       83.29% |    -0.157323 |   0.320711 |       88.86% |    -0.248347 |   0.229688 |            GOOD
-  64 |       81.01% |    -0.136009 |   0.350971 |       83.70% |    -0.176728 |   0.310251 |            GOOD
+  24 |       96.70% |    +0.061116 |   0.069187 |       96.99% |    +0.057835 |   0.065906 |    SUB-CRITICAL
+  28 |       81.33% |    +0.010924 |   0.295376 |       97.58% |    -0.222362 |   0.062091 |    SUB-CRITICAL
+  32 |       83.32% |    -0.088364 |   0.298263 |       97.40% |    -0.318576 |   0.068051 |    SUB-CRITICAL
+  40 |       84.19% |    -0.153904 |   0.303655 |       96.07% |    -0.354066 |   0.103494 |       FALSIFIED
+  48 |       83.29% |    -0.157323 |   0.320711 |       88.86% |    -0.248347 |   0.229688 |       FALSIFIED
+  64 |       81.01% |    -0.136009 |   0.350971 |       83.70% |    -0.176728 |   0.310251 |       FALSIFIED
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-TABLE 5: OPERATOR COMMUTATOR NORM & ROBERTSON-SCHRODINGER UNCERTAINTY
-Commutator: C = [K_rest, W_perp], ||C||_op = sqrt(lambda_max(-C^2))
+TABLE 5: OPERATOR COMMUTATOR NORM & JOINT VARIANCE DIAGNOSTICS
+Commutator: C = [K_rest, W_perp], ||C||_op = sqrt(lambda_max(-C^2)); Var(K) = Var(W) = sigma^2 on v_bad
 --------------------------------------------------------------------------------
-   N |  ||[K, W]||_op |  Std(K) on v_bad |  Std(W) on v_bad |  Uncertainty Prod
+   N |  ||[K, W]||_op |  Std(K) on v_bad |  Std(W) on v_bad |  Variance sigma^2
 --------------------------------------------------------------------------------
   24 |       1.793025 |         0.650032 |         0.650032 |          0.422541
   28 |       2.232241 |         0.696441 |         0.696441 |          0.485030
@@ -88,18 +88,19 @@ SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
   Exact Decomposition of Gain:          Delta K = 0.291278 (34.59%)
                                         Delta W = 0.550712 (65.41%)
   Extremal Eigenvector Overlap:         |<x_0, y_0>|^2 = 0.000000 (Principal angle: 90.00 deg)
-  V_{2,2} 4-Dimensional Capture Mass: 83.70% (Err in mu_0: 0.310251)
+  V_{2,2} 4-Dimensional Capture Mass: 83.70% (Err in mu_0: 0.310251 -> Falsified as asymptotic model)
   Operator Commutator Norm:             ||[K_rest, W_perp]||_op = 2.734524
 
 EPISTEMIC ASSESSMENT:
-  1. The exact algebraic identity Delta_{coupling} === Delta K + Delta W proves that the
-     +0.8420 coupling gain is partitioned into restoring excess (~35%) and forfeited well (~65%).
-  2. Extremal misalignment (|x_0 . y_0|^2 << 1) proves that the direction of maximal well depth
-     is nearly orthogonal to the direction of minimal restoring penalty.
-  3. The 4-mode coupled subspace V_{2,2} captures >= 99% of the minimizer, reducing the infinite-
-     dimensional continuum problem to a low-dimensional geometric effective model.
+  1. The exact algebraic identity Delta_{coupling} === Delta K + Delta W decomposes the
+     +0.8420 coupling gain into restoring excess (~35%) and forfeited well harvest (~65%).
+  2. The extremal restoring direction and extremal well-harvesting direction are nearly orthogonal,
+     demonstrating strong incompatibility of the two individual variational optima.
+     The quantitative coupling mechanism involves the full cross-geometry of their low/high spectral sectors.
+  3. The 4-mode coupled subspace V_{2,2} fails asymptotically (capture drops to 83.70%,
+     error rises to 0.3103), proving coupling is a collective spectral geometry.
 
-Total execution time: 170.10s
+Total execution time: 170.97s
 ================================================================================
 CELL 138 EXECUTION COMPLETE
 ================================================================================
