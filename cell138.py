@@ -33,7 +33,7 @@ Execution Standard:
 
 import time
 import mpmath as mp
-from connes_cvs import h_plus
+from connes_cvs.operator import h_plus
 from cell import get_galerkin_matrix
 
 # Canonical precision baseline
