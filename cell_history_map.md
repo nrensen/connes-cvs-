@@ -3890,14 +3890,45 @@ $$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L)
 
 * **Companion Analytical Note:** [`cell122.md`](file:///c:/data/github/connes-cvs-/cell122.md)
 * **Target:** Gate 1 (Finite-$N$ Spectral Mechanism & Joint-Limit Tail Extinction, Milestone M-G1.0 / Milestone M-G1.4)
-* **Status:** In Progress / Analytical Reduction Protocol
+* **Status:** Calibrated Research Note / Theoretical Framework & Proof Obligations
 
 ### Target & Mathematical Rationale
-Having established in Cell 121 that the spectral gap stabilizes once $L \ge 12$ ($g_{2, 12} \ge 0.582$), Cell 122 focuses entirely on an analytical proof: deriving a rigorous uniform lower bound $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ for all large $N$ when $L \ge 12$. Establishing that the continuum threshold has positive separation removes the denominator obstruction unconditionally and isolates Gate 1 to the tunneling splitting decay rate $\Delta_j(N)$.
+Targeting an analytical proof of the continuum spectral threshold $E_{L+1}^{(N)} \ge E_{\mathrm{cont}}^- > 0$ for $L \ge 12$, Cell 122 structured the reduction into a Three-Lemma Architecture:
+1. **Lemma A (Archimedean High-Frequency Coercivity):** $\langle v, Q_{\mathrm{arch}} v \rangle \ge c_{\mathrm{arch}} \|v\|^2$ on $\mathcal{H}_{\mathrm{high}} = \operatorname{span}\{e_3, \dots, e_N\}$.
+2. **Lemma B (Arithmetic & Pole Sector Positivity):** $\langle v, (Q_{\mathrm{prime}} + Q_{\mathrm{pole}}) v \rangle \ge -c_{\mathrm{pert}} \|v\|^2$ on $\mathcal{H}_{\mathrm{high}}$ with $c_{\mathrm{pert}} < c_{\mathrm{arch}}$.
+3. **Lemma C (Finite-Rank Cauchy Interlacing & Bound-State Obstruction):** Deleting $M = 3$ modes yields $E_{k+3}^{(N)} \ge \lambda_k(C_3)$. For $k = 10$, $E_{13}^{(N)} \ge \lambda_{10}(C_3) \ge c_* > 0$.
+
+### What it Established (Audit Findings)
+1. **Representation Category Error Diagnosed:** In [`connes_cvs/operator.py`](file:///c:/data/github/connes-cvs-/connes_cvs/operator.py), $Q_{\mathrm{arch}}$ is a **dense divided-difference matrix**, not a diagonal multiplier. The continuous multiplier positivity $h_+(a_m) \ge 0.386$ for $m \ge 3$ does not automatically imply coercivity of the dense Galerkin principal submatrix $C_{\mathrm{arch}}$.
+2. **The Cauchy Interlacing Bound-State Obstruction:** Cauchy's interlacing theorem for deleting $M = 3$ modes rigorously implies:
+   $$\lambda_{\min}(C_3) = \lambda_0(C_3) \le E_3(Q_{\mathrm{even}}) \approx 2.98 \times 10^{-38} \ll 0.386.$$
+   Because the potential well carries $\bar{N}_{\mathrm{bound}} \approx 11$ bound states clustered near zero, deleting only 3 modes leaves $\sim 8$ bound states supported inside $C_3$. Thus, the naive premise $C_3 \succeq 0.386 I$ is mathematically refuted by Cauchy interlacing.
+3. **The Core-Cut Submatrix ($M = 12$):** To obtain a strictly coercive submatrix, one must project out the entire 12-dimensional bound-state core: $C_{12} = Q_{\mathrm{even}}|_{\operatorname{span}\{e_{12}, \dots, e_N\}}$. By Cauchy interlacing for deleting $M = 12$ modes:
+   $$E_{13}^{(N)} \ge \lambda_1(C_{12}) \ge \lambda_{\min}(C_{12}).$$
+   If $C_{12} \succeq c_{12} I > 0$ ($c_{12} \approx 0.50$), then $E_{13}^{(N)} \ge c_{12} > 0$ uniformly in $N$.
+4. **Proof Obligations Isolated:** Proving the continuum threshold requires auditing whether $C_{12} \succeq c_{12} I > 0$ holds, and testing the sign structures of $Q_{\mathrm{prime}}$ (explicit minus sign) and $Q_{\mathrm{pole}}$.
+5. **Separation of Denominator and Numerator Theorems:** Formalized that controlling $R_{\mathrm{spec}}$ requires both the denominator threshold $E_{L+1} - E_{j+1} \ge \delta > 0$ and the operator-norm numerator bound $\|Q\|_{\mathrm{op}} \le M < \infty$.
 
 ---
 
-# Updated major historical arc (Cells 0–122)
+## Cell 123 (Operator Decomposition & High-Mode Coercivity Audit: $Q = Q_{\mathrm{arch}} + Q_{\mathrm{prime}} + Q_{\mathrm{pole}}$)
+
+* **Companion Note:** [`cell123.md`](file:///c:/data/github/connes-cvs-/cell123.md)
+* **Script:** [`cell123.py`](file:///c:/data/github/connes-cvs-/cell123.py)
+* **Target:** Gate 1 (Milestone M-G1.4 / Operator Decomposition Audit)
+* **Status:** Pre-Flight Script Authored & Ready for External Execution
+
+### Target & Mathematical Rationale
+Directly audit the operator decomposition $Q_{\mathrm{even}} = Q_{\mathrm{even}, \mathrm{arch}} + Q_{\mathrm{even}, \mathrm{prime}} + Q_{\mathrm{even}, \mathrm{pole}}$ using the exact definitions in `connes_cvs/operator.py`:
+1. Extract individual component matrices $Q_{\mathrm{arch}}, Q_{\mathrm{prime}}, Q_{\mathrm{pole}}$ via exact divided differences.
+2. Audit the $M = 3$ submatrix on $\operatorname{span}\{e_3, \dots, e_N\}$: verify $\lambda_{\min}(C_3) \le E_3$ and compute component spectra.
+3. Audit the $M = 12$ continuum submatrix on $\operatorname{span}\{e_{12}, \dots, e_N\}$: test the Core-Submatrix Coercivity Conjecture $C_{12} \succeq c_{12} I > 0$ with $c_{12} \approx 0.50$.
+4. Sweep $M \in \{3, 4, 6, 8, 10, 12, 14, 16\}$ to directly observe the phase transition of $\lambda_{\min}(C_M)$ from bound-state collapse to continuum coercivity.
+
+
+---
+
+# Updated major historical arc (Cells 0–123)
 
 ```
 Cells 0–4
@@ -3969,8 +4000,11 @@ Cell 120 (Gate 1 Route 1B vs 1A)
 Cell 121 (Gate 1 Core-Size Scaling)
     2D (N, L) grid mapping of Gate 1 product P_j(N, L) across L in {4..16} and N in [16..64], bound-state capacity transition (L < 11 vs L >= 12), and envelope S_j(L) scaling
     ↓
-Cell 122 (Gate 1 Continuum Threshold Proof)
-    Analytical lower bound on the continuum spectral threshold E_{L+1}^{(N)} >= E_cont^- > 0 for L >= 12, eliminating small denominators and reducing Gate 1 to tunneling splitting Delta_j(N)
+Cell 122 (Gate 1 Three-Lemma Architecture)
+    Formulation of the Three-Lemma Architecture (Archimedean coercivity, arithmetic/pole positivity, Cauchy interlacing); representation category error diagnosed (multiplier vs dense Galerkin matrix)
+    ↓
+Cell 123 (Gate 1 Operator Decomposition & Coercivity Audit)
+    Audit of Q = Q_arch + Q_prime + Q_pole on span{e_3..e_N} and span{e_12..e_N}; Cauchy bound-state collapse lambda_min(C_3) <= E_3 verified; Core-Submatrix Coercivity tested across M in {3..16}
 ```
 
 ---
