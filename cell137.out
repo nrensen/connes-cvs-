@@ -1,0 +1,98 @@
+================================================================================
+CELL 137 — PROJECTED STEP POTENTIAL & FULL 11-MODE CONSTANT ENCLOSURE
+Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50
+Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)
+================================================================================
+Loaded 9 prime powers up to c = 13.
+Average translation stiffness / depth:      W(L) = 9.943768796
+Archimedean zero-frequency infimum:        h_+(0) = -5.372183419
+Positive-mode multiplier floor (m >= 1):   Omega_floor = 0.156708
+--------------------------------------------------------------------------------
+Completed N = 24 in   4.77s | eps_0 =  2.92%, ||W_perp|| = 4.2440, R_W = 3.3327, mu_0 = +7.352784
+Completed N = 28 in   7.52s | eps_0 =  3.32%, ||W_perp|| = 4.2581, R_W = 3.3812, mu_0 = +7.336305
+Completed N = 32 in  11.31s | eps_0 =  3.64%, ||W_perp|| = 4.2602, R_W = 3.4131, mu_0 = +7.346932
+Completed N = 40 in  22.24s | eps_0 =  3.94%, ||W_perp|| = 4.2605, R_W = 3.3429, mu_0 = +7.093164
+Completed N = 48 in  39.39s | eps_0 =  3.99%, ||W_perp|| = 4.2605, R_W = 3.3428, mu_0 = +7.085635
+Completed N = 64 in  94.34s | eps_0 =  4.00%, ||W_perp|| = 4.2605, R_W = 3.3362, mu_0 = +6.998446
+
+--------------------------------------------------------------------------------
+TABLE 1: 11-DIMENSIONAL ZERO-MODE MASS ENCLOSURE & KINETIC FLOOR
+Theory: epsilon_0(N) = 1 - sum_{k=0}^{10} |(u_k)_0|^2 = max_{T perp B_{11}} |<T, e_0>|^2
+--------------------------------------------------------------------------------
+   N |  |u_0(0)|^2 | Cap Mass (B_11) | Max Leak (eps_0) | |v_bad(0)|^2 |  Kinetic Floor
+--------------------------------------------------------------------------------
+  24 |      29.90% |          97.08% |            2.92% |        1.14% |      -0.004651
+  28 |      29.64% |          96.68% |            3.32% |        1.47% |      -0.027093
+  32 |      29.48% |          96.36% |            3.64% |        1.71% |      -0.044584
+  40 |      29.27% |          96.06% |            3.94% |        0.12% |      -0.060947
+  48 |      21.33% |          96.01% |            3.99% |        0.10% |      -0.063803
+  64 |       1.56% |          96.00% |            4.00% |        0.02% |      -0.064197
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 2: PROJECTED STEP-POTENTIAL OPERATOR NORM
+Definition: W_{perp B} = P_{B_{11}^perp} W_tilde P_{B_{11}^perp}, ||W_{perp B}||_op = lambda_max(W_hat_perp)
+--------------------------------------------------------------------------------
+   N | ||W_unproj|| |  ||W_perp|| |  lambda_max |  Ratio to W(L) |  Compression
+--------------------------------------------------------------------------------
+  24 |     4.260495 |    4.244045 |    4.244045 |         42.68% |       99.61%
+  28 |     4.260495 |    4.258124 |    4.258124 |         42.82% |       99.94%
+  32 |     4.260495 |    4.260232 |    4.260232 |         42.84% |       99.99%
+  40 |     4.260495 |    4.260493 |    4.260493 |         42.85% |      100.00%
+  48 |     4.260495 |    4.260495 |    4.260495 |         42.85% |      100.00%
+  64 |     4.260495 |    4.260495 |    4.260495 |         42.85% |      100.00%
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 3: UNIVERSAL SUPREMUM VS VARIATIONAL MINIMIZER HARVEST
+Dichotomy: Case A (||W_perp|| approx R_W) vs Case B (||W_perp|| >> R_W)
+--------------------------------------------------------------------------------
+   N | ||W_perp||_op |  R_W(v_bad) |  Harvest % |  Harvest Gap |    Dichotomy Verdict
+--------------------------------------------------------------------------------
+  24 |      4.244045 |    3.332667 |     33.52% |     0.911378 | Case B (Variational)
+  28 |      4.258124 |    3.381244 |     34.00% |     0.876880 | Case B (Variational)
+  32 |      4.260232 |    3.413072 |     34.32% |     0.847160 | Case B (Variational)
+  40 |      4.260493 |    3.342936 |     33.62% |     0.917558 | Case B (Variational)
+  48 |      4.260495 |    3.342811 |     33.62% |     0.917685 | Case B (Variational)
+  64 |      4.260495 |    3.336198 |     33.55% |     0.924298 | Case B (Variational)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 4: OPERATOR SPLITTING VS COUPLED COMPETITION GROUND STATE
+Theory: mu_0 >= mu_0^{split} = lambda_min(K_rest) - ||W_perp||_op
+--------------------------------------------------------------------------------
+   N | lambda_min(K) | ||W_perp||_op |  mu_0^{split} |  mu_0 (Coupled) |  Coupling Gap |  Margin (> -1/2)
+--------------------------------------------------------------------------------
+  24 |     10.464065 |      4.244045 |     +6.220021 |     +7.35278424 |     +1.132763 |      +7.85278424
+  28 |     10.480711 |      4.258124 |     +6.222587 |     +7.33630502 |     +1.113718 |      +7.83630502
+  32 |     10.510103 |      4.260232 |     +6.249871 |     +7.34693233 |     +1.097062 |      +7.84693233
+  40 |     10.301681 |      4.260493 |     +6.041188 |     +7.09316356 |     +1.051976 |      +7.59316356
+  48 |     10.295495 |      4.260495 |     +6.035000 |     +7.08563519 |     +1.050635 |      +7.58563519
+  64 |     10.251453 |      4.260495 |     +5.990957 |     +6.99844649 |     +1.007489 |      +7.49844649
+--------------------------------------------------------------------------------
+
+SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
+  Captured Zero-Mode Mass in B_11:       96.00% (Invariant under bound-state rotations)
+  Max Possible Constant Leakage eps_0:   4.00% (B_11 suppresses constant mode by 96.00%)
+  Rigorous Subspace Kinetic Floor:       Floor_kin = -0.064197
+  Unprojected Step Potential Norm:       ||W_tilde||_op = 4.260495
+  Projected Step Potential Norm:         ||W_{perp B}||_op = 4.260495 (42.85% of W(L))
+  Minimizer Harvest:                     R_W(v_bad) = 3.336198 (33.55% of W(L))
+  Harvest Gap (Supremum - Minimizer):    Delta_W = 0.924298 -> Case B (Variational)
+  Operator-Splitting Lower Bound:        mu_0^{split} = +5.990957
+  True Coupled Competition Ground State: mu_0 = +6.99844649
+  Coupling Phase Interference Margin:    Delta_{coupling} = +1.007489
+  Finite-N Margin to Target -1/2:        Delta_{margin} = +7.49844649 > 0
+
+EPISTEMIC ASSESSMENT:
+  1. The full 11-mode constraint B_{11} provides an invariant zero-mode enclosure,
+     bypassing individual state permutations and establishing a rigorous kinetic floor.
+  2. Comparing ||W_{perp B}||_op with R_W(v_bad) reveals whether the 37% harvest is
+     a universal geometric property of B_{11}^perp or an energy-driven minimizer profile.
+  3. The coupled ground-state deficit mu_0 exceeds the operator-splitting lower bound
+     by the coupling margin Delta_{coupling}, driven by destructive phase interference.
+
+Total execution time: 179.58s
+================================================================================
+CELL 137 EXECUTION COMPLETE
+================================================================================
