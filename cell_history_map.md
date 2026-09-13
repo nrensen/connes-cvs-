@@ -4104,7 +4104,26 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–131)
+## Cell 132 (Geometric Dissection of the Competition Minimum & Coupled Cancellation on $\Phi^\perp$)
+
+* **Companion Note:** [`cell132.md`](file:///c:/data/github/connes-cvs-/cell132.md)
+* **Target:** Gate 1 (Milestone M-G1.5 / Semiclassical Potential Barrier & Mode Quenching)
+* **Status:** Theoretical Formulation Completed (Analytical Note) & Computational Audit Script Authored ([`cell132.py`](file:///c:/data/github/connes-cvs-/cell132.py))
+* **Execution Script:** Ready for high-precision external execution (`mpmath` at 50 dps)
+
+### Key Analytical Objectives & Formulations
+1. **Full Matrix Operator Norm Residual Audit:** Formulated the entrywise operator residual on $\Phi^\perp$:
+   $$\|\mathcal{R}_{\Phi^\perp}\|_{\mathrm{op}} \equiv \|\widehat{Q}_{\mathrm{even}} - (\widehat{\Omega} + \widehat{\Delta Q}_{\mathrm{arch}} - \widehat{\mathcal{K}}_{\mathrm{neg}} + \widehat{Q}_{\mathrm{pole}})\|_{\mathrm{op}} < 10^{-45},$$
+   advancing beyond the scalar trace identity to certify exact matrix equivalence.
+2. **Rayleigh Quotient Budget along $w_{\mathrm{bad}}$:** Formulated the exact quadratic form budget on the principal negative direction $w_{\mathrm{bad}}$ of $\widehat{\mathcal{Q}}_{\mathrm{comp}} \equiv \widehat{\Omega} - \widehat{\mathcal{K}}_{\mathrm{neg}}$ ($\mu_0 \approx -0.487$):
+   $$R_{\mathrm{net}}(w_{\mathrm{bad}}) \equiv R_{\mathrm{comp}}(w_{\mathrm{bad}}) + R_{\mathrm{arch}}(w_{\mathrm{bad}}) + R_{\mathrm{pole}}(w_{\mathrm{bad}}),$$
+   and the restoring force metric $\rho_{\mathrm{restore}} \equiv (R_{\mathrm{arch}} + R_{\mathrm{pole}}) / |R_{\mathrm{comp}}| > 1$ to prove that the off-diagonal divided-difference operator provides a targeted restoring force on the negative direction.
+3. **Negative Eigenspace Dimension ($k_{\mathrm{neg}}$):** Tracked the spectrum $\mu_0 \le \mu_1 \le \mu_2$ of $\widehat{\mathcal{Q}}_{\mathrm{comp}}$ to determine whether the negative subspace is 1-dimensional or multidimensional across $N \in [16, 64]$.
+4. **Physical Modal Anatomy of $v_{\mathrm{bad}} = U_{\mathrm{cont}} w_{\mathrm{bad}}$:** Evaluated the Fourier energy coordinates across the zero mode $|v_0|^2$, low modes $\sum_{m=1}^3 |v_m|^2$, and high modes $\sum_{m > 3} |v_m|^2$ to map the physical profile of the vulnerable direction.
+
+---
+
+# Updated major historical arc (Cells 0–132)
 
 ```
 Cells 0–4
@@ -4205,6 +4224,9 @@ Cell 130 (Gate 1 Exact Component Decomposition Audit & Spectrum of Prime Form)
     ↓
 Cell 131 (Gate 1 Subspace Compression & Coupled Cancellation Discovery)
     50-dps audit on Phi^perp: H-OffDiag, H-Supp, and H-Dom decisively falsified (S_supp ~ 0.999991, lambda_min(Omega-K) ~ -0.487); macroscopic 0.58 floor retired (E_11(N) decreases from 1.976 to 0.006025 while cluster E_10 drops to 7e-6, maintaining 862x separation); strict positivity lambda_min(Q_hat) = E_11 > 0 survives via emergent coupled cancellation with Archimedean off-diagonal and pole operators
+    ↓
+Cell 132 (Gate 1 Geometric Dissection of the Competition Minimum)
+    Dissection of competition minimum w_bad (lambda_min ~ -0.487); Rayleigh quotient budget (R_comp, R_Omega, R_neg, R_arch, R_pole, R_net); restoring ratio rho_restore; modal anatomy of v_bad; full matrix operator norm residual ||R||_op < 10^-45
 ```
 
 ---
