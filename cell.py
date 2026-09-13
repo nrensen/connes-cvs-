@@ -402,6 +402,26 @@ def _assemble_Q_from_psi(psi_vals, psi_deriv_vals, N):
     return Q
 
 
+# ============================================================
+# MATRIX ALGEBRA & INVARIANTS
+# ============================================================
+
+def frobenius_norm(A: mp.matrix) -> mp.mpf:
+    """
+    Compute the Frobenius norm ||A||_F = sqrt(sum_{i,j} |A_{ij}|^2) of an mpmath matrix.
+
+    Uses explicit accumulation to ensure universal mpmath portability without
+    relying on ambiguous string order parameters in mp.norm (which raise TypeError
+    in mpmath when passed 'fro' or 'f').
+    """
+    s = mp.mpf(0)
+    for i in range(A.rows):
+        for j in range(A.cols):
+            val = A[i, j]
+            s += val * val
+    return mp.sqrt(s)
+
+
 def _galerkin_matrix_encode(
     psi_vals,
     psi_deriv_vals,
@@ -613,13 +633,10 @@ def _generate_galerkin_matrix(
     assembly_elapsed = time.perf_counter() - assembly_start
 
     trace_val = mp.mpf(0)
-    frob_sq = mp.mpf(0)
     dim = 2 * N + 1
     for i in range(dim):
         trace_val += Q[i, i]
-        for j in range(dim):
-            frob_sq += Q[i, j] ** 2
-    frob_val = mp.sqrt(frob_sq)
+    frob_val = frobenius_norm(Q)
 
     encoded = _galerkin_matrix_encode(
         psi_vals=psi_vals,

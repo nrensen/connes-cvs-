@@ -49,7 +49,10 @@ from connes_cvs.operator import (
     psi_pole_deriv,
     prime_powers_up_to,
 )
-from cell import get_galerkin_matrix
+from cell import (
+    get_galerkin_matrix,
+    frobenius_norm,
+)
 
 # ============================================================
 # CONFIGURATION & PARAMETERS
@@ -167,19 +170,6 @@ def extract_submatrix(A: mp.matrix, M: int) -> mp.matrix:
         for j in range(dim_sub):
             sub[i, j] = A[M + i, M + j]
     return mp.mpf("0.5") * (sub + sub.T)
-
-
-def frobenius_norm(A: mp.matrix) -> mp.mpf:
-    """
-    Compute the Frobenius norm ||A||_F = sqrt(sum_{i,j} A_{ij}^2)
-    using explicit accumulation to ensure universal mpmath portability.
-    """
-    s = mp.mpf(0)
-    for i in range(A.rows):
-        for j in range(A.cols):
-            val = A[i, j]
-            s += val * val
-    return mp.sqrt(s)
 
 
 # ============================================================
