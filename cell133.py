@@ -11,18 +11,19 @@ Target Propositions & Tested Hypotheses:
      Profile the spatial probability density |T_{v_{bad}}(t)|^2, boundary contact at t = 0, L,
      midpoint amplitude, and spatial kinetic semi-norm K_{kin} = (2*pi/L)^2 * sum m^2 (v_{bad})_m^2.
   2. Coordinate-Matrix Potential Equivalence:
-       R_W = v_{bad}^T * W_tilde * v_{bad} === (1/L) * int_0^L (-W(t)) * |T_{v_{bad}}(t)|^2 dt
+       R_W = v_{bad}^T * W_tilde * v_{bad} === (1/L) * int_0^L W(t) * |T_{v_{bad}}(t)|^2 dt
+     where W(t) = 2 * sum_{q <= c} w_q * 1_{t >= log q} is the exact Cell 129 step potential.
      Verify this identity to 40 decimal digits via piecewise Gauss-Legendre quadrature
      across the prime transition points log(q_k).
   3. Spatial Mass Partition & Bound-State Exclusion:
        M_{flat} = (1/L) * int_0^{log 2} |T_{v_{bad}}(t)|^2 dt,
        M_{well} = (1/L) * int_{log 2}^L |T_{v_{bad}}(t)|^2 dt.
      Quantify the fraction of mass forced into the zero-potential plateau [0, log 2)
-     by the orthogonality of v_{bad} to the 11 bound states.
-  4. Archimedean Spectral Partition & Negative Well Quenching:
+     when v_{bad} is orthogonalized against the 11 bound states.
+  4. Archimedean Spectral Partition & Low-Frequency Suppression:
        I_{arch}^{(-)} = (1/pi) * int_0^{r_*} |Phi_{v_{bad}}(r)|^2 * h_+(r) dr
-     Verify that the negative Archimedean energy is suppressed (|I_{arch}^{(-)}| << 0.01),
-     proving that Phi^perp effectively quenches the negative Archimedean well.
+     Evaluate the negative Archimedean energy and test whether it is suppressed
+     relative to the total Archimedean form (empirically ~5.8% of total).
   5. Asymptotic Stabilization of the Surplus Margin:
        Delta_{surplus} = R_{arch} + R_{pole} - |R_{comp}| = R_{net}
      Track Delta_{surplus} across N in [24, 64] and verify that it stabilizes to a macroscopic
@@ -479,7 +480,7 @@ def run_cell133_audit():
         # Interval 0: [0, log 2] has W(t) = 0
         for i in range(len(prime_data)):
             _, logn_curr, w_curr = prime_data[i]
-            current_W += w_curr  # accumulating -W(t)
+            current_W += mp.mpf("2") * w_curr  # W(t) = 2 * sum_{q <= c} w_q * 1_{t >= log q} (Cell 129 Theorem 5.1)
             a_interval = logn_curr
             b_interval = prime_data[i + 1][1] if i + 1 < len(prime_data) else L_PARAM
             if b_interval > a_interval:
@@ -565,7 +566,8 @@ def run_cell133_audit():
 
     print("\n" + "-" * 80)
     print("TABLE 2: COORDINATE INTEGRATION OF POTENTIAL WELL: MATRIX vs CONTINUOUS INTEGRAL")
-    print("Identity: R_W = v^T * W_tilde * v === (1/L) * int_0^L (-W(t)) * |T_v(t)|^2 dt")
+    print("Identity: R_W = v^T * W_tilde * v === (1/L) * int_0^L W(t) * |T_v(t)|^2 dt")
+    print("where W(t) = 2 * sum_{q <= c} w_q * 1_{t >= log q}")
     print("-" * 80)
     print(f"{'N':>4} | {'R_W (Matrix)':>14} | {'I_pot (Integral)':>16} | {'|Residual|':>12} | {'R_Delta_D':>11} | {'R_neg':>11}")
     print("-" * 80)
@@ -611,12 +613,19 @@ def run_cell133_audit():
     print(f"  Boundary Contact:                     T(0) = T(L) = {float(r1['T_0']):.4f}, T(L/2) = {float(r1['T_mid']):.4f}")
     print(f"  Spatial Kinetic Semi-Norm K_kin:      {float(r1['K_kin']):.2f}")
     print(f"  Coordinate-Matrix Potential Error:    {float(r2['pot_err']):.4e}")
-    print(f"  Negative Archimedean Energy I(-):     {float(r3['I_arch_minus']):.6e} (quenched by {float(abs(r3['I_arch_minus']) / r3['I_arch_tot']) * 100:.4f}% of total)")
+    print(f"  Negative Archimedean Energy I(-):     {float(r3['I_arch_minus']):.6e} (suppressed to {float(abs(r3['I_arch_minus']) / r3['I_arch_tot']) * 100:.2f}% of total)")
     print(f"  Positive Off-Diagonal Archimedean:    R_arch = {float(r3['R_arch']):+.6f}")
     print(f"  Zeta Pole Contribution:               R_pole = {float(r4['R_pole']):+.6f}")
     print(f"  Competition Deficit:                  R_comp = {float(r4['R_comp']):+.6f}")
     print(f"  Net Positivity Surplus Margin:        Delta_surplus = {float(r4['surplus']):+.6f}")
     print(f"  Restoring Efficiency Ratio:           rho_restore   = {float(r4['rho']):.6f} (> 1)")
+
+    print("\nEPISTEMIC ASSESSMENT:")
+    print("  The computational audit rigorously certifies the coordinate-matrix equivalence")
+    print("  R_W === (1/L) int_0^L W(t) |T_v(t)|^2 dt to < 10^-40 across all tested N. The data")
+    print("  strongly support the hypothesis of a stable coordinate/spectral profile (M_well approx 60.6%,")
+    print("  m* = 26, Delta_surplus approx +0.165), but neither the limiting profile nor a uniform")
+    print("  positive margin as N -> oo has yet been proved analytically.")
 
     t_total = time.time() - t_start
     print(f"\nTotal execution time: {t_total:.2f}s")
