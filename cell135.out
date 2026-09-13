@@ -1,0 +1,101 @@
+================================================================================
+CELL 135 — CONTINUUM VARIATIONAL LIMIT & EXACT COORDINATE CERTIFICATION
+Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50
+Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)
+================================================================================
+Loaded 9 prime powers up to c = 13.
+Step potential maximum depth: W(L) = 2 * sum w_q = 9.943768796
+Average periodic translation stiffness: 4 * mean(M) = 9.943768796 (Exact Identity)
+--------------------------------------------------------------------------------
+Completed N = 24 in 3.34s | Bridge A diff = 7.48e-50, ||lambda|| = 1.3535, Dominant k* = 0 (rho = 21.7%)
+Completed N = 28 in 4.96s | Bridge A diff = 4.28e-50, ||lambda|| = 1.4455, Dominant k* = 0 (rho = 22.1%)
+Completed N = 32 in 7.16s | Bridge A diff = 5.88e-50, ||lambda|| = 1.5447, Dominant k* = 0 (rho = 22.4%)
+Completed N = 40 in 13.26s | Bridge A diff = 1.18e-49, ||lambda|| = 1.6468, Dominant k* = 0 (rho = 22.6%)
+Completed N = 48 in 22.27s | Bridge A diff = 6.41e-50, ||lambda|| = 1.6680, Dominant k* = 1 (rho = 19.2%)
+Completed N = 64 in 51.53s | Bridge A diff = 8.55e-50, ||lambda|| = 1.6733, Dominant k* = 1 (rho = 34.4%)
+
+--------------------------------------------------------------------------------
+TABLE 1: EXACT CLOSED-FORM STEP POTENTIAL INTEGRAL AUDIT (BRIDGE A)
+Identity: R_W = <v, W_tilde * v> === (1/L) int_0^L W(t) * |T_v(t)|^2 dt (Exact Closed Form)
+--------------------------------------------------------------------------------
+   N |   R_W (Matrix) | I_pot (Closed) |  |R_W - I_pot| | Harvest Ratio
+--------------------------------------------------------------------------------
+  24 |     3.71036864 |     3.71036864 |     7.4837e-50 |        37.31%
+  28 |     3.67456352 |     3.67456352 |     4.2764e-50 |        36.95%
+  32 |     3.68942510 |     3.68942510 |     5.8801e-50 |        37.10%
+  40 |     3.70046455 |     3.70046455 |     1.1760e-49 |        37.21%
+  48 |     3.70667768 |     3.70667768 |     6.4146e-50 |        37.28%
+  64 |     3.70978306 |     3.70978306 |     8.5528e-50 |        37.31%
+--------------------------------------------------------------------------------
+BRIDGE A COORDINATE INTEGRAL AUDIT: PASSED (max discrepancy = 1.1760e-49 < 1e-45).
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 2: GAUGE-INVARIANT PHYSICAL CONSTRAINT FORCE FIELD
+Field: F_{constr}(t) = sum_{k=0}^{10} lambda_k * T_{u_k}(t) | Invariant Fractions: rho_k = lambda_k^2 / ||lambda||_2^2
+--------------------------------------------------------------------------------
+   N | ||lambda||_2 |      F(0) |    F(L/2) |    rho_0 |    rho_1 |    rho_2 |   rho_10 |  k*
+--------------------------------------------------------------------------------
+  24 |      1.3535 |   -0.2707 |   -1.1185 |   21.67% |   12.33% |   10.63% |    9.30% |   0
+  28 |      1.4455 |   -0.1177 |   -1.2658 |   22.14% |   12.62% |   10.87% |    8.92% |   0
+  32 |      1.5447 |   -0.0602 |   -1.3909 |   22.44% |   12.81% |   11.01% |    8.66% |   0
+  40 |      1.6468 |   -0.0268 |   -1.5065 |   22.60% |   12.95% |   11.10% |    8.46% |   0
+  48 |      1.6680 |   -0.0204 |   -1.5299 |   16.34% |   19.19% |   11.10% |    8.47% |   1
+  64 |      1.6733 |   -0.0190 |   -1.5358 |    1.04% |   34.45% |   11.09% |    8.45% |   1
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 3: CONSECUTIVE PAIRWISE CAUCHY CONTRACTION ANALYSIS
+Consecutive Metric: Delta(N_{j-1}, N_j) = ||v^{(N_{j-1})} - v^{(N_j)}||_2 | Rate: Delta / Delta_N
+--------------------------------------------------------------------------------
+   N | Delta_N |  Delta(Consec) |  Rate per Mode |  delta_ref(64)
+--------------------------------------------------------------------------------
+  24 |       0 |            --- |            --- |   5.302263e-01
+  28 |       4 |   4.355000e-01 |   1.088750e-01 |   2.276279e-01
+  32 |       4 |   1.596330e-01 |   3.990826e-02 |   1.374859e-01
+  40 |       8 |   9.137563e-02 |   1.142195e-02 |   1.050641e-01
+  48 |       8 |   7.974894e-02 |   9.968618e-03 |   6.495661e-02
+  64 |      16 |   6.495661e-02 |   4.059788e-03 | 0.000000 (Ref)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+TABLE 4: CONTINUUM ENERGY FUNCTIONAL DECOMPOSITION
+Functional: E[T] = A[T] - W[T] + D[T]  (where W[T] is exact closed-form integral)
+--------------------------------------------------------------------------------
+   N |   A[T] (Arch) |   W[T] (Step) |   D[T] (Stiff) |       E_net |  Balance Error
+--------------------------------------------------------------------------------
+  24 |      1.436458 |      3.710369 |       2.265839 |   -0.008071 |     7.2227e-50
+  28 |      1.392251 |      3.674564 |       1.997859 |   -0.284453 |     3.7419e-50
+  32 |      1.307048 |      3.689425 |       1.995750 |   -0.386627 |     5.2119e-50
+  40 |      1.202064 |      3.700465 |       2.040841 |   -0.457559 |     1.0357e-49
+  48 |      1.178727 |      3.706678 |       2.049916 |   -0.478034 |     7.8178e-50
+  64 |      1.173761 |      3.709783 |       2.049043 |   -0.486979 |     8.4192e-50
+--------------------------------------------------------------------------------
+
+SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
+  Bridge A Coordinate Residual:         |R_W - I_pot| = 8.5528e-50 (Certified Exact)
+  Physical Constraint Force Norm:       ||F_constr||_{L^2} = 1.673335
+  Spatial Boundary Contact:             F_constr(0) = -0.0190, F_constr(L/2) = -1.5358
+  Dominant Invariant Bound State:       u_1 (rho_1 = 34.45% of barrier force)
+  Ground State Force Fraction:          rho_0 = 1.04%
+  Consecutive Step Contraction (48->64): Delta = 6.495661e-02 (Rate = 4.059788e-03 / mode)
+  Distance to Reference State:          delta_ref(48) = 6.495661e-02
+  Continuum Kinetic Energy A[T]:        +1.173761
+  Continuum Potential Energy W[T]:      -3.709783 (37.31% of max depth W(L) = 9.9438)
+  Continuum Translation Energy D[T]:    +2.049043
+  Net Continuum Variational Energy:     E[T] = -0.48697922
+  Three-Form Balance Error:             |mu_0 - E[T]| = 8.4192e-50
+
+EPISTEMIC ASSESSMENT:
+  1. Bridge A is decisively certified to machine precision (< 10^-48): the discrete step
+     potential matrix W_tilde is algebraically identical to the continuous spatial integral.
+  2. The physical constraint force field F_{constr}(t) is strictly gauge-invariant with an
+     O(1) norm ||F||_{L^2} approx 1.6733, with 34.4% of the force exerted by the u_1 state.
+  3. Consecutive pairwise distances Delta(N_{j-1}, N_j) contract steadily per mode.
+  4. The continuum energy functional E[T] stabilizes cleanly to -0.4870, with the lower bound
+     enforced by average translation stiffness 4*mean(M) == W(L) and bound-state orthogonality.
+
+Total execution time: 102.53s
+================================================================================
+CELL 135 EXECUTION COMPLETE
+================================================================================
