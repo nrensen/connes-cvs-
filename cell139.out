@@ -4,11 +4,11 @@ Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50
 Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)
 ================================================================================
 Loaded 9 prime powers up to c = 13.
-Completed N = 24 in   5.05s | Delta_K(y0) = -3.4813, Delta_W(x0) = 1.0066, Delta_coup = +0.754632
-Completed N = 28 in   8.78s | Delta_K(y0) = -3.0591, Delta_W(x0) = 1.3571, Delta_coup = +0.914556
-Completed N = 32 in  13.07s | Delta_K(y0) = -2.9922, Delta_W(x0) = 1.2882, Delta_coup = +0.881375
-Completed N = 40 in  26.97s | Delta_K(y0) = -2.9483, Delta_W(x0) = 1.2465, Delta_coup = +0.854601
-Completed N = 48 in  51.15s | Delta_K(y0) = -2.9360, Delta_W(x0) = 1.2398, Delta_coup = +0.846505
+Completed N = 24 in   4.82s | Delta_K(y0) = 1.8371, Delta_W(x0) = 1.0066, Delta_coup = +0.754632
+Completed N = 28 in   7.92s | Delta_K(y0) = 2.3491, Delta_W(x0) = 1.3571, Delta_coup = +0.914556
+Completed N = 32 in  12.42s | Delta_K(y0) = 2.4840, Delta_W(x0) = 1.2882, Delta_coup = +0.881375
+Completed N = 40 in  25.42s | Delta_K(y0) = 2.5747, Delta_W(x0) = 1.2465, Delta_coup = +0.854601
+Completed N = 48 in  46.32s | Delta_K(y0) = 2.6754, Delta_W(x0) = 1.2398, Delta_coup = +0.846505
 
 HARD REGRESSION AUDIT AGAINST CELL 138 (N = 64):
   omega_0 = 2.9315259531 (Expected: 2.9315260463, Residual: 9.32e-08)
@@ -16,7 +16,7 @@ HARD REGRESSION AUDIT AGAINST CELL 138 (N = 64):
   mu_0    = -0.4869792197 (Expected: -0.4869792210, Residual: 1.30e-09)
   REGRESSION AUDIT PASSED: Operators match Cell 138 to machine precision.
 
-Completed N = 64 in 227.68s | Delta_K(y0) = -2.9315, Delta_W(x0) = 1.2360, Delta_coup = +0.841990
+Completed N = 64 in 205.35s | Delta_K(y0) = 2.9231, Delta_W(x0) = 1.2360, Delta_coup = +0.841990
 
 --------------------------------------------------------------------------------
 TABLE 1: THE VARIATIONAL PARETO TRADEOFF FRONTIER AT N = 64
@@ -39,24 +39,24 @@ Marginal Tradeoff Slope: d(Delta K) / d(Delta W) = -gamma (Exact Hellmann-Feynma
 
 --------------------------------------------------------------------------------
 TABLE 2: EXTREMAL BOUNDARY PENALTIES ACROSS DISCRETE DIMENSIONS N
-Kinetic floor for pure well mode: Delta K(y_0) >= omega_1 - omega_0 > 0
-Well deficit for pure restoring mode: Delta W(x_0) >= nu_0 - nu_1 > 0
+Kinetic floor for pure well mode: Delta K(y_0) >= (omega_1 - omega_0) * (1 - O_{0,0}) > 0
+Well deficit for pure restoring mode: Delta W(x_0) >= (nu_0 - nu_1) * (1 - O_{0,0}) > 0
 --------------------------------------------------------------------------------
    N |    q |    omega_0 |    gap(K) | Delta K(y0) |       nu_0 |    gap(W) | Delta W(x0) |  Delta_coup
 --------------------------------------------------------------------------------
-  24 |   14 |   3.481342 |  0.505390 |   -3.481342 |   4.244045 |  0.490384 |    1.006625 |   +0.754632
-  28 |   18 |   3.059115 |  0.411983 |   -3.059115 |   4.258124 |  0.168376 |    1.357092 |   +0.914556
-  32 |   22 |   2.992230 |  0.446166 |   -2.992230 |   4.260232 |  0.046328 |    1.288151 |   +0.881375
-  40 |   30 |   2.948333 |  0.473513 |   -2.948333 |   4.260493 |  0.002294 |    1.246545 |   +0.854601
-  48 |   38 |   2.935956 |  0.469907 |   -2.935956 |   4.260495 |  0.000031 |    1.239847 |   +0.846505
-  64 |   54 |   2.931526 |  0.449337 |   -2.931526 |   4.260495 |  0.000000 |    1.236041 |   +0.841990
+  24 |   14 |   3.481342 |  0.505390 |    1.837093 |   4.244045 |  0.490384 |    1.006625 |   +0.754632
+  28 |   18 |   3.059115 |  0.411983 |    2.349097 |   4.258124 |  0.168376 |    1.357092 |   +0.914556
+  32 |   22 |   2.992230 |  0.446166 |    2.484041 |   4.260232 |  0.046328 |    1.288151 |   +0.881375
+  40 |   30 |   2.948333 |  0.473513 |    2.574729 |   4.260493 |  0.002294 |    1.246545 |   +0.854601
+  48 |   38 |   2.935956 |  0.469907 |    2.675397 |   4.260495 |  0.000031 |    1.239847 |   +0.846505
+  64 |   54 |   2.931526 |  0.449337 |    2.923056 |   4.260495 |  0.000000 |    1.236041 |   +0.841990
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 TABLE 3: LOW-FREQUENCY CROSS-GRAM MATRIX BLOCK O_{j, k} (6 x 6) AT N = 64
 Full Matrix (54 x 54): Doubly Stochastic (Row Sums = 1, Col Sums = 1 to machine precision)
 Full Matrix Closure Errors: Max Row Sum Err = 9.3547e-50 | Max Col Sum Err = 6.4146e-50
-Extremal Overlap: O_{0, 0} = |<x_0, y_0>|^2 = 0.05237127 (Exact Orthogonality)
+Extremal Overlap: O_{0, 0} = |<x_0, y_0>|^2 = 0.05237127 (Misalignment: 76.77 deg)
 Note: The 6x6 submatrix below displays low-frequency entries; row/col sums < 1 omit high modes.
 --------------------------------------------------------------------------------
   j (K) | k=0 (W) | k=1 (W) | k=2 (W) | k=3 (W) | k=4 (W) | k=5 (W)
@@ -97,12 +97,12 @@ Tracking the Pareto minimum (gamma = 1) and asymptotic stability of boundary pen
 --------------------------------------------------------------------------------
    N |    q | Delta K(y0) | Delta W(x0) | Delta K(1) | Delta W(1) |  Delta_coup |   Min Prod
 --------------------------------------------------------------------------------
-  24 |   14 |   -3.481342 |    1.006625 |   0.220956 |   0.533676 |   +0.754632 |   0.047290
-  28 |   18 |   -3.059115 |    1.357092 |   0.330996 |   0.583561 |   +0.914556 |   0.102517
-  32 |   22 |   -2.992230 |    1.288151 |   0.310568 |   0.570807 |   +0.881375 |   0.089857
-  40 |   30 |   -2.948333 |    1.246545 |   0.294572 |   0.560029 |   +0.854601 |   0.082607
-  48 |   38 |   -2.935956 |    1.239847 |   0.292687 |   0.553818 |   +0.846505 |   0.081776
-  64 |   54 |   -2.931526 |    1.236041 |   0.291278 |   0.550712 |   +0.841990 |   0.019295
+  24 |   14 |    1.837093 |    1.006625 |   0.220956 |   0.533676 |   +0.754632 |   0.047290
+  28 |   18 |    2.349097 |    1.357092 |   0.330996 |   0.583561 |   +0.914556 |   0.102517
+  32 |   22 |    2.484041 |    1.288151 |   0.310568 |   0.570807 |   +0.881375 |   0.089857
+  40 |   30 |    2.574729 |    1.246545 |   0.294572 |   0.560029 |   +0.854601 |   0.082607
+  48 |   38 |    2.675397 |    1.239847 |   0.292687 |   0.553818 |   +0.846505 |   0.081776
+  64 |   54 |    2.923056 |    1.236041 |   0.291278 |   0.550712 |   +0.841990 |   0.019295
 --------------------------------------------------------------------------------
 
 SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
@@ -111,9 +111,9 @@ SYNTHESIS AT MAXIMAL RESOLUTION N = 64:
   Coupling Gain:                Delta_{coupling} = +0.841990
   Optimal Tradeoff Coordinates: Delta K(1) = 0.291278 (34.59%), Delta W(1) = 0.550712 (65.41%)
   Marginal Tradeoff Rate:       d(Delta K)/d(Delta W)|_{gamma=1} = -1.000000 (Exact Pareto Optimum)
-  Extremal Pure-State Penalties: Delta K(y_0) = -2.931526 (Kinetic penalty of pure well mode)
+  Extremal Pure-State Penalties: Delta K(y_0) = 2.923056 (Kinetic penalty of pure well mode)
                                 Delta W(x_0) = 1.236041 (Harvest sacrifice of pure restoring mode)
-  Cross-Gram Orthogonality:     O_{0, 0} = |<x_0, y_0>|^2 = 0.05237127
+  Extremal Overlap:             O_{0, 0} = |<x_0, y_0>|^2 = 0.05237127 (76.77 deg misalignment)
   Full Matrix Double Stoch:     Max Row Err = 9.35e-50, Max Col Err = 6.41e-50
 
 EPISTEMIC ASSESSMENT:
@@ -123,12 +123,14 @@ EPISTEMIC ASSESSMENT:
      +0.8420 coupling gain is the unique global minimum of Delta K + Delta W along the
      convex Pareto frontier, attained at marginal exchange rate d(Delta K)/d(Delta W) = -1.0.
   3. The unistochastic cross-Gram matrix O_{j, k} = |<x_j, y_k>|^2 is doubly stochastic (< 10^-45)
-     across the full 54x54 matrix, and strict orthogonality O_{0, 0} = 0 enforces non-zero
-     boundary penalties: Delta K(y_0) >= omega_1 - omega_0 > 0 and Delta W(x_0) >= nu_0 - nu_1 > 0.
+     across the full 54x54 matrix. The ground states x_0 and y_0 have 5.24% squared overlap
+     (76.77 deg misalignment). Strictly positive boundary penalties are enforced without
+     requiring exact orthogonality via the generalized spectral gap bounds:
+     Delta K(y_0) >= (omega_1 - omega_0)*(1 - O_{0, 0}) > 0 and Delta W(x_0) >= (nu_0 - nu_1)*(1 - O_{0, 0}) > 0.
   4. Cumulative dispersion profiles demonstrate that y_0 spreads broadly across kinetic modes,
      confirming that the coupling is an infinite-dimensional collective spectral geometry.
 
-Total execution time: 332.70s
+Total execution time: 302.26s
 ================================================================================
 CELL 139 EXECUTION COMPLETE
 ================================================================================
