@@ -53,7 +53,7 @@ The reason is evident in the minimizer's spectral distribution:
 - In the restoring basis, $v_{\mathrm{bad}}$ is relatively concentrated ($89.38\%$ in the first 4 modes).
 - In the well basis, $v_{\mathrm{bad}}$ is broadly dispersed ($y_0$ holds only $21.06\%$, and the first 4 modes hold only $49.29\%$).
 
-The coupling mechanism is **not an avoided crossing between a tiny handful of modes**. It is a **collective spectral geometry** spanning the entire low-$K$ and high-$W$ continuum sectors.
+The coupling mechanism is **not an avoided crossing between a tiny handful of modes**. It is a **collective spectral geometry** spanning a large fraction of the available finite-$N$ spectral sectors. This provides strong evidence for a collective mechanism that may persist in the continuum limit.
 
 ### 1.2 The New Abstraction: Functional Spectral Tradeoff
 Rather than seeking an ad-hoc larger subspace ($V_{3, 3}, V_{4, 4}, \dots$), the correct infinite-dimensional abstraction is a **functional spectral tradeoff inequality**:
@@ -114,26 +114,23 @@ The slope of the Pareto frontier $\Delta K = F(\Delta W)$ in the $(\Delta W, \De
 $$\boxed{\frac{d(\Delta K)}{d(\Delta W)} = \frac{d(\Delta K)/d\gamma}{d(\Delta W)/d\gamma} = \frac{-\gamma E''(\gamma)}{E''(\gamma)} = -\gamma.}$$
 
 **Consequences:**
-1. **Strict Convexity (Under Nondegeneracy):**
-   Where the ground state is nondegenerate and $E''(\gamma) < 0$ (verified numerically across all tested $\gamma \in [0.2, 5.0]$ at $N=64$):
-   $$\frac{d^2(\Delta K)}{d(\Delta W)^2} = \frac{d(-\gamma)}{d(\Delta W)} = -\frac{1}{d(\Delta W)/d\gamma} = -\frac{1}{E''(\gamma)} > 0.$$
-   The Pareto tradeoff frontier $F(\Delta W)$ is **strictly convex**.
-2. **The 1-to-1 Exchange Point:**
-   At $\gamma = 1.0$:
-   $$\left. \frac{d(\Delta K)}{d(\Delta W)} \right|_{\gamma=1} = -1.0.$$
-   At this point, one unit of forfeited well depth buys exactly one unit of restoring relaxation.
-3. **Global Minimization of $\Delta K + \Delta W$:**
-   Consider the total deficit functional $G(\Delta W) \equiv F(\Delta W) + \Delta W$.
-   Its derivative is $G'(\Delta W) = F'(\Delta W) + 1 = -\gamma + 1$.
-   Thus $G'(\Delta W) = 0 \iff \gamma = 1$.
-   Since $G''(\Delta W) = F''(\Delta W) > 0$, the sum $\Delta K + \Delta W$ achieves its **unique global minimum** on the Pareto frontier precisely at $\gamma = 1$:
-   $$\min_{\|v\|=1} \left[ \Delta K(v) + \Delta W(v) \right] = \Delta K(1) + \Delta W(1) \equiv \Delta_{\mathrm{coupling}} \approx 0.841990.$$
+1. **Exact Theorem: Unconditional Global Minimization at $\gamma = 1.0$:**
+   For any normalized unit vector $v \in \mathcal{B}_{11}^\perp$:
+   $$\Delta K(v) + \Delta W(v) = (\langle v, K_{\mathrm{rest}} v \rangle - \omega_0) + (\nu_0 - \langle v, W_\perp v \rangle) = \langle v, (K_{\mathrm{rest}} - W_\perp) v \rangle - (\omega_0 - \nu_0).$$
+   Taking the infimum over the unit sphere $\|v\|=1$:
+   $$\min_{\|v\|=1} \left[ \Delta K(v) + \Delta W(v) \right] = \lambda_{\min}(K_{\mathrm{rest}} - W_\perp) - (\omega_0 - \nu_0) = E(1) - (\omega_0 - \nu_0) \equiv \Delta_{\mathrm{coupling}} \approx 0.841990.$$
+   Consequently, the fact that $\gamma = 1.0$ minimizes the total deficit is an **exact algebraic theorem** that holds unconditionally; it does not depend on establishing global strict convexity across all $\gamma \in (0, \infty)$.
+2. **Numerical Observation: Smooth Strict Convexity on Tested Interval:**
+   Along the sampled interval $\gamma \in [0.2, 5.0]$ at $N=64$, the computed ground state $v(\gamma)$ is strictly nondegenerate with $E''(\gamma) < 0$. By the chain rule:
+   $$\frac{d^2(\Delta K)}{d(\Delta W)^2} = \frac{d(-\gamma)}{d(\Delta W)} = -\frac{1}{E''(\gamma)} > 0,$$
+   confirming that the sampled Pareto tradeoff curve is smooth and strictly convex throughout the tested range.
+3. **The 1-to-1 Marginal Exchange Rate:**
+   At $\gamma = 1.0$, the marginal tradeoff slope is exactly:
+   $$\left. \frac{d(\Delta K)}{d(\Delta W)} \right|_{\gamma=1} = -1.000000.$$
+   At this variational balance point, one unit of forfeited well depth buys exactly one unit of restoring relaxation.
 
-### 2.5 Equivalence with the Original Variational Problem
-It is crucial to recognize that for any normalized vector $v \in \mathcal{B}_{11}^\perp$:
-$$\Delta K(v) + \Delta W(v) = (\langle v, K_{\mathrm{rest}} v \rangle - \omega_0) + (\nu_0 - \langle v, W_\perp v \rangle) = \langle v, (K_{\mathrm{rest}} - W_\perp) v \rangle - (\omega_0 - \nu_0).$$
-Consequently, minimizing the sum $\Delta K(v) + \Delta W(v)$ over the unit sphere is **algebraically identical to minimizing the coupled operator $Q_{\mathrm{comp}} = K_{\mathrm{rest}} - W_\perp$**.
-The Pareto formulation does not bypass the coupled operator diagonalization; rather, it **organizes the physical tradeoff geometrically**, mapping out the full continuous exchange rate between restoring energy and well harvest.
+### 2.5 Variational Architecture of the Pareto Formulation
+The Pareto formulation does not replace the coupled operator diagonalization; rather, it **organizes the physical tradeoff geometrically**, mapping out the full continuous exchange rate between restoring energy and well harvest. By parameterizing the competition through $H(\gamma)$, it reveals how the coupled ground state is dynamically selected as the exact balance point where the marginal rate of substitution equals unity.
 
 ### 2.6 Endpoint Regressions and Asymptotic Boundary Behavior
 The 1-parameter family $H(\gamma) = K_{\mathrm{rest}} - \gamma W_\perp$ satisfies explicit endpoint boundary conditions:
@@ -191,6 +188,7 @@ Since $\omega_j - \omega_0 \ge \omega_1 - \omega_0 > 0$ for all $j \ge 1$:
 $$\Delta K(y_0) \ge (\omega_1 - \omega_0) \sum_{j=1}^{q-1} O_{j, 0} = (\omega_1 - \omega_0)(1 - O_{0, 0}).$$
 At $N=64$, with gap $\omega_1 - \omega_0 \approx 0.449337$ and $O_{0, 0} \approx 0.052371$:
 $$\boxed{\Delta K(y_0) \ge (0.449337)(1 - 0.052371) \approx 0.425807 > 0.}$$
+The actual computed value at $N=64$ is $\Delta K(y_0) = 2.923056$, comfortably exceeding the analytical spectral gap floor.
 
 **Well Harvest Penalty for the Pure Restoring State $x_0$:**
 Similarly, expanding $x_0$ in the well eigenbasis $\{y_k\}$:
@@ -232,7 +230,7 @@ The distribution of $y_0$'s spectral mass across the 54 kinetic modes exhibits d
 - **$90\%$ mass** requires **50 modes**
 - **$95\%$ mass** requires **53 modes** (out of 54 total modes!)
 
-Only $24.40\%$ of $y_0$'s mass lies within the first 11 modes. This proves conclusively that the restoring-well competition cannot be captured by low-order Galerkin subspace models. It is an **infinite-dimensional collective spectral geometry**.
+Only $24.40\%$ of $y_0$'s mass lies within the first 11 modes. This demonstrates that, at $N=64$, the restoring-well competition is not captured by a low-order Galerkin subspace and is instead distributed across a large fraction of the available spectral modes. This provides strong evidence for a collective mechanism that may persist in the continuum limit.
 
 ---
 
@@ -311,7 +309,18 @@ Before computing the Pareto frontier, Cell 139 executed a hard regression agains
 | 32 | 22 | $0.310568$ | $0.570807$ | $+0.881375$ | $1.288151$ | $> 0$ | $0.089857$ |
 | 40 | 30 | $0.294572$ | $0.560029$ | $+0.854601$ | $1.246545$ | $> 0$ | $0.082607$ |
 | 48 | 38 | $0.292687$ | $0.553818$ | $+0.846505$ | $1.239847$ | $> 0$ | $0.081776$ |
-| 64 | 54 | $0.291278$ | $0.550712$ | $+0.841990$ | $1.236041$ | $> 0$ | $0.019295$ |
+| 64 | 54 | $0.291278$ | $0.550712$ | $+0.841990$ | $1.236041$ | $2.923056$ | $0.019295$ |
+
+### 6.5 Quantitative Compromise of the Coupled Ground State
+At $N=64$, the kinetic excitation required to attain the pure well state is:
+$$\Delta K(y_0) = 2.923056.$$
+Comparing this with the actual coupled ground state at $\gamma = 1.00$:
+$$\Delta K(1) = 0.291278.$$
+The coupled minimizer pays only **$\approx 10\%$ of the kinetic excitation** required by the pure well state:
+$$\frac{\Delta K(1)}{\Delta K(y_0)} = \frac{0.291278}{2.923056} \approx 9.96\% \approx 10\%.$$
+Meanwhile, it sacrifices $\Delta W(1) = 0.550712$ out of the pure restoring state's total harvest potential $\Delta W(x_0) = 1.236041$, thereby securing $(1.236041 - 0.550712) / 1.236041 = 55.45\%$ of the well harvest available above the restoring ground state.
+
+**Variational Takeaway:** The coupled ground state does not move anywhere near all the way toward the deepest well state. It achieves an exceptionally efficient compromise: paying only $\sim 10\%$ in kinetic excitation to capture more than half of the available potential well depth. This explains why the competition settles at $\gamma = 1.00$ on the smooth Pareto tradeoff curve.
 
 ---
 
