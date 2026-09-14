@@ -4230,7 +4230,24 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–139)
+## Cell 140 (Spectral Geometry of the Pareto Frontier: Gap Normalization, Top-W Degeneracy & Curvature Stabilization)
+
+* **Companion Note:** [`cell140.md`](file:///c:/data/github/connes-cvs-/cell140.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Variational Lower Bound & Coupled Operator Geometry)
+* **Status:** Executed & Epistemically Calibrated ([`cell140.py`](file:///c:/data/github/connes-cvs-/cell140.py), `cell140.out`, [`cell140.md`](file:///c:/data/github/connes-cvs-/cell140.md))
+* **Execution Script:** [`cell140.py`](file:///c:/data/github/connes-cvs-/cell140.py) (50-dps verification suite across $N \in [32, 48, 64]$)
+
+### Key Analytical & Numerical Results Certified
+1. **Hard Pre-Flight Operator Regression Certified ($N=64$):** Verified exact agreement with certified Cell 138/139 invariants prior to sweeps: $\omega_0 = 2.9315259531$ (residual $9.32 \times 10^{-8}$), $\nu_0 = 4.2604954421$ (residual $1.09 \times 10^{-7}$), and $\mu_0 = -0.4869792197$ (residual $1.30 \times 10^{-9}$).
+2. **Precipitous Collapse of the First Excited Well Gap ($\nu_0 - \nu_1 \to 0$):** Discovered that the fundamental spectral gap of the projected potential well $W_\perp$ on $\mathcal{B}_{11}^\perp$ collapses exponentially across discrete dimensions: $\Delta \nu(24) = 0.490384 \to \Delta \nu(28) = 0.168376 \to \Delta \nu(32) = 0.046328 \to \Delta \nu(40) = 0.002294 \to \Delta \nu(48) = 3.1 \times 10^{-5} \to \Delta \nu(64) < 10^{-7}$. This demonstrates that $W_\perp$ is developing an asymptotically degenerate top eigenspace on the continuum constraint subspace.
+3. **Singularity of Naive Gap Normalization & 2-Level Parameterization:** Proved that because $\Delta \nu \to 0$, the normalized coordinate $u(\gamma) \equiv \Delta W(\gamma) / \Delta \nu$ diverges ($u_{64}(1) \approx 1.47 \times 10^7$). This divergence reflects the singularity of the chosen scale $\Delta \nu(N)$, not an intrinsic failure of Pareto geometric scaling. Furthermore, the naive two-level model $W_2 = \nu_1 I_2 + \Delta \nu y_0 y_0^T$ collapses to a multiple of the identity ($\nu_0 I_2$) as $\Delta \nu \to 0$, trivially yielding $\Delta K_{\mathrm{2lvl}} = \Delta W_{\mathrm{2lvl}} = 0$. The observed discrepancy $\varepsilon_{\mathrm{2lvl}} = 0.623$ is therefore a diagnostic symptom of parameterization degeneracy rather than evidence against effective low-dimensional well manifolds.
+4. **Decoupling and Stabilization of Pareto Curvature ($\kappa \approx 2.50$):** In sharp contrast to the collapsing well gap, the physical ground-state curvature $E''(1)$ and Pareto stiffness $\kappa(1) = -1/E''(1)$ stabilize cleanly across dimensions: $E''(1) = -0.4267 \to -0.4045 \to -0.4007$, yielding $\kappa(1) = 2.343 \to 2.472 \to 2.4958 \approx 2.50$. This establishes the central structural finding: **the local geometry of the competition is decoupled from the top spectral gap $\nu_0 - \nu_1$**.
+5. **Cross-Gram Moment Asymmetry:** While $K$-side moments broaden with $N$ ($M_K^{(1)} = 2.48 \to 2.92, \sigma_K = 1.53 \to 1.68$), the well-side moments rapidly stabilize ($M_W^{(1)} = 1.288 \to 1.236, \sigma_W = 0.760 \to 0.797$). Clarified that curvature involves coherent off-diagonal phase interference $\langle x_j, W x_0 \rangle = \sum_k \nu_k \langle x_j, y_k \rangle \langle y_k, x_0 \rangle$, whereas $M_W^{(2)}$ contains only diagonal probabilities $|\langle x_0, y_k \rangle|^2$, motivating the multi-mode degeneracy investigation for Cell 141.
+
+
+---
+
+# Updated major historical arc (Cells 0–140)
 
 ```
 Cells 0–4
@@ -4355,6 +4372,9 @@ Cell 138 (Gate 1 Exact Variational Decomposition, Incompatibility & Falsificatio
     ↓
 Cell 139 (Gate 1 Functional Spectral Tradeoff Inequality & Cross-Gram Geometry)
     Theorem 139.1 certified: 1-parameter Pareto operator family H(gamma) = K_rest - gamma * W_perp traces convex tradeoff frontier with marginal slope -gamma; unique global minimum of Delta K + Delta W attained at gamma = 1.0 (Delta K = 0.291278, Delta W = 0.550712, sum = 0.841990); Theorem 139.2 certified: unistochastic cross-Gram matrix O_{j, k} = |<x_j, y_k>|^2 is doubly stochastic (< 10^-49); extremal misalignment O_{0, 0} = 0.05237127 (76.77 deg, resolving preliminary 0.000000 artefact); generalized spectral gap bounds Delta K(y_0) >= (omega_1 - omega_0)*(1 - O_{0, 0}) > 0 and Delta W(x_0) >= (nu_0 - nu_1)*(1 - O_{0, 0}) > 0 enforce positive boundary penalties without requiring exact orthogonality; Diagnostic 139.4 certified: massive spectral dispersion of y_0 across 53 of 54 modes (50% in 39 modes, 95% in 53 modes), proving coupling is an infinite-dimensional collective continuum geometry
+    ↓
+Cell 140 (Gate 1 Spectral Geometry of the Pareto Frontier)
+    Hard operator regression certified (< 1.1e-7); exponential collapse of top well gap Delta nu = nu_0 - nu_1 -> 0 discovered (0.490 -> < 10^-7); naive gap normalization and 2-level model diagnosed as singular; Pareto curvature shown to decouple and cleanly stabilize at kappa(1) ~ 2.50; well moments rapidly stabilize (M_W^(1) ~ 1.236, sigma_W ~ 0.797) while K-moments broaden; pivots to Cell 141 top-W spectral degeneracy audit
 ```
 
 ---
