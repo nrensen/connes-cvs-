@@ -23,9 +23,9 @@ Target Propositions & Tested Hypotheses:
        Unistochastic transition matrix O_{j, k} = |<x_j, y_k>|^2 linking K-eigenbasis
        and W-eigenbasis on B_{11}^perp.
        Sum_j O_{jk} = 1 and Sum_k O_{jk} = 1 on the FULL q x q matrix to machine precision (< 10^-45).
-       Extremal mutual orthogonality O_{0, 0} = 0.000000 (x_0 perp y_0) guarantees:
-         Delta K(y_0) >= omega_1 - omega_0 > 0 (strictly positive kinetic floor for pure well state)
-         Delta W(x_0) >= nu_0 - nu_1 > 0 (strictly positive well deficit for pure restoring state).
+       Extremal misalignment O_{0, 0} = 0.05237127 (76.77 deg) guarantees:
+         Delta K(y_0) >= (omega_1 - omega_0) * (1 - O_{0, 0}) > 0 (kinetic floor for pure well state)
+         Delta W(x_0) >= (nu_0 - nu_1) * (1 - O_{0, 0}) > 0 (well deficit for pure restoring state).
   4. Spectral Dispersion Profiles (Diagnostic 139.3):
        Cumulative dispersion Sigma_K(m) = sum_{j=0}^{m-1} O_{j, 0} and Sigma_W(n) = sum_{k=0}^{n-1} O_{0, k}.
        Quantifies why fixed-dimensional truncations fail: the well mode y_0 distributes
@@ -317,6 +317,10 @@ def run_cell139_audit():
         for r in range(q_cont):
             x_0[r, 0] = V_K[r, 0]
 
+        evals_W, V_W = symmetric_eigendecomposition(W_hat_perp)
+        nu_0 = evals_W[-1]
+        nu_1 = evals_W[-2] if q_cont > 1 else nu_0
+        gap_W = nu_0 - nu_1
         y_0 = mp.matrix(q_cont, 1)
         for r in range(q_cont):
             y_0[r, 0] = V_W[r, q_cont - 1]
