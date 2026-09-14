@@ -1,0 +1,103 @@
+================================================================================
+CELL 141 — SPECTRAL DEGENERACY OF THE WELL OPERATOR W_perp
+Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50
+Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)
+Investigating Top-Spectrum Splittings, Degeneracy Counting, and Ground-State Coupling
+================================================================================
+Loaded 9 prime powers up to c = 13.
+
+================================================================================
+PRE-FLIGHT HARD REGRESSION AUDIT AGAINST CELL 138/139/140 (N = 64)
+================================================================================
+  omega_0 = 2.9315259531 (Expected: 2.9315260463, Residual: 9.32e-08)
+  nu_0    = 4.2604954421 (Expected: 4.2604953336, Residual: 1.09e-07)
+  mu_0    = -0.4869792197 (Expected: -0.4869792210, Residual: 1.30e-09)
+  REGRESSION AUDIT PASSED in 80.38s: Operators match certified invariants.
+
+Completed N = 24 in  4.01s | nu_0 = 4.244045, delta_nu_1 = 4.9038e-01, delta_nu_2 = 6.2185e-01, r(1e-2) = 1
+Completed N = 28 in  6.33s | nu_0 = 4.258124, delta_nu_1 = 1.6838e-01, delta_nu_2 = 5.6518e-01, r(1e-2) = 1
+Completed N = 32 in  9.62s | nu_0 = 4.260232, delta_nu_1 = 4.6328e-02, delta_nu_2 = 4.1211e-01, r(1e-2) = 1
+Completed N = 40 in 18.92s | nu_0 = 4.260493, delta_nu_1 = 2.2941e-03, delta_nu_2 = 6.0786e-02, r(1e-2) = 2
+Completed N = 48 in 33.21s | nu_0 = 4.260495, delta_nu_1 = 3.1359e-05, delta_nu_2 = 4.8259e-03, r(1e-2) = 3
+Completed N = 64 in 12.80s | nu_0 = 4.260495, delta_nu_1 = 3.7391e-08, delta_nu_2 = 6.6852e-06, r(1e-2) = 5
+
+================================================================================
+TABLE 1: TOP EIGENVALUE SPLITTINGS delta nu_j = nu_0 - nu_j ACROSS N
+================================================================================
+   N |    q | delta nu_1 | delta nu_2 | delta nu_3 | delta nu_4 | delta nu_5 | delta nu_6
+--------------------------------------------------------------------------------
+  24 |   14 |   0.490384 |   0.621855 |   0.923903 |   1.188213 |   1.257026 |   1.415933
+  28 |   18 |   0.168376 |   0.565184 |   0.745644 |   0.954866 |   1.071084 |   1.249033
+  32 |   22 |   0.046328 |   0.412114 |   0.605237 |   0.769030 |   0.944210 |   1.014920
+  40 |   30 |   0.002294 |   0.060786 |   0.385605 |   0.576015 |   0.715854 |   0.773224
+  48 |   38 |   3.14e-05 |   0.004826 |   0.065991 |   0.361309 |   0.561452 |   0.716680
+  64 |   54 |   3.74e-08 |   6.69e-06 |   0.000129 |   0.007630 |   0.070128 |   0.319290
+--------------------------------------------------------------------------------
+
+================================================================================
+TABLE 2: EFFECTIVE DEGENERACY COUNTER r(epsilon; N) = 1 + #{j >= 1 : delta nu_j < epsilon}
+================================================================================
+   N |    q | eps=1e-1 | eps=1e-2 | eps=1e-3 | eps=1e-4 | eps=1e-6
+--------------------------------------------------------------------------------
+  24 |   14 |        1 |        1 |        1 |        1 |        1
+  28 |   18 |        1 |        1 |        1 |        1 |        1
+  32 |   22 |        2 |        1 |        1 |        1 |        1
+  40 |   30 |        3 |        2 |        1 |        1 |        1
+  48 |   38 |        4 |        3 |        2 |        2 |        1
+  64 |   54 |        6 |        5 |        4 |        3 |        2
+--------------------------------------------------------------------------------
+
+================================================================================
+TABLE 3: PHYSICAL GROUND-STATE WELL PROJECTION P_W(j) = |<y_j, v(1)>|^2 (N = 64)
+Total Deficit: Delta W(1) = 0.550712 | Well Depth: nu_0 = 4.260495
+================================================================================
+Mode j | Splitting delta nu_j |  Modal Mass P_W(j) |  Cumulative Mass |  Deficit Contrib
+--------------------------------------------------------------------------------
+     0 |         0.000000e+00 |           21.0581% |         21.0581% |     0.000000e+00
+     1 |         3.739145e-08 |           10.4038% |         31.4619% |     3.890130e-09
+     2 |         6.685161e-06 |            9.8925% |         41.3543% |     6.613270e-07
+     3 |         1.285021e-04 |            7.9390% |         49.2933% |     1.020172e-05
+     4 |         7.630214e-03 |            3.6702% |         52.9635% |     2.800439e-04
+     5 |         7.012848e-02 |            6.0328% |         58.9962% |     4.230683e-03
+     6 |         3.192895e-01 |            0.0439% |         59.0401% |     1.401018e-04
+     7 |         5.382642e-01 |            0.2001% |         59.2402% |     1.077255e-03
+     8 |         7.061160e-01 |            0.7985% |         60.0388% |     5.638450e-03
+     9 |         7.199005e-01 |            1.1338% |         61.1725% |     8.161944e-03
+    10 |         7.229821e-01 |            0.0127% |         61.1853% |     9.211858e-05
+    11 |         7.238031e-01 |            0.0000% |         61.1853% |     2.464997e-08
+--------------------------------------------------------------------------------
+Top 2 Modes Capture:  Pi_top(2)  = 31.4619% | Deficit paid: 3.890130e-09
+Top 4 Modes Capture:  Pi_top(4)  = 49.2933% | Deficit paid: 1.086694e-05
+Top 10 Modes Capture: Pi_top(10) = 61.1725%
+Bulk Deficit Share (j >= 2): 100.00% of Delta W(1) comes from j >= 2!
+
+================================================================================
+TABLE 4: SCENARIO CLASSIFICATION DIAGNOSTICS & RATIO TESTS
+Testing Scenario A (Doublet: delta nu_2 / delta nu_1 -> infty) vs Scenario B (Cluster: delta nu_2 -> 0)
+================================================================================
+   N |   delta nu_1 |   delta nu_2 |   delta nu_3 |    Ratio 2/1 |    Ratio 3/2 | Local Rate alpha_1
+--------------------------------------------------------------------------------
+  24 |   4.9038e-01 |   6.2185e-01 |   9.2390e-01 |     1.27e+00 |       1.4857 |                ---
+  28 |   1.6838e-01 |   5.6518e-01 |   7.4564e-01 |     3.36e+00 |       1.3193 |             0.2672
+  32 |   4.6328e-02 |   4.1211e-01 |   6.0524e-01 |     8.90e+00 |       1.4686 |             0.3226
+  40 |   2.2941e-03 |   6.0786e-02 |   3.8560e-01 |     2.65e+01 |       6.3436 |             0.3757
+  48 |   3.1359e-05 |   4.8259e-03 |   6.5991e-02 |     1.54e+02 |      13.6742 |             0.5366
+  64 |   3.7391e-08 |   6.6852e-06 |   1.2850e-04 |     1.79e+02 |      19.2220 |             0.4207
+--------------------------------------------------------------------------------
+
+SYNTHESIS & SCENARIO VERDICT:
+  1. Doublet Splitting Collapse: delta nu_1 collapses from 0.4904 (N=24) to 3.74e-08 (N=64).
+  2. Second Splitting delta nu_2: at N=64, delta nu_2 = 0.000007.
+     Splitting Ratio delta nu_2 / delta nu_1 at N=64 is: 1.79e+02!
+  3. Scenario Verdict: EVIDENCE FOR SCENARIO B (GROWING NEAR-DEGENERATE CLUSTER).
+     Multiple eigenvalues coalesce at the top of the well.
+  4. Physical Ground State Coupling: The coupled ground state v(1) places:
+     - 31.46% of its mass in the top doublet span{y_0, y_1}.
+     - Because delta nu_1 is exponentially tiny, the top doublet contributes practically ZERO to Delta W(1).
+     - Over 99% of the well deficit Delta W(1) = 0.5507 is paid by bulk modes (j >= 2), exactly explaining
+       why the single-gap 2-level model collapsed while the physical Pareto curvature kappa ~ 2.50 stabilized!
+
+Total execution time: 165.28s
+================================================================================
+CELL 141 EXECUTION COMPLETE
+================================================================================
