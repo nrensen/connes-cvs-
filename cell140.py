@@ -21,8 +21,8 @@ Target Propositions & Tested Hypotheses:
          M_K^(1) = Delta K(y_0), M_K^(2) = sum (omega_j - omega_0)^2 O_{j, 0}, sigma_K^2 = M_K^(2) - (M_K^(1))^2
          M_W^(1) = Delta W(x_0), M_W^(2) = sum (nu_0 - nu_k)^2 O_{0, k}, sigma_W^2 = M_W^(2) - (M_W^(1))^2
        Connect cross-spectral variances to Pareto curvature kappa(1) = -1 / E''(1).
-  4. Hard Pre-Flight Regression Audit (at N = 64):
-       Certify exact agreement with certified Cell 138/139 invariants:
+  4. Immediate Pre-Flight Hard Regression Audit (at N = 64):
+       Executed before sweeps to certify exact agreement with certified Cell 138/139 invariants:
          omega_0 = 2.9315260463, nu_0 = 4.2604953336, mu_0 = -0.4869792210.
 
 Execution Standard:
@@ -85,138 +85,191 @@ def canonical_even_projector(N: int) -> mp.matrix:
     dim_full = 2 * N + 1
     dim_even = N + 1
     V_even = mp.matrix(dim_full, dim_even)
-    inv_sqrt2 = mp.mpf("1") / mp.sqrt(mp.mpf("2"))
-
-    # m = 0: canonical basis e_0 is pure constant mode
     V_even[N, 0] = mp.mpf("1")
-
-    # m >= 1: canonical basis e_m is (e^{i m tau} + e^{-i m tau}) / sqrt(2)
+    inv_sqrt2 = mp.mpf("1") / mp.sqrt(mp.mpf("2"))
     for m in range(1, dim_even):
         V_even[N + m, m] = inv_sqrt2
         V_even[N - m, m] = inv_sqrt2
-
     return V_even
 
 
 def build_W_tilde(N: int, prime_data: list) -> mp.matrix:
     """
-    Projected step potential matrix W_tilde on the canonical even subspace.
-    Closed-form trigonometric integration.
+    Construct the (N+1) x (N+1) even step-potential matrix W_tilde using
+    the exact closed-form trigonometric integrals (certified Cell 138/139).
     """
-    dim_even = N + 1
-    W = mp.matrix(dim_even, dim_even)
+    dim = N + 1
+    W = mp.matrix(dim, dim)
     PI = mp.pi
 
-    for q_int, log_q, w_q in prime_data:
-        t_q = log_q
-        coeff = mp.mpf("4") * w_q / L_PARAM
-
-        for m in range(dim_even):
-            for n in range(m, dim_even):
-                val = mp.mpf("0")
-
+    for m in range(dim):
+        for n in range(m, dim):
+            entry = mp.mpf("0")
+            for (_, logq, w_q) in prime_data:
+                u_q = logq / L_PARAM
                 if m == 0 and n == 0:
-                    val = L_PARAM - t_q
+                    val = mp.mpf("2") * (mp.mpf("1") - u_q)
                 elif m == 0 and n > 0:
-                    beta_n = mp.mpf(2) * PI * mp.mpf(n) / L_PARAM
-                    val = -mp.sqrt(mp.mpf(2)) * mp.sin(beta_n * t_q) / beta_n
-                elif m > 0 and n == m:
-                    beta_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM
-                    val = (L_PARAM - t_q) - mp.sin(mp.mpf(2) * beta_m * t_q) / (mp.mpf(2) * beta_m)
+                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(n) * u_q) / (PI * mp.mpf(n)))
+                elif m > 0 and n == 0:
+                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(m) * u_q) / (PI * mp.mpf(m)))
                 else:
-                    beta_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM
-                    beta_n = mp.mpf(2) * PI * mp.mpf(n) / L_PARAM
-                    diff_b = beta_m - beta_n
-                    sum_b = beta_m + beta_n
-                    term_diff = -mp.sin(diff_b * t_q) / diff_b
-                    term_sum = -mp.sin(sum_b * t_q) / sum_b
+                    diff_mn = mp.mpf(m - n)
+                    sum_mn = mp.mpf(m + n)
+                    if m == n:
+                        term_diff = mp.mpf("2") * (mp.mpf("1") - u_q)
+                    else:
+                        term_diff = -mp.sin(mp.mpf("2") * PI * diff_mn * u_q) / (PI * diff_mn)
+                    term_sum = -mp.sin(mp.mpf("2") * PI * sum_mn * u_q) / (PI * sum_mn)
                     val = term_diff + term_sum
 
-                val *= coeff
-                W[m, n] += val
-                if n != m:
-                    W[n, m] += val
+                entry += w_q * val
+
+            W[m, n] = entry
+            W[n, m] = entry
 
     return mp.mpf("0.5") * (W + W.T)
 
 
 def build_D_tilde_per(N: int, prime_data: list) -> mp.matrix:
     """
-    Periodic translation defect matrix D_tilde^per on canonical even subspace.
-    Exact diagonal form.
+    Construct the (N+1) x (N+1) diagonal periodic translation defect matrix D_tilde_per
+    (certified Cell 138/139).
     """
-    dim_even = N + 1
-    D_per = mp.matrix(dim_even, dim_even)
+    dim = N + 1
+    D_per = mp.matrix(dim, dim)
     PI = mp.pi
 
-    for m in range(dim_even):
-        omega_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM
-        diag_val = mp.mpf("0")
-        for q_int, log_q, w_q in prime_data:
-            diag_val += mp.mpf("2") * w_q * mp.cos(omega_m * log_q)
-        D_per[m, m] = diag_val
+    for m in range(dim):
+        if m == 0:
+            D_per[0, 0] = mp.mpf("0")
+            continue
+        M_m = mp.mpf("0")
+        for (_, logq, w_q) in prime_data:
+            theta_m = PI * mp.mpf(m) * logq / L_PARAM
+            M_m += w_q * (mp.sin(theta_m) ** 2)
+        D_per[m, m] = mp.mpf("4") * M_m
 
     return D_per
 
 
 def build_Delta_D_tilde_closed(N: int, prime_data: list) -> mp.matrix:
     """
-    Boundary translation defect matrix Delta_D_tilde on canonical even subspace.
-    Exact closed-form rank-2 representation.
+    Construct the (N+1) x (N+1) boundary truncation matrix Delta_D_tilde using the
+    exact closed-form formulas with rigorous negative sign (certified Cell 138/139).
     """
-    dim_even = N + 1
-    Delta_D = mp.matrix(dim_even, dim_even)
+    dim = N + 1
+    Delta_D = mp.matrix(dim, dim)
     PI = mp.pi
 
-    for q_int, log_q, w_q in prime_data:
-        t_q = log_q
-        coeff = -mp.mpf("4") * w_q / L_PARAM
+    for m in range(1, dim):
+        for n in range(m, dim):
+            entry = mp.mpf("0")
+            for (_, logq, w_q) in prime_data:
+                theta_m = PI * mp.mpf(m) * logq / L_PARAM
+                theta_n = PI * mp.mpf(n) * logq / L_PARAM
+                sin_prod = mp.sin(theta_m) * mp.sin(theta_n)
 
-        for m in range(dim_even):
-            for n in range(m, dim_even):
-                val = mp.mpf("0")
-                if m == 0 and n == 0:
-                    val = t_q
-                elif m == 0 and n > 0:
-                    beta_n = mp.mpf(2) * PI * mp.mpf(n) / L_PARAM
-                    val = mp.sqrt(mp.mpf(2)) * mp.sin(beta_n * t_q) / beta_n
-                elif m > 0 and n == m:
-                    beta_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM
-                    val = t_q - mp.sin(mp.mpf(2) * beta_m * t_q) / (mp.mpf(2) * beta_m)
+                if m == n:
+                    J_val = mp.mpf("0.5") * logq - (L_PARAM / (mp.mpf("4") * PI * mp.mpf(m))) * mp.sin(mp.mpf("2") * theta_m)
                 else:
-                    beta_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM
-                    beta_n = mp.mpf(2) * PI * mp.mpf(n) / L_PARAM
-                    diff_b = beta_m - beta_n
-                    sum_b = beta_m + beta_n
-                    term_diff = mp.sin(diff_b * t_q) / diff_b
-                    term_sum = -mp.sin(sum_b * t_q) / sum_b
-                    val = term_diff + term_sum
+                    diff_m_n = mp.mpf(m - n)
+                    sum_m_n = mp.mpf(m + n)
+                    J_val = (L_PARAM / (mp.mpf("2") * PI)) * (
+                        mp.sin(diff_m_n * PI * logq / L_PARAM) / diff_m_n -
+                        mp.sin(sum_m_n * PI * logq / L_PARAM) / sum_m_n
+                    )
 
-                val *= coeff
-                Delta_D[m, n] += val
-                if n != m:
-                    Delta_D[n, m] += val
+                term = -(mp.mpf("8") / L_PARAM) * w_q * sin_prod * J_val
+                entry += term
+
+            Delta_D[m, n] = entry
+            Delta_D[n, m] = entry
 
     return mp.mpf("0.5") * (Delta_D + Delta_D.T)
 
 
 def symmetric_eigendecomposition(A: mp.matrix) -> tuple:
     """
-    High-precision symmetric eigendecomposition.
-    Returns: (eigenvalues, eigenvectors) sorted ascending.
+    Compute full eigenvalues and eigenvectors of a real symmetric mpmath matrix,
+    returning sorted eigenvalues (ascending) and orthonormal eigenvectors as columns.
     """
-    n = A.rows
-    diag, V = mp.eigsy(A)
-    evals = [diag[i] for i in range(n)]
-    idx = sorted(range(n), key=lambda k: evals[k])
-    sorted_evals = [evals[k] for k in idx]
+    dim = A.rows
+    evals, evecs = mp.eigsy(A)
 
-    V_sorted = mp.matrix(n, n)
-    for col_new, k in enumerate(idx):
-        for row in range(n):
-            V_sorted[row, col_new] = V[row, k]
+    pairs = []
+    for i in range(dim):
+        val = evals[i]
+        col = evecs[:, i]
+        pairs.append((val, col))
+
+    pairs.sort(key=lambda x: x[0])
+
+    sorted_evals = [p[0] for p in pairs]
+    V_sorted = mp.matrix(dim, dim)
+    for col_idx in range(dim):
+        col_vec = pairs[col_idx][1]
+        for row_idx in range(dim):
+            V_sorted[row_idx, col_idx] = col_vec[row_idx, 0]
 
     return sorted_evals, V_sorted
+
+
+def build_continuum_operators(N: int, prime_data: list):
+    """
+    Construct the certified continuum operators (K_rest, W_hat_perp, Q_hat_comp, U_cont, q_cont)
+    on the subspace B_11^perp (dimension q = N - 10).
+    """
+    dim_even = N + 1
+    q_cont = N - N_BOUND + 1
+    PI = mp.pi
+
+    # Full Galerkin matrix and parity projection
+    Q_full, _ = get_galerkin_matrix(
+        c=C_PARAM,
+        N=N,
+        T=T_PARAM,
+        dps=GROUND_DPS,
+        verbose=False,
+    )
+    V_even = canonical_even_projector(N)
+    Q_even = V_even.T * Q_full * V_even
+    Q_even = mp.mpf("0.5") * (Q_even + Q_even.T)
+
+    # Component matrices
+    W_tilde = build_W_tilde(N, prime_data)
+    D_per = build_D_tilde_per(N, prime_data)
+    Delta_D = build_Delta_D_tilde_closed(N, prime_data)
+    K_neg = mp.mpf("0.5") * ((W_tilde - Delta_D) + (W_tilde - Delta_D).T)
+
+    Omega_diag = mp.matrix(dim_even, dim_even)
+    for m in range(dim_even):
+        a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
+        h_val = h_plus(a_m, GROUND_DPS)
+        Omega_diag[m, m] = h_val + D_per[m, m]
+
+    Q_comp = Omega_diag - K_neg
+    Q_comp = mp.mpf("0.5") * (Q_comp + Q_comp.T)
+
+    # Continuum subspace projector B_11^perp
+    _, V_even_eigs = symmetric_eigendecomposition(Q_even)
+    U_cont = mp.matrix(dim_even, q_cont)
+    for col in range(q_cont):
+        orig_col = N_BOUND + col
+        for row in range(dim_even):
+            U_cont[row, col] = V_even_eigs[row, orig_col]
+
+    # Restricted continuum operators
+    W_hat_perp = U_cont.T * W_tilde * U_cont
+    W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
+
+    K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
+    K_rest = mp.mpf("0.5") * (K_rest + K_rest.T)
+
+    Q_hat_comp = U_cont.T * Q_comp * U_cont
+    Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
+
+    return K_rest, W_hat_perp, Q_hat_comp, U_cont, q_cont
 
 
 def solve_two_level_model(omega_0, gap_K, nu_0, gap_W, O_00, gamma):
@@ -237,22 +290,17 @@ def solve_two_level_model(omega_0, gap_K, nu_0, gap_W, O_00, gamma):
     H22 = omega_1 - gamma * (nu_1 + gap_W * (mp.mpf(1) - O_00))
     H12 = -gamma * gap_W * s01
 
-    delta_H = H22 - H11
-    disc = mp.sqrt(delta_H**2 + mp.mpf(4) * H12**2)
-    E_2lvl = mp.mpf("0.5") * (H11 + H22 - disc)
+    H_2 = mp.matrix(2, 2)
+    H_2[0, 0] = H11
+    H_2[0, 1] = H12
+    H_2[1, 0] = H12
+    H_2[1, 1] = H22
 
-    # Ground state eigenvector (v_1, v_2)
-    c1 = -H12
-    c2 = H11 - E_2lvl
-    norm_c = mp.sqrt(c1**2 + c2**2)
-    if norm_c > 0:
-        v1 = c1 / norm_c
-        v2 = c2 / norm_c
-    else:
-        v1 = mp.mpf(1)
-        v2 = mp.mpf(0)
+    evals_2, evecs_2 = symmetric_eigendecomposition(H_2)
+    E_2lvl = evals_2[0]
+    v1 = evecs_2[0, 0]
+    v2 = evecs_2[1, 0]
 
-    # Deficits
     Delta_K_2lvl = gap_K * (v2**2)
     proj_W = v1 * s00 + v2 * s11
     Delta_W_2lvl = gap_W * (mp.mpf(1) - proj_W**2)
@@ -265,90 +313,110 @@ def run_cell140_audit():
 
     print("=" * 80)
     print("CELL 140 — SPECTRAL GEOMETRY OF THE PARETO FRONTIER")
-    print("Parameters: c = 13, L = 2.56494935746, T = 600, dps = 50")
-    print("Bound-State Cutoff: N_bound = 11 (continuum subspace dimension q = N - 10)")
+    print(f"Parameters: c = {C_PARAM}, L = {float(L_PARAM):.11f}, T = {T_PARAM}, dps = {GROUND_DPS}")
+    print(f"Bound-State Cutoff: N_bound = {N_BOUND} (continuum subspace dimension q = N - 10)")
     print("Investigating Gap Normalization, 2-Level Falsification, and Spectral Moments")
     print("=" * 80)
 
     prime_data = load_prime_powers_table(C_PARAM)
     print(f"Loaded {len(prime_data)} prime powers up to c = {C_PARAM}.")
-    PI = mp.pi
 
-    # Multi-N data storage
+    # ============================================================
+    # IMMEDIATE PRE-FLIGHT HARD REGRESSION AUDIT (N = 64)
+    # ============================================================
+    print("\n" + "=" * 80)
+    print("PRE-FLIGHT HARD REGRESSION AUDIT AGAINST CELL 138/139 (N = 64)")
+    print("=" * 80)
+    t_pre_start = time.time()
+    K_rest_64, W_hat_perp_64, Q_hat_comp_64, U_cont_64, q_cont_64 = build_continuum_operators(64, prime_data)
+
+    evals_K_64, V_K_64 = symmetric_eigendecomposition(K_rest_64)
+    omega_0_64 = evals_K_64[0]
+
+    evals_W_64, V_W_64 = symmetric_eigendecomposition(W_hat_perp_64)
+    nu_0_64 = evals_W_64[-1]
+
+    evals_Q_64, V_Q_64 = symmetric_eigendecomposition(Q_hat_comp_64)
+    mu_0_64 = evals_Q_64[0]
+
+    expected_omega_0 = mp.mpf("2.9315260462705")
+    expected_nu_0 = mp.mpf("4.2604953335549")
+    expected_mu_0 = mp.mpf("-0.4869792209778")
+
+    err_omega = abs(omega_0_64 - expected_omega_0)
+    err_nu = abs(nu_0_64 - expected_nu_0)
+    err_mu = abs(mu_0_64 - expected_mu_0)
+
+    print(f"  omega_0 = {float(omega_0_64):.10f} (Expected: {float(expected_omega_0):.10f}, Residual: {float(err_omega):.2e})")
+    print(f"  nu_0    = {float(nu_0_64):.10f} (Expected: {float(expected_nu_0):.10f}, Residual: {float(err_nu):.2e})")
+    print(f"  mu_0    = {float(mu_0_64):.10f} (Expected: {float(expected_mu_0):.10f}, Residual: {float(err_mu):.2e})")
+
+    if err_omega > mp.mpf("1e-6") or err_nu > mp.mpf("1e-6") or err_mu > mp.mpf("1e-6"):
+        print("FATAL: REGRESSION AUDIT FAILED AGAINST CELL 138/139! ABORTING.")
+        raise RuntimeError("Operator regression failure between Cell 138/139 and Cell 140.")
+    t_pre = time.time() - t_pre_start
+    print(f"  REGRESSION AUDIT PASSED in {t_pre:.2f}s: Operators match Cell 138/139 to machine precision.\n")
+
+    # Store cached N=64 operators and eigensystems to avoid recomputation
+    cached_64 = {
+        "K_rest": K_rest_64,
+        "W_hat_perp": W_hat_perp_64,
+        "Q_hat_comp": Q_hat_comp_64,
+        "U_cont": U_cont_64,
+        "q_cont": q_cont_64,
+        "evals_K": evals_K_64,
+        "V_K": V_K_64,
+        "evals_W": evals_W_64,
+        "V_W": V_W_64,
+        "evals_Q": evals_Q_64,
+        "V_Q": V_Q_64,
+    }
+
+    # ============================================================
+    # MULTI-N SPECTRAL GEOMETRY SWEEP
+    # ============================================================
     n_results = {}
 
     for N in N_LIST:
         t_n_start = time.time()
-        dim_even = N + 1
-        q_cont = dim_even - N_BOUND
 
-        # Parity projection
-        V_even = canonical_even_projector(N)
+        if N == 64:
+            K_rest = cached_64["K_rest"]
+            W_hat_perp = cached_64["W_hat_perp"]
+            Q_hat_comp = cached_64["Q_hat_comp"]
+            U_cont = cached_64["U_cont"]
+            q_cont = cached_64["q_cont"]
+            evals_K = cached_64["evals_K"]
+            V_K = cached_64["V_K"]
+            evals_W = cached_64["evals_W"]
+            V_W = cached_64["V_W"]
+            evals_Q = cached_64["evals_Q"]
+            V_Q = cached_64["V_Q"]
+        else:
+            K_rest, W_hat_perp, Q_hat_comp, U_cont, q_cont = build_continuum_operators(N, prime_data)
+            evals_K, V_K = symmetric_eigendecomposition(K_rest)
+            evals_W, V_W = symmetric_eigendecomposition(W_hat_perp)
+            evals_Q, V_Q = symmetric_eigendecomposition(Q_hat_comp)
 
-        # Full Galerkin matrix
-        Q_full, _ = get_galerkin_matrix(
-            c=C_PARAM,
-            N=N,
-            T=T_PARAM,
-            dps=GROUND_DPS,
-            verbose=False,
-        )
-
-        Q_even = V_even.T * Q_full * V_even
-        Q_even = mp.mpf("0.5") * (Q_even + Q_even.T)
-
-        # Closed-form operator components
-        W_tilde = build_W_tilde(N, prime_data)
-        D_per = build_D_tilde_per(N, prime_data)
-        Delta_D = build_Delta_D_tilde_closed(N, prime_data)
-        K_neg = W_tilde + Delta_D
-
-        Omega_diag = mp.matrix(dim_even, dim_even)
-        for m in range(dim_even):
-            a_m = mp.mpf(2) * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf(0)
-            h_val = h_plus(a_m, GROUND_DPS)
-            Omega_diag[m, m] = h_val + D_per[m, m]
-
-        Q_comp = Omega_diag - K_neg
-        Q_comp = mp.mpf("0.5") * (Q_comp + Q_comp.T)
-
-        # Continuum subspace projection B_11^perp
-        _, V_even_eigs = symmetric_eigendecomposition(Q_even)
-        U_cont = mp.matrix(dim_even, q_cont)
-        for col in range(q_cont):
-            orig_col = N_BOUND + col
-            for row in range(dim_even):
-                U_cont[row, col] = V_even_eigs[row, orig_col]
-
-        # Projected operators
-        W_hat_perp = U_cont.T * W_tilde * U_cont
-        W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
-
-        K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
-        K_rest = mp.mpf("0.5") * (K_rest + K_rest.T)
-
-        Q_hat_comp = U_cont.T * Q_comp * U_cont
-        Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
-
-        # Individual eigensystems
-        evals_K, V_K = symmetric_eigendecomposition(K_rest)
         omega_0 = evals_K[0]
         omega_1 = evals_K[1] if q_cont > 1 else omega_0
         gap_K = omega_1 - omega_0
+
+        nu_0 = evals_W[-1]
+        nu_1 = evals_W[-2] if q_cont > 1 else nu_0
+        gap_W = nu_0 - nu_1
+
+        mu_0 = evals_Q[0]
+
+        # Explicit column extractions
         x_0 = mp.matrix(q_cont, 1)
         for r in range(q_cont):
             x_0[r, 0] = V_K[r, 0]
 
-        evals_W, V_W = symmetric_eigendecomposition(W_hat_perp)
-        nu_0 = evals_W[-1]
-        nu_1 = evals_W[-2] if q_cont > 1 else nu_0
-        gap_W = nu_0 - nu_1
         y_0 = mp.matrix(q_cont, 1)
         for r in range(q_cont):
             y_0[r, 0] = V_W[r, q_cont - 1]
 
-        evals_Q, V_Q = symmetric_eigendecomposition(Q_hat_comp)
-        mu_0 = evals_Q[0]
         w_bad = mp.matrix(q_cont, 1)
         for r in range(q_cont):
             w_bad[r, 0] = V_Q[r, 0]
@@ -360,26 +428,6 @@ def run_cell140_audit():
             y_0 = -y_0
         if (U_cont * w_bad)[0, 0] < 0:
             w_bad = -w_bad
-
-        # Hard pre-flight regression at N = 64
-        if N == 64:
-            print("\nHARD REGRESSION AUDIT AGAINST CELL 138/139 (N = 64):")
-            expected_omega_0 = mp.mpf("2.9315260462705")
-            expected_nu_0 = mp.mpf("4.2604953335549")
-            expected_mu_0 = mp.mpf("-0.4869792209778")
-
-            err_omega = abs(omega_0 - expected_omega_0)
-            err_nu = abs(nu_0 - expected_nu_0)
-            err_mu = abs(mu_0 - expected_mu_0)
-
-            print(f"  omega_0 = {float(omega_0):.10f} (Expected: {float(expected_omega_0):.10f}, Residual: {float(err_omega):.2e})")
-            print(f"  nu_0    = {float(nu_0):.10f} (Expected: {float(expected_nu_0):.10f}, Residual: {float(err_nu):.2e})")
-            print(f"  mu_0    = {float(mu_0):.10f} (Expected: {float(expected_mu_0):.10f}, Residual: {float(err_mu):.2e})")
-
-            if err_omega > mp.mpf("1e-6") or err_nu > mp.mpf("1e-6") or err_mu > mp.mpf("1e-6"):
-                print("FATAL: REGRESSION AUDIT FAILED! ABORTING.")
-                raise RuntimeError("Operator regression failure.")
-            print("  REGRESSION AUDIT PASSED: Operators match Cell 138/139 to machine precision.\n")
 
         # Cross-Gram matrix via orthogonal transition matrix
         V_W_rev = mp.matrix(q_cont, q_cont)
@@ -488,7 +536,7 @@ def run_cell140_audit():
         }
 
         t_n = time.time() - t_n_start
-        print(f"Completed N = {N:2d} in {t_n:6.2f}s | gap_K = {float(gap_K):.4f}, gap_W = {float(gap_W):.4e}, O_00 = {float(O_00):.6f}, M_K(1) = {float(M_K_1):.4f}")
+        print(f"Completed N = {N:2d} in {t_n:6.2f}s | gap_K = {float(gap_K):.4f}, gap_W = {float(gap_W):.4f}, O_00 = {float(O_00):.6f}, M_K(1) = {float(M_K_1):.4f}")
 
     # ============================================================
     # FORMATTED REPORT OUTPUTS
@@ -500,7 +548,7 @@ def run_cell140_audit():
     res_64 = n_results[64]
     print("\n" + "-" * 80)
     print("TABLE 1: FULL PARETO FRONTIER VS ANALYTICAL 2-LEVEL MODEL (N = 64)")
-    print(f"Spectral Inputs: gap_K = {float(res_64['gap_K']):.6f}, gap_W = {float(res_64['gap_W']):.6e}, O_00 = {float(res_64['O_00']):.6f}")
+    print(f"Spectral Inputs: gap_K = {float(res_64['gap_K']):.6f}, gap_W = {float(res_64['gap_W']):.6f}, O_00 = {float(res_64['O_00']):.6f}")
     print("-" * 80)
     print(f"{'gamma':>6} | {'Delta K (Full)':>14} | {'Delta K (2lvl)':>14} | {'Delta W (Full)':>14} | {'Delta W (2lvl)':>14} | {'Discrepancy':>12} | {'Rel Err %':>9}")
     print("-" * 80)
