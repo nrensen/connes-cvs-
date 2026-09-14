@@ -3,178 +3,149 @@
 **Target Gate:** Gate 1 (Finite-$N$ Spectral Mechanism & Asymptotic Tail Extinction)  
 **Milestone:** Milestone M-G1.6 (Variational Lower Bound & Coupled Operator Geometry)  
 **Target Operators:** Certified Continuum Truncations $K_{\mathrm{rest}}(N)$, $W_\perp(N)$, and $H_1(N) = K_{\mathrm{rest}} - W_\perp$ on $\mathcal{B}_{11}^\perp$  
-**Pre-Flight Invariants ($N = 64$):** $\omega_0 = 2.9315259531$, $\nu_0 = 4.2604954421$, $\mu_0 = -0.4869792197$  
+**Pre-Flight Invariants ($N = 64$):** $\omega_0 = 2.9315259531$, $\nu_0 = 4.2604954421$, $\mu_0 = -0.4869792197$ (residual $< 1.3 \times 10^{-9}$)  
+**Computational Output:** Certified via [`cell143.out`](file:///c:/data/github/connes-cvs-/cell143.out) (runtime: 173.77s)  
 
 ---
 
-## 1. Executive Context & The Strategic Pivot
+## 1. Executive Summary & Epistemic Synthesis
 
-In [cell142.md](file:///c:/data/github/connes-cvs-/cell142.md), the investigation achieved an essential epistemic clarity by certifying an important **negative result**:
-- The energy-deficit participation rank $r_{0.05}(N)$ (modes required to account for $95\%$ of the well-energy sacrifice $\Delta W(1)$) scales as approximately **$90\%$ of the entire continuum dimension $q(N)$**:
-  $$\frac{r_{0.05}(N)}{q(N)} \in \{0.909, \; 0.895, \; 0.913, \; 0.907\} \approx 0.90.$$
-- This decisively **refutes** the hypothesis that the active deficit-paying sector is low-dimensional ($r_\eta \ll q$).
-- Instead, the physical coupled ground state $v(1)$ operates through a **dual-reservoir architecture**:
-  $$\boxed{\text{Top Cluster } (j \le 3): \; 49.3\% \text{ probability mass, paying } < 0.002\% \text{ of well deficit}}$$
-  $$\boxed{\text{Deep Spectral Tail } (j \ge 4): \; 50.7\% \text{ probability mass, paying } > 99.998\% \text{ of well deficit}}.$$
+Cell 143 transforms the investigation of the well-energy sacrifice from discrete mode counting into a continuous spectral-measure problem. By defining the normalized energy-deficit measure $d\lambda_N(x) \equiv \frac{x \, d\mu_N(x)}{\Delta W_N}$, it isolates the continuous energy scale on which the well deficit is paid.
 
-Because the discrete mode count $r_\eta(N) \propto q(N)$ is extensive, extending discrete eigenvalue censuses (e.g. to 30 or 40 modes) is mathematically exhausted. If the discrete spectrum simply densifies as $N \to \infty$, counting discrete mode indices $j$ is the wrong mathematical coordinate.
+### 1.1 Summary of Certified Findings
 
-The fundamental unresolved question is:
-$$\boxed{\textbf{Where, on the continuous energy axis } x = \delta\nu, \textbf{ is the well-energy sacrifice being paid?}}$$
-
-Cell 143 pivots from discrete mode indices $j$ to the **continuous energy-deficit spectral measure** $d\lambda_N(x)$ and continuous energy quantiles $Q_p(N)$ across $N \in \{32, 48, 56, 64\}$.
+1. **Stationary $\mathcal{O}(1)$ Energy Scale:**  
+   The mean deficit energy $\bar{E}_{\mathrm{def}}(N)$ and spectral standard deviation $\sigma_\lambda(N)$ are essentially stationary across dimensions:
+   $$\bar{E}_{\mathrm{def}}(N) \in \{1.4532, \; 1.4570, \; 1.4562, \; 1.4559\} \approx 1.456,$$
+   $$\sigma_\lambda(N) \in \{0.4328, \; 0.4366, \; 0.4365, \; 0.4374\} \approx 0.437.$$
+2. **Continuous Energy Quantiles ($Q_{50} \approx 1.39, Q_{95} \approx 2.05$):**  
+   On the physical energy axis $x = \delta\nu$:
+   - The median deficit energy $Q_{50}(N)$ is extraordinarily stable: $1.4047 \to 1.3915 \to 1.3913 \to 1.3912$.
+   - The 95th percentile $Q_{95}(N)$ drifts only mildly: $1.9613 \to 2.0150 \to 2.0416 \to 2.0503$.
+   - The empirical power-law exponents $\alpha_{50} = -0.0140$ and $\alpha_{95} = +0.0640$ are fully consistent with an $\mathcal{O}(1)$ stationary scale rather than UV power-law dilation.
+3. **Physical Explanation of the Extensive Mode Count ($r_\eta \sim 0.90 q$):**  
+   The data provide strong finite-$N$ evidence that the extensive mode count $r_{0.05} \approx 0.90 q$ observed in Cell 142 is a **coordinate densification effect**. Approximately $90\%$ of the discrete Galerkin continuum modes are involved because the discrete eigenvalues are sampling a fixed, bounded continuum spectral window $[0, X_*]$ (with $X_* \approx 2.05\text{--}2.10$) ever more densely as $N \to \infty$.
+4. **No UV-Dilation Escape:**  
+   The energy sacrifice is not marching toward the truncation edge. Over $95\%$ of the deficit is paid below energy $x \le 2.0503$, completely ruling out UV runaway scenarios where high-frequency edge modes would dominate the well sacrifice.
 
 ---
 
-## 2. Mathematical Framework & Continuous Spectral Measures
+## 2. Mathematical Formulation & Continuous Measures
 
-### 2.1 The Empirical Ground-State Probability Measure $\mu_N$
+### 2.1 The Discrete Spectral Probability Measure $\mu_N$
 
 Let $\{y_j\}_{j=0}^{q-1}$ be the orthonormal eigenfunctions of $W_\perp$ with descending eigenvalues $\nu_0 > \nu_1 > \dots > \nu_{q-1}$, and let $\delta\nu_j \equiv \nu_0 - \nu_j$ be their energy splittings from the well top. The coupled physical ground state $v(1)$ induces the discrete spectral probability distribution:
 $$P_W(j) \equiv |\langle y_j, v(1) \rangle|^2, \qquad \sum_{j=0}^{q-1} P_W(j) = 1.$$
-We associate to $v(1)$ the empirical spectral probability measure on the energy axis $[0, \infty)$:
+The empirical spectral probability measure on $[0, \infty)$ is:
 $$\mu_N \equiv \sum_{j=0}^{q-1} P_W(j) \, \delta_{\delta\nu_j}.$$
-The total well-energy deficit $\Delta W_N \equiv \nu_0 - \langle v(1), W_\perp v(1) \rangle$ is simply its first moment:
+The total well-energy deficit $\Delta W_N \equiv \nu_0 - \langle v(1), W_\perp v(1) \rangle$ is its first moment:
 $$\Delta W_N = \int_0^\infty x \, d\mu_N(x) = \sum_{j=1}^{q-1} \delta\nu_j P_W(j).$$
 
 ---
 
-### 2.2 The Normalized Energy-Deficit Measure $\lambda_N$
+### 2.2 The Normalized Energy-Deficit Spectral Measure $\lambda_N$
 
-To isolate the distribution of energy sacrifice independently of probability mass, we define the **normalized energy-deficit spectral measure**:
+To isolate where the well-energy sacrifice is paid independently of probability mass, we define:
 $$d\lambda_N(x) \equiv \frac{x \, d\mu_N(x)}{\Delta W_N} = \sum_{j=1}^{q-1} w_j \, \delta_{\delta\nu_j}, \qquad w_j \equiv \frac{\delta\nu_j P_W(j)}{\Delta W_N}.$$
-By construction:
-$$\int_0^\infty d\lambda_N(x) = \sum_{j=1}^{q-1} w_j = 1.0.$$
-The weight $w_j$ is the precise fraction of the total well sacrifice paid by mode $j$.
+By construction, $\int_0^\infty d\lambda_N(x) = \sum_{j=1}^{q-1} w_j = 1.0$.
 
 ---
 
-### 2.3 Cumulative Distribution Functions & Continuous Quantiles
+### 2.3 Continuous Energy Quantiles $Q_p(N)$
 
-Let $F_\mu^{(N)}(x)$ and $F_\lambda^{(N)}(x)$ denote the cumulative distribution functions:
-$$F_\mu^{(N)}(x) \equiv \mu_N\big([0, x]\big) = \sum_{\delta\nu_j \le x} P_W(j),$$
-$$F_\lambda^{(N)}(x) \equiv \lambda_N\big([0, x]\big) = \sum_{\delta\nu_j \le x} w_j = \frac{1}{\Delta W_N} \sum_{\delta\nu_j \le x} \delta\nu_j P_W(j).$$
+Let $F_\lambda^{(N)}(x) \equiv \sum_{\delta\nu_j \le x} w_j$ be the cumulative deficit distribution.
 
 > **Definition 143.1 (Continuous Energy Quantiles $Q_p(N)$).**  
-> For any fraction $p \in (0, 1)$, the $p$-th energy quantile of the deficit distribution is defined as:
-> $$Q_p(N) \equiv \inf \big\{ x \ge 0 : F_\lambda^{(N)}(x) \ge p \big\}.$$
-> Because $F_\lambda^{(N)}$ is supported on the discrete splittings $\{\delta\nu_j\}$, $Q_p(N)$ is the minimal splitting $\delta\nu_k$ such that the cumulative deficit fraction reaches $p$:
-> $$Q_p(N) = \delta\nu_{k_p}, \qquad k_p \equiv \min \left\{ k \in \{1, \dots, q-1\} : \sum_{j=1}^k w_j \ge p \right\}.$$
-
-Specifically, we evaluate:
-- $Q_{25}(N)$: lower quartile of the well deficit,
-- $Q_{50}(N)$: median energy of the well deficit (half of $\Delta W$ is paid below $Q_{50}$),
-- $Q_{75}(N)$: upper quartile of the well deficit,
-- $Q_{90}(N)$: 90th percentile of the well deficit,
-- $Q_{95}(N)$: 95th percentile of the well deficit,
-- $Q_{99}(N)$: 99th percentile of the well deficit.
-- Inter-quartile range: $\mathrm{IQR}(N) \equiv Q_{75}(N) - Q_{25}(N)$.
+> For any fraction $p \in (0, 1)$, the $p$-th energy quantile is defined by:
+> $$Q_p(N) \equiv \inf \big\{ x \ge 0 : F_\lambda^{(N)}(x) \ge p \big\} = \delta\nu_{k_p}, \qquad k_p \equiv \min \left\{ k \ge 1 : \sum_{j=1}^k w_j \ge p \right\}.$$
 
 ---
 
-### 2.4 Moments and Dispersion of the Energy-Deficit Measure
+## 3. Certified Numerical Results (`cell143.out`)
 
-We compute the continuous moments of $d\lambda_N(x)$:
-- **Mean Deficit Energy:**
-  $$\bar{E}_{\mathrm{def}}(N) \equiv \int_0^\infty x \, d\lambda_N(x) = \sum_{j=1}^{q-1} \delta\nu_j w_j = \frac{1}{\Delta W_N} \sum_{j=1}^{q-1} (\delta\nu_j)^2 P_W(j).$$
-- **Second Moment & Variance:**
-  $$M_2^{(\lambda)}(N) \equiv \int_0^\infty x^2 \, d\lambda_N(x) = \frac{1}{\Delta W_N} \sum_{j=1}^{q-1} (\delta\nu_j)^3 P_W(j), \qquad \sigma_\lambda^2(N) \equiv M_2^{(\lambda)} - (\bar{E}_{\mathrm{def}})^2.$$
+Pre-flight audit at $N=64$ passed in 92.12s ($\omega_0 = 2.9315259531, \nu_0 = 4.2604954421, \mu_0 = -0.4869792197$; residual $< 1.3 \times 10^{-9}$).
 
----
+### 3.1 Table 1: Energy-Deficit Distribution Moments Across $N$
 
-### 2.5 Scaling Hypotheses: Stationary Continuum vs Moving-Edge Dilation
-
-Cell 143 tests two competing structural explanations for why $r_\eta(N) / q(N) \approx 0.90$:
-
-> **Hypothesis 143.2 (Stationary Continuum Deficit Density).**  
-> The well deficit is paid on a **fixed, bounded macroscopic energy interval** $[0, X_*]$ in the continuum limit. Under this hypothesis:
-> $$\lim_{N \to \infty} Q_p(N) = Q_p^{(\infty)} < \infty \qquad \forall p \in (0, 1),$$
-> and the cumulative distribution $F_\lambda^{(N)}(x)$ converges pointwise to a stationary continuum function $F_\lambda^{(\infty)}(x)$ on $[0, \infty)$.  
-> *Implication:* The extensive mode scaling $r_\eta \sim 0.90 q$ is a purely discrete coordinate effect caused by eigenvalues densifying inside a fixed macroscopic spectral window $[0, X_*]$.
-
-> **Hypothesis 143.3 (Moving-Edge UV Dilation).**  
-> The deficit-carrying modes shift upward as $N$ increases ($Q_p(N) \sim N^\alpha$ with $\alpha > 0$).  
-> *Implication:* The energy sacrifice is pushed to the ultraviolet truncation edge, meaning the well sacrifice diverges in the continuum unless damped by kinetic penalties.
-
----
-
-## 3. Computational Verification Suite (`cell143.py`)
-
-The verification script implements the following structure:
-1. **Pre-Flight Invariant Hard Regression ($N=64$ at 50 dps):**  
-   Certify operators against certified Cell 138–142 baselines ($\omega_0 = 2.9315259531, \nu_0 = 4.2604954421, \mu_0 = -0.4869792197$; residual $< 10^{-6}$).
-2. **Multi-$N$ Eigensystem & Ground-State Sweep ($N \in \{32, 48, 56, 64\}$):**  
-   Construct full continuum operators at 50 dps, extract $v(1)$, compute $P_W(j)$, verify modal deficit conservation $\mathcal{R}_{\mathrm{cons}} < 10^{-45}$.
-3. **Table 1: Deficit Moments & Dispersion ($\Delta W_N, \bar{E}_{\mathrm{def}}, \sigma_\lambda$):**  
-   Track whether the mean deficit energy $\bar{E}_{\mathrm{def}}(N)$ and standard deviation $\sigma_\lambda(N)$ stabilize or grow with $N$.
-4. **Table 2: Continuous Energy Quantiles ($Q_{25}, Q_{50}, Q_{75}, Q_{90}, Q_{95}, Q_{99}$, IQR):**  
-   Evaluate quantiles on the physical energy axis $x = \delta\nu$ across dimensions.
-5. **Table 3: Fixed-Energy Profile of Cumulative Deficit $F_\lambda^{(N)}(x)$:**  
-   Sample $F_\lambda^{(N)}(x)$ and $F_\mu^{(N)}(x)$ on a fixed grid $x \in \{0.001, 0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 2.00\}$ to test for pointwise profile convergence.
-6. **Table 4: Quantile Scaling & Drift Analysis:**  
-   Compute relative drift $\rho_p \equiv |Q_p(64) - Q_p(48)| / Q_p(64)$ and empirical power-law exponents $\alpha_p = \frac{\log(Q_p(64)/Q_p(32))}{\log(64/32)}$.
-7. **Sentinel:** Terminates with canonical 3-line sentinel.
-
----
-
-## 4. Expected Diagnostic Output Schemas
-
-### Table 1: Energy-Deficit Distribution Moments Across $N$
-*Awaiting execution of `cell143.py` on external compute node.*
-
-| $N$ | $q$ | Total Deficit $\Delta W_N$ | Mean Energy $\bar{E}_{\mathrm{def}}$ | Second Moment $M_2^{(\lambda)}$ | Std Dev $\sigma_\lambda$ | $\sigma_\lambda / \bar{E}_{\mathrm{def}}$ |
+| $N$ | $q$ | Total Deficit $\Delta W_N$ | Mean Energy $\bar{E}_{\mathrm{def}}$ | Second Moment $M_2^{(\lambda)}$ | Std Dev $\sigma_\lambda$ | Rel Spread $\sigma_\lambda / \bar{E}_{\mathrm{def}}$ |
 |---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 32 | 22 | ... | ... | ... | ... | PENDING |
-| 48 | 38 | ... | ... | ... | ... | PENDING |
-| 56 | 46 | ... | ... | ... | ... | PENDING |
-| 64 | 54 | ... | ... | ... | ... | PENDING |
+| 32 | 22 | 0.570807 | 1.453235 | 2.299196 | 0.432787 | 0.2978 |
+| 48 | 38 | 0.553818 | 1.457033 | 2.313581 | 0.436620 | 0.2997 |
+| 56 | 46 | 0.552398 | 1.456153 | 2.310899 | 0.436484 | 0.2998 |
+| 64 | 54 | 0.550712 | 1.455910 | 2.310983 | 0.437389 | 0.3004 |
 
 ---
 
-### Table 2: Continuous Energy Quantiles $Q_p(N)$ (on $x = \delta\nu$ Axis)
-*Awaiting execution of `cell143.py` on external compute node.*
+### 3.2 Table 2: Continuous Energy Quantiles $Q_p(N)$ (on $x = \delta\nu$ Axis)
 
 | $N$ | $q$ | $Q_{25}$ (25% Def) | $Q_{50}$ (Median) | $Q_{75}$ (75% Def) | $Q_{90}$ (90% Def) | $Q_{95}$ (95% Def) | $Q_{99}$ (99% Def) | $\mathrm{IQR} = Q_{75} - Q_{25}$ |
 |---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 32 | 22 | ... | ... | ... | ... | ... | ... | PENDING |
-| 48 | 38 | ... | ... | ... | ... | ... | ... | PENDING |
-| 56 | 46 | ... | ... | ... | ... | ... | ... | PENDING |
-| 64 | 54 | ... | ... | ... | ... | ... | ... | PENDING |
+| 32 | 22 | 1.2031 | 1.4047 | 1.8033 | 1.9239 | 1.9613 | 2.2177 | 0.6002 |
+| 48 | 38 | 1.1107 | 1.3915 | 1.8529 | 2.0057 | 2.0150 | 2.2850 | 0.7422 |
+| 56 | 46 | 1.1097 | 1.3913 | 1.8095 | 2.0030 | 2.0416 | 2.2907 | 0.6997 |
+| 64 | 54 | 1.1116 | 1.3912 | 1.8337 | 1.9678 | 2.0503 | 2.2764 | 0.7221 |
 
 ---
 
-### Table 3: Cumulative Deficit Distribution $F_\lambda^{(N)}(x)$ on Fixed Energy Grid
-*Awaiting execution of `cell143.py` on external compute node.*
+### 3.3 Table 3: Cumulative Deficit Distribution $F_\lambda^{(N)}(x)$ on Fixed Energy Grid
 
-| Energy $x = \delta\nu$ | $F_\lambda^{(32)}(x)$ | $F_\lambda^{(48)}(x)$ | $F_\lambda^{(56)}(x)$ | $F_\lambda^{(64)}(x)$ | $F_\mu^{(64)}(x)$ (Mass) | Convergence Status |
+| Energy $x = \delta\nu$ | $F_\lambda^{(32)}(x)$ | $F_\lambda^{(48)}(x)$ | $F_\lambda^{(56)}(x)$ | $F_\lambda^{(64)}(x)$ | $F_\mu^{(64)}(x)$ (Mass) | Convergence Behavior |
 |---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 0.001 | ... | ... | ... | ... | ... | PENDING |
-| 0.010 | ... | ... | ... | ... | ... | PENDING |
-| 0.050 | ... | ... | ... | ... | ... | PENDING |
-| 0.100 | ... | ... | ... | ... | ... | PENDING |
-| 0.250 | ... | ... | ... | ... | ... | PENDING |
-| 0.500 | ... | ... | ... | ... | ... | PENDING |
-| 0.750 | ... | ... | ... | ... | ... | PENDING |
-| 1.000 | ... | ... | ... | ... | ... | PENDING |
-| 1.250 | ... | ... | ... | ... | ... | PENDING |
-| 1.500 | ... | ... | ... | ... | ... | PENDING |
-| 2.000 | ... | ... | ... | ... | ... | PENDING |
+| 0.001 | 0.00% | 0.00% | 0.00% | 0.00% | 49.29% | Top cluster ($j \le 3$) zero deficit |
+| 0.010 | 0.00% | 0.06% | 0.08% | 0.05% | 52.96% | Negligible energy harvest |
+| 0.050 | 1.61% | 0.06% | 0.08% | 0.05% | 52.96% | Stable near-zero baseline |
+| 0.100 | 1.61% | 0.85% | 0.73% | 0.82% | 59.00% | Minimal deficit below 0.10 |
+| 0.250 | 1.61% | 0.85% | 0.73% | 0.82% | 59.00% | Minimal deficit below 0.25 |
+| 0.500 | 1.66% | 0.85% | 0.79% | 0.85% | 59.04% | < 1% deficit paid below 0.50 |
+| 0.750 | 1.69% | 4.97% | 3.81% | 3.57% | 61.19% | Bulk deficit onset |
+| 1.000 | 15.12% | 15.48% | 15.16% | 15.11% | 68.87% | Highly stabilized $\approx 15.1\%$ |
+| 1.250 | 33.66% | 33.89% | 33.76% | 33.67% | 78.06% | Highly stabilized $\approx 33.7\%$ |
+| 1.500 | 51.66% | 54.44% | 53.52% | 53.69% | 86.12% | Highly stabilized $\approx 53.7\%$ |
+| 2.000 | 96.16% | 88.78% | 89.58% | 91.50% | 97.82% | Mild finite-size drift ($96\% \to 91\%$) |
 
 ---
 
-### Table 4: Quantile Scaling Exponents $\alpha_p$ ($Q_p \sim N^{\alpha_p}$)
-*Awaiting execution of `cell143.py` on external compute node.*
+### 3.4 Table 4: Quantile Scaling & Drift Analysis (Testing $Q_p \sim N^{\alpha_p}$)
 
-| Quantile $p$ | $Q_p(32)$ | $Q_p(48)$ | $Q_p(64)$ | Relative Drift (48 $\to$ 64) | Exponent $\alpha_p$ | Scaling Interpretation |
+| Quantile $p$ | $Q_p(32)$ | $Q_p(48)$ | $Q_p(64)$ | Relative Drift ($48 \to 64$) | Exponent $\alpha_p$ | Scaling Interpretation |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 50% ($Q_{50}$) | ... | ... | ... | ... | ... | PENDING |
-| 75% ($Q_{75}$) | ... | ... | ... | ... | ... | PENDING |
-| 90% ($Q_{90}$) | ... | ... | ... | ... | ... | PENDING |
-| 95% ($Q_{95}$) | ... | ... | ... | ... | ... | PENDING |
+| 25% ($Q_{25}$) | 1.2031 | 1.1107 | 1.1116 | 0.08% | -0.1140 | Stationary bulk onset |
+| 50% ($Q_{50}$) | 1.4047 | 1.3915 | 1.3912 | 0.02% | -0.0140 | Extremely stationary median |
+| 75% ($Q_{75}$) | 1.8033 | 1.8529 | 1.8337 | 1.05% | +0.0241 | Stationary core |
+| 90% ($Q_{90}$) | 1.9239 | 2.0057 | 1.9678 | 1.93% | +0.0325 | Bounded tail |
+| 95% ($Q_{95}$) | 1.9613 | 2.0150 | 2.0503 | 1.72% | +0.0640 | Bounded tail ($X_* \approx 2.05$) |
 
 ---
 
-## 5. Epistemic Status & Forward Strategic Linkage
+## 4. Epistemic Calibrations & Qualifications
 
-- **Epistemic Discipline:** All empirical scaling observations in this note are classified as *Empirical Continuum Scaling Tests* pending infinite-dimensional analytical proofs.
-- **Link to Milestone M-G1.6:** If $Q_{95}(N)$ stabilizes to an $O(1)$ constant, the well deficit is paid on a bounded frequency domain, securing the mathematical viability of a continuum variational bound. If $Q_{95}(N)$ diverges, the deficit is driven by UV boundary modes and requires kinetic penalization.
+### 4.1 Calibration of the "Proof" Claim
+While the data strongly support that the extensive mode scaling $r_\eta \sim 0.90 q$ is a coordinate densification effect, it is **not yet a mathematical proof**.
+- At $x = 2.0$, $F_\lambda(x)$ moves from $96.16\%$ at $N=32$ to $91.50\%$ at $N=64$.
+- $Q_{95}$ drifts mildly from $1.9613 \to 2.0503$.
+- The sequence has four data points ($N \in \{32, 48, 56, 64\}$); while the exponents $\alpha_p \approx 0$ indicate stability, analytical proofs in the infinite-dimensional limit are required to declare the continuum measure strictly stationary.
+
+### 4.2 The Epistemic Boundary: M-G1.6 vs Gate 1
+The measure studied in Cell 143 is associated strictly with:
+$$v_{\mathrm{phys}} = \arg\min \big( K_{\mathrm{rest}} - W_\perp \big),$$
+the minimizing ground state of the compressed continuum competition operator.
+- **Gate 1 requires bounding:** $\Delta_j(N) R_{\mathrm{spec}}(N, L)$, where $\Delta_j$ is the parity-doublet splitting of the original finite-$N$ Galerkin operator.
+- Cell 143 characterizes the internal mechanism of the competition operator (Milestone M-G1.6), but has **not yet connected the deficit measure to $\Delta_j$ or bounded $R_{\mathrm{spec}}$**.
+- Consequently, Cell 143 is a valuable M-G1.6 structural diagnostic; it is **not** a Gate 1 clearance.
+
+### 4.3 Provenance Footnote on Cutoff $T = 600$
+Cell 143 uses $T = 600$ and $\mathrm{dps} = 50$. While $W$, $D_{\mathrm{per}}$, and $\Delta D$ are evaluated analytically, $Q_{\mathrm{full}}$ is retrieved from `get_galerkin_matrix(..., T=600)`, and the continuum projection $U_{\mathrm{cont}}$ is spanned by eigenvectors of $Q_{\mathrm{even}}(T)$. Because previous phases revealed sensitivity of high-mode tails to finite-$T$ Archimedean truncation, $T$-robustness checks (e.g. at $T = 800, 1200$) will be required before promoting these findings into Paper NR2.
+
+---
+
+## 5. Forward Strategic Direction: Cell 144 (Analytical Operator Inequality)
+
+With Cell 143 establishing that the well deficit is concentrated on the bounded energy interval $[0, X_*]$ with $X_* \approx 2.05\text{--}2.10$, further spectral-measure censuses are complete.
+
+**The central objective for Cell 144 is analytical and operator-theoretic:**
+$$\boxed{\textbf{Turn the empirical } \mathcal{O}(1) \textbf{ deficit scale into a uniform variational / operator inequality.}}$$
+
+1. **Uniform Variational Statement:**  
+   Cell 143 evaluated the measure only on the minimizing state $v_{\mathrm{phys}}$. To prove an operator lower bound, we must establish a controlled inequality relating $\langle T, W_\perp T \rangle$ and $\langle T, K_{\mathrm{rest}} T \rangle$ across a uniform class of trial states $T \in \mathcal{H}_{\mathrm{trial}}$.
+2. **Bridge to Gate 1 Doublet:**  
+   Investigate whether the bounded deficit scale can be connected analytically to the odd/even parity splitting $\Delta_j$ and the resolvent norm $R_{\mathrm{spec}}$, opening a rigorous path from the extensive continuum geometry toward Gate 1 clearance.
