@@ -28,6 +28,8 @@
    The cumulative dispersion functions:
    $$\Sigma_K(m) \equiv \sum_{j=0}^{m-1} O_{j, 0}, \qquad \Sigma_W(n) \equiv \sum_{k=0}^{n-1} O_{0, k}$$
    quantify the spectral leakage across basis sectors, providing a structural explanation for the failure of fixed low-dimensional subspace reductions ($V_{2, 2}$) and characterizing the collective continuum geometry.
+5. **Diagnostic 139.5 (Hard Pre-Flight Regression Audit against Cell 138):**
+   Exact numerical verification at $N=64$ of $\lambda_{\min}(K_{\mathrm{rest}}) = 2.9315260463$, $\lambda_{\max}(W_\perp) = 4.2604953336$, and $\mu_0 = -0.4869792210$ prior to computing the $\gamma$-frontier.
 
 **Companion Computational Script:** [`cell139.py`](file:///c:/data/github/connes-cvs-/cell139.py)  
 **Execution Standard:** Self-contained 50-dps verification suite ready for compute node execution.
@@ -124,21 +126,43 @@ $$\boxed{\frac{d(\Delta K)}{d(\Delta W)} = \frac{d(\Delta K)/d\gamma}{d(\Delta W
    Since $G''(\Delta W) = F''(\Delta W) > 0$, the sum $\Delta K + \Delta W$ achieves its **unique global minimum** on the Pareto frontier precisely at $\gamma = 1$:
    $$\min_{\|v\|=1} \left[ \Delta K(v) + \Delta W(v) \right] = \Delta K(1) + \Delta W(1) \equiv \Delta_{\mathrm{coupling}}.$$
 
+### 2.5 Equivalence with the Original Variational Problem
+It is crucial to recognize that for any normalized vector $v \in \mathcal{B}_{11}^\perp$:
+$$\Delta K(v) + \Delta W(v) = (\langle v, K_{\mathrm{rest}} v \rangle - \omega_0) + (\nu_0 - \langle v, W_\perp v \rangle) = \langle v, (K_{\mathrm{rest}} - W_\perp) v \rangle - (\omega_0 - \nu_0).$$
+Consequently, minimizing the sum $\Delta K(v) + \Delta W(v)$ over the unit sphere is **algebraically identical to minimizing the coupled operator $Q_{\mathrm{comp}} = K_{\mathrm{rest}} - W_\perp$**.
+The Pareto formulation does not by itself bypass the coupled operator diagonalization; rather, it **organizes the physical tradeoff geometrically**, mapping out the full continuous exchange rate between restoring energy and well harvest.
+
+### 2.6 Endpoint Regressions and Asymptotic Boundary Behavior
+The 1-parameter family $H(\gamma) = K_{\mathrm{rest}} - \gamma W_\perp$ satisfies explicit endpoint boundary conditions:
+1. **Restoring Limit ($\gamma \to 0^+$):**
+   $$E(0) = \lambda_{\min}(K_{\mathrm{rest}}) = \omega_0 \approx 2.931526,$$
+   with initial descent slope given by Hellmann–Feynman:
+   $$E'(0^+) = -\langle x_0, W_\perp x_0 \rangle.$$
+   At this endpoint, $\Delta K(0) = 0$ and $\Delta W(0) = \Delta W(x_0) = \nu_0 - \langle x_0, W_\perp x_0 \rangle$.
+2. **Well-Dominated Limit ($\gamma \to \infty$):**
+   Rescaling the operator: $\frac{1}{\gamma} H(\gamma) = \frac{1}{\gamma} K_{\mathrm{rest}} - W_\perp \to -W_\perp$.
+   The ground state $v(\gamma)$ converges to the dominant well eigenstate $y_0$, with energy asymptotic:
+   $$E(\gamma) = -\gamma \nu_0 + \langle y_0, K_{\mathrm{rest}} y_0 \rangle + \mathcal{O}(1/\gamma).$$
+   At this endpoint, $\Delta W(\infty) = 0$ and $\Delta K(\infty) = \Delta K(y_0) = \langle y_0, K_{\mathrm{rest}} y_0 \rangle - \omega_0$.
+
 ---
 
 ## 3. Theorem 139.2: The Doubly Stochastic Cross-Gram Bridge
 
-### 3.1 Definition and Double Stochasticity
-Let $\{x_j\}_{j=0}^{q-1}$ and $\{y_k\}_{k=0}^{q-1}$ be complete orthonormal bases of $\mathcal{H}_q$.
+### 3.1 Definition and Double Stochasticity of the Full Matrix
+Let $\{x_j\}_{j=0}^{q-1}$ and $\{y_k\}_{k=0}^{q-1}$ be complete orthonormal bases of $\mathcal{H}_q$ ($q = N - 10$).
 Define the transition matrix $U \in O(q)$ with entries $U_{kj} \equiv \langle y_k, x_j \rangle$.
 The **cross-Gram matrix** (unistochastic matrix) is defined by:
 $$O_{jk} \equiv U_{kj}^2 = |\langle x_j, y_k \rangle|^2 \ge 0.$$
 
-**Double Stochasticity:**
+**Double Stochasticity of the Full $q \times q$ Matrix:**
 Because $U$ is an orthogonal matrix ($U U^T = I_q$ and $U^T U = I_q$):
 $$\sum_{j=0}^{q-1} O_{jk} = \sum_{j=0}^{q-1} |\langle x_j, y_k \rangle|^2 = \|y_k\|^2 = 1 \qquad \forall k \in \{0, \dots, q-1\},$$
 $$\sum_{k=0}^{q-1} O_{jk} = \sum_{k=0}^{q-1} |\langle x_j, y_k \rangle|^2 = \|x_j\|^2 = 1 \qquad \forall j \in \{0, \dots, q-1\}.$$
-Thus $O$ lies on an extremal face of the Birkhoff polytope of doubly stochastic matrices.
+Thus the full $q \times q$ matrix $O$ is doubly stochastic to machine precision ($< 10^{-45}$).
+
+> [!IMPORTANT]
+> **Submatrix Truncation Note:** Any finite $m \times m$ submatrix (such as the displayed $6 \times 6$ low-frequency block) has row and column sums strictly less than $1$, because it omits the complementary higher-frequency modes $j, k \ge m$. Truncated block sums below $1$ are an expected consequence of dimension truncation, not a failure of double stochasticity.
 
 ### 3.2 Extremal Misalignment & Boundary Penalties
 From Cell 138 (Proposition 138.2), we have:
@@ -164,45 +188,45 @@ The minimal possible well harvest sacrifice of the restoring ground state is bou
 
 ---
 
-## 4. Proposition 139.3: Candidate Analytical Lower Bounds for $F(\Delta W)$
+## 4. Analytical Bounds and Exploratory Hypotheses for $F(\Delta W)$
 
 Because $F(\Delta W)$ is strictly convex and passes through the boundary coordinates:
 $$(0, \Delta K(y_0)) \quad \text{and} \quad (\Delta W(x_0), 0),$$
-any convex chord or supporting tangent provides a rigorous lower bound.
+convex chords and supporting tangents provide rigorous bounding geometries.
 
-### 4.1 Linear Relaxation Bound
+### 4.1 Linear Relaxation and Supporting Tangent
 By convexity, the chord connecting the endpoints is an upper bound on $F$, while any tangent line is a lower bound.
-The secant slope is:
-$$S_{\mathrm{sec}} \equiv -\frac{\Delta K(y_0)}{\Delta W(x_0)} < 0.$$
 At $\gamma = 1$, the tangent line to the frontier has slope $-1$ and passes through $(\Delta W(1), \Delta K(1))$:
 $$F(\Delta W) \ge F_{\mathrm{tang}}(\Delta W) \equiv \Delta K(1) - (\Delta W - \Delta W(1)) = \Delta_{\mathrm{coupling}} - \Delta W.$$
-This gives the exact lower bound $\Delta K + \Delta W \ge \Delta_{\mathrm{coupling}}$.
+This confirms the exact lower bound $\Delta K + \Delta W \ge \Delta_{\mathrm{coupling}}$.
 
-### 4.2 Spectral Gap Hyperbolic Relaxation
-If the interaction between the two bases is mediated by a non-zero off-diagonal transfer kernel $O_{jk}$, the unistochastic constraint prevents simultaneous concentration.
-For any state $v$, Cauchy–Schwarz on the overlaps yields an uncertainty-type lower bound:
-$$\Delta K(v) \cdot \Delta W(v) \ge \Gamma_N > 0,$$
-which corresponds to a hyperbolic lower bound:
-$$F_{\mathrm{hyp}}(\Delta W) = \frac{\Gamma_N}{\Delta W}.$$
-Cell 139 will compute the product $\Delta K(\gamma) \Delta W(\gamma)$ across $\gamma \in [0.2, 5.0]$ to determine whether the hyperbolic parameter $\Gamma_N \equiv \min_\gamma [\Delta K(\gamma) \Delta W(\gamma)]$ is asymptotically stable.
+### 4.2 The Hyperbolic Uncertainty Hypothesis (Exploratory Diagnostic)
+It is tempting to conjecture an uncertainty-type product lower bound of the form:
+$$\Delta K(v) \cdot \Delta W(v) \ge \Gamma_N > 0 \qquad (\text{Hypothesis H}_{\mathrm{hyp}}).$$
+However, **this does not follow mathematically from unistochasticity alone**. 
+Orthogonality of the ground states ($x_0 \perp y_0$) constrains only a single matrix entry ($O_{0, 0} = 0$). Because $\Delta K$ and $\Delta W$ are weighted spectral sums whose weights $(\omega_j - \omega_0)$ and $(\nu_0 - \nu_k)$ vanish at the ground states, unistochasticity does not prevent the product from becoming arbitrarily small if mass concentrates in low-gap modes.
+
+Therefore, $\Gamma_N \equiv \min_\gamma [\Delta K(\gamma) \Delta W(\gamma)]$ must be treated strictly as an **empirical diagnostic**, not an asserted theorem.
 
 ---
 
-## 5. Pre-Flight Formulation of Cell 139
+## 5. Hard Pre-Flight Regression Audit & Verification Standards
 
 Per [AGENTS.md](file:///c:/data/github/connes-cvs-/AGENTS.md) operating principles:
 1. **Target Gate:** Gate 1 (Finite-$N$ Spectral Mechanism & Tail Extinction, Milestone M-G1.6).
-2. **Target Mathematical Statements:**
-   - Compute the exact Pareto tradeoff curve $(\Delta W(\gamma), \Delta K(\gamma))$ for $\gamma \in [0.2, 5.0]$ at $N=64$.
-   - Confirm that $\Delta K(\gamma) + \Delta W(\gamma)$ attains its unique global minimum at $\gamma = 1.0$, reproducing $\Delta_{\mathrm{coupling}} = 0.841990$.
-   - Verify that the marginal slope $d(\Delta K)/d(\Delta W) = -\gamma$ holds numerically.
-   - Compute the doubly stochastic cross-Gram matrix $O_{jk} = |\langle x_j, y_k \rangle|^2$ and confirm $O_{0, 0} = 0.000000$ and row/column sums equal $1.000000$ to $< 10^{-45}$.
-   - Measure the spectral dispersion profiles $\Sigma_K(m)$ and $\Sigma_W(n)$ across $N \in [24, 64]$.
-   - Track the asymptotic stability of the extremal penalties $\Delta K(y_0)$ and $\Delta W(x_0)$.
-3. **Verification / Falsification Criteria:**
-   - Double stochasticity of $O_{jk}$ must close to $< 10^{-45}$.
-   - $O_{0, 0} \le 10^{-20}$ confirms exact mutual orthogonality.
-   - Minimum of $\Delta K(\gamma) + \Delta W(\gamma)$ occurs at $\gamma = 1.0$ within $|\gamma - 1.0| \le 0.05$.
-   - Extremal boundaries $\Delta K(y_0) \ge 0.50$ and $\Delta W(x_0) \ge 1.50$ must remain bounded away from zero.
-4. **Forward Path to Weil:**
-   The functional tradeoff $F(\Delta W)$ provides the continuum operator inequality needed to establish $\mu_0^{(\infty)} > -1/2$, bypassing finite-dimensional subspace truncations entirely.
+2. **Hard Pre-Flight Regression Audit (at $N=64$):**
+   Before executing the Pareto $\gamma$-sweep, [`cell139.py`](file:///c:/data/github/connes-cvs-/cell139.py) must verify exact numerical agreement with the certified Cell 138 invariants:
+   $$\begin{aligned}
+   |\lambda_{\min}(K_{\mathrm{rest}}) - 2.9315260463| &< 10^{-6}, \\
+   |\lambda_{\max}(W_\perp) - 4.2604953336| &< 10^{-6}, \\
+   |\lambda_{\min}(K_{\mathrm{rest}} - W_\perp) - (-0.4869792210)| &< 10^{-6}.
+   \end{aligned}$$
+   Any deviation indicates an operator assembly discrepancy and aborts execution immediately.
+3. **Verification Criteria for Cell 139:**
+   - At $\gamma = 1.0$, $E(1)$ must reproduce $\mu_0 = -0.48697922$ to $< 10^{-45}$.
+   - Double stochasticity of the full $q \times q$ cross-Gram matrix must close to $< 10^{-45}$.
+   - Extremal overlap must satisfy $O_{0, 0} = 0.000000$ ($\theta_0 = 90.00^\circ$).
+   - The minimum of $\Delta K(\gamma) + \Delta W(\gamma)$ along the Pareto curve must occur uniquely at $\gamma = 1.0$, with marginal slope $-1.000000$.
+4. **Forward Path to Gate 1:**
+   Establishing the true shape of the convex frontier $F(\Delta W)$ on the certified operators determines whether the $+0.8420$ coupling gain can be captured by an analytical tradeoff inequality, advancing Milestone M-G1.6.
+
