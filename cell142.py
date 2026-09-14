@@ -9,14 +9,14 @@ Target Propositions & Tested Hypotheses:
        Compute top splittings delta nu_1 ... delta nu_5 at both 50 dps and 70 dps across N in [48, 56, 64].
        Evaluate relative discrepancy:
          rho_j(N) = |delta nu_j^(50) - delta nu_j^(70)| / delta nu_j^(70).
-       Falsification Criterion: rho_j < 1e-8 for all j in {1..5} decisively refutes Scenario C.
+       Falsification Criterion: rho_j < 1e-8 for all j in {1..5} confirms numerical stability under precision escalation.
   2. Extended Top-20 Spectrum Survey (Definition 142.2):
        Compute the first 20 splittings {delta nu_j}_{j=0}^19 and successive ratios gamma_j = delta nu_j / delta nu_{j-1}
-       at N = 64 (q = 54) to determine the geometric cluster boundary j_*.
+       at N = 64 (q = 54) to determine the ratio-crossing index j_cross^(2).
   3. Joint Spectral/Weight Measure & Modal Deficit Flow (Proposition 142.3):
        Evaluate discrete pair (delta nu_j, P_W(j)) and modal well deficit Delta W_j = delta nu_j P_W(j) up to j = 19.
        Verify conservation residual |Delta W_phys - Delta W_spec| < 1e-45.
-  4. Energy-Based Effective Dimension r_eta (Definition 142.4):
+  4. Energy-Deficit Participation Rank r_eta (Definition 142.4):
        Compute r_eta(N) = min { r >= 1 : sum_{j<r} Delta W_j >= (1 - eta) Delta W(1) }
        for eta in {0.50, 0.25, 0.10, 0.05, 0.01} across N in [32, 48, 56, 64].
   5. Immediate Pre-Flight Hard Regression Audit (at N = 64, 50 dps):
@@ -416,9 +416,9 @@ def run_cell142_suite():
 
     print(f"\nMaximum relative discrepancy across all tested dimensions and modes: max rho = {float(max_rho_all):.4e}")
     if max_rho_all < mp.mpf("1e-8"):
-        print("SCENARIO C VERDICT: DECISIVELY REFUTED.")
-        print("The tiny splittings delta nu_1 ... delta nu_5 are stable to > 8 digits under precision escalation to 70 dps.")
-        print("They represent genuine mathematical eigenvalues of the projected operator W_perp, NOT numerical artefacts.\n")
+        print("SCENARIO C AUDIT VERDICT: STABILITY CONFIRMED AT FINITE N.")
+        print("The tiny splittings delta nu_1 ... delta nu_5 are stable to full displayed precision under 50 -> 70 dps escalation.")
+        print("They are numerically stable eigenvalue splittings of the specified finite-N projected operator under 50 -> 70 dps escalation.\n")
     else:
         print("SCENARIO C VERDICT: WARNING — SENSITIVITY DETECTED UNDER PRECISION ESCALATION.\n")
 
@@ -469,7 +469,7 @@ def run_cell142_suite():
 
     print("-" * 96)
     if cluster_boundary_j_star is not None:
-        print(f"Identified Geometric Cluster Boundary: j_* = {cluster_boundary_j_star} (where successive ratio delta nu_j / delta nu_{{j-1}} drops below 2.0).")
+        print(f"Diagnostic Crossing Index: j_cross^(2) = {cluster_boundary_j_star} (first ratio-crossing index where delta nu_j / delta nu_{{j-1}} drops below 2.0).")
     print()
 
     # ============================================================
@@ -525,10 +525,10 @@ def run_cell142_suite():
     print(f"Total Ground-State Probability Mass:    = {float(sum(P_W_64))*100:.6f}%\n")
 
     # ============================================================
-    # SECTION 5: ENERGY-BASED EFFECTIVE DIMENSION r_eta
+    # SECTION 5: ENERGY-DEFICIT PARTICIPATION RANK r_eta
     # ============================================================
     print("=" * 80)
-    print("TABLE 4: ENERGY-BASED EFFECTIVE WELL DIMENSION r_eta(N)")
+    print("TABLE 4: ENERGY-DEFICIT PARTICIPATION RANK r_eta(N)")
     print("r_eta = min { r >= 1 : sum_{j<r} Delta W_j >= (1 - eta) Delta W(1) }")
     print("=" * 80)
     header_eta = f"{'N':>4} | {'q':>4} | {'Delta W(1)':>12} | " + " | ".join([f"r_{{eta={eta:.2f}}}" for eta in ETA_THRESHOLDS]) + f" | {'r_0.05 / q':>10}"
@@ -585,12 +585,13 @@ def run_cell142_suite():
 
     print("-" * 88)
     print("\nSYNTHESIS & KEY OBSERVATIONS:")
-    print("  1. Precision Robustness: All top splittings delta nu_1 ... delta nu_5 are invariant to > 8 digits")
-    print("     under precision escalation from 50 to 70 dps, refuting Scenario C completely.")
-    print("  2. Cluster vs Bulk Separation: The top manifold forms a flattened plateau where probability mass")
-    print("     accumulates with near-zero well deficit penalty. The deficit is paid in the crossover / bulk modes.")
-    print("  3. Effective Dimension: The energy-based effective dimension r_eta captures the true active subspace")
-    print("     governing the Pareto curvature and variational lower bound.")
+    print("  1. Precision Robustness: All top splittings delta nu_1 ... delta nu_5 are numerically stable")
+    print("     under 50 -> 70 dps precision escalation, refuting Scenario C as a finite-N precision artefact.")
+    print("  2. Dual-Reservoir Architecture: The top cluster (j <= 3) serves as a low-cost probability reservoir")
+    print("     (49.29% mass, paying < 0.002% deficit). Over 99.998% of the deficit is paid outside the top 4 modes.")
+    print("  3. Extensive Deficit Scaling (Negative Result): The energy-deficit rank scales as r_0.05 / q ~ 0.90")
+    print("     across all tested N, decisively falsifying low-dimensional active subspace reduction.")
+    print("     The well-energy deficit is genuinely extensive in the continuum truncation dimension.")
 
     t_suite = time.time() - t_suite_start
     print(f"\nTotal suite execution time: {t_suite:.2f}s")
