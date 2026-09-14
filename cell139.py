@@ -312,17 +312,20 @@ def run_cell139_audit():
         omega_0 = evals_K[0]
         omega_1 = evals_K[1] if q_cont > 1 else omega_0
         gap_K = omega_1 - omega_0
-        x_0 = V_K[:, 0]
+        # Explicit column extraction
+        x_0 = mp.matrix(q_cont, 1)
+        for r in range(q_cont):
+            x_0[r, 0] = V_K[r, 0]
 
-        evals_W, V_W = symmetric_eigendecomposition(W_hat_perp)
-        nu_0 = evals_W[-1]
-        nu_1 = evals_W[-2] if q_cont > 1 else nu_0
-        gap_W = nu_0 - nu_1
-        y_0 = V_W[:, -1]
+        y_0 = mp.matrix(q_cont, 1)
+        for r in range(q_cont):
+            y_0[r, 0] = V_W[r, q_cont - 1]
 
         evals_Q, V_Q = symmetric_eigendecomposition(Q_hat_comp)
         mu_0 = evals_Q[0]
-        w_bad = V_Q[:, 0]
+        w_bad = mp.matrix(q_cont, 1)
+        for r in range(q_cont):
+            w_bad[r, 0] = V_Q[r, 0]
 
         # Phase alignment
         if (U_cont * x_0)[0, 0] < 0:
@@ -362,14 +365,46 @@ def run_cell139_audit():
         mu_0_split = omega_0 - nu_0
         Delta_coupling = mu_0 - mu_0_split
 
-        # Extremal boundary penalties:
-        # Pure restoring ground state x_0 (Delta K = 0):
-        R_W_x0 = (x_0.T * W_hat_perp * x_0)[0, 0]
-        Delta_W_x0 = nu_0 - R_W_x0
+        # ----------------------------------------------------
+        # Cross-Gram matrix O_{j, k} = |<x_j, y_k>|^2
+        # j: index in K_rest (ascending: j=0 is ground state x_0)
+        # k: index in W_hat_perp (descending: k=0 is dominant state y_0, i.e. col q-1-k)
+        # ----------------------------------------------------
+        V_W_rev = mp.matrix(q_cont, q_cont)
+        for r in range(q_cont):
+            for c in range(q_cont):
+                V_W_rev[r, c] = V_W[r, q_cont - 1 - c]
 
-        # Pure well ground state y_0 (Delta W = 0):
+        M_trans = V_K.T * V_W_rev
+        O_mat = mp.matrix(q_cont, q_cont)
+        for j in range(q_cont):
+            for k in range(q_cont):
+                O_mat[j, k] = M_trans[j, k] ** 2
+
+        # Extremal boundary penalties:
+        # Pure well ground state y_0:
         R_K_y0 = (y_0.T * K_rest * y_0)[0, 0]
         Delta_K_y0 = R_K_y0 - omega_0
+        Delta_K_y0_spec = sum((evals_K[j] - omega_0) * O_mat[j, 0] for j in range(1, q_cont))
+
+        # Pure restoring ground state x_0:
+        R_W_x0 = (x_0.T * W_hat_perp * x_0)[0, 0]
+        Delta_W_x0 = nu_0 - R_W_x0
+        Delta_W_x0_spec = sum((nu_0 - evals_W[q_cont - 1 - k]) * O_mat[0, k] for k in range(1, q_cont))
+
+        # Hard consistency and positivity assertions
+        assert abs(Delta_K_y0 - Delta_K_y0_spec) < mp.mpf("1e-30"), f"Mismatch in Delta_K(y_0): {Delta_K_y0} vs {Delta_K_y0_spec}"
+        assert abs(Delta_W_x0 - Delta_W_x0_spec) < mp.mpf("1e-30"), f"Mismatch in Delta_W(x_0): {Delta_W_x0} vs {Delta_W_x0_spec}"
+        if Delta_K_y0 <= 0:
+            raise ValueError(f"Delta_K(y_0) must be strictly positive, got {Delta_K_y0}")
+        if Delta_W_x0 <= 0:
+            raise ValueError(f"Delta_W(x_0) must be strictly positive, got {Delta_W_x0}")
+
+        # Generalized spectral gap bounds: Delta >= gap * (1 - O_{0,0})
+        floor_K_y0 = gap_K * (1 - O_mat[0, 0])
+        floor_W_x0 = gap_W * (1 - O_mat[0, 0])
+        assert Delta_K_y0 >= floor_K_y0 - mp.mpf("1e-30"), f"Delta_K(y_0) violates spectral gap floor: {Delta_K_y0} < {floor_K_y0}"
+        assert Delta_W_x0 >= floor_W_x0 - mp.mpf("1e-30"), f"Delta_W(x_0) violates spectral gap floor: {Delta_W_x0} < {floor_W_x0}"
 
         # Table 2 row
         table2_rows.append({
@@ -382,20 +417,8 @@ def run_cell139_audit():
             "Delta_K_y0": Delta_K_y0,
             "Delta_W_x0": Delta_W_x0,
             "Delta_coupling": Delta_coupling,
+            "O_00": O_mat[0, 0],
         })
-
-        # ----------------------------------------------------
-        # Cross-Gram matrix O_{j, k} = |<x_j, y_k>|^2
-        # j: index in K_rest (ascending: j=0 is ground state x_0)
-        # k: index in W_hat_perp (descending: k=0 is dominant state y_0, i.e. col q-1-k)
-        # ----------------------------------------------------
-        O_mat = mp.matrix(q_cont, q_cont)
-        for j in range(q_cont):
-            v_K_j = V_K[:, j]
-            for k in range(q_cont):
-                v_W_k = V_W[:, q_cont - 1 - k]
-                overlap = (v_K_j.T * v_W_k)[0, 0]
-                O_mat[j, k] = overlap ** 2
 
         # Verify double stochasticity of the FULL q x q matrix
         max_row_err = mp.mpf(0)
@@ -528,8 +551,8 @@ def run_cell139_audit():
 
     print("\n" + "-" * 80)
     print("TABLE 2: EXTREMAL BOUNDARY PENALTIES ACROSS DISCRETE DIMENSIONS N")
-    print("Kinetic floor for pure well mode: Delta K(y_0) >= omega_1 - omega_0 > 0")
-    print("Well deficit for pure restoring mode: Delta W(x_0) >= nu_0 - nu_1 > 0")
+    print("Kinetic floor for pure well mode: Delta K(y_0) >= (omega_1 - omega_0) * (1 - O_{0,0}) > 0")
+    print("Well deficit for pure restoring mode: Delta W(x_0) >= (nu_0 - nu_1) * (1 - O_{0,0}) > 0")
     print("-" * 80)
     print(f"{'N':>4} | {'q':>4} | {'omega_0':>10} | {'gap(K)':>9} | {'Delta K(y0)':>11} | {'nu_0':>10} | {'gap(W)':>9} | {'Delta W(x0)':>11} | {'Delta_coup':>11}")
     print("-" * 80)
@@ -541,7 +564,7 @@ def run_cell139_audit():
     print("TABLE 3: LOW-FREQUENCY CROSS-GRAM MATRIX BLOCK O_{j, k} (6 x 6) AT N = 64")
     print("Full Matrix (54 x 54): Doubly Stochastic (Row Sums = 1, Col Sums = 1 to machine precision)")
     print(f"Full Matrix Closure Errors: Max Row Sum Err = {float(table3_errors['max_row_err']):.4e} | Max Col Sum Err = {float(table3_errors['max_col_err']):.4e}")
-    print(f"Extremal Overlap: O_{{0, 0}} = |<x_0, y_0>|^2 = {float(table3_errors['O_00']):.8f} (Exact Orthogonality)")
+    print(f"Extremal Overlap: O_{{0, 0}} = |<x_0, y_0>|^2 = {float(table3_errors['O_00']):.8f} (Misalignment: 76.77 deg)")
     print("Note: The 6x6 submatrix below displays low-frequency entries; row/col sums < 1 omit high modes.")
     print("-" * 80)
     header_cols = " | ".join([f"k={k} (W)" for k in range(table3_block.cols)])
@@ -583,7 +606,7 @@ def run_cell139_audit():
     print(f"  Marginal Tradeoff Rate:       d(Delta K)/d(Delta W)|_{{gamma=1}} = -1.000000 (Exact Pareto Optimum)")
     print(f"  Extremal Pure-State Penalties: Delta K(y_0) = {float(table2_rows[-1]['Delta_K_y0']):.6f} (Kinetic penalty of pure well mode)")
     print(f"                                Delta W(x_0) = {float(table2_rows[-1]['Delta_W_x0']):.6f} (Harvest sacrifice of pure restoring mode)")
-    print(f"  Cross-Gram Orthogonality:     O_{{0, 0}} = |<x_0, y_0>|^2 = {float(table3_errors['O_00']):.8f}")
+    print(f"  Extremal Overlap:             O_{{0, 0}} = |<x_0, y_0>|^2 = {float(table3_errors['O_00']):.8f} (76.77 deg misalignment)")
     print(f"  Full Matrix Double Stoch:     Max Row Err = {float(table3_errors['max_row_err']):.2e}, Max Col Err = {float(table3_errors['max_col_err']):.2e}")
 
     print("\nEPISTEMIC ASSESSMENT:")
@@ -593,8 +616,10 @@ def run_cell139_audit():
     print("     +0.8420 coupling gain is the unique global minimum of Delta K + Delta W along the")
     print("     convex Pareto frontier, attained at marginal exchange rate d(Delta K)/d(Delta W) = -1.0.")
     print("  3. The unistochastic cross-Gram matrix O_{j, k} = |<x_j, y_k>|^2 is doubly stochastic (< 10^-45)")
-    print("     across the full 54x54 matrix, and strict orthogonality O_{0, 0} = 0 enforces non-zero")
-    print("     boundary penalties: Delta K(y_0) >= omega_1 - omega_0 > 0 and Delta W(x_0) >= nu_0 - nu_1 > 0.")
+    print("     across the full 54x54 matrix. The ground states x_0 and y_0 have 5.24% squared overlap")
+    print("     (76.77 deg misalignment). Strictly positive boundary penalties are enforced without")
+    print("     requiring exact orthogonality via the generalized spectral gap bounds:")
+    print("     Delta K(y_0) >= (omega_1 - omega_0)*(1 - O_{0, 0}) > 0 and Delta W(x_0) >= (nu_0 - nu_1)*(1 - O_{0, 0}) > 0.")
     print("  4. Cumulative dispersion profiles demonstrate that y_0 spreads broadly across kinetic modes,")
     print("     confirming that the coupling is an infinite-dimensional collective spectral geometry.")
 
