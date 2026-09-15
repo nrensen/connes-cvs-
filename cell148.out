@@ -11,16 +11,16 @@ PRE-FLIGHT HARD REGRESSION AUDIT AGAINST CERTIFIED INVARIANTS (N = 64, T = 600)
   omega_0 = 2.9315259531 (Expected: 2.9315259531, Residual: 6.86e-12)
   nu_0    = 4.2604954421 (Expected: 4.2604954421, Residual: 6.11e-12)
   mu_0    = -0.4869792197 (Expected: -0.4869792197, Residual: 2.54e-11)
-  REGRESSION AUDIT PASSED in 95.50s: Operators match certified invariants.
+  REGRESSION AUDIT PASSED in 128.11s: Operators match certified invariants.
 
 Executing operator dissection sweeps across N in [48, 56, 64, 72, 80, 88, 96] at T = 600...
-  Completed N = 48 (dim = 49, q = 38) in 52.24s | E_11 = 0.009243
-  Completed N = 56 (dim = 57, q = 46) in 78.28s | E_11 = 0.007095
-  Completed N = 64 (dim = 65, q = 54) in 106.95s | E_11 = 0.006025
-  Completed N = 72 (dim = 73, q = 62) in 153.45s | E_11 = 0.005384
-  Completed N = 80 (dim = 81, q = 70) in 217.43s | E_11 = 0.005044
-  Completed N = 88 (dim = 89, q = 78) in 315.45s | E_11 = 0.004856
-  Completed N = 96 (dim = 97, q = 86) in 367.74s | E_11 = 0.004668
+  Completed N = 48 (dim = 49, q = 38) in 73.61s | E_11 = 0.009243
+  Completed N = 56 (dim = 57, q = 46) in 116.14s | E_11 = 0.007095
+  Completed N = 64 (dim = 65, q = 54) in 151.38s | E_11 = 0.006025
+  Completed N = 72 (dim = 73, q = 62) in 230.94s | E_11 = 0.005384
+  Completed N = 80 (dim = 81, q = 70) in 309.55s | E_11 = 0.005044
+  Completed N = 88 (dim = 89, q = 78) in 395.50s | E_11 = 0.004856
+  Completed N = 96 (dim = 97, q = 86) in 503.12s | E_11 = 0.004668
 
 ================================================================================
 TABLE 1: EXACT OPERATOR COMPONENT DISSECTION OF THE THRESHOLD STATE E_11(N)
@@ -96,7 +96,7 @@ SYNTHESIS & KEY OBSERVATIONS:
   3. Pole vs Archimedean Role: E_pole ranges from 0.119304 to 0.118681.
   4. Competition Operator: H_1[v_11] evaluated against ground state mu_0 = -0.478034.
 ================================================================================
-Total suite execution time: 1387.31s
+Total suite execution time: 1908.67s
 ================================================================================
 CELL 148 EXECUTION COMPLETE
 ================================================================================

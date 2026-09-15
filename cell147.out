@@ -13,29 +13,29 @@ PRE-FLIGHT HARD REGRESSION AUDIT AGAINST CERTIFIED INVARIANTS (N = 64, T = 600)
   omega_0 = 2.9315259531 (Expected: 2.9315259531, Residual: 6.86e-12)
   nu_0    = 4.2604954421 (Expected: 4.2604954421, Residual: 6.11e-12)
   mu_0    = -0.4869792197 (Expected: -0.4869792197, Residual: 2.54e-11)
-  REGRESSION AUDIT PASSED in 78.77s: Operators match certified invariants.
+  REGRESSION AUDIT PASSED in 125.57s: Operators match certified invariants.
 
 ================================================================================
 EXECUTING DIMENSION SWEEP FOR ARCHIMEDEAN CUTOFF T = 600...
 ================================================================================
-  T = 600, N = 48 | dim = 49 | E_11 = 0.00924271 | D_10 = 8.5428e-5 (solved in 10.69s)
-  T = 600, N = 56 | dim = 57 | E_11 = 0.00709492 | D_10 = 5.0338e-5 (solved in 16.87s)
+  T = 600, N = 48 | dim = 49 | E_11 = 0.00924271 | D_10 = 8.5428e-5 (solved in 15.15s)
+  T = 600, N = 56 | dim = 57 | E_11 = 0.00709492 | D_10 = 5.0338e-5 (solved in 27.91s)
   T = 600, N = 64 | dim = 65 | E_11 = 0.00602464 | D_10 = 3.6296e-5 (reused from pre-flight)
-  T = 600, N = 72 | dim = 73 | E_11 = 0.00538367 | D_10 = 2.8984e-5 (solved in 35.65s)
-  T = 600, N = 80 | dim = 81 | E_11 = 0.00504355 | D_10 = 2.5437e-5 (solved in 49.25s)
-  T = 600, N = 88 | dim = 89 | E_11 = 0.004856 | D_10 = 2.3581e-5 (solved in 200.42s)
-  T = 600, N = 96 | dim = 97 | E_11 = 0.00466832 | D_10 = 2.1793e-5 (solved in 220.11s)
+  T = 600, N = 72 | dim = 73 | E_11 = 0.00538367 | D_10 = 2.8984e-5 (solved in 58.29s)
+  T = 600, N = 80 | dim = 81 | E_11 = 0.00504355 | D_10 = 2.5437e-5 (solved in 75.36s)
+  T = 600, N = 88 | dim = 89 | E_11 = 0.004856 | D_10 = 2.3581e-5 (solved in 100.42s)
+  T = 600, N = 96 | dim = 97 | E_11 = 0.00466832 | D_10 = 2.1793e-5 (solved in 122.13s)
 
 ================================================================================
 EXECUTING DIMENSION SWEEP FOR ARCHIMEDEAN CUTOFF T = 800...
 ================================================================================
-  T = 800, N = 48 | dim = 49 | E_11 = 0.00976727 | D_10 = 0.00010095 (solved in 12.01s)
-  T = 800, N = 56 | dim = 57 | E_11 = 0.00750428 | D_10 = 6.0596e-5 (solved in 157.67s)
-  T = 800, N = 64 | dim = 65 | E_11 = 0.00638819 | D_10 = 4.4465e-5 (solved in 166.96s)
-  T = 800, N = 72 | dim = 73 | E_11 = 0.00569438 | D_10 = 3.5695e-5 (solved in 180.89s)
-  T = 800, N = 80 | dim = 81 | E_11 = 0.00532742 | D_10 = 3.1446e-5 (solved in 202.10s)
-  T = 800, N = 88 | dim = 89 | E_11 = 0.00511689 | D_10 = 2.9131e-5 (solved in 285.61s)
-  T = 800, N = 96 | dim = 97 | E_11 = 0.00490797 | D_10 = 2.6921e-5 (solved in 304.09s)
+  T = 800, N = 48 | dim = 49 | E_11 = 0.00976727 | D_10 = 0.00010095 (solved in 18.66s)
+  T = 800, N = 56 | dim = 57 | E_11 = 0.00750428 | D_10 = 6.0596e-5 (solved in 27.78s)
+  T = 800, N = 64 | dim = 65 | E_11 = 0.00638819 | D_10 = 4.4465e-5 (solved in 39.81s)
+  T = 800, N = 72 | dim = 73 | E_11 = 0.00569438 | D_10 = 3.5695e-5 (solved in 57.44s)
+  T = 800, N = 80 | dim = 81 | E_11 = 0.00532742 | D_10 = 3.1446e-5 (solved in 76.23s)
+  T = 800, N = 88 | dim = 89 | E_11 = 0.00511689 | D_10 = 2.9131e-5 (solved in 105.42s)
+  T = 800, N = 96 | dim = 97 | E_11 = 0.00490797 | D_10 = 2.6921e-5 (solved in 149.39s)
 
 ================================================================================
 TABLE 1: DUAL-T HIGH-N CONTINUUM BASE TRAJECTORY (N in [48..96])
@@ -113,7 +113,7 @@ SYNTHESIS & KEY OBSERVATIONS:
   4. Epistemic Verdict: If E_infty > 0 is verified to survive cutoff variation, Rayleigh-Ritz monotonicity
      E_11(N) >= E_11(oo) = E_infty unconditionally guarantees a non-vanishing floor D(N) >= E_infty^2 > 0.
 ================================================================================
-Total suite execution time: 1921.09s
+Total suite execution time: 999.57s
 ================================================================================
 CELL 147 EXECUTION COMPLETE
 ================================================================================
