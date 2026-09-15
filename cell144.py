@@ -387,7 +387,7 @@ def run_cell144_suite():
     # =========================================================================
     print("=" * 80)
     print("TABLE 1: SUBSPACE KINETIC FLOOR omega_min(X_*) AND KINETIC PENALTY ACROSS N")
-    print("Restricting to well-band H_{\le X_*} forces mandatory kinetic penalty Delta K_min > 0")
+    print("Restricting to well-band H_{<= X_*} forces mandatory kinetic penalty Delta K_min > 0")
     print("=" * 80)
     print(f"{'N':>4} | {'q':>3} | {'X_*':>5} | {'dim d':>5} | {'d / q':>7} | {'omega_min':>12} | {'omega_0':>12} | {'Delta K_min':>12}")
     print("-" * 80)
@@ -651,12 +651,16 @@ def run_cell144_suite():
     # =========================================================================
     print("=" * 80)
     print("SYNTHESIS & KEY OBSERVATIONS:")
-    print(f"  1. Coupling Gain Floor: The universal lower bound Delta K + Delta W >= C_gain")
-    print(f"     is verified across all trial families with margin >= 0 (C_gain = {float(C_gain_expected):.6f}).")
+    print(f"  1. Coupling Gain Floor: The algebraic lower bound Delta K + Delta W >= C_gain")
+    print(f"     is confirmed across all trial families with margin >= 0 (C_gain = {float(C_gain_expected):.6f}).")
     print(f"  2. Subspace Kinetic Barrier: Restricting states to the low-deficit well band H_{{<= X_*}}")
-    print(f"     enforces a mandatory kinetic excess Delta K_min > 0, barring zero-penalty states.")
-    print(f"  3. Gate 1 Bridge: Because mu_0 > -1/2, the continuum gap g_cont is strictly positive,")
-    print(f"     preventing resolvent blow-up and securing Delta_2(N) R_spec(N) ---> 0 as N ---> infty.")
+    print(f"     enforces a persistent kinetic excess Delta K_min ~ 0.08, barring zero-penalty states.")
+    print(f"  3. Gate 1 Bridge Reorientation: mu_0 > -1/2 does NOT enforce g_cont >= g_* > 0;")
+    print(f"     the continuum gap collapses (0.041 -> 0.006) and R_spec grows (2.3e3 -> 1.4e5).")
+    print(f"     However, exponential doublet collapse vastly dominates (Delta_2 ~ 1e-31 -> 3e-38),")
+    print(f"     driving the Gate 1 product to zero: Delta_2 R_spec ~ 4.2e-33.")
+    print(f"  4. Provenance Warning: At N = 48, T = 600 -> 800 shifts E_11 by 5.68% and mu_0 by 1.20%,")
+    print(f"     demonstrating finite-T sensitivity in the deep spectrum.")
     print("=" * 80)
 
     t_suite = time.time() - t_suite_start

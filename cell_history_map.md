@@ -4300,7 +4300,35 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–143)
+## Cell 144 (Analytical Operator Inequality, Uniform Trial Enclosures & Gate 1 Bridge Reorientation)
+
+* **Companion Note:** [`cell144.md`](file:///c:/data/github/connes-cvs-/cell144.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Variational Lower Bound & Coupled Operator Geometry $\longrightarrow$ Reorientation of Gate 1 Resolvent Mechanism)
+* **Status:** Certified & Epistemically Calibrated ([`cell144.py`](file:///c:/data/github/connes-cvs-/cell144.py), [`cell144.out`](file:///c:/data/github/connes-cvs-/cell144.out), [`cell144.md`](file:///c:/data/github/connes-cvs-/cell144.md))
+* **Execution Script:** [`cell144.py`](file:///c:/data/github/connes-cvs-/cell144.py) (50-dps verification suite across $N \in [32, 48, 56, 64]$; runtime: 1186.16s)
+
+### Key Analytical & Numerical Results Certified
+1. **Pre-Flight Hard Regression Certified ($N=64$):** Certified operators against Cell 138–143 invariants in 145.25s: $\omega_0 = 2.9315259531$ (residual $6.86 \times 10^{-12}$), $\nu_0 = 4.2604954421$ (residual $6.11 \times 10^{-12}$), and $\mu_0 = -0.4869792197$ (residual $2.54 \times 10^{-11}$).
+2. **Exact Variational Deficit Tradeoff Identity:** Proved and verified across all trial families that for every unit state $T \in \mathcal{B}_{11}^\perp$:
+   $$\Delta K[T] + \Delta W[T] \ge C_{\mathrm{gain}} \equiv \mu_0 - (\omega_0 - \nu_0) = +0.841991.$$
+   Saturated by the coupled ground state $v_{\mathrm{phys}}$ to machine precision ($\Delta K = 0.291278, \Delta W = 0.550712, \text{margin} = -0.000000$).
+3. **Uniform Tail-Mass Enclosure (Proposition 144.1):** Applied spectral Markov/Chebyshev reasoning to $\nu_0 I - W_\perp \succeq 0$ to establish $\|(I - P_{\le X_*}) T\|_2^2 \le \Delta W[T] / X_*$.
+4. **Subspace Kinetic Floor on the Low-Deficit Band:** Restricting states to $\mathcal{H}_{\le X_*} = \operatorname{ran}(P_{\le X_*})$ with $X_* = 2.10$ enforces an essentially stationary, strictly positive kinetic penalty $\Delta K_{\min} \in \{0.0802, 0.0779, 0.0809, 0.0844\} \approx 0.084 > 0$. Even though $91\%\text{--}95\%$ of continuum modes lie in this band, states cannot achieve the kinetic ground state without paying this excess.
+5. **Decisive Falsification of the Non-Collapsing Continuum Gap Route:**
+   - The proposed implication $\mu_0 > -1/2 \implies g_{\mathrm{cont}} \ge g_* > 0$ is decisively refuted.
+   - The continuum gap collapses monotonically: $g_{\mathrm{cont}} = E_{11} - E_{10} \in \{0.0414, 0.0092, 0.0071, 0.0060\} \to 0$.
+   - Consequently, the resolvent denominator collapses $D(N) = 1.7 \times 10^{-3} \to 3.6 \times 10^{-5}$, and $R_{\mathrm{spec}}$ explodes from $2.38 \times 10^3 \to 1.41 \times 10^5$.
+   - *Epistemic Lesson:* Absolute continuum energy control ($\mu_0 > -1/2$) does not imply a relative spectral gap between continuum and bound states.
+6. **The True Gate 1 Engine (Exponential Doublet Collapse Dominates Resolvent Growth):**
+   - While $R_{\mathrm{spec}}$ grows by $\approx 60 \times$, the tunneling doublet splitting $\Delta_2(N)$ collapses by 7 orders of magnitude ($1.31 \times 10^{-31} \to 2.98 \times 10^{-38}$).
+   - The Gate 1 product remains extraordinarily tiny: $\Pi_{\mathrm{Gate1}} \approx 4.21 \times 10^{-33}$.
+   - Gate 1 does not require $R_{\mathrm{spec}} = \mathcal{O}(1)$; it requires only that denominator collapse is subexponential while doublet splitting is exponential.
+7. **Archimedean Cutoff $T$-Robustness Warning:** At $N=48$, escalating $T = 600 \to 800$ shifts $E_{11}$ by $5.68\%$ and $\mu_0$ by $1.20\%$, proving that deep spectrum eigenvalues remain materially sensitive to finite-$T$ Archimedean truncation.
+8. **Bridge to Cell 145:** Reorients from keeping the continuum gap open to quantifying the actual collapse rate of $D(N)$ vs $\Delta_2(N)$ and measuring $-\log \Delta_2(N) / \log R_{\mathrm{spec}}(N)$ over the largest feasible $N$.
+
+---
+
+# Updated major historical arc (Cells 0–144)
 
 ```
 Cells 0–4
@@ -4431,6 +4459,9 @@ Cell 142 (Gate 1 Precision Robustness, Extended Well Spectrum & Energy-Deficit P
     ↓
 Cell 143 (Gate 1 Continuum Scaling of the Energy-Deficit Spectral Measure)
     Hard operator regression certified (< 1.3e-9); normalized energy-deficit spectral measure d\lambda_N(x) = x d\mu_N(x) / Delta W_N certified; mean deficit energy E_bar_def ~ 1.456 and standard deviation sigma_lambda ~ 0.437 stationary across N in [32..64]; continuous energy quantiles Q_50 ~ 1.391 and Q_95 ~ 2.050 certified with near-zero drift (alpha_50 = -0.014, alpha_95 = +0.064); strong finite-N evidence established for stationary O(1) deficit band [0, X_*] with X_* ~ 2.05-2.10, explaining extensive mode count r_eta ~ 0.90 q as coordinate densification rather than UV dilation; M-G1.6 diagnostic calibrated; sets up Cell 144 analytical operator inequality
+    ↓
+Cell 144 (Gate 1 Analytical Operator Inequality & Resolvent Gap Reorientation)
+    Hard operator regression certified (< 2.6e-11); exact variational deficit lower bound Delta K + Delta W >= 0.841991 certified across 4 trial families; tail-mass enclosure verified; stable subspace kinetic floor Delta K_min ~ 0.084 established; non-collapsing continuum gap route decisively falsified (g_cont collapses 0.041 -> 0.006, R_spec explodes 2.3e3 -> 1.4e5); absolute energy control uncoupled from relative spectral gap; exponential doublet collapse vastly outpaces denominator collapse (Delta_2 ~ 1e-31 -> 3e-38, Delta_2 R_spec ~ 4.2e-33); finite-T sensitivity (5.68%) confirmed; sets up Cell 145 subexponential vs exponential envelope comparison
 ```
 
 ---

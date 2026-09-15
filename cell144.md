@@ -1,169 +1,182 @@
 # CELL 144 — Analytical Operator Inequality, Uniform Trial-Class Enclosures, and the Variational Bridge to Gate 1 Doublet
 
 **Target Gate:** Gate 1 (Finite-$N$ Spectral Mechanism & Asymptotic Tail Extinction)  
-**Milestone:** Milestone M-G1.6 (Variational Lower Bound & Coupled Operator Geometry) $\longrightarrow$ Bridge to Gate 1 Clearance ($\Delta_j R_{\mathrm{spec}} \to 0$)  
+**Milestone:** Milestone M-G1.6 (Variational Lower Bound & Coupled Operator Geometry) $\longrightarrow$ Reorientation of Gate 1 Resolvent Mechanism  
 **Target Operators:** Certified Continuum Truncations $K_{\mathrm{rest}}(N)$, $W_\perp(N)$, and $H_1(N) = K_{\mathrm{rest}} - W_\perp$ on $\mathcal{B}_{11}^\perp$; Full Parity Operators $Q_{\mathrm{even}}, Q_{\mathrm{odd}}$  
-**Pre-Flight Invariants ($N = 64$):** $\omega_0 = 2.9315259531$, $\nu_0 = 4.2604954421$, $\mu_0 = -0.4869792197$ (tolerance $10^{-8}$)  
-**Execution Script:** [`cell144.py`](file:///c:/data/github/connes-cvs-/cell144.py) (50-dps verification suite across $N \in [32, 48, 56, 64]$)  
+**Pre-Flight Invariants ($N = 64$):** $\omega_0 = 2.9315259531$, $\nu_0 = 4.2604954421$, $\mu_0 = -0.4869792197$ (residual $< 2.6 \times 10^{-11}$)  
+**Computational Output:** Certified via [`cell144.out`](file:///c:/data/github/connes-cvs-/cell144.out) (suite runtime: 1186.16s)  
 
 ---
 
-## 1. Executive Context & Epistemic Synthesis
+## 1. Executive Summary & Epistemic Synthesis
 
-### 1.1 The Hand-Off from Cell 143
-In [`cell143.md`](file:///c:/data/github/connes-cvs-/cell143.md), the continuous spectral-measure investigation established that the normalized energy-deficit measure:
-$$d\lambda_N(x) \equiv \frac{x \, d\mu_N(x)}{\Delta W_N}$$
-is concentrated on a stationary $\mathcal{O}(1)$ macroscopic window on the continuous physical energy axis $x = \delta\nu$:
-$$\bar{E}_{\mathrm{def}} \approx 1.456, \qquad Q_{50} \approx 1.391, \qquad Q_{95} \approx 2.050, \qquad \sigma_\lambda \approx 0.437.$$
-This result established two decisive physical facts:
-1. **Zero UV Dilation:** The energy sacrifice is not escaping toward the truncation edge (empirical power-law exponents $\alpha_{50} = -0.014$, $\alpha_{95} = +0.064 \approx 0$).
-2. **Resolution of Extensive Mode Counting:** The extensive participation rank $r_{0.05} \approx 0.90 q$ discovered in Cell 142 is a coordinate densification effect: discrete Galerkin modes sample the fixed interval $[0, X_*]$ (with $X_* \approx 2.05\text{--}2.10$) ever more densely as $N \to \infty$.
+Cell 144 executed the planned transition from empirical spectral-measure diagnostics to analytical operator bounds and tested the bridge to André Weil's explicit quadratic functional in Gate 1.
 
-### 1.2 The Epistemic Imperative for Cell 144
-However, Cell 143 observed this measure **strictly on the minimizing ground state** $v_{\mathrm{phys}} = \arg\min(K_{\mathrm{rest}} - W_\perp)$.  
-To advance from a descriptive diagnostic to an authentic Gate 1 proof component, we must solve two remaining mathematical problems:
-1. **From Single Minimizer to Uniform Operator Inequality:**  
-   We must show that the bounded deficit scale $X_* \approx 2.10$ gives a controlled lower bound on $\langle T, (K_{\mathrm{rest}} - W_\perp) T \rangle$ that applies to a **uniform class of trial states $T$**, not merely the single minimizer $v_{\mathrm{phys}}$.
-2. **The Direct Variational Bridge to Gate 1:**  
-   We must connect the continuum competition lower bound $\mu_0 > -1/2$ to the Gate 1 asymptotic product:
-   $$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.$$
-   Specifically, we show that $\mu_0 > -1/2$ enforces a uniform non-vanishing continuum gap $g_{\mathrm{cont}} = E_{11} - E_{10} > 0$, preventing the denominator of $R_{\mathrm{spec}}$ from collapsing and rigorously forcing the Gate 1 product to zero under the exponentially decaying doublet splitting $\Delta_j(N)$.
+The investigation yielded **two major analytical and structural advances**, but decisively **falsified the proposed $R_{\mathrm{spec}} = \mathcal{O}(1)$ proof route**. The failure of that route is highly informative and cleanly reorients the Gate 1 programme.
+
+### 1.1 Summary of Established Findings & Advances
+1. **Exact Variational Deficit Tradeoff Identity:**  
+   Proved algebraically and verified across all trial families that for every unit state $T \in \mathcal{B}_{11}^\perp$:
+   $$\boxed{\Delta K[T] + \Delta W[T] \ge C_{\mathrm{gain}} \equiv \mu_0 - (\omega_0 - \nu_0) = +0.841991.}$$
+   At $N=64$, the coupled physical ground state $v_{\mathrm{phys}}$ saturates this bound to machine precision ($\Delta K = 0.291278, \Delta W = 0.550712, \text{Sum} = 0.841990$, margin $-0.000000$).
+2. **Proposition 144.1 (Uniform Tail-Mass Enclosure):**  
+   Applied spectral Markov/Chebyshev reasoning to $\nu_0 I - W_\perp \succeq 0$ to establish:
+   $$\|(I - P_{\le X_*}) T\|_2^2 \le \frac{\Delta W[T]}{X_*}.$$
+3. **Subspace Kinetic Floor on the Low-Deficit Well Band:**  
+   Restricting states to the low-deficit energy window $\mathcal{H}_{\le X_*} = \operatorname{ran}(P_{\le X_*})$ with $X_* = 2.10$ enforces an essentially stationary, strictly positive kinetic penalty across all dimensions:
+   $$\Delta K_{\min}(X_* = 2.10) \in \{0.0802, \; 0.0779, \; 0.0809, \; 0.0844\} \approx 0.084 > 0.$$
+   Because of cross-Gram misalignment ($O_{0,0} \approx 0.0524$, $76.8^\circ$), states cannot harvest deep well depth without paying a persistent kinetic excess.
 
 ---
 
-## 2. Mathematical Architecture: Uniform Trial-Class Enclosures
+### 1.2 Decisive Falsification of the Proposed Non-Collapsing Continuum Gap
+The pre-computation manuscript hypothesized that $\mu_0(N) > -1/2$ would enforce a strictly bounded-away continuum gap $g_{\mathrm{cont}}(N) \equiv E_{11}(N) - E_{10}(N) \ge g_* > 0$, preventing the resolvent denominator from collapsing.
 
-### 2.1 The Competition Functional and Exact Deficit Decomposition
-On the continuum subspace $\mathcal{B}_{11}^\perp \subset \mathcal{H}_N$ (dimension $q = N - 10$), the compressed competition operator is:
-$$\widehat{Q}_{\mathrm{comp}} = \widehat{K}_{\mathrm{rest}} - \widehat{W}_\perp.$$
-For any unit state $T \in \mathcal{B}_{11}^\perp$ ($\|T\|_2 = 1$), define:
-- **Kinetic / Restoring Excess:** $\Delta K[T] \equiv \langle T, K_{\mathrm{rest}} T \rangle - \omega_0 \ge 0$, where $\omega_0 \equiv \lambda_{\min}(K_{\mathrm{rest}}) \approx 2.9315259531$.
-- **Well Deficit:** $\Delta W[T] \equiv \nu_0 - \langle T, W_\perp T \rangle \ge 0$, where $\nu_0 \equiv \lambda_{\max}(W_\perp) \approx 4.2604954421$.
-
-The expectation value of $\widehat{Q}_{\mathrm{comp}}$ on $T$ decomposes identically as:
-$$\langle T, \widehat{Q}_{\mathrm{comp}} T \rangle = (\omega_0 - \nu_0) + \Delta K[T] + \Delta W[T].$$
-Since $\mu_0 = \lambda_{\min}(\widehat{Q}_{\mathrm{comp}}) = \inf_{\|T\|=1} \langle T, \widehat{Q}_{\mathrm{comp}} T \rangle$, every unit state $T \in \mathcal{B}_{11}^\perp$ unconditionally satisfies:
-$$\boxed{\Delta K[T] + \Delta W[T] \ge \mu_0 - (\omega_0 - \nu_0) \approx -0.486979 - (-1.328970) = +0.841991.}$$
-
-We call $C_{\mathrm{gain}} \equiv \mu_0 - (\omega_0 - \nu_0) \approx +0.8420$ the **Coupling Gain over the Split Weyl Bound**.
+**This implication is decisively refuted by the computation:**
+- The measured continuum gap collapses monotonically by nearly an order of magnitude:
+  $$g_{\mathrm{cont}}(N) = E_{11}(N) - E_{10}(N) \in \{0.0414, \; 0.0092, \; 0.0071, \; 0.0060\} \longrightarrow 0.$$
+- Consequently, the resolvent denominator $D(N) \equiv (E_{11} - E_2)(E_{11} - E_3)$ collapses from $1.73 \times 10^{-3} \to 3.63 \times 10^{-5}$.
+- The resolvent growth ratio $R_{\mathrm{spec}}(N) \equiv \|Q_{\mathrm{even}}\|_{\mathrm{op}} / D(N)$ explodes:
+  $$R_{\mathrm{spec}}(N) \in \{2.38 \times 10^3, \; 5.81 \times 10^4, \; 9.98 \times 10^4, \; 1.41 \times 10^5\} \longrightarrow \infty.$$
+- **Root Cause of Theoretical Failure:**  
+  $\mu_0 > -1/2$ provides **absolute continuum energy control** relative to a baseline; it does **not** provide a relative spectral gap between the continuum base $E_{11}$ and the uppermost bound state $E_{10}$. When both $E_{10}, E_{11} \to E_*$, $E_{11}$ remains bounded while $E_{11} - E_{10} \to 0$.
 
 ---
 
-### 2.2 Proposition 144.1 (Uniform Tail-Mass Enclosure)
-Let $\{y_j\}_{j=0}^{q-1}$ be the orthonormal eigenbasis of $W_\perp$ with descending eigenvalues $\nu_0 > \nu_1 > \dots > \nu_{q-1}$, and energy splittings $\delta\nu_j \equiv \nu_0 - \nu_j \ge 0$.  
-Let $X_* > 0$ be any energy threshold (canonically $X_* \approx 2.10$). Define the spectral projection of $W_\perp$ onto the low-deficit energy window $[0, X_*]$:
-$$P_{\le X_*} \equiv \sum_{\delta\nu_j \le X_*} y_j y_j^T, \qquad P_{> X_*} \equiv I - P_{\le X_*}.$$
-Every state $T \in \mathcal{B}_{11}^\perp$ decomposes orthogonally as:
-$$T = T_{\le X_*} + T_{> X_*}, \qquad T_{\le X_*} \equiv P_{\le X_*} T, \quad T_{> X_*} \equiv P_{> X_*} T.$$
+### 1.3 The True Gate 1 Mechanism: Exponential Splitting Vastly Outpaces Denominator Collapse
+Despite the blow-up of $R_{\mathrm{spec}}(N)$, the Gate 1 product does **not** fail. It collapses by 5 orders of magnitude:
+$$\boxed{\Pi_{\mathrm{Gate1}}(N) = \Delta_2(N) R_{\mathrm{spec}}(N) \in \{3.12 \times 10^{-28}, \; 2.57 \times 10^{-32}, \; 4.80 \times 10^{-33}, \; 4.21 \times 10^{-33}\} \longrightarrow 0.}$$
+While $R_{\mathrm{spec}}$ grows by a factor of $\approx 60$, the tunneling doublet splitting $\Delta_2(N)$ collapses by **7 orders of magnitude** ($1.31 \times 10^{-31} \to 2.98 \times 10^{-38}$).
 
-> **Proposition 144.1 (Uniform Tail-Mass Enclosure).**  
-> For any unit state $T \in \mathcal{B}_{11}^\perp$ ($\|T\|_2 = 1$), the mass outside the energy band $[0, X_*]$ satisfies:
-> $$\boxed{\|T_{> X_*}\|_2^2 \le \frac{\Delta W[T]}{X_*}.}$$
-> *Proof.*  
-> Because $(\nu_0 I - W_\perp)$ is diagonal in the $\{y_j\}$ basis with eigenvalues $\delta\nu_j$:
-> $$\Delta W[T] = \langle T, (\nu_0 I - W_\perp) T \rangle = \sum_{\delta\nu_j \le X_*} \delta\nu_j |\langle y_j, T \rangle|^2 + \sum_{\delta\nu_j > X_*} \delta\nu_j |\langle y_j, T \rangle|^2.$$
-> Since $\delta\nu_j \ge 0$ for all $j$, and $\delta\nu_j > X_*$ on the second sum:
-> $$\Delta W[T] \ge \sum_{\delta\nu_j > X_*} \delta\nu_j |\langle y_j, T \rangle|^2 > X_* \sum_{\delta\nu_j > X_*} |\langle y_j, T \rangle|^2 = X_* \|T_{> X_*}\|_2^2.$$
-> Dividing by $X_* > 0$ yields the result. $\blacksquare$
-
-**Physical Consequence:** For any energy-competitive trial state (where $\Delta W[T] \le X_*$), $T$ cannot hide significant mass in the high-frequency / deep tail. It is geometrically confined to $\mathcal{H}_{\le X_*} \equiv \operatorname{ran}(P_{\le X_*})$ up to a controlled leakage bounded by $\Delta W[T] / X_*$.
+$$\boxed{\textbf{Gate 1 works despite a collapsing continuum gap: exponential doublet splitting dominates resolvent growth.}}$$
 
 ---
 
-### 2.3 The Subspace Kinetic Floor $\omega_{\min}(X_*)$
-Define the compressed restoring / kinetic operator restricted to the low-deficit well band $\mathcal{H}_{\le X_*}$:
-$$\widehat{K}_{\le X_*} \equiv P_{\le X_*} K_{\mathrm{rest}} P_{\le X_*}.$$
-Let $d(X_*) \equiv \operatorname{rank}(P_{\le X_*})$ and define its minimal eigenvalue on $\mathcal{H}_{\le X_*}$:
-$$\omega_{\min}(X_*) \equiv \lambda_{\min}\left( \widehat{K}_{\le X_*} \big|_{\mathcal{H}_{\le X_*}} \right).$$
-
-> **Definition 144.1 (Subspace Kinetic Excess).**  
-> The minimal kinetic excess enforced by the low-deficit subspace $\mathcal{H}_{\le X_*}$ is:
-> $$\Delta K_{\min}(X_*) \equiv \omega_{\min}(X_*) - \omega_0.$$
-
-Because the kinetic ground state $x_0$ is strongly misaligned with the top well modes ($O_{0,0} = |\langle x_0, y_0 \rangle|^2 \approx 0.0524$, corresponding to an angle of $76.8^\circ$), any state restricted to the top well modes cannot achieve the kinetic minimum $\omega_0$.  
-Therefore, $\Delta K_{\min}(X_*) > 0$ represents the **mandatory kinetic penalty** that *any* state in $\mathcal{H}_{\le X_*}$ must pay.
+### 1.4 Archimedean Cutoff $T$-Robustness: A Warning Diagnostic
+Comparing $T=600$ vs $T=800$ at $N=48$ reveals that the deep spectrum is sensitive to finite-$T$ truncation:
+- $E_{11}$ shifts from $0.00924 \to 0.00977$ (a relative change of **$5.68\%$**).
+- $\mu_0$ shifts from $-0.4780 \to -0.4838$ (a relative change of **$1.20\%$**).
+- This falsifies the hope that these continuum invariants are already $T$-independent to $10^{-6}$. Finite-$T$ continuum values must be treated as regularized quantities.
 
 ---
 
-## 3. The Variational Bridge to Gate 1 Doublet and $R_{\mathrm{spec}}$
+## 2. Certified Numerical Results (`cell144.out`)
 
-### 3.1 The Gate 1 Target Product
-In Gate 1 of the canonical roadmap ([`ROADMAP.md`](file:///c:/data/github/connes-cvs-/ROADMAP.md)), the core mathematical requirement is:
-$$\lim_{L \to \infty} \limsup_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0 \implies \lim_{L \to \infty} \limsup_{N \to \infty} \Pi_{j, \mathrm{tail}}(N, L) = 1,$$
-where:
-- $\Delta_j(N) = |E_j^{\mathrm{even}}(N) - E_j^{\mathrm{odd}}(N)|$ (or the intra-well splitting $|E_{j+1} - E_j|$) is the bound-state doublet splitting.
-- $R_{\mathrm{spec}}(N, L)$ is the relative high-spectrum resolvent growth ratio:
-  $$R_{\mathrm{spec}}(N, L) \equiv \frac{\|Q_{\mathrm{even}}^{(N)}\|_{\mathrm{op}}}{D(N, L)}, \qquad D(N, L) \equiv (E_{\mathrm{cont}}(N) - E_j(N))(E_{\mathrm{cont}}(N) - E_{j+1}(N)).$$
-- $E_{\mathrm{cont}}(N) \equiv E_{11}(N)$ is the continuum threshold energy (the 12th eigenvalue of $Q_{\mathrm{even}}^{(N)}$, corresponding to the bottom of the continuum spectrum on $\mathcal{B}_{11}^\perp$).
+Pre-flight audit at $N=64$ passed in 145.25s ($\omega_0 = 2.9315259531, \nu_0 = 4.2604954421, \mu_0 = -0.4869792197$; residuals $< 2.6 \times 10^{-11}$).
 
-### 3.2 Theorem 144.2 (Continuum Gap Enclosure & Gate 1 Product Extinction)
-On the continuum subspace $\mathcal{B}_{11}^\perp$, the operator is $Q_{\mathrm{even}}|_{\mathcal{B}_{11}^\perp}$.  
-Its lowest eigenvalue is bounded below by the competition ground state:
-$$E_{\mathrm{cont}}(N) \ge E_{\mathrm{base}} + \mu_0(N).$$
+### 2.1 Table 1: Subspace Kinetic Floor $\omega_{\min}(X_*)$ and Kinetic Excess Across $N$
+*Restricting states to the low-deficit well band $\mathcal{H}_{\le X_*} = \operatorname{ran}(P_{\le X_*})$ enforces a mandatory kinetic penalty $\Delta K_{\min} > 0$.*
 
-> **Theorem 144.2 (Continuum Gap Enclosure & Gate 1 Bridge).**  
-> If the competition ground state satisfies $\mu_0(N) \ge \mu_* > -1/2$ uniformly across all $N$, then:
-> 1. **Uniform Continuum Gap:** The continuum threshold remains strictly separated from the bound states $E_j(N)$ ($j \le 10$):
->    $$g_{\mathrm{cont}}(N) \equiv E_{11}(N) - E_{10}(N) \ge g_* > 0 \qquad \forall N.$$
-> 2. **Uniform Resolvent Denominator Enclosure:**
->    $$D(N, L) \equiv (E_{11} - E_j)(E_{11} - E_{j+1}) \ge g_*^2 > 0.$$
-> 3. **Gate 1 Product Extinction:** Since the operator norm grows at most polynomially ($\|Q_{\mathrm{even}}\|_{\mathrm{op}} = \mathcal{O}(N^p)$ with $p \le 2$), while the tunneling doublet splitting decays exponentially ($\Delta_j(N) \le C e^{-\kappa N}$ with $\Delta_2 \sim 10^{-26}\text{--}10^{-40}$ as certified in Cells 120–121):
->    $$\boxed{\Delta_j(N) R_{\mathrm{spec}}(N, L) \le \Delta_j(N) \frac{\|Q_{\mathrm{even}}\|_{\mathrm{op}}}{g_*^2} \le \frac{C N^p e^{-\kappa N}}{g_*^2} \longrightarrow 0 \qquad (N \to \infty).}$$
->
-> *Significance:* This theorem directly bridges the continuum competition lower bound $\mu_0 > -1/2$ to Gate 1 clearance, proving that the absence of UV escape in Cell 143 was precisely the missing link preventing continuum states from collapsing into the bound-state well.
+| $N$ | $q$ | Cutoff $X_*$ | Subspace Dim $d$ | Subspace Ratio $d/q$ | Minimal Kinetic $\omega_{\min}$ | Ground Kinetic $\omega_0$ | Kinetic Excess $\Delta K_{\min}$ |
+|---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 32 | 22 | 1.50 | 12 | 0.545 | 3.667113 | 2.992230 | 0.674883 |
+| 32 | 22 | 2.00 | 20 | 0.909 | 3.080034 | 2.992230 | 0.087804 |
+| 32 | 22 | 2.10 | 21 | 0.955 | 3.072399 | 2.992230 | 0.080169 |
+| 32 | 22 | 2.50 | 22 | 1.000 | 2.992230 | 2.992230 | 0.000000 |
+| 48 | 38 | 1.50 | 20 | 0.526 | 3.583772 | 2.935956 | 0.647816 |
+| 48 | 38 | 2.00 | 32 | 0.842 | 3.163866 | 2.935956 | 0.227909 |
+| 48 | 38 | 2.10 | 35 | 0.921 | 3.013867 | 2.935956 | 0.077911 |
+| 48 | 38 | 2.50 | 38 | 1.000 | 2.935956 | 2.935956 | 0.000000 |
+| 56 | 46 | 1.50 | 23 | 0.500 | 3.588005 | 2.932617 | 0.655388 |
+| 56 | 46 | 2.00 | 39 | 0.848 | 3.143101 | 2.932617 | 0.210484 |
+| 56 | 46 | 2.10 | 42 | 0.913 | 3.013555 | 2.932617 | 0.080938 |
+| 56 | 46 | 2.50 | 46 | 1.000 | 2.932617 | 2.932617 | 0.000000 |
+| 64 | 54 | 1.50 | 27 | 0.500 | 3.587360 | 2.931526 | 0.655834 |
+| 64 | 54 | 2.00 | 44 | 0.815 | 3.118251 | 2.931526 | 0.186725 |
+| 64 | 54 | 2.10 | 49 | 0.907 | 3.015877 | 2.931526 | 0.084351 |
+| 64 | 54 | 2.50 | 54 | 1.000 | 2.931526 | 2.931526 | 0.000000 |
 
----
-
-## 4. Experimental Suite Design (`cell144.py`)
-
-The computational suite evaluates four targeted numerical experiments:
-
-### 4.1 Pre-Flight Hard Regression Audit ($N=64$, 50 dps)
-Verify exact agreement with certified invariants within $10^{-8}$:
-$$\omega_0 = 2.9315259531, \quad \nu_0 = 4.2604954421, \quad \mu_0 = -0.4869792197.$$
-The $N=64$ system is cached and explicitly labeled:
-`Completed N = 64 (reused from pre-flight cache)`.
-
-### 4.2 Experiment 1: Subspace Kinetic Floor $\omega_{\min}(X_*)$ on $\mathcal{H}_{\le X_*}$
-For energy thresholds $X_* \in \{1.5, 2.0, 2.1, 2.5\}$:
-- Compute subspace dimension $d(X_*) = \operatorname{rank}(P_{\le X_*})$.
-- Compute minimal eigenvalue $\omega_{\min}(X_*) = \lambda_{\min}(P_{\le X_*} K_{\mathrm{rest}} P_{\le X_*})$.
-- Compute kinetic excess $\Delta K_{\min}(X_*) = \omega_{\min}(X_*) - \omega_0$.
-- Evaluate across $N \in [32, 48, 56, 64]$ to test stability.
-
-### 4.3 Experiment 2: Uniform Tradeoff Audit Across 4 Trial Families
-Test the fundamental lower bound $\Delta K[T] + \Delta W[T] \ge C_{\mathrm{gain}} \approx 0.8420$ across four diverse families:
-- **Family A (Extremal Modes):** $x_0$ (kinetic ground state), $y_0, y_1, y_2, y_3$ (top well modes).
-- **Family B (Rotation Geodesic):** $T(\theta) \equiv \cos\theta \, x_0 + \sin\theta \, y_0$ for $\theta \in [0, \pi/2]$.
-- **Family C (Random Unit Vectors):** Random samples in $\mathcal{H}_{\le X_*}$ and in full $\mathcal{B}_{11}^\perp$.
-- **Family D (Coupled Excited States):** Eigenvectors $v_k(1)$ of $H_1 = K_{\mathrm{rest}} - W_\perp$ for $k \in \{0, 1, 2, 3\}$.
-
-### 4.4 Experiment 3: The Gate 1 Continuum Gap & $R_{\mathrm{spec}}$ Bridge
-For each dimension $N \in [32, 48, 56, 64]$:
-- Compute bound-state doublet splitting $\Delta_2(N) \equiv E_3(N) - E_2(N)$ and parity splitting $\Delta_0^{\mathrm{parity}}(N) \equiv |E_0^{\mathrm{even}} - E_0^{\mathrm{odd}}|$.
-- Compute continuum threshold $E_{11}(N)$ and continuum gap $g_{\mathrm{cont}}(N) \equiv E_{11}(N) - E_{10}(N)$.
-- Compute denominator $D(N) \equiv (E_{11} - E_2)(E_{11} - E_3)$ and operator norm $\|Q_{\mathrm{even}}\|_{\mathrm{op}}$.
-- Compute resolvent growth ratio $R_{\mathrm{spec}}(N) \equiv \|Q_{\mathrm{even}}\|_{\mathrm{op}} / D(N)$.
-- Compute the Gate 1 product:
-  $$\Pi_{\mathrm{Gate1}}(N) \equiv \Delta_2(N) R_{\mathrm{spec}}(N).$$
-
-### 4.5 Experiment 4: Archimedean Cutoff $T$-Robustness Check
-Audit $E_{11}, \omega_0, \nu_0, \mu_0$ at $N=48$ comparing $T=600$ vs $T=800$ to confirm that the continuum subspace and competition invariants are immune to finite-$T$ Archimedean truncation.
+*Interpretation:* Although the $X_* = 2.10$ band captures $\approx 91\%\text{--}95\%$ of all continuum modes ($d/q \approx 0.91$), the kinetic operator cannot attain its ground state on this subspace, incurring an irreducible penalty of $\Delta K_{\min} \approx 0.084$.
 
 ---
 
-## 5. Diagnostic Output Tables
+### 2.2 Table 2: Consistency Audit of Extremal Variational Geometry ($N = 64$)
+*Algebraic Lower Bound: $\Delta K[T] + \Delta W[T] \ge C_{\mathrm{gain}} \equiv \mu_0 - (\omega_0 - \nu_0) = +0.841991$.*
 
-The computational results generated by [`cell144.py`](file:///c:/data/github/connes-cvs-/cell144.py) will populate the following certified tables in `cell144.md`:
+| Family | Trial State $T$ | Kinetic Excess $\Delta K[T]$ | Well Deficit $\Delta W[T]$ | Total Deficit $\Delta K + \Delta W$ | Margin $\ge C_{\mathrm{gain}}$ |
+|:---|:---|:---:|:---:|:---:|:---:|
+| Family A (Extremal) | $x_0$ (Kinetic Ground) | 0.000000 | 1.236041 | 1.236041 | +0.394051 |
+| Family A (Extremal) | $y_0$ (Well Mode 0) | 2.923056 | 0.000000 | 2.923056 | +2.081066 |
+| Family A (Extremal) | $y_1$ (Well Mode 1) | 3.884590 | 0.000000 | 3.884590 | +3.042600 |
+| Family A (Extremal) | $y_2$ (Well Mode 2) | 3.617613 | 0.000007 | 3.617620 | +2.775630 |
+| Family A (Extremal) | $y_3$ (Well Mode 3) | 4.262298 | 0.000129 | 4.262427 | +3.420437 |
+| Family B (Rotation) | $\operatorname{rot}(\theta = 22.5^\circ)$ | 0.510716 | 1.258711 | 1.769427 | +0.927437 |
+| Family B (Rotation) | $\operatorname{rot}(\theta = 45.0^\circ)$ | 1.895252 | 0.801425 | 2.696677 | +1.854687 |
+| Family B (Rotation) | $\operatorname{rot}(\theta = 67.5^\circ)$ | 2.976668 | 0.215961 | 3.192629 | +2.350639 |
+| Family C (Subspace) | Uniform Sum $(y_0 \dots y_3)$ | 3.880256 | 0.000034 | 3.880290 | +3.038299 |
+| Family C (Subspace) | Ramp on Top 10 Well Modes | 3.613122 | 0.472720 | 4.085842 | +3.243852 |
+| Family C (Subspace) | Alternating Top 10 Modes | 3.184173 | 0.236146 | 3.420320 | +2.578329 |
+| Family C (Subspace) | Global Sinusoidal Mode | 2.506841 | 1.397316 | 3.904157 | +3.062167 |
+| Family D (Coupled) | $v_0(1)$ (Ground State) | 0.291278 | 0.550712 | 0.841990 | -0.000000 |
+| Family D (Coupled) | $v_1(1)$ (1st Excited) | 0.698685 | 0.978563 | 1.677248 | +0.835258 |
+| Family D (Coupled) | $v_2(1)$ (2nd Excited) | 0.682456 | 1.188940 | 1.871396 | +1.029406 |
+| Family D (Coupled) | $v_3(1)$ (3rd Excited) | 0.800547 | 1.226037 | 2.026584 | +1.184594 |
 
-### Table 1: Subspace Kinetic Floor $\omega_{\min}(X_*)$ and Mandatory Kinetic Penalty Across $N$
-*(To be populated upon external execution of `cell144.py`)*
+---
 
-### Table 2: Uniform Tradeoff Audit $\Delta K[T] + \Delta W[T] \ge 0.8420$ Across Trial Families
-*(To be populated upon external execution of `cell144.py`)*
+### 2.3 Table 3: Gate 1 Continuum Gap Collapse vs Doublet Splitting Extinction
+*Quantifying the competition between denominator collapse and exponential doublet decay.*
 
-### Table 3: Gate 1 Continuum Gap, Resolvent Growth $R_{\mathrm{spec}}$, and Product Extinction $\Delta_2 R_{\mathrm{spec}}$
-*(To be populated upon external execution of `cell144.py`)*
+| $N$ | Bound Top $E_{10}$ | Continuum Base $E_{11}$ | Continuum Gap $g_{\mathrm{cont}}$ | Doublet Splitting $\Delta_2$ | Parity Splitting $\Delta_0^{\mathrm{par}}$ | Denom $D(N)$ | Norm $\|Q\|_{\mathrm{op}}$ | Resolvent Ratio $R_{\mathrm{spec}}$ | Gate 1 Product $\Delta_2 R_{\mathrm{spec}}$ |
+|---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 32 | 0.0001 | 0.0416 | 0.0414 | $1.3121 \times 10^{-31}$ | $5.4013 \times 10^{-46}$ | 0.0017 | 4.11 | 2379.06 | $3.1215 \times 10^{-28}$ |
+| 48 | 0.0000 | 0.0092 | 0.0092 | $4.4210 \times 10^{-37}$ | $2.7919 \times 10^{-50}$ | 0.0001 | 4.96 | 58071.38 | $2.5673 \times 10^{-32}$ |
+| 56 | 0.0000 | 0.0071 | 0.0071 | $4.8088 \times 10^{-38}$ | $1.0331 \times 10^{-50}$ | 0.0001 | 5.03 | 99839.13 | $4.8011 \times 10^{-33}$ |
+| 64 | 0.0000 | 0.0060 | 0.0060 | $2.9751 \times 10^{-38}$ | $7.9865 \times 10^{-51}$ | 0.0000 | 5.13 | 141466.14 | $4.2088 \times 10^{-33}$ |
 
-### Table 4: Archimedean Cutoff $T$-Robustness Audit ($T=600$ vs $T=800$ at $N=48$)
-*(To be populated upon external execution of `cell144.py`)*
+*Key Findings:*
+1. The continuum gap collapses: $g_{\mathrm{cont}} = 0.0414 \to 0.0060$.
+2. The resolvent ratio explodes: $R_{\mathrm{spec}} = 2.38 \times 10^3 \to 1.41 \times 10^5$.
+3. The doublet splitting collapses vastly faster: $\Delta_2 = 1.31 \times 10^{-31} \to 2.98 \times 10^{-38}$.
+4. The Gate 1 product remains extraordinarily small: $\Pi_{\mathrm{Gate1}} \approx 4.21 \times 10^{-33}$.
+
+---
+
+### 2.4 Table 4: Archimedean Cutoff $T$-Robustness Audit ($N = 48$, $T = 600$ vs $T = 800$)
+*Demonstrating sensitivity of continuum eigenvalues to Archimedean truncation.*
+
+| Physical Quantity | $T = 600$ | $T = 800$ | Absolute Difference | Relative Change |
+|:---|:---:|:---:|:---:|:---:|
+| Continuum Base $E_{11}$ | 0.0092427126 | 0.0097672673 | $5.25 \times 10^{-4}$ | **5.68%** |
+| Kinetic Base $\omega_0$ | 2.9359562559 | 2.9325006819 | $3.46 \times 10^{-3}$ | **0.12%** |
+| Step-Well Top $\nu_0$ | 4.2604953442 | 4.2604889875 | $6.36 \times 10^{-6}$ | $1.49 \times 10^{-6}$ |
+| Coupled Ground $\mu_0$ | -0.4780344223 | -0.4837607207 | $5.73 \times 10^{-3}$ | **1.20%** |
+
+*Interpretation:* The step-well potential $\nu_0$ is virtually immune to $T$, but the continuum threshold $E_{11}$ and competition ground state $\mu_0$ undergo percent-level shifts. Finite-$T$ values cannot be treated as $10^{-6}$-converged continuum thresholds.
+
+---
+
+## 3. Epistemic Calibrations & Deconstruction of Failed Claims
+
+### 3.1 Removal of the Unsupported Gap Implication
+The statement:
+> *"Because $\mu_0 > -1/2$, the continuum gap $g_{\mathrm{cont}}$ is strictly positive"*
+
+is **mathematically unsupported and empirically refuted**. It is permanently removed.  
+Controlling $\inf_{T \in \mathcal{B}_{11}^\perp} \langle T, (K_{\mathrm{rest}} - W_\perp) T \rangle > -1/2$ sets an energy floor for the continuum subspace as a whole; it does not prevent $E_{11}(N)$ from approaching $E_{10}(N)$ asymptotically.
+
+### 3.2 Epistemic Reorientation for Gate 1
+We do **not** need to prove that the resolvent denominator stays open ($D(N) \ge D_\infty > 0$).  
+Gate 1 tail extinction requires only:
+$$\lim_{N \to \infty} \Delta_j(N) R_{\mathrm{spec}}(N, L) = 0.$$
+If $D(N)$ collapses at a polynomial rate $D(N) \asymp N^{-p}$ (or any subexponential rate $D(N) \gtrsim e^{-o(N)}$), while the doublet splitting collapses exponentially:
+$$\Delta_j(N) \le C e^{-\kappa N},$$
+then:
+$$\lim_{N \to \infty} \frac{C e^{-\kappa N} \|Q\|_{\mathrm{op}}}{N^{-2p}} = 0.$$
+The relevant analytical problem is **bounding the denominator collapse from below**, not keeping it bounded away from zero.
+
+---
+
+## 4. Strategic Direction: Cell 145 (Subexponential Denominator Enclosure vs Exponential Splitting)
+
+Cell 145 will focus strictly on the asymptotic competition between denominator collapse and tunneling splitting:
+$$\boxed{\textbf{Quantify the actual collapse rate of } D(N) \textbf{ and compare it directly with } \Delta_2(N).}$$
+
+1. **Dimensional Scaling Sweep:**  
+   Collect $\Delta_2(N), D(N), R_{\mathrm{spec}}(N)$, and $\Pi(N) = \Delta_2 R_{\mathrm{spec}}$ across the widest feasible range of dimensions $N \in [24, 32, 40, 48, 56, 64, 72, 80]$.
+2. **Log-Ratio Metric:**  
+   Compute the asymptotic ratio:
+   $$\rho_{\mathrm{Gate1}}(N) \equiv \frac{-\log \Delta_2(N)}{\log R_{\mathrm{spec}}(N)}.$$
+   If $\rho_{\mathrm{Gate1}}(N) \gg 1$ and increases with $N$, it provides rigorous numerical certification that exponential tunneling dominates resolvent blow-up.
+3. **Analytical Target Formulation:**  
+   Formulate a subexponential lower bound $D(N) \gtrsim N^{-p}$ based on the density of states near the continuum threshold, completing the revised Gate 1 proof architecture.
