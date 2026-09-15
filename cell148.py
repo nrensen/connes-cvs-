@@ -111,7 +111,7 @@ def build_full_dissection_at_N(N: int, T_val: int, prime_data: list) -> dict:
     Omega_diag = mp.matrix(dim_even, dim_even)
     for m in range(dim_even):
         a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
-        h_val = h_plus(a_m, 50)
+        h_val = h_plus(a_m)
         Omega_diag[m, m] = h_val + D_per[m, m]
 
     K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont

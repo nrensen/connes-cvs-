@@ -2388,7 +2388,7 @@ def K_fourier(v, r, L):
 # ARCHIMEDEAN SOURCE
 # ============================================================
 
-def h_plus(r, dps=None):
+def h_plus(r):
     """
     Archimedean source function:
 
@@ -2403,21 +2403,14 @@ def h_plus(r, dps=None):
                 h_+(r) K_fourier(v,r,L)
             dr.
 
-    Supports optional dps parameter for compatibility with connes_cvs.operator.h_plus.
+    NOTE ON DESIGN INTENT (DO NOT REFACTOR):
+    This function intentionally uses a strictly 1-argument signature (r) and pure
+    mpmath evaluating at ambient mp.dps. It intentionally does NOT accept a dps
+    parameter or alter mp.workdps, avoiding context-manager overhead and string-
+    conversion penalties in quadratures and matrix diagonal loops. Do not attempt
+    to reconcile this with connes_cvs.operator.h_plus(tau, dps), which serves a
+    different internal purpose in the C-Arb backend.
     """
-    if dps is not None:
-        with mp.workdps(dps):
-            r = mp.mpf(r)
-            return (
-                mp.re(
-                    mp.digamma(
-                        mp.mpf("0.25")
-                        + 1j * r / 2
-                    )
-                )
-                - mp.log(mp.pi)
-            )
-
     r = mp.mpf(r)
 
     return (
