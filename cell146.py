@@ -23,7 +23,22 @@ Pre-Flight Invariants (N = 64, 50 dps):
 
 import time
 import mpmath as mp
-from cell import get_galerkin_matrix, h_plus
+
+try:
+    from connes_cvs.operator import h_plus
+except ImportError:
+    from cell import h_plus
+from cell import get_galerkin_matrix
+
+
+def eval_h_plus(tau: mp.mpf, dps: int = 50) -> mp.mpf:
+    """
+    Robust wrapper for h_plus supporting both 2-arg (tau, dps) and 1-arg (tau) signatures.
+    """
+    try:
+        return h_plus(tau, dps)
+    except TypeError:
+        return h_plus(tau)
 
 # =============================================================================
 # Precision & Physical Parameters
@@ -31,7 +46,7 @@ from cell import get_galerkin_matrix, h_plus
 mp.mp.dps = 50
 
 C_PARAM = 13
-L_PARAM = mp.log(C_PARAM)
+L_PARAM = mp.log(mp.mpf(C_PARAM))
 T_PARAM = 600
 N_BOUND = 11  # Number of bound states in nominal well core (L = 10, index 11 is 12th state)
 
@@ -43,20 +58,22 @@ SWEEP_N = [24, 32, 40, 48, 56, 64, 72, 80]
 # =============================================================================
 def load_prime_powers_table(c_val: int) -> list:
     """
-    Generate prime powers q = p^k <= c with their weights w_q = log(p) / q^(1/2).
+    Exact prime-power table for c = 13:
+      q in {2, 3, 4, 5, 7, 8, 9, 11, 13}
+    Weight: w_q = log(p) / sqrt(q) where q = p^k.
     """
-    primes = [2, 3, 5, 7, 11, 13]
-    records = []
-    for p in primes:
-        p_pow = p
-        while p_pow <= c_val:
-            log_p = mp.log(p)
-            log_q = mp.log(p_pow)
-            w_q = log_p / mp.sqrt(p_pow)
-            records.append((p_pow, log_q, w_q))
-            p_pow *= p
-    records.sort(key=lambda x: x[0])
-    return records
+    primes_powers = [
+        (2, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(2))),
+        (3, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(3))),
+        (4, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(4))),
+        (5, 5, mp.log(mp.mpf(5)) / mp.sqrt(mp.mpf(5))),
+        (7, 7, mp.log(mp.mpf(7)) / mp.sqrt(mp.mpf(7))),
+        (8, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(8))),
+        (9, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(9))),
+        (11, 11, mp.log(mp.mpf(11)) / mp.sqrt(mp.mpf(11))),
+        (13, 13, mp.log(mp.mpf(13)) / mp.sqrt(mp.mpf(13))),
+    ]
+    return [(q, mp.log(mp.mpf(q)), w_q) for (q, _, w_q) in primes_powers if q <= c_val]
 
 
 # =============================================================================
@@ -263,7 +280,7 @@ def preflight_continuum_audit_64(sys_64: dict, prime_data: list):
     Omega_diag = mp.matrix(dim_even, dim_even)
     for m in range(dim_even):
         a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
-        h_val = h_plus(a_m, 50)
+        h_val = eval_h_plus(a_m, 50)
         Omega_diag[m, m] = h_val + D_per[m, m]
 
     Q_comp = Omega_diag - K_neg
@@ -318,7 +335,7 @@ def analyze_spatial_profile(v_vec: list, N: int, L_val: mp.mpf, n_grid: int = 40
     log_c = L_val  # log(13) is the whole interval, well steps occur at log q <= log(13)
     # The major well region is [0, log(7)] or [0, log(13)/2], but let's measure mass in [0, log(c)/2]
     # and in the step region [0, log(11)]
-    log_11 = mp.log(11)
+    log_11 = mp.log(mp.mpf(11))
 
     t_points = [L_val * mp.mpf(i) / mp.mpf(n_grid) for i in range(n_grid + 1)]
     psi_vals = [evaluate_wavefunction(v_vec, t, L_val) for t in t_points]
