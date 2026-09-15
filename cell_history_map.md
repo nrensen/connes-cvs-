@@ -4328,7 +4328,33 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–144)
+## Cell 145 (Asymptotic Competition of Resolvent Denominator Collapse vs Exponential Tunneling Splitting)
+
+* **Companion Note:** [`cell145.md`](file:///c:/data/github/connes-cvs-/cell145.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Resolvent Denominator Power Law vs Tunneling Splitting Exponent)
+* **Status:** Certified & Epistemically Calibrated ([`cell145.py`](file:///c:/data/github/connes-cvs-/cell145.py), [`cell145.out`](file:///c:/data/github/connes-cvs-/cell145.out), [`cell145.md`](file:///c:/data/github/connes-cvs-/cell145.md))
+* **Execution Script:** [`cell145.py`](file:///c:/data/github/connes-cvs-/cell145.py) (50-dps verification suite across $N \in [24, 32, 40, 48, 56, 64, 72, 80]$; runtime: 615.23s; commit `61525cf`)
+
+### Key Analytical & Numerical Results Certified
+1. **Pre-Flight Hard Regression Certified ($N=64$):** Certified operators against Cell 138–144 invariants in 102.10s: $\omega_0 = 2.9315259531$ (residual $6.86 \times 10^{-12}$), $\nu_0 = 4.2604954421$ (residual $6.11 \times 10^{-12}$), and $\mu_0 = -0.4869792197$ (residual $2.54 \times 10^{-11}$).
+2. **Empirical Gate 1 Product Suppression:** Despite the explosion of the resolvent ratio $R_{\mathrm{spec}, 10}(N) \equiv \|Q_{\mathrm{even}}\|_{\mathrm{op}} / D_{10}(N)$ from $22.5 \to 2.12 \times 10^5$, the Gate 1 tail extinction product $\Pi_2(N) \equiv \Delta_2(N) R_{\mathrm{spec}, 10}(N)$ collapses by 8 orders of magnitude ($3.17 \times 10^{-25} \to 4.62 \times 10^{-33}$). Doublet splitting collapses by 12 orders of magnitude ($1.41 \times 10^{-26} \to 2.18 \times 10^{-38}$).
+3. **Descriptive Nature of the Polynomial Fit:** Regression yields $D_{10}(N) \sim N^{-6.6564}$ ($R^2 = 0.8419$) and $R_{\mathrm{spec}, 10}(N) \sim N^{6.9457}$ ($R^2 = 0.8489$). These $R^2$ values represent descriptive finite-range effective exponents, not established asymptotic laws. $D(N)$ drops by $11\times$ from $N=32 \to 40$ ($p_D^{\mathrm{loc}} \approx 10.8$), but drops by only $14\%$ from $N=72 \to 80$ ($p_D^{\mathrm{loc}} \approx 1.24$), exhibiting marked deceleration.
+4. **Instability of the Tunneling Decay Exponent:** The fitted decay rate shifts from $\kappa = 0.8176$ ($R^2 = 0.9279$) on $N \in [24, 56]$ down to $\kappa = 0.4358$ ($R^2 = 0.7527$) on $N \in [24, 80]$, refuting a single stable asymptotic exponential law across the full range.
+5. **Product Plateau Around $4 \times 10^{-33}$:** After $N=48$, $\Pi_2(N)$ essentially flattens ($2.57 \times 10^{-32} \to 4.80 \times 10^{-33} \to 4.21 \times 10^{-33} \to 4.45 \times 10^{-33} \to 4.62 \times 10^{-33}$). This plateau reflects potential numerical conditioning / precision limits of $\Delta_2$ ($2.18 \times 10^{-38}$), finite-$T$ effects, or an asymptotic transition; naive extrapolation of the $N \le 56$ exponential slope is invalid.
+6. **Dimensionless Log-Ratio $\rho(N)$:** $\rho(N) \equiv -\log \Delta_2(N) / \log R_{\mathrm{spec}}(N)$ decreases from $19.11 \to 7.07$ rather than growing toward $\infty$. However, $\rho(N) > 7.0$ across all tested dimensions, confirming that $\Delta_2 R_{\mathrm{spec}}$ remains separated from unity by $\sim 7$ orders of magnitude on a log scale.
+7. **Clean Operator Norm Scaling:** $\|Q_{\mathrm{even}}\|_{\mathrm{op}} \sim N^{0.2894}$ ($R^2 = 0.9528$) is the cleanest fit. The identity $p_R = p_D + p_Q$ ($6.9457 = 6.6564 + 0.2894$) holds to machine precision, confirming that resolvent divergence is overwhelmingly driven by denominator collapse.
+8. **Dual Core-Size Contrast ($L=10$ vs $L=12$):** At $L=12$ (scattering continuum), $D_{12}(N) \ge 0.3362$ remains macroscopic, keeping $R_{\mathrm{spec}, 12} \approx 16.04 = \mathcal{O}(1)$ and $\Pi_2(L=12) \approx 3.5 \times 10^{-37}$. This confirms denominator collapse is tied to the well-edge mode $E_{11}$ in $L=10$.
+9. **Multi-Doublet Persistence:** Products for $j=0, 1, 2$ remain extraordinarily small ($\Pi_0 \sim 10^{-45}$, $\Pi_1 \sim 10^{-43}$, $\Pi_2 \sim 10^{-33}$), confirming the phenomenon is not isolated to $\Delta_2$.
+10. **Epistemic Classification & Clearance Status:**
+    - Established Numerically: $D_{10} \downarrow 0$, $R_{\mathrm{spec}} \uparrow \infty$, $\Pi_2 \sim 10^{-33}$, $\|Q\| \sim N^{0.29}$, $L=12$ macroscopic denominator, multi-doublet persistence, invariants verified to $10^{-11}$.
+    - Strongly Suggested: $D_{10}(N)$ is subexponential; $\Delta_2(N)$ is rapidly decaying.
+    - Not Established: $D(N) \ge c N^{-p}$ or $D(N) \ge e^{-o(N)}$.
+    - **Formal Status: Gate 1 is NOT yet mathematically cleared.**
+11. **Bridge to Cell 146:** Direct analytical investigation of the weak link: deriving a genuine lower bound on $D(N) \approx E_{11}(N)^2$ from the discrete Galerkin finite-volume boundary quantization condition and phase shift $\delta(E)$, replacing generic Weyl spacing heuristics.
+
+---
+
+# Updated major historical arc (Cells 0–145)
 
 ```
 Cells 0–4
@@ -4462,6 +4488,9 @@ Cell 143 (Gate 1 Continuum Scaling of the Energy-Deficit Spectral Measure)
     ↓
 Cell 144 (Gate 1 Analytical Operator Inequality & Resolvent Gap Reorientation)
     Hard operator regression certified (< 2.6e-11); exact variational deficit lower bound Delta K + Delta W >= 0.841991 certified across 4 trial families; tail-mass enclosure verified; stable subspace kinetic floor Delta K_min ~ 0.084 established; non-collapsing continuum gap route decisively falsified (g_cont collapses 0.041 -> 0.006, R_spec explodes 2.3e3 -> 1.4e5); absolute energy control uncoupled from relative spectral gap; exponential doublet collapse vastly outpaces denominator collapse (Delta_2 ~ 1e-31 -> 3e-38, Delta_2 R_spec ~ 4.2e-33); finite-T sensitivity (5.68%) confirmed; sets up Cell 145 subexponential vs exponential envelope comparison
+    ↓
+Cell 145 (Gate 1 Resolvent Denominator Collapse vs Tunneling Doublet Splitting)
+    Expanded sweep N in [24..80] (50 dps, 615s); regression certified; Gate 1 product collapses by 8 orders (3.2e-25 -> 4.6e-33) despite R_spec exploding (22.5 -> 2.1e5); denominator collapse decelerates (11x drop at N=32->40 vs 14% drop at N=72->80), proving p_D = 6.66 (R^2 = 0.84) is a descriptive transient; doublet decay exponent shifts kappa = 0.82 (N<=56) -> 0.44 (N<=80); product flattens around 4e-33 after N=48; log-ratio rho decreases (19.1 -> 7.1) but remains > 7.0; ||Q||_op ~ N^0.29 (R^2 = 0.95) and p_R === p_D + p_Q confirmed; L=12 control maintains macroscopic D_12 >= 0.336 and R_spec ~ 16; multi-doublets confirmed; Gate 1 declared NOT yet mathematically cleared; isolates gap lower bound D(N) >= e^-o(N) via finite-volume boundary quantization as target for Cell 146
 ```
 
 ---
