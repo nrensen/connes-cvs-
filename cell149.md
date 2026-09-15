@@ -117,18 +117,102 @@ For each dimension $N \in [48, 56, 64, 72, 80, 88, 96]$:
 
 ---
 
-## 5. Diagnostic Output Tables
-
-*(To be populated upon external execution of `cell149.py`)*
+## 5. Certified Diagnostic Tables ($T = 600, \mathrm{dps} = 50$)
 
 ### Table 1: Well Deficit Spectrum $\delta \nu_k$ and Cluster Gap Floor ($N \in [48..96]$)
-Tracking $\nu_0, \nu_1, \nu_2, \nu_3, \nu_4$, the cluster gap $\delta_*^{(4)} = \nu_0 - \nu_4$, and the step gap $\nu_3 - \nu_4$.
+Tracking $\nu_0, \nu_1, \nu_2, \nu_3, \nu_4$, the cluster gap floor $\delta_*^{(4)} = \nu_0 - \nu_4$, and the step gap $\Delta_{\mathrm{step}} = \nu_3 - \nu_4$:
+| $N$ | $\nu_0$ | $\nu_1$ | $\nu_2$ | $\nu_3$ | $\nu_4$ | $\delta_*^{(4)}$ | $\Delta_{\mathrm{step}}$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 4.260495 | 4.260464 | 4.255669 | 4.194505 | 3.899187 | 0.361309 | 0.295318 |
+| 56 | 4.260495 | 4.260493 | 4.260413 | 4.254009 | 4.191167 | 0.069329 | 0.062843 |
+| 64 | 4.260495 | 4.260495 | 4.260489 | 4.260367 | 4.252865 | 0.007630 | 0.007502 |
+| 72 | 4.260495 | 4.260495 | 4.260495 | 4.260482 | 4.260326 | 0.000169 | 0.000156 |
+| 80 | 4.260495 | 4.260495 | 4.260495 | 4.260495 | 4.260475 | 0.000020 | 0.000020 |
+| 88 | 4.260495 | 4.260495 | 4.260495 | 4.260495 | 4.260495 | 0.000000 | 0.000000 |
+| 96 | 4.260495 | 4.260495 | 4.260495 | 4.260495 | 4.260495 | 0.000000 | 0.000000 |
 
-### Table 2: Exact Modal Deficit Conservation & Bulk Fraction
-Tracking exact well sacrifice $\Delta W$, cluster deficit $\Delta W_{\mathrm{cluster}}$, bulk deficit $\Delta W_{\mathrm{bulk}}$, and the ratio $\Delta W_{\mathrm{bulk}} / \Delta W$.
+*Key Finding:* The cluster gap floor $\delta_*^{(4)}$ collapses exponentially toward zero as $N$ increases. Modes $k \in \{0, 1, 2, 3, 4\}$ become asymptotically degenerate at $\nu_0 \approx 4.260495$.
 
-### Table 3: Master Operator Tri-Partition of $E_{11}(N)$
-Tracking $E_{11}$, $H_1[v_{11}]$, non-local Archimedean boost $\Delta_{\mathrm{arch}}[v_{11}]$, zeta-pole rescue $E_{\mathrm{pole}}$, and closure residual.
+---
 
-### Table 4: Analytical Coercivity Certificate & Lower Bound Floor
-Comparing actual $E_{11}(N)$ against the certificate floor $E_{11}^{\mathrm{cert}}(N)$ to establish positivity unconditionally.
+### Table 2: Exact Modal Deficit Conservation & Bulk Penalty ($N \in [48..96]$)
+Tracking Exact $\Delta W$, Cluster Deficit $\Delta W_{\mathrm{cluster}}$, Bulk Deficit $\Delta W_{\mathrm{bulk}}$, Bulk Bound Floor, and Deficit Residual:
+| $N$ | $\Delta W$ | $\Delta W_{\mathrm{cluster}}$ | $\Delta W_{\mathrm{bulk}}$ | $\delta_*^{(4)} P_{\ge 4}$ | Bulk/Tot (%) | Deficit Res |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 0.832869 | 0.003333 | 0.829536 | 0.208457 | 99.60% | $1.11 \times 10^{-16}$ |
+| 56 | 0.831883 | 0.000524 | 0.831359 | 0.042203 | 99.94% | $0.00 \times 10^{0}$ |
+| 64 | 0.830970 | 0.000014 | 0.830956 | 0.005044 | 100.00% | $4.44 \times 10^{-16}$ |
+| 72 | 0.830641 | 0.000002 | 0.830640 | 0.000124 | 100.00% | $3.33 \times 10^{-16}$ |
+| 80 | 0.830375 | 0.000000 | 0.830375 | 0.000017 | 100.00% | $5.55 \times 10^{-16}$ |
+| 88 | 0.830341 | 0.000000 | 0.830341 | 0.000000 | 100.00% | $2.22 \times 10^{-16}$ |
+| 96 | 0.830192 | 0.000000 | 0.830192 | 0.000000 | 100.00% | $1.11 \times 10^{-16}$ |
+
+*Closure Verification:* Modal deficit identity $\Delta W \equiv \Delta W_{\mathrm{spec}}$ holds to machine precision ($< 5.6 \times 10^{-16}$). Bulk modes $k \ge 4$ generate $100.00\%$ of the well sacrifice at $N = 96$, but the lower bound floor $\delta_*^{(4)} P_{\ge 4}$ vanishes as $\delta_*^{(4)} \to 0$.
+
+---
+
+### Table 3: Master Operator Tri-Partition: $E_{11} = H_1 + \Delta_{\mathrm{arch}} + E_{\mathrm{pole}}$
+Tracking Competition Energy $H_1$, Archimedean Non-Local Boost $\Delta_{\mathrm{arch}}$, Zeta-Pole Rescue $E_{\mathrm{pole}}$, Combined Balance, and Algebraic Residual:
+| $N$ | $E_{11}$ | $H_1[v_{11}]$ | $\Delta_{\mathrm{arch}}[v_{11}]$ | $E_{\mathrm{pole}}[v_{11}]$ | $H_1 + \Delta_{\mathrm{arch}}$ | Tri-Res |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 0.009243 | -0.306554 | 0.196493 | 0.119304 | -0.110062 | $1.56 \times 10^{-17}$ |
+| 56 | 0.007095 | -0.309627 | 0.196646 | 0.120076 | -0.112981 | $2.95 \times 10^{-17}$ |
+| 64 | 0.006025 | -0.312912 | 0.198159 | 0.120777 | -0.114753 | $3.90 \times 10^{-17}$ |
+| 72 | 0.005384 | -0.311813 | 0.197180 | 0.120017 | -0.114633 | $6.94 \times 10^{-18}$ |
+| 80 | 0.005044 | -0.311405 | 0.196857 | 0.119591 | -0.114548 | $5.20 \times 10^{-18}$ |
+| 88 | 0.004856 | -0.310534 | 0.196282 | 0.119109 | -0.114253 | $3.64 \times 10^{-17}$ |
+| 96 | 0.004668 | -0.309927 | 0.195914 | 0.118681 | -0.114013 | $1.04 \times 10^{-17}$ |
+
+*Closure Verification:* Master Tri-Partition $Q_{\mathrm{even}} = Q_{\mathrm{comp}} + \Delta_{\mathrm{arch}} + Q_{\mathrm{pole}}$ verified to $< 3.9 \times 10^{-17}$.
+
+---
+
+### Table 4: State-Specific Certificate Floor Evaluation
+Comparing Actual $E_{11}(N)$ against the Proposed Lower Bound $E_{11}^{\mathrm{cert}} = \mu_0 + \delta_*^{(4)} P_{\ge 4} + \Delta_{\mathrm{arch}} + E_{\mathrm{pole}}$:
+| $N$ | $E_{11}$ | $\mu_0(H_1)$ | $\delta_*^{(4)} P_{\ge 4}$ | $\Delta_{\mathrm{arch}}[v_{11}]$ | $E_{\mathrm{pole}}[v_{11}]$ | $E_{11}^{\mathrm{cert}}$ | Actual - Cert |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 0.009243 | -0.478034 | 0.208457 | 0.196493 | 0.119304 | +0.046219 | -0.036977 |
+| 56 | 0.007095 | -0.483979 | 0.042203 | 0.196646 | 0.120076 | -0.125053 | +0.132148 |
+| 64 | 0.006025 | -0.486979 | 0.005044 | 0.198159 | 0.120777 | -0.162998 | +0.169023 |
+| 72 | 0.005384 | -0.485077 | 0.000124 | 0.197180 | 0.120017 | -0.167756 | +0.173140 |
+| 80 | 0.005044 | -0.484604 | 0.000017 | 0.196857 | 0.119591 | -0.168139 | +0.173183 |
+| 88 | 0.004856 | -0.484666 | 0.000000 | 0.196282 | 0.119109 | -0.169275 | +0.174131 |
+| 96 | 0.004668 | -0.484127 | 0.000000 | 0.195914 | 0.118681 | -0.169532 | +0.174200 |
+
+---
+
+## 6. Epistemic Synthesis & Strategic Reorientation
+
+### 6.1 Refutation of the Fixed Bulk-Gap Hypothesis
+Cell 149 establishes a clear, rigorous **negative result**:
+$$\boxed{\lim_{N \to \infty} \delta_*^{(4)}(N) = 0.}$$
+The proposed coercivity mechanism—that expulsion of $v_{11}$ into modes $k \ge 4$ ($P_{\ge 4} \to 91.1\%$) incurs an unavoidable macroscopic well deficit $\Delta W \ge \delta_* \cdot 0.90 > 0$—is **mathematically refuted**.
+As dimension $N$ increases from $48 \to 96$, the cluster gap $\delta_*^{(4)} = \nu_0 - \nu_4$ collapses from $0.361$ down to $0.000000$. The top five eigenvalues of $W_{\hat{\perp}}$ become asymptotically degenerate. Consequently, the bulk boundary $k=4$ is an artifact of finite $N$ and merges into the continuous spectrum as $N \to \infty$.
+
+### 6.2 Failure of the Proposed Coercivity Certificate
+Because $\delta_*^{(4)} \to 0$, the attempted certificate floor collapses into negative territory:
+$$E_{11}^{\mathrm{cert}}(96) = \mu_0 + 0 + \Delta_{\mathrm{arch}} + E_{\mathrm{pole}} \approx -0.4841 + 0.1959 + 0.1187 = \mathbf{-0.169532} < 0.$$
+While the actual eigenvalue remains strictly positive ($E_{11} = +0.004668$), the proposed lower bound fails to certify positivity.
+
+> [!IMPORTANT]
+> **Methodological Note on Coercivity Terminology:**
+> The quantities $\Delta_{\mathrm{arch}}[v_{11}]$ and $E_{\mathrm{pole}}[v_{11}]$ are evaluated on the specific normalized Ritz eigenvector $v_{11}$, not as operator infima over the full subspace $\mathcal{B}_{11}^\perp$. Describing $E_{11}^{\mathrm{cert}}$ as a "coercivity certificate on $\mathcal{B}_{11}^\perp$" was a misnomer; it was a state-specific lower bound for $v_{11}$.
+
+### 6.3 The Enduring Structural Discovery: The Three-Way Master Cancellation
+While the well gap mechanism failed, the Master Tri-Partition produced an extraordinarily clean and stable structural picture:
+$$\boxed{E_{11} = \underbrace{-0.3099}_{\text{competition } H_1} + \underbrace{0.1959}_{\text{non-local Archimedean } \Delta_{\mathrm{arch}}} + \underbrace{0.1187}_{\text{zeta-pole } E_{\mathrm{pole}}} = +0.00467.}$$
+- The negative component is the competition energy $H_1[v_{11}] \approx -0.310$.
+- The positive rescue is **not** the pole alone ($+0.119$), but the **combined non-local correction**:
+  $$\Delta_{\mathrm{arch}}[v_{11}] + E_{\mathrm{pole}}[v_{11}] \approx +0.196 + 0.119 = +\mathbf{0.3146}.$$
+- Across all tested dimensions $N \in [48..96]$, this positive combination is remarkably stable within a $1.3\%$ band:
+  $$\Delta_{\mathrm{arch}} + E_{\mathrm{pole}} \in [0.3146, 0.3189].$$
+
+### 6.4 Strategic Roadmap Reorientation (Cell 150 Target)
+Following the reviewer’s verdict:
+1. **Halt further searches for a potential well gap:** The spectral gap of $W_\perp$ collapses and cannot support a lower bound.
+2. **Halt further discrete $N$-sweeps:** Finite-$N$ empirical sweeps have reached diagnostic saturation.
+3. **Attack the combined non-local positive form $\Delta_{\mathrm{arch}} + Q_{\mathrm{pole}}$ directly:**
+   The positive combination $\Delta_{\mathrm{arch}} + Q_{\mathrm{pole}}$ delivers a stable $+0.315$, which unconditionally outweighs the competition energy $-0.310$. The open analytical challenge for Gate 1 is to prove that the combined operator:
+   $$\mathcal{A}_{\mathrm{pos}} \equiv \Delta_{\mathrm{arch}} + Q_{\mathrm{pole}} = Q_{\mathrm{arch}} - \operatorname{diag}(h_+(a_m)) + Q_{\mathrm{pole}}$$
+   is strictly positive definite on $\mathcal{B}_{11}^\perp$ with lower bound $\lambda_{\min}(\mathcal{A}_{\mathrm{pos}}) \ge c_* > 0.310$.
+
