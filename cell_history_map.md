@@ -4380,7 +4380,38 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–146)
+## Cell 147 (Continuum Threshold Stability Audit, Asymptotic Box Offset Robustness & Variational Lower Bounds)
+
+* **Companion Note:** [`cell147.md`](file:///c:/data/github/connes-cvs-/cell147.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Boundary Quantization & Resolvent Coercivity)
+* **Status:** Certified & Epistemically Calibrated ([`cell147.py`](file:///c:/data/github/connes-cvs-/cell147.py), [`cell147.out`](file:///c:/data/github/connes-cvs-/cell147.out), [`cell147.md`](file:///c:/data/github/connes-cvs-/cell147.md))
+* **Execution Script:** [`cell147.py`](file:///c:/data/github/connes-cvs-/cell147.py) (50-dps verification suite across $N \in [48, 56, 64, 72, 80, 88, 96]$ and $T \in \{600, 800\}$; commit `67fb5d6` / `221ba3c`)
+
+### Key Analytical & Numerical Results Certified
+1. **Pre-Flight Hard Regression Certified ($N=64, T=600$):** Certified operators against Cell 138–146 invariants in 78.77s: $\omega_0 = 2.9315259531$ (residual $6.86 \times 10^{-12}$), $\nu_0 = 4.2604954421$ (residual $6.11 \times 10^{-12}$), and $\mu_0 = -0.4869792197$ (residual $2.54 \times 10^{-11}$).
+2. **Robustness of the Candidate Positive Threshold ($E_\infty \approx 0.003$):**  
+   Audited across $N \in [48..96]$ under Archimedean cutoff variation $T = 600 \to 800$. The fitted offset box intercept $E_{11}(N) \approx E_\infty + C_{\mathrm{box}}/N^2$ exhibits remarkable stability ($R^2 \approx 0.978\text{--}0.980$):
+   $$E_\infty(T=600) = 0.0029002, \qquad E_\infty(T=800) = 0.0030485 \qquad (\text{shift of only } 5.11\%).$$
+   The relative trajectory discrepancy $\delta_T(N) \equiv |E_{11}(800) - E_{11}(600)| / E_{11}(600)$ remains tightly bounded in $5.13\%\text{--}6.03\%$, proving that trajectory shape is preserved under cutoff escalation.
+3. **Local Exponent Descent Below Order One:**  
+   Instantaneous scaling exponents descend from $a_{\mathrm{loc}} \approx 1.71$ down to $0.398$ ($N = 80 \to 88$) and $0.453$ ($N = 88 \to 96$) for $T=600$, and $0.423 \to 0.479$ for $T=800$. While the slight rebound ($0.398 \to 0.453$) precludes claiming monotonic convergence to zero, the effective exponent has dropped from $\mathcal{O}(1)$ to $\sim 0.4\text{--}0.5$, consistent with crossover toward a positive constant offset.
+4. **Variational Rayleigh–Ritz Monotonicity Principle:**  
+   Nested Galerkin subspaces $\mathcal{H}_N \subset \mathcal{H}_{N+1}$ ensure discrete Ritz eigenvalues converge from above: $E_{11}(N) \ge E_\infty$. If $E_\infty > 0$ holds in the continuum, then $E_{11}(N) \ge E_\infty > 0$ unconditionally for all $N$, eliminating the need to prove an asymptotic $N^{-2}$ correction formula. Requires verifying that $E_{11}$ tracks the same spectral branch without branch crossing (supported by Cell 146's stationary 46-node spatial profile).
+5. **Gate 1 Denominator Floor & Product Suppression:**  
+   The resolvent denominator stabilizes at $D_{10}(96) = 2.18 \times 10^{-5}$ ($T=600$) and $2.69 \times 10^{-5}$ ($T=800$), remaining $\approx 2.6\text{--}2.9 \times$ the candidate asymptotic floor $E_\infty^2$. Resolvent growth is bounded by $R_{\mathrm{spec}, 10}(96) \approx 2.61 \times 10^5$.
+6. **Strategic Simplification of Gate 1 Proof Obligations:**  
+   Cell 147 establishes that clearing Gate 1 does not strictly require an exact positive threshold $E_\infty > 0$:
+   - *Route A (Positive Threshold):* $E_\infty > 0 \implies D(N) \ge E_\infty^2 > 0 \implies R_{\mathrm{spec}} = \mathcal{O}(N^{0.29}) \implies \Delta_2 R_{\mathrm{spec}} \to 0$.
+   - *Route B (Polynomial / Subexponential Lower Bound):* Even if $E_\infty = 0$, any weak bound $E_{11}(N) \ge C N^{-a}$ gives $D(N) \gtrsim N^{-2a}$, against which exponential tunneling $\Delta_2(N) \lesssim e^{-\kappa N}$ unconditionally wins.
+7. **Epistemic Classification & Clearance Status:**  
+   - Established Numerically: Trajectory stability across $T \in \{600, 800\}$ up to $N=96$, candidate threshold $E_\infty \approx 0.003$ robust within $5\%$, local exponent descent to $\sim 0.4\text{--}0.5$, $D_{10} / E_\infty^2 \ge 2.59$.
+   - Open Analytical Problem: Constructing an analytic lower bound $E_\infty > 0$ or $E_{11}(N) \ge C N^{-a}$ independent of numerical curve-fitting.
+   - **Formal Status: Gate 1 is NOT yet mathematically cleared.**
+8. **Bridge to Cell 148:** Pivoting from numerical curve-fitting to analytical coercivity of $H_1 = K_{\mathrm{rest}} - W_\perp$, seeking a variational test-function enclosure $\inf_{\|\psi\|=1} \langle \psi, Q_\infty \psi \rangle \ge c_* > 0$ or an algebraic bound $E_{11}(N) \ge C N^{-a}$.
+
+---
+
+# Updated major historical arc (Cells 0–147)
 
 ```
 Cells 0–4
@@ -4520,6 +4551,9 @@ Cell 145 (Gate 1 Resolvent Denominator Collapse vs Tunneling Doublet Splitting)
     ↓
 Cell 146 (Gate 1 Finite-Volume Boundary Quantization, Deceleration & Candidate Positive Threshold)
     Expanded sweep N in [24..80] (50 dps, 358s); pre-flight certified (< 3e-11); local exponent collapses a_loc = 7.97 -> 0.619, p_D = 15.94 -> 1.24, confirming collapse deceleration; naive free-box dispersion ratio refuted (R_disp ~ 0.364 != 1.667); edge state anatomy stable (46 nodes, M_well ~ 77.3%, m* = 26, |psi(L)| falls 2.54 -> 0.52); best fit is offset model E_11 ~ 15.22/N^2 + 0.00246 (R^2 = 0.9874), suggesting positive threshold E_infty > 0 and naturally driving a_loc -> 0; Theorem 146.1 demoted due to Fourier resolution vs box length category gap; Gate 1 NOT yet cleared; sets up Cell 147 robustness test across N in [48..96] and T in {600, 800}
+    ↓
+Cell 147 (Gate 1 Continuum Threshold Stability Audit & Asymptotic Box Offset Robustness)
+    High-N dual-T sweep across N in [48..96] and T in {600, 800} (50 dps, 119s); pre-flight certified (< 2.6e-11); candidate threshold robust within 5.1% under 33% cutoff escalation (E_infty = 0.00290 at T=600 vs 0.00305 at T=800, R^2 ~ 0.978-0.980); trajectory shape preserved (delta_T in [5.1%, 6.0%]); local exponent descends to ~ 0.40-0.48, consistent with crossover toward positive offset; Rayleigh-Ritz min-max monotonicity establishes E_11(N) >= E_infty > 0 for all N under spectral branch stability; D_10(N) stabilizes above 2.18e-5 (> 2.59 * E_infty^2); Gate 1 proof obligation simplified to either Route A (positive threshold E_infty > 0) or Route B (polynomial bound E_11 >= C N^-a); Gate 1 declared NOT yet mathematically cleared; sets up Cell 148 analytical coercivity on H_1 = K_rest - W_perp
 ```
 
 ---
