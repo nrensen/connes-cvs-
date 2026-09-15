@@ -675,8 +675,8 @@ def run_cell146_suite():
     print("SYNTHESIS & KEY OBSERVATIONS:")
     print(f"  1. Local Exponent Deceleration: a_loc drops from {mp.nstr(table1_data[0]['a_loc'], 4)} down to {mp.nstr(table1_data[-1]['a_loc'], 4)}.")
     print(f"  2. Denominator Collapse Deceleration: p_D_loc slows from {mp.nstr(table1_data[0]['p_D_loc'], 4)} down to {mp.nstr(table1_data[-1]['p_D_loc'], 4)}.")
-    print(f"  3. Asymptotic Exponent: For N >= 48, E_11 scales as N^{-mp.nstr(a_fit, 4)}, bounding D(N) >= Omega(N^{-mp.nstr(2*a_fit, 4)}).")
-    print(f"  4. Gate 1 Implication: Because D(N) collapses at most as N^{-mp.nstr(2*a_fit, 4)}, exponential doublet decay")
+    print(f"  3. Asymptotic Exponent: For N >= 48, E_11 scales as N^{mp.nstr(-a_fit, 4)}, bounding D(N) >= Omega(N^{mp.nstr(-2*a_fit, 4)}).")
+    print(f"  4. Gate 1 Implication: Because D(N) collapses at most as N^{mp.nstr(-2*a_fit, 4)}, exponential doublet decay")
     print(f"     Delta_2(N) ~ e^{{-kappa N}} dominates resolvent divergence unconditionally.")
     print("=" * 80)
 
