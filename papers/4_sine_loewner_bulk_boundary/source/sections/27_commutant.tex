@@ -1,0 +1,78 @@
+\section{A scalar differential commutator obstruction}
+\label{boundary:app:commutator}
+
+The scalar second-order differential route available for several
+classical Hankel kernels does not apply to the present physical
+half-line kernel.  The following obstruction is an interior identity;
+it is independent of endpoint-domain choices.
+
+\begin{proposition}[No smooth scalar second-order formal commutant]
+\label{boundary:prop:no-second-order}
+Let $I=(a,\infty)$, $p\in C^1(I)$, $q\in C(I)$, and
+$\mathcal L u=-(pu')'+qu$.  If
+\[
+ (\mathcal L_x-\mathcal L_y)
+ \frac{\sin x-\sin y}{x-y}=0
+ \qquad(x,y\in I,\ x\ne y),
+\]
+then $p=0$ and $q$ is constant.  The coefficients may be complex.
+\end{proposition}
+\begin{proof}
+Put $d=x-y$ and $\Delta=\sin x-\sin y$.  Direct differentiation gives
+\begin{align*}
+ d^3(\mathcal L_x-\mathcal L_y)\frac{\Delta}{d}
+ ={}&d^2[p(x)\sin x+p(y)\sin y-p'(x)\cos x-p'(y)\cos y]\\
+ &+2d[p(x)\cos x-p(y)\cos y]\\
+ &+\{d^2[q(x)-q(y)]+d[p'(x)+p'(y)]-2[p(x)-p(y)]\}\Delta.
+\end{align*}
+Choose $s=\pi/2+n\pi>a+\pi$ and set $x=s+t$, $y=s-t$,
+$|t|<s-a$.  Then $\Delta=0$.  With
+$P_s(t)=p(s+t)+p(s-t)$, the displayed identity reduces to
+\[
+ \sin t\,P_s'(t)+(\cos t-\sin t/t)P_s(t)=0,
+ \qquad
+ \left(\frac{\sin t}{t}P_s(t)\right)'=0.
+\]
+The second equation extends through zero by continuity.  Its constant
+is $2p(s)$, while evaluation at $t=\pi$ makes that constant zero.
+Thus $p$ is odd about every such center $s$.
+For any $x>a$, choose $s$ sufficiently large and compose reflection
+about $s$ with reflection about $s+\pi$.  Both reflected points stay
+in $I$, and the two sign changes give $p(x+2\pi)=p(x)$.
+The same periodicity holds for $p'$.
+
+Now take $y=x+2\pi$ in the original differentiated identity.
+It gives $p(x)\sin x-p'(x)\cos x=0$, or $(p(x)\cos x)'=0$.
+The constant vanishes at a zero of cosine, so $p=0$ everywhere by
+continuity.  The remaining equation is
+$(q(x)-q(y))(\sin x-\sin y)=0$.  It makes $q$ constant; when two
+sine values coincide, use a third point with a different sine value.
+\end{proof}
+
+The unitary change $x=2\pi X$ turns the physical kernel into a constant
+multiple of the displayed one.  A commuting realization whose identity
+includes compactly supported smooth test functions must satisfy this
+formal interior equation, by integration by parts.  The proposition
+excludes that smooth scalar second-order class.  It does not exclude
+higher-order, matrix, nonlocal, or interior-singular differential models.
+
+\begin{corollary}[Polynomial expressions on a finite interval]
+\label{T10:prop:nocommute}
+Let $\tau>0$, $D=d/dx$, and $p,q,s$ be real polynomials. If
+$L=DpD+q+\tfrac i2(sD+Ds)$ satisfies
+\begin{equation}\label{eshort:commute}
+ (L^x-\overline L^{\,y})K_\tau(x,y)=0\qquad(-1<x,y<1),
+\end{equation}
+then $p=s=0$ and $q$ is constant.
+\end{corollary}
+\begin{proof}
+The real part of the identity analytically continues to all real
+$x,y$: the divided difference has removable diagonal and is entire.
+Rescale by $2\pi\tau$ and apply Proposition~\ref{boundary:prop:no-second-order}
+on a half-line, with the sign of $p$ reversed, to obtain $p=0$ and
+constant $q$. The imaginary part on the diagonal is
+$(s(x)\cos(2\pi\tau x))'=0$. Its constant vanishes at the zeros of
+cosine, so $s=0$.
+\end{proof}
+
+

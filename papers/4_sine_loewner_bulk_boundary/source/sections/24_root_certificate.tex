@@ -1,0 +1,365 @@
+\section{Proof of the certified root enclosure}
+\label{boundary:app:step-parametrix:rr}
+
+\subsection{A full-space residual and the existence witness}
+\label{v12:sec:gap-certificate}
+
+Let $u\in L^2(-1,1)$, let $\widetilde u$ be its extension by zero, and
+let $\mathcal H$ be the full-line Hilbert transform with kernel
+$[\pi(x-y)]^{-1}$.  Put
+\[
+ q_u=\langle u,Q_0u\rangle,\qquad
+ c_u=\operatorname{Re}\langle Q_0u,Ju\rangle.
+\]
+Choose any finite orthonormal family $e_j$ supported outside $(-1,1)$
+and set $E_u=\sum_j|\langle e_j,\mathcal H\widetilde u\rangle|^2$.
+For real $a$, Hilbert-transform isometry and Bessel's inequality give
+\begin{equation}\label{v12:eq:outside-residual-certificate}
+ \|(Q_0-aJ)u\|^2
+ \le q_u-\tfrac14E_u-2ac_u+a^2\|u\|^2=:U_u(a).
+\end{equation}
+Indeed $Q_0=(I+iH)/2$, $H^*=-H$, and
+$\|\mathcal H\widetilde u\|^2=\|u\|^2$, so
+\[
+ \|Q_0u\|^2=q_u-\tfrac14
+       \|\mathbf1_{\mathbb R\setminus(-1,1)}\mathcal H\widetilde u\|^2.
+\]
+For $q_u>0$ let $f=V_0u$, where $V_0$ is the restriction of inverse
+Fourier transformation to $(0,\infty)$.  Then $\|f\|^2=q_u$ and
+\[
+ (B_0-a)f=V_0J(Q_0-aJ)u,
+ \qquad
+ \operatorname{dist}(a,\operatorname{spec}B_0)
+       \le\sqrt{U_u(a)/q_u}.
+\]
+Here the norm of $V_0J$ is at most one.  Thus an interval containing
+$[a-\sqrt{U_u(a)/q_u},a+\sqrt{U_u(a)/q_u}]$ and lying in an open
+central gap contains a discrete physical eigenvalue.
+
+Take $u$ constant on cells in a $J$-invariant partition and the $e_j$
+to be normalized indicators of disjoint exterior cells. The Hilbert
+cell formula \eqref{rr:eq:double-cell-logarithms} evaluates $q_u,c_u,E_u$
+exactly, including principal values. Omitting the other exterior modes
+preserves the upper-bound direction; no tail quadrature is required.
+
+\begin{proof}[Existence in Theorem~\ref{boundary:thm:negative-exclusion:rr}]
+The exact rational trial data in \texttt{anc/boundary\_gap\_witness.json}
+specify a partition of $(0,1)$, its exact translate by $-1$, complex
+coefficients on the resulting 512 normalized indicator functions,
+and disjoint exterior indicator functions. Write $u_0$ for this trial.
+Its common positive parameter is
+\begin{equation}\label{rr:eq:positive-trial}
+ a_0=\frac{3750237663924847}{9007199254740992}.
+\end{equation}
+The independent checker \texttt{anc/verify\_boundary\_gap\_certificate.py}
+evaluates the displayed double-cell logarithmic integrals with
+outward-rounded Arb ball arithmetic \cite{Johansson2017}.
+At both 192 and 256 bits it verifies
+the strict rational bounds
+\[
+ 0.41635<a_0<0.41637,\qquad q_{u_0}>0.32783,\qquad
+ 0<U_{u_0}(a_0)<0.000038641,
+\]
+and directly verifies $\sqrt{U_{u_0}(a_0)/q_{u_0}}<0.01086$.
+All inputs are exact rationals and all rounding errors are enclosed;
+no eigenvalue solver or quadrature estimate enters this check.
+Thus the residual interval lies strictly inside $(0.405,0.428)$,
+which is contained in $(0,g)$.  Equation
+\eqref{v12:eq:outside-residual-certificate} and the spectral theorem
+force a spectral point there.  The reference gap makes it a discrete
+eigenvalue, and Theorem~\ref{boundary:thm:one-cell-flow} makes it simple.
+\end{proof}
+
+
+\subsection{The negative-window model}
+
+We prove the exclusion at a single frequency parameter and then use a
+resolvent bound.  Put
+\[
+ a=-\frac{833}{2000},\qquad P_a=Q_0-aJ,
+ \qquad c_0=\frac\pi2,
+ \qquad
+ \chi(t)=\begin{cases}\cos(c_0t),&0\le t\le1,\\0,&t>1.\end{cases}
+\]
+Identify $L^2(-1,1)$ with $L^2((0,1);\mathbb C^2)$ by
+$f_1(t)=u(t)$, $f_2(t)=u(t-1)$.  On four copies of $L^2(0,\infty)$
+retain the endpoint model $Q_e,J_e,M_a=Q_e-aJ_e$ of
+Section~\ref{v12:app:mellin-proofs}, at phase zero.  Define
+\[
+ Ef(t)=\chi(t)(f_1(t),f_2(t),f_1(1-t),f_2(1-t))^T
+\]
+with zero extension outside $(0,1)$.  Since
+$\chi(t)^2+\chi(1-t)^2=1$, one has $E^*E=I$.  In particular no
+interior model is needed for this partition.
+
+\subsection{The exact model and the residual criterion}
+
+The intertwining error is $\Delta=EQ_0-Q_eE$.  For later use set
+\[
+ D_0(t,s)=\frac{\chi(t)-\chi(s)}{t-s},\qquad
+ D_1(t,s)=\frac{\chi(t)-\chi(s)}{t+s},\qquad
+ D_2(t,s)=\begin{cases}\dfrac{\chi(t)}{1-t+s},&t<1,\\0,&t\ge1.
+ \end{cases}
+\]
+For $t>0$, $0<s<1$, its complete kernel is
+\begin{equation}\label{rr:eq:cosine-defect}
+ \Delta(t,s)=\frac{i}{2\pi}
+ \begin{pmatrix}
+ D_0(t,s)&D_1(t,1-s)\\
+ -D_2(t,s)&D_0(t,s)\\
+ -D_0(t,1-s)&D_2(t,1-s)\\
+ -D_1(t,s)&-D_0(t,1-s)
+ \end{pmatrix}.
+\end{equation}
+Divided differences take their continuous diagonal values.  The unmatched
+corner quotients are bounded because $\chi(t)=\sin(c_0(1-t))$ near one.
+The entries are bounded on bounded rectangles and are $O(t^{-1})$ at
+infinity.  Thus $\Delta\in\mathfrak S_2$.  The Lipschitz cutoff suffices
+for this assertion and the intertwining identity; no differentiated
+endpoint expansion is used here.
+
+At the single parameter $a$ the model satisfies
+\begin{equation}\label{rr:eq:model-inverse-bound}
+ \|M_a^{-1}\|\le5.
+\end{equation}
+Here is an elementary verification of the constant.  Write $p=a^2$,
+$d=qr\in[0,1/4]$, and let $m$ be the matrix in
+\eqref{v12:eq:endpoint-symbol}.  For $w=z(z-1)$, direct expansion gives
+\[
+ \det(m-zI)=w^2-2pw+p^2-p+d(w+2p).
+\]
+Since $4/25<p<19/100$, this determinant at $z=1/5$ is at most
+$p^2-9p/50-9/625\le-71/10000$, and at $z=-1/5$ it is at most
+$p^2-49p/50+147/1250\le-31/10000$.
+At $q=0$ the eigenvalues are $-|a|,|a|,1-|a|,1+|a|$.
+Exactly one is below each of $-1/5$ and $1/5$.
+Continuity as $q$ ranges over $[0,1]$ shows that no eigenvalue enters
+$[-1/5,1/5]$, proving \eqref{rr:eq:model-inverse-bound}.
+
+Let $C_\infty$ denote the Carleman operator with kernel
+$[\pi(t+s)]^{-1}$.  The $(1,4)$ block of $Q_e$ is an orthogonal
+projection: its multiplier has diagonal entries $q,r$, off-diagonal
+entries $ic,-ic$, and $q+r=1$, $c^2=qr$.
+The two singleton channels satisfy $q^2=q-c^2$, $r^2=r-c^2$.
+Since $2c$ is the multiplier of $C_\infty$, one obtains the exact identity
+\begin{equation}\label{rr:eq:model-square}
+ Q_e^2=Q_e-\tfrac14\operatorname{diag}
+                    (0,C_\infty^2,C_\infty^2,0).
+\end{equation}
+
+Choose any finite step-function projection $\Pi$ on $L^2(0,\infty)$,
+and any source step-function projection $\Pi_s$ on $L^2(0,1)$.
+Let $W,D:L^2((0,1);\mathbb C^2)\to
+L^2((0,\infty);\mathbb C^4)$ vanish on
+$(\Pi_s\otimes I_2)^\perp$ and have their outputs in
+$\Pi\otimes\mathbb C^4$.  Put
+$Q_\Pi=(\Pi\otimes I_4)Q_e(\Pi\otimes I_4)$ and
+$C_\Pi=\Pi C_\infty\Pi$.
+All inner products below are Hilbert--Schmidt inner products.  Define
+\begin{align}
+ \mathcal R(W,D)^2={}&
+ \langle W,Q_\Pi W\rangle
+ -\tfrac14\bigl(\|C_\Pi W_2\|_2^2+\|C_\Pi W_3\|_2^2\bigr)
+ -2a\operatorname{Re}\langle Q_\Pi W,J_eW\rangle
+ +a^2\|W\|_2^2\nonumber\\
+ &-2\operatorname{Re}\langle(Q_\Pi-aJ_e)W,D\rangle+\|D\|_2^2.
+ \label{rr:eq:residual-quadratic}
+\end{align}
+Then
+\begin{equation}\label{rr:eq:full-model-residual}
+ \|M_aW-D\|_2^2\le\mathcal R(W,D)^2.
+\end{equation}
+Indeed \eqref{rr:eq:model-square} gives the first line of
+\eqref{rr:eq:residual-quadratic} with the full Carleman norms.
+Their finite orthogonal projections have smaller norm and enter with
+a minus sign.  Every other term is exact after compression, since
+$J_e$ preserves the step space and both $W$ and $D$ take values there.
+Expanding the squared residual proves
+\eqref{rr:eq:full-model-residual}.
+
+The intertwining identity now yields
+\[
+ S_aP_a=I+K_a,\qquad
+ S_a=E^*M_a^{-1}E,\qquad K_a=E^*M_a^{-1}\Delta,
+ \qquad \|S_a\|\le5.
+\]
+For every such trial $W,D$, the full correction therefore obeys
+\begin{equation}\label{rr:eq:certificate-budget}
+ \|K_a\|\le\|E^*W\|_2+
+                5\bigl(\mathcal R(W,D)+\|\Delta-D\|_2\bigr).
+\end{equation}
+This follows by subtracting $E^*W$ and using
+$M_a^{-1}\Delta-W=M_a^{-1}(\Delta-D+D-M_aW)$.
+The source complement is included in $\Delta-D$.
+
+\subsection{Exact finite quantities}
+
+All finite matrices use normalized cell indicators.  For cells
+$(a_i,b_i)$ of length $h_i$, write $F(x)=x\log|x|$, $F(0)=0$.
+The Hilbert and Carleman matrices are
+\begin{align}
+ H_{ij}&=\frac{F(b_i-a_j)-F(a_i-a_j)-F(b_i-b_j)+F(a_i-b_j)}
+                   {\pi\sqrt{h_i h_j}},\nonumber\\
+ C_{ij}&=\frac{F(b_i+b_j)-F(a_i+b_j)-F(b_i+a_j)+F(a_i+a_j)}
+                   {\pi\sqrt{h_i h_j}}.
+ \label{rr:eq:double-cell-logarithms}
+\end{align}
+Since $F''(x)=1/x$ off zero, twice integrating gives these formulas;
+the Hilbert diagonal is zero in principal value. The Hilbert formula
+also applies to the interior and exterior cells in the existence test.
+With the channel structure of $Q_e$ and exchanges $(1,2),(3,4)$,
+these matrices evaluate \eqref{rr:eq:residual-quadratic} exactly.
+
+The projected trial norm is equally explicit.  Suppose the source
+partition $I_i=(s_i,s_{i+1})$ is reflection symmetric and is also the
+initial part of the model partition on $(0,1)$.  Let $v_{j,i}$ be the
+constant row vector of $W_j$ on $I_i$, and let $i^*$ index its reflected
+cell.  These row vectors are obtained by dividing normalized model-cell
+coefficients by $\sqrt{|I_i|}$.  Then
+\begin{equation}\label{rr:eq:projected-trial-norm}
+ \|E^*W\|_2^2=\sum_i\sum_{j=1}^2
+ \left[A_i\|v_{j,i}\|^2+B_i\|v_{j+2,i^*}\|^2
+       +2C_i\operatorname{Re}\langle v_{j,i},v_{j+2,i^*}\rangle\right],
+\end{equation}
+where, with $h_i=s_{i+1}-s_i$,
+\[
+ A_i=\frac{h_i}{2}+\frac{\sin(\pi s_{i+1})-\sin(\pi s_i)}{2\pi},
+ \quad B_i=h_i-A_i,
+ \quad C_i=\frac{\cos(\pi s_i)-\cos(\pi s_{i+1})}{2\pi}.
+\]
+They are the integrals of $\chi^2$, $\chi(1-t)^2$ and
+$\chi(t)\chi(1-t)$ on the cell, respectively.
+
+\subsection{A global midpoint error bound}
+
+Take $D$ to be the exact midpoint step kernel of
+\eqref{rr:eq:cosine-defect} on $(0,T)\times(0,1)$, zero for $t>T$.
+The output partition includes one as an endpoint; the source partition
+is exactly reflection symmetric.  For a scalar kernel with derivative
+bounds $A,B$ on a rectangle of widths $h,k$, its squared midpoint error
+is at most
+\begin{equation}\label{rr:eq:midpoint-cell-bound}
+ \mathcal E(h,k;A,B)
+   =hk\left(\frac{A^2h^2+B^2k^2}{12}+\frac{ABhk}{8}\right).
+\end{equation}
+To verify this, bound the pointwise error by
+$A|t-t_0|+B|s-s_0|$ and integrate its square over the rectangle.
+
+The following bounds specify every cell.  For $t<1$, both derivatives
+of $D_0$ are bounded by $c_0^2/2$, by the divided-difference integral
+and $|\chi''|\le c_0^2$.  Both derivatives of $D_1$ are bounded by
+$3c_0^2/2$: use
+$|\chi'(t)|\le c_0^2t$ and
+$|\chi(t)-\chi(s)|\le c_0^2|t^2-s^2|/2$ in the differentiated quotient.
+For an output cell above one with lower endpoint $t_-$, and source
+lower endpoint $s_-$, put $d=t_-+s_-$.  Since
+$D_1=-\chi(s)/(t+s)$ there, its derivative bounds are
+\[
+ |\partial_tD_1|\le d^{-2},\qquad
+ |\partial_sD_1|\le c_0d^{-1}+d^{-2}.
+\]
+
+The remaining nonzero kernels reduce, up to a sign, to
+$f(\alpha,\beta)=\sin(c_0\alpha)/(\alpha+\beta)$,
+$0\le\alpha\le1$, $\beta\ge0$.
+For $D_2$ below one take $(\alpha,\beta)=(1-t,s)$; for $D_0$ above
+one take $(\alpha,\beta)=(1-s,t-1)$.
+On $[\alpha_-,\alpha_+]\times[\beta_-,\beta_+]$ with
+$d=\alpha_-+\beta_->0$, valid bounds are
+\begin{equation}\label{rr:eq:corner-derivative-bounds}
+ A_\alpha=\frac{c_0\beta_++c_0^3\alpha_+^3/3}{d^2},
+ \qquad A_\beta=\frac{c_0\alpha_+}{d^2}.
+\end{equation}
+Indeed $|x\cos x-\sin x|\le x^3/3$, by integration of $-x\sin x$.
+This proves the first bound after differentiating $f$; the second
+uses $|\sin x|\le x$.  Assign these bounds to $t,s$ in the displayed
+coordinate order.  When $d=0$, use instead the squared error bound
+$c_0^2$ times the cell area, since both $f$ and its midpoint value
+lie in $[0,c_0]$.  This handles the corner cells without asserting a
+global square-integrable first derivative.  Above one, $D_2$ vanishes.
+
+Let $E_j$ be the sum of these squared cell bounds for $D_j$.
+The multiplicities in \eqref{rr:eq:cosine-defect} give the finite error
+$(4E_0+2E_1+2E_2)/(4\pi^2)$.
+The complete omitted output tail satisfies
+\begin{align}
+ \|\mathbf1_{(T,\infty)}\Delta\|_2^2
+ &=\frac1{4\pi^2}\int_0^1\chi(s)^2
+                     \left(\frac4{T-s}+\frac2{T+s}\right)ds\nonumber\\
+ &\le\frac1{8\pi^2}\left(\frac4{T-1}+\frac2T\right),
+ \label{rr:eq:global-defect-tail}
+\end{align}
+using $\int_0^1\chi(s)^2ds=1/2$.
+Finite and tail squared errors add on disjoint output supports.
+These inequalities provide a global bound for $\|\Delta-D\|_2$.
+
+\subsection{Exact witness and rational verification gates}
+
+The source grid has 48 cells and is specified by
+\[
+ s_j=\frac{j^4}{2\cdot24^4}\quad(0\le j\le24),\qquad
+ s_{48-j}=1-s_j.
+\]
+The model grid is the sorted union of
+\[
+ \{s_j:0\le j\le48\},\quad
+ \{1+s_j:1\le j\le48\},\quad
+ \{2^k(1+\ell/6):1\le k\le39,\ 1\le\ell\le6\}.
+\]
+It has 330 cells and ends at $T=2^{40}$.
+The file \texttt{step\_parametrix\_witness.json} specifies a
+$1320\times96$ matrix $W$, whose real and imaginary coefficients are
+integers divided by $2^{48}$ in the normalized cell bases.
+Its SHA-256 digest begins \texttt{2b5d1dca6fbcdf3a}; the full digest is
+recorded with the checker output.  The choice of trial is immaterial to
+the proof once these exact coefficients are fixed.
+
+The accompanying negative-window checker and its global-error helper
+evaluate the preceding expressions with outward-rounded Arb arithmetic
+\cite{Johansson2017}; their filenames and execution instructions are
+listed in \texttt{anc/README.md}.
+For \eqref{rr:eq:midpoint-cell-bound}--\eqref{rr:eq:global-defect-tail}
+it uses the rational upper bounds $c_0<11/7$,
+$1/(4\pi^2)<1/36$ and $1/(8\pi^2)<1/72$.
+Midpoint defect values are enclosed directly, so $D$ has no separate
+saved-coefficient rounding error.  All primitive arguments in
+\eqref{rr:eq:double-cell-logarithms} are formed as exact rationals
+before conversion; a zero argument uses $F(0)=0$.
+
+At both 128 and 192 bits, the checker verifies the strict rational gates
+\begin{equation}\label{rr:eq:rational-certificate-gates}
+ \|E^*W\|_2<\frac{27}{100},\qquad
+ \mathcal R(W,D)<\frac9{500},\qquad
+ \|\Delta-D\|_2<\frac{37}{1000}.
+\end{equation}
+No eigenvalue solve, Fourier truncation, or numerical quadrature enters
+this verification.  The gates and \eqref{rr:eq:certificate-budget} give
+\[
+ \|K_a\|<\frac{27}{100}
+          +5\left(\frac9{500}+\frac{37}{1000}\right)
+       =\frac{109}{200}<\frac35.
+\]
+
+\begin{proof}[Exclusion and uniqueness in Theorem~\ref{boundary:thm:negative-exclusion:rr}]
+The Neumann series makes $I+K_a$ invertible.  Since $S_aP_a=I+K_a$
+and $\|S_a\|\le5$, the self-adjoint pencil $P_a$ is bounded below
+by a constant strictly greater than $2/25$.  Its range is closed and
+its orthogonal complement is its zero kernel, so it is onto and
+\[
+ \|P_a^{-1}\|<\frac{25}{2}.
+\]
+For real $\lambda$ with $|\lambda-a|\le3/50$,
+$\|P_\lambda-P_a\|=|\lambda-a|$ and the inverse Neumann product is
+strictly below $3/4$.  Thus every $P_\lambda$ on
+$[-953/2000,-713/2000]$ is invertible.  The exact frequency
+correspondence of Proposition~\ref{v12:prop:frequency-pencil} excludes
+physical spectrum there.
+
+The existence argument above supplies a
+positive eigenvalue in $(81/200,107/250)$.  If another positive boundary
+level lay in $[713/2000,953/2000]$, the signed alternation of
+Corollary~\ref{interaction:cor:boundary-alternation} would put a negative
+gap magnitude strictly between them, contradicting the exclusion.
+The eigenvalue is simple by Theorem~\ref{boundary:thm:one-cell-flow}.
+\end{proof}
+

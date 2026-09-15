@@ -1,0 +1,648 @@
+\section{Finite onset, endpoint packets and concentration}
+\label{sec:packets}\label{sec:thirdregime}
+
+We retain the matrix, Fourier and parity conventions of
+Section~\ref{sec:matrix}. The following results describe the individual
+edges and eigenvectors, in addition to the trace laws.
+
+\begin{theorem}[Onset and the four small-scale edges]
+\label{thm:signed-bounds}\label{cor:sharp}
+Put $a=\min\{1,(4\tau)^{-1}\}$,
+$p_\tau=16a\tau/\pi^2$ and $m_\tau=128a^3\tau^3/(3\pi^2)$.
+For every $\tau>0$,
+\begin{equation}\label{eq:3.7}
+ \lambda_+^+(\tau)\ge p_\tau>0,\qquad
+ \lambda_-^-(\tau)\le-m_\tau<0.
+\end{equation}
+If $\varepsilon=\tau/N$ and
+$N>2\tau$, $\nu_N=(2\tau+8\pi\tau^2)/N<\min(p_\tau,m_\tau)$, then
+$\lambda_{N,+}^+\ge p_\tau-\nu_N>0$ and
+$\lambda_{N,-}^-\le-m_\tau+\nu_N<0$.
+For arbitrary $0<\varepsilon_N<1/2$, the three regimes are
+\begin{equation}\label{eq:v6:5.6}
+\begin{array}{c|c}
+N\varepsilon_N\longrightarrow0&\|A_N(\varepsilon_N)\|\longrightarrow0\\
+N\varepsilon_N\longrightarrow\tau\in(0,\infty)&
+ \widetilde A_{N,N\varepsilon_N}\longrightarrow\mathcal K_\tau
+ \text{ in norm}\\
+N\varepsilon_N\longrightarrow\infty&
+ \lambda_{N,p}^{\pm}(\varepsilon_N)\longrightarrow\pm1
+ \quad(p=\pm1).
+\end{array}
+\end{equation}
+The middle regime transfers every isolated nonzero parity spectral
+cluster. In the last regime $\varepsilon_N$ need not converge.
+As $\tau\downarrow0$, the four continuum edges satisfy
+\begin{align}
+\lambda_+^+&=4\tau-\frac{16\pi^2}{9}\tau^3+
+ \frac{872\pi^4}{2025}\tau^5+O(\tau^7),&
+\lambda_+^-&=-\frac{224\pi^4}{2025}\tau^5+O(\tau^7),
+\label{eq:small-even}\\
+\lambda_-^-&=-\frac{8\pi^2}{9}\tau^3+
+ \frac{16\pi^4}{75}\tau^5-\frac{6352\pi^6}{275625}\tau^7+O(\tau^9),&
+\lambda_-^+&=\frac{352\pi^6}{275625}\tau^7+O(\tau^9).
+\label{eq:small-odd}
+\end{align}
+All other even eigenvalues are $O(\tau^7)$ and all other odd eigenvalues
+are $O(\tau^9)$. The displayed edges are simple for sufficiently small
+$\tau$, when $F_+=\lambda_+^+$ and $F_-=-\lambda_-^-$.
+\end{theorem}
+\begin{proof}
+For real even $f$, the exchange identity gives
+$\langle f,\mathcal K_\tau f\rangle
+=2\int_0^\tau C_f(s)C_f(\tau-s)\,ds$, where
+$C_f(s)=\int f(x)\cos(2\pi sx)\,dx$; for odd $f$ it gives the negative
+of the same expression with $S_f(s)=\int f(x)\sin(2\pi sx)\,dx$.
+Test $e_a=(2a)^{-1/2}\mathbf1_{[-a,a]}$ and
+$o_a=\operatorname{sgn}(x)e_a$. Their transforms are
+\[
+ C_{e_a}(s)=\frac{\sin(2\pi as)}{\pi s\sqrt{2a}}
+ \ge\frac{2\sqrt{2a}}\pi,\qquad
+ S_{o_a}(s)=\frac{1-\cos(2\pi as)}{\pi s\sqrt{2a}}
+ \ge\frac{8\sqrt2\,a^{3/2}s}\pi .
+\]
+Here $0\le2\pi as\le\pi/2$, and the inequalities follow from
+$\sin z\ge2z/\pi$ and $1-\cos z\ge4z^2/\pi^2$ on that interval.
+Integration and minimax prove \eqref{eq:3.7}; Theorem~\ref{thm:nystrom}
+gives the finite certificate and first two regimes, using
+$\|\mathcal K_\tau\|\le4\tau$ for norm collapse. The last regime
+follows from the concentration bounds proved below.
+
+For the expansions put
+$\beta_k=(-1)^k(2\pi\tau)^{2k+1}/[\pi(2k+1)!]$.
+The even and odd kernels are respectively
+$\sum_{i,l\ge0}\beta_{i+l}x^{2i}y^{2l}$ and
+$\sum_{i,l\ge0}\beta_{i+l+1}x^{2i+1}y^{2l+1}$; absolute uniform
+convergence follows from
+$\sum_k(2k+1)|\beta_k|=2\tau\cosh(2\pi\tau)$.
+Truncation at $i+l\le2$ has matrix $C_rG_r$, $r=0,1$, with
+\[
+C_r=\begin{pmatrix}\beta_r&\beta_{r+1}&\beta_{r+2}\\
+\beta_{r+1}&\beta_{r+2}&0\\ \beta_{r+2}&0&0\end{pmatrix},
+\qquad (G_r)_{il}=\frac2{2i+2l+2r+1}\quad(0\le i,l\le2).
+\]
+These matrices are similar to self-adjoint matrices
+$G_r^{1/2}C_rG_r^{1/2}$. With $u=2\pi\tau$, the even kernel tail is
+at most $2\tau u\sum_{j\ge0}u^{2j+5}/(2j+5)!
+\le\tau u^6\cosh u/60$; the odd tail uses $7!$ instead of $5!$.
+Twice the kernel bounds therefore give
+\begin{equation}\label{eq:small-tail}
+\|\mathcal K_\tau|_{\mathcal H_+}-T_0\|
+\le\frac{32\pi^6}{15}\tau^7\cosh(2\pi\tau),\qquad
+\|\mathcal K_\tau|_{\mathcal H_-}-T_1\|
+\le\frac{64\pi^8}{315}\tau^9\cosh(2\pi\tau).
+\end{equation}
+For $r=0,1$, the coefficients of $z^3-e_1z^2+e_2z-e_3$ are
+\begin{align*}
+e_{1,0}&=4\tau-\frac{16\pi^2}9\tau^3+\frac{8\pi^4}{25}\tau^5,&
+e_{2,0}&=-\frac{896\pi^4}{2025}\tau^6+O(\tau^8),\\
+e_{1,1}&=-\frac{8\pi^2}9\tau^3+\frac{16\pi^4}{75}\tau^5
+-\frac{16\pi^6}{735}\tau^7,&
+e_{2,1}&=-\frac{2816\pi^8}{2480625}\tau^{10}+O(\tau^{12}),
+\end{align*}
+with $e_{3,0}=O(\tau^{15})$ and $e_{3,1}=O(\tau^{21})$.
+The leading rank-one part gives one root
+$z=4\tau+O(\tau^3)$ for $r=0$, respectively
+$z=-8\pi^2\tau^3/9+O(\tau^5)$ for $r=1$.
+The identity $z=e_1-e_2/z+e_3/z^2$ gives the two dominant expansions.
+The remaining roots have sums
+$-224\pi^4\tau^5/2025+O(\tau^7)$ and
+$352\pi^6\tau^7/275625+O(\tau^9)$, and products $O(\tau^{14})$
+and $O(\tau^{18})$, respectively. The quadratic formula gives the
+other displayed edges and residual roots $O(\tau^9),O(\tau^{11})$.
+Minimax with zero-completed signed lists and \eqref{eq:small-tail}
+transfers these statements to the true operators, including simplicity.
+\end{proof}
+
+\begin{theorem}[Endpoint packets]\label{thm:packet}
+Let $a_N$ be unit vectors whose step embeddings $U_Na_N$ converge
+strongly to $\phi$, and put
+$f_N(t)=\sum_{|m|\le N}a_{N,m}e^{2\pi imt}$,
+$\Phi(s)=\int_{-1}^1\phi(x)e^{2\pi ixs}\,dx$.
+Zero-extending the rescaled function from $[-N/2,N/2]$ gives
+\begin{equation}\label{eq:4.2}
+ N^{-1/2}f_N(s/N)\longrightarrow\Phi(s)\quad\text{in }L^2(\mathbb R).
+\end{equation}
+Consequently $f_N\rightharpoonup0$ in $L^2(0,1)$, and
+\begin{equation}\label{eq:4.3}
+ |f_N(t)|^2dt\longrightarrow w_0\delta_0+w_1\delta_1,\qquad
+ w_0=\int_0^\infty|\Phi|^2,\quad w_1=\int_{-\infty}^0|\Phi|^2.
+\end{equation}
+For vectors in one fixed reflection sector, $w_0=w_1=1/2$.
+The required strong convergence holds for phase-aligned eigenvectors
+at a simple parity eigenvalue $\lambda$ of $\mathcal K_\tau$ separated
+within that sector by $g>0$: at $\varepsilon=\tau/N$, when
+$\nu_N=(2\tau+8\pi\tau^2)/N<g/4$, the corresponding
+Riesz projections satisfy
+\begin{equation}\label{eq:4.1}
+\|\widetilde P_{N,\tau,\lambda}-P_{\tau,\lambda}\|\le4\nu_N/g.
+\end{equation}
+For a finite isolated cluster, the projections and suitably aligned
+orthonormal cluster bases converge; at crossings one follows the cluster.
+\end{theorem}
+\begin{proof}
+Set $h=2/(2N+1)$, $\beta_N=Nh$. Exact cell integration gives
+\[
+ N^{-1/2}f_N(s/N)=
+ \beta_N^{-1/2}\frac{\widehat{U_Na_N}(s/\beta_N)}
+ {\operatorname{sinc}(s/N)},\qquad |s|\le N/2,
+\]
+with $\operatorname{sinc}(z)=\sin(\pi z)/(\pi z)$.
+Plancherel and strong continuity of dilations handle the numerator.
+The zero-extended multipliers
+$\mathbf1_{|s|\le N/2}/\operatorname{sinc}(s/N)$ are bounded by
+$\pi/2$ and converge pointwise to one, hence strongly on $L^2$.
+This proves \eqref{eq:4.2}; its squared moduli converge in $L^1$.
+Positive and negative $s$ correspond to $0+$ and $1-$, giving the
+endpoint measure and tightness on scale $N^{-1}$. Concentration in
+shrinking neighborhoods and absolute continuity of the $L^2$ integral
+give weak convergence to zero. Parity makes $|\Phi|^2$ even.
+Finally the resolvent identity on $|z-\lambda|=g/2$, with resolvent
+bounds $2/g$ and $4/g$, gives \eqref{eq:4.1}.
+Projections at distance less than one have equal rank; normalizing
+$\widetilde P_N\phi$ gives the simple eigenvector. For clusters,
+the same contour argument followed by the near-identity unitary
+between the two projections gives aligned bases.
+\end{proof}
+
+\subsection{One exchange estimate for both finite and continuum edges}
+\label{app:exchange}\label{sec:exchange}
+Let $P,Q$ be orthogonal projections, $S$ unitary, and $\varrho$ a
+self-adjoint unitary, satisfying
+\[
+ [S,P]=0,\quad QS^2Q=0,\quad [\varrho,P]=[\varrho,Q]=0,\quad
+ \varrho S=S^*\varrho,\quad PQP\text{ compact}.
+\]
+Put $\Sigma=S^2$, $R_-=SQS^*$, $R_+=S^*QS$,
+$R=R_-+R_+$, $J=R_+\Sigma^*R_-+R_-\Sigma R_+$,
+$\Pi_\pm=(R\pm J)/2$, and, on $\operatorname{ran}P$,
+\[
+ \mathcal A=PJP,\quad\mathcal B=PRP,\quad\mathcal C=PQP,\quad
+\mathcal C_\pm=P\Pi_\pm P,\qquad \mathcal E_r=\ker(\varrho-rI).
+\]
+Assume $\operatorname{ran}P\cap\mathcal E_r$ and
+$\operatorname{ran}Q\cap\mathcal E_r$ are nonzero in each sector used;
+both concrete frames below have this property. In this common frame,
+$\lambda_p^\pm$ denote the spectral extrema of
+$\mathcal A|_{\operatorname{ran}P\cap\mathcal E_p}$.
+On $L^2(\mathbb R)$ take $P=UU^*$,
+$Q=\mathbf1_{(-\tau/2,\tau/2)}$, $Sg(\xi)=g(\xi+\tau/2)$;
+on $L^2(\mathbb T)$ take $P=P_N$,
+$Q=\mathbf1_{(-\varepsilon/2,\varepsilon/2)}$, $Sf(t)=f(t+\varepsilon/2)$.
+Then
+\begin{equation}\label{eq:T12:frame}
+(\mathcal A,\mathcal B,\mathcal C)=
+\begin{cases}(\mathcal K_\tau,C_{2\tau},C_\tau)&\text{on the line},\\
+(A_N,C_N(2\varepsilon),C_N(\varepsilon))&\text{on the circle}.
+\end{cases}
+\end{equation}
+Here $\varrho$ is reflection, centered arcs are read modulo one, and
+$C_N(\ell)_{mn}=\sin(\pi\ell(m-n))/[\pi(m-n)]$, with diagonal $\ell$.
+Translation commutes with $P$ in either Fourier representation;
+the shifted half-bands are disjoint. Fourier integration gives the
+three operators in the two cases, with
+$(\tr\mathcal C,\tr\mathcal B)=(2\tau,4\tau)$ and
+$(d\varepsilon,2d\varepsilon)$.
+
+\begin{lemma}[Exchange and dual concentration]\label{lem:T12:frame}
+\label{lem:T12:instances}\label{prop:T12:dual}\label{prop:T12:master}
+One has $J^2=R$, $\Pi_\pm$ are orthogonal projections,
+$\mathcal C_++\mathcal C_-=\mathcal B$,
+$\mathcal C_+-\mathcal C_-=\mathcal A$, and $\mathcal A^2\le\mathcal B$.
+The maps $\Gamma_\pm v=(Sv\pm S^*v)/\sqrt2$ are isometries from
+$\operatorname{ran}Q$ onto $\operatorname{ran}\Pi_\pm$ and send
+parity $r$ to $\pm r$. For $v\in\operatorname{ran}Q$, define
+\[
+ \Theta_\pm(v)=\tfrac12\|(1\pm\Sigma)(1-P)v\|^2,\quad
+ \Theta_0(v)=\|(1-P)v\|^2,\quad
+ \mu_r=\|\mathcal C|_{\mathcal E_r}\|,\quad\eta_r^2=1-\mu_r,
+\]
+and let $\theta_\pm^r$ be the infimum of $\Theta_\pm$ over unit
+vectors of $\operatorname{ran}Q\cap\mathcal E_r$. Then
+\begin{equation}\label{eq:T12:dualid}
+1-\|\mathcal C_\pm|_{\mathcal E_p}\|=\theta_\pm^{\pm p},\quad
+\inf_{\operatorname{ran}Q\cap\mathcal E_r,\ \|v\|=1}\Theta_0(v)=\eta_r^2,
+\quad\theta_+^r+\theta_-^r\le2\eta_r^2.
+\end{equation}
+For $\mu_r>1/2$,
+\begin{equation}\label{eq:T12:master}
+ \theta_+^r\le1-\lambda_r^+
+ \le\frac{2\mu_r}{2\mu_r-1}\eta_r^2,\qquad
+ \theta_-^r\le1+\lambda_{-r}^-
+ \le\frac{2\mu_r}{2\mu_r-1}\eta_r^2.
+\end{equation}
+The lower bounds have no restriction on $\mu_r$; the upper factor is
+at most $3$ when $\mu_r\ge3/4$.
+\end{lemma}
+\begin{proof}
+$QS^{\pm2}Q=0$ gives $R_-R_+=0$ and $J^2=R$, hence the projection
+identities; $\mathcal A^2\le PJ^2P=\mathcal B$.
+The vectors $Sv,S^*v$ are orthogonal, and $J\Gamma_\pm v=\pm\Gamma_\pm v$.
+Conversely $JF=\pm F$, $RF=F$ give
+$F=\Gamma_\pm(\sqrt2 S^*R_-F)$.
+The adjoints are $\Gamma_\pm^*=Q(S^*\pm S)/\sqrt2$.
+Commuting $P$ past $S$ gives
+$\|(1-P)\Gamma_\pm v\|^2=\Theta_\pm(v)$ and
+$\Theta_++\Theta_-=2\Theta_0$.
+The variational formula for $\|P\Pi P\|$ over unit vectors of
+$\operatorname{ran}\Pi$ proves \eqref{eq:T12:dualid};
+$\mathcal A\le\mathcal C_+$ and $-\mathcal A\le\mathcal C_-$
+give the lower comparisons. Compactness of $QP$, hence of
+$\Pi_\pm P$, ensures attainment of the required extrema.
+
+Choose a unit $V\in\operatorname{ran}P\cap\mathcal E_r$ with
+$PQV=\mu V$, $\mu=\mu_r>1/2$, and put $u=QV/\sqrt\mu$,
+$w=(1-Q)V$, $\eta^2=1-\mu$, $\rho=\Re\langle V,\Sigma V\rangle$.
+Since $\langle u,\Sigma u\rangle=0$ and $\Sigma$ preserves $P\oplus(1-P)$,
+$|\rho|\le\eta^2/\mu$. Thus $g_\pm=(S\pm S^*)V/2$ have
+\[
+ \|g_\pm\|^2=\tfrac12(1\pm\rho)\ge(2\mu-1)/(2\mu).
+\]
+Write $Y_\pm=\|Q\Sigma^{\pm1}V\|^2=\|Q\Sigma^{\pm1}w\|^2$.
+The identities
+$S^*RS=Q+\Sigma^*Q\Sigma$, $SRS^*=Q+\Sigma Q\Sigma^*$ and
+$S^*RS^*=Q\Sigma^*+\Sigma^*Q$ give
+\[
+ \|(1-R)g_\pm\|^2
+ =\tfrac12\eta^2\pm\tfrac12\Re\langle w,\Sigma w\rangle
+       -\tfrac14(Y_++Y_-).
+\]
+Applying the projection $SRS^*$ to $(1\mp\Sigma)w$, using $Qw=0$,
+gives $Y_++Y_-\le2\eta^2\mp2\Re\langle w,\Sigma w\rangle$.
+Hence
+\[
+ \|(1-R)g_\pm\|^2\le\eta^2-\tfrac12(Y_++Y_-),\qquad
+ 2\|\Pi_\mp g_\pm\|^2
+ =\tfrac14\|Q(\Sigma^*-\Sigma)V\|^2\le\tfrac12(Y_++Y_-).
+\]
+Their sum is
+$\|g_\pm\|^2\mp\langle g_\pm,Jg_\pm\rangle\le\eta^2$.
+Division by the displayed norm lower bound and minimax prove
+\eqref{eq:T12:master}.
+\end{proof}
+
+\subsection{Uniform rates for all four edges}\label{sec:T12:edges}
+\begin{theorem}[Concentration bounds]\label{thm:T12:cont}
+\label{thm:T12:disc}\label{thm:rev:uniform:discrete}
+The half-band leakages in \eqref{eq:T12:master} satisfy
+\begin{equation}\label{eq:T12:thresh}
+\begin{array}{c|cc}
+ &\eta_{+1}^2&\eta_{-1}^2\\ \hline
+\text{continuum},\ \tau\ge3/2&
+27/(64\pi^2\tau^3)&108/(25\pi^2\tau^3)\\
+\text{finite},\ 0<\varepsilon<1/2&
+1/(d\varepsilon)&3/(N\varepsilon)+1/[4(N\varepsilon)^3]
+\end{array}
+\quad\text{as upper bounds.}
+\end{equation}
+Both continuum leakages are at most $1/4$ when $\tau\ge3/2$;
+both finite leakages are at most $1/4$ when $d\varepsilon\ge25$.
+For the finite even and odd bounds, respectively, $\mu_r>1/2$
+already holds when $d\varepsilon>2$ and $d\varepsilon\ge13$.
+Thus the factor in \eqref{eq:T12:master} is at most $3$ in the
+first two stated ranges. More strongly, put
+$\tau_N=N\varepsilon$ and $c_*=(2/5)\log16$. For $\tau_N\ge20$,
+\begin{equation}\label{eq:rev:uniform:edges}
+ \eta_r^2\le283000\sqrt{\tau_N}e^{-c_*\tau_N},\qquad
+ 1-\lambda_{N,p}^+,\ 1+\lambda_{N,p}^-
+ \le850000\sqrt{\tau_N}e^{-c_*\tau_N}
+ \quad(r,p=\pm1).
+\end{equation}
+All finite constants are independent of $N,\varepsilon$.
+\end{theorem}
+\begin{proof}
+In the continuum use the normalized even and odd trials
+$\cos(\pi x/2)$ and $\sin(\pi x)$, whose Fourier transforms are
+$4\cos(2\pi\xi)/[\pi(1-16\xi^2)]$ and
+$2i\sin(2\pi\xi)/[\pi(1-4\xi^2)]$.
+For $|\xi|\ge\tau/2\ge3/4$, their squares are at most
+$81/(1024\pi^2\xi^4)$ and $81/(100\pi^2\xi^4)$.
+Integrating the two tails, using
+$2\int_{\tau/2}^\infty\xi^{-4}d\xi=16/(3\tau^3)$, gives the first row.
+In the circle use $D_N/\sqrt d$ and $D_N'/\|D_N'\|_2$, where
+\[
+D_N(x)=\frac{\sin(\pi dx)}{\sin(\pi x)},\quad
+\|D_N'\|_2^2=\frac{4\pi^2N(N+1)d}{3},\quad
+|D_N|\le\frac1{2|x|},\quad
+|D_N'|\le\frac{\pi d}{2|x|}+\frac\pi{4x^2}.
+\]
+Integrating outside $|x|<\varepsilon/2$, and using
+$(a+b)^2\le2a^2+2b^2$, gives the second row:
+the odd bound before simplification is
+$3d/[2N(N+1)\varepsilon]+1/[2N(N+1)d\varepsilon^3]$.
+Here $d\le2(N+1)$ and $(N+1)d\ge2N^2$.
+The threshold assertions follow from
+$2N\varepsilon>d\varepsilon-1/2$: the decreasing function
+$3/s+1/(4s^3)$ is below $1/2$ at $s=25/4$, and below $1/4$
+at $s=49/4$. The continuum values are below $1/4$ at $\tau=3/2$.
+
+For the exponential estimate set
+$m=\lceil2/\varepsilon\rceil$, $h=2m+1$, $a=h\varepsilon$,
+$k=\lfloor(N-1)/m\rfloor$ and
+$q(x)=D_m(x)/h$. Then
+\[
+4\le a\le11/2,\qquad
+(2/5)\tau_N-6/5<k\le\tau_N/2,\qquad k\ge2.
+\]
+These inequalities use $2/\varepsilon\le m<2/\varepsilon+1$ and
+$\varepsilon<1/2$. The even and odd polynomials
+$\mathsf F_+=q^k$, $\mathsf F_-=\sin(2\pi x)q^k$ have degree at most
+$mk+1\le N$. Put $\delta=(\pi h\sqrt k)^{-1}<1/4$.
+On $|x|\le\delta$, sine's Taylor lower bound and Bernoulli's inequality
+give $q^{2k}\ge(1-1/(6k))^{2k}\ge2/3$, while
+$|\sin(2\pi x)|\ge4|x|$. Thus
+\[
+ \|\mathsf F_+\|_2^2\ge4\delta/3,\qquad
+ \|\mathsf F_-\|_2^2\ge64\delta^3/9.
+\]
+On $0<|x|\le1/2$, $|q(x)|\le(2h|x|)^{-1}$.
+Using also $|\sin(2\pi x)|\le2\pi|x|$ and extending the tail to infinity,
+\[
+\int_{|x|>\varepsilon/2}|\mathsf F_+|^2\le
+\frac{\varepsilon a^{-2k}}{2k-1},\qquad
+\int_{|x|>\varepsilon/2}|\mathsf F_-|^2\le
+\frac{\pi^2\varepsilon^3a^{-2k}}{2k-3}.
+\]
+The ratios bound the respective leakages:
+\[
+B_+=\frac{3\pi a\sqrt k}{4(2k-1)}a^{-2k}
+\le B_-=\frac{9\pi^5a^3k^{3/2}}{64(2k-3)}a^{-2k}.
+\]
+Since $k/(2k-3)\le2$ and $4\le a\le11/2$, both are at most
+\[
+\frac{9\pi^5}{32\sqrt2}\left(\frac{11}{2}\right)^3
+16^{6/5}\sqrt{\tau_N}e^{-c_*\tau_N}
+<283000\sqrt{\tau_N}e^{-c_*\tau_N}.
+\]
+Finally $d\varepsilon\ge40$ ensures the factor $3$ in
+\eqref{eq:T12:master}, and $3\cdot283000<850000$.
+The algebraic leakages tend to zero when $N\varepsilon_N\to\infty$,
+proving the last regime in \eqref{eq:v6:5.6}.
+\end{proof}
+
+\begin{corollary}[Lower comparisons and the continuum exponent]
+\label{prop:T12:rational}\label{cor:T12:fuchs}
+The weighted leakages have the concrete forms
+\begin{equation}\label{eq:T12:contQ}
+\Theta_\pm(v)=
+\begin{cases}
+\displaystyle\int_{|x|>1}(1\pm\cos(2\pi\tau x))|\mathcal F^*v(x)|^2dx,
+ &\text{on the line},\\[2mm]
+\displaystyle\sum_{|m|>N}(1\pm\cos(2\pi m\varepsilon))|\widehat v(m)|^2,
+ &\text{on the circle}.
+\end{cases}
+\end{equation}
+Removing the cosine weight gives $\Theta_0$.
+If $\varepsilon=a/q$ in lowest terms and $q$ is odd, then
+\begin{equation}\label{eq:T12:rational}
+1-\lambda_{N,r}^+\ge2\sin^2(\pi/(2q))\eta_r^2
+\ge2\eta_r^2/q^2.
+\end{equation}
+If $d\varepsilon$ is an integer, then $q\mid d$ and $q$ can be
+replaced by $d$ in the last denominator. In the continuum,
+\begin{align}
+1-\lambda_{+1}^+,\ 1+\lambda_{-1}^-&
+\le(8\pi+o(1))\sqrt\tau e^{-2\pi\tau},\label{eq:T12:rate}\\
+1-\lambda_{-1}^+,\ 1+\lambda_{+1}^-&
+\le(64\pi^2+o(1))\tau^{3/2}e^{-2\pi\tau}.\nonumber
+\end{align}
+Both defects in physical parity $p$ are at least
+$1-\lambda_0(2\pi\tau)$ if $p=+1$, and
+$1-\lambda_1(2\pi\tau)$ if $p=-1$, where $\lambda_n(c)$ are the
+classical prolate eigenvalues for $\sin(c(x-y))/[\pi(x-y)]$.
+\end{corollary}
+\begin{proof}
+Fourier transformation of $\Sigma$ gives \eqref{eq:T12:contQ}.
+For odd $q$, the distance of $ma/q$ from $1/2$ modulo one is at least
+$1/(2q)$; hence $1+\cos(2\pi m\varepsilon)\ge
+2\sin^2(\pi/(2q))\ge2/q^2$. Infimizing and using
+\eqref{eq:T12:master} proves \eqref{eq:T12:rational}.
+Prolate eigenfunctions alternate parity \cite{SlepianPollak1961},
+and the fixed-$n$ law \cite{Fuchs1964,Slepian1965}
+\[
+1-\lambda_n(c)\sim\frac{\sqrt\pi\,2^{3n+2}}{n!}
+c^{n+1/2}e^{-2c}
+\]
+gives $\eta_{+1}^2\sim4\pi\sqrt\tau e^{-2\pi\tau}$ and
+$\eta_{-1}^2\sim32\pi^2\tau^{3/2}e^{-2\pi\tau}$.
+The factor in \eqref{eq:T12:master} tends to $2$.
+The lower bounds follow from
+$-C_{2\tau}\le\mathcal K_\tau\le C_{2\tau}$ in each parity.
+\end{proof}
+These are one-sided physical rates: the lower comparison has exponent
+$4\pi$, the upper comparison $2\pi$. A uniform inequality
+$\theta_\pm^r\ge c_0\eta_r^2$ is not proved; the cosine weights vanish,
+or have infimum zero for irrational $\varepsilon$, so pointwise
+comparison cannot establish it. The finite exponent is not asserted sharp.
+At $\varepsilon=\tau/N$, the argument of Theorem~\ref{thm:nystrom}
+applied to $c_\tau$ gives embedded error $(\tau+2\pi\tau^2)/N$
+for $C_N(\varepsilon)\to C_\tau$, and
+$(2\tau+8\pi\tau^2)/N$ for $C_N(2\varepsilon)\to C_{2\tau}$.
+Indeed $|c_\tau|\le\tau$, $|c_\tau'|\le\pi\tau^2/2$.
+Sector eigenvalues, $\eta_r^2$ and the dual quantities therefore converge;
+for the last use $\mathcal C_\pm=(\mathcal B\pm\mathcal A)/2$
+and \eqref{eq:T12:dualid}.
+
+\subsection{Global finite defects and Lipschitz statistics}
+\label{sec:rev:lip}
+Put $\Delta(\theta)=[3+2\log^+(2\pi\theta)]/\pi^2$, where
+$\log^+x=\max(\log x,0)$.
+\begin{theorem}[Defect, trace and Wasserstein bounds]
+\label{lem:rev:lip}\label{lem:rev:lip:defect}
+\label{thm:rev:lip:trace}\label{T3:lem:deficit}
+\label{cor:rev:lip:wasserstein}
+For $x=d\varepsilon$, $N\ge1$ and $0<\varepsilon<1/2$, put
+\begin{equation}\label{compact:eq:finite-defect-min}
+ B(x)=\min\{2x,\ 3+2\log^+(2x),\
+                 8\pi^{-2}[3+\log^+(\pi x)]\}.
+\end{equation}
+Then $0\le2d\varepsilon-\tr A_N^2\le B(x)$, and
+\begin{equation}\label{eq:T3:trace}
+t_N:=\tr A_N=\frac{2\varepsilon\sin(\pi d\varepsilon)}
+{\sin(\pi\varepsilon)},\qquad |t_N|\le\min(2x,1).
+\end{equation}
+Every real $L$-Lipschitz $f$ with $f(0)=0$ satisfies
+\begin{align}
+\left|\tr f(A_N)-x[f(1)+f(-1)]\right|
+&\le L[2B(x)+|t_N|]\le L[7+4\log^+(2x)],
+\label{compact:eq:finite-lip-min}\\
+\left|\tr f(\mathcal K_\tau)-2\tau[f(1)+f(-1)]\right|
+&\le L[8\Delta(\tau)+2/\pi]\quad(\tau>0).
+\label{eq:rev:lip:continuum}
+\end{align}
+For $\tau\ge2$, the last upper bound can be replaced by
+$L[4\pi^{-2}\log\tau+2.712]$.
+For the empirical probability measure
+$\mu_N=d^{-1}\sum_j\delta_{\lambda_j(A_N)}$ and
+$\nu_\varepsilon=(1-2\varepsilon)\delta_0+
+\varepsilon(\delta_1+\delta_{-1})$,
+\begin{equation}\label{eq:rev:lip:wasserstein}
+W_1(\mu_N,\nu_\varepsilon)
+\le\min\{4\varepsilon,\ [7+4\log^+(2d\varepsilon)]/d\}.
+\end{equation}
+In particular $\mu_N$ converges weakly to $\nu_\varepsilon$
+at fixed $\varepsilon$.
+\end{theorem}
+\begin{proof}
+For $X=C_+-C_-$ with positive trace-class $C_\pm$, $\|X\|\le1$ and
+$s=\tr(C_++C_-)$, scalar interpolation gives
+\begin{equation}\label{eq:rev:lip:abstract}
+\left|\tr f(X)-\tfrac s2[f(1)+f(-1)]\right|
+\le2L(s-\tr X^2)+L|\tr X|.
+\end{equation}
+Indeed put $a=[f(1)+f(-1)]/2$, $b=[f(1)-f(-1)]/2$.
+On each half interval,
+$|f(t)-a|t|-bt|\le2L|t|(1-|t|)$, by writing, for $t\ge0$,
+$f(t)-tf(1)=(1-t)f(t)+t(f(t)-f(1))$.
+The spectral projection onto the positive half-line gives
+$\tr X_+\le\tr C_+$, and likewise $\tr X_-\le\tr C_-$; hence
+$T=\tr|X|\le s$. Absolute summability follows from $|f(t)|\le L|t|$.
+The trace error is at most
+$2L(T-\tr X^2)+L(s-T)+L|\tr X|$, proving \eqref{eq:rev:lip:abstract}.
+
+The half-band concentration defect is at most $\Delta(\tau)$ on the
+line and $3/4+\tfrac12\log^+(2d\varepsilon)$ on the circle.
+Indeed on the line it equals
+$2\int_0^\infty c_\tau(u)^2\min(u,2)du$; splitting the bound
+$c_\tau^2\le\min(\tau^2,(\pi u)^{-2})$ at $(\pi\tau)^{-1},2$
+gives $\Delta(\tau)$ (for $2\pi\tau<1$, use
+$8\tau/\pi-4\tau^2\le3/\pi^2$).
+On the circle it equals
+$2\int_0^{1/2}|D_N(t)|^2\min(\varepsilon,t)dt$.
+Splitting $|D_N(t)|^2\le\min(d^2,(2t)^{-2})$ at $1/(2d),\varepsilon$
+gives $3/4+\tfrac12\log(2d\varepsilon)$ when $d\varepsilon\ge1/2$;
+otherwise it gives $2d\varepsilon-\varepsilon-d^2\varepsilon^2\le3/4$.
+
+In the exchange frame,
+\[
+0\le\tr\mathcal B-\tr\mathcal A^2
+=\|(1-P)JP\|_2^2\le4\tr(\mathcal C-\mathcal C^2).
+\]
+For the last inequality use $J=\Sigma^*R_-+\Sigma R_+$:
+each $(1-P)R_\pm P$ has squared Hilbert--Schmidt norm
+$\tr(\mathcal C-\mathcal C^2)$ by unitary translation.
+This proves the middle bound in \eqref{compact:eq:finite-defect-min}
+and the continuum estimate; the first bound $2x$ is immediate.
+For the remaining finite bound, precisely $\min(|k|,d)$ pairs with
+difference $k\ne0$ cross the Fourier cutoff. The divided-difference
+entries of the full exchange therefore give
+\[
+2x-\tr A_N^2\le\frac8{\pi^2}
+\sum_{k\ge1}\frac{\min(k,d)\min(1,\pi^2\varepsilon^2k^2)}{k^2}.
+\]
+If $1\le k_0=(\pi\varepsilon)^{-1}\le d$, the ranges
+$k\le k_0$, $k_0<k\le d$, $k>d$ contribute at most
+$1$, $1+\log(d/k_0)$ and $1$. If $k_0<1$, the sum is at most
+$2+\log d<3+\log(\pi x)$. If $k_0>d$, use
+$2x<2/\pi<24/\pi^2$ instead. This proves $B(x)$.
+The finite cosine sum gives \eqref{eq:T3:trace}, using
+$\sin(\pi\varepsilon)\ge2\varepsilon$.
+Apply \eqref{eq:rev:lip:abstract} with $s=2x$ or $4\tau$.
+For the sharper continuum bound the exact quadratic formula gives
+$4\tau-\tr\mathcal K_\tau^2\le2\pi^{-2}\log\tau+1.0375$ for
+$\tau\ge2$; thus the remaining constant is at most
+$2.075+2/\pi<2.712$.
+Finally apply the finite estimate to $f=\varphi-\varphi(0)$ and use
+the Kantorovich dual formula. Transport through $\delta_0$ costs at
+most $2\varepsilon$ for each measure, because
+$\tr|A_N|\le2d\varepsilon$, proving the other Wasserstein bound.
+\end{proof}
+
+
+\subsection{Counts and finite inertia}\label{sec:counts}
+Write $\mathcal N_{p,\sigma}(\alpha)$ for the number of eigenvalues in
+parity $p$ with $\sigma\lambda>\alpha$; omission of $p$ sums both parities.
+The trace budget gives the following direct alternative to counting
+concentrated subspaces.
+\begin{theorem}[All-scale signed counts]\label{T3:thm:explicit}
+For $0<\alpha<1$ put $q_\alpha=\max\{\alpha^{-1},(1-\alpha)^{-1}\}$.
+At every $\tau>0$ and every $N\ge1$, $0<\varepsilon<1/2$,
+\begin{equation}\label{eq:T3:A}
+ \begin{aligned}
+ |\mathcal N_{p,\sigma}(\alpha;\tau)-\tau|
+   &\le2+4q_\alpha\Delta(\tau),\\
+ |\mathcal N_{N,p,\sigma}(\alpha;\varepsilon)-d\varepsilon/2|
+   &\le2+q_\alpha B(d\varepsilon).
+ \end{aligned}
+\end{equation}
+Without parity the corresponding bounds are
+\begin{equation}\label{eq:T3:Awhole}
+ |\mathcal N_\sigma(\alpha;\tau)-2\tau|
+ \le\pi^{-1}+4q_\alpha\Delta(\tau),\qquad
+ |\mathcal N_{N,\sigma}(\alpha;\varepsilon)-d\varepsilon|
+ \le\tfrac12+q_\alpha B(d\varepsilon).
+\end{equation}
+More precisely, in each displayed estimate $|N-m|\le c+q_\alpha D_*$,
+one has $-c-D_* /(1-\alpha)\le N-m\le c+D_* /\alpha$.
+Thus each parity count is $\tau+O_\alpha(\log(2+\tau))$, respectively
+$d\varepsilon/2+O_\alpha(1+\log(2+d\varepsilon))$, uniformly in
+$N,\varepsilon$. The finite inertia in each parity satisfies
+$n_\sigma\ge d\varepsilon/2-2-B(d\varepsilon)/2$, and without parity
+$n_\sigma\ge d\varepsilon-1/2-B(d\varepsilon)/2$.
+For every $N\ge1$ the even block has both signs and the odd block has a
+negative eigenvalue; for $N=1$ the odd block has no positive eigenvalue.
+\end{theorem}
+\begin{proof}
+For a contraction $X=C_+-C_-$ with positive trace-class summands, put
+$s=\tr(C_++C_-)$, $T=\tr|X|\le s$ and $D=s-\tr X^2$.
+For $0\le r\le1$,
+$-r(1-r)/(1-\alpha)\le\mathbf1_{r>\alpha}-r\le r(1-r)/\alpha$.
+Sum over the sign-$\sigma$ eigenvalues. With $E=T-\tr X^2$,
+$F=s-T$, and $\tr X_\sigma=(T+\sigma\tr X)/2$, subtracting $F/2$
+from the error gives, since $E+F=D$ and $(1-\alpha)^{-1}\ge1/2$,
+\begin{equation}\label{unified:eq:asymmetric-count}
+ -\frac D{1-\alpha}\le N_\sigma(\alpha)-\frac s2-\frac{\sigma\tr X}2
+                    \le\frac D\alpha.
+\end{equation}
+This also implies the symmetric estimate with $q_\alpha$.
+The same inequalities hold for the nonstrict count $\sigma\lambda\ge\alpha$;
+at $r=\alpha$ the scalar upper bound is an equality.
+Also $n_\sigma\ge\tr X_\sigma\ge(s-D+\sigma\tr X)/2$.
+Apply the inequalities separately in every parity sector. For our
+exchange compressions, $B=C_++C_-$ satisfies $B-X^2\ge0$ by the
+compression identity in the preceding proof; hence each sector defect
+is at most the full defect.
+
+The full traces are $s=4\tau,2d\varepsilon$ and
+$|\tr X|\le2/\pi,1$. The reflected continuum traces are
+$\tr(\mathcal R C_{2\tau})=\Si(4\pi\tau)/\pi$ and
+$\tr(\mathcal R\mathcal K_\tau)=2\Si(2\pi\tau)/\pi$.
+Since $0<\Si(u)\le\Si(\pi)<\pi$ by decreasing alternating humps,
+the parity correction $(|\tr\mathcal RB|+|\tr X|+
+|\tr\mathcal RX|)/4$ is less than two.
+For the finite traces, write $S_N(\theta)=\sum_{j=1}^N\sin(j\theta)/j$.
+Exact reflected diagonals give
+\[
+ \tr(\mathcal R_NC_N(2\varepsilon))=2\varepsilon+
+       S_N(4\pi\varepsilon)/\pi,\qquad
+ \tr(\mathcal R_NA_N)=2\varepsilon+2S_N(2\pi\varepsilon)/\pi.
+\]
+One has $|S_N(\theta)|\le1+\pi$: reduce to $0<\theta\le\pi$,
+bound the terms $j\le1/\theta$ by a total of one, and Abel-sum the
+remaining terms, using the geometric-sum bound $1/\sin(\theta/2)$.
+Their modulus is at most $\theta/\sin(\theta/2)\le\pi$.
+Thus the finite parity correction is at most
+$(6+3/\pi)/4<2$. Apply the preceding scalar inequalities and the
+defect bounds already proved to obtain every stated estimate.
+
+For the exact finite signs put $\vartheta=2\pi\varepsilon\in(0,\pi)$.
+The even vector $e_0$ has form $2\varepsilon>0$; the odd vector
+$e_1-e_{-1}$ has Rayleigh quotient
+$(\vartheta\cos\vartheta-\sin\vartheta)/\pi<0$, since the numerator
+has derivative $-\vartheta\sin\vartheta$.
+The even compression to $e_0,(e_1+e_{-1})/\sqrt2$ is
+\[
+\pi^{-1}\begin{pmatrix}\vartheta&\sqrt2\sin\vartheta\\
+\sqrt2\sin\vartheta&\vartheta\cos\vartheta+\sin\vartheta\end{pmatrix}.
+\]
+Its determinant has the sign of
+$q=\vartheta^2\cos\vartheta+\vartheta\sin\vartheta-2\sin^2\vartheta$.
+Writing $u=\sin\vartheta/\vartheta$, for $0<\vartheta\le2$ use
+$u\ge1-\vartheta^2/6\ge1/3$,
+$\cos\vartheta\le1-\vartheta^2/2+\vartheta^4/24$, and monotonicity
+of $2u^2-u$ for $u\ge1/3$ to obtain
+$-q/\vartheta^2=2u^2-u-\cos\vartheta\ge\vartheta^4/72>0$.
+For $2\le\vartheta<\pi$, use $2u^2-u\ge-1/8$ and
+$\cos\vartheta\le\cos2\le-1/3$. Thus the even compression is
+indefinite. At $N=1$ the odd space is the one-dimensional span already tested.
+\end{proof}

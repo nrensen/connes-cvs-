@@ -1,0 +1,63 @@
+\section{Critical-window convergence}\label{sec:critical}
+
+\begin{theorem}[Explicit operator-norm limit]\label{thm:nystrom}
+For every $0<T<\infty$ and every integer $N>2T$, which ensures that
+$\tau/N<1/2$ for $0\le\tau\le T$, there are
+reflection-intertwining isometries $U_N$ from
+$\mathbb C^{2N+1}$ into $L^2[-1,1]$, independent of $\tau$, under which the
+embedded matrix $\widetilde A_{N,\tau}=U_NA_N(\tau/N)U_N^*$ acts as zero off
+its step-function range and
+\begin{equation}\label{eq:3.1}
+ \sup_{0\le\tau\le T}
+ \|\widetilde A_{N,\tau}-\mathcal K_\tau\|
+ \le \frac{2T+8\pi T^2}{N}.
+\end{equation}
+Pointwise in $\tau$, the numerator may be replaced by
+$2\tau+8\pi\tau^2$.  The same estimate holds in each parity sector.
+\end{theorem}
+
+\begin{proof}
+Put $h=2/d$, and partition $[-1,1]$ into equal cells $B_m$
+of width $h$ centered at $z_m=hm$, $-N\le m\le N$.  Define
+$(U_Na)(x)=h^{-1/2}a_m$ on $B_m$.  Since
+$N^{-1}=h(2N+1)/(2N)$, the embedded matrix has step kernel
+\begin{equation}\label{eq:3.2}
+ \widetilde K_{N,\tau}(x,y)
+ =\frac{2N+1}{2N}K_\tau(m/N,n/N),
+ \quad (x,y)\in B_m\times B_n.
+\end{equation}
+Formula \eqref{eq:2.4} gives
+\begin{equation}\label{eq:3.3}
+ |K_\tau|\le2\tau,\qquad
+ |\partial_xK_\tau|,|\partial_yK_\tau|\le2\pi\tau^2.
+\end{equation}
+Since $z_m=hm$ and $|z_m-m/N|=|m|/(N(2N+1))\le1/(2N+1)=h/2$, while
+$|x-z_m|\le h/2$ on $B_m$, we have $|x-m/N|\le h$.  The scalar mismatch in
+\eqref{eq:3.2} and
+the two coordinate errors therefore give
+\[
+ |\widetilde K_{N,\tau}(x,y)-K_\tau(x,y)|
+ \le\frac{\tau+4\pi\tau^2}{N}.
+\]
+The square $[-1,1]^2$ has area $4$, so the operator norm is at most the
+Hilbert--Schmidt norm, which is at most twice this supremum.  Reflection
+intertwining follows from the symmetric cells.
+\end{proof}
+
+Differentiating \eqref{eq:2.4} also gives
+\begin{equation}\label{eq:3.4}
+ \|\mathcal K_\tau-\mathcal K_{\tau'}\|
+ \le(4+8\pi T)|\tau-\tau'|,
+ \qquad 0\le\tau',\tau\le T.
+\end{equation}
+Hence if $\tau_N=N\varepsilon_N\to\tau<\infty$, then with
+$T=\sup_N\tau_N<\infty$ and every $N>2T$,
+\begin{equation}\label{eq:3.5}
+ \|\widetilde A_{N,\tau_N}-\mathcal K_\tau\|
+ \le\frac{2\tau_N+8\pi\tau_N^2}{N}
+ +(4+8\pi T)|\tau_N-\tau|\longrightarrow0.
+\end{equation}
+The parity norms and every isolated nonzero parity spectral cluster therefore
+converge; the same holds for an individual signed edge whenever it is separated
+from zero.
+

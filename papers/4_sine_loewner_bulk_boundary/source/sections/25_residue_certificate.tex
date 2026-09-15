@@ -1,0 +1,318 @@
+\section{A global residue functional and its interval certificate}
+\label{boundary:app:residue:rr}
+
+We work at phase zero, with $P_\alpha=Q_0-\alpha J$.
+For real $0<\alpha<g$ put
+\[
+ a=\sqrt{1-2\alpha^2},\quad t=\arctan a,\quad
+ \nu=\tfrac12+t/\pi,\quad c=(2\cos t)^{-1},\quad q=ce^{-it}.
+\]
+For $p>0$ and real $z<1$ define
+\begin{align}
+ \ell_p(z)&=\frac1\pi\int_0^1\frac{x^{p-1}}{1-zx}\,dx,
+ \nonumber\\
+ A_\nu(s)&=-\int_0^1\frac{x^{-\nu}}{1+s-x}\,dx
+   =-\frac\pi{1+s}\ell_{1-\nu}\!\left(\frac1{1+s}\right),
+ \qquad B_\nu(s)=-A_\nu(1-s).
+ \label{boundary:eq:residue-scalar-kernels:rr}
+\end{align}
+Let
+\[
+ k=(1,(\alpha/c)e^{it},i(\alpha/c)e^{2it},ie^{3it})
+\]
+be a row, and define
+\begin{align}
+ j_1(s)&=k_2A_\nu(s)+\pi[-\ell_\nu(s)
+                  +k_3\ell_\nu(1-s)+k_4\ell_\nu(-s)],\nonumber\\
+ j_2(s)&=k_3B_\nu(s)+\pi[-\ell_\nu(s-1)
+                  -k_2\ell_\nu(s)+k_4\ell_\nu(1-s)],\nonumber\\
+ p_\alpha&=\frac{-i\Gamma(\nu)e^{-i(\pi/4+3t/2)}}
+                  {8\pi^2ac(2\pi)^\nu},\qquad
+ F_\alpha(u)=p_\alpha\int_0^1
+                [j_1(s)u(s)+j_2(s)u(s-1)]\,ds.
+ \label{boundary:eq:global-residue-functional:rr}
+\end{align}
+The scalar $p_\alpha$ here is a prefactor, distinct from the pencil
+$P_\alpha$.  The two row kernels have only logarithmic endpoint
+singularities, so $F_\alpha$ is a bounded complex-linear functional
+on $L^2(-1,1)$.
+
+\begin{lemma}[The global residue row]
+\label{boundary:lem:global-residue:rr}
+If $P_\alpha u=0$, then $F_\alpha(u)$ is the inward physical tail
+amplitude of $V_0u$, with its induced physical normalization.
+Moreover, in the operator norm of functionals,
+\begin{equation}\label{boundary:eq:uniform-residue-bounds:rr}
+ \|F_\alpha\|<\frac{13}{100},\qquad
+ \|\partial_\alpha F_\alpha\|<1,
+ \qquad \frac25\le\alpha\le\frac{11}{25}.
+\end{equation}
+\end{lemma}
+
+\subsection{Derivation and the auxiliary cutoff limit}
+
+The right null column of the endpoint multiplier at $\omega=-i\beta$,
+with first component one, is
+\[
+ v=(1,(\alpha/c)e^{it},-i(\alpha/c)e^{2it},-ie^{3it})^T.
+\]
+Direct multiplication in \eqref{v12:eq:endpoint-symbol} shows that
+$k$ is its left null row, without conjugation.  Its adjugate has
+$(1,1)$ entry $-q^3$ and
+\[
+ \partial_\omega\det m_{\alpha,0}(-i\beta)
+       =i4\pi\alpha^2ac^2.
+\]
+For a smooth endpoint cutoff, the residue formula in the proof of
+Theorem~\ref{v12:thm:boundary-tail} therefore gives the endpoint vector
+\begin{equation}\label{boundary:eq:source-residue-row:rr}
+ V=\frac{q^3}{4\pi\alpha^2ac^2}\,vN,\qquad
+ N=\int_0^\infty x^{-\nu}k(-\Delta_eu)(x)\,dx.
+\end{equation}
+Indeed the factor $-i\sqrt{2\pi}$ in that residue formula cancels
+the Mellin normalization and the displayed determinant derivative.
+The positive zero-carrier Gamma factor for $v$ is
+$2\cos(2t)e^{-i\pi/4+3it/2}$, and
+$\alpha^2=2c^2\cos(2t)$.  Thus its physical amplitude is
+\[
+ \frac{\Gamma(\nu)e^{-i(\pi/4+3t/2)}}
+      {4\pi ac(2\pi)^\nu}\,N.
+\]
+
+This calculation uses only $EP_\alpha=M_\alpha E+\Delta_e$ and
+$\chi=1$ near zero; the auxiliary cutoffs need not form an isometric
+partition. For two such cutoffs the difference localizes away from
+zero. On a kernel vector its Mellin transform is regular at $-i\beta$
+and $km_{\alpha,0}(-i\beta)=0$, so the source pairing is unchanged.
+No cutoff independence on arbitrary $u$ is asserted.
+
+Take smooth cutoffs equal to one up to $1-2\varepsilon$ and zero
+after $1-\varepsilon$, and let $\varepsilon\downarrow0$.
+Their source-pairing rows converge in $L^2$ to the row for
+$\chi=\mathbf1_{(0,1)}$.  Here are the required operator bounds.
+In $EQ_0$, move $Q_0$ onto the cutoff difference multiplied by
+$x^{-\nu}k$; this weight is bounded near one and $Q_0$ is bounded
+on $L^2$.  In $Q_eE$, move $Q_e$ onto $x^{-\nu}k$ and restrict the
+result to a neighborhood of one.  That result is bounded: the input
+near zero is integrable since $\nu<1$, its tail is integrable against
+the Cauchy denominator, and its local principal value is the transform
+of a smooth power.  Both error rows tend to zero with the $L^2$ norm
+of the cutoff difference.  These statements may first be proved for
+smooth inputs and then extended by density.  They require no uniform
+derivative bound on the steep cutoffs.
+
+For this limiting cutoff, the kernel in
+\eqref{v12:eq:endpoint-defect-kernel}, before its factor $i/(2\pi)$,
+has on $0<x<1$ only the entries
+$(2,1)=(x-1-s)^{-1}$ and $(3,2)=(2-x-s)^{-1}$.
+On $x>1$ it is
+\[
+ \begin{pmatrix}
+ -(x-s)^{-1}&-(x+1-s)^{-1}\\
+ 0&-(x-s)^{-1}\\
+ (x+s-1)^{-1}&0\\
+ (x+s)^{-1}&(x+s-1)^{-1}
+ \end{pmatrix}.
+\]
+Integration against $x^{-\nu}k$ gives exactly the two rows in
+\eqref{boundary:eq:global-residue-functional:rr}, with
+$N=-i(2\pi)^{-1}\int_0^1(j_1u_1+j_2u_2)$.
+This proves the first assertion of
+Lemma~\ref{boundary:lem:global-residue:rr}, including its normalization.
+
+\subsection{Uniform row and derivative bounds}
+
+All decimals in the following estimates are finite rational numbers.
+For $2/5\le\alpha\le11/25$, elementary differentiation gives
+\begin{gather*}
+ a>0.78,\quad c>0.63,\quad 0.7<\nu<0.75,\quad
+ \kappa:=\alpha/c<0.7,\\
+ |t'|<0.71,\quad |\nu'|<0.23,\quad |c'|<0.35,\quad
+ |\kappa'|<2,\quad |k_2'|<2.5,\quad |k_3'|<3,\quad |k_4'|<2.14.
+\end{gather*}
+For example,
+$t'=-2\alpha/[a(1+a^2)]$, $c'=-\alpha/(2c)$, and
+$\kappa'=1/c+\alpha^2/(2c^3)$.  In bounding $\nu'$ below we also
+retain the sharper bound $|\nu'|<0.71/\pi$.
+
+The power series
+$\pi\ell_p(z)=\sum_{n\ge0}z^n/(n+p)$ for $0\le z<1$, and the
+positive defining integrals for $z\le0$, imply
+\begin{gather*}
+ \pi\ell_\nu(s)\le\nu^{-1}-\log(1-s),\qquad
+ \pi\ell_\nu(-s),\ \pi\ell_\nu(s-1)\le\nu^{-1},\\
+ |A_\nu(s)|\le(1-\nu)^{-1}+\log2-\log s,\qquad
+ B_\nu(s)\le(1-\nu)^{-1}+\log2-\log(1-s).
+\end{gather*}
+For the last bounds apply the series at $z=(1+s)^{-1}$ and its
+reflection.  Differentiation in $\nu$ gives the absolute bounds
+\[
+ \nu^{-2}+\pi^2/6<15/4,\qquad \nu^{-2}<21/10,
+ \qquad (1-\nu)^{-2}+\pi^2/6<18,
+\]
+respectively for a positive-argument $\pi\ell$, a nonpositive-argument
+$\pi\ell$, and $A,B$.  The series bounds use
+$\sum_{n\ge1}(n+p)^{-2}\le\pi^2/6$.
+
+With $L_0=-\log s$ and $L_1=-\log(1-s)$, these estimates yield
+\begin{align}
+ |j_1|&\le7.2+1.4L_0+L_1,&
+ |j_2|&\le7.2+L_0+1.4L_1,\nonumber\\
+ |j_1'|&\le24+5.5L_0,&
+ |j_2'|&\le26+2.2L_0+5.5L_1.
+ \label{boundary:eq:logarithmic-row-bounds:rr}
+\end{align}
+For example the first undifferentiated constant is at most
+$0.7(4.7)+2.7(10/7)<7.2$.  The first differentiated constant is at most
+\[
+ 2.5(4.7)+(3+2.14)\frac{10}{7}
+ +0.23\left(0.7(18)+1.7\frac{15}{4}+\frac{21}{10}\right)<24.
+\]
+Replacing $2.5(4.7)+3(10/7)$ by $3(4.7)+2.5(10/7)$ bounds the
+second by 26.  The logarithmic coefficients in
+\eqref{boundary:eq:logarithmic-row-bounds:rr} are respectively the
+sums of the corresponding $|k_j|$ or $|k_j'|$.
+
+The scalar prefactor satisfies
+\begin{equation}\label{boundary:eq:prefactor-bounds:rr}
+ |p_\alpha|<0.0093,\qquad |p_\alpha'|<4|p_\alpha|.
+\end{equation}
+For the first inequality use
+\[
+ |p_\alpha|\le
+ \frac{\Gamma(0.7)}{(2\pi)^{0.7}\,8\pi^2(0.78)(0.63)}<0.0093.
+\]
+The digamma $\psi_0=\Gamma'/\Gamma$ is increasing, since
+$\psi_0'(x)=\sum_{n\ge0}(n+x)^{-2}>0$.
+The scalar bounds $\psi_0(0.7)>-1.3$ and $\psi_0(0.75)<0$ show that
+$\Gamma$ decreases and $|\psi_0|<1.3$ on $[0.7,0.75]$.
+Consequently
+\[
+ |p_\alpha'/p_\alpha|
+ \le\frac{0.71}{\pi}(1.3+\log(2\pi))
+       +\frac{0.88}{0.78^2}+\frac{0.35}{0.63}+\tfrac32(0.71)<4.
+\]
+All scalar inequalities here are also checked with outward-rounded
+arithmetic by the accompanying verifier.
+
+Finally, $\int L_j=1$, $\int L_j^2=2$, and
+$\int L_0L_1=2-\pi^2/6<0.36$.
+Squaring \eqref{boundary:eq:logarithmic-row-bounds:rr} and integrating
+gives bounds $186.656$ for $\|(j_1,j_2)\|_2^2$ and $2055.792$ for
+$\|(j_1',j_2')\|_2^2$.  Therefore
+\[
+ \|F_\alpha\|<0.0093\sqrt{186.656}<0.13,\qquad
+ \|\partial_\alpha F_\alpha\|
+ <4(0.13)+0.0093\sqrt{2055.792}<1.
+\]
+The same logarithmic envelopes justify differentiation in operator
+norm.  This finishes Lemma~\ref{boundary:lem:global-residue:rr}.
+
+\subsection{Exact integration of the rational witness}
+
+Define primitives
+\begin{align}
+ E_\nu(z)&=\frac{z\ell_\nu(z)+\pi^{-1}\log(1-z)}{1-\nu},
+ &E_\nu'&=\ell_\nu,\nonumber\\
+ D_\nu(s)&=\frac{(1+s)A_\nu(s)-\log s}{1-\nu},
+ &D_\nu'&=A_\nu.
+ \label{boundary:eq:residue-primitives:rr}
+\end{align}
+Their continuous endpoint values are
+\[
+ E_\nu(0)=0,\quad
+ E_\nu(1)=-\frac{\psi_0(\nu)+\gamma_E}{\pi(1-\nu)},\quad
+ D_\nu(0)=\frac{\psi_0(1-\nu)+\gamma_E}{1-\nu},
+\]
+where $\gamma_E$ is Euler's constant.
+The derivative identities follow by integration by parts in the
+defining integrals; the endpoint values follow from
+$\pi\ell_p(z)+\log(1-z)\to-\psi_0(p)-\gamma_E$ as $z\uparrow1$.
+Primitives of $j_1,j_2$ are consequently
+\begin{align}
+ J_1(s)&=k_2D_\nu(s)+\pi[-E_\nu(s)-k_3E_\nu(1-s)-k_4E_\nu(-s)],
+ \nonumber\\
+ J_2(s)&=k_3D_\nu(1-s)+\pi[-E_\nu(s-1)-k_2E_\nu(s)-k_4E_\nu(1-s)].
+ \label{boundary:eq:residue-row-primitives:rr}
+\end{align}
+
+Use the same exact witness $u_0$ and parameter $a_0$ as in
+\eqref{rr:eq:positive-trial}.
+Integrate \eqref{boundary:eq:residue-row-primitives:rr} over each
+cell and multiply by the witness's constant value there.  Its stored
+coefficients multiply normalized indicators, so this value is the
+coefficient divided by the square root of the exact cell width.
+The first 256 coefficients belong to the negative half and the last
+256 to the positive half; they pair with $j_2$ and $j_1$, respectively.
+
+The accompanying interval verifier evaluates these endpoint
+differences using
+$\ell_p(z)={}_2F_1(1,p;p+1;z)/(\pi p)$, Gamma and digamma functions
+with outward-rounded Arb arithmetic \cite{Johansson2017}.
+The exact parameter relations $b-c=-1$ and $a+b-c=0$ are supplied
+when evaluating the zero-balanced hypergeometric function. At both
+192 and 256 bits it verifies
+\begin{equation}\label{boundary:eq:exact-residue-anchor:rr}
+ |F_{a_0}(u_0)|>0.069,
+ \qquad \|u_0\|<1.001,
+ \qquad 0.41635<a_0<0.41637,
+\end{equation}
+as well as the scalar bounds used above.  No quadrature, eigensolver,
+or saved floating-point result enters these checks.
+The existing residual certificate gives
+\begin{equation}\label{boundary:eq:frequency-residual-bound:rr}
+ \|P_{a_0}u_0\|<0.00622:
+ \qquad U_{u_0}(a_0)<0.000038641<(0.00622)^2.
+\end{equation}
+
+\subsection{The complete physical projection estimate}
+
+\begin{proof}[Nonvanishing in Theorem~\ref{boundary:thm:certified-residue:rr}]
+By the proved isolation clause, $\alpha_0\in(0.405,0.428)$ is the
+only spectral point in $[0.3565,0.4765]$. Let $\Pi$ project onto it.
+Equation~\eqref{boundary:eq:exact-residue-anchor:rr} puts every other
+spectral point at distance at least $0.049$ from $a_0$.
+
+Put $f_0=V_0u_0$.  The identities
+$B_0=V_0JV_0^*$, $V_0^*V_0=Q_0$, and $\|V_0\|\le1$ give
+\[
+ (B_0-a_0)f_0=V_0JP_{a_0}u_0,\qquad
+ \|(I-\Pi)f_0\|<\frac{0.00622}{0.049}.
+\]
+For $\alpha\in(0.405,0.428)$ define the bounded physical functional
+\[
+ \mathcal L_\alpha f=\alpha^{-1}F_\alpha(JV_0^*f),\qquad
+ \|\mathcal L_\alpha\|<\frac{0.13}{0.405}.
+\]
+On the $\alpha$ eigenspace it equals the physical tail amplitude:
+$u=\alpha^{-1}JV_0^*f$ satisfies $P_\alpha u=0$ and $V_0u=f$.
+For the trial vector, the exact identity $JQ_0=\alpha I+JP_\alpha$
+instead gives
+\[
+ \mathcal L_\alpha f_0
+    =F_\alpha(u_0)+\alpha^{-1}F_\alpha(JP_\alpha u_0).
+\]
+Thus no trial value is identified with an eigenvector value.
+
+Now $|\alpha_0-a_0|<0.012$, and
+\eqref{boundary:eq:uniform-residue-bounds:rr} yields
+\[
+ |F_{\alpha_0}(u_0)-F_{a_0}(u_0)|<0.012(1.001),\qquad
+ \|P_{\alpha_0}u_0\|<0.00622+0.012(1.001).
+\]
+Combining these bounds with the full complementary projection error,
+\begin{align*}
+ |\mathcal L_{\alpha_0}\Pi f_0|
+ &>0.069-0.012(1.001)\\
+ &\quad-\frac{0.13}{0.405}
+       \left(0.00622+0.012(1.001)+\frac{0.00622}{0.049}\right)
+ >0.0103.
+\end{align*}
+The final inequality is rational and is checked independently by the
+same verifier.  Since $\|\Pi f_0\|\le\|f_0\|\le\|u_0\|<1.001$,
+normalizing the nonzero eigenfunction $\Pi f_0$ gives $|\eta|>0.01$.
+Simplicity makes this magnitude independent of the phase of the
+normalized eigenfunction.  The asserted parity consequence now
+follows from Corollary~\ref{v13:cor:leading-parity-splitting}.
+\end{proof}
+

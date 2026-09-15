@@ -2,7 +2,7 @@
 
 **Package:** [`connes-cvs` on PyPI](https://pypi.org/project/connes-cvs/) - an open-source arbitrary-precision implementation of the Connes-van Suijlekom Galerkin matrix.
 
-**Package version:** `0.3.1`. The published papers pin the preserved historical release `0.2.2` (2026-04-19).
+**Package version:** `0.3.1`. The Riemann-zeros paper pins the preserved historical release `0.2.2` (2026-04-19) for its package-based reproduction. The sine Loewner paper has independent verification programs and does not use this package.
 
 ## Source files
 
@@ -25,7 +25,7 @@ The package intentionally has no automatic precision recommender or a-priori “
 | 0.1.0 | 2026-04-13 | Repository tag only; **never uploaded to PyPI** | Initial public repository release and Paper Zenodo Version 1 lineage. |
 | 0.2.0 | 2026-04-14 | Live on PyPI | Memoized/fused archimedean kernel; historical A/B record reports 2.06x on the psi-cache phase and agreement in all 80 printed lambda digits. |
 | 0.2.1 | 2026-04-19 | **Yanked on PyPI** | Internal `__version__` drift; superseded the same day. |
-| 0.2.2 | 2026-04-19 | Preserved on PyPI | Version-string fix. This is the package version pinned by the published papers. |
+| 0.2.2 | 2026-04-19 | Preserved on PyPI | Version-string fix. This is the historical package version pinned for the Riemann-zeros paper. |
 | 0.3.0 | 2026-08-12 | Live on PyPI | Full-precision `extract_zeros(c=...)`, float-`L` warning, validated runner/sweep, finite-matrix Arb residual bound, hardening and real regression gates. |
 | 0.3.1 | 2026-08-14 | Current package version | Documentation and metadata only; no code or numerical change. Corrects the `build_galerkin_matrix` basis docstring, replaces paper version DOIs with concept DOIs so the frozen PyPI description cannot go stale, and ships the current `ERRATA.md`. |
 
@@ -35,7 +35,7 @@ The package intentionally has no automatic precision recommender or a-priori “
 pip install connes-cvs
 pip install connes-cvs==0.3.1          # this package version
 pip install connes-cvs==0.2.0          # retained historical PyPI release
-pip install connes-cvs==0.2.2          # version pinned by the papers
+pip install connes-cvs==0.2.2          # historical Riemann-zeros reproduction
 ```
 
 To test a source checkout, clone the repository and install it in an isolated environment:

@@ -1,0 +1,167 @@
+\section{An explicit endpoint equation and quantitative gap limits}
+\label{v12:sec:boundary-mellin}
+
+We make the limiting spectral equation explicit and derive the physical
+tail exponent. Unlike the adjacent-interval transform diagonalized in
+\cite[Sections~2--4]{BertolaEtAl2020}, this pencil retains same-interval
+Hilbert blocks and a phased exchange, producing four endpoint channels.
+
+For $\theta=2\pi l$, define on $L^2(-1,1)$
+\[
+ Q_0=\tfrac12(I+iH),\qquad
+ Hu(\xi)=\frac1\pi\operatorname{pv}\int_{-1}^1
+                   \frac{u(\eta)}{\xi-\eta}\,d\eta,
+\]
+\[
+ (J_\theta u)(\xi)=
+ \begin{cases}e^{-i\theta}u(\xi-1),&0<\xi<1,\\
+ e^{i\theta}u(\xi+1),&-1<\xi<0,
+ \end{cases}
+ \qquad P_\lambda=Q_0-\lambda J_\theta.
+\]
+
+\begin{proposition}[Exact frequency pencil]\label{v12:prop:frequency-pencil}
+For every nonzero $\lambda$, the physical operator $L_l\mathcal G L_l$
+has eigenvalue $\lambda$ precisely when $P_\lambda$ has a nonzero kernel.
+The correspondence preserves the algebraic multiplicity of an isolated
+eigenvalue.  If $P_\lambda u=0$, its physical eigenfunction is the
+restriction to $X>l$ of
+\begin{equation}\label{v12:eq:physical-continuation}
+ h(X)=\int_{-1}^1e^{-2\pi i(X-l)\xi}u(\xi)\,d\xi,
+ \qquad \mathcal G L_lh=\lambda h\quad\hbox{on }\mathbb R.
+\end{equation}
+Equivalently, the frequency equation is
+$Hu=i(I-2\lambda J_\theta)u$.
+\end{proposition}
+\begin{proof}
+Let $V_l$ restrict inverse Fourier transformation from $L^2(-1,1)$ to
+$L^2(l,\infty)$, and let $M_lu(\xi)=e^{2\pi il\xi}u(\xi)$.
+Direct integration gives $L_l\mathcal G L_l=V_lJV_l^*$ and
+$V_l^*V_l=M_lQ_0M_l^*$, where $J=J_0$.
+The bounded-product identity used in
+Theorem~\ref{boundary:thm:one-cell-flow} preserves nonzero spectra
+and isolated algebraic multiplicities. Conjugation by $M_l$ gives
+$J_\theta Q_0$ and $P_\lambda$. The map $V_lM_l$ is injective by
+entire uniqueness. Finally $Q_0u=\lambda J_\theta u$ implies
+$JV_l^*V_lM_lu=\lambda M_lu$; inverse transformation on the whole line
+gives \eqref{v12:eq:physical-continuation}.
+\end{proof}
+
+The endpoint channels are $u(t),u(t-1),u(1-t),u(-t)$ as $t\downarrow0$.
+For real Mellin frequency $\omega$, put
+\[
+ q=\frac{1+\tanh\pi\omega}{2},\qquad
+ r=\frac{1-\tanh\pi\omega}{2},\qquad
+ c=\tfrac12\operatorname{sech}\pi\omega,
+ \qquad D_\theta=\operatorname{diag}(1,e^{i\theta},e^{-i\theta},1).
+\]
+The endpoint pencil has the explicit multiplier
+\begin{equation}\label{v12:eq:endpoint-symbol}
+ m_{\lambda,\theta}(\omega)=D_\theta
+ \begin{pmatrix}
+ q&-\lambda&0&ic\\-\lambda&q&0&0\\
+ 0&0&r&-\lambda\\-ic&0&-\lambda&r
+ \end{pmatrix}D_\theta^*,\qquad
+ \det m_{\lambda,\theta}
+ =\lambda^2\left(\lambda^2-\frac{1+\tanh^2\pi\omega}{2}\right).
+\end{equation}
+Its inverse is its adjugate divided by the displayed scalar determinant.
+In particular it is a bounded Mellin multiplier for $\lambda\in\Omega$.
+
+For $K\in\mathfrak S_2$ we use the regularized determinant
+$\det_2(I+K)=\det((I+K)e^{-K})$; the operator inside the latter
+determinant differs from the identity by a trace-class operator
+\cite[Chapter~9]{Simon2005}.
+
+\begin{theorem}[Explicit scalar equation in the central gaps]
+\label{v12:thm:explicit-gap-equation}
+The cutoff construction in Section~\ref{v12:app:mellin-proofs} gives
+explicit operators $E,\mathcal I,M_\lambda,N_\lambda,\Delta_e,\Delta_i$, where
+$M_\lambda^{-1}$ has symbol $m_{\lambda,\theta}^{-1}$ from
+\eqref{v12:eq:endpoint-symbol}, $N_\lambda^{-1}$ is a piecewise constant
+Fourier multiplier, and $\Delta_e,\Delta_i$ have the elementary
+Hilbert--Schmidt kernels \eqref{v12:eq:endpoint-defect-kernel} and
+\eqref{v12:eq:interior-defect-kernel}.  Define
+\begin{align}
+ R_\lambda&=E^*M_\lambda^{-2}E+\mathcal I^*N_\lambda^{-2}\mathcal I,\nonumber\\
+ K_\lambda&=E^*(M_\lambda^{-2}\Delta_eP_\lambda
+                          +M_\lambda^{-1}\Delta_e)
+          +\mathcal I^*(N_\lambda^{-2}\Delta_iP_\lambda
+                          +N_\lambda^{-1}\Delta_i).
+ \label{v12:eq:explicit-preconditioner}
+\end{align}
+Then $R_\lambda P_\lambda^2=I+K_\lambda$, with $K_\lambda$ holomorphic
+in $\mathfrak S_2$ on $\Omega$.  For every real
+$\lambda\in(-g,0)\cup(0,g)$,
+\begin{equation}\label{v12:eq:scalar-quantization}
+ \det{}_2(I+K_\lambda)=0
+ \quad\Longleftrightarrow\quad
+ \lambda\in\sigma_p(L_l\mathcal G L_l).
+\end{equation}
+An eigenvalue of multiplicity $k$ is a zero of order $2k$.
+Here $R_\lambda\ge(1+|\lambda|)^{-2}I$ on the real gaps; it remains
+invertible on a neighborhood of each such point.  No global complex
+invertibility of $R_\lambda$ is asserted.
+\end{theorem}
+
+\begin{theorem}[Endpoint exponent and physical tails]
+\label{v12:thm:boundary-tail}
+Let $\lambda\in(-g,0)\cup(0,g)$ and
+$u\in\ker P_\lambda\setminus\{0\}$, and define
+\begin{equation}\label{v12:eq:gap-exponent}
+ \beta(\lambda)=\frac1\pi\arctan\sqrt{1-2\lambda^2},\qquad
+ \nu=\tfrac12+\beta,\qquad
+ \gamma(\lambda)=2\beta
+ =\frac1\pi\arccos\frac{\lambda^2}{1-\lambda^2}.
+\end{equation}
+There is a possibly zero vector $v=(v_1,v_2,v_3,v_4)^T$ in the
+one-dimensional kernel of $m_{\lambda,\theta}(-i\beta)$ such that, for
+every fixed $\beta<a<1/2$,
+\begin{equation}\label{v12:eq:endpoint-expansion}
+ (u(t),u(t-1),u(1-t),u(-t))^T
+       =t^{\nu-1}v+O(t^{-1/2+a}).
+\end{equation}
+The expansion holds after any fixed number of derivatives, with the
+corresponding power lost from the remainder.  The continuation in
+\eqref{v12:eq:physical-continuation}, with $\sigma=\operatorname{sgn}T$,
+satisfies
+\begin{align}
+ h(l+T)=\frac{\Gamma(\nu)}{(2\pi|T|)^\nu}
+ \big[&e^{-i\sigma\pi\nu/2}(v_1+e^{2\pi iT}v_2)
+       +e^{i\sigma\pi\nu/2}(v_4+e^{-2\pi iT}v_3)\big]
+       +O(|T|^{-1/2-a}).
+ \label{v12:eq:physical-tail}
+\end{align}
+In particular, $|h(l+T)|\le C(1+|T|)^{-\nu}$.  More precisely,
+\begin{equation}\label{v12:eq:tail-mass}
+ \int_L^\infty|h(l+\sigma T)|^2\,dT
+   =C_\sigma L^{-\gamma(\lambda)}+O(L^{-\beta-a}),
+\end{equation}
+where
+\[
+ C_\sigma=\frac{\Gamma(\nu)^2}{(2\pi)^{2\nu}(2\beta)}
+ \left(|e^{-i\sigma\pi\nu/2}v_1+e^{i\sigma\pi\nu/2}v_4|^2
+                            +|v_2|^2+|v_3|^2\right).
+\]
+Both constants are positive if $v\ne0$.  Their vanishing is not excluded.
+\end{theorem}
+
+\begin{corollary}[Rate for each isolated boundary cluster]
+\label{v12:cor:gap-cluster-rate}
+Fix $l,h$ and an isolated eigenvalue $\alpha$ in either open central gap
+of one or both boundary operators in Theorem~\ref{v11:thm:gap-limits}.
+Let $k$ be its total boundary multiplicity.  For integer $m\to\infty$,
+the $k$ eigenvalues of $P_{(l,m+h)}\mathcal G P_{(l,m+h)}$ converging
+to $\alpha$ satisfy
+\[
+ \max_{1\le j\le k}|\lambda_j-\alpha|
+       =O(m^{-\gamma(\alpha)}).
+\]
+The constants may depend on the fixed endpoints, eigenvalue, and
+separating interval.  In the centered case, each of the two parity
+clusters in Corollary~\ref{v11:cor:gap-parity} obeys this rate.
+\end{corollary}
+
+Section~\ref{v12:app:mellin-proofs} proves the claims and supplies a
+finite-rank error scheme. The equation does not evaluate its roots in
+closed form; the tail and rate apply to every isolated root.

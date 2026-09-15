@@ -1,0 +1,347 @@
+\section{A finite trace law with a growing scale}\label{v7:sec:finite-trace}
+The fixed-parameter critical limit alone does not transfer a large-$\tau$
+trace asymptotic to growing matrices.  The midpoint realization gives a quantitative sampling estimate; the
+frequency-space comparison below additionally bounds trace errors independently
+of the dimension.  Its natural parameter is
+$\tau=d\varepsilon/2$, where $d=2N+1$; it differs by $\varepsilon/2$ from the
+scale $\tau_N=N\varepsilon$ used in Theorem~\ref{thm:nystrom}.
+
+\begin{theorem}[Uniform sampling and trace transfer]\label{v7:thm:finite-transfer}
+Let $h=2/d$, $x_m=mh$, and let $\iota_N$ send the $m$th coordinate vector
+to $h^{-1/2}\mathbf1_{[x_m-h/2,x_m+h/2]}$ in $L^2[-1,1]$.
+For $0<\varepsilon<1/2$ and $\tau=d\varepsilon/2$,
+\begin{equation}\label{v7:eq:nuclear-transfer}
+ \|\iota_N A_N(\varepsilon)\iota_N^*-\mathcal K_\tau\|_1
+ \le\frac{16\pi\tau^2}{3d}.
+\end{equation}
+More sharply, for every real $f\in C^2([-1,1])$ with $f(0)=0$,
+\begin{equation}\label{v7:eq:smooth-transfer}
+ \left|\tr f(A_N(\varepsilon))-\tr f(\mathcal K_\tau)
+                -f'(0)\Delta_{N,\varepsilon}\right|
+ \le\frac{5\pi^2}{9}d\varepsilon^3\|f''\|_\infty,
+\end{equation}
+where the exact linear correction is
+\begin{equation}\label{v7:eq:linear-correction}
+ \Delta_{N,\varepsilon}
+ =2\sin(\pi d\varepsilon)
+       \left(\frac{\varepsilon}{\sin(\pi\varepsilon)}-\frac1\pi\right),
+ \qquad |\Delta_{N,\varepsilon}|\le\frac{\pi^2\varepsilon^2}{6}.
+\end{equation}
+All estimates are uniform in $N$ and $\varepsilon$ on this range.
+\end{theorem}
+
+\begin{proof}
+Put $P=\iota_N\iota_N^*$, $Q=I-P$, and let
+$U_\tau:L^2[-1,1]\to L^2(-\tau,\tau)$ have kernel $e^{2\pi i\xi x}$.
+Let $B$ have kernel $e^{2\pi i\xi x_m}$ for $x$ in the $m$th cell.
+The exchange $J_\tau$ from \eqref{eq:v6:4.1} gives
+\[
+ \mathcal K_\tau=U_\tau^*J_\tau U_\tau,\qquad
+ \iota_NA_N(\varepsilon)\iota_N^*=B^*J_\tau B,
+ \qquad \|U_\tau\|_2=\|B\|_2=2\sqrt\tau.
+\]
+Indeed $hK_\tau(x_m,x_n)=A_N(\varepsilon)_{mn}$, including the diagonal.
+Since $|e^{ia}-e^{ib}|\le|a-b|$,
+\[
+ \|U_\tau-B\|_2^2\le
+ 4\pi^2\int_{-\tau}^\tau\xi^2d\xi
+       \sum_m\int_{x_m-h/2}^{x_m+h/2}(x-x_m)^2dx
+ =\frac{4\pi^2h^2\tau^3}{9}.
+\]
+Factoring the difference of the two quadratic forms proves
+\eqref{v7:eq:nuclear-transfer} by the Hilbert--Schmidt product inequality.
+
+For the sharper estimate let $S$ multiply by
+$s(\xi)=\sin(\pi h\xi)/(\pi h\xi)$, with $s(0)=1$.
+Exact integration over a cell gives $U_\tau P=SB$, and therefore
+$P\mathcal K_\tau P=B^*SJ_\tau SB$.  Write $C=U_\tau^*U_\tau=C_{2\tau}$ and
+\[
+ \eta=\tr QCQ=\|U_\tau Q\|_2^2
+ =2\int_{-\tau}^\tau(1-s(\xi)^2)\,d\xi
+ \le\bar\eta:=\frac{4\pi^2h^2\tau^3}{9}
+ =\frac{2\pi^2}{9}d\varepsilon^3.
+\]
+Here $|\pi h\xi|\le\pi h\tau=\pi\varepsilon<\pi/2$ for $|\xi|\le\tau$, so
+$0<s\le1$ on that range, and $1-\sin z/z\le z^2/6$ gives
+$1-s(\xi)^2\le2(1-s(\xi))\le(\pi h\xi)^2/3$.
+On each exchanged frequency pair $\xi,\xi-\tau$, $0<\xi<\tau$,
+\[
+ 0\le1-s(\xi)s(\xi-\tau)
+ \le\frac{\pi^2h^2}{6}\bigl(\xi^2+(\xi-\tau)^2\bigr)
+ \le\frac{\pi^2h^2\tau^2}{6}.
+\]
+It follows that
+\begin{equation}\label{v7:eq:sample-compression}
+ \|B^*J_\tau B-P\mathcal K_\tau P\|_1
+ \le\|B\|_2^2\|J_\tau-SJ_\tau S\|
+ \le\tfrac32\bar\eta.
+\end{equation}
+
+Set $M=\|f''\|_\infty$ and $r(x)=f(x)-f'(0)x$.
+Then $\operatorname{Lip}(r)\le M$ and $|r(x)|\le Mx^2/2$.
+Scalar Taylor expansion in the spectral measure of $\mathcal K_\tau$,
+for an eigenbasis of $P\mathcal K_\tau P$ on $P L^2[-1,1]$, yields
+\[
+ |\tr r(P\mathcal K_\tau P)-\tr P r(\mathcal K_\tau)P|
+ \le\tfrac12M\|Q\mathcal K_\tau P\|_2^2\le\tfrac12M\eta.
+\]
+The linear Taylor term vanishes because each basis vector is an
+eigenvector of the compression.  Positivity of the operator is not
+needed for this scalar argument.  The last inequality uses $\|Q\mathcal K_\tau P\|_2\le\|Q\mathcal K_\tau\|_2$ and
+$\mathcal K_\tau^2\le C$ from \eqref{eq:positive-split}.
+The same order and $|r(\mathcal K_\tau)|\le M\mathcal K_\tau^2/2$ give
+$|\tr Qr(\mathcal K_\tau)Q|\le M\eta/2$.
+Together with \eqref{v7:eq:sample-compression} and the scalar trace
+inequality of Lemma~\ref{rev5:lem:trace-lip}, this bounds the difference
+of the two $r$-traces by $5M\bar\eta/2$.
+The remaining linear traces are exactly \eqref{v7:eq:linear-correction},
+by the finite cosine sum and \eqref{eq:2.8}.
+Finally $0\le\pi\varepsilon-\sin(\pi\varepsilon)
+\le(\pi\varepsilon)^3/6$ and
+$\sin(\pi\varepsilon)\ge2\varepsilon$ prove its bound.
+\end{proof}
+
+\subsection{A comparison independent of the matrix dimension}
+\label{v11:sec:direct-transfer}\label{v10:sec:finite-lipschitz}
+The frequency-space comparison gives finite trace bounds independent of
+the matrix dimension. For $0<\varepsilon<1/2$, define
+\begin{equation}\label{v11:eq:transfer-constants}
+ L_\varepsilon=2\varepsilon\csc(2\pi\varepsilon)-\frac1\pi,
+ \qquad
+ \Gamma_\varepsilon=
+ \frac{16\sqrt{2/\pi}\,\varepsilon}
+ {(1-2\varepsilon)\sqrt{1-4\varepsilon^2}}.
+\end{equation}
+These are $O(\varepsilon^2)$ and $O(\varepsilon)$ respectively as
+$\varepsilon\downarrow0$, and are bounded on
+$0<\varepsilon\le1/2-\delta$ for each fixed $\delta>0$.
+
+\begin{theorem}[Direct finite trace comparison]\label{v11:thm:direct-transfer}
+\label{v10:thm:finite-lipschitz}
+Let $d=2N+1$, $0<\varepsilon<1/2$ and $\tau=d\varepsilon/2$.
+For every real $f\in C^2([-1,1])$, $f(0)=0$,
+\begin{equation}\label{v11:eq:direct-smooth}
+ \left|\tr f(A_N(\varepsilon))-\tr f(\mathcal K_\tau)
+                 -f'(0)\Delta_{N,\varepsilon}\right|
+ \le L_\varepsilon\|f''\|_\infty,
+\end{equation}
+where $\Delta_{N,\varepsilon}$ is \eqref{v7:eq:linear-correction}.
+Every real Lipschitz $f$ on $[-1,1]$ with $f(0)=0$ satisfies
+\begin{equation}\label{v11:eq:direct-lipschitz}
+ \left|\tr f(A_N(\varepsilon))-\tr f(\mathcal K_\tau)\right|
+ \le\Gamma_\varepsilon\operatorname{Lip}(f).
+\end{equation}
+Both estimates are independent of $N$; no lower bound on $\tau$ is needed.
+Together with the nuclear sampling estimate they give
+\begin{equation}\label{v10:eq:finite-lip-error}
+ \mathsf E_{N,\varepsilon}
+ =\min\left\{\Gamma_\varepsilon,\frac{16\pi\tau^2}{3d}\right\},
+\end{equation}
+\begin{equation}\label{v10:eq:finite-lipschitz}
+ \left|\tr f(A_N(\varepsilon))-\tr f(\mathcal K_\tau)\right|
+ \le\mathsf E_{N,\varepsilon}\operatorname{Lip}(f).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+On $I=(-\varepsilon,\varepsilon)$ let $J$ exchange its two halves by
+translation through $\varepsilon$.  The two positive trace-class
+contractions
+\[
+ C_d(x,y)=\frac{\sin(\pi d(x-y))}{\sin(\pi(x-y))},\qquad
+ C_d^0(x,y)=\frac{\sin(\pi d(x-y))}{\pi(x-y)}
+\]
+have trace $2d\varepsilon$.  They are the restrictions of the Fourier
+projections onto modes $-N,\ldots,N$ on the unit circle and onto
+$(-d/2,d/2)$ on the real line, respectively.  For $C\ge0$ put
+$A(C)=C^{1/2}JC^{1/2}$.  Polar decomposition of the corresponding
+restriction maps identifies the nonzero spectra of $A(C_d)$ and
+$A(C_d^0)$ with those of $A_N(\varepsilon)$ and $\mathcal K_\tau$,
+respectively, including multiplicities.  Indeed the first exchange
+matrix element is
+\[
+ 2\cos(\pi\varepsilon(m+n))
+       \frac{\sin(\pi\varepsilon(m-n))}{\pi(m-n)},
+\]
+with continuous diagonal; the same formula in continuous frequencies,
+followed by dilation from $(-d/2,d/2)$ to $(-1,1)$, gives $K_\tau$.
+
+We first record a covariance trace estimate.  If $C_0,C_1$ are positive
+trace-class contractions and $J$ is a self-adjoint contraction, then
+\begin{equation}\label{v11:eq:covariance-trace}
+ \left|\tr f(A(C_1))-\tr f(A(C_0))
+       -f'(0)\tr J(C_1-C_0)\right|
+ \le\|f''\|_\infty\|C_1-C_0\|_1.
+\end{equation}
+For a polynomial $p$ with $p(0)=0$, cyclicity gives
+$\tr p(A(C))=\tr p(JC)$.  Along $C_t=C_0+t(C_1-C_0)$ the derivative
+after subtracting the affine part has gradient
+\[
+ p'(JC_t)J-p'(0)J
+ =JC_t^{1/2}g(A(C_t))C_t^{1/2}J,
+ \qquad g(x)=\frac{p'(x)-p'(0)}x.
+\]
+The continuous value at zero is understood.  Its norm is at most
+$\|p''\|_\infty$.  Integrate against $C_1-C_0$ in trace duality.
+Approximate $f''$ uniformly by polynomials and integrate twice,
+preserving $f(0)$ and $f'(0)$, to obtain
+\eqref{v11:eq:covariance-trace}.  The trace passage follows from
+$\|A(C)\|_1\le\tr C$ and $|p(x)-f(x)|\le
+\|p'-f'\|_\infty|x|$.
+
+Put $h(u)=\csc(\pi u)-1/(\pi u)$, with $h(0)=0$.
+Pairing opposite poles in the partial fraction expansion of the
+cosecant and then expanding geometrically gives
+\[
+ h(u)=\frac2\pi\sum_{k\ge0}\eta(2k+2)u^{2k+1},\qquad |u|<1,
+ \quad \eta(s)=\sum_{j\ge1}(-1)^{j+1}j^{-s}\in(0,1).
+\]
+The rank-one binomial expansion of $(x-y)^m$ on $I$ gives nuclear norm
+at most $2\varepsilon(2\varepsilon)^m$.  Positivity of the displayed
+Taylor coefficients therefore bounds the operator $H_h$ with kernel
+$h(x-y)$ by
+\[
+ \|H_h\|_1\le2\varepsilon h(2\varepsilon)=L_\varepsilon.
+\]
+Now $C_d-C_d^0$ has kernel $\sin(\pi d(x-y))h(x-y)$, half the
+difference of two unitary modulations of $H_h$.  Hence
+$\|C_d-C_d^0\|_1\le L_\varepsilon$.  Moreover
+\[
+ \tr J(C_d-C_d^0)=2\varepsilon\sin(\pi d\varepsilon)h(\varepsilon)
+                 =\Delta_{N,\varepsilon}.
+\]
+Equation~\eqref{v11:eq:covariance-trace} proves
+\eqref{v11:eq:direct-smooth}.
+
+For the Lipschitz estimate set $q=2\varepsilon$ and
+$\alpha=8\varepsilon^2/[\pi(1-4\varepsilon^2)]$.
+Truncating the series for $h$ before $k=K$ gives a kernel of rank at most
+$2K$; the two sine modulations have combined rank at most $4K$.
+The remaining nuclear norm is at most $\alpha q^{2K}$.
+The singular values of $D=C_d-C_d^0$ thus satisfy
+\[
+ s_{4K+1}(D)\le\alpha q^{2K},\qquad
+ \tr|D|^{1/2}\le\frac{4\sqrt\alpha}{1-q}.
+\]
+We use the following square-root inequality, a special case of the
+operator-function norm comparisons in \cite{Ando1988}:
+\begin{equation}\label{v11:eq:sqrt-nuclear}
+ \|\sqrt{X}-\sqrt{Y}\|_1\le\tr|X-Y|^{1/2}\qquad(X,Y\ge0).
+\end{equation}
+Here is a proof of the precise compact-operator form needed.  In finite
+dimension write $X-Y=D_+-D_-$ and $Z=X+D_-=Y+D_+$.
+Operator monotonicity of the square root gives
+$\sqrt Z-\sqrt X\ge0$ and $\sqrt Z-\sqrt Y\ge0$.
+For positive $U,V$, the triangle inequality for the nuclear norm of
+the row operator $[\sqrt U\ \sqrt V]$ gives
+$\tr\sqrt{U+V}\le\tr\sqrt U+\tr\sqrt V$.
+Consequently
+\[
+ \|\sqrt X-\sqrt Y\|_1
+ \le\tr(\sqrt Z-\sqrt X)+\tr(\sqrt Z-\sqrt Y)
+ \le\tr\sqrt{D_-}+\tr\sqrt{D_+}.
+\]
+For compact $X,Y$, compress both by common increasing finite-rank
+projections.  The square roots converge in operator norm, and
+$s_j(P(X-Y)P)\le s_j(X-Y)$.  Lower semicontinuity of each finite
+Ky Fan sum, followed by passage to the number of singular values,
+proves \eqref{v11:eq:sqrt-nuclear} whenever its right side is finite.
+The square-root monotonicity used here also follows directly by
+integrating $x/(t+x)$ in the standard positive integral formula for
+$\sqrt{x}$.
+
+Since the two covariances are contractions,
+\[
+ \|A(C_d)-A(C_d^0)\|_1
+ \le2\|\sqrt{C_d}-\sqrt{C_d^0}\|_1
+ \le\frac{8\sqrt\alpha}{1-2\varepsilon}=\Gamma_\varepsilon.
+\]
+The scalar trace inequality of Lemma~\ref{rev5:lem:trace-lip},
+together with the exact spectral identifications, proves
+\eqref{v11:eq:direct-lipschitz}.
+Finally, \eqref{v7:eq:nuclear-transfer} and the scalar trace inequality
+of Lemma~\ref{rev5:lem:trace-lip}, together with
+\eqref{v11:eq:direct-lipschitz}, prove
+\eqref{v10:eq:finite-lipschitz}.
+\end{proof}
+
+
+\begin{corollary}[Finite trace, Schatten and gap bounds]
+\label{v7:cor:finite-law}\label{v10:cor:finite-band-schatten}
+\label{v10:cor:finite-gap-plateau}\label{rem:finite-counts}
+Let $0<\varepsilon<1/2$, $d=2N+1$, $\tau=d\varepsilon/2\ge2$,
+$g=2^{-1/2}$ and $C_0=2C_V+4b(1/2)$.
+For real $f\in C^2([-1,1])$ with $f(0)=0$,
+\begin{equation}\label{v7:eq:finite-law}
+ \tr f(A_N(\varepsilon))
+ =d\varepsilon[f(1)+f(-1)]+\varkappa(f)\log\tau
+       +\mathsf R_{N,\varepsilon}(f),
+\end{equation}
+where, writing $M_j=\|f^{(j)}\|_\infty$,
+\[
+ |\mathsf R_{N,\varepsilon}(f)|
+ \le C_{\mathrm{tr}}(M_1+M_2)
+       +\frac{\pi^2\varepsilon^2}{6}|f'(0)|
+       +\min\{L_\varepsilon,\tfrac{5\pi^2}{9}d\varepsilon^3\}M_2.
+\]
+More generally, if $f(0)=0$, $f$ is real $L$-Lipschitz and has
+$C^{1,1}$ restrictions to both closed outer bands, let $M$ be the
+larger Lipschitz constant of its derivatives there. Then
+\begin{equation}\label{v10:eq:finite-band-law}
+ \left|\tr f(A_N(\varepsilon))
+   -d\varepsilon[f(1)+f(-1)]-\varkappa(f)\log\tau\right|
+ \le(A_{\rm band}+\mathsf E_{N,\varepsilon})L+B_2M.
+\end{equation}
+In particular, for $p\ge1$ and
+$D_p=p(p-1)\max\{1,g^{p-2}\}$,
+\begin{equation}\label{v10:eq:finite-schatten-law}
+ \left|\|A_N(\varepsilon)\|_p^p
+       -2d\varepsilon-\varkappa_p\log\tau\right|
+ \le p(A_{\rm band}+\mathsf E_{N,\varepsilon})+B_2D_p.
+\end{equation}
+All these remainders are bounded uniformly for
+$0<\varepsilon\le1/2-\delta$ with fixed $\delta>0$, including fixed
+$\varepsilon$ as $N\to\infty$.
+
+For the gap bounds put $C_{\rm fin}=C_0+\mathsf E_{N,\varepsilon}$ and
+$w_g(x)=\min\{|x|,(g-|x|)_+\}$. Choose a nearest integer $q$ to $\tau$
+and set $n=2q$. For $0<a<g$ and either sign, one has
+\[
+ \begin{gathered}
+ \sum_j w_g(\lambda_j(A_N(\varepsilon)))\le C_{\rm fin},\\
+ n-\frac{C_{\rm fin}}{g-a}
+ \le N^{(N)}_\pm(a;\varepsilon)
+ \le n+\frac{C_{\rm fin}}a,\qquad |n-2\tau|\le1.
+ \end{gathered}
+\]
+where $N^{(N)}_\pm(a;\varepsilon)=
+\#\{j:\pm\lambda_j(A_N(\varepsilon))>a\}$.
+\end{corollary}
+\begin{proof}
+Combine Theorem~\ref{T10:conj:law} with the two smooth comparisons
+\eqref{v7:eq:smooth-transfer} and \eqref{v11:eq:direct-smooth}, retaining
+\eqref{v7:eq:linear-correction}. The band estimate follows from
+Theorem~\ref{v7:thm:band-regularity} and
+\eqref{v10:eq:finite-lipschitz}. For $f(x)=|x|^p$, the two derivative
+constants are $L=p$ and $M=D_p$ (including $D_1=0$), and
+Corollary~\ref{cor:schatten} gives $\varkappa(f)=\varkappa_p$.
+
+The function $w_g$ is nonnegative and $1$-Lipschitz, so
+\eqref{v10:eq:finite-lipschitz} and Proposition~\ref{v7:prop:gap-mass}
+prove the weighted bound. The comparison with the star matrix $M_n$
+in Proposition~\ref{v7:prop:count-plateau}, followed by
+\eqref{v10:eq:finite-lipschitz}, bounds every Lipschitz trace difference
+between $A_N(\varepsilon)$ and $M_n$ by
+$C_{\rm fin}\operatorname{Lip}(f)$. Applying the same two ramp functions
+as in that proposition gives the strict counts.
+\end{proof}
+
+The signed transition counts also transfer with error
+$O((\log\tau)^{2/3})$, uniformly on compact subsets of the outer bands,
+with the constant also depending on $\delta$: the finite smooth error
+has the same $M_1+M_2$ dependence used
+in the smoothing proof of Theorem~\ref{v7:thm:cumulative-count}.
+The nuclear term in \eqref{v10:eq:finite-lip-error} retains the vanishing
+fixed-$\tau$ comparison. The smooth minimum additionally retains its
+exact linear correction, with no additive $C_0$ term.
+

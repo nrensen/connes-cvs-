@@ -54,11 +54,7 @@ def test_every_package_test_example_and_public_data_file_is_allowlisted():
         "data/third_party/karl-keysingularity",
     ):
         assert _relative_files(directory) <= sdist, directory
-    for directory in (
-        "papers/2_guinand_weil_dictionary_tail_order",
-        "papers/3_matrix_von_mangoldt_measure",
-    ):
-        assert not any(name.startswith(directory + "/") for name in sdist)
+    assert not any(name.startswith("papers/") for name in sdist)
 
     expected_tests = _relative_files("tests") - {
         "tests/test_paper2_public_artifacts.py"
@@ -88,6 +84,7 @@ def test_every_package_test_example_and_public_data_file_is_allowlisted():
 def test_wheel_manifest_is_exactly_the_public_package_plus_metadata():
     manifest = _manifest()
     wheel = set(manifest["wheel_files"])
+    assert not any(name.startswith("papers/") for name in wheel)
     package_files = _relative_files("connes_cvs")
     assert {name for name in wheel if name.startswith("connes_cvs/")} == (
         package_files

@@ -2,7 +2,8 @@
 # .gitignore for connes-cvs
 # =============================================================
 
-# ---- Python / build artifacts ----
+# ---- Python caches and build artifacts ----
+# Generated build output is recreated from source and is not versioned.
 __pycache__/
 *.pyc
 *.pyo

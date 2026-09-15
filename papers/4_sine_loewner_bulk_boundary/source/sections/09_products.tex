@@ -1,0 +1,221 @@
+\section{Signed quadratic products and finite oscillations}
+Put $D_R=4\tau-\tr C_{2\tau}^2$,
+$D_J=4\tau-\tr\mathcal K_\tau^2$ and
+$S=\tr(\mathcal K_\tau-\mathcal K_\tau C_{2\tau})$.
+The operators $C_\pm=(C_{2\tau}\pm\mathcal K_\tau)/2$ are positive
+concentrations, not the positive/negative spectral parts of $\mathcal K_\tau$.
+
+\begin{proposition}[Signed quadratic constants]\label{prop:defect-identities}
+\label{thm:cross-exact}\label{cor:signed-constants}
+Exactly,
+\begin{equation}\label{short:eq:signed-defect}
+\tr(C_\pm-C_\pm^2)=\tfrac14(D_R+D_J\pm2S),\qquad
+\tr(C_+C_-)=\tfrac14(D_J-D_R).
+\end{equation}
+For $P=UU^*$, $A=(1-P)R_\tau P$ and $B=(1-P)J_\tau P$,
+$D_R=\|A\|_2^2$, $D_J=\|B\|_2^2$ and
+$S=\Re\langle A,B\rangle_{\mathrm{HS}}$.
+For every $\tau>0$,
+\begin{equation}\label{eq:cross-exact}
+S=\frac{4\log2}{\pi^2}\cos(2\pi\tau)+R_2,\qquad
+|R_2|\le\frac3{\pi^3\tau}.
+\end{equation}
+Writing $c_+=\cos(\pi\tau)$, $c_-=\sin(\pi\tau)$, it follows that
+\begin{align}
+\tr(C_\pm-C_\pm^2)&=
+\frac{3\log\tau+\log(2\pi^3)+3(1+\gamma)+16(\log2)c_\pm^4}{4\pi^2}
++r_\pm,
+\label{eq:defect-plus}\\
+\tr(C_+C_-)&=
+\frac{\log(2\pi\tau)+1+\gamma+2(\log2)\cos(4\pi\tau)}{4\pi^2}
++r_0,
+\label{eq:cross-product}
+\end{align}
+where $|r_\pm|\le21/(8\pi^3\tau)$ and $|r_0|\le9/(8\pi^3\tau)$.
+\end{proposition}
+\begin{proof}
+Expand $C_\pm^2$ and use trace cyclicity. Since
+$\Pi_\pm=(R_\tau\pm J_\tau)/2$ are projections, their compressed
+defects are $\|(1-P)\Pi_\pm P\|_2^2=\|A\pm B\|_2^2/4$,
+which also proves the Hilbert--Schmidt identities.
+For \eqref{eq:cross-exact}, put $t=2\pi\tau$ and use $u=x-y,v=x+y$
+in the product-kernel trace. Integrating first in $v$ gives
+\[
+\tr(\mathcal K_\tau C_{2\tau})=\frac4{\pi^2}
+\left[\sin t\int_0^t\frac{\sin^2(2w)}{2w^2}dw
+-\cos t\int_0^t\frac{\sin^2w\sin2w}{w^2}dw\right].
+\]
+The infinite integrals are $\pi/2$ and $\log2$
+(Lemma~\ref{lem:two-integrals}); their tails have modulus at most
+$1/(2t)$ and $1/t$. Subtracting from $\tr\mathcal K_\tau=2\sin t/\pi$
+proves \eqref{eq:cross-exact}.
+Insert the exact quadratic and prolate defect formulas in
+\eqref{short:eq:signed-defect}.
+With $c=\cos(2\pi\tau)$, the oscillating numerator is
+$2(\log2)(2c^2-1)\pm8(\log2)c
+=4(\log2)(1\pm c)^2-6\log2$.
+The error sums are $(1/2+4+6)/4=21/8$ and $(1/2+4)/4=9/8$
+in units $(\pi^3\tau)^{-1}$.
+In particular
+$D_R=\tr(C_+-C_+^2)+\tr(C_--C_-^2)-2\tr(C_+C_-)$.
+\end{proof}
+
+\begin{theorem}[Finite quadratic traces]\label{thm:hs-discrete}
+Let $s_k=\sin^2(\pi\varepsilon k)/(\pi^2k^2)$, $s_0=\varepsilon^2$.
+For $N\ge1$, $d=2N+1$, $0<\varepsilon<1/2$, exactly
+\begin{equation}\label{eq:hs-finite-identity}
+\tr A_N^2=\sum_{|k|\le2N}s_k\left[
+2(d-|k|)+\frac{2\sin(2\pi\varepsilon(d-|k|))}
+{\sin(2\pi\varepsilon)}\right].
+\end{equation}
+For each $\delta\in(0,1/2)$, uniformly in
+$0<\varepsilon\le1/2-\delta$ and $N\ge1$,
+\begin{equation}\label{eq:hs-discrete}
+2d\varepsilon-\tr A_N^2=
+\frac2{\pi^2}\left[\log(4N\sin(\pi\varepsilon))+1+\gamma
+ +(\log2)\cos(2\pi\varepsilon d)\right]
+ +O_\delta\left(\varepsilon^2+\frac1{N\varepsilon}\right).
+\end{equation}
+For $\Pi_W=C_N(2W)$, uniformly in $N\ge1$, $0<W\le1/4$,
+\begin{equation}\label{eq:dpss-discrete}
+\tr(\Pi_W-\Pi_W^2)=
+\frac{\log(4N\sin(2\pi W))+1+\gamma}{\pi^2}
+ +O((NW)^{-1}),
+\end{equation}
+with an absolute constant, including the endpoint $W=1/4$.
+\end{theorem}
+\begin{proof}
+Put $K=2N$, $\theta=2\pi\varepsilon$, $h=\pi\varepsilon$.
+The entrywise square is $4s_{m-n}\cos^2(h(m+n))$.
+For fixed $k=m-n$, the $M=d-|k|$ sums $m+n$ form the progression
+$-(M-1),-(M-3),\ldots,M-1$; its cosine sum is
+$\sin(M\theta)/\sin\theta$, proving \eqref{eq:hs-finite-identity}.
+Write its unmodulated and modulated parts as $\Sigma_1,\Sigma_2$.
+Parseval for an arc gives $\sum_{k\in\mathbb Z}s_k=\varepsilon$, so
+\[
+2d\varepsilon-\Sigma_1=4d\sum_{k>K}s_k+4\sum_{k=1}^Kks_k.
+\]
+For decreasing $b_k\downarrow0$, geometric and Abel summation give
+$|\sum_{k>K}b_k\cos(k\theta)|\le b_{K+1}/\sin(\theta/2)$.
+Using $b_k=k^{-2},k^{-1}$, $\sin(\pi\varepsilon)\ge2\varepsilon$,
+$\sum_{k>K}k^{-2}=K^{-1}+O(K^{-2})$ and
+$H_K=\log K+\gamma+O(K^{-1})$, one obtains
+\[
+4d\sum_{k>K}s_k=\frac2{\pi^2}+O((N\varepsilon)^{-1}),\quad
+4\sum_{k=1}^Kks_k=
+\frac2{\pi^2}[\log(4N\sin(\pi\varepsilon))+\gamma]
+ +O((N\varepsilon)^{-1}).
+\]
+Here $\sum_{k\ge1}\cos(k\theta)/k=-\log(2\sin(\theta/2))$ follows
+by Abel limiting the power series for $-\log(1-re^{i\theta})$;
+the displayed tail estimate justifies that limit.
+
+Set $g_c(w)=\sin^2w\cos(2w)/w^2$,
+$g_s(w)=\sin^2w\sin(2w)/w^2$, with values $1,0$ at zero, and $X=Kh$.
+The modulation is
+\[
+\Sigma_2=\frac2{\sin\theta}
+[\sin(\theta d)\Sigma_c-\cos(\theta d)\Sigma_s],\quad
+\Sigma_\bullet=\frac{2\varepsilon}{\pi}
+\left[\mathcal T_\bullet+\frac h2g_\bullet(X)\right],
+\]
+where $\mathcal T_\bullet$ is the trapezoidal rule on $[0,X]$
+with mesh $h$. Its half-weight at zero is the exact diagonal contribution;
+it cannot be discarded. Twice integrating the interpolation error on
+each cell gives
+$|\mathcal T_\bullet-\int_0^Xg_\bullet|
+\le h^2\int_0^\infty|g_\bullet''|/8=O(h^2)$.
+For finiteness, write $g_\bullet=\phi_\bullet/w^2$, where
+$\phi_c=\frac12\cos2w-\frac14-\frac14\cos4w$ and
+$\phi_s=\frac12\sin2w-\frac14\sin4w$:
+the origin is removable and, for $w\ge1$,
+$|g_\bullet''|\le6w^{-2}+8w^{-3}+6w^{-4}$.
+Also $h|g_\bullet(X)|/2\le1/(2K)$.
+Lemma~\ref{lem:two-integrals} gives
+$\int_0^\infty g_c=0$, $\int_0^\infty g_s=\log2$ with tails at most $1/X$.
+Consequently
+$\Sigma_2=-2\pi^{-2}(\log2)\cos(\theta d)
+ +O_\delta(\varepsilon^2+(N\varepsilon)^{-1})$,
+using $\theta/\sin\theta=1+O_\delta(\varepsilon^2)$.
+This proves \eqref{eq:hs-discrete}.
+Finally $\Sigma_1=2\tr C_N(\varepsilon)^2$; divide the unmodulated
+calculation by two and set $\varepsilon=2W$ to obtain
+\eqref{eq:dpss-discrete}. That argument never divides by $\sin\theta$.
+\end{proof}
+The prolate constant is classical; \cite[eq.~(D.6)]{AbanovIvanovQian2011}
+gives a sharper fixed-band expansion. At $\varepsilon=\tau/N$,
+\eqref{eq:hs-discrete} matches the continuum logarithmic and oscillating
+terms with error $O(\tau^2/N^2+1/\tau)$; this error does not vanish
+at fixed $\tau$, whose convergence follows separately from the operator limit.
+
+\subsection{Adjacent bands and cyclic words}\label{app:adjacent}
+Put $C_\tau'=M_{e^{2\pi i\tau x}}C_\tau M_{e^{-2\pi i\tau x}}$,
+$\mathcal N=M_{e^{-i\pi\tau x}}$ and $\mathcal V=\mathcal N^*C_\tau\mathcal N^*$.
+With the positive-sign Fourier convention, the frequency bands of
+$C_\tau,C_\tau'$ are $(-\tau/2,\tau/2)$ and $(-3\tau/2,-\tau/2)$.
+
+\begin{proposition}[Adjacent products]\label{short:cor:adjacent-quadratic}
+\label{T4:lem:factor}\label{rev5:prop:phase}\label{T4:conj:twoband}
+Write $D(a)=\tr(C^{(a)}-(C^{(a)})^2)$,
+$X=\tr(C_\tau^2C_\tau'^2)$,
+$\Omega_2=\tr(\mathcal V^3\mathcal V^*)$, $\Omega_3=\tr\mathcal V^4$.
+Then $\mathcal K_\tau=\mathcal V+\mathcal V^*$, the $\Omega_j$ are real, and
+\begin{equation}\label{short:eq:cyclic}
+\tr\mathcal K_\tau^4=2\tr C_\tau^4+4X+8\Omega_2+2\Omega_3.
+\end{equation}
+For every $\tau>0$,
+\[
+0\le X\le\tr(C_\tau C_\tau')=D(\pi\tau)-\tfrac12D(2\pi\tau)
+=\frac{\log(2\pi\tau)+1+\gamma}{2\pi^2}+r,\quad
+|r|\le\frac5{4\pi^3\tau},
+\]
+and $|\Omega_2|\le b(1/4)$, $|\Omega_3|\le4b(1/8)$.
+Moreover $X=(12\pi^2)^{-1}\log\tau+O(1)$.
+\end{proposition}
+\begin{proof}
+The kernel factorization is product-to-sum.
+In degree four the cyclic word classes have sizes $2,4,8,2$:
+alternating, contiguous two-and-two, three-and-one, and pure.
+They give \eqref{short:eq:cyclic}; for example
+$\tr(\mathcal V^2\mathcal V^{*2})=X$.
+The antiunitary $f(x)\mapsto\overline{f(-x)}$ fixes $C_\tau,\mathcal N$
+and $\mathcal V$, proving reality of the word traces.
+The sum $C_\tau+C_\tau'$ is unitarily equivalent to $C_{2\tau}$,
+so its defect gives the quadratic product identity.
+Apply Lemma~\ref{lem:defect-exact} at $\pi\tau,2\pi\tau$ for the
+error $1+1/4$ in units $(\pi^3\tau)^{-1}$.
+The inequalities follow successively from $C_\tau^2\le C_\tau$
+and $C_\tau'^2\le C_\tau'$ in positive trace pairings.
+
+For $F(\phi)=\tr(e^{i\phi}\mathcal V+e^{-i\phi}\mathcal V^*)^4$,
+the strip and trace comparisons give
+$|F(\phi)-F(\psi)|\le16b(|\phi-\psi|/(2\pi))$.
+The word expansion is
+$F(\phi)=2\tr C_\tau^4+4X+8\Omega_2\cos2\phi+2\Omega_3\cos4\phi$.
+Thus $16\Omega_2=F(0)-F(\pi/2)$ and
+$8\Omega_3=F(0)+F(\pi/2)-2F(\pi/4)$, proving the bounds.
+In degree two the same argument gives
+\begin{equation}\label{T4:eq:osc1}
+\Omega_1:=\tr\mathcal V^2=-\pi^{-2}(\log2)\cos(4\pi\tau)+\rho_1,
+\qquad |\rho_1|\le3/(\pi^3\tau).
+\end{equation}
+Indeed $\tr\mathcal K_\tau^2=2\tr C_\tau^2+2\Omega_1$ and the
+two quadratic errors sum to $6/(\pi^3\tau)$.
+
+For the remaining coefficient, \cite[Theorem~2.1]{KitanineEtAl2009},
+with $q=1,p(\lambda)=\lambda,F=1,g=0,x=2\pi\tau$, gives
+$\log\det(I+\gamma C_\tau)
+=2\tau\log(1+\gamma)+(2\pi^2)^{-1}\log^2(1+\gamma)\log\tau
++c(\gamma)+o(1)$.
+The constant is analytic near zero; the fixed $n$th derivative of the
+remainder there is $O((\log\tau)^n/\tau)$ by that paper's
+eqs.~(8.40)--(8.43). The $\gamma^4$ coefficient $11/12$ therefore gives
+$\tr C_\tau^4=2\tau-11(6\pi^2)^{-1}\log\tau+O(1)$, also consistent
+with the Landau--Widom integral
+$\int_0^1(t^4-t)/[t(1-t)]\,dt=-11/6$ \cite[p.~478]{LandauWidom1980}.
+Subtract twice this formula from the quartic trace law for
+$\mathcal K_\tau$ in \eqref{short:eq:cyclic} and divide by four.
+\end{proof}
+This computes one adjacent word, not arbitrary cyclic words, and does
+not supply an independent proof of the quartic coefficient used.
+

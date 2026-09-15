@@ -1,0 +1,770 @@
+\section{Proof of the uniform trace law}\label{app:general-trace}
+
+The proof combines a full-fiber unitary transport, scalar Hilbert-square
+corners and a Carleman--Mellin comparison. The classical comparison
+methods are in Otte~\cite[Lemmas~3.1--3.3]{Otte2024},
+Fedele--Gebert~\cite[proof of Corollary~1.5]{FedeleGebert2019} and
+Laptev--Safarov~\cite[Theorem~1.2]{LaptevSafarov1996}; all estimates used
+here are proved below.
+
+We use Section~\ref{sec:crosswindow} and
+Proposition~\ref{T4:prop:bloch}: dilation identifies
+$\mathcal K_\tau$ with $P_{(-\tau,\tau)}\mathcal G P_{(-\tau,\tau)}$,
+where $P_I$ denotes multiplication by $\mathbf1_I$ and
+\begin{equation}\label{rev5:eq:G}
+ G(X,Y)=\frac{\sin(2\pi X)-\sin(2\pi Y)}{\pi(X-Y)},\qquad
+ \mathcal G=\mathcal G^*,\quad \|\mathcal G\|=1,\quad
+ \mathcal G^2=\mathcal F^*\mathbf1_{(-1,1)}\mathcal F.
+\end{equation}
+The global Fourier transform $\mathcal F$ retains the positive exponent
+of Section~\ref{sec:crosswindow}.  Bloch coefficients below use a negative
+exponent, as in \eqref{T4:eq:symbol}; the angular Fourier transform used
+after the Mellin change of variables will be defined separately.
+All Schatten norms are denoted by $\|\cdot\|_p$; in particular,
+$\mathfrak S_1$ is the trace class.  Operators compressed to a subspace
+are extended by zero when they are compared on a common ambient space.
+
+\subsection{Trace comparisons and bounded endpoint changes}
+\label{rev5:subsec:trace-comparisons}
+
+\begin{lemma}[Scalar trace perturbation]\label{rev5:lem:trace-lip}
+Let $A,B$ be self-adjoint trace-class operators with spectra in a compact
+interval containing zero.  If $f$ is real and Lipschitz on that interval,
+with $f(0)=0$, then
+\begin{equation}\label{rev5:eq:trace-lip}
+ |\operatorname{tr}f(A)-\operatorname{tr}f(B)|
+ \leq\operatorname{Lip}(f)\|A-B\|_1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For matrices, differentiate a polynomial along $A_t=A+t(B-A)$:
+$\frac d{dt}\tr p(A_t)=\tr(p'(A_t)(B-A))$. Integration gives the
+bound with $\|p'\|_\infty$. Uniform polynomial approximation of a
+continuous derivative, then convolution of a Lipschitz extension,
+gives every Lipschitz $f$ without increasing its Lipschitz constant.
+For trace-class operators apply the matrix result on the sum of their
+finite spectral subspaces and pass to the limit. Both operator tails
+and scalar trace tails converge because
+$|f(\lambda)|\le\operatorname{Lip}(f)|\lambda|$.
+This is a scalar trace inequality, not an operator-Lipschitz assertion.
+\end{proof}
+
+\begin{lemma}[Fixed strips]\label{rev5:lem:strips}
+For an interval $E$ of length $\ell$, put
+\begin{equation}\label{rev5:eq:strip-function}
+ b(\ell)=\sqrt{2\ell}\int_0^1e^{\pi\ell u^2}\,du.
+\end{equation}
+Then $\|P_E\mathcal G\|_1\leq b(\ell)
+\leq\sqrt{2\ell}e^{\pi\ell}$.  If $I\mathbin\triangle J$ consists of
+at most two intervals, each of length at most $h$, then
+\begin{equation}\label{rev5:eq:strips}
+ \|P_I\mathcal G P_I-P_J\mathcal G P_J\|_1\leq4b(h).
+\end{equation}
+In particular, writing $A_I=P_I\mathcal G P_I$, every interval
+$I\subseteq\mathbb R$ and every $a_1,a_2\in\mathbb R$ satisfy
+\begin{equation}\label{rev5:eq:translated-intervals}
+ \|A_{I+a_1}-A_{I+a_2}\|_1\leq4b(|a_1-a_2|).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The restricted Fourier operator $R_E:L^2(-1,1)\to L^2(E)$ with kernel
+$e^{2\pi iX\xi}$ satisfies
+$R_ER_E^*=P_E\mathcal G^2P_E
+=(P_E\mathcal G)(P_E\mathcal G)^*$, by the symmetry of the frequency
+interval in \eqref{rev5:eq:G}.  It has the same nonzero singular values
+as $P_E\mathcal G$.  Translation of $E$ gives a unitary factor in the
+frequency variable, so assume $E=[-\ell/2,\ell/2]$.  Expand its kernel as
+$\sum_{j\geq0}(2\pi i)^jX^j\xi^j/j!$.  The $j$th rank-one term has
+trace norm
+\[
+ \frac{(2\pi)^j}{j!}\|X^j\|_{L^2(E)}\|\xi^j\|_{L^2(-1,1)}
+ =\sqrt{2\ell}\,\frac{(\pi\ell)^j}{j!(2j+1)}.
+\]
+Their sum is $b(\ell)$; uniform kernel convergence identifies the
+trace-norm sum with $R_E$. For $D=P_I-P_J$, the identity
+$P_I\mathcal G P_I-P_J\mathcal G P_J=D\mathcal G P_I+P_J\mathcal G D$
+bounds the difference by $2\|D\mathcal G\|_1$. Decompose $D$ into its
+at most two signed strip projections. Monotonicity of $b$ gives
+\eqref{rev5:eq:strips}; two translates have strips of length at most
+$|a_1-a_2|$, including when they are disjoint.
+\end{proof}
+
+\begin{corollary}[Odd tests and integer parameters]
+\label{rev5:cor:odd-endpoints}
+For every odd real Lipschitz function $f$ and every $\tau>0$,
+\begin{equation}\label{rev5:eq:odd-bound}
+ |\operatorname{tr}f(\mathcal K_\tau)|
+ \leq2b(1/2)\operatorname{Lip}(f)
+ \leq2e^{\pi/2}\operatorname{Lip}(f).
+\end{equation}
+For $\tau\geq2$ and a nearest integer $q$ to $\tau$,
+\begin{equation}\label{rev5:eq:integer-transfer}
+ |\operatorname{tr}f(\mathcal K_\tau)
+       -\operatorname{tr}f(\mathcal K_q)|
+ \leq4b(1/2)\operatorname{Lip}(f)
+\end{equation}
+for every real Lipschitz $f$ with $f(0)=0$.
+\end{corollary}
+
+\begin{proof}
+The kernel obeys $G(X+1/2,Y+1/2)=-G(X,Y)$.  Thus the compression to
+$I+1/2$ is unitarily equivalent to the negative of the compression to
+$I$.  Their symmetric difference has at most two components, each of
+length at most $1/2$.  Lemmas~\ref{rev5:lem:trace-lip}
+and~\ref{rev5:lem:strips}, followed by division by two, prove
+\eqref{rev5:eq:odd-bound}.  For \eqref{rev5:eq:integer-transfer}, the
+two endpoints of $(-\tau,\tau)$ each move by at most $1/2$ when replaced
+by those of $(-q,q)$.
+\end{proof}
+
+\subsection{A periodic gauge to a three-dimensional symbol}
+\label{rev5:subsec:gauge}
+
+On the Bloch fiber $\mathscr H=L^2(0,1)$ set
+$e_j(t)=e^{2\pi ijt}$ and $W_\theta=M_{e^{2\pi i\theta t}}$.
+Writing $X_{j,k}=|e_j\rangle\langle e_k|+|e_k\rangle\langle e_j|$,
+the symbol of Proposition~\ref{T4:prop:bloch} is
+\[
+ \sigma(\theta):=\varsigma(\theta)=W_\theta^*X_{1,0}W_\theta,
+ \qquad 0\leq\theta\leq1.
+\]
+Define
+\begin{equation}\label{rev5:eq:star}
+ c_\theta=\cos(\pi\theta/2),\quad s_\theta=\sin(\pi\theta/2),\quad
+ w_\theta=c_\theta e_1+s_\theta e_{-1},\qquad
+ a(\theta)=|e_0\rangle\langle w_\theta|
+             +|w_\theta\rangle\langle e_0|.
+\end{equation}
+Both symbols have eigenvalues $1,-1,0$, with simple nonzero eigenvalues,
+and the same endpoint operators:
+$a(0)=\sigma(0)=X_{1,0}$ and $a(1)=\sigma(1)=X_{0,-1}$.
+The range of $a$ lies in the fixed space
+$E=\operatorname{span}\{e_{-1},e_0,e_1\}$.
+
+\begin{lemma}[Full-fiber gauge]\label{rev5:lem:gauge}
+There is a unitary path $V_\theta$ on $\mathscr H$ such that
+\begin{equation}\label{rev5:eq:gauge}
+ V_0=V_1=I,\qquad
+ V-I\in C^\infty([0,1];\mathfrak S_1),\qquad
+ V_\theta^*\sigma(\theta)V_\theta=a(\theta).
+\end{equation}
+Its periodic extension is continuous; matching derivatives at the two
+ends is not required.
+\end{lemma}
+
+\begin{proof}
+For either $b=\sigma$ or $b=a$, form its three spectral projections
+\[
+ P_+=(b^2+b)/2,\qquad P_-=(b^2-b)/2,\qquad P_0=I-b^2.
+\]
+The rank-one projections $P_\pm$ are smooth in trace norm, by their
+Riesz formulas and the rank-two bound for their differences; derivatives
+of $P_0$ are minus their sums. Thus
+$K_b=\sum_{j\in\{+,-,0\}}P_j'P_j$ is smooth in trace norm and
+skew-adjoint. The projection identities give $[P_j,K_b]=-P_j'$,
+so $U_b'=K_bU_b$, $U_b(0)=I$, has a unitary solution satisfying
+\[
+ U_b(\theta)^*P_j(\theta)U_b(\theta)=P_j(0),\qquad
+ U_b(\theta)-I=\int_0^\theta K_b(t)U_b(t)\,dt.
+\]
+The Bochner integral and differential equation make $U_b-I$ smooth
+in trace norm. Put $S=U_\sigma$, $T=U_a$, $M=T_1^*S_1$. Endpoint
+agreement makes $M$ commute with $X_{1,0}$, and $M-I$ is trace class.
+Compact-normal spectral calculus gives a commuting skew-adjoint
+logarithm $L$: choose eigenangles $\phi\in(-\pi,\pi]$, with zero on
+the eigenspace of one, and use
+$|\phi|\le(\pi/2)|e^{i\phi}-1|$ for trace summability.
+Then $V_\theta=S_\theta e^{-\theta L}T_\theta^*$ conjugates
+$a(\theta)=T_\theta X_{1,0}T_\theta^*$ to $\sigma(\theta)$ and has
+$V_0=V_1=I$. The construction includes the infinite zero eigenspace.
+\end{proof}
+
+For a bounded operator-valued symbol $b$, use the conventions
+\begin{equation}\label{rev5:eq:laurent}
+ \widehat b(k)=\int_0^1b(\theta)e^{-2\pi ik\theta}\,d\theta,
+ \qquad (\mathcal L(b)x)_j=\sum_l\widehat b(j-l)x_l,
+ \qquad T_n(b)=P_n\mathcal L(b)P_n,
+\end{equation}
+where $P_n$ selects cells $0,\ldots,n-1$ and acts as identity on each
+fiber.  Laurent multiplication is multiplicative and preserves adjoints.
+
+\begin{lemma}[A continuous seam]\label{rev5:lem:seam}
+Suppose $F\in C^3([0,1];\mathfrak S_1)$ and $F(0)=F(1)$.  Define
+\begin{equation}\label{rev5:eq:seam-constant}
+ \mathfrak c(F)=\frac{\|F'(1)-F'(0)\|_1}{8}
+ +\frac{\|F''(1)-F''(0)\|_1+
+             \int_0^1\|F'''(\theta)\|_1\,d\theta}{12\pi}.
+\end{equation}
+Then $\|[P_n,\mathcal L(F)]\|_1\leq\mathfrak c(F)$ for every $n$.
+The same assertion applies to scalar symbols, using absolute values
+in \eqref{rev5:eq:seam-constant}.
+\end{lemma}
+
+\begin{proof}
+For $k\ne0$, three integrations by parts give
+\[
+ \widehat F(k)=\frac{D}{4\pi^2k^2}+R_k,
+ \quad D=F'(1)-F'(0),\quad
+ R_k=\frac{-D_2+\int_0^1F'''(\theta)e^{-2\pi ik\theta}\,d\theta}
+            {(2\pi ik)^3},
+\]
+where $D_2=F''(1)-F''(0)$.  Thus
+\[
+ \sum_{k\ne0}|k|\|R_k\|_1
+ \leq\frac{\|D_2\|_1+\int_0^1\|F'''(\theta)\|_1\,d\theta}{24\pi}.
+\]
+For the principal term use the positive Hankel matrix
+\[
+ H^{(2)}_{jl}=(j+l+1)^{-2}
+ =\int_0^1t^{j+l}(-\log t)\,dt,
+ \qquad \|H^{(2)}\|_1=\sum_{j\geq0}(2j+1)^{-2}=\pi^2/8.
+\]
+The rank-one integral proves positivity and finite trace. Each end
+block of the Laurent sequence $k^{-2}$ compresses $H^{(2)}$, with
+row reversal at the right end. The commutator therefore has norm
+at most $4\|H^{(2)}\|_1$, giving $\|D\|_1/8$ after tensoring.
+For the remainder use the bilateral shift $\mathsf S$ and
+$\|[P_n,\mathsf S^k\otimes R_k]\|_1=2\min(n,|k|)\|R_k\|_1$.
+Summation proves \eqref{rev5:eq:seam-constant}; the zeroth coefficient
+commutes with $P_n$ and the Fourier series converges in operator norm.
+\end{proof}
+
+Apply the lemma to $F=V-I$ and put $C_V=\mathfrak c(V-I)$.
+The Laurent unitary $\mathscr V=\mathcal L(V)$ satisfies
+$\mathcal L(a)=\mathscr V^*\mathcal L(\sigma)\mathscr V$.  The exact
+identity, with $B=\mathcal L(\sigma)$,
+\[
+ \mathscr V^*P_nBP_n\mathscr V-P_n\mathscr V^*B\mathscr VP_n
+ =(\mathscr V^*P_n-P_n\mathscr V^*)BP_n\mathscr V
+   +P_n\mathscr V^*B(P_n\mathscr V-\mathscr VP_n)
+\]
+therefore has trace norm at most $2C_V$, since $\|B\|=1$.
+Both compressions are trace class: for $\sigma$ this follows from the
+original finite-interval operator and Proposition~\ref{prop:traces};
+for $a$ the compression acts on $E^n$ and vanishes on its complement.
+Lemma~\ref{rev5:lem:trace-lip} gives
+\begin{equation}\label{rev5:eq:star-transfer}
+ |\operatorname{tr}f(T_n(\sigma))
+       -\operatorname{tr}_{E^n}f(T_n(a))|
+ \leq2C_V\operatorname{Lip}(f).
+\end{equation}
+The gauge compressed to $P_n$ was not assumed unitary.
+
+\begin{lemma}[A numerical bound for the full-fiber gauge]
+\label{pubpair:lem:numerical-gauge}
+For the path of Lemma~\ref{rev5:lem:gauge}, with the specified
+eigenangle logarithm, the constant in
+\eqref{rev5:eq:star-transfer} satisfies $C_V<65$.
+\end{lemma}
+\begin{proof}
+On the whole fiber set
+\[
+ \mathsf D=M_{2\pi i(t-1/2)},\qquad
+ P=|e_0\rangle\langle e_0|+|e_1\rangle\langle e_1|,\qquad
+ Q=I-P,\qquad R=Q\mathsf DQ.
+\]
+Both $\mathsf D$ and $R$ are skew-adjoint, with norms at most $\pi$.
+The scalar phase introduced by centering does not change the
+spectral projections of $\sigma$, so
+$P_j(\theta)=e^{-\theta\mathsf D}P_j(0)e^{\theta\mathsf D}$ and
+\[
+ K_\sigma(\theta)=e^{-\theta\mathsf D}K_0e^{\theta\mathsf D},
+ \qquad
+ K_0=\sum_jP_j(0)\mathsf DP_j(0)-\mathsf D.
+\]
+Indeed $P_j'=P_j\mathsf D-\mathsf DP_j$.  In the basis $(e_0,e_1)$,
+$P\mathsf DP=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$;
+its expectations on $(e_0\pm e_1)/\sqrt2$ vanish.  Thus
+\[
+ K_0=Q\mathsf DQ-\mathsf D
+    =-P\mathsf DP-P\mathsf DQ-Q\mathsf DP.
+\]
+Its range lies in $P\mathscr H+\operatorname{ran}(Q\mathsf DP)$, of
+dimension at most four.  The three displayed blocks are orthogonal
+in Hilbert--Schmidt inner product.  Direct integration gives
+$\|P\mathsf DP\|_2^2=2$ and
+$\operatorname{tr}(P\mathsf D^*\mathsf DP)=2\pi^2/3$, whence
+\[
+ \|K_0\|_2^2=4\pi^2/3-2,\qquad
+ k_0:=\|K_0\|_1\le2\sqrt{4\pi^2/3-2}<67/10.
+\]
+The original transport is exactly
+$S_\theta=e^{-\theta\mathsf D}e^{\theta R}$: its derivative is
+$e^{-\theta\mathsf D}K_0e^{\theta R}=K_\sigma(\theta)S_\theta$,
+and $S_0=I$.  Differentiating this formula further yields
+\[
+ \|S_\theta^{(j)}\|_1\le(2\pi)^{j-1}k_0,\qquad j=1,2,3.
+\]
+Only this differentiated product is estimated in trace norm; its
+two exponential factors need not separately be trace-class
+perturbations of the identity.
+
+For the star symbol put
+$J=(\pi/2)(|e_{-1}\rangle\langle e_1|
+          -|e_1\rangle\langle e_{-1}|)$.
+The unitary $e^{\theta J}$ fixes $e_0$ and rotates $e_1$ to $w_\theta$.
+All three diagonal spectral blocks $P_j(\theta)JP_j(\theta)$
+vanish, including the zero block, so $K_a=J$ and
+$T_\theta=e^{\theta J}$.  Since $J$ has rank two,
+\[
+ \|(T_\theta^*)^{(j)}\|\le(\pi/2)^j,\qquad
+ \|(T_\theta^*)^{(j)}\|_1=\pi(\pi/2)^{j-1},\qquad
+ \|T_1-I\|_1=2\sqrt2.
+\]
+For $M=T_1^*S_1$ and the logarithm $L$ used in
+Lemma~\ref{rev5:lem:gauge}, the eigenangle inequality in that proof
+gives
+\[
+ \|L\|\le\pi,\qquad
+ \ell_0:=\|L\|_1
+ \le\frac{\pi}{2}\|M-I\|_1
+ \le\frac{\pi}{2}(k_0+2\sqrt2)<15.
+\]
+Here $\|S_1-I\|_1\le k_0$ follows by integration.  No finite-rank
+assumption on $M-I$ or $L$ is used.  The numerical bounds follow
+already from $\pi<22/7$ and $\sqrt2<99/70$.
+
+Apply Leibniz to $V_\theta=S_\theta e^{-\theta L}T_\theta^*$.
+In each term use the trace norm of the first differentiated factor
+and operator norms for the other factors.  The resulting uniform
+bounds on the first three derivatives are
+\begin{equation}\label{pubpair:eq:gauge-derivatives}
+ \begin{aligned}
+ v_1&=k_0+\ell_0+\pi,\\
+ v_2&=5\pi k_0+2\pi\ell_0+\pi^2/2,\\
+ v_3&=(79/4)\pi^2k_0+(13/4)\pi^2\ell_0+\pi^3/4.
+ \end{aligned}
+\end{equation}
+Explicitly, for $j=1,2,3$ the product sum is bounded by
+\[
+ \frac{k_0}{2\pi}\big[(7\pi/2)^j-(3\pi/2)^j\big]
+ +\frac{\ell_0}{\pi}\big[(3\pi/2)^j-(\pi/2)^j\big]
+ +\pi(\pi/2)^{j-1},
+\]
+which gives \eqref{pubpair:eq:gauge-derivatives}.
+The two endpoint differences in
+\eqref{rev5:eq:seam-constant} are bounded by $2v_1,2v_2$,
+and the third-derivative integral by $v_3$.  Consequently
+\[
+ \begin{split}
+ C_V&\le\frac{v_1}{4}+\frac{2v_2+v_3}{12\pi}\\
+ &\le k_0\left(\frac{13}{12}+\frac{79\pi}{48}\right)
+    +\ell_0\left(\frac7{12}+\frac{13\pi}{48}\right)
+    +\frac{\pi}{3}+\frac{\pi^2}{48}\\
+ &<\frac{760709}{11760}<65.
+ \end{split}
+\]
+\end{proof}
+
+\subsection{The scalar defect and the test function}
+\label{rev5:subsec:scalar-defect}
+
+Grouping the center and leaves of \eqref{rev5:eq:star} gives
+\[
+ T_n(a)\simeq\begin{pmatrix}0&B_n\\B_n^*&0\end{pmatrix},
+ \qquad B_n=(T_n(s),T_n(c)),\qquad
+ H_n=B_nB_n^*=T_n(c)^2+T_n(s)^2.
+\]
+Restricted to $E^n$ its eigenvalues are $\pm s_j(B_n)$, $1\leq j\leq n$, and $n$
+additional zeros.  For a real scalar symbol $w$ write
+\[
+ D_n(w)=P_n\mathcal L(w)(I-P_n)\mathcal L(w)P_n
+        =T_n(w^2)-T_n(w)^2\geq0.
+\]
+The functions $u=(c+s)/\sqrt2$, $v=(c-s)/\sqrt2$ satisfy
+\begin{equation}\label{rev5:eq:scalar-defect}
+ H_n=I-D_n(u)-D_n(v).
+\end{equation}
+Indeed $c^2+s^2=1$ gives $H_n=I-D_n(c)-D_n(s)$, and the
+parallelogram law for $A_w=P_n\mathcal L(w)(I-P_n)$ gives
+$D_n(u)+D_n(v)=D_n(c)+D_n(s)$. This rotation leaves only $v$
+discontinuous at the periodic seam. Since $T_n(a)$ is a contraction,
+$0\le H_n\le I$.
+
+Set $v_0(\theta)=(1-2\theta)/\sqrt2$ and $z=v-v_0$.  The endpoint
+values of $u$ agree; those of $z$ are both zero.  These functions are
+smooth on $[0,1]$, so Lemma~\ref{rev5:lem:seam} applies.  In particular,
+$\|P_n\mathcal L(w)(I-P_n)\|_1\leq\mathfrak c(w)$ for $w=u,z$.
+Expanding $D_n(v)-D_n(v_0)$ and using boundedness of the other factors
+gives
+\begin{equation}\label{rev5:eq:star-defect-error}
+ \|D_n(u)+D_n(v)-D_n(v_0)\|_1\leq C_*,\qquad
+ C_*:=\|u\|_\infty\mathfrak c(u)
+       +(\|v\|_\infty+\|v_0\|_\infty)\mathfrak c(z).
+\end{equation}
+The constant is independent of $n$, $f$ and $\tau$.
+For example, if $A_w=P_n\mathcal L(w)(I-P_n)$, then
+$D_n(v)-D_n(v_0)=A_zA_v^*+A_{v_0}A_z^*$, which proves the stated bound.
+Also
+\begin{equation}\label{rev5:eq:half-bound}
+ 0\leq D_n(v_0)\leq T_n(v_0^2)\leq\tfrac12 I.
+\end{equation}
+
+\begin{lemma}[Paired test function]\label{rev5:lem:paired-test}
+Let $f\in C^2([-1,1])$ be real, with $f(0)=0$, and put
+\begin{equation}\label{rev5:eq:h}
+ h(x)=f(\sqrt{1-x})+f(-\sqrt{1-x})-f(1)-f(-1),\qquad 0\leq x\leq1.
+\end{equation}
+Then $h(0)=0$, $\operatorname{Lip}_{[0,1]}(h)\leq\|f''\|_\infty$,
+and $h\in C^2([0,1/2])$ with
+$\|h''\|_{[0,1/2]}\leq2\|f''\|_\infty$.
+Moreover
+\begin{equation}\label{rev5:eq:paired-trace}
+ \left|\operatorname{tr}f(T_n(a))-n[f(1)+f(-1)]
+                    -\operatorname{tr}h(D_n(v_0))\right|
+ \leq C_*\|f''\|_\infty.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $r=\sqrt{1-x}>0$,
+\[
+ h'(x)=\frac{f'(-r)-f'(r)}{2r},\qquad
+ h''(x)=\frac{f''(r)+f''(-r)}{4r^2}
+          -\frac{f'(r)-f'(-r)}{4r^3}.
+\]
+Integrating $f''$ from $-r$ to $r$ proves the first bound, including
+the limit at $r=0$.  The second expression is bounded by
+$\|f''\|_\infty/r^2$, hence by $2\|f''\|_\infty$ when $x\leq1/2$.
+Signed singular-value pairing gives exactly
+\[
+ \operatorname{tr}f(T_n(a))
+ =n[f(1)+f(-1)]+\operatorname{tr}h(D_n(u)+D_n(v)).
+\]
+Possible zero singular values cause no extra term because $f(0)=0$.
+Apply Lemma~\ref{rev5:lem:trace-lip} and
+\eqref{rev5:eq:star-defect-error}.  Only the global Lipschitz bound
+is used in this first comparison.  All later model spectra lie in
+$[0,1/2]$, where the second derivative is bounded.
+\end{proof}
+
+\subsection{The Hilbert and Carleman operators}
+\label{rev5:subsec:hilbert-carleman}
+
+We establish boundedness before using the square of the infinite Hilbert
+matrix.  Let $\mathcal C$ denote the Carleman operator with kernel
+$(u+v)^{-1}$ on $L^2(0,\infty)$.  The unitary map
+\[
+ (\mathscr Mf)(s)=e^{s/2}f(e^s)
+\]
+turns it into convolution with $[2\cosh(s/2)]^{-1}$.  For the angular
+Fourier convention $\widehat k(\omega)=\int_{\mathbb R}k(s)e^{-i\omega s}\,ds$,
+Euler's integral at $z=1/2-i\omega$ gives
+\begin{equation}\label{rev5:eq:carleman-multiplier}
+ \int_{\mathbb R}\frac{e^{-i\omega s}}{2\cosh(s/2)}\,ds
+ =\int_0^\infty\frac{t^{-1/2-i\omega}}{1+t}\,dt
+ =\pi\operatorname{sech}(\pi\omega).
+\end{equation}
+Thus $\mathcal C$ is bounded, positive, and has norm $\pi$.
+The operator $\mathcal C_{\rm sh}$ with kernel $(x+y+1)^{-1}$ is
+unitarily its compression to $u\geq1/2$, by translation.
+
+Embed $\ell^2(\mathbb N_0)$ as unit-cell constants in $L^2(0,\infty)$.
+The Hilbert matrix $\mathsf H_{jl}=(j+l+1)^{-1}$, initially on finitely
+supported sequences, has embedded kernel
+$(\lfloor x\rfloor+\lfloor y\rfloor+1)^{-1}$ and is zero on the
+orthogonal complement.  Write $\widetilde{\mathsf H}$ for this embedding.
+
+\begin{lemma}[A nuclear comparison]\label{rev5:lem:hilbert-carleman}
+The Hilbert matrix extends to a bounded operator, and
+\begin{equation}\label{rev5:eq:hilbert-carleman}
+ \|\widetilde{\mathsf H}-\mathcal C_{\rm sh}\|_1\leq\Delta,
+ \qquad \Delta:=\frac{2}{1-e^{-2}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $r_\lambda(x)=e^{-\lambda\lfloor x\rfloor}$,
+$s_\lambda(x)=e^{-\lambda x}$.  The difference of the two kernels is
+represented by
+\[
+ \int_0^\infty e^{-\lambda}
+   (|r_\lambda\rangle\langle r_\lambda|
+     -|s_\lambda\rangle\langle s_\lambda|)\,d\lambda.
+\]
+Here
+$\|r_\lambda\|^2=(1-e^{-2\lambda})^{-1}$,
+$\|s_\lambda\|^2=(2\lambda)^{-1}\leq\|r_\lambda\|^2$, and
+$\|r_\lambda-s_\lambda\|\leq\min(\lambda,1)\|r_\lambda\|$.  The integrand's
+trace norm is therefore at most
+$2e^{-\lambda}\min(\lambda,1)/(1-e^{-2\lambda})$.  For $0<\lambda\leq1$,
+concavity gives $1-e^{-2\lambda}\geq\lambda(1-e^{-2})$; for $\lambda\geq1$
+use $1-e^{-2\lambda}\geq1-e^{-2}$.  Integration bounds the nuclear norm by
+$\Delta$.  Testing against compactly supported functions identifies
+the kernel of the nuclear integral with the displayed difference.
+Since $\mathcal C_{\rm sh}$ is bounded, this also proves boundedness
+of the Hilbert matrix.  Only the difference of the two Laplace
+integrals has been integrated in trace norm.
+\end{proof}
+
+The Fourier coefficients of $v_0$ are
+$\widehat v_0(k)=(\sqrt2\pi i k)^{-1}$ for $k\ne0$.
+Multiplication of the left and right exterior blocks in $D_n(v_0)$ now
+gives the exact identity
+\begin{equation}\label{rev5:eq:hilbert-corners}
+ D_n(v_0)=\alpha(P_n\mathsf H^2P_n+J_nP_n\mathsf H^2P_nJ_n),
+ \qquad \alpha=\frac1{2\pi^2},
+\end{equation}
+where $J_n$ reverses the $n$ coordinates.  Indeed, each exterior index
+produces the denominator $j+l+1$, and the opposite Fourier signs
+multiply to the positive coefficient $\alpha$.
+By positivity of both terms and \eqref{rev5:eq:half-bound},
+$\alpha\|\mathsf H P_nx\|^2\leq\|P_nx\|^2/2$.
+Testing finitely supported vectors proves $\|\mathsf H\|\leq\pi$.
+Consequently \eqref{rev5:eq:hilbert-carleman} also gives
+\begin{equation}\label{rev5:eq:square-comparison}
+ \|\widetilde{\mathsf H}^2-\mathcal C_{\rm sh}^2\|_1
+ \leq2\pi\Delta.
+\end{equation}
+In particular all compressions of $\alpha\mathsf H^2$,
+$\alpha\mathcal C_{\rm sh}^2$ and $\alpha\mathcal C^2$ have
+spectrum in $[0,1/2]$.
+
+\subsection{Separating the two endpoints}
+\label{rev5:subsec:corners}
+
+\begin{lemma}[Smooth compression]\label{rev5:lem:compression}
+Let $X$ be bounded and positive, $P$ an orthogonal projection, $PXP$
+trace class, and $(I-P)XP$ Hilbert--Schmidt.  If $h$ is real and
+$C^2$ on $[0,\|X\|]$, with $h(0)=0$, then
+\begin{equation}\label{rev5:eq:compression}
+ |\operatorname{tr}h(PXP)-\operatorname{tr}Ph(X)P|
+ \leq\tfrac12\|h''\|_\infty\|(I-P)XP\|_2^2.
+\end{equation}
+The first trace is taken on $P\mathscr H$.  This is the positive case
+of the compression estimate in \cite[Theorem~1.2]{LaptevSafarov1996}.
+\end{lemma}
+
+\begin{proof}
+Since $|h(X)|\leq\operatorname{Lip}(h)X$, the compressed traces exist.
+Choose an eigenbasis $v_j$ of the compact compression $PXP$, including
+its kernel, with eigenvalues $\lambda_j$.  Scalar Taylor expansion in
+the spectral measure of $X$ gives
+\[
+ |\langle v_j,h(X)v_j\rangle-h(\lambda_j)|
+ \leq\tfrac12\|h''\|_\infty
+                 \langle v_j,(X-\lambda_j)^2v_j\rangle
+ =\tfrac12\|h''\|_\infty\|(I-P)Xv_j\|^2.
+\]
+The linear term vanishes because
+$\langle v_j,Xv_j\rangle=\lambda_j$.  Summing proves the estimate.
+\end{proof}
+
+Take $n=2m$, and split its cells into two equal halves with projections
+$P,Q$.  With $A=\alpha P_n\mathsf H^2P_n$ and
+$A'=J_nAJ_n$, the trace of $A$ on the second half and that of $A'$ on the
+first half obey
+\begin{equation}\label{rev5:eq:wrong-half}
+ \operatorname{tr}QAQ
+ =\alpha\sum_{j=m}^{2m-1}\sum_{l\geq0}(j+l+1)^{-2}\leq2\alpha,
+ \qquad \operatorname{tr}PA'P\leq2\alpha.
+\end{equation}
+The inner sum is at most $(j+1)^{-1}+(j+1)^{-2}$, and its sum
+over the $m$ indices is at most $m/(m+1)+m/(m+1)^2<1$.
+Since $\|A\|,\|A'\|\le1/2$, positivity gives
+\[
+ \|PAQ\|_2^2\leq\|A\|\operatorname{tr}QAQ\leq\alpha,
+ \qquad \|PA'Q\|_2^2\leq\alpha.
+\]
+Thus $\|P(A+A')Q\|_2^2\leq4\alpha$.
+Apply Lemma~\ref{rev5:lem:compression} to both complementary blocks
+of $A+A'=D_n(v_0)$; their errors sum to at most
+$4\alpha\|h''\|_{[0,1/2]}$.  Remove the other corner in each diagonal
+half using Lemma~\ref{rev5:lem:trace-lip} and
+\eqref{rev5:eq:wrong-half}.  The remaining two corners are identical.
+We obtain the quantitative estimate
+\begin{equation}\label{rev5:eq:decouple}
+ \left|\operatorname{tr}h(D_{2m}(v_0))
+       -2\operatorname{tr}h(\alpha P_m\mathsf H^2P_m)\right|
+ \leq4\alpha\bigl(\|h'\|_{[0,1/2]}+\|h''\|_{[0,1/2]}\bigr).
+\end{equation}
+
+Under the step-function embedding, $P_m$ is restriction to $(0,m)$.
+Its added zero eigenvalues do not affect the trace.  By
+\eqref{rev5:eq:square-comparison} and Lemma~\ref{rev5:lem:trace-lip},
+replacing its Hilbert-square corner by the shifted Carleman-square
+corner costs at most $2\pi\alpha\Delta\operatorname{Lip}(h)$.
+After translation the latter interval is $I=[a,m+a]$, $a=1/2$.
+The difference between the compression of the full square and the
+square of the half-line compression is the positive operator
+\[
+ P_I\mathcal C^2P_I
+ -P_I\mathcal C P_{[a,\infty)}\mathcal C P_I
+ =P_I\mathcal C P_{(0,a)}\mathcal C P_I,
+\]
+whose trace is
+\begin{equation}\label{rev5:eq:missing-interval}
+ \int_a^{m+a}\int_0^a\frac{dv\,du}{(u+v)^2}
+ =\log\frac{2(m+a)}{m+2a}\leq\log2.
+\end{equation}
+Thus, for one corner,
+\begin{equation}\label{rev5:eq:corner-transfer}
+ \left|\operatorname{tr}h(\alpha P_m\mathsf H^2P_m)
+       -\operatorname{tr}h(\alpha P_I\mathcal C^2P_I)\right|
+ \leq\alpha(2\pi\Delta+\log2)\operatorname{Lip}(h).
+\end{equation}
+
+\subsection{The Mellin trace and completion of the proof}
+\label{rev5:subsec:mellin}
+
+By \eqref{rev5:eq:carleman-multiplier}, the Mellin transform of
+$\alpha\mathcal C^2$ is convolution on $L^2(\mathbb R)$ with multiplier
+and kernel
+\begin{equation}\label{rev5:eq:mellin-model}
+ d(\omega)=\tfrac12\operatorname{sech}^2(\pi\omega),\qquad
+ \ell(s)=\frac{s}{4\pi^2\sinh(s/2)},\qquad \ell(0)=\frac1{2\pi^2}.
+\end{equation}
+Here inverse angular Fourier transformation has the factor $1/(2\pi)$.
+Write $D$ for this convolution operator.  The interval $I$ becomes an
+interval of length $L=\log(2m+1)$.  If $R_L$ restricts to such an
+interval, then
+\begin{equation}\label{rev5:eq:mellin-boundary}
+ \|(I-R_L)DR_L\|_2^2
+ =\int_{\mathbb R}\min(L,|s|)|\ell(s)|^2\,ds
+ \leq M_D:=\frac{3\zeta(3)}{\pi^4}.
+\end{equation}
+To evaluate $M_D$, expand $\sinh^{-2}(s/2)=4\sum_{j\geq1}je^{-js}$ for
+$s>0$ and integrate $s^3$ term by term; the first moment
+$\int|s|\,|\ell(s)|^2\,ds$ converges at both zero and infinity.
+
+The positive compression $R_LDR_L$ is trace class, of trace
+$L\ell(0)$.  Since $h(0)=0$ and
+$|h(d(\omega))|\leq\operatorname{Lip}(h)d(\omega)$, the integral
+of $|h(d)|$ is finite.  Fourier factorization of its positive and
+negative parts gives
+\[
+ \operatorname{tr}R_Lh(D)R_L
+ =\frac{L}{2\pi}\int_{\mathbb R}h(d(\omega))\,d\omega.
+\]
+Lemma~\ref{rev5:lem:compression} and
+\eqref{rev5:eq:mellin-boundary} consequently yield
+\begin{equation}\label{rev5:eq:mellin-trace}
+ \left|\operatorname{tr}h(R_LDR_L)
+ -\frac{L}{2\pi}\int_{\mathbb R}h(d(\omega))\,d\omega\right|
+ \leq\tfrac12 M_D\|h''\|_{[0,1/2]}.
+\end{equation}
+
+Combining \eqref{rev5:eq:decouple}, \eqref{rev5:eq:corner-transfer}
+and \eqref{rev5:eq:mellin-trace} gives two copies of the Mellin bulk
+term.  Since $\int_{\mathbb R}d(\omega)\,d\omega=1/\pi$, replacing
+$\log(2m+1)$ by $\log n$, $n=2m$, costs at most
+$\operatorname{Lip}(h)/\pi^2$.  In particular, with
+\begin{equation}\label{rev5:eq:model-constants}
+ B_1=4\alpha+4\pi\alpha\Delta+2\alpha\log2+\pi^{-2},
+ \qquad B_2=4\alpha+M_D,
+\end{equation}
+we have
+\begin{equation}\label{rev5:eq:model-trace}
+ \left|\operatorname{tr}h(D_n(v_0))
+    -\frac{\log n}{\pi}\int_{\mathbb R}h(d(\omega))\,d\omega\right|
+ \leq B_1\operatorname{Lip}_{[0,1]}(h)
+       +B_2\|h''\|_{[0,1/2]}
+ \quad(n\geq2\text{ even}).
+\end{equation}
+For the paired test \eqref{rev5:eq:h}, substitute
+\[
+ t=\frac{1+\tanh(\pi\omega)}2,
+ \qquad d(\omega)=2t(1-t),\qquad
+ d\omega=\frac{dt}{2\pi t(1-t)}.
+\]
+The coefficient in \eqref{rev5:eq:model-trace} is exactly
+\begin{equation}\label{rev5:eq:coefficient}
+ \frac1\pi\int_{\mathbb R}h(d(\omega))\,d\omega
+ =\frac1{2\pi^2}\int_0^1
+ \frac{f(r_t)+f(-r_t)-f(1)-f(-1)}{t(1-t)}\,dt
+ =\varkappa(f).
+\end{equation}
+Here $r_t=\sqrt{1-2t(1-t)}=\sqrt{t^2+(1-t)^2}$ agrees with the $r_t$ of
+\eqref{T10:eq:kappa}.  The integral converges; for instance,
+$1-r_t=2t(1-t)/(1+r_t)$ gives
+\begin{equation}\label{rev5:eq:kappa-bound}
+ |\varkappa(f)|\leq\frac{2}{\pi^2}\|f'\|_\infty.
+\end{equation}
+
+We now finish Theorem~\ref{T10:conj:law}.  At an integer parameter
+$q\geq2$, the interval $(-q,q)$ has $n=2q$ complete cells; integer
+translation does not change the compression's unitary class.  Equations
+\eqref{rev5:eq:star-transfer}, \eqref{rev5:eq:paired-trace},
+\eqref{rev5:eq:model-trace}, and Lemma~\ref{rev5:lem:paired-test} prove
+\begin{equation}\label{rev5:eq:whole-cell-law}
+ \begin{split}
+ &\left|\operatorname{tr}f(\mathcal K_q)
+       -n[f(1)+f(-1)]-\varkappa(f)\log n\right|\\
+ &\hspace{1cm}\leq2C_V\|f'\|_\infty
+             +(C_*+B_1+2B_2)\|f''\|_\infty.
+ \end{split}
+\end{equation}
+For real $\tau\geq2$ choose a nearest integer $q$ and apply
+\eqref{rev5:eq:integer-transfer}.  The bulk changes by at most
+$2\|f'\|_\infty$, since $|2q-2\tau|\leq1$ and $f(0)=0$.
+Also $1<2q/\tau\leq5/2$, so replacing $\log(2q)$ by $\log\tau$
+costs at most $2\pi^{-2}\log(5/2)\|f'\|_\infty$, by
+\eqref{rev5:eq:kappa-bound}.  Thus the estimate holds for every constant satisfying
+\begin{equation}\label{rev5:eq:final-constant}
+ C_{\mathrm{tr}}\ge2C_V+4b(1/2)+2+\frac{2\log(5/2)}{\pi^2}
+       +C_*+B_1+2B_2.
+\end{equation}
+All quantities on the right are fixed independently of $f$ and
+$\tau$, proving the uniform $C^2$ bound. No optimal constant is claimed.
+
+\begin{remark}[An admissible numerical trace constant]\label{rem:constants}
+One may take $C_{\mathrm{tr}}=143$ in
+Theorem~\ref{T10:conj:law}.  Here are rational bounds for the
+remaining scalar terms in \eqref{rev5:eq:final-constant}.
+Direct differentiation of $u$ and $z=v-v_0$ gives
+\[
+ \mathfrak c(u)=\frac{\pi}{8\sqrt2}
+                   +\frac{\pi(2-\sqrt2)}{48},\qquad
+ \mathfrak c(z)=\frac{\pi}{12\sqrt2},\qquad
+ C_*=\frac{\pi(3+\sqrt2)}{24}<\frac35.
+\]
+For example, the derivative jumps of $u$ have absolute values
+$\pi/\sqrt2$ and zero, and
+$\int_0^1|u'''|=(\pi/2)^2(2-\sqrt2)$.
+The first-derivative jump of $z$ vanishes, while its
+second-derivative jump and $\int_0^1|z'''|$ both equal
+$\sqrt2(\pi/2)^2$.
+
+For the strip term, set $r=11/7>\pi/2$ and use its positive
+power series.  The ratio of successive terms from index five
+onwards is at most $r/6$, so
+\[
+ b(1/2)\le\sum_{j=0}^4\frac{r^j}{j!(2j+1)}
+       +\frac{r^5}{5!\,11}\frac1{1-r/6}
+ =\frac{152829401}{80385480}<\frac{191}{100}.
+\]
+The elementary bounds $\pi>31/10$, $e^2>7$,
+$\log2<7/10$, $\log(5/2)<1$ and $\zeta(3)<5/4$ give
+\[
+ \Delta<\frac73,\qquad
+ B_1=\frac{3+\log2}{\pi^2}+\frac{2\Delta}{\pi}
+       <\frac{5450}{2883}<\frac{19}{10},\qquad
+ B_2<\frac{229700}{923521}<\frac14.
+\]
+The exponential comparisons follow from positive finite Taylor
+sums, and the zeta bound from
+$1+1/8+\int_2^\infty x^{-3}\,dx=5/4$.
+Thus the scalar portion of \eqref{rev5:eq:final-constant} is less
+than
+\[
+ 4\frac{191}{100}+2+\frac{200}{961}
+      +\frac35+\frac{19}{10}+\frac12
+ =\frac{308676}{24025}<13.
+\]
+Lemma~\ref{pubpair:lem:numerical-gauge} now gives
+$2C_V+\text{scalar portion}<143$.  The same estimates give $A_{\rm band}<144$, $C_0<138$ and $B_2<1/4$;
+these upper bounds may replace the corresponding constants in the
+band-local and gap estimates.
+These estimates concern the
+whole-fiber transport and are conservative; no optimal constant
+is asserted.
+\end{remark}
+
+Finally $\int_{\mathbb R}d(\omega)^j\,d\omega=2^{-j}B(1/2,j)/\pi$
+checks the quadratic and quartic coefficients, while
+\eqref{rev5:eq:odd-bound} independently controls every odd Lipschitz test.
+
+
+

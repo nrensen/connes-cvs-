@@ -1,0 +1,228 @@
+\section{Commensurate frequencies: symmetric bulk and an odd logarithm}
+\label{sec:commensurate-family}
+For $M\ge1$ and real $\mathbf c=(c_1,\ldots,c_M)$, set $c_j=0$ for $j>M$ and
+\begin{equation}\label{mf:eq:operator}
+ \mathcal K_{\tau,\mathbf c}=\sum_{m=1}^M c_m\mathcal K_{m\tau},\qquad
+ K_{\tau,\mathbf c}(x,y)=
+ \frac{\sum_m c_m[\sin(2\pi m\tau x)-\sin(2\pi m\tau y)]}{\pi(x-y)}.
+\end{equation}
+Write $A_{\mathbf c}=\sum_m|c_m|$, $D_{\mathbf c}=\sum_m m|c_m|$, and
+$\mathcal A_3(\mathbf c)=\sum_{j,k\ge1,\ j+k\le M}c_jc_kc_{j+k}$;
+the last sum counts ordered pairs. Each frequency exchanges positive and
+negative Fourier intervals. The bulk graph is therefore bipartite and
+has a sign-symmetric spectrum. At the jump, however, the two exchanges
+share a vertex and create triangles. Their weights give an odd logarithmic
+term even though the odd bulk term vanishes.
+
+\begin{theorem}[Finite-frequency trace laws]\label{mf:thm:moments}
+For fixed $M$, uniformly in $\tau\ge2$ and $\mathbf c\in\mathbb R^M$,
+\begin{align}
+ \tr\mathcal K_{\tau,\mathbf c}^2
+ &=4\tau\sum_m m c_m^2-\frac2{\pi^2}\sum_m c_m^2\log\tau
+       +O_M(A_{\mathbf c}^2),\label{mf:eq:quadratic}\\
+ \tr\mathcal K_{\tau,\mathbf c}^3
+ &=\frac3{\pi^2}\mathcal A_3(\mathbf c)\log\tau
+       +O_M(A_{\mathbf c}^3).\label{mf:eq:cubic}
+\end{align}
+The exact Bloch fiber has nonzero eigenvalues $\pm s_j(B_{\mathbf c})$,
+with multiplicity, where
+\begin{equation}\label{mf:eq:hankel}
+ B_{\mathbf c}=(c_{j+k-1})_{j,k=1}^M.
+\end{equation}
+Zero singular values are omitted; if $c_M\ne0$ all $2M$ values are nonzero.
+\end{theorem}
+For $(1,a)$ the cubic coefficient is $3a/\pi^2$; for $(1,1,1)$ it is
+$9/\pi^2$. A sum-free occupied frequency set forces $\mathcal A_3=0$,
+while signed coefficients can also cancel. This alone says nothing about
+higher odd traces. The matrix-jump precedents are
+\cite{BollmannMueller2024,BasorEhrhardtVirtanen2024}; we prove the stated
+bounded polynomial remainders directly.
+
+\subsection{The graph and its jump}
+Let $\mathcal G_m$ have kernel
+$G_m(X,Y)=[\sin(2\pi mX)-\sin(2\pi mY)]/[\pi(X-Y)]$ on the line.
+Fourier transformation gives
+\begin{equation}\label{mf:eq:exchange}
+ (J_mg)(\xi)=\mathbf1_{(0,m)}(\xi)g(\xi-m)
+              +\mathbf1_{(-m,0)}(\xi)g(\xi+m).
+\end{equation}
+Indeed its inverse kernel is
+$2\cos(\pi m(X+Y))\sin(\pi m(X-Y))/[\pi(X-Y)]$.
+Thus $\mathcal G_{\mathbf c}=\sum c_m\mathcal G_m$ is self-adjoint,
+$\|\mathcal G_{\mathbf c}\|\le A_{\mathbf c}$, and dilation identifies
+$\mathcal K_{\tau,\mathbf c}$ with its compression to $(-\tau,\tau)$.
+On $\mathscr H=L^2(0,1)$ put $e_j(t)=e^{2\pi ijt}$,
+$W_\theta=M_{e^{2\pi i\theta t}}$ and
+$X_{j,k}=|e_j\rangle\langle e_k|+|e_k\rangle\langle e_j|$. Then
+\begin{equation}\label{mf:eq:bloch}
+ \sigma_{\mathbf c}(\theta)=W_\theta^*H_{\mathbf c}W_\theta,
+ \qquad H_{\mathbf c}=\sum_m c_m\sum_{j=1}^m X_{j,j-m}.
+\end{equation}
+To verify the cell coefficients, set $d=t-s$. The kernel of the inner
+sum is $2e^{\pi id}\cos(\pi m(t+s))\sin(\pi md)/\sin(\pi d)$.
+Multiplication by
+$\int_0^1e^{-2\pi i(k+d)\theta}d\theta
+=e^{-\pi id}\sin(\pi d)/[\pi(k+d)]$ gives $G_m(k+t,s)$,
+including removable singularities.
+Ordering the vertices as $j=1,\ldots,M$ and $1-k$, $k=1,\ldots,M$, gives
+\begin{equation}\label{mf:eq:block-graph}
+ H_{\mathbf c}=\begin{pmatrix}0&B_{\mathbf c}\\B_{\mathbf c}&0\end{pmatrix}.
+\end{equation}
+Its signed singular-value pairing proves the spectral assertion;
+column reversal in $B_{\mathbf c}$ gives a triangular matrix, so
+$\det B_{\mathbf c}=(-1)^{M(M-1)/2}c_M^M$. In particular
+\begin{equation}\label{mf:eq:bulk-moments}
+ \tr\sigma_{\mathbf c}^3=0,\qquad
+ \tr\sigma_{\mathbf c}^2=2\sum_m m c_m^2.
+\end{equation}
+
+Set $H_i=\sigma_{\mathbf c}(i)$, $i=0,1$, and
+$C_t=(1-t)H_0+tH_1$ on $\operatorname{span}\{e_{-M},\ldots,e_M\}$.
+Their common edges join $+j$ to $-k$ with weight $c_{j+k}$.
+The other edges join zero to $+j$ in $H_0$ and to $-j$ in $H_1$,
+with weight $c_j$. Hence every triangle is $0,+j,-k$;
+its product contributes six times to the cubic trace. Also
+$\tr(H_1-H_0)^2=4\sum_m c_m^2$. Therefore
+\begin{align}
+ \tr C_t^3&=6t(1-t)\mathcal A_3(\mathbf c),\label{mf:eq:seam-cubic}\\
+ \tr C_t^2&=2\sum_m m c_m^2-4t(1-t)\sum_m c_m^2.
+ \label{mf:eq:seam-quadratic}
+\end{align}
+
+\subsection{From the jump to the trace}
+Use the Laurent conventions \eqref{rev5:eq:laurent}, with $P_n$ selecting
+$n$ cells and acting on the entire fiber.
+\begin{lemma}[Quadratic and cubic localization]\label{mf:lem:localization}
+If $b\in C^3([0,1];\mathfrak S_1)$ is self-adjoint and its two endpoint
+ranges span a finite-dimensional space, put $\ell(t)=(1-t)b(0)+tb(1)$.
+For $p=2,3$,
+\begin{equation}\label{mf:eq:localization}
+ \tr T_n(b)^p-n\int_0^1\tr b^p
+ =\tr T_n(\ell)^p-n\int_0^1\tr\ell^p+O(1),
+\end{equation}
+uniformly in $n$.
+\end{lemma}
+\begin{proof}
+Put $r=b-\ell$, $b_u=\ell+ur$, $B_u=\mathcal L(b_u)$,
+$R=\mathcal L(r)$, $P=P_n$, $Q=I-P$ and $A_* =\sup_u\|B_u\|$.
+Both $r$ and $rb_u$ have zero endpoints. Lemma~\ref{rev5:lem:seam}
+therefore bounds $\|[P,R]\|_1$ and $\|[P,RB_u]\|_1$ by
+$\mathfrak c(r)$ and $\mathfrak c(rb_u)$, uniformly in $n,u$.
+For $\Delta_p(u)=\tr(PB_u^pP)-\tr(PB_uP)^p$, cyclicity and $P+Q=I$ give
+\begin{align*}
+ \Delta_2'(u)/2&=\tr(PRQB_uP),\\
+ \Delta_3'(u)/3&=\tr(PRQB_u^2P)+\tr(P(RB_u)QB_uP)
+                   -\tr(PRQB_uQB_uP).
+\end{align*}
+Cyclicity in the first trace is fiberwise; each compression has finitely
+many trace-class blocks. Thus the derivatives have respective bounds
+$2A_*\mathfrak c(r)$ and
+$3[2A_*^2\mathfrak c(r)+A_*\mathfrak c(rb_u)]$.
+Integration in $u$, and
+$\tr(P\mathcal L(b^p)P)=n\int_0^1\tr b^p$, prove the claim.
+\end{proof}
+For the scalar sawtooth $S_n=T_n(t)$, its Fourier coefficients are
+$1/2$ at zero and $i/(2\pi k)$ otherwise, whence
+\begin{equation}\label{mf:eq:sawtooth}
+ \tr S_n=n/2,\qquad
+ \tr S_n^2=\frac n4+\frac1{2\pi^2}\sum_{k=1}^{n-1}\frac{n-k}{k^2}
+ =\frac n3-\frac{\log n}{2\pi^2}+O(1).
+\end{equation}
+The error is bounded by $H_{n-1}-\log n=O(1)$ and
+$n\sum_{k\ge n}k^{-2}=O(1)$.
+Now $T_n(\ell)=I_n\otimes H_0+S_n\otimes(H_1-H_0)$.
+Diagonalizing only $S_n$ and using
+\eqref{mf:eq:seam-cubic}--\eqref{mf:eq:sawtooth} gives the cubic trace
+$n\mathcal A_3+3\pi^{-2}\mathcal A_3\log n+O(A_{\mathbf c}^3)$;
+the integral of the cubic interpolant is $\mathcal A_3$.
+Subtract that bulk term in \eqref{mf:eq:localization} and use
+\eqref{mf:eq:bulk-moments}. The quadratic calculation gives
+$2n\sum_m m c_m^2-2\pi^{-2}\sum_m c_m^2\log n+O_M(A_{\mathbf c}^2)$.
+The constants are uniform in $\mathbf c$: the bounded generator of
+$W_\theta$ and $\|H_{\mathbf c}\|_1\le2MA_{\mathbf c}$ bound
+$\|r\|_{C^3(\mathfrak S_1)}$ by $C_MA_{\mathbf c}$,
+$\|rb_u\|_{C^3(\mathfrak S_1)}$ by $C_MA_{\mathbf c}^2$, and
+$A_*\le A_{\mathbf c}$. No spectral gap or eigenvector choice is used.
+
+For a nearest integer $q$ to $\tau\ge2$, set $n=2q$.
+Dilation and Lemma~\ref{rev5:lem:strips} give, with $b$ from
+\eqref{rev5:eq:strip-function},
+\begin{equation}\label{mf:eq:strip-transfer}
+ \|P_{(-\tau,\tau)}\mathcal G_{\mathbf c}P_{(-\tau,\tau)}
+       -P_{(-q,q)}\mathcal G_{\mathbf c}P_{(-q,q)}\|_1
+ \le4\sum_m|c_m|b(m/2).
+\end{equation}
+Indeed each endpoint moves by at most $1/2$, and a strip of length $h$
+for $\mathcal G_m$ has nuclear norm at most $b(mh)$.
+The trace perturbation inequality for $x^2,x^3$ gives errors
+$O_M(A_{\mathbf c}^2),O_M(A_{\mathbf c}^3)$.
+Replacing $\log(2q)$ by $\log\tau$ and $q$ by $\tau$ in the bulk has the
+same orders, completing Theorem~\ref{mf:thm:moments}.
+
+\begin{proposition}[General first-order law]\label{mf:prop:first-order}
+For $\mathbf c\ne0$ and real $f\in C^2([-A_{\mathbf c},A_{\mathbf c}])$,
+$f(0)=0$,
+\begin{multline}\label{mf:eq:first-order}
+ \tr f(\mathcal K_{\tau,\mathbf c})
+ =2\tau\sum_{j=1}^M[f(s_j(B_{\mathbf c}))+f(-s_j(B_{\mathbf c}))]\\
+ +O_M\bigl(A_{\mathbf c}\|f'\|_\infty+
+ A_{\mathbf c}^2\|f''\|_\infty(1+\log\tau)\bigr),\qquad\tau\ge2.
+\end{multline}
+For $\mathbf c=0$ the trace is zero.
+\end{proposition}
+\begin{proof}
+The kernel is bounded by
+$\min\{2D_{\mathbf c},2A_{\mathbf c}/(\pi|X-Y|)\}$.
+For $P=P_I$, $|I|=2q$, the measure of points lost by displacement $u$
+is $\min(2q,|u|)$. Splitting the squared-kernel integral at
+$u_0=A_{\mathbf c}/(\pi D_{\mathbf c})$ and $2q$ gives
+\[
+ \|P\mathcal G_{\mathbf c}(I-P)\|_2^2
+ \le\frac{4A_{\mathbf c}^2}{\pi^2}
+ [3+2\log(2\pi qD_{\mathbf c}/A_{\mathbf c})].
+\]
+Scalar Taylor expansion in the spectral measure of each compression
+eigenvector has zero linear term. Summing its quadratic remainder yields
+\[
+ |\tr f(P\mathcal G_{\mathbf c}P)-\tr P f(\mathcal G_{\mathbf c})P|
+ \le\tfrac12\|f''\|_\infty\|P\mathcal G_{\mathbf c}(I-P)\|_2^2.
+\]
+The traces exist because $f(0)=0$ bounds $|f(\mathcal G_{\mathbf c})|$
+by a constant times the frequency projection onto $(-M,M)$, whose bounded
+interval compression is trace class. On $I=(-q,q)$ the latter trace equals
+$2q\tr_{\mathscr H}f(H_{\mathbf c})$ by the Bloch formula.
+Use \eqref{mf:eq:strip-transfer},
+$D_{\mathbf c}/A_{\mathbf c}\le M$ and
+$\|H_{\mathbf c}\|_1\le2MA_{\mathbf c}$ to replace $q$ by $\tau$.
+\end{proof}
+
+\subsection{Two frequencies}
+For $\mathbf c=(1,a)$ the bulk graph is the path $(-1,1,0,2)$,
+with weights $a,1,a$. Its polynomial is
+$\lambda^4-(1+2a^2)\lambda^2+a^4$; hence its spectrum is
+$\pm\rho_+,\pm\rho_-$, where
+$\rho_\pm=(\sqrt{1+4a^2}\pm1)/2$, and $\|\mathcal G_a\|=\rho_+$.
+The quadratic and cubic traces are
+$4\tau(1+2a^2)-2\pi^{-2}(1+a^2)\log\tau+O_a(1)$ and
+$3a\pi^{-2}\log\tau+O_a(1)$.
+At the jump,
+\begin{equation}\label{mf:eq:two-harmonic-seam}
+ C_t=aX_{-1,1}+t(aX_{-2,0}+X_{-1,0})
+                   +(1-t)(X_{0,1}+aX_{0,2}).
+\end{equation}
+Put $s=t(1-t)$, $r^2=1-2s$. The vector $(1-t)e_{-2}-te_2$ is null.
+Combining the other two leaves into $(te_{-2}+(1-t)e_2)/r$ leaves
+\[
+ \begin{pmatrix}0&0&ar&0\\0&0&t&a\\ar&t&0&1-t\\0&a&1-t&0\end{pmatrix},
+\]
+whose determinant gives
+\begin{equation}\label{mf:eq:quartic}
+ \lambda^4-[a^2+(1+a^2)r^2]\lambda^2-2as\lambda+a^4r^2.
+\end{equation}
+For $a\ne0$ its constant term never vanishes; the four roots retain two
+positive and two negative signs. Their product and $\|C_t\|\le\rho_+$
+give $|\lambda|\ge a^4/(2\rho_+^3)$. They are not sign-paired when
+$0<t<1$, because $\tr C_t^3=6at(1-t)\ne0$.
+No disjointness of their image intervals is claimed. A general
+second-order $C^2$ law with bounded remainder, its phase profile and
+individual transition eigenvalues require further analysis.
