@@ -4354,7 +4354,33 @@ Pivot from coordinate-mode truncation $C_M = Q[M..N, M..N]$ to the physical spec
 
 ---
 
-# Updated major historical arc (Cells 0–145)
+## Cell 146 (Finite-Volume Boundary Quantization, Continuum Deceleration & Candidate Positive Threshold)
+
+* **Companion Note:** [`cell146.md`](file:///c:/data/github/connes-cvs-/cell146.md)
+* **Target:** Gate 1 (Milestone M-G1.6 / Finite-Volume Boundary Quantization, Deceleration Tracking & Candidate Threshold)
+* **Status:** Certified & Epistemically Calibrated ([`cell146.py`](file:///c:/data/github/connes-cvs-/cell146.py), [`cell146.out`](file:///c:/data/github/connes-cvs-/cell146.out), [`cell146.md`](file:///c:/data/github/connes-cvs-/cell146.md))
+* **Execution Script:** [`cell146.py`](file:///c:/data/github/connes-cvs-/cell146.py) (50-dps verification suite across $N \in [24, 32, 40, 48, 56, 64, 72, 80]$; runtime: 358.64s; commit `18bc73a`)
+
+### Key Analytical & Numerical Results Certified
+1. **Pre-Flight Hard Regression Certified ($N=64$):** Certified operators against Cell 138–145 invariants in 103.27s: $\omega_0 = 2.9315259531$ (residual $6.86 \times 10^{-12}$), $\nu_0 = 4.2604954421$ (residual $6.11 \times 10^{-12}$), and $\mu_0 = -0.4869792197$ (residual $2.54 \times 10^{-11}$).
+2. **Local Exponent Deceleration Certified (Table 1):** Pairwise local scaling exponents between consecutive dimensions demonstrate marked deceleration:
+   - $a_{\mathrm{loc}}(E_{11})$ drops continuously: $7.97 \to 5.40 \to 1.64 \to 1.72 \to 1.23 \to 0.955 \to 0.6194$.
+   - $p_{D, \mathrm{loc}}(D)$ decelerates: $15.94 \to 10.81 \to 3.27 \to 3.43 \to 2.45 \to 1.91 \to 1.239$.
+   Confirms that the severe $N \le 40$ power-law collapse was a transient finite-size effect, not an asymptotic law.
+3. **Negative Result on Free-Box Dispersion (Table 2):** Consecutive Ritz gaps in the continuum yield ratio $\mathcal{R}_{\mathrm{disp}}(N) \equiv (E_{13} - E_{12}) / (E_{12} - E_{11}) \approx 0.3641$ (stabilizing in $[0.35, 0.36]$), decisively refuting the naive free-box prediction $5/3 \approx 1.667$. The continuum Ritz spectrum does not behave like free particles in a box.
+4. **Stable Spatial Anatomy of $v_{11}^{(N)}$ (Table 3):** Internal node count locks at 46 for all $N \ge 32$; peak Fourier mode locks at $m^* = 26$; well mass fraction stabilizes at $M_{\mathrm{well}} \approx 77.26\%$; boundary amplitude $|\psi(L)|$ falls smoothly from $2.535 \to 0.5241$. (Endpoint equality $|\psi(0)| = |\psi(L)|$ is an algebraic identity of the cosine basis and even reflection, not empirical symmetry; boundary derivative $|\psi'(L)|$ was not evaluated.)
+5. **The Crucial Clue: Candidate Positive Continuum Threshold $E_\infty \approx 0.00246$ (Table 4):**
+   Across $N \ge 48$, the offset box model achieves the highest correlation:
+   $$E_{11}(N) \approx E_\infty + \frac{15.22}{N^2}, \qquad E_\infty \approx 0.002461 \qquad (R^2 = 0.987413).$$
+   Explains local exponent deceleration: if $E_{11} \to E_\infty > 0$, then $a_{\mathrm{loc}} \to 0$ asymptotically, naturally producing $7.97 \to 0.619$. If $E_\infty > 0$ survives larger $N$ and cutoff $T$ variation, then $D(N) \to E_\infty^2 > 0$, vastly simplifying Gate 1.
+6. **Demotion of Theorem 146.1 (Category Hygiene):** Fourier cosine truncation at mode $N$ on fixed $[0, L]$ provides spatial resolution $\Delta t \sim N^{-1}$; it does not expand the physical domain into a box of length $X \sim N$. The bridge from discrete Fourier truncation to box quantization is an unproved analogy, demoted from a theorem to Hypothesis 146.1.
+7. **Removal of Regression Lower Bound:** The terminal claim "bounding $D(N) \ge \Omega(N^{-2.369})$" is retired as an empirical extrapolation. Calibrated formulation adopted: *"The observed $E_{11}$ deceleration is consistent with a positive continuum threshold or, at minimum, a sub-polynomial collapse; an analytic lower bound remains to be established."*
+8. **Clearance Status:** **Gate 1 is NOT yet mathematically cleared.**
+9. **Bridge to Cell 147:** Robustness test of the candidate threshold $E_\infty \approx 0.002461$ across higher dimensions $N \in [48..96]$ and Archimedean cutoff variation $T \in \{600, 800\}$.
+
+---
+
+# Updated major historical arc (Cells 0–146)
 
 ```
 Cells 0–4
@@ -4491,6 +4517,9 @@ Cell 144 (Gate 1 Analytical Operator Inequality & Resolvent Gap Reorientation)
     ↓
 Cell 145 (Gate 1 Resolvent Denominator Collapse vs Tunneling Doublet Splitting)
     Expanded sweep N in [24..80] (50 dps, 615s); regression certified; Gate 1 product collapses by 8 orders (3.2e-25 -> 4.6e-33) despite R_spec exploding (22.5 -> 2.1e5); denominator collapse decelerates (11x drop at N=32->40 vs 14% drop at N=72->80), proving p_D = 6.66 (R^2 = 0.84) is a descriptive transient; doublet decay exponent shifts kappa = 0.82 (N<=56) -> 0.44 (N<=80); product flattens around 4e-33 after N=48; log-ratio rho decreases (19.1 -> 7.1) but remains > 7.0; ||Q||_op ~ N^0.29 (R^2 = 0.95) and p_R === p_D + p_Q confirmed; L=12 control maintains macroscopic D_12 >= 0.336 and R_spec ~ 16; multi-doublets confirmed; Gate 1 declared NOT yet mathematically cleared; isolates gap lower bound D(N) >= e^-o(N) via finite-volume boundary quantization as target for Cell 146
+    ↓
+Cell 146 (Gate 1 Finite-Volume Boundary Quantization, Deceleration & Candidate Positive Threshold)
+    Expanded sweep N in [24..80] (50 dps, 358s); pre-flight certified (< 3e-11); local exponent collapses a_loc = 7.97 -> 0.619, p_D = 15.94 -> 1.24, confirming collapse deceleration; naive free-box dispersion ratio refuted (R_disp ~ 0.364 != 1.667); edge state anatomy stable (46 nodes, M_well ~ 77.3%, m* = 26, |psi(L)| falls 2.54 -> 0.52); best fit is offset model E_11 ~ 15.22/N^2 + 0.00246 (R^2 = 0.9874), suggesting positive threshold E_infty > 0 and naturally driving a_loc -> 0; Theorem 146.1 demoted due to Fourier resolution vs box length category gap; Gate 1 NOT yet cleared; sets up Cell 147 robustness test across N in [48..96] and T in {600, 800}
 ```
 
 ---
