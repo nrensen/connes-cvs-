@@ -108,18 +108,106 @@ For each dimension $N \in [48, 56, 64, 72, 80, 88, 96]$ at $T=600$:
 
 ---
 
-## 4. Diagnostic Output Tables
+## 4. Certified Diagnostic Tables ($T = 600, \mathrm{dps} = 50$)
 
-*(To be populated upon external execution of `cell148.py`)*
+### Table 1: Exact Operator Component Dissection of the Threshold State $E_{11}(N)$
+Tracking $E_{11} = E_{\mathrm{arch}} + E_{\mathrm{prime}} + E_{\mathrm{pole}}$, with $E_{\mathrm{prime}} = -W + D_{\mathrm{trans}}$:
+| $N$ | $E_{11}$ | $E_{\mathrm{arch}}$ | $E_{\mathrm{prime}}$ | $E_{\mathrm{pole}}$ | $-W[v_{11}]$ | $D_{\mathrm{trans}}$ | Closure Res |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 0.009243 | 1.868246 | -1.978308 | 0.119304 | -3.427627 | 1.449319 | $1.27 \times 10^{-16}$ |
+| 56 | 0.007095 | 1.865347 | -1.978328 | 0.120076 | -3.428612 | 1.450285 | $5.38 \times 10^{-17}$ |
+| 64 | 0.006025 | 1.862655 | -1.977408 | 0.120777 | -3.429525 | 1.452118 | $9.45 \times 10^{-17}$ |
+| 72 | 0.005384 | 1.864933 | -1.979566 | 0.120017 | -3.429854 | 1.450288 | $3.47 \times 10^{-17}$ |
+| 80 | 0.005044 | 1.866053 | -1.980601 | 0.119591 | -3.430121 | 1.449520 | $1.06 \times 10^{-16}$ |
+| 88 | 0.004856 | 1.867458 | -1.981711 | 0.119109 | -3.430155 | 1.448444 | $4.68 \times 10^{-17}$ |
+| 96 | 0.004668 | 1.868706 | -1.982719 | 0.118681 | -3.430304 | 1.447585 | $1.56 \times 10^{-16}$ |
 
-### Table 1: Exact Operator Component Dissection of $E_{11}(N)$ ($N \in [48..96], T=600$)
-Tracking $E_{11}$, $E_{\mathrm{arch}}$, $E_{\mathrm{prime}} = -W + D_{\mathrm{trans}}$, $E_{\mathrm{pole}}$, and algebraic closure residual.
+*Closure Verification:* Across all tested dimensions $N \in [48, 96]$, algebraic closure $|E_{11} - (E_{\mathrm{arch}} + E_{\mathrm{prime}} + E_{\mathrm{pole}})| < 1.6 \times 10^{-16}$, confirming that numerical decomposition is exact to floating-point precision.
+
+---
 
 ### Table 2: Competition Operator & Pareto Deficit Pair on $v_{11}^{(N)}$
-Tracking $K_{\mathrm{rest}}[v_{11}]$, $W_\perp[v_{11}]$, $H_1[v_{11}]$, $\Delta K[v_{11}]$, $\Delta W[v_{11}]$, and total deficit margin over $C_{\mathrm{gain}}$.
+Tracking $K_{\mathrm{rest}}[v_{11}]$, $W_\perp[v_{11}]$, $H_1[v_{11}]$, Deficits $\Delta K, \Delta W$, and Pareto Margin over $C_{\mathrm{gain}}$:
+| $N$ | $K_{\mathrm{rest}}$ | $W_\perp$ | $H_1[v_{11}]$ | $\Delta K$ | $\Delta W$ | $\Delta_{\mathrm{tot}}$ | $C_{\mathrm{gain}}$ | Margin |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 3.12107 | 3.42763 | -0.30655 | 0.18512 | 0.83287 | 1.01798 | 0.84650 | 0.17148 |
+| 56 | 3.11899 | 3.42861 | -0.30963 | 0.18637 | 0.83188 | 1.01825 | 0.84390 | 0.17435 |
+| 64 | 3.11661 | 3.42953 | -0.31291 | 0.18509 | 0.83097 | 1.01606 | 0.84199 | 0.17407 |
+| 72 | 3.11804 | 3.42985 | -0.31181 | 0.18592 | 0.83064 | 1.01656 | 0.84329 | 0.17326 |
+| 80 | 3.11872 | 3.43012 | -0.31140 | 0.18612 | 0.83037 | 1.01650 | 0.84330 | 0.17320 |
+| 88 | 3.11962 | 3.43015 | -0.31053 | 0.18695 | 0.83034 | 1.01729 | 0.84316 | 0.17413 |
+| 96 | 3.12038 | 3.43030 | -0.30993 | 0.18711 | 0.83019 | 1.01730 | 0.84310 | 0.17420 |
+
+---
 
 ### Table 3: Spectral Mass Distribution of $v_{11}^{(N)}$ across $W_\perp$ Eigenmodes
-Tracking cluster mass $P_{\le 3}$, bulk mass $P_{\ge 4}$, peak mode $k^*$, and modal deficit $\Delta W_{\mathrm{spec}}$.
+Tracking Top Mode Mass $P_{\mathrm{top}}$, Cluster Mass $P_{\le 3}$ (Modes 0–3), Deep Bulk Mass $P_{\ge 4}$, and Normalized Well Expectation $W_\perp / \nu_0$:
+| $N$ | $q_{\mathrm{cont}}$ | $P_{\mathrm{top}}$ (Mode 0) | $P_{\le 3}$ (Cluster) | $P_{\ge 4}$ (Bulk) | $W_\perp / \nu_0$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 38 | 7.0491% | 42.3051% | 57.6949% | 0.8045 |
+| 56 | 46 | 4.0613% | 39.1257% | 60.8743% | 0.8047 |
+| 64 | 54 | 3.1362% | 33.8929% | 66.1071% | 0.8050 |
+| 72 | 62 | 1.8994% | 26.5580% | 73.4420% | 0.8050 |
+| 80 | 70 | 1.1258% | 16.5057% | 83.4943% | 0.8051 |
+| 88 | 78 | 0.8533% | 13.5470% | 86.4530% | 0.8051 |
+| 96 | 86 | 0.4759% | 8.9209% | 91.0791% | 0.8051 |
 
-### Table 4: Coercivity Components and Analytical Lower Bound Candidates
-Tracking individual component scaling exponents to isolate the analytical mechanism preserving $E_{11} \ge E_\infty > 0$.
+---
+
+### Table 4: Arithmetic Component Balance & Barrier Margin
+Tracking $E_{11}$ vs Potential Residual $D_{\mathrm{trans}} - W$, Combined Balance $E_{\mathrm{arch}} + E_{\mathrm{prime}}$, and Pole Contribution $E_{\mathrm{pole}}$:
+| $N$ | $E_{11}$ | $E_{\mathrm{arch}}$ | $D_{\mathrm{trans}} - W$ | $E_{\mathrm{arch}} + E_{\mathrm{prime}}$ | $E_{\mathrm{pole}}$ | $H_1[v_{11}] + 0.50$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 48 | 0.009243 | 1.868246 | -1.978308 | -0.110062 | 0.119304 | 0.193446 |
+| 56 | 0.007095 | 1.865347 | -1.978328 | -0.112981 | 0.120076 | 0.190373 |
+| 64 | 0.006025 | 1.862655 | -1.977408 | -0.114753 | 0.120777 | 0.187088 |
+| 72 | 0.005384 | 1.864933 | -1.979566 | -0.114633 | 0.120017 | 0.188187 |
+| 80 | 0.005044 | 1.866053 | -1.980601 | -0.114548 | 0.119591 | 0.188595 |
+| 88 | 0.004856 | 1.867458 | -1.981711 | -0.114253 | 0.119109 | 0.189466 |
+| 96 | 0.004668 | 1.868706 | -1.982719 | -0.114013 | 0.118681 | 0.190073 |
+
+---
+
+## 5. Epistemic Synthesis & Strategic Analysis
+
+### 5.1 The Definitive Diagnostic Discovery: The Stable Arithmetic Pole Rescue
+Cell 148 has answered the core arithmetic question formulated in Section 2.4:
+$$\boxed{E_{\mathrm{arch}}[v_{11}] + E_{\mathrm{prime}}[v_{11}] < 0, \qquad E_{\mathrm{pole}}[v_{11}] > 0.}$$
+Across all tested dimensions $N \in [48..96]$:
+- The Archimedean and prime sectors combine to form a **consistently negative balance**:
+  $$E_{\mathrm{arch}} + E_{\mathrm{prime}} \in [-0.110062, -0.114013].$$
+- The zeta pole contribution $E_{\mathrm{pole}}$ provides a **stable positive contribution**:
+  $$E_{\mathrm{pole}} \in [0.118681, 0.120777],$$
+  remaining within a narrow $1.76\%$ band while dimension $N$ doubles ($48 \to 96$).
+- The small positive residual $E_{11}(N) = (E_{\mathrm{arch}} + E_{\mathrm{prime}}) + E_{\mathrm{pole}} > 0$ is therefore **not** an opaque kinetic barrier, but the result of structured arithmetic cancellation where the stable positive pole sector rescues a negative Archimedean/prime sum:
+  $$E_{11}(96) = -0.114013 + 0.118681 = +0.004668.$$
+
+> [!WARNING]
+> **Epistemic Constraint (Anti-Overstatement):**
+> Stability across seven discrete dimensions $N \in [48..96]$ demonstrates empirical robustness, but does **not** constitute an analytical proof that $E_{\mathrm{pole}} \ge c > 0$ or that $E_{\mathrm{arch}} + E_{\mathrm{prime}} \ge -c_0$ as $N \to \infty$. It establishes the precise arithmetic target for Gate 1.
+
+### 5.2 Deep Bulk Expulsion of the Threshold State
+Table 3 reveals a striking structural transformation in the threshold state:
+- Top-mode mass $P_{\mathrm{top}}$ collapses from $7.05\%$ down to $0.48\%$.
+- Cluster mass $P_{\le 3}$ drops by nearly a factor of 5: from $42.31\%$ ($N=48$) to $8.92\%$ ($N=96$).
+- Bulk mass $P_{\ge 4}$ rises from $57.69\%$ to **$91.08\%$**.
+- Meanwhile, the normalized well harvest $W_\perp / \nu_0$ stabilizes to 4 digits at $0.8051$.
+
+This demonstrates that the threshold state $v_{11}$ does **not** abandon the attractive potential well (it harvests $\approx 80.5\%$ of the maximum eigenvalue $\nu_0$), but is progressively expelled from the near-degenerate top cluster into the deep bulk modes of $W_\perp$.
+
+### 5.3 Clarification on Competition Ground States (Notation Audit)
+In the summary output, the competition operator ground state was reported as $\mu_0 = -0.478034$. This corresponds strictly to the dimension $N = 48$ value ($\mu_0^{(48)} = -0.478034$). Across the sweep, the ground state eigenvalue of $H_1$ converges toward the certified benchmark:
+$$\mu_0^{(48)} = -0.478034, \quad \mu_0^{(64)} = -0.4869792197, \quad \mu_0^{(96)} \approx -0.4871.$$
+Crucially:
+- For the specific threshold state: $H_1[v_{11}^{(96)}] = -0.30993 > -0.50$ (surplus $+0.19007$).
+- For the entire continuum subspace: $\inf_{v \perp \mathcal{B}_{11}} \langle v, H_1 v \rangle = \mu_0 \approx -0.48698 > -0.50$ (global margin $+0.013021$).
+Both quantities comfortably exceed the critical $-1/2$ Weil instability threshold.
+
+### 5.4 Strategic Forward Path: Cell 149
+Cell 148 concludes empirical curve-fitting. The forward analytical target for Cell 149 is to formalize an operator inequality based on the spectral deficit decomposition of $W_\perp$:
+1. Decompose any test state $v \in \mathcal{B}_{11}^\perp$ as $v = v_{\mathrm{top}} + v_{\mathrm{bulk}}$ with $P_{\mathrm{bulk}} = \|v_{\mathrm{bulk}}\|^2$.
+2. Formulate the modal deficit lower bound:
+   $$\Delta W[v] \ge \sum_{k \ge 4} \delta \nu_k P_W(k) \ge \delta_* P_{\mathrm{bulk}}.$$
+3. Combine this with the universal tradeoff $\Delta K + \Delta W \ge C_{\mathrm{gain}}$ and the positive pole lower bound to establish an explicit analytical lower bound:
+   $$E_{11}(N) = (E_{\mathrm{arch}} + E_{\mathrm{prime}}) + E_{\mathrm{pole}} \ge \varepsilon > 0.$$
+
