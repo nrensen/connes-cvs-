@@ -1,0 +1,247 @@
+\section{Introduction}
+A whole-line operator can have only three spectral values and still acquire
+rich spectral structure when restricted to a long interval. The sine
+Loewner operator provides an explicit example. Its whole-line Fourier
+representation exchanges two adjacent frequency windows, with spectrum
+contained in $\{-1,0,1\}$. Spatial truncation produces a logarithmic
+transition near the two outer spectral bands and isolated states in the
+central gaps. The outer transition admits a uniform trace law; the gap
+states follow a one-period boundary flow and interact across the interval
+at an explicitly determined algebraic rate.
+
+The finite matrices are
+\begin{equation}\label{eq:2.1}
+ A_N(\varepsilon)_{mn}=
+ \begin{cases}
+ \dfrac{\sin(2\pi m\varepsilon)-\sin(2\pi n\varepsilon)}{\pi(m-n)},&m\ne n,\\[1ex]
+ 2\varepsilon\cos(2\pi m\varepsilon),&m=n,
+ \end{cases}\qquad {-N}\le m,n\le N,
+\end{equation}
+where $N\ge1$, $d=2N+1$ and $0<\varepsilon<1/2$. Their critical
+integral operator on $L^2[-1,1]$ has kernel
+\begin{equation}\label{eq:2.3}
+ K_\tau(x,y)=\frac{\sin(2\pi\tau x)-\sin(2\pi\tau y)}{\pi(x-y)},
+ \qquad K_\tau(x,x)=2\tau\cos(2\pi\tau x).
+\end{equation}
+Both are self-adjoint contractions and commute with reflection.
+The kernel is the commutator of multiplication by $\sin(2\pi\tau x)$
+and the finite Hilbert transform with kernel $1/[\pi(x-y)]$.
+The critical scale is $N\varepsilon$; an exact covariance comparison
+uses the slightly different parameter $d\varepsilon/2$.
+
+\subsection*{Three main conclusions}
+\emph{A uniform trace law and a finite-matrix bridge.}
+For $r_t=\sqrt{t^2+(1-t)^2}$, set
+\begin{equation}\label{T10:eq:kappa}
+ \varkappa(f)=\frac1{2\pi^2}\int_0^1
+ \frac{f(r_t)+f(-r_t)-f(1)-f(-1)}{t(1-t)}\,dt.
+\end{equation}
+The integral converges for H\"older $f$: the endpoint numerator is
+$O([t(1-t)]^\alpha)$ for its H\"older exponent $\alpha>0$.
+\begin{theorem}[Uniform trace law]\label{T10:conj:law}
+Every real $f\in C^2([-1,1])$ with $f(0)=0$ satisfies, for $\tau\ge2$,
+\begin{equation}\label{T10:eq:law}
+ \tr f(\mathcal K_\tau)
+ =2\tau[f(1)+f(-1)]+\varkappa(f)\log\tau+\mathsf R_\tau(f),
+\end{equation}
+where, with the absolute constant $C_{\mathrm{tr}}=143$,
+\begin{equation}\label{rev5:eq:uniform-remainder}
+ |\mathsf R_\tau(f)|\le C_{\mathrm{tr}}
+                    (\|f'\|_\infty+\|f''\|_\infty).
+\end{equation}
+The bound is uniform in $f$ and $\tau$.
+\end{theorem}
+The two bulk masses lie at $\pm1$. The logarithmic correction is
+supported on $g\le|\lambda|\le1$, where $g=1/\sqrt2$, with the
+endpoint subtraction in \eqref{T10:eq:kappa} essential. The theorem
+extends to globally Lipschitz tests that are $C^{1,1}$ only on these
+outer bands. It gives all Schatten powers $|x|^p$, $p\ge1$, closed
+determinant coefficients and signed transition counts. In particular,
+for $w\ge0$ the coefficient in $\log\det(I+w\mathcal K_\tau^2)$ is
+\[
+ -\frac4{\pi^2}\arcsin^2\!\left(\frac12\sqrt{\frac{2w}{1+w}}\right),
+\]
+which equals $-1/9$ at $w=1$.
+
+Theorem~\ref{v11:thm:direct-transfer} compares $A_N(\varepsilon)$
+with $\mathcal K_{d\varepsilon/2}$ independently of dimension.
+After the exact linear correction, its $C^2$ trace error is at most
+$L_\varepsilon\|f''\|_\infty$, with
+$L_\varepsilon=2\varepsilon\csc(2\pi\varepsilon)-1/\pi
+=O(\varepsilon^2)$. The Lipschitz error is $O(\varepsilon)$.
+Thus the trace laws also apply at fixed sampling scale, uniformly
+when $\varepsilon$ stays below $1/2-\delta$, $\delta>0$.
+
+\emph{Physical gap states and one-period flow.}
+Dilation identifies $\mathcal K_\tau$ with the compression to
+$(-\tau,\tau)$ of the fixed whole-line exchange $\mathcal G$ with
+kernel $[\sin(2\pi X)-\sin(2\pi Y)]/[\pi(X-Y)]$.
+Let $B_b=P_{(b,\infty)}\mathcal G P_{(b,\infty)}$.
+For each fixed $\alpha\in(-g,0)\cup(0,g)$ there is exactly one
+$b$ modulo one for which $\alpha$ is an eigenvalue of $B_b$, and
+that eigenvalue is simple. Long-interval clusters converge to the
+two boundary spectra with exact multiplicity
+(Theorems~\ref{v11:thm:gap-limits} and
+\ref{boundary:thm:one-cell-flow}). This information is finer than the
+bulk and logarithmic trace terms.
+
+\emph{The full algebraic interaction and a certified nonzero example.}
+For an isolated level $\alpha$ shared by the two boundaries, let
+$\eta_L,\eta_R$ be the normalized physical tail amplitudes of
+Section~\ref{unified:sec:interaction}. For an interval of length $L$
+with fixed endpoint phases, the two nearby eigenvalues are
+\[
+ \alpha+L^{-\gamma(\alpha)}\lambda_j(M_\alpha)
+       +o(L^{-\gamma(\alpha)}),\qquad j=1,2,
+\]
+where
+\[
+ \gamma(\alpha)=\frac2\pi\arctan\sqrt{1-2\alpha^2},\qquad
+ M_\alpha=-\frac{2\pi(1-\alpha^2)\sqrt{1-2\alpha^2}}{\alpha}
+ \begin{pmatrix}0&\overline{\eta_L}\eta_R\\
+                 \overline{\eta_R}\eta_L&0\end{pmatrix}.
+\]
+This matrix includes the complementary-resolvent correction, which
+has the same order as the direct overlap
+(Theorem~\ref{v13:thm:leading-interaction}). Centered intervals have
+opposite even and odd coefficients; the odd state lies farther from
+zero when the amplitude is nonzero. Exact interval certificates
+isolate a phase-zero mode in $(0.405,0.428)$, prove its uniqueness in
+$[0.3565,0.4765]$, and establish $|\eta|>1/100$ for every normalized
+physical eigenfunction there. They therefore give an unconditional
+instance of the nonzero splitting law. General nonvanishing is not
+assumed or proved.
+
+\subsection*{Other consequences and scope}
+At small continuum scale, the four leading signed/parity branches begin
+at orders $\tau,\tau^3,\tau^5,\tau^7$. For a simple isolated parity
+eigenvalue in the finite critical limit, physical eigenvector
+reconstructions converge weakly to zero while magnification reveals
+nontrivial endpoint profiles. These are distinct from the long-window
+boundary modes.
+Physical boundary localization also gives continuous phase-dependent third terms.
+For finite matrices these hold whenever $\varepsilon_N\to0$ and
+$\tau_N=(2N+1)\varepsilon_N/2\to\infty$, without a further condition
+on $(2N+1)\varepsilon_N^3$ or convergence of the fractional phases.
+Reflection resolves information invisible in the leading signed trace:
+for $w>0$,
+\[
+ \frac{\det(I+w\mathcal K_{\tau,+}^2)}
+      {\det(I+w\mathcal K_{\tau,-}^2)}\longrightarrow1+\frac w2,
+\]
+where $+$ and $-$ denote spatial parity. For a fixed finite
+commensurate frequency family, a bipartite bulk graph is sign-symmetric,
+whereas additive frequency triples produce an odd logarithmic term.
+
+The estimates have different scopes, summarized below. In particular,
+relative gap indices do not determine unspecified absolute ranks, and
+no uniform interaction law at zero or at a band edge is asserted.
+\begin{center}
+\begin{tabular}{@{}p{.28\textwidth}p{.65\textwidth}@{}}
+\hline
+Question & Parameter and regularity range\\\hline
+Critical finite limit & $N\varepsilon_N\to\tau\in(0,\infty)$;
+all fixed signed/parity eigenvalue branches.\\
+Uniform trace remainder & $\tau\ge2$; global $C^2$, or global Lipschitz
+and band-local $C^{1,1}$.\\
+Finite covariance transfer & $0<\varepsilon<1/2$; constants independent
+of $N$, with stated dependence on $\varepsilon$.\\
+Phase-dependent constant & Global Lipschitz and band-local $C^2$;
+continuous periodic phase profile.\\
+Boundary interaction & Fixed isolated $\alpha\in(-g,0)\cup(0,g)$;
+fixed endpoint phases and integer increases of interval length.\\
+Certified nonvanishing & The isolated phase-zero mode enclosed in
+$(0.405,0.428)$.\\\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Relation to earlier work}
+Loewner matrices are classical \cite{Loewner1934}; their inertia is
+studied in \cite{BhatiaFriedlandJain2016}.  De Andrade Silva recorded the arithmetic
+divided-difference block \cite{SilvaPrime,SilvaFramework}; its finite
+arithmetic dictionary and cutoff-derivative geometry occur in
+\cite{GroskinDictionary,GroskinPrimeEvent}.  Compressed translations
+appear in \cite[Section~5.1]{GuoPoleFree}, and the commutator framework
+is classical \cite{Calderon1965}.
+Positive time--band concentration and discrete prolate sequences are
+classical \cite{Fuchs1964,LandauPollak1962,LandauWidom1980,Slepian1965,Slepian1978,SlepianPollak1961};
+quantitative bounds include \cite{BonamiJamingKaroui2021,Karnik2021}.
+No priority is claimed for these objects or for the variable $N\varepsilon$.
+The same matrix also appears in Shi
+\cite[eqs.~(3.4)--(3.7)]{Shi2026}: in that paper's notation,
+$2L\,\mathbf G_{N,L}(x)=A_N(1-x/L)$ for $L/2<x<L$, including the
+diagonal entries.  Shi studies a finite arithmetic model and its
+rank-two displacement structure; the critical scaling and uniform
+trace asymptotics considered here are different conclusions.
+
+The two-term structure of Theorem~\ref{T10:conj:law} is that of the
+Widom--Sobolev formula \cite{BollmannMueller2024,Sobolev2013,Widom1982}.
+In the notation of \cite[eq.~(2.27)]{BollmannMueller2024},
+$\varkappa(f)=2\,\mathfrak U(f;X_{1,0},X_{0,-1})$, where $X_{1,0}$ and
+$X_{0,-1}$ are the two one-sided limits of the Bloch symbol of
+Proposition~\ref{T4:prop:bloch}, the factor $2$ counts the two ends of
+the truncation, and $\pm\sqrt{t^2+(1-t)^2}$ is the nonzero spectrum of
+their linear interpolation (Section~\ref{v6:sec:density}).  Matrix-valued trace formulas, including the jump integral displayed in
+\cite[eq.~(1.3)]{Shao2003}, provide direct precedents for the reduced
+three-dimensional symbol. Block determinant asymptotics and
+operator-valued Szeg\H{o}--Widom theory supply further settings
+\cite{BasorEhrhardtVirtanen2024,BoettcherSilbermann1994};
+Bloch-function trace asymptotics for a lattice-periodic operator appear in
+\cite{PfirschSobolev2018}. The infinite physical fiber must be reduced
+with control of the compression error before the finite-matrix reference
+can be used. The positive logarithmic counting and
+logistic rank laws are already in
+Landau--Widom~\cite[pp.~469--470]{LandauWidom1980}.
+What is proved here is the reduction of the exchange symbol to a fixed
+three-dimensional jump, the resulting trace law with a remainder bounded
+by the first two derivative norms uniformly in $f$ and $\tau$, its
+band-local extension, the folded signed profile, and the quantified
+dimension-independent transfer back to finite matrices.  The Hilbert--Carleman comparison has a direct antecedent in
+Otte~\cite{Otte2024}, and the smooth compression estimate is a version of
+Laptev--Safarov~\cite{LaptevSafarov1996}. We prove all operator comparisons
+needed here. Recent work also treats moving thresholds and low-regularity traces for
+positive localization operators \cite{Azimifard2026b,KulikovDamLarsen2026}.
+Our signed transition estimate is uniform on compact subsets of the outer
+bands; it does not identify individual eigenvalues with positive prolate
+eigenvalues or assert their sharper counting errors for this operator.
+
+
+
+One-period edge flow has precedents for periodic differential
+operators \cite[Proposition~3.21]{Gontier2020}; the proof here uses
+an analytic bandlimited covariance and a relative projection index.
+The endpoint model is related to classical finite-Hilbert-transform
+analysis \cite{KoppelmanPincus1959,BertolaEtAl2020,AlAifariKatsevich2014}.
+Our frequency pencil retains the same-half Hilbert blocks together
+with a phase-dependent exchange; the scalar reductions for adjacent
+or overlapping intervals do not directly diagonalize that pencil.
+The full complementary correction has the structure of a
+Feshbach--Schur reduction \cite{DussonSigalStamm2021}, but its
+coefficient is evaluated here for the physical boundary modes.
+Block Toeplitz determinant constants
+\cite{BasorEhrhardtVirtanen2024} and scalar
+Toeplitz-plus-Hankel parity formulas \cite{BasorEhrhardt2002}
+provide the reference results; we prove the localization and reflected
+limits needed to transfer them to the present operator-valued symbol.
+
+
+
+\subsection*{Organization}
+Section~\ref{unified:sec:foundations} gives the exchange representation,
+strict signed monotonicity and critical limit.
+Section~\ref{unified:sec:trace} develops the logarithmic density,
+coefficients and complete uniform-remainder proof.
+Section~\ref{unified:sec:finite} gives finite-scale estimates and
+endpoint geometry; Section~\ref{unified:sec:frequency} treats
+commensurate frequencies.
+The boundary analysis proceeds from phase constants
+(Section~\ref{unified:sec:phase}) to half-line flow and the endpoint
+equation (Section~\ref{unified:sec:gap}), the full interaction
+(Section~\ref{unified:sec:interaction}) and its certificates
+(Section~\ref{unified:sec:certificate}).
+Section~\ref{unified:sec:parity} resolves parity traces and counts.
+The endpoint spectral measure and differential obstruction in
+Section~\ref{unified:sec:gap}, together with the final open questions,
+delineate what these methods do and do not determine. All mathematical proofs are
+included in the paper; the ancillary files contain reproducible
+programs and exact rational witnesses.

@@ -5,6 +5,45 @@ All notable changes to `connes-cvs` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Repository documentation audit] - 2026-09-08
+
+- Completed sibling navigation across all four paper folders and clarified where
+  each paper keeps its data, programs and figure sources. The sine Loewner paper
+  contains two separate TikZ inputs and a third figure directly in its TeX section.
+- Scoped the historical package pin to the Riemann-zeros reproduction and kept the
+  sine Loewner verification independent of the Python package.
+- Clarified that the displayed Fuchs asymptotic in Connes §6.4 is for a prolate
+  quantity; comparison with the Weil spectral floor is numerical and heuristic.
+  Corrected “above” to “below” for two negative logarithmic estimates, without
+  changing any value, and clarified the finite-cutoff and earlier digit-count text.
+- Updated the manuscript-version description for the von Mangoldt measure paper,
+  removed a stale errata count, and corrected an obsolete historical test command.
+- Refreshed checksums for the edited paper-folder documentation. Repaired five stale
+  Guinand-Weil checksum entries for artifact and script revisions already committed
+  on 2026-08-16, and included the previously unlisted full pivot transcript.
+  Clarified the distinction between the historical certificate log and the later
+  provenance JSON and pivot transcript. The underlying artifacts and numerical
+  values are unchanged. Manuscripts, released
+  source archives, numerical artifacts and software behavior are unchanged.
+  This is a repository documentation update; no PyPI release is made.
+
+## [Sine Loewner operator - first publication] - 2026-09-08
+
+Added Paper 4, *Bulk trace laws and algebraic boundary interaction for the sine Loewner operator*,
+with its complete 88-page manuscript, three figures and all 64 released source files.
+Zenodo version DOI [10.5281/zenodo.22662222](https://doi.org/10.5281/zenodo.22662222);
+concept DOI [10.5281/zenodo.22662221](https://doi.org/10.5281/zenodo.22662221).
+
+- The paper proves uniform trace laws, a dimension-independent finite-matrix comparison,
+  half-line boundary flow and algebraic splitting, with three interval certificates.
+- Its own verification programs and exact witnesses are included under
+  `papers/4_sine_loewner_bulk_boundary/source/anc/`; they do not depend on `connes-cvs`.
+- Updated the paper index, citation guidance and license scope, and made the release
+  manifest tests explicitly exclude every `papers/` member from both package archives.
+- This is a paper and repository update, not a software release. The package remains
+  version 0.3.1; its implementation, distribution allowlists and root software citation
+  are unchanged. No new PyPI distribution accompanies this update.
+
 ## [0.3.1] - 2026-08-14
 
 Documentation and metadata only. **No code path, numerical value, or public API changes**, and the c=13 bit-identity regression gate is unaffected.

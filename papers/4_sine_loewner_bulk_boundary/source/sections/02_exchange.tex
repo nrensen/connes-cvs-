@@ -1,0 +1,266 @@
+\section{The two operators and their exchange representations}\label{sec:matrix}
+On $L^2(\mathbb T)$, $\mathbb T=\mathbb R/\mathbb Z$, put
+$e_m(t)=e^{2\pi imt}$ and let $P_N$ project onto
+$V_N=\operatorname{span}\{e_m:|m|\le N\}$.  For $\delta=1-\varepsilon$,
+define
+\[
+ (S_\delta f)(t)=\mathbf1_{[\delta,1]}(t)f(t-\delta),
+ \qquad T_\delta=S_\delta+S_\delta^*.
+\]
+$S_\delta$ carries the source arc $[0,\varepsilon]$ onto the target arc
+$[1-\varepsilon,1]$; these are disjoint because $\varepsilon<1/2$. Thus
+$T_\delta$ exchanges them, vanishes off their union, and has norm one.
+
+\begin{lemma}\label{lem:source-block}
+The matrix of $P_NT_\delta P_N$ is \eqref{eq:2.1}.  At the critical scale,
+\begin{equation}\label{eq:2.2}
+ A_N(\tau/N)_{mn}=N^{-1}K_\tau(m/N,n/N).
+\end{equation}
+In particular $\|A_N(\varepsilon)\|\le1$.
+\end{lemma}
+\begin{proof}
+The matrix entry of $S_{1-\varepsilon}$ is
+$e^{2\pi im\varepsilon}\int_0^\varepsilon e^{2\pi i(n-m)t}\,dt$;
+the adjoint entry has the same integral multiplied by
+$e^{-2\pi in\varepsilon}$.  Their sum gives \eqref{eq:2.1}, including the
+diagonal.  Substitution gives \eqref{eq:2.2}.
+\end{proof}
+
+Write $\mathcal Rf(x)=f(-x)$, $(\mathcal R_Na)_m=a_{-m}$ and
+$\mathcal H_p=\ker(\mathcal R-pI)$ for $p=\pm1$.
+The largest and smallest spectral values in these sectors are denoted by
+$\lambda_p^\pm(\tau)$ for $\mathcal K_\tau$ and by $\lambda_{N,p}^\pm(\varepsilon)$
+for $A_N(\varepsilon)$;
+$F_p(\tau)=\|\mathcal K_\tau|_{\mathcal H_p}\|$.
+We use the unitary Fourier transform
+$(\mathcal Ff)(\xi)=\widehat f(\xi)=\int_{\mathbb R}f(x)e^{2\pi ix\xi}\,dx$
+throughout.
+Let $E$ extend functions on $[-1,1]$ by zero and put $U=\mathcal FE$.
+
+\begin{proposition}[Cross-window structure]\label{thm:crosswindow}\label{prop:traces}
+Let $R_\tau$ denote multiplication by $\mathbf1_{(-\tau,\tau)}$ on
+$L^2(\mathbb R)$ and
+\begin{equation}\label{eq:v6:4.1}
+ (J_\tau g)(\xi)=
+ \begin{cases}g(\xi-\tau),&0<\xi<\tau,\\
+ g(\xi+\tau),&-\tau<\xi<0,\\0,&|\xi|\ge\tau.
+ \end{cases}
+\end{equation}
+Then $J_\tau=J_\tau^*$, $J_\tau^2=R_\tau$, and
+\begin{equation}\label{eq:v6:4.2}
+ \mathcal K_\tau=U^*J_\tau U,\qquad
+ \langle f,\mathcal K_\tau f\rangle
+ =2\operatorname{Re}\int_0^\tau
+ \overline{\widehat f(\xi-\tau)}\widehat f(\xi)\,d\xi.
+\end{equation}
+Define $C_\theta$ to have kernel
+$c_\theta(x-y)=\sin(\pi\theta(x-y))/[\pi(x-y)]$ on $[-1,1]$.
+With $\Pi_\pm=(R_\tau\pm J_\tau)/2$ and $C_\pm=U^*\Pi_\pm U$,
+\begin{equation}\label{eq:positive-split}
+ C_\pm\ge0,\qquad C_++C_-=C_{2\tau},\qquad
+ C_+-C_-=\mathcal K_\tau,\qquad \mathcal K_\tau^2\le C_{2\tau}.
+\end{equation}
+$\mathcal K_\tau$ is trace class with $\|\mathcal K_\tau\|_1\le4\tau$, and
+\begin{equation}\label{eq:2.8}
+ \tr\mathcal K_\tau=\frac{2\sin(2\pi\tau)}\pi,\qquad
+ \tr(\mathcal K_\tau|_{\mathcal H_p})
+ =\frac{\sin(2\pi\tau)+p\Si(2\pi\tau)}\pi,
+\end{equation}
+where $\Si(x)=\int_0^x\sin(t)\,t^{-1}\,dt$.
+Moreover $\|\mathcal K_\tau\|<1$ for every finite $\tau>0$.
+\end{proposition}
+\begin{proof}
+Direct Fourier integration yields \eqref{eq:v6:4.2}; equivalently, commuting
+the multiplier $i\operatorname{sgn}\xi$ of the Hilbert transform on
+$\mathbb R$ with the two frequency shifts in the sine, then compressing to
+$[-1,1]$, gives $J_\tau$.
+The operators $\Pi_\pm$ are orthogonal projections.  The restriction
+$A=R_\tau U:L^2[-1,1]\to L^2(-\tau,\tau)$ is Hilbert--Schmidt with
+$\|A\|_2^2=4\tau$.  Thus $C_\pm=A^*\Pi_\pm A$ are positive trace class,
+their sum is $A^*A=C_{2\tau}$, and their total trace is $4\tau$.
+Also $U^*J_\tau UU^*J_\tau U\le U^*J_\tau^2U=C_{2\tau}$.
+Since $C_\pm$ and $\tfrac12(I+p\mathcal R)C_\sigma$, $p,\sigma=\pm1$, are
+positive trace-class operators with continuous kernels, their traces are the integrals of their
+diagonals (Mercer).  Hence
+$\tr\mathcal K_\tau=\int_{-1}^1 2\tau\cos(2\pi\tau x)\,dx$,
+$\tr(\mathcal R\mathcal K_\tau)=\int_{-1}^1\sin(2\pi\tau x)/(\pi x)\,dx
+ =2\Si(2\pi\tau)/\pi$,
+and $\tr(\mathcal K_\tau|_{\mathcal H_p})=\tfrac12[\tr\mathcal
+K_\tau+p\,\tr(\mathcal R\mathcal K_\tau)]$ proves \eqref{eq:2.8}.
+If $\mathcal K_\tau$ had an eigenvalue of modulus one, equality in the
+contraction $U^*J_\tau U$ would force $Uf$ to vanish outside $(-\tau,\tau)$.
+The Fourier transform of a compactly supported function is entire, so this
+forces $f=0$, a contradiction.
+\end{proof}
+
+The same exchange identifies exactly where compression loses mass.
+Let $\mathcal G_\tau=\mathcal F^*J_\tau\mathcal F$, $P=EE^*$, and
+$\widetilde{\mathcal K}_\tau=\mathcal G_\tau E$.
+Since $J_\tau^2=R_\tau$, Plancherel gives
+$\widetilde{\mathcal K}_\tau^*\widetilde{\mathcal K}_\tau=C_{2\tau}$ and
+\begin{equation}\label{unified:eq:two-leakages}
+\begin{aligned}
+ C_{2\tau}-\mathcal K_\tau^2
+   &=E^*\mathcal G_\tau(I-P)\mathcal G_\tau E\ge0,\\
+ 1-\|\mathcal K_\tau f\|^2
+   &=\|(I-P)\widetilde{\mathcal K}_\tau f\|^2
+      +\int_{|\xi|>\tau}|\widehat{Ef}(\xi)|^2\,d\xi
+      \qquad(\|f\|=1).
+\end{aligned}
+\end{equation}
+The two terms are output escaping the physical interval and input outside
+the frequency band. For an eigenvector the left side is $1-\lambda^2$.
+These identities follow by inserting $P+(I-P)=I$; the band has width
+$2\tau$, so its concentration kernel is $\sin(2\pi\tau(x-y))/[\pi(x-y)]$.
+
+The elementary identity
+\begin{equation}\label{eq:2.4}
+ K_\tau(x,y)=2\operatorname{Re}\int_0^\tau
+ e^{2\pi i[x(\tau-s)+ys]}\,ds
+ =2\cos(\pi\tau(x+y))c_\tau(x-y)
+\end{equation}
+will be used repeatedly.
+
+\begin{theorem}[Continuum inertia and strict monotonicity]
+\label{thm:rev:structure:inertia}\label{thm:rev:structure:monotonicity}
+For every $\tau>0$, $\mathcal K_\tau$ is injective and has infinitely many
+positive and infinitely many negative eigenvalues in each parity sector.
+Write $\xi_{k,p}^+(\tau)>0$ for the positive eigenvalues in
+nonincreasing order and $\xi_{k,p}^-(\tau)<0$ for the negative
+eigenvalues in nondecreasing order, counting multiplicity; thus
+$\xi_{1,p}^{\pm}=\lambda_p^{\pm}$.
+For every $k\ge1$, $p=\pm1$ and $0<\tau_1<\tau_2$,
+\begin{equation}\label{eq:monotonicity}
+\begin{split}
+ 0&<\xi_{k,p}^+(\tau_1)<\xi_{k,p}^+(\tau_2)<1,\\
+ -1&<\xi_{k,p}^-(\tau_2)<\xi_{k,p}^-(\tau_1)<0.
+\end{split}
+\end{equation}
+Each ordered eigenvalue is continuous in $\tau$, tends to zero as
+$\tau\downarrow0$, and tends to its respective sign as $\tau\to\infty$.
+\end{theorem}
+These statements do not assert simplicity at every parameter.
+\begin{proof}
+Both $A=R_\tau U$ and $A^*$ are injective: the Fourier transform of a
+function supported in either bounded interval is entire, and cannot vanish
+on the other interval unless it vanishes identically.  In the polar
+decomposition $A=BV$, $B=(AA^*)^{1/2}$ is therefore positive and injective,
+$V$ is unitary, and both respect reflection.  The last assertion follows
+from $A\mathcal R=\mathcal R A$ between the two spaces and uniqueness of
+the polar decomposition.  Thus $\mathcal K_\tau$ is unitarily equivalent,
+sector by sector, to $BJ_\tau B$.  This proves injectivity.
+
+In each parity sector the involution $J_\tau$ on $L^2(-\tau,\tau)$ has
+infinite-dimensional eigenspaces of both signs: for any $p,\sigma=\pm1$,
+choose $h\in L^2(0,\tau)$ with $h(\tau-\xi)=\sigma p h(\xi)$, and set
+$g=h$ on $(0,\tau)$ and $g(\xi)=\sigma h(\xi+\tau)$ on $(-\tau,0)$.
+Then $J_\tau g=\sigma g$ and $\mathcal Rg=pg$.  The range of $B$ is dense
+in either parity sector.  Approximate any $n$ orthonormal vectors in this
+joint eigenspace by $Bf_1,\ldots,Bf_n$ with $f_j\in\mathcal H_p$.  The matrix
+$(\sigma\langle Bf_i,J_\tau Bf_j\rangle)_{i,j}$ can be made arbitrarily close
+to the identity, hence positive definite.  The minimax principle gives at
+least $n$ eigenvalues of sign $\sigma$ for $BJ_\tau B$ on the sector $p$.
+
+For monotonicity use the parity-preserving isometry
+$\mathcal D_af(x)=a^{-1/2}f(x/a)\mathbf1_{[-a,a]}(x)$, $0<a<1$.
+The kernel gives
+$\mathcal D_a^*\mathcal K_\tau\mathcal D_a=\mathcal K_{a\tau}$.
+Fix $k,p,\sigma$, with $\sigma=\pm1$, and let $c>0$ be the $k$th
+largest eigenvalue of $\sigma\mathcal K_{a\tau}|_{\mathcal H_p}$.
+The dilated span $M$ of its first $k$ eigenvectors has dimension $k$,
+and every unit vector in $M$ has Rayleigh quotient at least $c$ for
+$\sigma\mathcal K_\tau$.  Minimax gives weak monotonicity.  If the
+$k$th largest eigenvalue at $\tau$ were also $c$, the spectral subspace
+$E$ of $\sigma\mathcal K_\tau|_{\mathcal H_p}$ for eigenvalues strictly
+larger than $c$ would have dimension at most $k-1$.  There would be a
+unit vector $v\in M\cap E^\perp$.  Its Rayleigh quotient is at least
+$c$ because $v\in M$ and at most $c$ because $v\in E^\perp$.
+Equality and the spectral theorem force
+$\sigma\mathcal K_\tau v=cv$.  Every nonzero eigenfunction is analytic,
+because the kernel is entire in its first variable, locally uniformly
+in its second.  But $v$ vanishes on $(a,1)$, a contradiction.  This proves
+strict monotonicity for both signs; strict contractivity gives the outer
+inequalities in \eqref{eq:monotonicity}.
+Norm continuity of the kernel and the minimax principle give continuity
+of each ordered eigenvalue, and $\|\mathcal K_\tau\|\le4\tau$ gives
+the limit at zero.  For the limit at infinity use the full-line operator
+$\mathcal G=\mathcal F^*J\mathcal F$ of Section~\ref{sec:crosswindow}.
+The construction above with $\tau=1$ gives infinitely many orthonormal
+eigenvectors of $J$ of either sign and either reflection parity. Their
+inverse Fourier transforms give the same eigenspaces for $\mathcal G$.
+Fix $k$ orthonormal vectors $g_1,\ldots,g_k$ of sign $\sigma$ and parity $p$.
+For $P_\tau=P_{(-\tau,\tau)}$, strong convergence $P_\tau\to I$ gives
+\[
+ \bigl(\langle P_\tau g_i,P_\tau g_j\rangle\bigr)_{i,j}\to I_k,
+ \qquad
+ \bigl(\sigma\langle P_\tau g_i,\mathcal G P_\tau g_j\rangle\bigr)_{i,j}
+ \to I_k.
+\]
+The truncated vectors retain parity $p$. Thus every unit vector in their
+span has Rayleigh quotient for $\sigma\mathcal G$ tending uniformly to one.
+The dilation identity in Section~\ref{sec:crosswindow} and minimax imply
+$\liminf_{\tau\to\infty}|\xi_{k,p}^{\sigma}(\tau)|\ge1$.
+Contractivity supplies the reverse bound, proving the asserted limits.
+\end{proof}
+
+\subsection{The global exchange and its Bloch symbol}\label{sec:crosswindow}
+On $L^2(\mathbb R)$ define
+\[
+ (Jg)(\xi)=\mathbf1_{(0,1)}(\xi)g(\xi-1)
+              +\mathbf1_{(-1,0)}(\xi)g(\xi+1),\qquad
+ \mathcal G=\mathcal F^*J\mathcal F.
+\]
+Then $J=J^*$, $J^2=\mathbf1_{(-1,1)}$ and $\|J\|=1$.
+For compactly supported inputs, the two Fourier integrals give the kernel
+\[
+ G(X,Y)=2\cos(\pi(X+Y))\frac{\sin(\pi(X-Y))}{\pi(X-Y)}
+       =\frac{\sin(2\pi X)-\sin(2\pi Y)}{\pi(X-Y)}.
+\]
+In particular $\mathcal G^2=\mathcal F^*\mathbf1_{(-1,1)}\mathcal F$
+and $G(X+1,Y+1)=G(X,Y)$.
+
+Dilation gives the identities
+\[
+ (\mathcal D_\tau f)(X)=\tau^{-1/2}f(X/\tau),\qquad
+ \mathcal D_\tau\mathcal K_\tau\mathcal D_\tau^*
+ =P_{(-\tau,\tau)}\mathcal G P_{(-\tau,\tau)}.
+\]
+Here $P_I$ multiplies by $\mathbf1_I$; the dilated kernel is
+$\tau^{-1}K_\tau(X/\tau,Y/\tau)=G(X,Y)$.
+The trace-class property, the norm bound and the trace formulas are in
+Proposition~\ref{prop:traces}.
+
+\begin{proposition}[Exact Bloch symbol]\label{T4:prop:bloch}
+Identify $L^2(\mathbb R)$ with $\ell^2(\mathbb Z;H)$, $H=L^2(0,1)$,
+by $f_n(t)=f(n+t)$.  Then $\mathcal G$ is the Laurent operator with blocks
+\begin{equation}\label{T4:eq:symbol}
+ g_k(t,s)=G(k+t,s)=\int_0^1\varsigma(\theta)(t,s)e^{-2\pi ik\theta}\,d\theta,
+ \quad
+ \varsigma(\theta)(t,s)=2\cos(\pi(t+s))e^{i\pi(t-s)(1-2\theta)}.
+\end{equation}
+For $e_j(t)=e^{2\pi ijt}$ and $W_\theta=M_{e^{2\pi i\theta t}}$,
+\[
+ \varsigma(\theta)=W_\theta^*X_{1,0}W_\theta,
+ \qquad X_{j,k}=|e_j\rangle\langle e_k|+|e_k\rangle\langle e_j|.
+\]
+It has eigenvalues $1,-1,0$ and one jump on the circle:
+$\varsigma(0)=X_{1,0}$, $\varsigma(1)=X_{0,-1}$.
+\end{proposition}
+\begin{proof}
+Periodicity gives the cell blocks $G(k+t,s)$.  With $z=t-s$,
+\[
+ \int_0^1e^{i\pi z(1-2\theta)}e^{-2\pi ik\theta}\,d\theta
+ =\frac{\sin(\pi z)}{\pi(k+z)}.
+\]
+The removable case $k=z=0$ follows by continuity.  Multiplication by
+$2\cos(\pi(t+s))$ proves \eqref{T4:eq:symbol}; Fubini is valid because
+the kernels are bounded on the unit square.  Expanding the cosine
+expresses the symbol as the exchange of the orthonormal pair
+$e^{2\pi i(1-\theta)t},e^{-2\pi i\theta t}$, proving the rest.
+\end{proof}
+The jump is not removable by a continuous periodic gauge to a constant
+symbol: its two endpoint limits would then be conjugated by the same
+unitary and would have to coincide.  The proof below instead uses a
+nonconstant symbol on a fixed three-dimensional subspace.
+
+

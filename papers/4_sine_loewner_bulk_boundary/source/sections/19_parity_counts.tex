@@ -1,0 +1,508 @@
+\section{Spatial parity of traces}\label{v11:sec:parity-limits}
+
+Reflection sectors have classical determinant analogues in scalar
+Toeplitz-plus-Hankel theory \cite[Sections~2--3]{BasorEhrhardt2002}.
+The following argument treats the operator-valued symbol and its seam
+directly, retaining the physical within-cell reflection.
+
+\begin{lemma}[A reflected Toeplitz limit]
+\label{ext:lem:reflected-toeplitz}
+Let $r$ be a self-adjoint involution on a separable Hilbert space
+$\mathscr H$, and let $a\in C^3([0,1];\mathfrak S_1)$ be self-adjoint
+with $ra(1-\theta)r=a(\theta)$.  Put
+\[
+ A=\tfrac12(a(0)+a(1)),\qquad B=\tfrac12(a(0)-a(1)),
+ \qquad R_n=F_n\otimes r,
+\]
+where $F_n$ reverses the $n$ cells and $M=\sup_\theta\|a(\theta)\|$.
+For every $f(0)=0$ holomorphic near $[-M,M]$, along even $n$,
+\begin{equation}\label{ext:eq:reflected-toeplitz}
+ \lim_{n\to\infty}\operatorname{tr}(R_nf(T_n(a)))
+ =\tfrac12\operatorname{tr}_{\mathscr H}
+       \bigl(r[f(A)-f(a(1/2))]\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+All finite sections are trace class: their trace norms are at most
+$n\int_0^1\|a(\theta)\|_1\,d\theta$, by the rank-one cell-vector
+representation of the Fourier coefficients.  Set
+$h(\theta)=1-2\theta$, $b=A+hB$, $c=a-b$, and $a_t=b+tc$.
+Then $c(0)=c(1)=0$, $R_n$ commutes with $T_n(a_t)$, and
+$\|a_t(\theta)\|\le M$: both $b$ and $a_t$ are convex combinations
+of symbols with norm at most $M$.
+
+Put $H_n=T_n(h)$. Since $F_nH_nF_n=-H_n$ and
+$T_n(b)=I_n\otimes A+H_n\otimes B$, reflection exchanges the
+nonzero $H_n$ eigenspaces in opposite pairs, contributing zero to
+$\tr(R_nf(T_n(b)))$. The kernel contributes
+$\tr(F_n|_{\ker H_n})\tr(rf(A))=0$: for even $n$,
+$\tr F_n=0$ and its nonzero pairs have zero trace. Hence
+\begin{equation}\label{ext:eq:linear-reflection-zero}
+ \tr(R_nf(T_n(b)))=0.
+\end{equation}
+
+If $d\in C^3([0,1];\mathfrak S_1)$ and $d(0)=d(1)$,
+Lemma~\ref{rev5:lem:seam} makes both one-sided Hankel blocks
+$\Pi_+\mathcal L(d)\Pi_-$ and $\Pi_-\mathcal L(d)\Pi_+$ trace class:
+the principal matrix is $((j+l+1)^{-2})_{j,l\ge0}$ and the remainder
+has summable weighted Fourier trace norms. For a fixed bounded
+self-adjoint symbol $a_0$ and $k\ge0$, this gives
+\begin{equation}\label{ext:eq:reflected-boundary-zero}
+ \tr\bigl(R_n[T_n(d)T_n(a_0)-T_n(da_0)]T_n(a_0)^k\bigr)\to0.
+\end{equation}
+Indeed split $-P_n\mathcal L(d)(I-P_n)\mathcal L(a_0)P_n$ into
+$j<0$ and $j\ge n$ boundary terms. At the left, the Hankel factor
+converges in trace norm and all remaining factors and adjoints converge
+strongly. Its trace-class limit pairs to zero with the weakly null
+zero-extended $R_n$ (check finite cell supports). Conjugating by $F_n$
+gives the same argument at the right, since $F_nR_nF_n=R_n$.
+Finite-rank approximation makes these bounds uniform on compact
+$C^3$ symbol families.
+
+Choose a fixed contour $\Gamma$ in the holomorphy domain enclosing
+$[-M,M]$ at positive distance.  For $\zeta\in\Gamma$, put
+$d_{t,\zeta}=c(\zeta-a_t)^{-1}$.  These symbols are $C^3$ in
+trace norm, vanish at both endpoints, and have uniform $C^3$ bounds
+on $[0,1]\times\Gamma$.  With $Q_n=I-P_n$, exactly
+\[
+ T_n(c)(\zeta-T_n(a_t))^{-1}-T_n(d_{t,\zeta})
+ =-P_n\mathcal L(d_{t,\zeta})Q_n\mathcal L(a_t)P_n
+           (\zeta-T_n(a_t))^{-1}.
+\]
+Put $\delta=\operatorname{dist}(\Gamma,[-M,M])$.
+The resolvents have norm at most $\delta^{-1}$; strong convergence
+of the self-adjoint finite sections and the resolvent identity give
+strong convergence of resolvents and adjoints at both ends. Finite
+nets make this uniform on fixed vectors for $(t,\zeta)\in[0,1]\times\Gamma$.
+The symbols $d_{t,\zeta}$ form a compact $C^3(\mathfrak S_1)$ family,
+so their two Hankel trace norms have a common bound $C_H$.
+The displayed error thus has trace norm at most $MC_H/\delta$.
+Its boundary limits are trace-norm uniform by the preceding localization;
+finite-rank approximation and weakly null reflection give uniform
+vanishing of its reflected trace. Cauchy calculus therefore gives
+\[
+ \operatorname{tr}(R_nT_n(c)f'(T_n(a_t)))
+ -\operatorname{tr}(R_nT_n(cf'(a_t)))\longrightarrow0.
+\]
+Differentiating the Cauchy integral and cycling the trace gives
+\[
+ \frac d{dt}\operatorname{tr}(R_nf(T_n(a_t)))
+ =\operatorname{tr}(R_nT_n(c)f'(T_n(a_t))).
+\]
+For $e_t=cf'(a_t)$ the zero-endpoint Fourier sums are uniformly
+absolutely summable in trace norm, say by $C_e$. Thus the derivative
+integrand is dominated, independently of $n,t$, by
+\[
+ C_e+\frac{\operatorname{length}(\Gamma)}{2\pi\delta}
+                    \sup_\Gamma|f'|\,MC_H.
+\]
+This justifies the contour limit and dominated convergence in $t$.
+For even $n$, absolute trace-norm Fourier convergence gives
+\[
+ \tr(R_nT_n(e_t))=\sum_{|k|<n,\ k\text{ odd}}\tr(r\widehat e_t(k))
+ \longrightarrow\tfrac12\tr(r[e_t(0)-e_t(1/2)]).
+\]
+Reflection symmetry gives $[r,a_t(1/2)]=0$, so cyclicity identifies
+$\tr(rc(1/2)f'(a_t(1/2)))$ with $d\tr(rf(a_t(1/2)))/dt$.
+Since $e_t(0)=0$, integration in $t$ gives
+$\tfrac12\tr(r[f(A)-f(a(1/2))])$. This proves
+\eqref{ext:eq:reflected-toeplitz} for this $f$.  The exact linear
+reference cancellation works unchanged by its spectral decomposition.
+
+
+\end{proof}
+
+\begin{theorem}[Spatial-parity limit]
+\label{ext:thm:polynomial-parity}\label{ext:thm:holomorphic-parity}
+Let $Rf(x)=f(-x)$ on $L^2[-1,1]$ and $g=1/\sqrt2$.
+For every $f(0)=0$ holomorphic near $[-1,1]$,
+\begin{equation}\label{ext:eq:polynomial-parity}
+ \operatorname{tr}(Rf(\mathcal K_\tau))
+ =\tfrac12[f(g)+f(-g)+f(1)-f(-1)]+o_f(1)
+ \qquad(\tau\to\infty).
+\end{equation}
+In particular, for every fixed integer $m\ge1$,
+\[
+ \operatorname{tr}(R\mathcal K_\tau^{2m})\longrightarrow2^{-m},
+ \qquad
+ \operatorname{tr}(R\mathcal K_\tau^{2m-1})\longrightarrow1.
+\]
+\end{theorem}
+
+\begin{proof}
+At integer $\tau=q$, dilation and integer translation identify the
+operator with the $2q$-cell section of its exact symbol
+$\sigma(\theta)=W_\theta^*X_{1,0}W_\theta$.
+Spatial reflection becomes $F_{2q}\otimes r$, where
+$(rf)(t)=f(1-t)$.  This symbol is smooth in trace norm and satisfies
+$r\sigma(1-\theta)r=\sigma(\theta)$.
+Its endpoint average
+$A=(X_{1,0}+X_{0,-1})/2$ has nonzero eigenvalues $\pm g$,
+both in the $r$-even space
+$\operatorname{span}\{e_0,(e_1+e_{-1})/\sqrt2\}$.
+At $\theta=1/2$, the $+1$ eigenvector of $\sigma$ is proportional
+to $\cos(\pi t)$ and is $r$-odd, while the $-1$ eigenvector is
+proportional to $\sin(\pi t)$ and is $r$-even.  Hence
+Lemma~\ref{ext:lem:reflected-toeplitz} gives precisely
+\eqref{ext:eq:polynomial-parity} along integer $\tau$.
+
+For $\tau=n+r$, $r\in[0,1]$, set $m=2n$,
+$A_m=P_{(-r,m+r)}\mathcal G P_{(-r,m+r)}$ and
+$B_m=P_{(0,m)}\mathcal G P_{(0,m)}$; both commute with
+$\mathscr R_m u(X)=u(m-X)$. The already proved strip localization
+\eqref{v11:eq:strip-localization} gives
+\[
+ A_m-B_m=F_{-r}^L+\mathsf S^mF_r^R\mathsf S^{-m}+o_{\mathfrak S_1}(1).
+\]
+For a contour $\Gamma$ around $[-1,1]$ in the holomorphy domain, insert
+this identity into
+\[
+ f(A_m)-f(B_m)=\frac1{2\pi i}\int_\Gamma f(\zeta)
+ (\zeta-A_m)^{-1}(A_m-B_m)(\zeta-B_m)^{-1}\,d\zeta.
+\]
+Each boundary product converges in trace norm after fixing that
+boundary.  The reflections $\mathscr R_m=\mathsf S^mR$ are weakly null
+at the left, and $\mathsf S^{-m}\mathscr R_m\mathsf S^m=\mathsf S^{-m}R$ are weakly null
+at the right.  Consequently
+$\operatorname{tr}(\mathscr R_m[f(A_m)-f(B_m)])\to0$ for fixed $r$.
+
+Cauchy calculus bounds $\|f(A)-f(B)\|_1$ by a fixed multiple of
+$\|A-B\|_1$, while
+$\|A_m(r)-A_m(s)\|_1\le4b(|r-s|)$ independently of $m$.
+Thus finite nets give uniform convergence on $r\in[0,1]$.
+Dilation and integer translation recover the reflected traces at $n+r$
+and $n$, proving the full limit.
+\end{proof}
+
+\begin{remark}[Quantitative moment transfer]
+Writing $G_L=P_{(-L,L)}\mathcal G P_{(-L,L)}$, cyclic differentiation
+of the reflected multiple-integral trace gives
+$d\tr(RG_L^m)/dL=2mG_L^m(L,-L)$: all $m$ boundary terms agree,
+and the two endpoints agree by reflection. With $w(s)=(1+|s|)^{-1}$,
+$|G(X,Y)|\le4w(X-Y)$ and
+$\int_{-L}^Lw(X-Z)w(Z-Y)dZ\le8\log(1+2L)w(X-Y)$.
+Indeed one of the two distances is at least $|X-Y|/2$, while the
+other factor has integral at most $2\log(1+2L)$. Induction gives
+\[
+ |G_L^m(L,-L)|\le\frac{4^m[8\log(1+2L)]^{m-1}}{1+2L}.
+\]
+Thus replacing $L$ by $\lfloor L\rfloor$ changes its reflected
+$m$th moment by $O_m(\log^{m-1}(2+L)/(1+L))$.
+\end{remark}
+
+\begin{corollary}[Parity trace balance and determinants]
+\label{ext:cor:polynomial-parity-sectors}
+\label{ext:cor:parity-determinants}
+For the spatial even and odd restrictions $\mathcal K_{\tau,\pm}$ and
+$f(0)=0$ holomorphic near $[-1,1]$,
+\[
+ \operatorname{tr}f(\mathcal K_{\tau,\pm})
+ =\tfrac12\operatorname{tr}f(\mathcal K_\tau)
+ \ \pm\tfrac14[f(g)+f(-g)+f(1)-f(-1)]+o_f(1).
+\]
+Thus the volume and logarithmic coefficients divide equally.
+For each real $w>0$,
+\begin{equation}\label{ext:eq:parity-squared-determinant}
+ \frac{\det(I+w\mathcal K_{\tau,+}^{2})}
+      {\det(I+w\mathcal K_{\tau,-}^{2})}
+ \longrightarrow1+\frac w2.
+\end{equation}
+For $|z|<1$, locally uniformly, the analytic logarithms normalized at zero
+satisfy
+\begin{equation}\label{ext:eq:parity-linear-determinant}
+ \log\frac{\det(I-z\mathcal K_{\tau,+})}
+               {\det(I-z\mathcal K_{\tau,-})}
+ \longrightarrow\tfrac12\log(1-z^2/2)
+             +\tfrac12\log\frac{1-z}{1+z}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+The commuting projections $(I\pm R)/2$ and
+Theorem~\ref{ext:thm:holomorphic-parity} give the first identity.
+Apply it to $\log(1+wx^2)$, holomorphic near $[-1,1]$, and
+$\log(1-zx)$ to obtain the determinant formulas.
+For $|z|\le\rho<1$ choose a common contour $\Gamma$ around $[-1,1]$
+with $\rho\sup_\Gamma|\zeta|<1$. The normalized logarithms and their
+derivatives form a compact family there; the proof's Hankel, Fourier
+and strip bounds and finite nets give local uniformity.
+\end{proof}
+
+\subsection{Sharp parity counts inside the central gaps}
+\label{boundary:sec:sharp-parity}
+
+\begin{theorem}[Exact eventual parity counts in the central gaps]
+\label{boundary:thm:sharp-parity}
+Fix $r\in\mathbb R$ and $0<t<g$. If $t\notin\operatorname{spec}B_{-r}$,
+then, for all sufficiently large integers $n$,
+\begin{equation}\label{boundary:eq:positive-sharp-parity}
+ \#\{\lambda_j(\mathcal K_{n+r,+})>t\}
+ -\#\{\lambda_j(\mathcal K_{n+r,-})>t\}=1.
+\end{equation}
+If instead $-t\notin\operatorname{spec}B_{-r}$, then eventually
+\begin{equation}\label{boundary:eq:negative-sharp-parity}
+ \#\{\lambda_j(\mathcal K_{n+r,+})<-t\}
+ -\#\{\lambda_j(\mathcal K_{n+r,-})<-t\}=0.
+\end{equation}
+Here the subscripts $+$ and $-$ denote even and odd spatial parity.
+Each assertion requires regularity only at its own signed threshold.
+\end{theorem}
+
+\begin{proof}
+Put $m=2n$ and use physical coordinates $(-r,m+r)$. Write
+$\rho f(t)=f(1-t)$ on the fiber and
+$\mathcal R_m=F_m\otimes\rho$ on the full cell space, where the full
+cell reflection sends $j$ to $m-1-j$. Retain the gauge of Lemma~\ref{rev5:lem:gauge}
+$\mathscr U=\mathcal L(V)$ and set
+\[
+ \widetilde{\mathcal R}_m=\mathscr U^*\mathcal R_m\mathscr U,
+ \quad Z(\theta)=\rho V(1-\theta)^*\rho V(\theta),\quad d=Z-I.
+\]
+Then
+\begin{equation}\label{boundary:eq:reflection-gauge}
+ \widetilde{\mathcal R}_m=\mathcal R_m\mathcal L(Z),\qquad
+ \rho Z(1/2)=V(1/2)^*\rho V(1/2),
+\end{equation}
+and $d$ is smooth in trace norm with $d(0)=d(1)=0$.
+
+Let $P_m^{A,\sigma}$ and $P_m^{C,\sigma}$ be the sharp spectral
+projections of $\mathscr A_m(-r,r)$ and $\mathscr C_m$ above $t$
+for $\sigma=+$, or below $-t$ for $\sigma=-$.
+Choose a rectangle enclosing the appropriate spectral band, crossing
+the real axis at the regular threshold and beyond $1$ or $-1$.
+The gap theorem gives uniform contour resolvent bounds for large $m$
+and both half-line limits. Their resolvents and adjoints converge
+strongly at each end, including the real crossing by the resolvent
+identity and common bound. Inserting
+\eqref{v11:eq:combined-gap-localization} therefore localizes
+$P_m^{A,\sigma}-P_m^{C,\sigma}$ in trace norm at both boundaries.
+The gauge commutes with shifts, so both
+$\widetilde{\mathcal R}_m$ and
+$\mathsf S^{-m}\widetilde{\mathcal R}_m\mathsf S^m$ are weakly null.
+Consequently
+\begin{equation}\label{boundary:eq:sharp-boundaries-vanish}
+ \operatorname{tr}\bigl(\widetilde{\mathcal R}_m
+ (P_m^{A,\sigma}-P_m^{C,\sigma})\bigr)\longrightarrow0.
+\end{equation}
+
+The star itself has exactly zero reflected count in each sign for even
+$m$. To see this, write it as
+$\left(\begin{smallmatrix}0&B_m\\B_m^*&0\end{smallmatrix}\right)$,
+where $B_mB_m^*\ge I/2$, and put
+$W_m=(B_mB_m^*)^{-1/2}B_m$.
+Its signed spectral subspaces are the graphs
+$x\mapsto2^{-1/2}(x,\pm W_m^*x)$.
+The star reflection symmetry intertwines these graphs with $F_m$ on
+the central component. Since $\operatorname{tr}F_m=0$ and all nonzero
+star eigenvalues have magnitude at least $g$,
+$\operatorname{tr}(\mathcal R_mP_m^{C,\sigma})=0$ exactly.
+Thus \eqref{boundary:eq:reflection-gauge} reduces the remaining trace to
+\[
+ \operatorname{tr}(\widetilde{\mathcal R}_mP_m^{C,\sigma})
+ =\operatorname{tr}(\mathcal R_mT_m(d)P_m^{C,\sigma}).
+\]
+
+For $z$ on the contour put $d_z=d(z-a)^{-1}$. An exact identity is
+\[
+ T_m(d)(z-\mathscr C_m)^{-1}-T_m(d_z)
+ =-P_m\mathcal L(d_z)(I-P_m)\mathcal L(a)P_m
+                         (z-\mathscr C_m)^{-1}.
+\]
+The symbols $d_z$ have zero endpoints and trace-class one-sided Hankel
+blocks, uniformly on the contour. The localization argument of
+Lemma~\ref{ext:lem:reflected-toeplitz}, now using the reference resolvent,
+makes the reflected trace of the right side tend to zero uniformly.
+Contour integration and the odd Fourier coefficient sum therefore give
+\[
+ \operatorname{tr}(\mathcal R_mT_m(d)P_m^{C,\sigma})
+ \longrightarrow-\tfrac12\operatorname{tr}_{\mathscr H}
+ \bigl(\rho d(1/2)p_\sigma(a(1/2))\bigr),
+ \qquad p_\sigma(a)=\tfrac12(a^2+\sigma a).
+\]
+Both signed star eigenvectors at $1/2$ are $\rho$-even. The physical
+positive eigenvector is proportional to $\cos(\pi t)$ and is
+$\rho$-odd; the negative one is proportional to $\sin(\pi t)$ and
+is $\rho$-even. Equation~\eqref{boundary:eq:reflection-gauge} makes the
+two fiber traces respectively $-2$ and $0$. Together with
+\eqref{boundary:eq:sharp-boundaries-vanish}, the physical reflected
+counts tend to $1$ and $0$. They are integers because physical
+reflection commutes with the physical sharp spectral projections,
+so both equalities hold eventually.
+\end{proof}
+
+In particular the gauge-invariant two-boundary positive count offset
+is odd, and its negative counterpart is even. These congruences do not
+fix an individual reference index or evaluate a boundary eigenvalue.
+
+\begin{corollary}[Alternation of signed boundary magnitudes]
+\label{interaction:cor:boundary-alternation}
+There is a continuous strictly decreasing lift
+$\mathfrak b:(0,g)\to\mathbb R$ such that, for every real $b$,
+\[
+ t\in\operatorname{spec}B_b
+ \iff\mathfrak b(t)\in b+\mathbb Z,
+ \qquad
+ -t\in\operatorname{spec}B_b
+ \iff\mathfrak b(t)\in b-\tfrac12+\mathbb Z.
+\]
+Thus the positive gap levels and the magnitudes of the negative gap
+levels alternate at each fixed boundary phase. If $0<a<c<g$ and
+$\pm a,\pm c\notin\operatorname{spec}B_b$, their counts in the
+magnitude interval $(a,c)$ differ by at most one.
+For the centered operators $\mathcal K_{n+r}$, these two signed counts
+are eventually even and differ by at most two; in each parity sector
+they differ by at most one.
+\end{corollary}
+\begin{proof}
+The simple strictly decreasing branches of
+Theorem~\ref{boundary:thm:one-cell-flow} have continuous strictly
+decreasing local inverses. Unique phases make them agree modulo one;
+the interval $(0,g)$ admits a continuous real lift. Subdivision of
+compact subintervals makes it globally strictly decreasing.
+Half-period sign reversal gives the second equivalence; differentiability
+of the inverse is unnecessary.
+
+The two lattices in the assertion alternate. More explicitly, at the
+stated regular endpoints the two counts are
+\[
+ \lfloor\mathfrak b(a)-b\rfloor-\lfloor\mathfrak b(c)-b\rfloor,
+ \quad
+ \lfloor\mathfrak b(a)-b+\tfrac12\rfloor
+       -\lfloor\mathfrak b(c)-b+\tfrac12\rfloor.
+\]
+Their difference has magnitude at most one. For $b=-r$, the centered
+finite statement follows from Theorem~\ref{v11:thm:gap-limits} and
+Corollary~\ref{boundary:cor:opposite-signs}: each boundary level
+contributes exactly one eigenvalue of each parity, and there are
+eventually no additional eigenvalues in either fixed compact interval.
+\end{proof}
+
+\begin{proposition}[Order of a stationary boundary crossing]
+\label{interaction:prop:contact-order}
+Let $\lambda_0\in(-g,0)\cup(0,g)$ be an eigenvalue of $B_{b_0}$,
+and let $h_0$ be its normalized physical eigenfunction, continued to
+its entire bandlimited representative. Let $d\ge0$ be its finite
+vanishing order at $b_0$, with $d=0$ when $h_0(b_0)\ne0$.
+The local eigenbranch satisfies
+\[
+ \lambda(b_0+s)=\lambda_0-
+ \frac{\lambda_0|h_0^{(d)}(b_0)|^2}{(2d+1)(d!)^2}s^{2d+1}
+ +O(s^{2d+2}).
+\]
+In particular, any stationary crossing has odd finite order.
+\end{proposition}
+\begin{proof}
+Use the unshifted frequency pencil
+$L(b)=Q_b-\lambda(b)J$ from
+\eqref{boundary:eq:covariance-rank-one}. Choose an analytic normalized
+kernel vector $u(b)$ with $\langle u,u'\rangle=0$, and set
+\[
+ z(b)=\langle v_b,u(b)\rangle,\quad
+ q(b)=\langle u(b),Q_bu(b)\rangle>0,\quad
+ j(b)=\langle u(b),Ju(b)\rangle=\frac{q(b)}{\lambda(b)}\ne0.
+\]
+Differentiating $L(b)u(b)=0$ gives
+\[
+ \lambda'=-\frac{|z|^2}{j},\qquad
+ L(b)u'=v_bz+\lambda'Ju.
+\]
+The inverse of $L(b)$ on the orthogonal complement of its simple
+kernel is locally uniformly bounded. Hence
+$\|u'\|\le C(|z|+|z|^2)$.
+The analytic function $z$ cannot vanish on an interval, since then
+$\lambda$ would be constant. If its zero order at $b_0$ is $d_0$,
+integration gives $u(b_0+s)-u(b_0)=O(s^{d_0+1})$.
+Consequently $z(b_0+s)$ and
+$\langle v_{b_0+s},u(b_0)\rangle$ have the same first nonzero Taylor
+coefficient. The latter is $\sqrt{q(b_0)}h_0(b_0+s)$, so $d_0=d$ and
+\[
+ z(b_0+s)=\sqrt{q(b_0)}\frac{h_0^{(d)}(b_0)}{d!}s^d
+             +O(s^{d+1}).
+\]
+Substitute this in the formula for $\lambda'$ and integrate once.
+\end{proof}
+
+\begin{theorem}[Relative signed counts at a regular gap threshold]
+\label{interaction:thm:signed-count-imbalance}
+Fix $r\in\mathbb R$ and $0<t<g$ with
+$\pm t\notin\operatorname{spec}B_{-r}$. Write
+\[
+ N_+(t;n,r)=\#\{\lambda_j(\mathcal K_{n+r})>t\},\qquad
+ N_-(t;n,r)=\#\{\lambda_j(\mathcal K_{n+r})<-t\}.
+\]
+For all sufficiently large integers $n$, putting $b=-r$, one has
+\[
+ N_+(t;n,r)-N_-(t;n,r)
+ =2\bigl[I_+(t;b)-I_+(t;b+\tfrac12)\bigr]-1
+ \in\{-1,1\}.
+\]
+The value is $1$ precisely when the unique positive crossing phase
+lies in $(b,b+1/2)$ modulo one. The two physical count offsets relative
+to $2n$ are therefore adjacent integers; their absolute values are
+not determined here.
+\end{theorem}
+\begin{proof}
+Write $i_L(t;l)=\iota_+(t;l)$ and
+$i_R(t;h)=\iota_-(t;h)$ for the positive left and right indices in
+\eqref{v11:eq:gap-indices}. The references cancel in their differences.
+Since physical reflection commutes with $\mathcal G$ and exchanges the
+right boundary at $h$ with the left boundary at $-h$, unitary invariance
+of the trace-class projection difference gives
+\[
+ i_R(t;h_2)-i_R(t;h_1)
+ =i_L(t;-h_2)-i_L(t;-h_1)
+\]
+at regular endpoints. This does not require a reflection-equivariant
+gauge or an equality between individual reference indices.
+
+Put $m=2n$. Half-translation changes the kernel's sign, so the negative
+count on $(b,m-b)$ equals the positive count on
+$(b+1/2,m-b+1/2)$. Apply
+Corollary~\ref{v11:cor:gap-count-offset} to these two fixed endpoint
+pairs, using the same $m$. Their reference counts cancel, and reflection
+then gives
+\begin{align*}
+ N_+-N_-
+ &=i_L(t;b)-i_L(t;b+\tfrac12)
+     +i_R(t;-b)-i_R(t;-b+\tfrac12)\\
+ &=2i_L(t;b)-i_L(t;b+\tfrac12)-i_L(t;b-\tfrac12)\\
+ &=2\bigl[i_L(t;b)-i_L(t;b+\tfrac12)\bigr]-1.
+\end{align*}
+The period law and monotonicity in
+Theorem~\ref{boundary:thm:one-cell-flow} make the bracket either zero
+or one; its value is one exactly when the unique crossing occurs in
+that half-period. Regularity at its endpoints follows from the two
+signed regularity assumptions in the statement.
+\end{proof}
+
+\begin{corollary}[Relative ranks of a centered boundary pair]
+\label{interaction:cor:relative-cluster-ranks}
+Let $\alpha$ be a nonzero central-gap eigenvalue of $B_{-r}$.
+Choose $0<a<|\alpha|<c<g$ so that $\alpha$ is the only boundary
+eigenvalue of either sign with magnitude in $[a,c]$.
+For all sufficiently large $n$, let $k$ be the number of opposite-sign
+eigenvalues of $\mathcal K_{n+r}$ with magnitude greater than $c$.
+The two eigenvalues converging to $\alpha$ occupy same-sign ranks
+$k,k+1$ and combined absolute-value ranks $2k,2k+1$, counting from
+largest magnitude and counting multiplicity.
+
+If $\alpha>0$, then $k=2q$ and their even and odd positive-sector ranks
+are respectively $q+1$ and $q$. If $\alpha<0$, then $k=2q+1$ and their
+respective negative-sector ranks are both $q+1$.
+\end{corollary}
+\begin{proof}
+Local gap convergence adds exactly two own-sign eigenvalues and no
+opposite-sign eigenvalue between the thresholds. The latter count stays
+$k$; the former increases by two. The signed-count theorem forces its
+value above $c$ to be $k-1$, giving both rank pairs.
+
+For a positive cluster, Theorem~\ref{boundary:thm:sharp-parity} makes
+$k=2q$ and divides the $k-1$ positive levels above the cluster into
+$q$ even and $q-1$ odd levels. For a negative cluster it makes $k=2q+1$
+and divides the $k-1$ negative levels into $q$ of each parity.
+Corollary~\ref{boundary:cor:opposite-signs} then adds one member in
+each sector. The internal ordering of the two parities is not asserted.
+\end{proof}
+
+
+

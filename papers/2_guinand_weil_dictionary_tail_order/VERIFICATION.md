@@ -1,7 +1,8 @@
 # Zero-Source Transport Verification Report
 
-Last updated: 2026-08-12 (release-coherence audit, dependency and reproducibility
-commands corrected; mathematical artifacts unchanged)
+Documentation updated: 2026-09-08 17:39:29 IDT (artifact provenance and integrity
+clarified; manuscript, scripts and numerical artifacts unchanged). The recorded
+mathematical checks below come from the prior release audits, not a new run.
 
 Package:
 
@@ -88,15 +89,24 @@ python3 scripts/arb_ldlt_certify.py --selftest --c 100 --N 200 --prec 9000 \
         --json-out artifacts/c100_N200_arb_ldlt_prec9000_provenance.json
 ```
 
-and its provenance JSON ships with the package alongside the original log. The
-archived 2026-07-02 run took about 15 minutes on one Apple M2 Max core under
-Python 3.12.11 and `python-flint` 0.8.0; that is historical provenance, not a
-cross-platform runtime guarantee.
+The repository preserves the original historical certificate log and separately
+ships the 2026-08-16 provenance JSON with its complete 401-pivot transcript. The
+JSON records the certifier hash, source commit, dependency versions, self-test
+result and transcript digest. Both runs certify `n_pos=401, n_neg=0`. The
+archived July run took about 15 minutes on one Apple M2 Max core; the August
+JSON records 898.6 seconds for assembly and 120.6 seconds for factorization.
+These are separate historical measurements, not runtime guarantees.
+
+The August artifact and script updates postdate the Zenodo v1.3 source archive.
+The manuscript PDF remains byte-identical to that deposit; the current GitHub
+artifact layer is identified by this repository and its `SHA256SUMS`.
 
 Run `shasum -a 256 -c SHA256SUMS` before regenerating artifacts in place. The
 headline command writes the current date and measured build/LDL timings into the
-provenance JSON, so those volatile fields make a fresh successful artifact differ
-from the archived checksum.
+provenance JSON and writes a companion `_pivots.txt` file. A fresh successful
+run therefore changes the JSON checksum. The provenance transcript digest hashes
+the joined pivot rows without the final newline; `SHA256SUMS` hashes the complete
+files, including their final newline. These are intentionally distinct digests.
 
 ## Artifact Trace
 
@@ -132,8 +142,12 @@ from the archived checksum.
   lambda_j(Q_inf) with the B_T sandwich at c=13, N=4 (Figure 2 data): strict
   order, within-budget, and monotonicity all hold on the full T ladder.
 - `zero_side_values.json`: the original M<=64 zero-side confirmation.
-- `c100_N200_arb_ldlt_prec9000.log` (+ `_provenance.json`): the cutoff-free
-  Arb interval LDL certificate, n_pos=401, n_neg=0; generator
+- `c100_N200_arb_ldlt_prec9000.log`: the preserved historical cutoff-free
+  Arb interval LDL certificate log, n_pos=401, n_neg=0.
+- `c100_N200_arb_ldlt_prec9000_provenance.json` and
+  `c100_N200_arb_ldlt_prec9000_provenance_pivots.txt`: the 2026-08-16
+  regenerated certificate and complete pivot transcript, with the same inertia.
+  The generator
   `arb_ldlt_certify.py` ships in-package with a self-test that checks the Arb
   entries against an independent mpmath recomputation of the same closed forms,
   agreeing to a relative tolerance of 1e-60. That is an agreement test, not a
@@ -142,7 +156,7 @@ from the archived checksum.
 - `fig_dictionary.pdf`, `fig_tailorder.pdf`: manuscript figures; generator
   `make_figures.py`.
 
-## Current Gate Status
+## Recorded Gate Status
 
 - PDF build: passed (pdflatex + bibtex, no warnings, no undefined references).
 - Manuscript scans: no em dashes; no banned-superlative hits; en dashes for

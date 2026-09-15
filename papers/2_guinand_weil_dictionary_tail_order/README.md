@@ -1,4 +1,4 @@
-[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · **Guinand-Weil dictionary** · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/)
+[**← `connes-cvs`**](../../README.md) · [**Papers**](../README.md) &nbsp;|&nbsp; [Riemann zeros](../1_high_precision_riemann_zeros/) · **Guinand-Weil dictionary** · [von Mangoldt measure](../3_matrix_von_mangoldt_measure/) · [Sine Loewner operator](../4_sine_loewner_bulk_boundary/)
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 > **archimedean tail-order theorem** with a two-sided certification rule. No claim regarding the
 > Riemann Hypothesis.
 
-Part of the [`connes-cvs` series](../../README.md#papers): [**Riemann zeros** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Guinand-Weil dictionary - the structure** · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
+Part of the [`connes-cvs` series](../../README.md#papers): [**Riemann zeros** - the numerics](../1_high_precision_riemann_zeros/) (the [`connes-cvs`](../../README.md) package) · **Guinand-Weil dictionary - the structure** · [**von Mangoldt measure** - the arithmetic](../3_matrix_von_mangoldt_measure/) · [**Sine Loewner operator** - bulk and boundary spectra](../4_sine_loewner_bulk_boundary/). Published on arXiv, [arXiv:2607.02828](https://arxiv.org/abs/2607.02828) (math.NT, math.SP), and archived on Zenodo, concept DOI [10.5281/zenodo.21124802](https://doi.org/10.5281/zenodo.21124802) (resolves to the latest version).
 
 **Corrections.** This paper has no errata: **no mathematical statement has been corrected
 since publication.** The PDF here is byte-identical to the manuscript in the Zenodo deposit
@@ -74,7 +74,7 @@ SHA256SUMS                                      checksums for every file
 source/      main.tex, main.bib, main.bbl, plainurl.bst   (LaTeX source)
 figures/     fig_dictionary.pdf, fig_tailorder.pdf + make_figures.py
 scripts/     verification guards (exact symbolic/integer + Arb interval)
-artifacts/   guard outputs (JSON) and the 9000-bit certificate log
+artifacts/   guard outputs (JSON), historical certificate log and full pivot transcript
 audit/       CLAIM_TRACE_AUDIT.md, NOVELTY_BOUNDARY_AUDIT.md
 ```
 
@@ -90,7 +90,7 @@ The `scripts/` guards, grouped by result:
 - **Archimedean tail order** - `verify_arch_tail_order.py` (tail-order algebra + strict total
   positivity), `audit_arch_tail_dt_bridge.py` (rank-two Cauchy density = finite-`T` derivative),
   `arch_tail_budget.py` (Arb interval budget at `c=100, N=200, T=800`), `arch_tail_stress_ladder.py`
-  (interval stress ladder across `T, N`, precision), `arch_tail_exact_asymptotic.py` (exact `B_T`
+  (interval stress ladder across `T, N`, precision), `arch_tail_exact_asymptotic.py` (quadrature `B_T`
   vs the closed asymptotic; the `B_T = 1e-59` solve).
 - **Cutoff-free inertia certificate** - `arb_ldlt_certify.py` (rigorous Arb interval `LDL^T`
   inertia certificate; generator of the 9000-bit `c=100, N=200` certificate).

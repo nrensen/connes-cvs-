@@ -1,0 +1,246 @@
+\section{Proofs of the endpoint equation and gap rate}
+\label{v12:app:mellin-proofs}
+
+\subsection{The explicit local models and all localization errors}
+
+In coordinates $f_1(t)=u(t)$, $f_2(t)=u(t-1)$, $0<t<1$, the finite
+Hilbert transform has kernel
+\[
+ \frac1\pi\begin{pmatrix}
+ \operatorname{pv}(t-s)^{-1}&(t-s+1)^{-1}\\
+ (t-s-1)^{-1}&\operatorname{pv}(t-s)^{-1}
+ \end{pmatrix}.
+\]
+On $L^2(0,\infty)$ let $H_\infty,C_\infty$ have kernels
+$[\pi(t-s)]^{-1}$, in principal value, and $[\pi(t+s)]^{-1}$.
+On four copies of this space set
+\[
+ H_e=\begin{pmatrix}
+ H_\infty&0&0&C_\infty\\0&H_\infty&0&0\\
+ 0&0&-H_\infty&0\\-C_\infty&0&0&-H_\infty
+ \end{pmatrix},\quad Q_e=\tfrac12(I+iH_e),\quad
+ J_e=\operatorname{diag}(J_\theta,J_\theta),\quad
+ M_\lambda=Q_e-\lambda J_e.
+\]
+For the unitary Mellin transform
+$\mathcal Mf(\omega)=(2\pi)^{-1/2}\int_0^\infty
+t^{-1/2-i\omega}f(t)\,dt$, the two scalar multipliers are
+$-i\tanh\pi\omega$ and $\operatorname{sech}\pi\omega$.
+Indeed these follow from the principal-value cotangent integral and
+the beta integral at exponent $1/2+i\omega$.  Thus $M_\lambda$ has
+multiplier \eqref{v12:eq:endpoint-symbol}.  Expansion of its determinant
+gives $\lambda^4-\lambda^2(q^2+r^2)+q^2r^2-c^2qr$; using $c^2=qr$
+proves the asserted formula.  The $2\times2$ block of $Q_e$ on
+channels 1 and 4 is a projection, and its other entries are $q,r$.
+Consequently $0\le Q_e\le I$.  The inverse multiplier is bounded on
+compact subsets of $\Omega$: its denominator is bounded away from zero,
+and its adjugate is bounded.
+
+Choose $0<\delta<1/4$ and a real smooth cutoff $0\le\chi\le1$, equal to one on
+$[0,\delta]$ and zero on $[2\delta,\infty)$, such that
+$\psi(t)=\sqrt{1-\chi(t)^2-\chi(1-t)^2}$ is smooth.  A smooth
+sine/cosine transition has this property.  Extend $\psi$ by zero.
+Define
+\[
+ Ef(t)=\chi(t)(f_1(t),f_2(t),f_1(1-t),f_2(1-t))^T,
+ \qquad \mathcal If=\psi f,
+\]
+where the outputs are in $L^2((0,\infty);\mathbb C^4)$ and
+$L^2(\mathbb R;\mathbb C^2)$, respectively, with zero extension.
+Their adjoints are
+\[
+ E^*v(t)=\begin{pmatrix}
+ \chi(t)v_1(t)+\chi(1-t)v_3(1-t)\\
+ \chi(t)v_2(t)+\chi(1-t)v_4(1-t)
+ \end{pmatrix},\qquad \mathcal I^*w(t)=\psi(t)w(t).
+\]
+Hence $E^*E+\mathcal I^*\mathcal I=1$, $EJ_\theta=J_eE$, and $\mathcal IJ_\theta=J_\theta\mathcal I$.
+Let $Q_i$ be the whole-line Cauchy projection on each of the two interior
+components and $N_\lambda=Q_i-\lambda J_\theta$.  In angular Fourier
+frequency,
+\begin{equation}\label{v12:eq:interior-inverse}
+ n_\lambda(\omega)^{-1}=
+ \begin{cases}-\lambda^{-1}J_\theta,&\omega<0,\\
+ (I+\lambda J_\theta)/(1-\lambda^2),&\omega>0.
+ \end{cases}
+\end{equation}
+
+The errors $\Delta_e=EQ_0-Q_eE$ and $\Delta_i=\mathcal IQ_0-Q_i\mathcal I$ are
+independent of $\lambda,\theta$.  For $t>0$, $0<s<1$, the first has
+kernel
+\begin{equation}\label{v12:eq:endpoint-defect-kernel}
+ \frac{i}{2\pi}\begin{pmatrix}
+ \dfrac{\chi(t)-\chi(s)}{t-s}&
+ \dfrac{\chi(t)-\chi(1-s)}{t+1-s}\\[5pt]
+ \dfrac{\chi(t)}{t-1-s}&
+ \dfrac{\chi(t)-\chi(s)}{t-s}\\[5pt]
+ \dfrac{\chi(t)-\chi(1-s)}{1-t-s}&
+ \dfrac{\chi(t)}{2-t-s}\\[5pt]
+ -\dfrac{\chi(t)-\chi(s)}{t+s}&
+ \dfrac{\chi(t)-\chi(1-s)}{1-t-s}
+ \end{pmatrix}.
+\end{equation}
+For $t\in\mathbb R$, $0<s<1$, the second has kernel
+\begin{equation}\label{v12:eq:interior-defect-kernel}
+ \frac{i}{2\pi}\begin{pmatrix}
+ (\psi(t)-\psi(s))/(t-s)&\psi(t)/(t-s+1)\\
+ \psi(t)/(t-s-1)&(\psi(t)-\psi(s))/(t-s)
+ \end{pmatrix}.
+\end{equation}
+Divided differences take their continuous values; a term supported where
+its numerator is identically zero is zero.  The kernels are square integrable: diagonal quotients are bounded by
+cutoff derivatives; corner quotients vanish below distance $\delta$,
+with denominator at least $\delta$ elsewhere; unmatched cross terms
+are separated from their poles. Output tails are $O(|t|^{-1})$.
+The touching-endpoint Carleman singularity remains in the model.
+
+\subsection{The scalar equation and its multiplicities}
+
+\begin{proof}[Proof of Theorem~\ref{v12:thm:explicit-gap-equation}]
+The intertwining errors satisfy
+$EP_\lambda=M_\lambda E+\Delta_e$ and
+$\mathcal IP_\lambda=N_\lambda\mathcal I+\Delta_i$.  Therefore
+\[
+ EP_\lambda^2=M_\lambda^2E+M_\lambda\Delta_e+\Delta_eP_\lambda,
+\]
+with the analogous interior identity.  Multiplying by the inverse
+squares and using $E^*E+\mathcal I^*\mathcal I=1$ gives
+\eqref{v12:eq:explicit-preconditioner}.  All inverse powers here are
+algebraic powers, not adjoint products.  The explicit multipliers are
+bounded and holomorphic on $\Omega$, so $K_\lambda$ is holomorphic in
+$\mathfrak S_2$.
+
+For real gap $\lambda$, self-adjoint model pencils of norm at most
+$1+|\lambda|$ have inverse squares at least $(1+|\lambda|)^{-2}I$.
+Thus $R_\lambda$ is invertible and $P_\lambda^2$ is Fredholm, with
+$\ker P_\lambda^2=\ker P_\lambda$. The exact frequency correspondence
+proves the real zero equivalence.
+
+At a real isolated eigenvalue $\alpha$ of multiplicity $k$, the
+bounded-product correspondence identifies the nonzero generalized
+eigenspace of $J_\theta Q_0$ with that of the self-adjoint physical
+operator.  It is therefore semisimple of dimension $k$.  Its Riesz
+decomposition splits $J_\theta Q_0-\lambda$ into
+$(\alpha-\lambda)I_k$ and an invertible analytic complement.  The
+analytic Fredholm pencil $P_\lambda=J_\theta(J_\theta Q_0-\lambda)$
+has characteristic multiplicity $k$; its square has multiplicity $2k$.
+Multiplication by the locally invertible analytic $R_\lambda$ preserves
+this number.  Finite-dimensional Schur reduction of an identity plus
+$\mathfrak S_2$ family shows that its regularized determinant has this
+zero order; the regularizing factor is a nonvanishing exponential.
+\end{proof}
+
+The equation permits finite-rank error control.  For $T\ge2$, the
+displayed kernels give
+\[
+ \|\mathbf1_{t>T}\Delta_e\|_2^2\le\frac3{2\pi^2(T-1)},\qquad
+ \|\mathbf1_{|t|>T}\Delta_i\|_2^2\le\frac1{\pi^2(T-1)}.
+\]
+There are six nonzero endpoint tail entries, bounded by
+$(2\pi)^{-1}(t-1)^{-1}$, and two diagonal interior entries on each tail.
+On the remaining finite rectangles, midpoint step approximations with
+mesh widths $h_t,h_s$ have Hilbert--Schmidt error at most
+$\sqrt T(B_th_t+B_sh_s)/2$, or
+$\sqrt{2T}(B_th_t+B_sh_s)/2$ for the interior, where $B_t,B_s$ bound
+the Frobenius norms of the two kernel derivatives.  Such bounds follow
+from cutoff second derivatives and the canceled corner formulas.
+The squared rectangle and tail errors add.
+
+Replacing only the errors in \eqref{v12:eq:explicit-preconditioner}
+by these finite-rank approximations gives, for example,
+\[
+ \|K_e-K_{e,n}\|_2\le
+ (\|M_\lambda^{-1}\|^2(1+|\lambda|)+\|M_\lambda^{-1}\|)
+                    \|\Delta_e-\Delta_{e,n}\|_2.
+\]
+Every multiplier is explicit; matrix evaluation errors must also be
+controlled in a certificate.  A contour may certify zeros only when
+it bounds a domain $D$ with $\overline D\Subset\Omega$ and
+$R_\lambda$ proved invertible throughout $\overline D$.  If model
+inverse norms are at most $b$ on a disk about real $\lambda_0$, then
+$\|R_\lambda-R_{\lambda_0}\|\le2b^3|\lambda-\lambda_0|$; a disk with
+$2b^3|\lambda-\lambda_0|<(1+|\lambda_0|)^{-2}$ suffices.
+On the contour, a verified bound
+$\|(I+K_{\lambda,n})^{-1}\|\,\|K_\lambda-K_{\lambda,n}\|<1$
+keeps the interpolation invertible.  Half the finite determinant winding
+then counts physical eigenvalues with multiplicity.  No such numerical
+enclosure is claimed by the construction alone.
+
+\subsection{Endpoint expansions and physical tails}
+
+\begin{proof}[Proof of Theorem~\ref{v12:thm:boundary-tail}]
+For $P_\lambda u=0$, set $f=-\Delta_eu$.  The displayed kernel implies,
+for every integer $j\ge0$,
+\[
+ |f^{(j)}(t)|\le C_j\|u\|_2\quad(0\le t\le2),\qquad
+ |f^{(j)}(t)|\le C_j\|u\|_2t^{-1-j}\quad(t\ge2).
+\]
+On bounded rectangles, derivatives of divided differences are bounded
+by cutoff derivatives; corner cancellation and separated denominators
+handle the other entries.  At infinity one differentiates rational
+tails.  These are estimates on kernels applied to $u\in L^2$, so no
+regularity of $u$ has been assumed.  Consequently
+$\widehat f=\mathcal Mf$ is holomorphic in
+$|\operatorname{Im}\omega|<1/2$ and rapidly decreases horizontally on
+every closed smaller strip: in logarithmic coordinates,
+$e^{x/2}f(e^x)$ and all its derivatives decay exponentially at both
+ends, allowing repeated integration by parts.
+
+Since $M_\lambda Eu=f$, Mellin inversion gives
+\[
+ Eu(t)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+ t^{-1/2+i\omega}m_{\lambda,\theta}(\omega)^{-1}
+                     \widehat f(\omega)\,d\omega.
+\]
+The determinant in \eqref{v12:eq:endpoint-symbol} has exactly two simple
+zeros in this strip, at $\pm i\beta$.  Away from these poles the inverse has bounded horizontal limits.
+Shifting down to $\operatorname{Im}\omega=-a$ crosses only $-i\beta$, giving
+\[
+ v=-i\sqrt{2\pi}\operatorname*{Res}_{\omega=-i\beta}
+                  (m_{\lambda,\theta}^{-1}\widehat f).
+\]
+The remaining integral is $O(t^{-1/2+a})$ and may be differentiated
+any fixed number of times.  Since $\chi=1$ near zero, this proves
+\eqref{v12:eq:endpoint-expansion}.  A simple determinant zero has matrix
+rank three, so the residue lies in the stated one-dimensional kernel;
+it may vanish.
+
+The interior error has smooth derivatives and rational tails.
+From $N_\lambda\mathcal Iu=-\Delta_i u$ and
+\eqref{v12:eq:interior-inverse}, the Fourier transform of $\mathcal Iu$
+decays rapidly at high frequency and is locally $L^2$ at zero.
+Thus $u$ is smooth away from its three endpoints.
+
+A cutoff of $t^{\nu-1}$ at zero has Fourier asymptotic
+$\Gamma(\nu)e^{-i\operatorname{sgn}(T)\pi\nu/2}
+(2\pi|T|)^{-\nu}+O(|T|^{-1})$, by the regularized Gamma integral.
+A remainder $r(t)=O(t^{\mu-1})$, $r'(t)=O(t^{\mu-2})$, $0<\mu<1$,
+has Fourier transform $O(|T|^{-\mu})$: split at $|T|^{-1}$ and integrate
+the upper part by parts.  Applying these formulas to the four endpoints
+with $\mu=1/2+a$ gives \eqref{v12:eq:physical-tail}, with the phases
+$e^{2\pi iT}$ and $e^{-2\pi iT}$ from endpoints $-1$ and $1$.
+
+After squaring, the nonoscillating part integrates to
+$L^{1-2\nu}/(2\nu-1)$; nonzero integer-frequency cross terms are
+$O(L^{-2\nu})$ by integration by parts.  The remainder cross term is
+$O(L^{1-\nu-\mu})=O(L^{-\beta-a})$, proving
+\eqref{v12:eq:tail-mass}.  At $\omega=-i\beta$, the kernel equations
+and $|q|=|r|=c=\sqrt{(1-\lambda^2)/2}$ give
+\[
+ |v_4|=|v_1|,\qquad
+ |v_2|=|v_3|=
+          \frac{\sqrt2|\lambda|}{\sqrt{1-\lambda^2}}|v_1|.
+\]
+Thus a nonzero residue makes both tail constants strictly positive,
+even if the zero-frequency amplitude cancels.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{v12:cor:gap-cluster-rate}]
+Theorem~\ref{v13:thm:leading-interaction}, proved independently from the
+boundary tails and the qualitative gap limit, gives the stronger
+$\lambda_j=\alpha+L^{-\gamma(\alpha)}\mu_j+o(L^{-\gamma(\alpha)})$
+for both boundaries and $\lambda=\alpha+o(L^{-\gamma(\alpha)})$
+for one boundary. Since $L=m+h-l$, these imply the stated rate,
+including each centered parity sector.
+\end{proof}
+

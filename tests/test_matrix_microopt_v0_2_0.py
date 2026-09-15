@@ -308,10 +308,11 @@ def test_microopt_matches_operator_assembly(_optional_deps):
 def test_microopt_end_to_end_build_galerkin_matrix(_optional_deps):  # pragma: no cover
     """End-to-end: call ``build_galerkin_matrix`` fully and compare.
 
-    Skipped by default.  Run manually with::
-
-        pytest tests/test_matrix_microopt_v0_2_0.py::test_microopt_end_to_end_build_galerkin_matrix \
-            -m slow --timeout=1800 --no-skip -v
+    This historical test is unconditionally skipped and requires the original
+    reference cache, which is not distributed. Running it requires that cache
+    and removal of the skip marker in a local copy. The standard pytest stack
+    has no ``--no-skip`` option. Current runnable reference checks are described
+    in tests/README.md.
     """
     import mpmath as mp
 

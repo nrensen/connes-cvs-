@@ -1,0 +1,60 @@
+\section{Exact endpoint spectral measure}\label{eshort:sec}
+Let $T$ be the finite Hilbert transform on $(-1,1)$,
+$Tf(x)=\pi^{-1}\operatorname{p.v.}\int_{-1}^1 f(y)/(x-y)\,dy$,
+and put $\Pi_T=(I-iT)/2$. Thus $T^*=-T$, $\|T\|\le1$, and
+$\Pi_T$ is a positive contraction. Its classical spectral representation
+\cite{KoppelmanPincus1959} gives the following exact endpoint law.
+
+\begin{proposition}[Endpoint spectral measure]\label{T10:prop:lump}
+For every $u>0$, $g_u(x)=[\pi(1+u-x)]^{-1}$ has normalized
+$iT$-spectral measure $\tfrac12\mathbf1_{[-1,1]}(y)dy$. In particular,
+\begin{equation}\label{eshort:moments}
+ \|g_u\|^2=\frac2{\pi^2u(2+u)},\qquad
+ \|T^kg_u\|^2=\frac{\|g_u\|^2}{2k+1},\qquad
+ \langle g_u,\Pi_T^a g_u\rangle=\frac{\|g_u\|^2}{a+1}
+ \quad(k\ge0,\ a\ge0),
+\end{equation}
+where $k$ is an integer.
+\end{proposition}
+\begin{proof}
+The unitary Cayley map $\mathcal Wf(s)=\sqrt2 f((1-s)/(1+s))/(1+s)$
+gives $\mathcal WT\mathcal W^*=-H_+$, where
+$H_+F(s)=\pi^{-1}\operatorname{p.v.}\int_0^\infty F(t)/(s-t)dt$.
+Indeed $x(s)-x(t)=2(t-s)/[(1+s)(1+t)]$. Also
+$\mathcal Wg_u=\sqrt2\phi_w/(2+u)$, with
+$w=u/(2+u)$ and $\phi_w(s)=[\pi(w+s)]^{-1}$.
+For $\mathfrak MF(\omega)=\int_0^\infty F(s)s^{-1/2+i\omega}ds$,
+Parseval has factor $(2\pi)^{-1}$, and
+\begin{equation}\label{eshort:mellin}
+ \mathfrak M\phi_w=w^{-1/2+i\omega}\operatorname{sech}(\pi\omega),
+ \qquad \mathfrak MH_+\mathfrak M^{-1}=i\tanh(\pi\omega).
+\end{equation}
+These follow from the beta integral
+$\int_0^\infty r^{z-1}/(1+r)dr=\pi/\sin\pi z$ and
+$\operatorname{p.v.}\int_0^\infty r^{z-1}/(1-r)dr=\pi\cot\pi z$,
+$0<\Re z<1$. For the latter, split at one and invert the upper part;
+the geometric series gives
+$\sum_{n\ge0}[(n+z)^{-1}-(n+1-z)^{-1}]=\pi\cot\pi z$.
+Substituting $s=tr$ in the transformed Hilbert kernel gives the
+multiplier $-\cot(\pi/2+i\pi\omega)=i\tanh(\pi\omega)$.
+Regulated compactly supported calculations extend by boundedness to
+$L^2$. Since $\|\phi_w\|^2=1/(\pi^2w)$, its normalized density is
+$(\pi/2)\operatorname{sech}^2(\pi\omega)d\omega$; setting
+$y=\tanh(\pi\omega)$ gives $dy/2$. Integrating $y^{2k}$ and
+$((1-y)/2)^a$ proves the claims.
+\end{proof}
+
+\begin{corollary}[Endpoint leakage]\label{T10:cor:leak}
+For the zero extension of $g_u$ and the whole-line Hilbert transform $H$,
+\begin{equation}\label{eshort:leak}
+ \int_{-1}^1|Hg_u|^2=\tfrac13\|g_u\|^2,\qquad
+ \int_{|x|>1}|Hg_u|^2=\tfrac23\|g_u\|^2.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Inside the interval $Hg_u=Tg_u$; apply \eqref{eshort:moments} with
+$k=1$ and the whole-line $L^2$ isometry. Partial fractions also give
+$Hg_u(x)=[\pi^2(1+u-x)]^{-1}\log[u|1+x|/((2+u)|1-x|)]$,
+with the removable value at $x=1+u$ understood by continuity.
+\end{proof}
+

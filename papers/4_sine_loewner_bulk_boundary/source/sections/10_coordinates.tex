@@ -1,0 +1,92 @@
+\section{Prolate coordinates and a prime-power application}
+\label{v6:sec:coordinates}
+\begin{proposition}[Full-band coordinates]\label{prop:T5a:involution}
+Let $C_{2\tau}\psi_n=\ell_n\psi_n$ be the real orthonormal prolate
+basis, with $\ell_n=\lambda_n(2\pi\tau)>0$ and parity $(-1)^n$.
+Then $\chi_n=\ell_n^{-1/2}R_\tau U\psi_n=i^n\varphi_n$ form an
+orthonormal basis of $L^2(-\tau,\tau)$, with $\varphi_n$ real of
+parity $(-1)^n$. The matrix
+$\mathcal J_{mn}=\langle\chi_m,J_\tau\chi_n\rangle$ is a real
+symmetric involution, vanishes for opposite parities, and obeys
+\begin{equation}\label{eq:T5a:matrix}
+(\mathcal K_\tau)_{mn}=\sqrt{\ell_m\ell_n}\mathcal J_{mn},\quad
+(C_\pm)_{mn}=\sqrt{\ell_m\ell_n}\,
+                    (\delta_{mn}\pm\mathcal J_{mn})/2 .
+\end{equation}
+For equal parities,
+$\mathcal J_{mn}=2(-1)^{(n-m)/2}
+\int_0^\tau\varphi_m(\xi)\varphi_n(\xi-\tau)\,d\xi$.
+All series in
+\begin{equation}\label{eq:T5a:traces}
+\begin{aligned}
+\tr\mathcal K_\tau&=\sum_n\ell_n\mathcal J_{nn},&
+\tr\mathcal K_\tau^2&=\sum_{m,n}\ell_m\ell_n\mathcal J_{mn}^2,\\
+D_J&=\sum_{m,n}\ell_n(1-\ell_m)\mathcal J_{mn}^2,&
+D_R&=\sum_n\ell_n(1-\ell_n)
+\end{aligned}
+\end{equation}
+converge absolutely.
+\end{proposition}
+\begin{proof}
+For $A=R_\tau U$, $A^*A=C_{2\tau}$ and both $A,A^*$ are
+injective by the entire-function argument in
+Theorem~\ref{thm:rev:structure:inertia}.
+Thus the $\chi_n$ are orthonormal and complete: orthogonality of
+$g$ to all $\chi_n$ implies $A^*g=0$.
+Separating the sine and cosine parts of $U\psi_n$ gives $i^n\varphi_n$.
+The exchange is a self-adjoint involution commuting with reflection;
+its matrix entries are
+$i^{n-m}\langle\varphi_m,J_\tau\varphi_n\rangle$, real for equal
+parities and zero otherwise. Splitting the exchange integral into
+two halves gives the stated formula.
+Now $\mathcal K_\tau=A^*J_\tau A$ and
+$C_\pm=A^*(I\pm J_\tau)A/2$ give \eqref{eq:T5a:matrix}.
+Parseval yields $\sum_m\mathcal J_{mn}^2=1$; together with
+$\sum_n\ell_n=4\tau$, this proves the trace formulas and all
+absolute-convergence assertions.
+\end{proof}
+
+\subsection{One prime-power summand}\label{sec:arith}
+For a prime power $q$, put $a_q=\Lam(q)/\sqrt q$, where $\Lam$
+is the von Mangoldt function, and
+$\varepsilon_q(c)=1-\log q/\log c$, $c>1$.
+With the localized Weil-form basis $L^{-1/2}e^{2\pi inx/L}$,
+$L=\log c$, $|n|\le N$, and prime distribution
+$-\sum_{q\le c}a_q\delta_{\log q}$, the individual summand is
+\begin{equation}\label{eq:5.1}
+ -a_qA_N(\varepsilon_q(c)),\qquad
+ \tau=N\varepsilon_q(c),\qquad
+ \log(c/q)=\frac{\tau\log q}{N-\tau}.
+\end{equation}
+The matrix formula is \cite[Proposition~4.1]{CvS}, specialized as in
+\cite{SilvaPrime}; the last equality is exact inversion.
+\begin{corollary}[Finite-section design rule]\label{cor:design}
+For fixed $q,T,\eta>0$, take $N>2T$, $N\ge(2T+8\pi T^2)/\eta$
+and $c(\tau)=q^{N/(N-\tau)}$. Uniformly on $0<\tau\le T$, the embedded
+normalized block is within $\eta$ of $\mathcal K_\tau$, and the physical
+summand within $a_q\eta$ of $-a_q\mathcal K_\tau$.
+If $\eta<\min(p_\tau,m_\tau)$ the normalized block has a positive even
+and negative odd eigenvalue; multiplication by $-a_q$ reverses them.
+\end{corollary}
+\begin{proof}
+The inversion gives $\varepsilon_q=\tau/N<1/2$; apply
+Theorem~\ref{thm:nystrom} and \eqref{eq:3.7}.
+\end{proof}
+The cutoff layer has width $T\log q/(N-T)=O_{q,T}(N^{-1})$.
+For phase-aligned eigenvectors at a fixed simple isolated parity eigenvalue,
+Theorem~\ref{thm:packet} gives weights $1/2,1/2$ at the exchanged-arc
+endpoints: for every $\zeta>0$, a sufficiently large fixed $C_\zeta$
+makes each $C_\zeta/N$ neighborhood's limiting mass at least $1/2-\zeta$.
+The disjoint-arc range is exactly $\sqrt c<q<c$, or $0<\tau<N/2$.
+At $q=\sqrt c$ the matrix is $\operatorname{diag}((-1)^m)$; entrywise,
+\begin{equation}\label{eq:5.6}
+ A_N(1-\varepsilon)=-A_N(\varepsilon)
+ +2\operatorname{diag}(\cos(2\pi m\varepsilon))_{m=-N}^N.
+\end{equation}
+Also $0<a_q\le2/e$, so signed count estimates transfer by reversing signs
+and replacing a threshold $0<\alpha<a_q$ by $\alpha/a_q$.
+This describes one moving summand, with no sign conclusion for the complete
+Weil form. Its other prime and archimedean terms also move; fixed-mode
+continuity alone gives no dimension-uniform right neighborhood.
+The complete-form estimates \cite{Zhu2026,Angelone2026} and activation-wall
+analysis \cite{Tao2026} concern different questions.

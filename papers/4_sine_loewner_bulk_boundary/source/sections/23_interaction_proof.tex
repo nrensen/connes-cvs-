@@ -1,0 +1,350 @@
+\section{Proof of the leading boundary interaction}
+\label{v13:app:boundary-interaction}
+
+Throughout, $\alpha$ is real and lies in an open central gap, and
+$\beta,\nu,\gamma,a$ are as in
+\eqref{v13:eq:interaction-parameters}.  Put $\epsilon=L^{-\gamma}$.
+Inner products are conjugate linear in the first variable.
+
+\subsection{The physical tail directions}
+
+Put $t=\pi\beta$, $q=(1-ia)/2$, $\overline q=(1+ia)/2$, and
+$c=(2\cos t)^{-1}$.  These are the endpoint multiplier values at
+$\omega=-i\beta$, so that $q=ce^{-it}$, $\overline q=ce^{it}$, and
+$q^2+\overline q^{\,2}=\alpha^2$.  Undoing $D_\theta$ in
+\eqref{v12:eq:endpoint-symbol}, the kernel vector with first
+component one is
+\[
+ (1,(\alpha/c)e^{it},-i(\alpha/c)e^{2it},-ie^{3it})^T.
+\]
+The second and third rows give $v_2=\alpha v_1/q$ and
+$v_3=\alpha v_4/\overline q$; the first gives
+$v_4=i(q^2-\alpha^2)/(cq)=-i\overline q^{\,2}/(cq)$, and the fourth then holds.
+If the first component is zero all four are zero.
+
+Use global physical carriers in the order $(-1,0,1)$, and put
+\[
+ \mathsf A=\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix},
+ \qquad
+ \mathsf S=\begin{pmatrix}0&1&0\\1&0&-1\\0&-1&0\end{pmatrix},
+\qquad v_+=\begin{pmatrix}\overline q/\alpha\\1\\q/\alpha\end{pmatrix},
+ \quad v_-=\overline{v_+}.
+\]
+Let $A^\pm$ be the tail vectors of the full continuation of the
+normalized left mode, and $B^\pm$ those of the right mode, with the
+superscript denoting the direction $X\to\pm\infty$.  Thus, for example,
+\[
+ \widetilde\psi_L(X)=|X-l|^{-\nu}
+       \sum_{p=-1}^1 A_p^\pm e^{2\pi ipX}+O(|X-l|^{-\mu}),
+ \qquad \nu<\mu<1.
+\]
+Substitution in \eqref{v12:eq:physical-tail} gives
+\begin{equation}\label{v13:eq:universal-tail-vectors}
+ A^+=\eta_Lv_+,\qquad A^-=-i(c/\alpha)\mathsf SA^+,
+ \qquad B^-=\eta_Rv_-,\qquad B^+=i(c/\alpha)\mathsf SB^-.
+\end{equation}
+Here the factors of $D_\theta$ cancel the factors from replacing
+$e^{2\pi ip(X-l)}$ by $e^{2\pi ipX}$.  To check the ratios explicitly,
+put $\varphi=\pi/4+t/2$.  The positive-tail vector before its common
+Gamma factor is
+$(e^{i\varphi}v_3,e^{-i\varphi}v_1+e^{i\varphi}v_4,
+e^{-i\varphi}v_2)$; its middle component is
+$2\cos(2t)e^{-i\pi/4+3it/2}$.  Division by it gives
+$(\overline q/\alpha,1,q/\alpha)$.  Reversing the Gamma phases gives the
+second formula in \eqref{v13:eq:universal-tail-vectors}; reflection
+gives the two right formulas.  Since $\cos(2t)>0$, $\eta_L$ vanishes
+precisely when the endpoint vector vanishes, and likewise on the right.
+
+\subsection{The three-channel limit and residual profiles}
+
+Let $H_{\mathbb R}$ have kernel $[\pi(s-t)]^{-1}$, set
+$P_\pm=(I\pm iH_{\mathbb R})/2$, and define
+\[
+ \mathbb G=\begin{pmatrix}0&P_+&0\\P_+&0&P_-\\0&P_-&0\end{pmatrix},
+ \qquad
+ (\mathcal U_Lf)(X)=L^{-1/2}\sum_{p=-1}^1
+              e^{2\pi ipX}f_p((X-l)/L).
+\]
+These maps have norm at most $\sqrt3$ and, for fixed $f,g\in L^2(\mathbb R)^3$, satisfy
+\begin{equation}\label{v13:eq:three-channel-transfer}
+ \langle\mathcal U_Lf,\mathcal U_Lg\rangle\to\langle f,g\rangle,
+ \qquad \|\mathcal G\mathcal U_Lf-\mathcal U_L\mathbb Gf\|_2\to0.
+\end{equation}
+For the first limit, off-diagonal carrier products are Fourier
+transforms of $L^1$ functions at nonzero frequencies tending to infinity.
+For the second, write $M_pf(X)=e^{2\pi ipX}f(X)$ and
+$D_Lf(X)=L^{-1/2}f((X-l)/L)$.  The exact commutator identity is
+\[
+ \mathcal G=(2i)^{-1}
+       (M_1H_{\mathbb R}-H_{\mathbb R}M_1
+        -M_{-1}H_{\mathbb R}+H_{\mathbb R}M_{-1}).
+\]
+The transform $H_{pL}=M_{-pL}H_{\mathbb R}M_{pL}$ on the scaled
+variable has multiplier $-i\operatorname{sgn}(\omega+2\pi pL)$.
+For $p\ne0$ it converges strongly to $-i\operatorname{sgn}p$.
+The output from the carrier $p$ is exactly
+\[
+ \frac1{2i}M_{p+1}D_L(H_{pL}-H_{(p+1)L})f
+ -\frac1{2i}M_{p-1}D_L(H_{pL}-H_{(p-1)L})f.
+\]
+The $\pm2$ outputs tend to zero.  The remaining entries are $P_+$
+between $-1,0$ and $P_-$ between $0,1$, proving the claim.
+
+Write $p=\mathbf1_{(0,1)}$ on the envelope space.  Interval
+multiplication intertwines exactly with $p$, so $T_m$ has the strong
+envelope limit
+\begin{equation}\label{v13:eq:interval-star}
+ C=p\mathbb Gp=\begin{pmatrix}0&Q&0\\Q&0&I-Q\\0&I-Q&0\end{pmatrix},
+ \qquad Q=\tfrac12(I+iH_{(0,1)}).
+\end{equation}
+The commuting operators $Q,I-Q$ satisfy
+$Q^2+(I-Q)^2\ge I/2$; hence
+$\sigma(C)\subset\{0\}\cup[-1,-g]\cup[g,1]$.
+
+Translate the right mode by the integer $m$, and let $\Phi_m$ contain
+the restrictions of the one or two chosen boundary modes to
+$(l,m+h)$.  Integer translation preserves all global carrier phases.
+The omitted-tail envelope columns are
+\[
+ Z_L(s)=\mathbf1_{s>1}s^{-\nu}A^+,\qquad
+ Z_R(s)=\mathbf1_{s<0}(1-s)^{-\nu}B^-.
+\]
+These exterior profiles belong to $L^2$, unlike the singular interior
+powers. The scaled squared tail error is
+$O(L^{\gamma+1-2\mu})=o(1)$. Since the exact residual is minus
+$P_{(l,m+h)}\mathcal G$ applied to the omitted tail,
+\eqref{v13:eq:three-channel-transfer} gives
+\begin{equation}\label{v13:eq:scaled-residual}
+ \epsilon^{-1/2}(T_m-\alpha)\Phi_m-\mathcal U_LF\longrightarrow0,
+ \quad
+ F(s)=\left(\frac i2\ell_\nu(s)\mathsf SA^+,
+          -\frac i2\ell_\nu(1-s)\mathsf SB^-\right),
+\end{equation}
+omitting an absent boundary column, where
+\[
+ \ell_\nu(s)=\frac1\pi\int_1^\infty\frac{t^{-\nu}}{t-s}\,dt
+            =\frac1\pi\int_0^1\frac{x^{\nu-1}}{1-sx}\,dx.
+\]
+Its endpoint singularity is logarithmic, so $F\in L^2(0,1)^3$.
+The left exterior Hilbert transform is $-\ell_\nu(s)$ and the
+right one is $\ell_\nu(1-s)$, which fixes both signs in
+\eqref{v13:eq:scaled-residual}.
+
+\subsection{The direct interaction}
+
+Let $P=P_{(l,m+h)}$, $P^\perp=I-P$, and let $z_i,z_j$ denote
+the half-line modes, extended by zero on their complementary half-lines.
+Their full continuations satisfy $\mathcal Gz_i=\alpha\widetilde z_i$.
+Self-adjointness gives the exact identity
+\begin{equation}\label{v13:eq:exact-Rayleigh-identity}
+ \langle Pz_i,(T_m-\alpha)Pz_j\rangle
+  =-\alpha\langle\widetilde z_i,P^\perp z_j\rangle
+        +\langle P^\perp z_i,\mathcal GP^\perp z_j\rangle.
+\end{equation}
+The tails imply $\Phi_m^*\Phi_m=I+O(\epsilon)$: omitted squared
+tails are $O(\epsilon)$, and the cross overlap is bounded by
+$O(L^{1-2\nu})\int_0^1s^{-\nu}(1-s)^{-\nu}\,ds$ plus
+$O(L^{-\nu})$ endpoint terms.  For \eqref{v13:eq:exact-Rayleigh-identity}, matching carriers converge
+by dominated convergence and the others vanish by Riemann--Lebesgue.
+The cross profiles $s^{-\nu}(1-s)^{-\nu}$ on $(0,1)$ and
+$|s|^{-\nu}(1-s)^{-\nu}$ on $(-\infty,0)$ are integrable;
+the better tail exponent controls the remainders.
+
+The diagonal limit of $\epsilon^{-1}\Phi_m^*(T_m-\alpha)\Phi_m$
+is $(A^+)^*(\mathsf A/2-\alpha)A^+/\gamma$, and similarly on the
+right.  It is zero, because
+\[
+ (\mathsf A/2+(ia/2)\mathsf S)v_+=\alpha v_+,
+ \qquad v_+^*\mathsf Sv_+=0,
+\]
+and reflection gives the same right identity.  The first term follows
+by substitution; its imaginary quadratic part gives the second.
+For the cross entry, put $b_\nu=B(1-\nu,2\nu-1)$ and
+\[
+ \kappa_\nu=\frac1\pi\int_1^\infty\int_1^\infty
+                \frac{x^{-\nu}y^{-\nu}}{x+y-1}\,dx\,dy.
+\]
+The first term in \eqref{v13:eq:exact-Rayleigh-identity} has limit
+$-\alpha b_\nu(A^-)^*B^-$; the second has limit
+$i\kappa_\nu(A^+)^*\mathsf SB^-/2$.  Therefore their sum is
+\begin{equation}\label{v13:eq:direct-cross-limit}
+ -\frac i2j_\nu(A^+)^*\mathsf SB^-
+ =-\frac a\alpha j_\nu\overline{\eta_L}\eta_R,
+ \quad
+ j_\nu=\frac{b_\nu}{\sin\pi\nu}-\kappa_\nu
+      =\int_0^1s^{-\nu}\ell_\nu(1-s)\,ds.
+\end{equation}
+For the last identity, integrate $s^{-\nu}/(s+u)$ over all $s>0$,
+obtaining $\pi u^{-\nu}/\sin\pi\nu$, then integrate against
+$(1+u)^{-\nu}/\pi$.  The portion $s>1$ is $\kappa_\nu$ and the
+portion $0<s<1$ is $j_\nu$.  All integrands are positive.
+
+\subsection{The full complementary correction}
+
+Let $\Pi_m$ be the spectral projection of the cluster converging to
+$\alpha$.  Theorem~\ref{v11:thm:gap-limits} supplies its exact rank
+and radii $0<\delta_1<\delta_2$ such that the cluster lies in
+$|x-\alpha|<\delta_1$ and no spectrum lies in
+$\delta_1\le |x-\alpha|\le\delta_2$, for all sufficiently large $m$.
+Choose $[\alpha-\delta_2,\alpha+\delta_2]$ inside the same open
+central gap. Let $b$ be continuous and real on $[-1,1]$, zero for
+$|x-\alpha|\le\delta_1$, equal to $(x-\alpha)^{-1}$ for
+$|x-\alpha|\ge\delta_2$, and interpolated across the empty annulus.
+Consequently
+\[
+ b(T_m)=(I-\Pi_m)(T_m-\alpha)^{-1},\qquad
+ b(C)=(C-\alpha)^{-1},
+\]
+where the first inverse is restricted to the spectral complement.
+Telescoping the intertwining defect proves polynomial transfer.
+Uniform polynomial approximation of $b$ and the common norm bound on
+$\mathcal U_L$ then give
+\[
+ \|b(T_m)\mathcal U_Lf-\mathcal U_Lb(C)f\|\to0
+ \quad(f\in L^2((0,1))^3).
+\]
+
+Write $V_m=(T_m-\alpha)\Phi_m$.  The spectral theorem and the fixed
+complementary gap give
+$\|(I-\Pi_m)\Phi_m\|=O(\epsilon^{1/2})$.  In conjunction with
+\eqref{v13:eq:scaled-residual}, the preceding transfer proves
+\begin{equation}\label{v13:eq:complement-limit}
+ \epsilon^{-1}V_m^*b(T_m)V_m\longrightarrow F^*(C-\alpha)^{-1}F.
+\end{equation}
+The exact identity
+\begin{equation}\label{v13:eq:projected-effective-identity}
+ \Phi_m^*\Pi_m(T_m-\alpha)\Pi_m\Phi_m
+  =\Phi_m^*(T_m-\alpha)\Phi_m-V_m^*b(T_m)V_m
+\end{equation}
+keeps the whole complementary contribution.  The Gram matrix of
+$\Pi_m\Phi_m$ is $I+O(\epsilon)$, so these vectors span the actual
+cluster and orthonormalization does not change its leading matrix.
+
+For its explicit calculation, the unitary logit transform
+$s=e^x/(1+e^x)$, $f(s)\mapsto\sqrt{s(1-s)}f(s)$ sends
+$H_{(0,1)}$ to the convolution kernel
+$[2\pi\sinh((x-y)/2)]^{-1}$.  Its angular Fourier multiplier is
+$-i\tanh\pi\omega$.  Put $x_\omega=\tanh\pi\omega$,
+$q_\omega=(1+x_\omega)/2$, $d_\omega=(1+x_\omega^2)/2$.  The
+symbol of $C$ and its inverse at $\alpha$ are
+\[
+ \mathsf c_\omega=
+ \begin{pmatrix}0&q_\omega&0\\q_\omega&0&1-q_\omega\\
+                 0&1-q_\omega&0\end{pmatrix},\qquad
+ \mathsf R_\alpha(\omega)=-I/\alpha+
+  \frac{\alpha\mathsf c_\omega+\mathsf c_\omega^2}
+       {\alpha(d_\omega-\alpha^2)}.
+\]
+The inverse identity follows from
+$\mathsf c_\omega^3=d_\omega\mathsf c_\omega$; its denominator is
+positive because $d_\omega\ge1/2>\alpha^2$.
+The transformed scalar residual is
+\begin{equation}\label{v13:eq:residual-beta-transform}
+ L_\nu(\omega)=\frac{B(\nu,1/2+i\omega)}
+                    {\sqrt{2\pi}\cosh\pi\omega}.
+\end{equation}
+To verify the normalization, write $A=1/2-i\omega$, $B=1/2+i\omega$.
+The defining double integral is
+\[
+ \frac1{\pi\sqrt{2\pi}}\int_0^1x^{\nu-1}\int_0^1
+ \frac{s^{A-1}(1-s)^{B-1}}{1-xs}\,ds\,dx
+ =\frac{B(A,B)B(\nu,B)}{\pi\sqrt{2\pi}}.
+\]
+Here $A+B=1$, so the inner hypergeometric factor is
+$(1-x)^{-A}$, and $B(A,B)=\pi/\cosh\pi\omega$.
+Absolute Fubini follows from the same positive integrals with
+$\operatorname{Re}A=\operatorname{Re}B=1/2$.
+Reflection has transform $L_\nu(-\omega)$.
+
+Set $u_+=\mathsf Sv_+=(1,ia/\alpha,-1)^T$ and
+$u_-=\overline{u_+}$.  Direct multiplication gives
+\begin{align*}
+ u_+^*\mathsf R_\alpha u_+
+  &=u_-^*\mathsf R_\alpha u_-=0,\\
+ u_+^*\mathsf R_\alpha u_-
+  &=-\frac{4a}{\alpha(a-ix_\omega)}.
+\end{align*}
+For example the first contraction is
+$-2/\alpha+(x_\omega^2+a^2)/[\alpha(d_\omega-\alpha^2)]$,
+which is zero.  In the second contraction the real numerator is
+$-4a^2$ and the imaginary numerator $-4iax_\omega$, over
+$\alpha(x_\omega^2+a^2)$.  Thus the complementary diagonal vanishes
+pointwise.  Combining the cross contraction, the two signs in
+\eqref{v13:eq:scaled-residual}, and
+\eqref{v13:eq:direct-cross-limit}, the full cross coefficient is
+\begin{equation}\label{v13:eq:unevaluated-cross-coefficient}
+ -\frac a\alpha\overline{\eta_L}\eta_R
+ \left[j_\nu+I_\nu\right],\qquad
+ I_\nu=\int_{\mathbb R}
+    \frac{L_\nu(-\omega)^2}{a-i\tanh\pi\omega}\,d\omega.
+\end{equation}
+Exponential decay of $L_\nu$ and $a>0$ give absolute convergence.
+
+\subsection{Evaluation of the scalar and conclusion}
+
+On $(0,1)$ let $H=H_{(0,1)}$, let $\mathcal Rf(s)=f(1-s)$, and put
+\[
+ f(s)=s^{-\nu},\qquad h(s)=s^{-\nu}(1-s)^{\nu-1}.
+\]
+Their difference is in $L^2$: it is $O(s^{1-\nu})$ at zero and
+$O((1-s)^{\nu-1})$ at one.  The elementary principal-value identity
+\[
+ \frac1\pi\operatorname{pv}\int_0^\infty
+     \frac{t^{-\nu}}{s-t}\,dt=-\cot(\pi\nu)s^{-\nu}=as^{-\nu}
+\]
+gives $Hf=af+\ell_\nu$.  The substitution
+$x=s/(1-s)$, $y=t/(1-t)$ gives $Hh=ah$ by the same identity.
+Subtracting the principal values, which agree almost everywhere with
+the bounded $L^2$ transform of their difference, gives
+$(H-a)(f-h)=\ell_\nu$.  No assertion that $f$ or $h$ separately
+belongs to $L^2$ is used.  Since $H^*=-H$ and $a>0$, the operators
+$H\pm a$ are invertible.  Plancherel and
+\eqref{v13:eq:residual-beta-transform} therefore give
+\[
+ I_\nu=\langle\ell_\nu,(a+H)^{-1}\mathcal R\ell_\nu\rangle
+      =-\langle f-h,\mathcal R\ell_\nu\rangle.
+\]
+The last sign uses $((a+H)^{-1})^*=-(H-a)^{-1}$.
+Both separate pairings with $f,h$ are absolutely integrable, so
+\[
+ j_\nu+I_\nu=\int_0^1s^{-\nu}(1-s)^{\nu-1}\ell_\nu(1-s)\,ds
+            =\frac{B(\nu,1-\nu)^2}{\pi}
+            =\frac\pi{\sin^2\pi\nu}=\pi(1+a^2).
+\]
+For the beta evaluation, substitute the integral for $\ell_\nu$ and
+use Tonelli.  With $y=1-s$ the inner integral is
+$B(\nu,1-\nu)(1-x)^{-\nu}$; the remaining integral is the same
+beta function.  This proves
+\eqref{v13:eq:closed-interaction-matrix}.
+
+Finally, divide \eqref{v13:eq:projected-effective-identity} by
+$\epsilon$ and orthonormalize $\Pi_m\Phi_m$.  The resulting finite
+Hermitian matrix tends to $\mathsf M_\alpha$, proving
+\eqref{v13:eq:leading-cluster-law} including coincident or zero
+leading coefficients.  With only one boundary column its limit is
+zero.  For $l=-r$, $h=r$, choose the right mode by reflection.
+Reflection about $m/2$ exchanges the two columns exactly, and
+$\eta_R=\eta_L$.  The symmetric column has even parity and the
+antisymmetric column odd parity, so the two leading shifts are
+$c_\alpha|\eta|^2$ and $-c_\alpha|\eta|^2$.  The centered family
+has $m=2n$ and physical length $L=2(n+r)$.
+The sign of $c_\alpha$ is opposite that of $\alpha$, proving the
+strict absolute-value ordering when $\eta\ne0$.
+If $\eta=0$, the endpoint vector is zero and
+Theorem~\ref{v12:thm:boundary-tail} gives every tail exponent $\mu<1$.
+Choose $1/2<\mu<1$ and set $e=L^{1-2\mu}$. The two elementary bounds
+\[
+ \int_0^L(1+x)^{-\mu}(1+L-x)^{-\mu}dx=O(e),\qquad
+ \int_0^\infty(1+x)^{-\mu}(1+L+x)^{-\mu}dx=O(e)
+\]
+follow by splitting at $L/2$ and $L$. Applied to the two-sided
+continuations, they give $\Phi_m^*\Phi_m=I+O(e)$ and
+$\|V_m\|=O(\sqrt e)$. The exact continuation identity
+\eqref{v13:eq:exact-Rayleigh-identity} gives
+$\Phi_m^*(T_m-\alpha)\Phi_m=O(e)$: same-boundary terms are products
+of omitted tails, and the second integral controls opposite-boundary
+continuation overlaps. The uniformly bounded $b(T_m)$ and
+\eqref{v13:eq:projected-effective-identity} therefore give a projected
+Rayleigh matrix $O(e)$ and Gram matrix $I+O(e)$.
+Orthonormalizing proves $O(L^{1-2\mu})$, hence
+$O(L^{-1+\delta})$ for every $\delta>0$.
