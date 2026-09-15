@@ -2388,7 +2388,7 @@ def K_fourier(v, r, L):
 # ARCHIMEDEAN SOURCE
 # ============================================================
 
-def h_plus(r):
+def h_plus(r, dps=None):
     """
     Archimedean source function:
 
@@ -2402,7 +2402,21 @@ def h_plus(r):
           = 1/pi * integral_0^T
                 h_+(r) K_fourier(v,r,L)
             dr.
+
+    Supports optional dps parameter for compatibility with connes_cvs.operator.h_plus.
     """
+    if dps is not None:
+        with mp.workdps(dps):
+            r = mp.mpf(r)
+            return (
+                mp.re(
+                    mp.digamma(
+                        mp.mpf("0.25")
+                        + 1j * r / 2
+                    )
+                )
+                - mp.log(mp.pi)
+            )
 
     r = mp.mpf(r)
 
@@ -2463,3 +2477,372 @@ def ghat(v, xi, L):
         mp.pi
         * K_canonical(v, omega)
     )
+
+
+# ============================================================
+# CANONICAL PARITY PROJECTORS
+# ============================================================
+
+def canonical_even_projector(N: int) -> mp.matrix:
+    """
+    Construct the (2N+1) x (N+1) orthonormal matrix V_even mapping the canonical
+    even cosine basis v in R^{N+1} to the full exponential basis c in R^{2N+1}:
+        c = V_even v.
+    """
+    dim_full = 2 * N + 1
+    dim_even = N + 1
+    V = mp.matrix(dim_full, dim_even)
+    V[N, 0] = mp.mpf("1")
+    inv_sqrt2 = 1 / mp.sqrt(2)
+    for m in range(1, dim_even):
+        V[N + m, m] = inv_sqrt2
+        V[N - m, m] = inv_sqrt2
+    return V
+
+
+def canonical_odd_projector(N: int) -> mp.matrix:
+    """
+    Construct the (2N+1) x N orthonormal matrix V_odd mapping the canonical
+    odd sine basis v in R^N to the full exponential basis c in R^{2N+1}:
+        c = V_odd v.
+    """
+    dim_full = 2 * N + 1
+    dim_odd = N
+    V = mp.matrix(dim_full, dim_odd)
+    inv_sqrt2 = 1 / mp.sqrt(2)
+    for m in range(1, N + 1):
+        V[N + m, m - 1] = inv_sqrt2
+        V[N - m, m - 1] = -inv_sqrt2
+    return V
+
+
+# ============================================================
+# PRIME STEP-WELL & TRANSLATION-DEFECT DECOMPOSITION (CELLS 130-148)
+# ============================================================
+
+def load_prime_powers_table(c_val: int = 13) -> list:
+    """
+    Exact prime-power table up to cutoff c:
+        q in {2, 3, 4, 5, 7, 8, 9, 11, 13, ...}
+    Returns list of tuples (q, log(q), w_q) where w_q = log(p) / sqrt(q) for q = p^k.
+    """
+    c_int = int(mp.floor(c_val))
+    prime_data, _ = prime_powers_up_to(c_int)
+    return [(int(n), mp.log(mp.mpf(n)), mp.mpf(w)) for (n, logn, w) in prime_data if n <= c_int]
+
+
+def build_W_tilde(N: int, prime_data: list, L: mp.mpf = None) -> mp.matrix:
+    """
+    Construct the (N+1) x (N+1) step-potential well matrix W_tilde in the canonical
+    even cosine basis on [0, L]. Certified in Cell 130 and audited to machine precision.
+    """
+    L_val = L if L is not None else mp.log(mp.mpf(13))
+    dim = N + 1
+    W = mp.matrix(dim, dim)
+    PI = mp.pi
+
+    for m in range(dim):
+        for n in range(m, dim):
+            entry = mp.mpf("0")
+            for (_, logq, w_q) in prime_data:
+                u_q = logq / L_val
+                if m == 0 and n == 0:
+                    val = mp.mpf("2") * (mp.mpf("1") - u_q)
+                elif m == 0 and n > 0:
+                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(n) * u_q) / (PI * mp.mpf(n)))
+                elif m > 0 and n == 0:
+                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(m) * u_q) / (PI * mp.mpf(m)))
+                else:
+                    diff_mn = mp.mpf(m - n)
+                    sum_mn = mp.mpf(m + n)
+                    if m == n:
+                        term_diff = mp.mpf("2") * (mp.mpf("1") - u_q)
+                    else:
+                        term_diff = -mp.sin(mp.mpf("2") * PI * diff_mn * u_q) / (PI * diff_mn)
+                    term_sum = -mp.sin(mp.mpf("2") * PI * sum_mn * u_q) / (PI * sum_mn)
+                    val = term_diff + term_sum
+
+                entry += w_q * val
+
+            W[m, n] = entry
+            W[n, m] = entry
+
+    return mp.mpf("0.5") * (W + W.T)
+
+
+def build_D_tilde_per(N: int, prime_data: list, L: mp.mpf = None) -> mp.matrix:
+    """
+    Construct the (N+1) x (N+1) diagonal periodic translation defect matrix D_tilde_per.
+    Certified in Cell 130.
+    """
+    L_val = L if L is not None else mp.log(mp.mpf(13))
+    dim = N + 1
+    D_per = mp.matrix(dim, dim)
+    PI = mp.pi
+
+    for m in range(dim):
+        if m == 0:
+            D_per[0, 0] = mp.mpf("0")
+            continue
+        M_m = mp.mpf("0")
+        for (_, logq, w_q) in prime_data:
+            theta_m = PI * mp.mpf(m) * logq / L_val
+            M_m += w_q * (mp.sin(theta_m) ** 2)
+        D_per[m, m] = mp.mpf("4") * M_m
+
+    return D_per
+
+
+def build_Delta_D_tilde_closed(N: int, prime_data: list, L: mp.mpf = None) -> mp.matrix:
+    """
+    Construct the (N+1) x (N+1) boundary truncation matrix Delta_D_tilde.
+    Certified in Cell 130 and sign-audited in Cell 137.
+    """
+    L_val = L if L is not None else mp.log(mp.mpf(13))
+    dim = N + 1
+    Delta_D = mp.matrix(dim, dim)
+    PI = mp.pi
+
+    for m in range(1, dim):
+        for n in range(m, dim):
+            entry = mp.mpf("0")
+            for (_, logq, w_q) in prime_data:
+                theta_m = PI * mp.mpf(m) * logq / L_val
+                theta_n = PI * mp.mpf(n) * logq / L_val
+                sin_prod = mp.sin(theta_m) * mp.sin(theta_n)
+
+                if m == n:
+                    J_val = mp.mpf("0.5") * logq - (L_val / (mp.mpf("4") * PI * mp.mpf(m))) * mp.sin(mp.mpf("2") * theta_m)
+                else:
+                    diff_m_n = mp.mpf(m - n)
+                    sum_m_n = mp.mpf(m + n)
+                    J_val = (L_val / (mp.mpf("2") * PI)) * (
+                        mp.sin(diff_m_n * PI * logq / L_val) / diff_m_n -
+                        mp.sin(sum_m_n * PI * logq / L_val) / sum_m_n
+                    )
+
+                term = -(mp.mpf("8") / L_val) * w_q * sin_prod * J_val
+                entry += term
+
+            Delta_D[m, n] = entry
+            Delta_D[n, m] = entry
+
+    return mp.mpf("0.5") * (Delta_D + Delta_D.T)
+
+
+def build_Q_prime_even(N: int, prime_data: list, L: mp.mpf = None) -> mp.matrix:
+    """
+    Construct the exact prime quadratic form on the canonical even sector:
+        Q_prime_even = -W_tilde + D_tilde_per + Delta_D_tilde.
+    Certified in Theorem 130.1.
+    """
+    W = build_W_tilde(N, prime_data, L)
+    D_per = build_D_tilde_per(N, prime_data, L)
+    Delta_D = build_Delta_D_tilde_closed(N, prime_data, L)
+    Q_p = -W + D_per + Delta_D
+    return mp.mpf("0.5") * (Q_p + Q_p.T)
+
+
+# ============================================================
+# ZETA POLE OPERATOR (EVEN SECTOR)
+# ============================================================
+
+def build_Q_pole_even(N: int, L: mp.mpf = None) -> mp.matrix:
+    """
+    Construct the (N+1) x (N+1) zeta-pole matrix on the canonical even sector.
+    """
+    from connes_cvs.operator import psi_pole, psi_pole_deriv
+
+    L_val = L if L is not None else mp.log(mp.mpf(13))
+    dim_full = 2 * N + 1
+    Q_full_pole = mp.matrix(dim_full, dim_full)
+
+    psi_p = {}
+    psi_pd = {}
+    for n in range(0, N + 1):
+        v = psi_pole(mp.mpf(n), L_val)
+        vd = psi_pole_deriv(mp.mpf(n), L_val)
+        psi_p[n] = v
+        psi_pd[n] = vd
+        if n > 0:
+            psi_p[-n] = -v
+            psi_pd[-n] = vd
+
+    for i in range(dim_full):
+        m = i - N
+        for j in range(i, dim_full):
+            n = j - N
+            if m == n:
+                val = psi_pd[n]
+            else:
+                val = (psi_p[m] - psi_p[n]) / mp.mpf(m - n)
+            Q_full_pole[i, j] = val
+            if i != j:
+                Q_full_pole[j, i] = val
+
+    V_even = canonical_even_projector(N)
+    Q_pole_even = V_even.T * Q_full_pole * V_even
+    return mp.mpf("0.5") * (Q_pole_even + Q_pole_even.T)
+
+
+# ============================================================
+# SYMMETRIC EIGENSOLVER & REGRESSION UTILITIES
+# ============================================================
+
+def symmetric_eigendecomposition(A: mp.matrix, sort_descending: bool = False) -> tuple:
+    """
+    Compute sorted real eigensystem of symmetric matrix A.
+    Returns (sorted_evals, V_sorted) where columns of V_sorted are orthonormal eigenvectors.
+    """
+    dim = A.rows
+    evals, V = mp.eigsy(A)
+    pairs = []
+    for i in range(dim):
+        val = mp.re(evals[i])
+        col = mp.matrix([mp.re(V[r, i]) for r in range(dim)])
+        pairs.append((val, col))
+    pairs.sort(key=lambda x: x[0], reverse=sort_descending)
+
+    sorted_evals = [p[0] for p in pairs]
+    V_sorted = mp.matrix(dim, dim)
+    for col_idx in range(dim):
+        col_vec = pairs[col_idx][1]
+        for row_idx in range(dim):
+            V_sorted[row_idx, col_idx] = col_vec[row_idx, 0]
+
+    return sorted_evals, V_sorted
+
+
+def linear_fit(x_vals: list, y_vals: list) -> tuple:
+    """
+    Compute least-squares linear regression y = slope * x + intercept.
+    Returns (slope, intercept, r2) with mp.mpf numeric safety.
+    """
+    n = len(x_vals)
+    if n < 2:
+        return mp.mpf("0"), mp.mpf("0"), mp.mpf("0")
+    sx = sum(x_vals)
+    sy = sum(y_vals)
+    sxx = sum(x * x for x in x_vals)
+    syy = sum(y * y for y in y_vals)
+    sxy = sum(x * y for (x, y) in zip(x_vals, y_vals))
+
+    denom = mp.mpf(n) * sxx - sx * sx
+    if abs(denom) < mp.mpf("1e-40"):
+        return mp.mpf("0"), mp.mpf("0"), mp.mpf("0")
+
+    slope = (mp.mpf(n) * sxy - sx * sy) / denom
+    intercept = (sy - slope * sx) / mp.mpf(n)
+
+    denom_y = mp.mpf(n) * syy - sy * sy
+    if abs(denom_y) < mp.mpf("1e-40"):
+        r2 = mp.mpf("1")
+    else:
+        r2 = ((mp.mpf(n) * sxy - sx * sy) ** 2) / (denom * denom_y)
+
+    return slope, intercept, r2
+
+
+# ============================================================
+# CONTINUUM COMPETITION OPERATORS ON B_11^perp (CELLS 137-148)
+# ============================================================
+
+def extract_continuum_projector(V_Qeven: mp.matrix, n_bound: int = 11) -> mp.matrix:
+    """
+    Extract the isometry matrix U_cont: R^q -> R^{N+1} spanning eigenvectors of
+    Q_even from index n_bound onward (orthogonal complement B_11^perp).
+    """
+    dim_even = V_Qeven.rows
+    q_cont = dim_even - n_bound
+    U_cont = mp.matrix(dim_even, q_cont)
+    for col in range(q_cont):
+        orig_col = n_bound + col
+        for row in range(dim_even):
+            U_cont[row, col] = V_Qeven[row, orig_col]
+    return U_cont
+
+
+def build_continuum_operators(
+    V_Qeven: mp.matrix,
+    prime_data: list,
+    L: mp.mpf = None,
+    n_bound: int = 11,
+) -> dict:
+    """
+    Construct the certified continuum competition operators on B_11^perp:
+      - W_hat_perp = U_cont^T * W_tilde * U_cont
+      - K_rest = U_cont^T * (Omega_diag + Delta_D) * U_cont
+      - Q_hat_comp = K_rest - W_hat_perp
+    Returns a dict containing U_cont, W_hat_perp, K_rest, Q_hat_comp,
+    as well as their extremal eigenvalues (omega_0, nu_0, mu_0).
+    """
+    L_val = L if L is not None else mp.log(mp.mpf(13))
+    dim_even = V_Qeven.rows
+    N = dim_even - 1
+    PI = mp.pi
+
+    U_cont = extract_continuum_projector(V_Qeven, n_bound=n_bound)
+
+    W_tilde = build_W_tilde(N, prime_data, L_val)
+    D_per = build_D_tilde_per(N, prime_data, L_val)
+    Delta_D = build_Delta_D_tilde_closed(N, prime_data, L_val)
+
+    Omega_diag = mp.matrix(dim_even, dim_even)
+    for m in range(dim_even):
+        a_m = mp.mpf("2") * PI * mp.mpf(m) / L_val if m > 0 else mp.mpf("0")
+        h_val = h_plus(a_m)
+        Omega_diag[m, m] = h_val + D_per[m, m]
+
+    W_hat_perp = U_cont.T * W_tilde * U_cont
+    W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
+
+    K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
+    K_rest = mp.mpf("0.5") * (K_rest + K_rest.T)
+
+    Q_hat_comp = K_rest - W_hat_perp
+    Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
+
+    evals_K, _ = symmetric_eigendecomposition(K_rest)
+    evals_W, _ = symmetric_eigendecomposition(W_hat_perp)
+    evals_Q, _ = symmetric_eigendecomposition(Q_hat_comp)
+
+    return {
+        "U_cont": U_cont,
+        "W_hat_perp": W_hat_perp,
+        "K_rest": K_rest,
+        "Q_hat_comp": Q_hat_comp,
+        "omega_0": evals_K[0],
+        "nu_0": evals_W[-1],
+        "mu_0": evals_Q[0],
+    }
+
+
+def verify_continuum_invariants_64(prime_data: list = None, dps: int = 50) -> tuple:
+    """
+    Fast pre-flight audit verifying continuum invariants at N=64, T=600 against certified baselines:
+      omega_0 = 2.9315259531
+      nu_0    = 4.2604954421
+      mu_0    = -0.4869792197
+    Returns (omega_0, nu_0, mu_0, passed_bool).
+    """
+    if prime_data is None:
+        prime_data = load_prime_powers_table(13)
+
+    Q_full_64, _ = get_galerkin_matrix(c=13, N=64, T=600, dps=dps, verbose=False)
+    V_even_64 = canonical_even_projector(64)
+    Q_even_64 = V_even_64.T * Q_full_64 * V_even_64
+    Q_even_64 = mp.mpf("0.5") * (Q_even_64 + Q_even_64.T)
+    _, V_e_64 = symmetric_eigendecomposition(Q_even_64)
+
+    ops = build_continuum_operators(V_e_64, prime_data, L=mp.log(mp.mpf(13)), n_bound=11)
+    w0 = ops["omega_0"]
+    nu0 = ops["nu_0"]
+    mu0 = ops["mu_0"]
+
+    passed = (
+        abs(w0 - mp.mpf("2.9315259531")) < mp.mpf("1e-8")
+        and abs(nu0 - mp.mpf("4.2604954421")) < mp.mpf("1e-8")
+        and abs(mu0 - mp.mpf("-0.4869792197")) < mp.mpf("1e-8")
+    )
+    return w0, nu0, mu0, passed
+

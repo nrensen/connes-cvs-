@@ -25,19 +25,20 @@ Pre-Flight Invariants (N = 64, T = 600, 50 dps):
 import time
 import mpmath as mp
 
-try:
-    from connes_cvs.operator import h_plus, psi_pole, psi_pole_deriv
-except ImportError:
-    from cell import h_plus
-from cell import get_galerkin_matrix
-
-
-def eval_h_plus(tau: mp.mpf, dps: int = 50) -> mp.mpf:
-    """Robust wrapper for h_plus supporting both 2-arg and 1-arg signatures."""
-    try:
-        return h_plus(tau, dps)
-    except TypeError:
-        return h_plus(tau)
+from cell import (
+    h_plus,
+    get_galerkin_matrix,
+    canonical_even_projector,
+    load_prime_powers_table,
+    build_W_tilde,
+    build_D_tilde_per,
+    build_Delta_D_tilde_closed,
+    build_Q_prime_even,
+    build_Q_pole_even,
+    symmetric_eigendecomposition,
+    extract_continuum_projector,
+    build_continuum_operators,
+)
 
 
 # =============================================================================
@@ -54,233 +55,19 @@ SWEEP_N = [48, 56, 64, 72, 80, 88, 96]
 
 
 # =============================================================================
-# Prime Powers & Geometric Tables
-# =============================================================================
-def load_prime_powers_table(c_val: int) -> list:
-    primes_powers = [
-        (2, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(2))),
-        (3, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(3))),
-        (4, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(4))),
-        (5, 5, mp.log(mp.mpf(5)) / mp.sqrt(mp.mpf(5))),
-        (7, 7, mp.log(mp.mpf(7)) / mp.sqrt(mp.mpf(7))),
-        (8, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(8))),
-        (9, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(9))),
-        (11, 11, mp.log(mp.mpf(11)) / mp.sqrt(mp.mpf(11))),
-        (13, 13, mp.log(mp.mpf(13)) / mp.sqrt(mp.mpf(13))),
-    ]
-    return [(q, mp.log(mp.mpf(q)), w_q) for (q, _, w_q) in primes_powers if q <= c_val]
-
-
-# =============================================================================
-# Canonical Parity Projectors
-# =============================================================================
-def canonical_even_projector(N: int) -> mp.matrix:
-    dim_full = 2 * N + 1
-    dim_even = N + 1
-    V = mp.matrix(dim_full, dim_even)
-    V[N, 0] = mp.mpf("1")
-    inv_sqrt2 = 1 / mp.sqrt(2)
-    for m in range(1, dim_even):
-        V[N + m, m] = inv_sqrt2
-        V[N - m, m] = inv_sqrt2
-    return V
-
-
-# =============================================================================
-# Operator Builders
-# =============================================================================
-def build_W_tilde(N: int, prime_data: list) -> mp.matrix:
-    dim = N + 1
-    W = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(dim):
-        for n in range(m, dim):
-            entry = mp.mpf("0")
-            for (_, logq, w_q) in prime_data:
-                u_q = logq / L_PARAM
-                if m == 0 and n == 0:
-                    val = mp.mpf("2") * (mp.mpf("1") - u_q)
-                elif m == 0 and n > 0:
-                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(n) * u_q) / (PI * mp.mpf(n)))
-                elif m > 0 and n == 0:
-                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(m) * u_q) / (PI * mp.mpf(m)))
-                else:
-                    diff_mn = mp.mpf(m - n)
-                    sum_mn = mp.mpf(m + n)
-                    if m == n:
-                        term_diff = mp.mpf("2") * (mp.mpf("1") - u_q)
-                    else:
-                        term_diff = -mp.sin(mp.mpf("2") * PI * diff_mn * u_q) / (PI * diff_mn)
-                    term_sum = -mp.sin(mp.mpf("2") * PI * sum_mn * u_q) / (PI * sum_mn)
-                    val = term_diff + term_sum
-
-                entry += w_q * val
-
-            W[m, n] = entry
-            W[n, m] = entry
-
-    return mp.mpf("0.5") * (W + W.T)
-
-
-def build_D_tilde_per(N: int, prime_data: list) -> mp.matrix:
-    dim = N + 1
-    D_per = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(dim):
-        if m == 0:
-            D_per[0, 0] = mp.mpf("0")
-            continue
-        M_m = mp.mpf("0")
-        for (_, logq, w_q) in prime_data:
-            theta_m = PI * mp.mpf(m) * logq / L_PARAM
-            M_m += w_q * (mp.sin(theta_m) ** 2)
-        D_per[m, m] = mp.mpf("4") * M_m
-
-    return D_per
-
-
-def build_Delta_D_tilde_closed(N: int, prime_data: list) -> mp.matrix:
-    dim = N + 1
-    Delta_D = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(1, dim):
-        for n in range(m, dim):
-            entry = mp.mpf("0")
-            for (_, logq, w_q) in prime_data:
-                theta_m = PI * mp.mpf(m) * logq / L_PARAM
-                theta_n = PI * mp.mpf(n) * logq / L_PARAM
-                sin_prod = mp.sin(theta_m) * mp.sin(theta_n)
-
-                if m == n:
-                    J_val = mp.mpf("0.5") * logq - (L_PARAM / (mp.mpf("4") * PI * mp.mpf(m))) * mp.sin(mp.mpf("2") * theta_m)
-                else:
-                    diff_m_n = mp.mpf(m - n)
-                    sum_m_n = mp.mpf(m + n)
-                    J_val = (L_PARAM / (mp.mpf("2") * PI)) * (
-                        mp.sin(diff_m_n * PI * logq / L_PARAM) / diff_m_n -
-                        mp.sin(sum_m_n * PI * logq / L_PARAM) / sum_m_n
-                    )
-
-                term = -(mp.mpf("8") / L_PARAM) * w_q * sin_prod * J_val
-                entry += term
-
-            Delta_D[m, n] = entry
-            Delta_D[n, m] = entry
-
-    return mp.mpf("0.5") * (Delta_D + Delta_D.T)
-
-
-_POLE_CACHE = {}
-
-def eval_psi_pole_cached(n_idx: int, L_val: mp.mpf) -> tuple:
-    if n_idx not in _POLE_CACHE:
-        val = psi_pole(mp.mpf(n_idx), L_val)
-        val_d = psi_pole_deriv(mp.mpf(n_idx), L_val)
-        _POLE_CACHE[n_idx] = (val, val_d)
-    return _POLE_CACHE[n_idx]
-
-
-def build_Q_pole_even(N: int, L_val: mp.mpf) -> mp.matrix:
-    dim_full = 2 * N + 1
-    Q_full_pole = mp.matrix(dim_full, dim_full)
-
-    psi_p = {}
-    psi_pd = {}
-    for n in range(0, N + 1):
-        v, vd = eval_psi_pole_cached(n, L_val)
-        psi_p[n] = v
-        psi_pd[n] = vd
-        if n > 0:
-            psi_p[-n] = -v
-            psi_pd[-n] = vd
-
-    for i in range(dim_full):
-        m = i - N
-        for j in range(i, dim_full):
-            n = j - N
-            if m == n:
-                val = psi_pd[n]
-            else:
-                val = (psi_p[m] - psi_p[n]) / mp.mpf(m - n)
-            Q_full_pole[i, j] = val
-            if i != j:
-                Q_full_pole[j, i] = val
-
-    V_even = canonical_even_projector(N)
-    Q_pole_even = V_even.T * Q_full_pole * V_even
-    return mp.mpf("0.5") * (Q_pole_even + Q_pole_even.T)
-
-
-def symmetric_eigendecomposition(A: mp.matrix) -> tuple:
-    dim = A.rows
-    evals, V = mp.eigsy(A)
-    pairs = []
-    for i in range(dim):
-        pairs.append((evals[i], V[:, i]))
-    pairs.sort(key=lambda x: x[0])
-
-    sorted_evals = [p[0] for p in pairs]
-    V_sorted = mp.matrix(dim, dim)
-    for col_idx in range(dim):
-        col_vec = pairs[col_idx][1]
-        for row_idx in range(dim):
-            V_sorted[row_idx, col_idx] = col_vec[row_idx, 0]
-
-    return sorted_evals, V_sorted
-
-
-# =============================================================================
 # Pre-Flight Hard Regression Audit (N = 64, T = 600)
 # =============================================================================
 def preflight_continuum_audit_64(sys_64: dict, prime_data: list) -> tuple:
-    N = 64
-    dim_even = N + 1
-    q_cont = N - N_BOUND + 1
-    PI = mp.pi
-
-    W_tilde = build_W_tilde(N, prime_data)
-    D_per = build_D_tilde_per(N, prime_data)
-    Delta_D = build_Delta_D_tilde_closed(N, prime_data)
-    K_neg = mp.mpf("0.5") * ((W_tilde - Delta_D) + (W_tilde - Delta_D).T)
-
-    Omega_diag = mp.matrix(dim_even, dim_even)
-    for m in range(dim_even):
-        a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
-        h_val = eval_h_plus(a_m, 50)
-        Omega_diag[m, m] = h_val + D_per[m, m]
-
-    Q_comp = Omega_diag - K_neg
-    Q_comp = mp.mpf("0.5") * (Q_comp + Q_comp.T)
-
-    V_Qeven = sys_64["V_Qeven"]
-    U_cont = mp.matrix(dim_even, q_cont)
-    for col in range(q_cont):
-        orig_col = N_BOUND + col
-        for row in range(dim_even):
-            U_cont[row, col] = V_Qeven[row, orig_col]
-
-    W_hat_perp = U_cont.T * W_tilde * U_cont
-    W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
-
-    K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
-    K_rest = mp.mpf("0.5") * (K_rest + K_rest.T)
-
-    Q_hat_comp = U_cont.T * Q_comp * U_cont
-    Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
-
-    evals_K, _ = symmetric_eigendecomposition(K_rest)
-    omega_0 = evals_K[0]
-
-    evals_W, _ = symmetric_eigendecomposition(W_hat_perp)
-    nu_0 = evals_W[-1]
-
-    evals_Q, _ = symmetric_eigendecomposition(Q_hat_comp)
-    mu_0 = evals_Q[0]
-
-    return omega_0, nu_0, mu_0
+    """
+    Audit continuum competition invariants at N = 64 against certified baselines.
+    """
+    ops = build_continuum_operators(
+        sys_64["V_Qeven"],
+        prime_data,
+        L=L_PARAM,
+        n_bound=N_BOUND,
+    )
+    return ops["omega_0"], ops["nu_0"], ops["mu_0"]
 
 
 # =============================================================================
@@ -305,23 +92,18 @@ def build_full_dissection_at_N(N: int, T_val: int, prime_data: list) -> dict:
     evals_e, V_e = symmetric_eigendecomposition(Q_even)
 
     # Component matrices
-    W_tilde = build_W_tilde(N, prime_data)
-    D_per = build_D_tilde_per(N, prime_data)
-    Delta_D = build_Delta_D_tilde_closed(N, prime_data)
+    W_tilde = build_W_tilde(N, prime_data, L_PARAM)
+    D_per = build_D_tilde_per(N, prime_data, L_PARAM)
+    Delta_D = build_Delta_D_tilde_closed(N, prime_data, L_PARAM)
     D_trans = D_per + Delta_D
-    Q_prime_even = -W_tilde + D_trans
-    Q_prime_even = mp.mpf("0.5") * (Q_prime_even + Q_prime_even.T)
+    Q_prime_even = build_Q_prime_even(N, prime_data, L_PARAM)
 
     Q_pole_even = build_Q_pole_even(N, L_PARAM)
     Q_arch_even = Q_even - Q_prime_even - Q_pole_even
     Q_arch_even = mp.mpf("0.5") * (Q_arch_even + Q_arch_even.T)
 
     # Continuum subspace projector
-    U_cont = mp.matrix(dim_even, q_cont)
-    for col in range(q_cont):
-        orig_col = N_BOUND + col
-        for row in range(dim_even):
-            U_cont[row, col] = V_e[row, orig_col]
+    U_cont = extract_continuum_projector(V_e, n_bound=N_BOUND)
 
     W_hat_perp = U_cont.T * W_tilde * U_cont
     W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
@@ -329,7 +111,7 @@ def build_full_dissection_at_N(N: int, T_val: int, prime_data: list) -> dict:
     Omega_diag = mp.matrix(dim_even, dim_even)
     for m in range(dim_even):
         a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
-        h_val = eval_h_plus(a_m, 50)
+        h_val = h_plus(a_m, 50)
         Omega_diag[m, m] = h_val + D_per[m, m]
 
     K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
@@ -339,14 +121,7 @@ def build_full_dissection_at_N(N: int, T_val: int, prime_data: list) -> dict:
     Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
 
     # W_hat_perp eigensystem (sorted descending for near-degenerate cluster analysis)
-    evals_W_asc, V_W_asc = symmetric_eigendecomposition(W_hat_perp)
-    # Reverse to descending order: nu_0 >= nu_1 >= ...
-    evals_W_desc = [evals_W_asc[q_cont - 1 - k] for k in range(q_cont)]
-    V_W_desc = mp.matrix(q_cont, q_cont)
-    for col in range(q_cont):
-        orig_col = q_cont - 1 - col
-        for row in range(q_cont):
-            V_W_desc[row, col] = V_W_asc[row, orig_col]
+    evals_W_desc, V_W_desc = symmetric_eigendecomposition(W_hat_perp, sort_descending=True)
 
     # Threshold state v_11
     v_11 = [V_e[r, N_BOUND] for r in range(dim_even)]

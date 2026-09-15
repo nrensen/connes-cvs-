@@ -24,21 +24,18 @@ Pre-Flight Invariants (N = 64, T = 600, 50 dps):
 import time
 import mpmath as mp
 
-try:
-    from connes_cvs.operator import h_plus
-except ImportError:
-    from cell import h_plus
-from cell import get_galerkin_matrix
-
-
-def eval_h_plus(tau: mp.mpf, dps: int = 50) -> mp.mpf:
-    """
-    Robust wrapper for h_plus supporting both 2-arg and 1-arg signatures.
-    """
-    try:
-        return h_plus(tau, dps)
-    except TypeError:
-        return h_plus(tau)
+from cell import (
+    h_plus,
+    get_galerkin_matrix,
+    canonical_even_projector,
+    load_prime_powers_table,
+    build_W_tilde,
+    build_D_tilde_per,
+    build_Delta_D_tilde_closed,
+    symmetric_eigendecomposition,
+    linear_fit,
+    build_continuum_operators,
+)
 
 
 # =============================================================================
@@ -55,241 +52,19 @@ CUTOFF_T_LIST = [600, 800]
 
 
 # =============================================================================
-# Prime Powers & Geometric Tables
-# =============================================================================
-def load_prime_powers_table(c_val: int) -> list:
-    primes_powers = [
-        (2, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(2))),
-        (3, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(3))),
-        (4, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(4))),
-        (5, 5, mp.log(mp.mpf(5)) / mp.sqrt(mp.mpf(5))),
-        (7, 7, mp.log(mp.mpf(7)) / mp.sqrt(mp.mpf(7))),
-        (8, 2, mp.log(mp.mpf(2)) / mp.sqrt(mp.mpf(8))),
-        (9, 3, mp.log(mp.mpf(3)) / mp.sqrt(mp.mpf(9))),
-        (11, 11, mp.log(mp.mpf(11)) / mp.sqrt(mp.mpf(11))),
-        (13, 13, mp.log(mp.mpf(13)) / mp.sqrt(mp.mpf(13))),
-    ]
-    return [(q, mp.log(mp.mpf(q)), w_q) for (q, _, w_q) in primes_powers if q <= c_val]
-
-
-# =============================================================================
-# Canonical Parity Projector
-# =============================================================================
-def canonical_even_projector(N: int) -> mp.matrix:
-    dim_full = 2 * N + 1
-    dim_even = N + 1
-    V = mp.matrix(dim_full, dim_even)
-    V[N, 0] = mp.mpf("1")
-    inv_sqrt2 = 1 / mp.sqrt(2)
-    for m in range(1, dim_even):
-        V[N + m, m] = inv_sqrt2
-        V[N - m, m] = inv_sqrt2
-    return V
-
-
-# =============================================================================
-# Analytic Step Potential & Kinetic Operators (Certified Baseline)
-# =============================================================================
-def build_W_tilde(N: int, prime_data: list) -> mp.matrix:
-    """
-    Construct the (N+1) x (N+1) even step-potential matrix W_tilde.
-    """
-    dim = N + 1
-    W = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(dim):
-        for n in range(m, dim):
-            entry = mp.mpf("0")
-            for (_, logq, w_q) in prime_data:
-                u_q = logq / L_PARAM
-                if m == 0 and n == 0:
-                    val = mp.mpf("2") * (mp.mpf("1") - u_q)
-                elif m == 0 and n > 0:
-                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(n) * u_q) / (PI * mp.mpf(n)))
-                elif m > 0 and n == 0:
-                    val = -mp.sqrt(mp.mpf("2")) * (mp.sin(mp.mpf("2") * PI * mp.mpf(m) * u_q) / (PI * mp.mpf(m)))
-                else:
-                    diff_mn = mp.mpf(m - n)
-                    sum_mn = mp.mpf(m + n)
-                    if m == n:
-                        term_diff = mp.mpf("2") * (mp.mpf("1") - u_q)
-                    else:
-                        term_diff = -mp.sin(mp.mpf("2") * PI * diff_mn * u_q) / (PI * diff_mn)
-                    term_sum = -mp.sin(mp.mpf("2") * PI * sum_mn * u_q) / (PI * sum_mn)
-                    val = term_diff + term_sum
-
-                entry += w_q * val
-
-            W[m, n] = entry
-            W[n, m] = entry
-
-    return mp.mpf("0.5") * (W + W.T)
-
-
-def build_D_tilde_per(N: int, prime_data: list) -> mp.matrix:
-    """
-    Construct the (N+1) x (N+1) diagonal periodic translation defect matrix D_tilde_per.
-    """
-    dim = N + 1
-    D_per = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(dim):
-        if m == 0:
-            D_per[0, 0] = mp.mpf("0")
-            continue
-        M_m = mp.mpf("0")
-        for (_, logq, w_q) in prime_data:
-            theta_m = PI * mp.mpf(m) * logq / L_PARAM
-            M_m += w_q * (mp.sin(theta_m) ** 2)
-        D_per[m, m] = mp.mpf("4") * M_m
-
-    return D_per
-
-
-def build_Delta_D_tilde_closed(N: int, prime_data: list) -> mp.matrix:
-    """
-    Construct the (N+1) x (N+1) boundary truncation matrix Delta_D_tilde.
-    """
-    dim = N + 1
-    Delta_D = mp.matrix(dim, dim)
-    PI = mp.pi
-
-    for m in range(1, dim):
-        for n in range(m, dim):
-            entry = mp.mpf("0")
-            for (_, logq, w_q) in prime_data:
-                theta_m = PI * mp.mpf(m) * logq / L_PARAM
-                theta_n = PI * mp.mpf(n) * logq / L_PARAM
-                sin_prod = mp.sin(theta_m) * mp.sin(theta_n)
-
-                if m == n:
-                    J_val = mp.mpf("0.5") * logq - (L_PARAM / (mp.mpf("4") * PI * mp.mpf(m))) * mp.sin(mp.mpf("2") * theta_m)
-                else:
-                    diff_m_n = mp.mpf(m - n)
-                    sum_m_n = mp.mpf(m + n)
-                    J_val = (L_PARAM / (mp.mpf("2") * PI)) * (
-                        mp.sin(diff_m_n * PI * logq / L_PARAM) / diff_m_n -
-                        mp.sin(sum_m_n * PI * logq / L_PARAM) / sum_m_n
-                    )
-
-                term = -(mp.mpf("8") / L_PARAM) * w_q * sin_prod * J_val
-                entry += term
-
-            Delta_D[m, n] = entry
-            Delta_D[n, m] = entry
-
-    return mp.mpf("0.5") * (Delta_D + Delta_D.T)
-
-
-def symmetric_eigendecomposition(A: mp.matrix) -> tuple:
-    """
-    Compute full eigenvalues and eigenvectors of a real symmetric mpmath matrix,
-    returning sorted eigenvalues (ascending) and orthonormal eigenvectors as columns.
-    """
-    dim = A.rows
-    evals, evecs = mp.eigsy(A)
-
-    pairs = []
-    for i in range(dim):
-        val = mp.re(evals[i])
-        col = mp.matrix([mp.re(evecs[r, i]) for r in range(dim)])
-        pairs.append((val, col))
-
-    pairs.sort(key=lambda x: x[0])
-
-    sorted_evals = [p[0] for p in pairs]
-    V_sorted = mp.matrix(dim, dim)
-    for col_idx in range(dim):
-        col_vec = pairs[col_idx][1]
-        for row_idx in range(dim):
-            V_sorted[row_idx, col_idx] = col_vec[row_idx, 0]
-
-    return sorted_evals, V_sorted
-
-
-# =============================================================================
-# Linear Regression Utilities
-# =============================================================================
-def linear_fit(x_vals: list, y_vals: list) -> tuple:
-    n = len(x_vals)
-    if n < 2:
-        return mp.mpf("0"), mp.mpf("0"), mp.mpf("0")
-    sx = sum(x_vals)
-    sy = sum(y_vals)
-    sxx = sum(x * x for x in x_vals)
-    syy = sum(y * y for y in y_vals)
-    sxy = sum(x * y for (x, y) in zip(x_vals, y_vals))
-
-    denom = mp.mpf(n) * sxx - sx * sx
-    if abs(denom) < mp.mpf("1e-40"):
-        return mp.mpf("0"), mp.mpf("0"), mp.mpf("0")
-
-    slope = (mp.mpf(n) * sxy - sx * sy) / denom
-    intercept = (sy - slope * sx) / mp.mpf(n)
-
-    denom_y = mp.mpf(n) * syy - sy * sy
-    if abs(denom_y) < mp.mpf("1e-40"):
-        r2 = mp.mpf("1")
-    else:
-        r2 = ((mp.mpf(n) * sxy - sx * sy) ** 2) / (denom * denom_y)
-
-    return slope, intercept, r2
-
-
-# =============================================================================
 # Pre-Flight Continuum Hard Invariant Check (N = 64, T = 600)
 # =============================================================================
 def preflight_continuum_audit_64(sys_64: dict, prime_data: list) -> tuple:
     """
     Audit continuum competition invariants at N = 64 against certified baselines.
     """
-    N = 64
-    dim_even = N + 1
-    q_cont = N - N_BOUND + 1
-    PI = mp.pi
-
-    W_tilde = build_W_tilde(N, prime_data)
-    D_per = build_D_tilde_per(N, prime_data)
-    Delta_D = build_Delta_D_tilde_closed(N, prime_data)
-    K_neg = mp.mpf("0.5") * ((W_tilde - Delta_D) + (W_tilde - Delta_D).T)
-
-    Omega_diag = mp.matrix(dim_even, dim_even)
-    for m in range(dim_even):
-        a_m = mp.mpf("2") * PI * mp.mpf(m) / L_PARAM if m > 0 else mp.mpf("0")
-        h_val = eval_h_plus(a_m, 50)
-        Omega_diag[m, m] = h_val + D_per[m, m]
-
-    Q_comp = Omega_diag - K_neg
-    Q_comp = mp.mpf("0.5") * (Q_comp + Q_comp.T)
-
-    V_Qeven = sys_64["V_Qeven"]
-    U_cont = mp.matrix(dim_even, q_cont)
-    for col in range(q_cont):
-        orig_col = N_BOUND + col
-        for row in range(dim_even):
-            U_cont[row, col] = V_Qeven[row, orig_col]
-
-    W_hat_perp = U_cont.T * W_tilde * U_cont
-    W_hat_perp = mp.mpf("0.5") * (W_hat_perp + W_hat_perp.T)
-
-    K_rest = U_cont.T * (Omega_diag + Delta_D) * U_cont
-    K_rest = mp.mpf("0.5") * (K_rest + K_rest.T)
-
-    Q_hat_comp = U_cont.T * Q_comp * U_cont
-    Q_hat_comp = mp.mpf("0.5") * (Q_hat_comp + Q_hat_comp.T)
-
-    evals_K, _ = symmetric_eigendecomposition(K_rest)
-    omega_0 = evals_K[0]
-
-    evals_W, _ = symmetric_eigendecomposition(W_hat_perp)
-    nu_0 = evals_W[-1]
-
-    evals_Q, _ = symmetric_eigendecomposition(Q_hat_comp)
-    mu_0 = evals_Q[0]
-
-    return omega_0, nu_0, mu_0
+    ops = build_continuum_operators(
+        sys_64["V_Qeven"],
+        prime_data,
+        L=L_PARAM,
+        n_bound=N_BOUND,
+    )
+    return ops["omega_0"], ops["nu_0"], ops["mu_0"]
 
 
 # =============================================================================
